@@ -4,4 +4,4 @@ never_alone_login:
   email_input: //XCUIElementTypeTextField[@name='RNE__Input__text-input']
   password_input: //XCUIElementTypeSecureTextField[@name='RNE__Input__text-input']
   login_btn: (//XCUIElementTypeOther[@name='Log In'])[last()]
-  call_personal_partner_btn: //XCUIElementTypeOther[@name='Call Personal Care Partner']
+  schedule_label: //XCUIElementTypeStaticText[@name='Schedule']

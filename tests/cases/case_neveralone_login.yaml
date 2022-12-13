@@ -22,11 +22,6 @@ LoginTest:
     - Type: click
       Strategy: xpath
       Id: $PAGE.never_alone_login.login_btn$
-    # - Type: wait_for
-    #   Strategy: xpath
-    #   Id: $PAGE.never_alone_login.call_personal_partner_btn$
-    # - Type: wait_for_attribute
-    #   Strategy: xpath
-    #   Id: $PAGE.never_alone_login.call_personal_partner_btn$
-    #   Attribute: visible
-    #   Value: true
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.never_alone_login.schedule_label$
