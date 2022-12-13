@@ -4,10 +4,3 @@ care_platform_login_page:
   login_button: //button[text() = 'Log In']
 verify_account_page:
   email_button: //button[text() = 'Email']
-# never_alone:
-#   logging_you_in_label: //XCUIElementTypeStaticText[@name='Logging you in...']
-#   provision_device_btn: //XCUIElementTypeOther[@name='Provision Device']
-#   email_input: //XCUIElementTypeTextField[@name='RNE__Input__text-input']
-#   password_input: //XCUIElementTypeSecureTextField[@name='RNE__Input__text-input']
-#   login_btn: (//XCUIElementTypeOther[@name='Log In'])[last()]
-#   call_personal_partner_btn: //XCUIElementTypeOther[@name='Call Personal Care Partner']
