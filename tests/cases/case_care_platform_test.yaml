@@ -20,7 +20,7 @@ Login:
       Role: desktopChrome
       Id: $PAGE.care_platform_login.login_button$
     - Type: sleep
-      Time: 5
+      Time: 2
     - Type: if
       If_Cases:
       - If_Case: VerifyEmail
@@ -48,6 +48,7 @@ TestHomePage:
             - disable-gpu
       App: "desktop"
   Actions:
+  #Calling Login case
     - Type: case
       Value: Login
     - Type: wait_for
@@ -57,6 +58,7 @@ TestHomePage:
       - Value: 2
         Operation: visible
         Result: true
+  #Checking Home page and navigation
     - Type: get_text
       Strategy: xpath
       Id : $PAGE.care_platform.page_title$
@@ -95,6 +97,7 @@ TestHomePage:
         - Type: eq
           Var: HOME_TITLE
           Value: "Follow-up Tickets"
+  #Checking Header elements
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.care_platform_header.app_logo$
@@ -110,11 +113,13 @@ TestHomePage:
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.care_platform_header.headset_icon$
+  #Checking options in the user drop-down
     - Type: click
       Strategy: xpath
       Id : $PAGE.care_platform_header.user_dropdown_button$
     - Type: wait_for
       Strategy: xpath
+  #Status
       Id: $PAGE.care_platform_header.status_menu_header$
     - Type: wait_for
       Strategy: xpath
@@ -127,6 +132,7 @@ TestHomePage:
       Id: $PAGE.care_platform_header.status_insession_button$
     - Type: wait_for
       Strategy: xpath
+  #Other options
       Id: $PAGE.care_platform_header.account_menu_header$
     - Type: wait_for
       Strategy: xpath
