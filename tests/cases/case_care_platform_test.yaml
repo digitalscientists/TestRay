@@ -107,4 +107,34 @@ TestHomePage:
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.care_platform_header.user_dropdown_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_header.headset_icon$
+    - Type: click
+      Strategy: xpath
+      Id : $PAGE.care_platform_header.user_dropdown_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_header.status_menu_header$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_header.status_available_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_header.status_away_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_header.status_insession_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_header.account_menu_header$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_header.help_menu_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_header.myaccount_menu_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_header.logout_menu_button$
 
