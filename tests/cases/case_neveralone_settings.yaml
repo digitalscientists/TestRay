@@ -1,0 +1,89 @@
+# CXTB-221
+VerifyMyDetailsSettingsPageElementsTest:
+  Environment: Settings
+  Precases:
+    - LoginTest
+  Aftercases:
+    - TerminateApp
+  Roles:
+    - Role: localiOS
+      App: NeverAlone      
+  Actions:
+    # Click on the Settings icon in app header.
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.never_alone_home.settings_icon$
+    #Verify that the page shows the following sub pages:
+    #My Details
+    # Wi-fi
+    # Text Message Alerts
+    # Screen Brightness
+    # Sound
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.never_alone_settings.my_details_tab$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.never_alone_settings.wifi_tab$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.never_alone_settings.text_message_alerts_tab$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.never_alone_settings.screen_brightness_tab$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.never_alone_settings.sound_tab$
+# assert that there is only 5 elements on the following xpath.. findElements could be the way.
+# (//XCUIElementTypeOther[contains(@name, 'My Details') and contains(@name, 'Sound')])[last()]/XCUIElementTypeOther[@name]
+
+    # Verify that the default view is "My Details" page.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.never_alone_settings.first_name_field$
+    # Verify that the right side displays name, email, address and phone number as read-only.
+    - Type: wait_for_attribute
+      Strategy: xpath
+      Id: $PAGE.never_alone_settings.first_name_field$
+      Attribute: enabled
+      Value: "false"
+    - Type: wait_for_attribute
+      Strategy: xpath
+      Id: $PAGE.never_alone_settings.last_name_field$
+      Attribute: enabled
+      Value: "false"
+    - Type: wait_for_attribute
+      Strategy: xpath
+      Id: $PAGE.never_alone_settings.address_line1_field$
+      Attribute: enabled
+      Value: "false"
+    - Type: wait_for_attribute
+      Strategy: xpath
+      Id: $PAGE.never_alone_settings.address_line2_field$
+      Attribute: enabled
+      Value: "false"
+    - Type: wait_for_attribute
+      Strategy: xpath
+      Id: $PAGE.never_alone_settings.city_field$
+      Attribute: enabled
+      Value: "false"
+    - Type: wait_for_attribute
+      Strategy: xpath
+      Id: $PAGE.never_alone_settings.state_field$
+      Attribute: enabled
+      Value: "false"
+    - Type: wait_for_attribute
+      Strategy: xpath
+      Id: $PAGE.never_alone_settings.zip_code_field$
+      Attribute: enabled
+      Value: "false"
+    - Type: wait_for_attribute
+      Strategy: xpath
+      Id: $PAGE.never_alone_settings.country_field$
+      Attribute: enabled
+      Value: "false"
+    - Type: wait_for_attribute
+      Strategy: xpath
+      Id: $PAGE.never_alone_settings.phone_number_field$
+      Attribute: enabled
+      Value: "false"

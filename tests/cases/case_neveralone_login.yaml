@@ -1,8 +1,8 @@
 # CXTB-219
 LoginTest:
   Environment: Settings
-  Aftercases:
-    - TerminateApp
+  # Aftercases:
+  #   - TerminateApp
   Roles:
     - Role: localiOS
       App: NeverAlone      
@@ -29,4 +29,4 @@ LoginTest:
     # Verify that the user has successfully logged in.
     - Type: wait_for
       Strategy: xpath
-      Id: $PAGE.never_alone_login.schedule_label$
+      Id: $PAGE.never_alone_home.schedule_label$
