@@ -1,4 +1,4 @@
-Login:
+CarePartnerLogin:
   Roles:
     - Role: desktopChrome
       App: desktop
@@ -50,7 +50,7 @@ TestHomePage:
   Actions:
   #Calling Login case
     - Type: case
-      Value: Login
+      Value: CarePartnerLogin
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.care_platform.page_title$
