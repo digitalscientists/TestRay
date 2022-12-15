@@ -1,0 +1,185 @@
+providers_login:
+  Environment: Settings 
+  Roles:
+    - Role: desktopChrome
+      Capabilities:
+        chromeOptions:
+          args:
+            - use-fake-ui-for-media-stream
+            - use-fake-device-for-media-stream
+            - no-sandbox
+            - disable-gpu
+      App: desktop       
+  Actions:      
+  # Login to Providers Care Platform
+    - Type: maximize
+    - Type: navigate
+      Role: desktopChrome
+      Value: $AND_CLI_care_platform_url$
+    - Type: get_text
+      Strategy: xpath
+      Id : $PAGE.care_platform_login_page.login_button$
+      Greps:
+      - var: login_text
+        match: "Log In"
+    - Type: assert
+      Role: desktopChrome
+      Asserts: 
+      - Type: eq
+        Var: login_text
+        Value: "Log In"  
+    - Type: send_keys
+      Strategy: id
+      Id: $PAGE.care_platform_login_page.email_input$
+      Value: $AND_CLI_provider_user1$
+    - Type: send_keys
+      Strategy: id
+      Id: $PAGE.care_platform_login_page.password_input$
+      Value: $AND_CLI_provider_user1_pwd$
+    - Type: click
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.care_platform_login_page.login_button$
+    - Type: sleep
+      Time: 5
+
+set_follow_up_ticket:
+  Environment: Settings 
+  Roles:
+    - Role: desktopChrome
+      Capabilities:
+        chromeOptions:
+          args:
+            - use-fake-ui-for-media-stream
+            - use-fake-device-for-media-stream
+            - no-sandbox
+            - disable-gpu
+      App: desktop       
+  Actions:   
+    - Type: case
+      Value: providers_login
+    # Navigate to Facilities
+    - Type: navigate
+      Value: https://care-platform-qa.chs-ds.com/facilities
+    # Select the Alpha center 5
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_facilities_page.alpha_center_five$
+    - Type: click
+      Strategy: xpath
+    # Start the call
+      Id: $PAGE.providers_facilities_page.call_portal_btn$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_queue_page.call_device_btn$      
+    # Answer the call
+    - Type: sleep
+      Time: 15
+    # Fill the notes
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.providers_call_queue_page.subject_input$
+      Value: Follow-up Subject Automation
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.providers_call_queue_page.details_textarea$
+      Value: Follow-up Details Automation 
+    # Close the call 
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_queue_page.end_call_btn$
+    # Complete the session 
+    - Type: sleep
+      Time: 9    
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_queue_page.complete_session_btn$
+    # Fill the follow up ticket
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_queue_page.no_radiobtn$   
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_queue_page.reason_last_option$     
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_queue_page.time_follow_up_two_days_radiobtn$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_queue_page.submit_session_btn$
+    - Type: sleep
+      Time: 4
+    
+
+HomePageListingView:
+  Environment: Settings 
+  Roles:
+    - Role: desktopChrome
+      Capabilities:
+        chromeOptions:
+          args:
+            - use-fake-ui-for-media-stream
+            - use-fake-device-for-media-stream
+            - no-sandbox
+            - disable-gpu
+      App: desktop       
+  Actions:
+      # Login to the app
+    - Type: case
+      Value: providers_login
+      # Set the Time to All
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.time_dropdown$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.time_all_option$
+    - # Check that there are no active calls waiting to be answered
+      Type: wait_not_visible
+      Strategy: xpath
+      Id: (//div[contains(text(),'Medical Transfer')])[last()]
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id: (//div[contains(text(),'On Demand Call')])[last()]   
+      # Verify Missed calls are present
+    - Type: get_text  
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.missed_calls_text$
+      Greps:
+      - var: missed_call_text
+        match: "(.*)"
+        NoRaise: true
+    - Type: assert
+      Asserts: 
+      - Type: eq 
+        Var: missed_call_text
+        Value: "Missed Call"
+        raise: true
+      # Verify Scheduled calls are present
+    - Type: get_text
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.scheduled_calls$
+      Greps:
+      - var: scheduled_call_text
+        match: "(.*)"
+        NoRaise: true
+    - Type: assert
+      Asserts: 
+      - Type: eq 
+        Var: scheduled_call_text
+        Value: "Scheduled Call"
+        raise: true
+      # Verify Follow-up calls are present
+    - Type: get_text  
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.follow_up_calls$
+      Greps:
+      - var: follow_up_text
+        match: "(.*)"
+        NoRaise: true
+    - Type: assert
+      Asserts: 
+      - Type: eq 
+        Var: follow_up_text
+        Value: "Follow-up"
+        raise: true
