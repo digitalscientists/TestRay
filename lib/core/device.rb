@@ -1579,7 +1579,7 @@ class Device
       raise "#{@role}: 'Asserts' section requires attributes 'Type', 'Var', " +
             "'Value'!" if assert.values_at("Type", "Var", "Value").include?(nil)
       src_var = ENV[convert_value(assert["Var"])]
-      cmp_var = assert["Value"].is_a?(Numeric) ? assert["Value"] : convert_value(assert["Value"])
+        cmp_var = assert["Value"].is_a?(Numeric) ? assert["Value"] : convert_value(assert["Value"])
       op = assert["Type"].downcase
     
       # check for class mismatches
@@ -1683,6 +1683,16 @@ def xpath_concat(action)
   result = "#{first_part}, '#{quote_part}'#{last_part}" #added , in the variable due to value translation of the framework
   # result.gsub('\\', '')
   ENV[convert_value(action["ResultVar"])] = result.to_s
+end
+
+# returns the attribute of the element in a variable
+def return_element_attribute(action)
+  el = wait_for(action)
+  return unless el
+
+  attr_value = el.attribute(action["Attribute"])
+  log_info("Element attribute is " + attr_value.to_s)
+  ENV[convert_value(action["ResultVar"])] = attr_value.to_s
 end
 
 # END OF DEVICE CLASS

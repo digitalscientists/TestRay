@@ -43,7 +43,6 @@ VerifyMyDetailsSettingsPageElementsTest:
       Strategy: xpath
       Id: $PAGE.never_alone_settings.sound_tab$
 # assert that there is only 5 elements on the following xpath.. findElements could be the way.
-# (//XCUIElementTypeOther[contains(@name, 'My Details') and contains(@name, 'Sound')])[last()]/XCUIElementTypeOther[@name]
 
     # Verify that the default view is "My Details" page.
     - Type: wait_for
@@ -95,4 +94,18 @@ VerifyMyDetailsSettingsPageElementsTest:
       Id: $PAGE.never_alone_settings.phone_number_field$
       Attribute: enabled
       Value: "false"
-    #maybe verify that some of that ones are not empty
+    #Verify that the fields are not empty
+    - Type: return_element_attribute
+      Strategy: xpath
+      Id: $PAGE.never_alone_settings.first_name_field$
+      Attribute: value
+      ResultVar: FIRST_NAME_VALUE
+    - Type: operation
+      Operation: "'$AND_CLI_FIRST_NAME_VALUE$'.size > 0"
+      ResultVar: IS_FIRST_NAME_NOT_EMPTY
+    - Type: assert
+      Role: localiOS
+      Asserts:
+        - Type: eq
+          Var: IS_FIRST_NAME_NOT_EMPTY
+          Value: 'true'
