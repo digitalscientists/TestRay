@@ -1,3 +1,2 @@
 never_alone_home:
   schedule_label: //XCUIElementTypeStaticText[@name='Schedule']
-  settings_icon: (//XCUIElementTypeOther[starts-with(@name,'Thursday, December 15')])[last()]/following-sibling::XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther[1]

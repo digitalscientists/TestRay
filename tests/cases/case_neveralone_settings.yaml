@@ -7,12 +7,20 @@ VerifyMyDetailsSettingsPageElementsTest:
     - TerminateApp
   Roles:
     - Role: localiOS
-      App: NeverAlone      
+      App: NeverAlone
   Actions:
     # Click on the Settings icon in app header.
+    - Type: get_timestamp
+      Format: "%A, %B %d"
+      Var: TODAY_DATE
+    - Type: xpath_concat
+      First_part: (//XCUIElementTypeOther[starts-with(@name
+      Quote_part: $AND_CLI_TODAY_DATE$
+      Last_part: )])[last()]/following-sibling::XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther[1]
+      ResultVar: SETTINGS_ICON
     - Type: click
       Strategy: xpath
-      Id: $PAGE.never_alone_home.settings_icon$
+      Id: $AND_CLI_SETTINGS_ICON$
     #Verify that the page shows the following sub pages:
     #My Details
     # Wi-fi
@@ -87,3 +95,4 @@ VerifyMyDetailsSettingsPageElementsTest:
       Id: $PAGE.never_alone_settings.phone_number_field$
       Attribute: enabled
       Value: "false"
+    #maybe verify that some of that ones are not empty

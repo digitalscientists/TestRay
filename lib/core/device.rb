@@ -1668,4 +1668,21 @@ class Device
   end 
 end
 
+# call the specified operation method
+# Accepts:
+#  First_part
+#  Quote_part
+#  Last_part
+#  ResultVar
+# *NOTE*: commas at the end will be ignored due to translation of the values
+def xpath_concat(action)
+  first_part = convert_value(action["First_part"])
+  quote_part = convert_value(action["Quote_part"])
+  last_part = convert_value(action["Last_part"])
+
+  result = "#{first_part}, '#{quote_part}'#{last_part}" #added , in the variable due to value translation of the framework
+  # result.gsub('\\', '')
+  ENV[convert_value(action["ResultVar"])] = result.to_s
+end
+
 # END OF DEVICE CLASS
