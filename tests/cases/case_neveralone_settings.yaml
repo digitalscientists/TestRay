@@ -61,6 +61,11 @@ VerifyMyDetailsSettingsPageElementsTest:
       Value: "false"
     - Type: wait_for_attribute
       Strategy: xpath
+      Id: $PAGE.never_alone_settings.email_field$
+      Attribute: enabled
+      Value: "false"
+    - Type: wait_for_attribute
+      Strategy: xpath
       Id: $PAGE.never_alone_settings.address_line1_field$
       Attribute: enabled
       Value: "false"
@@ -108,4 +113,32 @@ VerifyMyDetailsSettingsPageElementsTest:
       Asserts:
         - Type: eq
           Var: IS_FIRST_NAME_NOT_EMPTY
+          Value: 'true'
+    - Type: return_element_attribute
+      Strategy: xpath
+      Id: $PAGE.never_alone_settings.last_name_field$
+      Attribute: value
+      ResultVar: LAST_NAME_VALUE
+    - Type: operation
+      Operation: "'$AND_CLI_LAST_NAME_VALUE$'.size > 0"
+      ResultVar: IS_LAST_NAME_NOT_EMPTY
+    - Type: assert
+      Role: localiOS
+      Asserts:
+        - Type: eq
+          Var: IS_LAST_NAME_NOT_EMPTY
+          Value: 'true'
+    - Type: return_element_attribute
+      Strategy: xpath
+      Id: $PAGE.never_alone_settings.email_field$
+      Attribute: value
+      ResultVar: EMAIL_VALUE
+    - Type: operation
+      Operation: "'$AND_CLI_EMAIL_VALUE$'.size > 0"
+      ResultVar: IS_EMAIL_NOT_EMPTY
+    - Type: assert
+      Role: localiOS
+      Asserts:
+        - Type: eq
+          Var: IS_EMAIL_NOT_EMPTY
           Value: 'true'
