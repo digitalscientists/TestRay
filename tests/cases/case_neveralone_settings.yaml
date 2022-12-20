@@ -2,7 +2,7 @@
 VerifyMyDetailsSettingsPageElementsTest:
   Environment: Settings
   Precases:
-    - LoginTest
+    - LoginNeverAloneHelper
   Aftercases:
     - TerminateApp
   Roles:
