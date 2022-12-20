@@ -21,8 +21,8 @@ VerifyMyDetailsSettingsPageElementsTest:
     - Type: click
       Strategy: xpath
       Id: $AND_CLI_SETTINGS_ICON$
-    #Verify that the page shows the following sub pages:
-    #My Details
+    # Verify that the page shows the following sub pages:
+    # My Details
     # Wi-fi
     # Text Message Alerts
     # Screen Brightness
@@ -42,8 +42,6 @@ VerifyMyDetailsSettingsPageElementsTest:
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.never_alone_settings.sound_tab$
-# assert that there is only 5 elements on the following xpath.. findElements could be the way.
-
     # Verify that the default view is "My Details" page.
     - Type: wait_for
       Strategy: xpath
