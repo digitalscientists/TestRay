@@ -1668,7 +1668,7 @@ class Device
   end 
 end
 
-# call the specified operation method
+# returns an string with an xpath that needs to have some single quotes inside expression.
 # Accepts:
 #  First_part
 #  Quote_part
@@ -1681,7 +1681,6 @@ def xpath_concat(action)
   last_part = convert_value(action["Last_part"])
 
   result = "#{first_part}, '#{quote_part}'#{last_part}" #added , in the variable due to value translation of the framework
-  # result.gsub('\\', '')
   ENV[convert_value(action["ResultVar"])] = result.to_s
 end
 
