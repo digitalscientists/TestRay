@@ -215,7 +215,9 @@ set_missed_call_ticket:
             - use-fake-device-for-media-stream
             - no-sandbox
             - disable-gpu
-      App: desktop       
+      App: desktop   
+    - Role: localiOS
+      App: NeverAlone
   Actions:   
       # Calling login test case
     - Type: case
@@ -233,12 +235,23 @@ set_missed_call_ticket:
       Id: $PAGE.care_platform_participant.call_portal_btn$
     - Type: sleep
       Time: 3
+      # Login to Seniors Never Alone App
+    - Type: case
+      Role: localiOS
+      Value: LoginNeverAloneHelper
       # Call the participant
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_call_portal.call_participant_btn$
-    - Type: sleep
-      Time: 15
+      # Answer the call
+    - Type: wait_for
+      Role: localiOS
+      Strategy: xpath
+      Id: $PAGE.never_alone_incoming_call.answer_call_button$
+    - Type: click
+      Role: localiOS
+      Strategy: xpath
+      Id: $PAGE.never_alone_incoming_call.answer_call_button$
       # Open the Meical Transfer
     - Type: click
       Strategy: xpath
@@ -270,11 +283,28 @@ set_missed_call_ticket:
       Strategy: xpath
       Id: $PAGE.care_platform_call_portal.submit_btn$
     - Type: sleep
-      Time: 20
+      Role: localiOS
+      Time: 5
       # Click in the End Call button
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.leave_call_btn$
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_call_portal.leave_call_btn$
+      # Complete the call in Seniors App
+    - Type: click
+      Role: localiOS
+      Strategy: xpath
+      Id: $PAGE.never_alone_call.end_call_button$
+    - Type: click
+      Role: localiOS
+      Strategy: xpath
+      Id: $PAGE.never_alone_post_call_survey.great_answer_button$
+    - Type: click
+      Role: localiOS
+      Strategy: xpath
+      Id: $PAGE.never_alone_post_call_survey.to_home_button$
       # Fill the notes
     - Type: send_keys
       Strategy: xpath
@@ -299,10 +329,23 @@ set_missed_call_ticket:
       Strategy: xpath
       Id: $PAGE.care_platform_call_portal.issue_resolved_yes_radiobutton$          
     - Type: click
+      Strategy: id
+      Id: $PAGE.care_platform_call_portal.category_select$
+    - Type: click
       Strategy: xpath
-      Id: $PAGE.care_platform_call_portal.$          
-               
-
+      Id: $PAGE.care_platform_call_portal.medical_question_option$
+    - Type: click
+      Strategy: id
+      Id: $PAGE.care_platform_call_portal.subcategory_select$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.located_provider_option$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.submit_and_exit_session_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_notifications.call_completed_notification$
     
 HomePageListingView:
   Environment: Settings 

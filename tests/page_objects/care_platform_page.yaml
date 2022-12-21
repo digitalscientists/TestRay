@@ -52,4 +52,11 @@ care_platform_call_portal:
   complete_session_btn: //button[text()='Complete Session']
   issue_resolved_yes_radiobutton: //label[input[@name='resolved'][@value='true']]
   non_medical_radiobtn: //label[input[@name='kind'][@value='non-med']]
-  
+  category_select: category
+  medical_question_option: //option[@value='medicalQuestion']
+  subcategory_select: subcategory
+  located_provider_option: //option[@value='locatedProvider']
+  submit_and_exit_session_button: //button[contains(text(),'Submit and Exit Session')]
+
+care_platform_notifications:
+  call_completed_notification: //div[text()='Call completed']
