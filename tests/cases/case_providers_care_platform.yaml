@@ -282,10 +282,26 @@ set_missed_call_ticket:
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_call_portal.submit_btn$
+      # Workaround: to make it appear Missed, it has to be waiting for 60 seconds. If appium passes 30+ seconds in sleep, it fails.
     - Type: sleep
       Role: localiOS
-      Time: 5
+      Time: 20
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.never_alone_call.mute_call_button$
+    - Type: sleep
+      Role: localiOS
+      Time: 20
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.never_alone_call.mute_call_button$
+    - Type: sleep
+      Role: localiOS
+      Time: 20
       # Click in the End Call button
+    # - Type: sleep
+    #   Role: localiOS
+    #   Time: 70  
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.care_platform_call_portal.leave_call_btn$

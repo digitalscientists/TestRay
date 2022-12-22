@@ -32,7 +32,8 @@ never_alone_incoming_call:
 
 never_alone_call:
   end_call_button: (//XCUIElementTypeOther[contains(@name,'End Call')])[last()]
-
+  mute_call_button: (//XCUIElementTypeOther[contains(@name,"Microphone")])[last()]
+  
 never_alone_post_call_survey:
   great_answer_button: //XCUIElementTypeOther[@name='Great']
   ok_answer_button: //XCUIElementTypeOther[@name='Ok']
