@@ -43,6 +43,26 @@ providers_care_platform_login:
     - Type: sleep
       Time: 5
 
+care_platform_logout:
+  Environment: Settings 
+  Roles:
+    - Role: desktopChrome
+      App: desktop       
+  Actions:     
+      # Login to the Care Platform app with Care Partners account
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_header.user_dropdown_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_header.logout_menu_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_logout_modal.stay_on_shift_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_login.login_button$
+      
 set_follow_up_ticket:
   Environment: Settings 
   Roles:
@@ -56,9 +76,6 @@ set_follow_up_ticket:
             - disable-gpu
       App: desktop       
   Actions:
-    # Calling login test case
-    - Type: case
-      Value: providers_care_platform_login
     # Navigate to Facilities
     - Type: navigate
       Value: https://care-platform-qa.chs-ds.com/facilities
@@ -92,13 +109,13 @@ set_follow_up_ticket:
 
     # SNF SHOULD CLOSE THE CALL TOO AND COMPLETE THE SESSION.
 
-    # Complete the session 
+      # Complete the session 
     - Type: sleep
       Time: 9    
     - Type: click
       Strategy: xpath
       Id: $PAGE.providers_call_queue_page.complete_session_btn$
-    # Set and Fill the follow up ticket
+      # Set and Fill the follow up ticket
     - Type: click
       Strategy: xpath
       Id: $PAGE.providers_call_queue_page.no_radiobtn$   
@@ -113,6 +130,10 @@ set_follow_up_ticket:
       Id: $PAGE.providers_call_queue_page.submit_session_btn$
     - Type: sleep
       Time: 4
+      # Navigate back to home 
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform.navigation_home$
 
 set_scheduled_call_ticket:
   Environment: Settings 
@@ -127,14 +148,11 @@ set_scheduled_call_ticket:
             - disable-gpu
       App: desktop       
   Actions:   
-    #Calling login test case
-    - Type: case
-      Value: CarePartnerLogin
-    #Navigate to Participants
+      # Navigate to Participants
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform.navigation_participant$
-    #Open the Call Portal
+      # Open the Call Portal
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_participant.miguel_henriquez_one_td$
@@ -143,7 +161,7 @@ set_scheduled_call_ticket:
       Id: $PAGE.care_platform_participant.call_portal_btn$
     - Type: sleep
       Time: 5
-      #Create the event
+      # Create the event
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_call_portal.create_event_btn$    
@@ -175,7 +193,7 @@ set_scheduled_call_ticket:
       Strategy: xpath
       Id: $PAGE.care_platform_call_portal.next_btn$
       # Filling the Situation fields
-      #urgent patient matter
+      # urgent patient matter
     - Type: click
       Strategy: id
       Id: $PAGE.care_platform_call_portal.urgent_patient_matter_select$
@@ -200,8 +218,14 @@ set_scheduled_call_ticket:
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_call_portal.submit_create_event_btn$
-    - Type: sleep
-      Time: 5
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_notifications.event_created_notification$
+      # Navigate back to home 
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform.navigation_home$
+    
 
 
 set_missed_call_ticket:
@@ -219,9 +243,6 @@ set_missed_call_ticket:
     - Role: localiOS
       App: NeverAlone
   Actions:   
-      # Calling login test case
-    - Type: case
-      Value: CarePartnerLogin
       # Navigate to Participants
     - Type: click
       Strategy: xpath
@@ -287,21 +308,19 @@ set_missed_call_ticket:
       Role: localiOS
       Time: 20
     - Type: click
+      Role: localiOS
       Strategy: xpath
       Id: $PAGE.never_alone_call.mute_call_button$
     - Type: sleep
       Role: localiOS
       Time: 20
     - Type: click
+      Role: localiOS
       Strategy: xpath
       Id: $PAGE.never_alone_call.mute_call_button$
     - Type: sleep
       Role: localiOS
       Time: 20
-      # Click in the End Call button
-    # - Type: sleep
-    #   Role: localiOS
-    #   Time: 70  
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.care_platform_call_portal.leave_call_btn$
@@ -374,11 +393,28 @@ HomePageListingView:
             - use-fake-device-for-media-stream
             - no-sandbox
             - disable-gpu
-      App: desktop       
+      App: desktop     
   Actions:
-      # Login to the app
+      # Login to the Care Platform app with Care Partners account
+    - Type: case
+      Value: CarePartnerLogin
+      # Set the test data
+        # scheduled call
+    - Type: case
+      Value: set_scheduled_call_ticket
+        # missed call 
+    - Type: case
+      Value: set_missed_call_ticket
+          # Logout from the Care Partner account
+    - Type: case
+      Value: care_platform_logout
+          # Login to the app with Providers account
     - Type: case
       Value: providers_care_platform_login
+        # Follow-up ticket
+    # - Type: case
+    #   Value: set_follow_up_ticket
+
       # Set the Time to All
     - Type: click
       Strategy: xpath

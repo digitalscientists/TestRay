@@ -12,6 +12,7 @@ care_platform:
   page_title: //h3
   navigation_participant: //nav//div[contains(text(),'Participants')]
   navigation_followup: //nav//div[contains(text(),'Follow-up')]
+  navigation_home: //nav//div[contains(text(),'Home')]
 care_platform_header:
   app_logo: //header//div[@class='app-header-logo']/img
   app_time: //header//time
@@ -26,6 +27,10 @@ care_platform_header:
   help_menu_button: //header//nav//button[contains(.,'Help')]
   myaccount_menu_button: //header//nav//button[contains(.,'My Account')]
   logout_menu_button: //header//nav//button[contains(.,'Log Out')]
+care_platform_logout_modal:
+  stay_on_shift_button: //button[contains(text(),'Stay On Shift')]
+  go_off_shift_button: //button[contains(text(),'Go Off Shift')]
+  cancel_logout_button: //button[contains(@class,'button-ghost')]    
 care_platform_participant:
   miguel_henriquez_one_td: //tr//td[contains(text(),'Miguel')][strong[text()='Henriquezone']]
   call_portal_btn: //button[text()='Call Portal']
@@ -60,3 +65,5 @@ care_platform_call_portal:
 
 care_platform_notifications:
   call_completed_notification: //div[text()='Call completed']
+  event_created_notification: //div[text()='Event created']
+  
