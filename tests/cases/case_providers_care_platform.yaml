@@ -74,7 +74,9 @@ set_follow_up_ticket:
             - use-fake-device-for-media-stream
             - no-sandbox
             - disable-gpu
-      App: desktop       
+      App: desktop
+    - Role: localiOS
+      App: NeverAlone
   Actions:
     # Navigate to Facilities
     - Type: navigate
@@ -86,13 +88,22 @@ set_follow_up_ticket:
     - Type: click
       Strategy: xpath
       Id: $PAGE.providers_facilities_page.call_portal_btn$
+    - Type: case
+      Role: localiOS
+      Value: LoginSNFHelper
     # Call an SNF Facility
     - Type: click
       Strategy: xpath
       Id: $PAGE.providers_call_queue_page.call_device_btn$      
     # Answer the call from SNF(SNF TEST CASE SHOULD DO THIS STEP)
-    - Type: sleep
-      Time: 15
+    - Type: wait_for
+      Role: localiOS
+      Strategy: xpath
+      Id: $PAGE.never_alone_incoming_call.answer_call_button$
+    - Type: click
+      Role: localiOS
+      Strategy: xpath
+      Id: $PAGE.never_alone_incoming_call.answer_call_button$
     # Fill the notes
     - Type: send_keys
       Strategy: xpath
@@ -106,9 +117,15 @@ set_follow_up_ticket:
     - Type: click
       Strategy: xpath
       Id: $PAGE.providers_call_queue_page.end_call_btn$
-
-    # SNF SHOULD CLOSE THE CALL TOO AND COMPLETE THE SESSION.
-
+    # Complete the call in SNF
+    - Type: click
+      Role: localiOS
+      Strategy: xpath
+      Id: $PAGE.never_alone_post_call_survey.great_answer_button$
+    - Type: click
+      Role: localiOS
+      Strategy: xpath
+      Id: $PAGE.never_alone_post_call_survey.to_home_button$
       # Complete the session 
     - Type: sleep
       Time: 9    
@@ -393,18 +410,19 @@ HomePageListingView:
             - use-fake-device-for-media-stream
             - no-sandbox
             - disable-gpu
-      App: desktop     
+      App: desktop
+    - Role: localiOS
+      App: NeverAlone
   Actions:
       # Login to the Care Platform app with Care Partners account
     - Type: case
       Value: CarePartnerLogin
       # Set the test data
-        # scheduled call
-    - Type: case
-      Value: set_scheduled_call_ticket
         # missed call 
     - Type: case
       Value: set_missed_call_ticket
+    - Type: case
+      Value: TerminateApp
           # Logout from the Care Partner account
     - Type: case
       Value: care_platform_logout
@@ -412,9 +430,14 @@ HomePageListingView:
     - Type: case
       Value: providers_care_platform_login
         # Follow-up ticket
-    # - Type: case
-    #   Value: set_follow_up_ticket
+    - Type: case
+      Value: LaunchApp
+    - Type: case
+      Value: set_follow_up_ticket
 
+        # scheduled call
+    - Type: case
+      Value: set_scheduled_call_ticket
       # Set the Time to All
     - Type: click
       Strategy: xpath
