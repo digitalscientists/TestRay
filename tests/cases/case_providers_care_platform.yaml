@@ -1,68 +1,3 @@
-providers_care_platform_login:
-  Environment: Settings 
-  Roles:
-    - Role: desktopChrome
-      Capabilities:
-        chromeOptions:
-          args:
-            - use-fake-ui-for-media-stream
-            - use-fake-device-for-media-stream
-            - no-sandbox
-            - disable-gpu
-      App: desktop       
-  Actions:      
-  # Login to Providers Care Platform
-    - Type: maximize
-    - Type: navigate
-      Role: desktopChrome
-      Value: $AND_CLI_care_platform_url$
-    - Type: get_text
-      Strategy: xpath
-      Id : $PAGE.care_platform_login_page.login_button$
-      Greps:
-      - var: login_text
-        match: "Log In"
-    - Type: assert
-      Role: desktopChrome
-      Asserts: 
-      - Type: eq
-        Var: login_text
-        Value: "Log In"  
-    - Type: send_keys
-      Strategy: id
-      Id: $PAGE.care_platform_login_page.email_input$
-      Value: $AND_CLI_provider_user1$
-    - Type: send_keys
-      Strategy: id
-      Id: $PAGE.care_platform_login_page.password_input$
-      Value: $AND_CLI_provider_user1_pwd$
-    - Type: click
-      Strategy: xpath
-      Role: desktopChrome
-      Id: $PAGE.care_platform_login_page.login_button$
-    - Type: sleep
-      Time: 5
-
-care_platform_logout:
-  Environment: Settings 
-  Roles:
-    - Role: desktopChrome
-      App: desktop       
-  Actions:     
-      # Login to the Care Platform app with Care Partners account
-    - Type: click
-      Strategy: xpath
-      Id: $PAGE.care_platform_header.user_dropdown_button$
-    - Type: click
-      Strategy: xpath
-      Id: $PAGE.care_platform_header.logout_menu_button$
-    - Type: click
-      Strategy: xpath
-      Id: $PAGE.care_platform_logout_modal.stay_on_shift_button$
-    - Type: wait_for
-      Strategy: xpath
-      Id: $PAGE.care_platform_login.login_button$
-      
 set_follow_up_ticket:
   Environment: Settings 
   Roles:
@@ -78,10 +13,11 @@ set_follow_up_ticket:
     - Role: localiOS
       App: NeverAlone
   Actions:
-    # Navigate to Facilities
-    - Type: navigate
-      Value: https://care-platform-qa.chs-ds.com/facilities
-    # Select the Alpha center 5
+      # Navigate to Facilities
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.facilities_navigation$
+      # Select the Alpha center 5
     - Type: click
       Strategy: xpath
       Id: $PAGE.providers_facilities_page.alpha_center_five$
@@ -91,11 +27,11 @@ set_follow_up_ticket:
     - Type: case
       Role: localiOS
       Value: LoginSNFHelper
-    # Call an SNF Facility
+      # Call an SNF Facility
     - Type: click
       Strategy: xpath
       Id: $PAGE.providers_call_queue_page.call_device_btn$      
-    # Answer the call from SNF(SNF TEST CASE SHOULD DO THIS STEP)
+      # Answer the call from SNF(SNF TEST CASE SHOULD DO THIS STEP)
     - Type: wait_for
       Role: localiOS
       Strategy: xpath
@@ -104,7 +40,7 @@ set_follow_up_ticket:
       Role: localiOS
       Strategy: xpath
       Id: $PAGE.never_alone_incoming_call.answer_call_button$
-    # Fill the notes
+      # Fill the notes
     - Type: send_keys
       Strategy: xpath
       Id: $PAGE.providers_call_queue_page.subject_input$
@@ -113,11 +49,11 @@ set_follow_up_ticket:
       Strategy: xpath
       Id: $PAGE.providers_call_queue_page.details_textarea$
       Value: Follow-up Details Automation 
-    # Close the call 
+      # Close the call 
     - Type: click
       Strategy: xpath
       Id: $PAGE.providers_call_queue_page.end_call_btn$
-    # Complete the call in SNF
+      # Complete the call in SNF
     - Type: click
       Role: localiOS
       Strategy: xpath
@@ -127,8 +63,9 @@ set_follow_up_ticket:
       Strategy: xpath
       Id: $PAGE.never_alone_post_call_survey.to_home_button$
       # Complete the session 
-    - Type: sleep
-      Time: 9    
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_call_queue_page.complete_session_btn$
     - Type: click
       Strategy: xpath
       Id: $PAGE.providers_call_queue_page.complete_session_btn$
@@ -242,9 +179,6 @@ set_scheduled_call_ticket:
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform.navigation_home$
-    
-
-
 set_missed_call_ticket:
   Environment: Settings 
   Roles:
@@ -398,7 +332,7 @@ set_missed_call_ticket:
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.care_platform_notifications.call_completed_notification$
-    
+      # CXTB-217
 HomePageListingView:
   Environment: Settings 
   Roles:
@@ -417,27 +351,38 @@ HomePageListingView:
       # Login to the Care Platform app with Care Partners account
     - Type: case
       Value: CarePartnerLogin
-      # Set the test data
-        # missed call 
+      # Setup for the test data
+      # Missed call 
     - Type: case
       Value: set_missed_call_ticket
     - Type: case
       Value: TerminateApp
-          # Logout from the Care Partner account
+      # Logout from the Care Partner account
     - Type: case
       Value: care_platform_logout
-          # Login to the app with Providers account
+      # Login to the app with Providers account
     - Type: case
       Value: providers_care_platform_login
-        # Follow-up ticket
+      # Follow-up ticket
     - Type: case
       Value: LaunchApp
     - Type: case
       Value: set_follow_up_ticket
-
-        # scheduled call
+      # Logout from the Care Partner account
+    - Type: case
+      Value: care_platform_logout
+      # Login to the Care Platform app with Care Partners account
+    - Type: case
+      Value: CarePartnerLogin
+      # Scheduled call
     - Type: case
       Value: set_scheduled_call_ticket
+      # Logout from the Care Partner account
+    - Type: case
+      Value: care_platform_logout
+      # Login to the app with Providers account
+    - Type: case
+      Value: providers_care_platform_login
       # Set the Time to All
     - Type: click
       Strategy: xpath
@@ -448,10 +393,10 @@ HomePageListingView:
     - # Check that there are no active calls waiting to be answered
       Type: wait_not_visible
       Strategy: xpath
-      Id: (//div[contains(text(),'Medical Transfer')])[last()]
+      Id: $PAGE.providers_home_page.last_medical_transfer_row$  
     - Type: wait_not_visible
       Strategy: xpath
-      Id: (//div[contains(text(),'On Demand Call')])[last()]   
+      Id: $PAGE.providers_home_page.last_on_demand_row$  
       # Verify Missed calls are present
     - Type: get_text  
       Strategy: xpath

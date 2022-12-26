@@ -5,10 +5,12 @@ providers_home_page:
   medical_transfer_calls: (//div[contains(text(),'Medical Transfer')])[last()]
   scheduled_calls: (//div[contains(text(),'Scheduled Call')])[last()]
   on_demand_calls: (//div[contains(text(),'On Demand Call')])[last()]
-  test_time: //time
+  datetime: //time
   time_dropdown: //div[div[contains(text(),'Time')]]//button
   time_all_option: //div[div[contains(text(),'Time')]]//button[contains(text(),'All')]
-
+  last_medical_transfer_row: (//div[contains(text(),'Medical Transfer')])[last()]
+  last_on_demand_row: (//div[contains(text(),'On Demand Call')])[last()]
+  facilities_navigation: //a//div[contains(text(),'Facilities')]
 
 providers_facilities_page:
   alpha_center_five: //tr//td[contains(text(),'5')]
@@ -24,3 +26,4 @@ providers_call_queue_page:
   reason_last_option: //option[last()]
   time_follow_up_two_days_radiobtn: //label[input[@name='followUpTime'][@value=48]]
   submit_session_btn: //button[@type='submit']
+
