@@ -31,7 +31,7 @@ set_follow_up_ticket:
     - Type: click
       Strategy: xpath
       Id: $PAGE.providers_call_queue_page.call_device_btn$      
-      # Answer the call from SNF(SNF TEST CASE SHOULD DO THIS STEP)
+      # Answer the call from SNF
     - Type: wait_for
       Role: localiOS
       Strategy: xpath
@@ -113,8 +113,9 @@ set_scheduled_call_ticket:
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_participant.call_portal_btn$
-    - Type: sleep
-      Time: 5
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.create_event_btn$    
       # Create the event
     - Type: click
       Strategy: xpath
@@ -179,6 +180,7 @@ set_scheduled_call_ticket:
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform.navigation_home$
+
 set_missed_call_ticket:
   Environment: Settings 
   Roles:
@@ -205,8 +207,6 @@ set_missed_call_ticket:
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_participant.call_portal_btn$
-    - Type: sleep
-      Time: 3
       # Login to Seniors Never Alone App
     - Type: case
       Role: localiOS
@@ -229,21 +229,21 @@ set_missed_call_ticket:
       Strategy: xpath
       Id: $PAGE.care_platform_call_portal.medical_transfer_btn$
       # Fill the medical transfer fields
-      # urgent patient matter
+      # Urgent patient matter
     - Type: click
       Strategy: id
       Id: $PAGE.care_platform_call_portal.urgent_patient_matter_select$
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_call_portal.urgent_patient_matter_yes_option$
-      # reason for request
+      # Reason for request
     - Type: click
       Strategy: id
       Id: $PAGE.care_platform_call_portal.reason_for_request_select$
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_call_portal.reason_for_request_covid_options$
-      # when did symptoms start      
+      # When did symptoms start      
     - Type: click
       Strategy: class
       Id: $PAGE.care_platform_call_portal.symptoms_start_input_container$
@@ -306,8 +306,9 @@ set_missed_call_ticket:
       Strategy: xpath
       Id: $PAGE.care_platform_call_portal.complete_session_btn$             
       # Fill the Post-call Survey
-    - Type: sleep
-      Time: 5
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.non_medical_radiobtn$
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_call_portal.non_medical_radiobtn$             
@@ -332,9 +333,12 @@ set_missed_call_ticket:
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.care_platform_notifications.call_completed_notification$
+
       # CXTB-217
 HomePageListingView:
-  Environment: Settings 
+  Environment: Settings
+  Vars:
+    LOGOUT_OPTION: "Stay On Shift"   
   Roles:
     - Role: desktopChrome
       Capabilities:
@@ -371,6 +375,9 @@ HomePageListingView:
       # Logout from the Care Partner account
     - Type: case
       Value: care_platform_logout
+      # Terminate the iOS App
+    - Type: case
+      Value: TerminateApp
       # Login to the Care Platform app with Care Partners account
     - Type: case
       Value: CarePartnerLogin
@@ -404,7 +411,6 @@ HomePageListingView:
       Greps:
       - var: missed_call_text
         match: "(.*)"
-        NoRaise: true
     - Type: assert
       Asserts: 
       - Type: eq 
@@ -418,7 +424,6 @@ HomePageListingView:
       Greps:
       - var: scheduled_call_text
         match: "(.*)"
-        NoRaise: true
     - Type: assert
       Asserts: 
       - Type: eq 
@@ -432,7 +437,6 @@ HomePageListingView:
       Greps:
       - var: follow_up_text
         match: "(.*)"
-        NoRaise: true
     - Type: assert
       Asserts: 
       - Type: eq 

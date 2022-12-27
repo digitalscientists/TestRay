@@ -13,7 +13,7 @@ care_platform_logout:
       Id: $PAGE.care_platform_header.logout_menu_button$
     - Type: click
       Strategy: xpath
-      Id: $PAGE.care_platform_logout_modal.stay_on_shift_button$
+      Id: //button[contains(text(),'$AND_CLI_LOGOUT_OPTION$')]
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.care_platform_login.login_button$
