@@ -276,7 +276,7 @@ TestStatusDropdown_NotInCall:
           Value: "is-green"
 
 #CXTB-227 Account - Update info
-UpdateInfoAccount:
+TestUpdateInfoAccount:
   Environment: Settings 
   Roles:
     - Role: desktopChrome
