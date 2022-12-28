@@ -2,7 +2,7 @@ care_platform_login:
   email_input: email
   password_input: password
   login_button: //button[text() = 'Log In']
-  
+
 verify_account:
   verify_modal_title: //*[@id='dialogs']//h4[contains(text(),'Verify Your Account')]
   email_button: //button[contains(text(),'Email')]
@@ -21,15 +21,28 @@ care_platform_header:
   app_time: //header//time
   user_toggle_input: //header//div[@class='radio-toggle']//input
   user_dropdown_button: //header//div[contains(@class,'user-dropdown')]/button
+  dropdown_username: //header//div[@class='user-dropdown-name']
   headset_icon: //header//button/span[@class='icon-headset']
   status_menu_header: //header//nav//div[contains(text(),'Status')]
   status_available_button: //header//nav/button[contains(.,'Available')]
   status_away_button: //header//nav/button[contains(.,'Away')]
   status_insession_button: //header//nav/button[contains(.,'In Session')]
+  status_indicator: //header//button[contains(@class,'user-dropdown-toggle')]/div[contains(@class,'has-status')]
   account_menu_header: //header//nav//div[contains(text(),'Account')]
   help_menu_button: //header//nav//button[contains(.,'Help')]
   myaccount_menu_button: //header//nav//button[contains(.,'My Account')]
   logout_menu_button: //header//nav//button[contains(.,'Log Out')]
+
+myaccount_info:
+  modal_title: //*[@id='modals']//h4[contains(text(),'My account')]
+  close_modal_button: //*[@id="modals"]//button[contains(text(),'Close')]
+  firstname_input: //input[@id='firstName']
+  email_input: //input[@id='email']
+  phone_input: //*[@id='phone']
+  phone_error_message: //*[@id='modals']//div[contains(text(),'Please enter a valid contact number')]
+  save_changes_button: //*[@id='modals']//button[text()='Save Changes']
+  cancel_button: //*[@id='modals']//button[text()='Cancel']
+  success_alert_msg: //div[@class='Toastify']//div[contains(text(),'Account info updated')]
 
 care_platform_logout_modal:
   stay_on_shift_button: //button[contains(text(),'Stay On Shift')]
@@ -38,7 +51,6 @@ care_platform_logout_modal:
 
 care_platform_participant:
   senior_1_td: //td[contains(text(),'$AND_CLI_senior_user1_name$')][strong[contains(text(),'$AND_CLI_senior_user1_lastname$')]]
-
   call_portal_btn: //button[text()='Call Portal']
 
 care_platform_call_portal:
@@ -73,4 +85,3 @@ care_platform_call_portal:
 care_platform_notifications:
   call_completed_notification: //div[text()='Call completed']
   event_created_notification: //div[text()='Event created']
-  
