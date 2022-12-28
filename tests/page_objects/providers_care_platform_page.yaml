@@ -13,7 +13,7 @@ providers_home_page:
   facilities_navigation: //a//div[contains(text(),'Facilities')]
 
 providers_facilities_page:
-  alpha_center_five: //tr//td[contains(text(),'5')]
+  alpha_center_td: //tr//td[contains(text(),'$AND_CLI_facility_devices_user1_number$')]
   call_portal_btn: //button[text()='Call Portal']
 
 providers_call_queue_page:

@@ -17,10 +17,10 @@ set_follow_up_ticket:
     - Type: click
       Strategy: xpath
       Id: $PAGE.providers_home_page.facilities_navigation$
-      # Select the Alpha center 5
+      # Select the Alpha center
     - Type: click
       Strategy: xpath
-      Id: $PAGE.providers_facilities_page.alpha_center_five$
+      Id: $PAGE.providers_facilities_page.alpha_center$
     - Type: click
       Strategy: xpath
       Id: $PAGE.providers_facilities_page.call_portal_btn$
@@ -82,12 +82,6 @@ set_follow_up_ticket:
     - Type: click
       Strategy: xpath
       Id: $PAGE.providers_call_queue_page.submit_session_btn$
-    - Type: sleep
-      Time: 4
-      # Navigate back to home 
-    - Type: click
-      Strategy: xpath
-      Id: $PAGE.care_platform.navigation_home$
 
 set_scheduled_call_ticket:
   Environment: Settings 
@@ -109,7 +103,7 @@ set_scheduled_call_ticket:
       # Open the Call Portal
     - Type: click
       Strategy: xpath
-      Id: $PAGE.care_platform_participant.miguel_henriquez_one_td$
+      Id: $PAGE.care_platform_participant.senior_1_td$
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_participant.call_portal_btn$
@@ -148,21 +142,21 @@ set_scheduled_call_ticket:
       Strategy: xpath
       Id: $PAGE.care_platform_call_portal.next_btn$
       # Filling the Situation fields
-      # urgent patient matter
+      # Urgent patient matter
     - Type: click
       Strategy: id
       Id: $PAGE.care_platform_call_portal.urgent_patient_matter_select$
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_call_portal.urgent_patient_matter_yes_option$
-      # reason for request
+      # Reason for request
     - Type: click
       Strategy: id
       Id: $PAGE.care_platform_call_portal.reason_for_request_select$
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_call_portal.reason_for_request_covid_options$
-      # when did symptoms start      
+      # When did symptoms start      
     - Type: click
       Strategy: class
       Id: $PAGE.care_platform_call_portal.symptoms_start_input_container$
@@ -203,7 +197,7 @@ set_missed_call_ticket:
       # Open the Call Portal
     - Type: click
       Strategy: xpath
-      Id: $PAGE.care_platform_participant.miguel_henriquez_one_td$
+      Id: $PAGE.care_platform_participant.senior_1_td$
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_participant.call_portal_btn$
@@ -300,8 +294,11 @@ set_missed_call_ticket:
       Strategy: xpath
       Id: $PAGE.providers_call_queue_page.details_textarea$
       Value: Missed Call Details Automation     
-    - Type: sleep
-      Time: 5
+    - Type: wait_for_attribute
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.complete_session_btn$ 
+      Attribute: disabled
+      Value: false
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_call_portal.complete_session_btn$             

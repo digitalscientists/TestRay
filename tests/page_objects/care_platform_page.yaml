@@ -37,7 +37,8 @@ care_platform_logout_modal:
   cancel_logout_button: //button[contains(@class,'button-ghost')] 
 
 care_platform_participant:
-  miguel_henriquez_one_td: //tr//td[contains(text(),'Miguel')][strong[text()='Henriquezone']]
+  senior_1_td: //td[contains(text(),'$AND_CLI_senior_user1_name$')][strong[contains(text(),'$AND_CLI_senior_user1_lastname$')]]
+
   call_portal_btn: //button[text()='Call Portal']
 
 care_platform_call_portal:
