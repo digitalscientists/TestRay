@@ -20,7 +20,7 @@ set_follow_up_ticket:
       # Select the Alpha center
     - Type: click
       Strategy: xpath
-      Id: $PAGE.providers_facilities_page.alpha_center$
+      Id: $PAGE.providers_facilities_page.alpha_center_td$
     - Type: click
       Strategy: xpath
       Id: $PAGE.providers_facilities_page.call_portal_btn$
@@ -294,11 +294,11 @@ set_missed_call_ticket:
       Strategy: xpath
       Id: $PAGE.providers_call_queue_page.details_textarea$
       Value: Missed Call Details Automation     
-    - Type: wait_for_attribute
+    - Type: wait_for_property
       Strategy: xpath
       Id: $PAGE.care_platform_call_portal.complete_session_btn$ 
-      Attribute: disabled
-      Value: false
+      Property: disabled
+      Value: "false"
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_call_portal.complete_session_btn$             
