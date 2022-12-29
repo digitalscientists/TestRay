@@ -1,4 +1,4 @@
-care_platform_logout:
+CarePlatformLogout:
   Environment: Settings 
   Roles:
     - Role: desktopChrome
@@ -18,7 +18,7 @@ care_platform_logout:
       Strategy: xpath
       Id: $PAGE.care_platform_login.login_button$
 
-providers_care_platform_login:
+ProvidersCarePlatformLogin:
   Environment: Settings 
   Roles:
     - Role: desktopChrome

@@ -1,4 +1,4 @@
-set_follow_up_ticket:
+SetFollowUpTicket:
   Environment: Settings 
   Roles:
     - Role: desktopChrome
@@ -83,7 +83,7 @@ set_follow_up_ticket:
       Strategy: xpath
       Id: $PAGE.providers_call_queue_page.submit_session_btn$
 
-set_scheduled_call_ticket:
+SetScheduledCallTicket:
   Environment: Settings 
   Roles:
     - Role: desktopChrome
@@ -175,7 +175,7 @@ set_scheduled_call_ticket:
       Strategy: xpath
       Id: $PAGE.care_platform.navigation_home$
 
-set_missed_call_ticket:
+SetMissedCallTicket:
   Environment: Settings 
   Roles:
     - Role: desktopChrome
@@ -332,7 +332,7 @@ set_missed_call_ticket:
       Id: $PAGE.care_platform_notifications.call_completed_notification$
 
       # CXTB-217
-HomePageListingView:
+TestHomePageListingView:
   Environment: Settings
   Vars:
     LOGOUT_OPTION: "Stay On Shift"   
@@ -355,23 +355,23 @@ HomePageListingView:
       # Setup for the test data
       # Missed call 
     - Type: case
-      Value: set_missed_call_ticket
+      Value: SetMissedCallTicket
     - Type: case
       Value: TerminateApp
       # Logout from the Care Partner account
     - Type: case
-      Value: care_platform_logout
+      Value: CarePlatformLogout
       # Login to the app with Providers account
     - Type: case
-      Value: providers_care_platform_login
+      Value: ProvidersCarePlatformLogin
       # Follow-up ticket
     - Type: case
       Value: LaunchApp
     - Type: case
-      Value: set_follow_up_ticket
+      Value: SetFollowUpTicket
       # Logout from the Care Partner account
     - Type: case
-      Value: care_platform_logout
+      Value: CarePlatformLogout
       # Terminate the iOS App
     - Type: case
       Value: TerminateApp
@@ -380,13 +380,13 @@ HomePageListingView:
       Value: CarePartnerLogin
       # Scheduled call
     - Type: case
-      Value: set_scheduled_call_ticket
+      Value: SetScheduledCallTicket
       # Logout from the Care Partner account
     - Type: case
-      Value: care_platform_logout
+      Value: CarePlatformLogout
       # Login to the app with Providers account
     - Type: case
-      Value: providers_care_platform_login
+      Value: ProvidersCarePlatformLogin
       # Set the Time to All
     - Type: click
       Strategy: xpath
