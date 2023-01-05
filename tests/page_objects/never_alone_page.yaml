@@ -8,6 +8,7 @@ never_alone_login:
   
 never_alone_home:
   schedule_label: //XCUIElementTypeStaticText[@name='Schedule']
+  call_care_partner: "**/XCUIElementTypeOther[`label BEGINSWITH 'Call Personal' AND label ENDSWITH 'Care Partner'`]"
 
 never_alone_settings:
   my_details_tab: (//XCUIElementTypeOther[contains(@name, 'My Details')])[2]
@@ -33,6 +34,10 @@ never_alone_incoming_call:
 never_alone_call:
   end_call_button: (//XCUIElementTypeOther[contains(@name,'End Call')])[last()]
   mute_call_button: (//XCUIElementTypeOther[contains(@name,'Microphone')])[last()]
+  medical_call_button: "**/XCUIElementTypeButton[`label ENDSWITH 'Medical'`][1]"
+  non_medical_call_button: "**/XCUIElementTypeButton[`label ENDSWITH 'Non-Medical'`]"
+  cancel_call_button: "**/XCUIElementTypeButton[`label CONTAINS 'Cancel Call'`]"
+  waiting_room_label: "**/XCUIElementTypeStaticText[`label == 'Waiting room'`]"
   
 never_alone_post_call_survey:
   great_answer_button: //XCUIElementTypeOther[@name='Great']

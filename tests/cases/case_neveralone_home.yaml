@@ -1,0 +1,48 @@
+# CXTB-70: Verify Call Personal Care Partner Button on Page
+TestCallPersonalCarePartnerOnHomePage:
+  Environment: Settings
+  Precases:
+    - LoginNeverAloneHelper
+  Aftercases:
+    - TerminateApp
+  Roles:
+    - Role: localiOS
+      App: NeverAlone
+  Actions:
+    # Click on the Call Personal Care Partner button.
+    - Type: click
+      Strategy: class_chain
+      Id: $PAGE.never_alone_home.call_care_partner$
+    # Verify that the screen updates to show screen asking what kinf of heelp you need:
+    # Medical 
+    # Non-Medical
+    # Cancel Call
+    - Type: wait_for
+      Strategy: class_chain
+      Id: $PAGE.never_alone_call.medical_call_button$
+    - Type: wait_for
+      Strategy: class_chain
+      Id: $PAGE.never_alone_call.non_medical_call_button$
+    - Type: wait_for
+      Strategy: class_chain
+      Id: $PAGE.never_alone_call.cancel_call_button$
+    # Click on the Cancel Call button and verify that Home page is displayed.
+    - Type: click
+      Strategy: class_chain
+      Id: $PAGE.never_alone_call.cancel_call_button$
+    - Type: wait_for
+      Strategy: class_chain
+      Id: $PAGE.never_alone_home.call_care_partner$
+    # Click on the Call Personal Care Partner button again.
+    - Type: click
+      Strategy: class_chain
+      Id: $PAGE.never_alone_home.call_care_partner$
+    # Click on the Non Medical call button.
+    - Type: click
+      Strategy: class_chain
+      Id: $PAGE.never_alone_call.non_medical_call_button$
+    # Verify that screen redirects to the call waiting room.
+    - Type: wait_for
+      Strategy: class_chain
+      Id: $PAGE.never_alone_call.waiting_room_label$
+
