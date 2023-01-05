@@ -40,6 +40,7 @@ never_alone_call:
   non_medical_call_button: "**/XCUIElementTypeButton[`label ENDSWITH 'Non-Medical'`]"
   cancel_call_button: "**/XCUIElementTypeButton[`label CONTAINS 'Cancel Call'`]"
   waiting_room_label: "**/XCUIElementTypeStaticText[`label == 'Waiting room'`]"
+  video_button: "**/XCUIElementTypeOther[`label ENDSWITH 'Camera'`]"
   
 never_alone_post_call_survey:
   great_answer_button: //XCUIElementTypeOther[@name='Great']

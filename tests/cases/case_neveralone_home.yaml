@@ -1,5 +1,43 @@
+GetCallRecordings:
+  ParallelRoles: true
+  Roles:
+    - Role: command1,command2,command3
+      App: command
+  Actions:
+    - Type: command
+      Role: command1
+      Value: mkdir -p $AND_CLI_TEST_FOLDER$
+    - Type: sync
+    - Type: command
+      Value: "tshark -Q -i \"$AND_CLI_INTERFACE$\" -w $AND_CLI_TEST_FOLDER$/trace.pcapng -a duration:$AND_CLI_TIME$"
+      Role: command1
+    - Type: command
+      Value: "sox -q -r 44100 -t coreaudio \"default\" $AND_CLI_TEST_FOLDER$/call.wav trim 0 $AND_CLI_TIME$"
+      Role: command1
+    - Type: command
+      Value: "ffmpeg -v quiet -y -f avfoundation -t $AND_CLI_TIME$ -video_size 320x240 -framerate 30 -probesize 42M  -pix_fmt uyvy422 -i \"$AND_CLI_VIDEO_IN$:\" $AND_CLI_TEST_FOLDER$/output.mp4"
+      Role: command1
+    - Type: sync
+
+  AnalyzeRecordings:
+    ParallelRoles: true
+    Roles:
+      - Role: command1,command2,command3
+        App: command
+    Actions:
+      - Type: command
+        Value: "ffprobe -v error -select_streams v:0 -show_entries stream=bit_rate -of default=noprint_wrappers=1:nokey=1 $AND_CLI_TEST_FOLDER$/output.mp4"
+        Role: command1
+      - Type: sync
+
+
 # CXTB-70: Verify Call Personal Care Partner Button on Page
 TestCallPersonalCarePartnerOnHomePage:
+  Vars:
+    TIME: 10
+    INTERFACE: en0
+    VIDEO_IN: "1"
+    TEST_FOLDER: $AND_CMD_pwd$/Reports/executions/$AND_CMD_date +%s$
   Environment: Settings
   Precases:
     - LoginNeverAloneHelper
@@ -8,7 +46,24 @@ TestCallPersonalCarePartnerOnHomePage:
   Roles:
     - Role: localiOS
       App: NeverAlone
+    - Role: desktopChrome
+      Capabilities:
+        chromeOptions:
+          args:
+            - use-fake-ui-for-media-stream
+            - use-fake-device-for-media-stream
+            - use-file-for-fake-audio-capture=/Users/$AND_CLI_USER$/Downloads/sample3.wav
+            - use-file-for-fake-video-capture=/Users/$AND_CLI_USER$/Downloads/sample_640x360.mjpeg
+            - no-sandbox
+            - disable-gpu
+      App: desktop
+    - Role: command1,command2,command3
+      App: command
+
   Actions:
+    # Login to the Care Platform app with Care Partners account
+    - Type: case
+      Value: CarePartnerLogin
     # Click on the Call Personal Care Partner button.
     - Type: click
       Strategy: class_chain
@@ -45,4 +100,125 @@ TestCallPersonalCarePartnerOnHomePage:
     - Type: wait_for
       Strategy: class_chain
       Id: $PAGE.never_alone_call.waiting_room_label$
+    - Type: click
+      Strategy: class_chain
+      Id: $PAGE.never_alone_call.video_button$
+
+    ## CARE PARTNER STEPS
+    - Type: click
+      Role: desktopChrome
+      Strategy: xpath
+      Id: $PAGE.care_platform_home.first_call_of_queue$
+    - Type: click
+      Role: desktopChrome
+      Strategy: xpath
+      Id: $PAGE.care_platform_home.answer_call$
+    - Type: click
+      Role: desktopChrome
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.video_btn$
+    - Type: wait_for
+      Role: desktopChrome
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.video_mirror_care_partner$
+    - Type: click
+      Role: desktopChrome
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.full_screen_call_btn$
+    - Type: wait_for
+      Role: desktopChrome
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.verify_video_is_full_screen$
+    # Record the call.
+    - Type: case
+      Value: GetCallRecordings
+    # Analyze the call.
+    - Type: case
+      Value: AnalyzeRecordings
+    - Type: click
+      Role: desktopChrome
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.full_screen_call_btn$
+
+    # i just copied this
+    - Type: wait_for
+      Role: desktopChrome
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.leave_call_btn$
+    - Type: click
+      Role: desktopChrome
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.leave_call_btn$
+      # Complete the call in Seniors App
+    # - Type: sleep
+    #   Time: 5
+    # - Type: click
+    #   Strategy: xpath
+    #   Id: $PAGE.never_alone_call.end_call_button$
+    # - Type: click
+    #   Strategy: xpath
+    #   Id: $PAGE.never_alone_post_call_survey.great_answer_button$
+    # - Type: click
+    #   Strategy: xpath
+    #   Id: $PAGE.never_alone_post_call_survey.to_home_button$
+    # Fill the notes
+    - Type: send_keys
+      Role: desktopChrome
+      Strategy: xpath
+      Id: $PAGE.providers_call_queue_page.subject_input$
+      Value: Missed Call Subject Automation
+    - Type: send_keys
+      Role: desktopChrome
+      Strategy: xpath
+      Id: $PAGE.providers_call_queue_page.details_textarea$
+      Value: Missed Call Details Automation     
+    - Type: wait_for_property
+      Role: desktopChrome
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.complete_session_btn$ 
+      Property: disabled
+      Value: "false"
+    - Type: click
+      Role: desktopChrome
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.complete_session_btn$             
+      # Fill the Post-call Survey
+    - Type: wait_for
+      Role: desktopChrome
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.non_medical_radiobtn$
+    - Type: click
+      Role: desktopChrome
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.non_medical_radiobtn$             
+    - Type: click
+      Role: desktopChrome
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.issue_resolved_yes_radiobutton$          
+    - Type: click
+      Role: desktopChrome
+      Strategy: id
+      Id: $PAGE.care_platform_call_portal.category_select$
+    - Type: click
+      Role: desktopChrome
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.medical_question_option$
+    - Type: click
+      Role: desktopChrome
+      Strategy: id
+      Id: $PAGE.care_platform_call_portal.subcategory_select$
+    - Type: click
+      Role: desktopChrome
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.located_provider_option$
+    - Type: click
+      Role: desktopChrome
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.submit_and_exit_session_button$
+    - Type: wait_for
+      Role: desktopChrome
+      Strategy: xpath
+      Id: $PAGE.care_platform_notifications.call_completed_notification$
+
+
 
