@@ -19,18 +19,18 @@ employee_health_signup_page:
   back_login_button: //button[contains(text(),'Login')]
   page_title: //span[@class='input-checkbox-label']
 
-confirmation_modal:
+employee_health_signup_confirmation_modal:
   thanks_title: //*[@id='dialogs']//h4[text()='Thank You']
   email_address: //*[@id='dialogs']//p/strong/text()
   close_modal_button: //*[@id='dialogs']//button
 
-home_page:
+employee_health_home_page:
   user_dropdown_button: //header//div[@class='user-dropdown']/button
   user_dropdown_menu: //nav[@class='user-dropdown-menu']
   dropdown_option_myaccount: //nav/button[text()='My Account']
   alert_updated_notification: //div[@class='Toastify']//div[contains(text(),'Notification preferences updated')]
 
-my_account_modal:
+employee_health_my_account_modal:
   modal_title: //*[@id='modals']//h4[text()='My Account']
   close_modal_button: //*[@id='modals']//button[text()='Close']
   notifications_tab: //*[@id='modals']//nav/button[text()='Notifications']

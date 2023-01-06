@@ -52,13 +52,13 @@ NavigateToMyAccount:
   Actions:
     - Type: wait_for
       Strategy: xpath
-      Id: $PAGE.home_page.user_dropdown_button$
+      Id: $PAGE.employee_health_home_page.user_dropdown_button$
     - Type: click
       Strategy: xpath
-      Id: $PAGE.home_page.user_dropdown_button$
+      Id: $PAGE.employee_health_home_page.user_dropdown_button$
     - Type: wait_for
       Strategy: xpath
-      Id: $PAGE.home_page.user_dropdown_menu$
+      Id: $PAGE.employee_health_home_page.user_dropdown_menu$
     - Type: click
       Strategy: xpath
-      Id: $PAGE.home_page.dropdown_option_myaccount$
+      Id: $PAGE.employee_health_home_page.dropdown_option_myaccount$

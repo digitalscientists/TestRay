@@ -20,15 +20,15 @@ TestSettingNotification:
       Value: NavigateToMyAccount
     - Type: wait_for
       Strategy: xpath
-      Id: $PAGE.my_account_modal.notifications_tab$
+      Id: $PAGE.employee_health_my_account_modal.notifications_tab$
   #Select Notification Tab
     - Type: click
       Strategy: xpath
-      Id: $PAGE.my_account_modal.notifications_tab$
+      Id: $PAGE.employee_health_my_account_modal.notifications_tab$
   #Verifying text in the notification tab
     - Type: get_text
       Strategy: xpath
-      Id : $PAGE.my_account_modal.notifications_text$
+      Id : $PAGE.employee_health_my_account_modal.notifications_text$
       Greps:
         - var: TITLE_TEXT
           condition: nempty
@@ -41,34 +41,34 @@ TestSettingNotification:
   #Checking that the checkboxes work: changes state with the click
     - Type: get_attribute
       Strategy: xpath
-      Id: $PAGE.my_account_modal.notifications_email_checkbox_input$
+      Id: $PAGE.employee_health_my_account_modal.notifications_email_checkbox_input$
       Greps:
       - var: ORIGINAL_EMAIL_VALUE
         attr: value
         match: "(.*)"
     - Type: get_attribute
       Strategy: xpath
-      Id: $PAGE.my_account_modal.notifications_sms_checkbox_input$
+      Id: $PAGE.employee_health_my_account_modal.notifications_sms_checkbox_input$
       Greps:
       - var: ORIGINAL_SMS_VALUE
         attr: value
         match: "(.*)"
     - Type: click
       Strategy: xpath
-      Id: $PAGE.my_account_modal.notifications_email_checkbox$
+      Id: $PAGE.employee_health_my_account_modal.notifications_email_checkbox$
     - Type: click
       Strategy: xpath
-      Id: $PAGE.my_account_modal.notifications_sms_checkbox$
+      Id: $PAGE.employee_health_my_account_modal.notifications_sms_checkbox$
     - Type: get_attribute
       Strategy: xpath
-      Id: $PAGE.my_account_modal.notifications_email_checkbox_input$
+      Id: $PAGE.employee_health_my_account_modal.notifications_email_checkbox_input$
       Greps:
       - var: NEW_EMAIL_VALUE
         attr: value
         match: "(.*)"
     - Type: get_attribute
       Strategy: xpath
-      Id: $PAGE.my_account_modal.notifications_sms_checkbox_input$
+      Id: $PAGE.employee_health_my_account_modal.notifications_sms_checkbox_input$
       Greps:
       - var: NEW_SMS_VALUE
         attr: value
@@ -86,27 +86,27 @@ TestSettingNotification:
   #Canceling changes. Modal should disappear.
     - Type: click
       Strategy: xpath
-      Id: $PAGE.my_account_modal.cancel_button$
+      Id: $PAGE.employee_health_my_account_modal.cancel_button$
     - Type: wait_not_visible
       Strategy: xpath
-      Id: $PAGE.my_account_modal.modal_title$
+      Id: $PAGE.employee_health_my_account_modal.modal_title$
   #Going back to My Account and Notification Tab
     - Type: case
       Value: NavigateToMyAccount
     - Type: click
       Strategy: xpath
-      Id: $PAGE.my_account_modal.notifications_tab$
+      Id: $PAGE.employee_health_my_account_modal.notifications_tab$
   #Checking state got undone when we canceled
     - Type: get_attribute
       Strategy: xpath
-      Id: $PAGE.my_account_modal.notifications_email_checkbox_input$
+      Id: $PAGE.employee_health_my_account_modal.notifications_email_checkbox_input$
       Greps:
       - var: ORIGINAL_EMAIL_VALUE_2
         attr: value
         match: "(.*)"
     - Type: get_attribute
       Strategy: xpath
-      Id: $PAGE.my_account_modal.notifications_sms_checkbox_input$
+      Id: $PAGE.employee_health_my_account_modal.notifications_sms_checkbox_input$
       Greps:
       - var: ORIGINAL_SMS_VALUE_2
         attr: value
@@ -124,15 +124,15 @@ TestSettingNotification:
   #Checking checkboxes
     - Type: click
       Strategy: xpath
-      Id: $PAGE.my_account_modal.notifications_email_checkbox$
+      Id: $PAGE.employee_health_my_account_modal.notifications_email_checkbox$
     - Type: click
       Strategy: xpath
-      Id: $PAGE.my_account_modal.notifications_sms_checkbox$
+      Id: $PAGE.employee_health_my_account_modal.notifications_sms_checkbox$
   #Saving
     - Type: click
       Strategy: xpath
-      Id: $PAGE.my_account_modal.save_changes_button$
+      Id: $PAGE.employee_health_my_account_modal.save_changes_button$
   #Waiting for notification of success
     - Type: wait_for
       Strategy: xpath
-      Id: $PAGE.home_page.alert_updated_notification$
+      Id: $PAGE.employee_health_home_page.alert_updated_notification$

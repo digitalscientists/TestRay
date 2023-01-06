@@ -92,10 +92,10 @@ TestSignUpNewDependent:
   #Check there's a Thank You modal
     - Type: wait_for
       Strategy: xpath
-      Id: $PAGE.confirmation_modal.thanks_title$  
+      Id: $PAGE.employee_health_signup_confirmation_modal.thanks_title$  
     - Type: click
       Strategy: xpath
-      Id: $PAGE.confirmation_modal.close_modal_button$
+      Id: $PAGE.employee_health_signup_confirmation_modal.close_modal_button$
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.employee_health_login_page.log_in_button$
