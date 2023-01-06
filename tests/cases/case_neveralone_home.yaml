@@ -15,20 +15,23 @@ GetCallRecordings:
       Value: "sox -q -r 44100 -t coreaudio \"default\" $AND_CLI_TEST_FOLDER$/call.wav trim 0 $AND_CLI_TIME$"
       Role: command1
     - Type: command
-      Value: "ffmpeg -v quiet -y -f avfoundation -t $AND_CLI_TIME$ -video_size 320x240 -framerate 30 -probesize 42M  -pix_fmt uyvy422 -i \"$AND_CLI_VIDEO_IN$:\" $AND_CLI_TEST_FOLDER$/output.mp4"
+      Value: "ffmpeg -y -f avfoundation -t $AND_CLI_TIME$ -framerate 30 -probesize 42M  -pix_fmt uyvy422 -i \"$AND_CLI_VIDEO_IN$:\" $AND_CLI_TEST_FOLDER$/output.mp4"
       Role: command1
     - Type: sync
 
-  AnalyzeRecordings:
-    ParallelRoles: true
-    Roles:
-      - Role: command1,command2,command3
-        App: command
-    Actions:
-      - Type: command
-        Value: "ffprobe -v error -select_streams v:0 -show_entries stream=bit_rate -of default=noprint_wrappers=1:nokey=1 $AND_CLI_TEST_FOLDER$/output.mp4"
-        Role: command1
-      - Type: sync
+AnalyzeRecordings:
+  ParallelRoles: true
+  Roles:
+    - Role: command1,command2,command3
+      App: command
+  Actions:
+    - Type: command
+      Value: "ffprobe -v error -select_streams v:0 -show_entries stream=bit_rate -of default=noprint_wrappers=1:nokey=1 $AND_CLI_TEST_FOLDER$/output.mp4"
+      Role: command1
+      Greps:
+        - var: BIT_RATE
+          match: "(.*)"
+    - Type: sync
 
 
 # CXTB-70: Verify Call Personal Care Partner Button on Page
@@ -135,6 +138,12 @@ TestCallPersonalCarePartnerOnHomePage:
     # Analyze the call.
     - Type: case
       Value: AnalyzeRecordings
+    # assert that bit rate is greater than 1.5 kbps
+    - Type: assert
+      Asserts:
+        - Type: gt
+          Var: BIT_RATE
+          Value: 1500000
     - Type: click
       Role: desktopChrome
       Strategy: xpath
