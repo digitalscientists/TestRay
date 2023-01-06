@@ -33,6 +33,13 @@ AnalyzeRecordings:
       Greps:
         - var: FRAME_COUNT
           match: "(.*)"   
+    # Get pixel count of video
+    - Type: command
+      Value: "ffprobe -v error -select_streams v:0 -show_entries stream=width,height -of csv=s=x:p=0 $AND_CLI_TEST_FOLDER$/output.mp4"
+      Role: command1
+      Greps:
+        - var: VIDEO_PIXEL_COUNT
+          match: "(.*)"   
     - Type: sync
 
 
@@ -148,14 +155,14 @@ TestCallPersonalCarePartnerOnHomePage:
     # Analyze the call.
     - Type: case
       Value: AnalyzeRecordings
-    # assert that bit rate is greater than 1.5 kbps.
+    # Assert that bit rate is greater than 1.5 kbps.
     - Type: assert
       Asserts:
         - Type: gt
           Var: BIT_RATE
           Value: 1500000 #low rate
     # Assert that frame count is framerate * seconds (150 on this case is the most accurate)
-    # Let's give ffmpeg a margin o 1 seconds so it's expected to record betweeen 4~6 seconds
+    # Let's give ffmpeg a margin o 1 seconds so it's expected to record betweeen 4~6 seconds.
     - Type: assert
       Asserts:
         - Type: ge
@@ -166,6 +173,12 @@ TestCallPersonalCarePartnerOnHomePage:
         - Type: le
           Var: FRAME_COUNT
           Value: 180 #maximum for 6 seconds.
+    # Assert that pixel count of the video is 3584x2240.
+    - Type: assert
+      Asserts:
+        - Type: eq
+          Var: VIDEO_PIXEL_COUNT
+          Value: "3584x2240"
     - Type: click # workaround
       Strategy: xpath
       Id: $PAGE.never_alone_call.mute_call_button$
