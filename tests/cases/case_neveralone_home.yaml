@@ -1,7 +1,7 @@
 GetCallRecordings:
   ParallelRoles: true
   Roles:
-    - Role: command1,command2,command3
+    - Role: command1
       App: command
   Actions:
     - Type: command
@@ -16,7 +16,7 @@ GetCallRecordings:
 AnalyzeRecordings:
   ParallelRoles: true
   Roles:
-    - Role: command1,command2,command3
+    - Role: command1
       App: command
   Actions:
     - Type: command
@@ -54,9 +54,8 @@ TestCallPersonalCarePartnerOnHomePage:
             - no-sandbox
             - disable-gpu
       App: desktop
-    - Role: command1,command2,command3
+    - Role: command1
       App: command
-
   Actions:
     # Login to the Care Platform app with Care Partners account.
     - Type: case
@@ -228,7 +227,7 @@ TestCallPersonalCarePartnerOnHomePage:
       Strategy: class_chain
       Id: $PAGE.never_alone_home.call_care_partner$
 
-    # End the call on care partner side
+    # End the call on care partner side - Teardown.
     # Fill the notes
     - Type: send_keys
       Role: desktopChrome
@@ -287,6 +286,3 @@ TestCallPersonalCarePartnerOnHomePage:
       Role: desktopChrome
       Strategy: xpath
       Id: $PAGE.care_platform_notifications.call_completed_notification$
-
-
-
