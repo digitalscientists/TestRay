@@ -9,12 +9,6 @@ GetCallRecordings:
       Value: mkdir -p $AND_CLI_TEST_FOLDER$
     - Type: sync
     - Type: command
-      Value: "tshark -Q -i \"$AND_CLI_INTERFACE$\" -w $AND_CLI_TEST_FOLDER$/trace.pcapng -a duration:$AND_CLI_TIME$"
-      Role: command1
-    - Type: command
-      Value: "sox -q -r 44100 -t coreaudio \"default\" $AND_CLI_TEST_FOLDER$/call.wav trim 0 $AND_CLI_TIME$"
-      Role: command1
-    - Type: command
       Value: "ffmpeg -y -f avfoundation -t $AND_CLI_TIME$ -framerate 30 -probesize 42M  -pix_fmt uyvy422 -i \"$AND_CLI_VIDEO_IN$:\" $AND_CLI_TEST_FOLDER$/output.mp4"
       Role: command1
     - Type: sync
@@ -37,7 +31,7 @@ AnalyzeRecordings:
 # CXTB-70: Verify Call Personal Care Partner Button on Page
 TestCallPersonalCarePartnerOnHomePage:
   Vars:
-    TIME: 10
+    TIME: 5
     INTERFACE: en0
     VIDEO_IN: "1"
     TEST_FOLDER: $AND_CMD_pwd$/Reports/executions/$AND_CMD_date +%s$
@@ -64,7 +58,7 @@ TestCallPersonalCarePartnerOnHomePage:
       App: command
 
   Actions:
-    # Login to the Care Platform app with Care Partners account
+    # Login to the Care Platform app with Care Partners account.
     - Type: case
       Value: CarePartnerLogin
     # Click on the Call Personal Care Partner button.
@@ -107,7 +101,7 @@ TestCallPersonalCarePartnerOnHomePage:
       Strategy: class_chain
       Id: $PAGE.never_alone_call.video_button$
 
-    ## CARE PARTNER STEPS
+    ## Care partner steps to take the call.
     - Type: click
       Role: desktopChrome
       Strategy: xpath
@@ -132,24 +126,36 @@ TestCallPersonalCarePartnerOnHomePage:
       Role: desktopChrome
       Strategy: xpath
       Id: $PAGE.care_platform_call_portal.verify_video_is_full_screen$
+    - Type: click #workaround
+      Strategy: xpath
+      Id: $PAGE.never_alone_call.mute_call_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.never_alone_call.mute_call_button$
     # Record the call.
     - Type: case
       Value: GetCallRecordings
+    - Type: click #workaround
+      Strategy: xpath
+      Id: $PAGE.never_alone_call.mute_call_button$
     # Analyze the call.
     - Type: case
       Value: AnalyzeRecordings
-    # assert that bit rate is greater than 1.5 kbps
+    # assert that bit rate is greater than 1.5 kbps.
     - Type: assert
       Asserts:
         - Type: gt
           Var: BIT_RATE
           Value: 1500000
+    - Type: click # workaround
+      Strategy: xpath
+      Id: $PAGE.never_alone_call.mute_call_button$
     - Type: click
       Role: desktopChrome
       Strategy: xpath
       Id: $PAGE.care_platform_call_portal.full_screen_call_btn$
 
-    # i just copied this
+    # Care partner leaves the call.
     - Type: wait_for
       Role: desktopChrome
       Strategy: xpath
@@ -158,18 +164,71 @@ TestCallPersonalCarePartnerOnHomePage:
       Role: desktopChrome
       Strategy: xpath
       Id: $PAGE.care_platform_call_portal.leave_call_btn$
-      # Complete the call in Seniors App
-    # - Type: sleep
-    #   Time: 5
-    # - Type: click
-    #   Strategy: xpath
-    #   Id: $PAGE.never_alone_call.end_call_button$
-    # - Type: click
-    #   Strategy: xpath
-    #   Id: $PAGE.never_alone_post_call_survey.great_answer_button$
-    # - Type: click
-    #   Strategy: xpath
-    #   Id: $PAGE.never_alone_post_call_survey.to_home_button$
+    # Select the Bad option on the Post Survey screen.
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.never_alone_post_call_survey.bad_answer_button$
+    # Verify page updates to ask why you made your selection and presents you with a set of reasons, or gives you option to return to main survey page.
+    - Type: wait_for
+      Strategy: class_chain
+      Id: $PAGE.never_alone_post_call_survey.video_quality_not_good_option$
+    - Type: wait_for
+      Strategy: class_chain
+      Id: $PAGE.never_alone_post_call_survey.could_not_hear_audio_option$
+    - Type: wait_for
+      Strategy: class_chain
+      Id: $PAGE.never_alone_post_call_survey.problem_was_not_solved_option$
+    - Type: wait_for
+      Strategy: class_chain
+      Id: $PAGE.never_alone_post_call_survey.issue_with_care_partner_option$
+    - Type: wait_for
+      Strategy: class_chain
+      Id: $PAGE.never_alone_post_call_survey.call_was_not_answered_option$
+    # Click on the back to select button.
+    - Type: click
+      Strategy: class_chain
+      Id: $PAGE.never_alone_post_call_survey.back_to_select_button$
+    # Select the Ok option.
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.never_alone_post_call_survey.ok_answer_button$
+    # Verify page updates to ask why you made your selection and presents you with a set of reasons, or gives you option to return to main survey page.
+    - Type: wait_for
+      Strategy: class_chain
+      Id: $PAGE.never_alone_post_call_survey.video_quality_not_good_option$
+    - Type: wait_for
+      Strategy: class_chain
+      Id: $PAGE.never_alone_post_call_survey.could_not_hear_audio_option$
+    - Type: wait_for
+      Strategy: class_chain
+      Id: $PAGE.never_alone_post_call_survey.problem_was_not_solved_option$
+    - Type: wait_for
+      Strategy: class_chain
+      Id: $PAGE.never_alone_post_call_survey.issue_with_care_partner_option$
+    - Type: wait_for
+      Strategy: class_chain
+      Id: $PAGE.never_alone_post_call_survey.call_was_not_answered_option$
+    # Click on the back to select button.
+    - Type: click
+      Strategy: class_chain
+      Id: $PAGE.never_alone_post_call_survey.back_to_select_button$
+    # Select the Great option.
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.never_alone_post_call_survey.great_answer_button$
+    # Verify page updates and shows Thank You for you feedback page.
+    - Type: wait_for
+      Strategy: class_chain
+      Id: $PAGE.never_alone_post_call_survey.thank_you_label$
+    # Do not click the "To Home" button on Thank you for your feedback screen.
+    - Type: sleep
+      Time: 8
+    # Verify device is automatically returned to home page after a few seconds.
+    - Type: wait_for
+      Strategy: class_chain
+      Id: $PAGE.never_alone_home.call_care_partner$
+
+    # End the call on care partner side
     # Fill the notes
     - Type: send_keys
       Role: desktopChrome
@@ -191,7 +250,7 @@ TestCallPersonalCarePartnerOnHomePage:
       Role: desktopChrome
       Strategy: xpath
       Id: $PAGE.care_platform_call_portal.complete_session_btn$             
-      # Fill the Post-call Survey
+    # Fill the Post-call Survey
     - Type: wait_for
       Role: desktopChrome
       Strategy: xpath
