@@ -69,12 +69,8 @@ TestCallPersonalCarePartnerOnHomePage:
       Capabilities:
         chromeOptions:
           args:
-            - use-fake-ui-for-media-stream
-            - use-fake-device-for-media-stream
             - use-file-for-fake-audio-capture=$AND_CMD_pwd$/video_audio_samples/sample3.wav
             - use-file-for-fake-video-capture=$AND_CMD_pwd$/video_audio_samples/sample_640x360.mjpeg
-            - no-sandbox
-            - disable-gpu
       App: desktop
     - Role: command1
       App: command

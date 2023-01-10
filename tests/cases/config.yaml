@@ -8,6 +8,14 @@ Timeout: 15
 Devices:
   - role: command1,command2,command3
   - role: desktopChrome,desktopChrome1   
+    capabilities:
+      chromeOptions:
+        args:
+          - use-fake-ui-for-media-stream
+          - use-fake-device-for-media-stream
+          - no-sandbox
+          - disable-gpu
+          - start-maximized
     browser: chrome
   - role: desktopFirefox
     browser: firefox
