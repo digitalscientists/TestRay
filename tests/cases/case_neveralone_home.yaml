@@ -33,12 +33,19 @@ AnalyzeRecordings:
       Greps:
         - var: FRAME_COUNT
           match: "(.*)"   
-    # Get pixel count of video
+    # Get pixel count of video (resolution)
     - Type: command
       Value: "ffprobe -v error -select_streams v:0 -show_entries stream=width,height -of csv=s=x:p=0 $AND_CLI_TEST_FOLDER$/output.mp4"
       Role: command1
       Greps:
         - var: VIDEO_PIXEL_COUNT
+          match: "(.*)"   
+    # Get average frame rate
+    - Type: command
+      Value: "ffprobe -v error -select_streams v:0 -show_entries stream=avg_frame_rate -of default=noprint_wrappers=1:nokey=1 $AND_CLI_TEST_FOLDER$/output.mp4"
+      Role: command1
+      Greps:
+        - var: AVG_FRAME_RATE
           match: "(.*)"   
     - Type: sync
 
@@ -64,8 +71,8 @@ TestCallPersonalCarePartnerOnHomePage:
           args:
             - use-fake-ui-for-media-stream
             - use-fake-device-for-media-stream
-            - use-file-for-fake-audio-capture=/Users/$AND_CLI_USER$/Downloads/sample3.wav
-            - use-file-for-fake-video-capture=/Users/$AND_CLI_USER$/Downloads/sample_640x360.mjpeg
+            - use-file-for-fake-audio-capture=$AND_CMD_pwd$/video_audio_samples/sample3.wav
+            - use-file-for-fake-video-capture=$AND_CMD_pwd$/video_audio_samples/sample_640x360.mjpeg
             - no-sandbox
             - disable-gpu
       App: desktop
@@ -173,12 +180,18 @@ TestCallPersonalCarePartnerOnHomePage:
         - Type: le
           Var: FRAME_COUNT
           Value: 180 #maximum for 6 seconds.
-    # Assert that pixel count of the video is 3584x2240.
+    # Assert that pixel count (resolution) of the video is 3584x2240.
     - Type: assert
       Asserts:
         - Type: eq
           Var: VIDEO_PIXEL_COUNT
           Value: "3584x2240"
+    # Assert that the average frame rate is 30/1
+    - Type: assert
+      Asserts:
+        - Type: eq
+          Var: AVG_FRAME_RATE
+          Value: "30/1"
     - Type: click # workaround
       Strategy: xpath
       Id: $PAGE.never_alone_call.mute_call_button$
