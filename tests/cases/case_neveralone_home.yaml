@@ -30,7 +30,7 @@ TestCallPersonalCarePartnerOnHomePage:
     - Type: click
       Strategy: class_chain
       Id: $PAGE.never_alone_home.call_care_partner$
-    # Verify that the screen updates to show screen asking what kinf of heelp you need:
+    # Verify that the screen updates to show screen asking what kind of heelp you need:
     # Medical 
     # Non-Medical
     # Cancel Call
@@ -91,7 +91,7 @@ TestCallPersonalCarePartnerOnHomePage:
       Role: desktopChrome
       Strategy: xpath
       Id: $PAGE.care_platform_call_portal.verify_video_is_full_screen$
-    - Type: click #workaround
+    - Type: click #workaround for appium's timeout issue until CXTB-253 is solved.
       Strategy: xpath
       Id: $PAGE.never_alone_call.mute_call_button$
     - Type: click
@@ -100,7 +100,7 @@ TestCallPersonalCarePartnerOnHomePage:
     # Record the call.
     - Type: case
       Value: GetCallRecordings
-    - Type: click #workaround
+    - Type: click #workaround for appium's timeout issue until CXTB-253 is solved.
       Strategy: xpath
       Id: $PAGE.never_alone_call.mute_call_button$
     # Analyze the call.
@@ -109,7 +109,7 @@ TestCallPersonalCarePartnerOnHomePage:
     # Make video quality assertions
     - Type: case
       Value: VideoQualityAssertions
-    - Type: click # workaround
+    - Type: click # workaround for appium's timeout issue until CXTB-253 is solved.
       Strategy: xpath
       Id: $PAGE.never_alone_call.mute_call_button$
     - Type: click
