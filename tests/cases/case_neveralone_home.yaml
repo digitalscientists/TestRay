@@ -91,27 +91,18 @@ TestCallPersonalCarePartnerOnHomePage:
       Role: desktopChrome
       Strategy: xpath
       Id: $PAGE.care_platform_call_portal.verify_video_is_full_screen$
-    - Type: click #workaround for appium's timeout issue until CXTB-253 is solved.
-      Strategy: xpath
-      Id: $PAGE.never_alone_call.mute_call_button$
     - Type: click
       Strategy: xpath
       Id: $PAGE.never_alone_call.mute_call_button$
     # Record the call.
     - Type: case
       Value: GetCallRecordings
-    - Type: click #workaround for appium's timeout issue until CXTB-253 is solved.
-      Strategy: xpath
-      Id: $PAGE.never_alone_call.mute_call_button$
     # Analyze the call.
     - Type: case
       Value: AnalyzeRecordings
     # Make video quality assertions
     - Type: case
       Value: VideoQualityAssertions
-    - Type: click # workaround for appium's timeout issue until CXTB-253 is solved.
-      Strategy: xpath
-      Id: $PAGE.never_alone_call.mute_call_button$
     - Type: click
       Role: desktopChrome
       Strategy: xpath
