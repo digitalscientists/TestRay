@@ -96,7 +96,7 @@ TestParticipantDirectoryFilter:
     - Type: click
       Strategy: xpath
       Id : $PAGE.care_platform.navigation_participant$
-  #BGet the value to compare later
+  #Get the value to compare later
     - Type: get_text
       Strategy: xpath
       Id: $PAGE.care_platform_participant.first_darkened_letter_button$
