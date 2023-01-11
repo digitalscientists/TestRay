@@ -95,7 +95,7 @@ TestParticipantDirectoryFilter:
   #Go to participants
     - Type: click
       Strategy: xpath
-      Id : $PAGE.care_platform.navigation_participant$
+      Id: $PAGE.care_platform.navigation_participant$
   #Get the value to compare later
     - Type: get_text
       Strategy: xpath
