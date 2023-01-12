@@ -210,3 +210,19 @@ TestVerifyFullScheduleDisplay:
       Strategy: class_chain
       Id: $PAGE.never_alone_schedule.events_elements$
       EventName: $AND_CLI_UNIQUE_EVENT_NAME$
+
+# CXTB-12: Schedules Page Navigation
+TestSchedulesPageNavigation:
+  Environment: Settings
+  Precases:
+    - LoginNeverAloneHelper
+  Roles:
+    - Role: localiOS
+      App: NeverAlone
+  Actions:
+  # In the Home page, click on the button "Full Schedule" and verify user is redirected to Schedules page.
+    - Type: case
+      Value: SchedulesPageNavigationHelper
+  # Terminate the app.
+    - Type: case
+      Value: TerminateApp

@@ -47,3 +47,18 @@ LoginNeverAloneHelper:
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.never_alone_home.schedule_label$
+
+SchedulesPageNavigationHelper:
+  Environment: Settings
+  Roles:
+    - Role: localiOS
+      App: NeverAlone
+  Actions:
+  # In the Home page, click on the button "Full Schedule"
+    - Type: click
+      Strategy: class_chain
+      Id: $PAGE.never_alone_home.full_schedule_btn$
+  # Verify Schedules page is displayed
+    - Type: wait_for
+      Strategy: class_chain
+      Id: $PAGE.never_alone_schedule.schedule_label$
