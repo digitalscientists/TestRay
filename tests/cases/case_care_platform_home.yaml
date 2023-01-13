@@ -422,3 +422,84 @@ TestAccountHelp:
         - Type: contain
           Var: HELP_PAGE_URL
           Value: .pdf
+
+#CXTB-236 Account - Update Password
+TestUpdatePassword:
+  Environment: Settings 
+  Vars:
+    LOGOUT_OPTION: "Stay On Shift"     
+  Roles:
+    - Role: desktopChrome
+      App: "desktop"
+  Actions:
+  #Calling Login case
+    - Type: case
+      Value: CarePartnerLogin
+  #Going to My Account
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_header.myaccount_menu_button$
+  #Click in Update Password
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_header.myaccount_menu_button$
+  #Verify the elements
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.myaccount_info.confirm_new_password_input$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.myaccount_info.confirm_new_password_label$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.myaccount_info.new_password_input$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.myaccount_info.new_password_label$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.myaccount_info.current_password_input$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.myaccount_info.current_password_label$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_login.dialog_cancel_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.myaccount_info.change_my_password_button$
+  #Fill the fields
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.myaccount_info.current_password_input$
+      Value: $AND_CLI_carepartner_user1_pwd$
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.myaccount_info.new_password_input$
+      Value: "Neural123!"
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.myaccount_info.confirm_new_password_input$
+      Value: "Neural123!"
+  #Click the Change My Password button
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.myaccount_info.change_my_password_button$
+  #Verify the modal for Password updated successfully is displayed
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.myaccount_info.password_updated_successfully_alert$
+  #Calling Logout case
+    - Type: case
+      Value: CarePlatformLogout
+  #Set the password var to the new value
+    - Type: set_env_var
+      Value: Neural123
+      Var: $AND_CLI_carepartner_user1_pwd$
+  #Calling Login case
+    - Type: case
+      Value: CarePartnerLogin
+  #Verify the login with the new password was successful
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_header.//header//time$
