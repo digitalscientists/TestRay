@@ -1,4 +1,3 @@
-
 #CXTB-191: Access Employees Directory and Filter
 TestAccessEmployeesDirectoryAndFilter:
   Environment: Settings 
@@ -39,7 +38,7 @@ TestAccessEmployeesDirectoryAndFilter:
       - Type: eq
         Var: LASTNAME_FIRST_LETTER
         Value: $AND_CLI_LASTNAME_FILTER_LETTER$
-  # Remove the filter by letter.
+  # Remove the filter by clicking on the letter.
     - Type: click
       Strategy: xpath
       Id: $PAGE.providers_employees_page.selected_darkened_letter_button$
@@ -58,7 +57,7 @@ TestAccessEmployeesDirectoryAndFilter:
       Strategy: xpath
       Id: $PAGE.providers_employees_page.search_input$
       Value: $AND_CLI_LASTNAME_FIRST_EMPLOYEE_NO_FILTER$
-  # Verify there is at least 1 employee with that name.
+  # Verify there is at least one employee with that name.
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.providers_employees_page.first_employee_in_list_strong$
@@ -78,11 +77,11 @@ TestAccessEmployeesDirectoryAndFilter:
     - Type: click
       Strategy: xpath
       Id: $PAGE.providers_employees_page.clear_search_button$
-  # Verify there is at least 1 employee.
+  # Verify there is at least one employee.
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.providers_employees_page.first_employee_in_list_strong$
-  # Click on an employee.
+  # Click on the first employee.
     - Type: click
       Strategy: xpath
       Id: $PAGE.providers_employees_page.first_employee$
