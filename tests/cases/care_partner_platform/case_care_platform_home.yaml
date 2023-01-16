@@ -427,7 +427,8 @@ TestAccountHelp:
 TestUpdatePassword:
   Environment: Settings 
   Vars:
-    LOGOUT_OPTION: "Stay On Shift"   
+    LOGOUT_OPTION: "Stay On Shift"
+    ENV_PASS_STORE: $AND_CLI_carepartner_user1_pwd$ 
   Roles:
     - Role: desktopChrome
       App: "desktop"
@@ -557,7 +558,7 @@ TestUpdatePassword:
       Id: $PAGE.care_platform_myaccount_info.update_password_button$
   #Set the password var to the new value
     - Type: set_env_var
-      Value: ec745fd25e9380325b1f649b1bb412b1!
+      Value: $AND_CLI_ENV_PASS_STORE$
       Var: carepartner_user1_pwd
   #Fill the fields
     - Type: send_keys
