@@ -1811,8 +1811,16 @@ def return_element_attribute(action)
   return unless el
 
   attr_value = el.attribute(action["Attribute"])
-  log_info("Element attribute is " + attr_value.to_s)
-  ENV[convert_value(action["ResultVar"])] = attr_value.to_s
+  
+  if action["NoNewLine"]
+    no_newline_el_string = attr_value.to_s.gsub("\n", " ")
+    log_info("Element attribute is  #{no_newline_el_string}")
+    ENV[convert_value(action["ResultVar"])] = no_newline_el_string
+  else
+    log_info("Element attribute is " + attr_value.to_s)
+    ENV[convert_value(action["ResultVar"])] = attr_value.to_s
+  end
+
 end
 
 # Returns a variable with a unique name using timestamps at the end
