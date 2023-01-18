@@ -386,7 +386,11 @@ TestVerifyInAppOfflineBehavior:
         - Type: eq
           Var: OFFLINE_CALL_BUTTON_VALUE
           Value: Personal Care Partner and Emergency Services are Offline
-    #TODO: Verify that the emergency call button disappears.
+    # Verify that the emergency call button disappears.
+    - Type: wait_not_visible
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_home.emergency_services_button$
+      Time: 10
     # Click an event from the schedule listing.
     - Type: click
       Strategy: class_chain
@@ -426,6 +430,11 @@ TestVerifyInAppOfflineBehavior:
         - Type: eq
           Var: SCHEDULE_OFFLINE_CALL_BUTTON_VALUE
           Value: Personal Care Partner & Emergency Services are Offline
+    # Verify that the emergency call button disappears.
+    - Type: wait_not_visible
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_schedule.emergency_services_button$
+      Time: 10
     # Click an event from the schedule listing.
     - Type: click
       Strategy: class_chain
