@@ -12,9 +12,8 @@ seniors_app_home:
   full_schedule_btn: "**/XCUIElementTypeButton[`label CONTAINS 'Full Schedule'`][-1]"
   settings_icon: (//XCUIElementTypeOther[starts-with(@name, '$AND_CLI_TODAY_DATE$')])[last()]/following-sibling::XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther[1]
   notifications_icon: "**/XCUIElementTypeOther[`name == 'headerContainer'`]/XCUIElementTypeOther/XCUIElementTypeOther[-1]/XCUIElementTypeOther/XCUIElementTypeOther[-1]"
-  # TODO: improve these locators
-  offline_call_button: "**/XCUIElementTypeOther[`label CONTAINS 'Personal'`][-1]"
-  offline_yellow_bar: "**/XCUIElementTypeStaticText[`label CONTAINS 'call 911'`][-1]"
+  offline_call_button: "**/XCUIElementTypeOther[`label BEGINSWITH 'Personal' AND label ENDSWITH 'Offline'`][-1]"
+  offline_yellow_bar: "**/XCUIElementTypeStaticText[`label ENDSWITH 'please call 911.'`][-1]"
 
 seniors_app_settings:
   my_details_tab: (//XCUIElementTypeOther[contains(@name, 'My Details')])[2]
