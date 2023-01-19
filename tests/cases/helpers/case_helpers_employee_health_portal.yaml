@@ -19,7 +19,6 @@ EmployeeHealthPortalGoSignUp:
       Id: $PAGE.employee_health_signup_page.first_name_input$
 
 EmployeeHealthPortalLogIn:
-  Environment: Settings 
   Roles:
     - Role: desktopChrome
       App: desktop       
@@ -45,7 +44,6 @@ EmployeeHealthPortalLogIn:
 
 #CXTB-233 Navigate to My Account
 NavigateToMyAccount:
-  Environment: Settings 
   Roles:
     - Role: desktopChrome
       App: desktop       
@@ -74,8 +72,7 @@ CaseDeletePhoneNumber:
       Id: $PAGE.employee_health_my_account_modal.my_info_phone_input$
       Value: backspace
 
-EmployeeHealthPortalLogOut:
-  Environment: Settings 
+EmployeeHealthPortalLogOut: 
   Roles:
     - Role: desktopChrome
       App: desktop       
