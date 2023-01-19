@@ -73,3 +73,19 @@ CaseDeletePhoneNumber:
       Strategy: xpath
       Id: $PAGE.employee_health_my_account_modal.my_info_phone_input$
       Value: backspace
+
+EmployeeHealthPortalLogOut:
+  Environment: Settings 
+  Roles:
+    - Role: desktopChrome
+      App: desktop       
+  Actions: 
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.employee_health_home_page.user_dropdown_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.employee_health_home_page.dropdown_option_logout$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.employee_health_login_page.log_in_button$
