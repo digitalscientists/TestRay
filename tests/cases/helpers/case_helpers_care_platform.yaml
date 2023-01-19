@@ -94,13 +94,6 @@ SetScheduledCallForSeniors:
   Environment: Settings 
   Roles:
     - Role: desktopChrome
-      Capabilities:
-        chromeOptions:
-          args:
-            - use-fake-ui-for-media-stream
-            - use-fake-device-for-media-stream
-            - no-sandbox
-            - disable-gpu
       App: desktop       
   Actions:
     # Login to the Care Platform app with Care Partners account
