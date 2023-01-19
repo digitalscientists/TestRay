@@ -626,13 +626,16 @@ TestLogoutGoOffShift:
       Greps:
         - var: CARE_PARTNER_ELEMENT
           match: "(.*)"
-      Asserts:
-        - Type: n_contain
-          Var: CARE_PARTNER_ELEMENT
-          Value: "Available"
-        - Type: n_contain
-          Var: CARE_PARTNER_ELEMENT
-          Value: "Idle"
+    - Type: assert
+      Asserts: 
+      - Type: n_contain
+        Var: CARE_PARTNER_ELEMENT
+        Value: "Available"
+    - Type: assert
+      Asserts: 
+      - Type: n_contain
+        Var: CARE_PARTNER_ELEMENT
+        Value: "Idle"
   # Log out of the second user too.
     - Type: case
       Value: CarePlatformLogout
