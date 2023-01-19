@@ -255,7 +255,7 @@ class Device
   end
 
   #add to documentation
-  # Toggles wifi using the iOS Control Center (available only for iOS)
+  # Toggles wifi using the iOS Control Center (available only for iOS with Physical Devices, not simulators)
   def toggle_wifi(action = nil)
     # Get the window size 
     size = @driver.window_size
