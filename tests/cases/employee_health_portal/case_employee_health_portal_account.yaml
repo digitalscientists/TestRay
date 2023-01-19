@@ -286,7 +286,7 @@ TestUpdateAccountPassword:
       Value: $AND_CLI_employee_dependent_user1_pwd$
       Var: employee_user1_pwd
     - Type: set_env_var
-      Value: $AND_CLI_employee_employee_dependent_user1$
+      Value: $AND_CLI_employee_dependent_user1$
       Var: employee_user1
     - Type: case
       Value: EmployeeHealthPortalUpdateAccountPassword  
