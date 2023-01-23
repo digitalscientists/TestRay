@@ -1878,6 +1878,8 @@ def verify_all_events_match_todays_date(action)
     wait = Selenium::WebDriver::Wait.new(:timeout => 5)
     date_label = wait.until {@driver.find_element(convert_value(action["SecondStrategy"]), convert_value_pageobjects(action["SecondId"]))}
     event_date = Date.parse(date_label.attribute("label"))
+    close_button = @driver.find_element(:class_chain, "**/XCUIElementTypeButton[`label CONTAINS 'Close'`]")
+    close_button.click
 
     if today_date == event_date
       log_info("An event has been validated to be for today!")

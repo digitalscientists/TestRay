@@ -20,7 +20,7 @@ TestVerifyFullScheduleDisplay:
   Actions:
   # Set up past event on Care Platform.
     - Type: case
-      Value: SetPastEvent
+      Value: SetPastEventForSeniors
     - Type: click
       Strategy: class_chain
       Id: $PAGE.seniors_app_appointment_modal.close_btn$
