@@ -34,7 +34,7 @@ TestVerifyFullScheduleDisplay:
       Strategy: class_chain
       Id: $PAGE.seniors_app_home.full_schedule_btn$
     - Type: get_timestamp
-      Format: "%A %B%e"
+      Format: "%A %B %-d"
       Var: TODAY_DATE
   # Verify that the Full Schedule page loaded as expected.
     - Type: return_element_attribute
@@ -52,7 +52,7 @@ TestVerifyFullScheduleDisplay:
       Strategy: class_chain
       Id: $PAGE.seniors_app_schedule.left_arrow_schedule$
     - Type: get_yesterday_date
-      Format: "%A %B%e"
+      Format: "%A %B %-d"
       Var: YESTERDAY_DATE
     - Type: return_element_attribute
       Strategy: class_chain
@@ -72,7 +72,7 @@ TestVerifyFullScheduleDisplay:
       Strategy: class_chain
       Id: $PAGE.seniors_app_schedule.right_arrow_schedule$
     - Type: get_tomorrow_date
-      Format: "%A %B%e"
+      Format: "%A %B %-d"
       Var: TOMORROW_DATE
     - Type: return_element_attribute
       Strategy: class_chain
