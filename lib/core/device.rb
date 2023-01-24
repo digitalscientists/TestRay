@@ -1872,7 +1872,6 @@ def verify_all_events_match_todays_date(action)
   end
 
   today_date = Date.today
-  event_labels = []
   events.each do |event|
     event.click
     wait = Selenium::WebDriver::Wait.new(:timeout => 5)
