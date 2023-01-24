@@ -453,7 +453,8 @@ TestAutoReturnToHomePageAfterInactivityPeriod:
 TestStartingSoonNotification:
   Environment: Settings
   Precases:
-    - SetScheduledCallForSeniorsToStartIn6Minutes
+    # - SetScheduledCallForSeniorsToStartIn6Minutes
+    - SetScheduledCallForSeniorsToStartIn10Minutes
     - LoginNeverAloneHelper
   Aftercases:
     - TerminateApp
@@ -505,4 +506,44 @@ TestStartingSoonNotification:
     - Type: click
       Strategy: class_chain
       Id: $PAGE.seniors_app_notifications.close_btn$
-    
+    # Add some sleep time to be closer to the 5 mins.
+    - Type: sleep
+      Time: 120
+    # Open a notification to see the notification detail window.
+    - Type: case
+      Value: NotificationsPageNavigationHelper
+    - Type: click
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_notifications.first_notification$
+    # Add some sleep time to be complete the 5 mins.
+    - Type: sleep
+      Time: 180
+    # Verify that the Starting Soon notification has not appeared until user closes the notifications detail view.
+    - Type: return_element_attribute
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_notifications.appointment_header_modal$
+      Attribute: label
+      ResultVar: APPOINTMENT_HEADER_TEXT
+    - Type: assert
+      Asserts:
+        - Type: ne
+          Var: APPOINTMENT_HEADER_TEXT
+          Value: Appointment Starting Soon
+    # Click on the Close button to go back to Home page.
+    - Type: click
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_notifications.close_btn$
+    # Verify that Starting Soon notification should show up.
+    - Type: wait_for
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_notifications.appointment_starting_soon_header_modal$
+    - Type: return_element_attribute
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_notifications.appointment_starting_soon_header_modal$
+      Attribute: label
+      ResultVar: APPOINTMENT_HEADER_TEXT
+    - Type: assert
+      Asserts:
+        - Type: eq
+          Var: APPOINTMENT_HEADER_TEXT
+          Value: Appointment Starting Soon
