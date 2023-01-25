@@ -207,6 +207,8 @@ SetScheduledCallForSeniors:
 
 SetScheduledCallForSeniorsToStartIn6Minutes:
   Environment: Settings
+  Vars:
+    LOGOUT_OPTION: "Go Off Shift"
   Roles:
     - Role: desktopChrome
       App: desktop       
@@ -306,9 +308,13 @@ SetScheduledCallForSeniorsToStartIn6Minutes:
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform.navigation_home$
+    - Type: case
+      Value: CarePlatformLogout
 
 SetScheduledCallForSeniorsToStartIn10Minutes:
   Environment: Settings
+  Vars:
+    LOGOUT_OPTION: "Go Off Shift"
   Roles:
     - Role: desktopChrome
       App: desktop       
@@ -408,3 +414,5 @@ SetScheduledCallForSeniorsToStartIn10Minutes:
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform.navigation_home$
+    - Type: case
+      Value: CarePlatformLogout

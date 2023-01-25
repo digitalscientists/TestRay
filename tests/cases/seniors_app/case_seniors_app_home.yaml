@@ -453,7 +453,7 @@ TestAutoReturnToHomePageAfterInactivityPeriod:
 TestStartingSoonNotification:
   Environment: Settings
   Precases:
-    # - SetScheduledCallForSeniorsToStartIn6Minutes
+    - SetScheduledCallForSeniorsToStartIn6Minutes
     - SetScheduledCallForSeniorsToStartIn10Minutes
     - LoginNeverAloneHelper
   Aftercases:
@@ -461,7 +461,7 @@ TestStartingSoonNotification:
   Roles:
     - Role: localiOS
       Capabilities:
-        newCommandTimeout: 1200
+        newCommandTimeout: 200
       App: NeverAlone
     - Role: desktopChrome
       App: desktop
