@@ -205,7 +205,7 @@ SetScheduledCallForSeniors:
       Strategy: xpath
       Id: $PAGE.care_platform.navigation_home$
 
-SetScheduledCallForSeniorsToStartIn6Minutes:
+SetScheduledCallForSeniorsToStartIn7Minutes:
   Environment: Settings
   Vars:
     LOGOUT_OPTION: "Go Off Shift"
@@ -256,7 +256,7 @@ SetScheduledCallForSeniorsToStartIn6Minutes:
       Id: $PAGE.care_platform_call_portal.today_date_date_picker$
     #Set a time in the future for the event to start in 6 minutes.
     - Type: get_timestamp_plus_minutes
-      Minutes: 6
+      Minutes: 7
       Format: "%I%M%p"
       Var: FUTURE_START_6MINUTES
     - Type: send_keys
@@ -311,7 +311,7 @@ SetScheduledCallForSeniorsToStartIn6Minutes:
     - Type: case
       Value: CarePlatformLogout
 
-SetScheduledCallForSeniorsToStartIn10Minutes:
+SetScheduledCallForSeniorsToStartIn11Minutes:
   Environment: Settings
   Vars:
     LOGOUT_OPTION: "Go Off Shift"
@@ -362,7 +362,7 @@ SetScheduledCallForSeniorsToStartIn10Minutes:
       Id: $PAGE.care_platform_call_portal.today_date_date_picker$
     #Set a time in the future for the event to start in 6 minutes.
     - Type: get_timestamp_plus_minutes
-      Minutes: 10
+      Minutes: 11
       Format: "%I%M%p"
       Var: FUTURE_START_6MINUTES
     - Type: send_keys

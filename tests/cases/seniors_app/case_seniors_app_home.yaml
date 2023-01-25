@@ -453,15 +453,15 @@ TestAutoReturnToHomePageAfterInactivityPeriod:
 TestStartingSoonNotification:
   Environment: Settings
   Precases:
-    - SetScheduledCallForSeniorsToStartIn6Minutes
-    - SetScheduledCallForSeniorsToStartIn10Minutes
+    - SetScheduledCallForSeniorsToStartIn7Minutes
+    - SetScheduledCallForSeniorsToStartIn11Minutes
     - LoginNeverAloneHelper
   Aftercases:
     - TerminateApp
   Roles:
     - Role: localiOS
       Capabilities:
-        newCommandTimeout: 200
+        newCommandTimeout: 300
       App: NeverAlone
     - Role: desktopChrome
       App: desktop
@@ -472,7 +472,7 @@ TestStartingSoonNotification:
       Id: $PAGE.seniors_app_home.first_event$
     # Wait for the first Starting Soon notification from the first meeting.
     - Type: sleep
-      Time: 60
+      Time: 120
     # Verify that the Starting Soon notification has not appeared until user closes the events detail view.
     - Type: return_element_attribute
       Strategy: class_chain
@@ -506,7 +506,7 @@ TestStartingSoonNotification:
     - Type: click
       Strategy: class_chain
       Id: $PAGE.seniors_app_notifications.close_btn$
-    # Add some sleep time to be closer to the 5 mins.
+    # Add some sleep time to be closer to the 5 mins notification.
     - Type: sleep
       Time: 120
     # Open a notification to see the notification detail window.
@@ -515,9 +515,9 @@ TestStartingSoonNotification:
     - Type: click
       Strategy: class_chain
       Id: $PAGE.seniors_app_notifications.first_notification$
-    # Add some sleep time to be complete the 5 mins.
+    # Add some sleep time to be complete the 5 mins notification.
     - Type: sleep
-      Time: 180
+      Time: 240
     # Verify that the Starting Soon notification has not appeared until user closes the notifications detail view.
     - Type: return_element_attribute
       Strategy: class_chain
