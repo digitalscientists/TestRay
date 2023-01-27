@@ -666,8 +666,46 @@ TestAlertAndStartingSoonVisuals:
     - Type: wait_for
       Strategy: class_chain
       Id: $PAGE.seniors_app_home.full_schedule_btn$
-    # Verify event sisplay is showing a message that says "In # min".
-
+    # Verify event display is showing a message that says "In # min".
+    - Type: get_text
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_home.event_based_on_name_element$
+      Greps:
+        - var: EVENT_STARTS_IN_X_MINS
+          match: 'In \d min'
+          NoRaise: false
     # Click the event in the listing.
-
+    - Type: click
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_home.event_based_on_name_element$
     # Verify that a modal has appeared with a "Join" button.
+    - Type: wait_for
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_appointment_modal.join_button$
+    # Click "Close" in the upper right corner.
+    - Type: click
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_appointment_modal.close_btn$
+    # Verify user was redirected to Home page.
+    - Type: wait_for
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_home.full_schedule_btn$
+    # Navigate to Schedules
+    - Type: case
+      Value: SchedulesPageNavigationHelper
+    # Verify event display is showing a message that says "In # min".
+    - Type: get_text
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_schedule.event_based_on_name_element$
+      Greps:
+        - var: EVENT_STARTS_IN_X_MINS
+          match: 'In \d min'
+          NoRaise: false
+    # Click the event in the listing.
+    - Type: click
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_schedule.event_based_on_name_element$
+    # Verify that a modal has appeared with a "Join" button.
+    - Type: wait_for
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_appointment_modal.join_button$
