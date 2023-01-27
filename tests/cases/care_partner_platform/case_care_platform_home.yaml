@@ -660,7 +660,6 @@ TestAccessAndReviewTeamMembersAvailability:
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.care_platform_header.users_dropdown_list$
-  # TODO: improve this wait.
     - Type: sleep
       Time: 5
   # Verify that the list shows care partner users and current statuses.
