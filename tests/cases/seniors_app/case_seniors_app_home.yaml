@@ -590,3 +590,84 @@ TestStartingSoonNotification:
         - Type: eq
           Var: APPOINTMENT_HEADER_TEXT
           Value: Appointment Starting Soon
+
+# CXTB-83: Verify starting soon notification while in the notification window.
+TestAlertAndStartingSoonVisuals:
+  Environment: Settings
+  Precases:
+    - SetScheduledCallForSeniorsToStartIn7Minutes
+    - LoginNeverAloneHelper
+  Aftercases:
+    - TerminateApp
+  Roles:
+    - Role: localiOS
+      Capabilities:
+        newCommandTimeout: 300
+      App: NeverAlone
+    - Role: desktopChrome
+      App: desktop
+  Actions:
+    # Wait for the Starting Soon modal and verify it appears on the screen indicating relative start time and the event details with a join button.
+    - Type: click
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_appointment_modal.close_btn$
+      Condition:
+      - Value: 5
+        Operation: visible
+        Result: true
+    - Type: sleep
+      Time: 120
+    - Type: wait_for
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_appointment_modal.appointment_starting_soon_header_modal$
+    - Type: return_element_attribute
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_appointment_modal.appointment_starting_soon_header_modal$
+      Attribute: label
+      ResultVar: APPOINTMENT_HEADER_TEXT
+    - Type: assert
+      Asserts:
+        - Type: eq
+          Var: APPOINTMENT_HEADER_TEXT
+          Value: Appointment Starting Soon
+    - Type: wait_for
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_appointment_modal.what_label$
+    - Type: wait_for
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_appointment_modal.date_label$
+    - Type: wait_for
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_appointment_modal.time_label$
+    - Type: return_element_attribute
+      Strategy: xpath
+      Id: $PAGE.seniors_app_appointment_modal.time_value$
+      Attribute: label
+      ResultVar: TIME_VALUE
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: TIME_VALUE
+          Value: $AND_CLI_FUTURE_START_6MINUTES_FOR_COMPARISON$
+    - Type: wait_for
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_appointment_modal.where_label$
+    - Type: wait_for
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_appointment_modal.description_label$
+    - Type: wait_for
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_appointment_modal.join_button$
+    # Click "Close" in the upper right corner.
+    - Type: click
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_appointment_modal.close_btn$
+    # Verify user was redirected to Home page.
+    - Type: wait_for
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_home.full_schedule_btn$
+    # Verify event sisplay is showing a message that says "In # min".
+
+    # Click the event in the listing.
+
+    # Verify that a modal has appeared with a "Join" button.

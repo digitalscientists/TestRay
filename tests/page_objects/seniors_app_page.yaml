@@ -67,6 +67,15 @@ seniors_app_post_call_survey:
 seniors_app_appointment_modal:
   reschedule_btn: "**/XCUIElementTypeButton[`label == 'Reschedule'`]"
   close_btn: "**/XCUIElementTypeButton[`label CONTAINS 'Close'`]"
+  join_button: "**/XCUIElementTypeButton[`label == 'Join'`]"
+  appointment_header_modal: "**/XCUIElementTypeStaticText[`label BEGINSWITH 'Appointment'`][-1]"
+  appointment_starting_soon_header_modal: "**/XCUIElementTypeStaticText[`label BEGINSWITH 'Appointment' and label ENDSWITH 'Soon'`][-1]"
+  what_label: "**/XCUIElementTypeStaticText[`label == 'What:'`]"
+  date_label: "**/XCUIElementTypeStaticText[`label == 'Date:'`]"
+  time_label: "**/XCUIElementTypeStaticText[`label == 'Time:'`]"
+  time_value: //XCUIElementTypeStaticText[@name='Time:']/following-sibling::XCUIElementTypeStaticText
+  where_label: "**/XCUIElementTypeStaticText[`label == 'Where:'`]"
+  description_label: "**/XCUIElementTypeStaticText[`label == 'Description'`]"
 
 seniors_app_connection_error_modal:
   device_offline_label: "**/XCUIElementTypeStaticText[`label == 'Device is offline.'`]"
