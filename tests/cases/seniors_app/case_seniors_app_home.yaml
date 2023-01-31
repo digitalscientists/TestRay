@@ -662,6 +662,10 @@ TestAlertAndStartingSoonVisuals:
     - Type: click
       Strategy: class_chain
       Id: $PAGE.seniors_app_appointment_modal.close_btn$
+    - Type: wait_not_visible
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_appointment_modal.close_btn$
+      Time: 10
     # Verify user was redirected to Home page.
     - Type: wait_for
       Strategy: class_chain
@@ -709,3 +713,11 @@ TestAlertAndStartingSoonVisuals:
     - Type: wait_for
       Strategy: class_chain
       Id: $PAGE.seniors_app_appointment_modal.join_button$
+    # Click on th "Join" button before the appointment's start time.
+    - Type: click
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_appointment_modal.join_button$
+    # Verify that "Waiting Room" label appears once user is connected to the Care Platform.
+    - Type: wait_for
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_call.waiting_room_label$
