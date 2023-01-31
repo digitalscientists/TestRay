@@ -602,7 +602,7 @@ TestAlertAndStartingSoonVisuals:
   Roles:
     - Role: localiOS
       Capabilities:
-        newCommandTimeout: 300
+        newCommandTimeout: 150
       App: NeverAlone
     - Role: desktopChrome
       App: desktop
@@ -731,8 +731,6 @@ TestAlertAndStartingSoonVisuals:
     - Type: wait_for
       Strategy: class_chain
       Id: $PAGE.seniors_app_call.video_button$
-    - Type: sleep
-      Time: 10
     # Then click "End Call".
     - Type: click
       Strategy: xpath
