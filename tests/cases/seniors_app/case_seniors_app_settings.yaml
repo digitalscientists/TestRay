@@ -193,3 +193,85 @@ TestWifiSettingsPage:
         - Type: contain
           Var: NETWORK_SETUP_VALUE
           Value: "Wi-fi is connected to"
+
+# CXTB-36: Verify Sound settings.
+TestSoundSettingsPage:
+  Environment: Settings
+  Precases:
+    - LoginNeverAloneHelper
+  Aftercases:
+    - TerminateApp
+  Roles:
+    - Role: localiOS
+      App: NeverAlone
+  Actions:
+    # In the Home page, click on the Settings icon and verify user is redirected to Settings "My Details" page.
+    - Type: case
+      Value: SettingsPageNavigationHelper
+    # Navigate to the Sound tab.
+    - Type: click
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_settings.sound_tab$
+    # Verify user has been redirected to Sound page.
+    - Type: wait_for
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_settings.sound_label$
+    # Verify that it shows current volume.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.seniors_app_settings.volume_percent_label$
+    - Type: return_element_attribute
+      Strategy: xpath
+      Id: $PAGE.seniors_app_settings.volume_percent_label$
+      Attribute: label
+      ResultVar: VOLUME_PERCENT
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: VOLUME_PERCENT
+          Value: "%"
+    # Verify that it shows quieter/louder buttons.
+    - Type: wait_for
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_settings.quieter_button$
+    - Type: wait_for
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_settings.louder_button$
+    # Use buttons on screen and validate that the Volume % has been adjusted.
+    # Set the volume to the maximum (100%)
+    - Type: long_press
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_settings.louder_button$
+      PressTime: 20000
+    - Type: get_text
+      Strategy: xpath
+      Id: $PAGE.seniors_app_settings.volume_percent_label$
+      Greps:
+      - var: VOLUME_PERCENT
+        match: '(100|[1-9]\d|[1-9])'
+    - Type: assert
+      Asserts:
+        - Type: eq
+          Var: VOLUME_PERCENT
+          Value: '100'
+    # Click some times on the quieter button to decrease the volume. 
+    - Type: click
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_settings.quieter_button$
+    - Type: click
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_settings.quieter_button$
+    - Type: click
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_settings.quieter_button$
+    - Type: get_text
+      Strategy: xpath
+      Id: $PAGE.seniors_app_settings.volume_percent_label$
+      Greps:
+      - var: VOLUME_PERCENT
+        match: '(100|[1-9]\d|[1-9])'
+    - Type: assert
+      Asserts:
+        - Type: le
+          Var: VOLUME_PERCENT
+          Value: 99

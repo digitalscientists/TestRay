@@ -542,6 +542,17 @@ class Device
     action = Appium::TouchAction.new(@driver).tap(element: el).release.perform
   end
 
+  #add to documentation
+  # long press on an element for an # amount of time, only mobile.
+  def long_press(action)
+    action = convert_value_pageobjects(action);
+    el = wait_for(action)
+
+    press_time = action["PressTime"] ? action["PressTime"] : 5000
+    action = Appium::TouchAction.new(@driver).long_press(element: el).wait(press_time).release.perform
+    log_info("Pressed an element for #{press_time} ms")
+  end
+
   # presses on the provided element. Uses Appium's TouchAction.
   # Accepts:
   #   Strategy

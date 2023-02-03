@@ -28,6 +28,7 @@ seniors_app_settings:
   text_message_alerts_tab: "**/XCUIElementTypeOther[`label CONTAINS 'Text Message Alerts'`][-1]"
   screen_brightness_tab: "**/XCUIElementTypeOther[`label CONTAINS 'Screen Brightness'`][-1]"
   sound_tab: "**/XCUIElementTypeOther[`label CONTAINS 'Sound'`][-1]"
+  sound_label: "**/XCUIElementTypeStaticText[`label == 'Settings | Sound'`]"
   first_name_field: //XCUIElementTypeOther[@name='First Name']//XCUIElementTypeTextField[@name='RNE__Input__text-input']
   last_name_field: //XCUIElementTypeOther[@name='Last Name']//XCUIElementTypeTextField[@name='RNE__Input__text-input']
   email_field: //XCUIElementTypeOther[@name='Email']//XCUIElementTypeTextField[@name='RNE__Input__text-input']
@@ -41,6 +42,9 @@ seniors_app_settings:
   wifi_network_name_label: "**/XCUIElementTypeStaticText[`label == 'Wi-fi Network Name'`]"
   network_status_label: //XCUIElementTypeStaticText[starts-with(@name, 'Status:')]/following-sibling::XCUIElementTypeOther
   network_setup_label: (//XCUIElementTypeOther[starts-with(@name, 'Status:')])[last()]/following-sibling::XCUIElementTypeStaticText
+  volume_percent_label: //XCUIElementTypeStaticText[@name='Volume']/preceding-sibling::XCUIElementTypeStaticText
+  quieter_button: "**/XCUIElementTypeOther[`label ENDSWITH 'Quieter'`][-1]"
+  louder_button: "**/XCUIElementTypeOther[`label ENDSWITH 'Louder'`][-1]"
 
 seniors_app_incoming_call:
   answer_call_button: //XCUIElementTypeButton[@name='Answer Call']
