@@ -248,7 +248,7 @@ TestSoundSettingsPage:
       Id: $PAGE.seniors_app_settings.volume_percent_label$
       Greps:
       - var: VOLUME_PERCENT
-        match: '(100|[1-9]\d|[1-9])'
+        match: '(0|100|[1-9]\d|[1-9])'
     - Type: assert
       Asserts:
         - Type: eq
@@ -269,7 +269,7 @@ TestSoundSettingsPage:
       Id: $PAGE.seniors_app_settings.volume_percent_label$
       Greps:
       - var: VOLUME_PERCENT
-        match: '(100|[1-9]\d|[1-9])'
+        match: '(0|100|[1-9]\d|[1-9])'
     - Type: assert
       Asserts:
         - Type: le
