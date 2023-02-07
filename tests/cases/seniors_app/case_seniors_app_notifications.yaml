@@ -60,8 +60,29 @@ TestNotificationsPage:
         - Type: eq
           Var: UPDATED_NOTIFICATION_NUMBER_LABEL
           Value: $AND_CLI_NOTIFICATIONS_NUMBER_LABEL$
-
   # Click on the notification created on this run.
+    - Type: click
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_notifications.appointment_based_on_name_element$
+    - Type: wait_for
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_appointment_modal.appointment_header_modal$
+    - Type: click
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_appointment_modal.close_btn$
+    - Type: wait_not_visible
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_appointment_modal.appointment_header_modal$
+      Time: 10
   # Verify the notification is not appearing on the "New" tab anymore.
+    - Type: wait_not_visible
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_notifications.appointment_based_on_name_element$
+      Time: 10
   # Click on "All" at the top of the page.
-  # Verify that the notification appears on the "All" tab.
+    - Type: click
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_notifications.all_tab$
+  # Verify that the notification appears under the "All" tab.
+  # Click on the notification.
+  # Verify user can see when it was sent.
