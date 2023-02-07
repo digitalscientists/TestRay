@@ -13,3 +13,55 @@ TestNotificationsPageNavigation:
   # Terminate the app.
     - Type: case
       Value: TerminateApp
+
+# CXTB-22: Verify Notifications Page
+TestNotificationsPage:
+  Environment: Settings
+  Precases:
+    - LoginNeverAloneHelper
+  Aftercases:
+    - TerminateApp
+  Roles:
+    - Role: localiOS
+      App: NeverAlone
+    - Role: desktopChrome
+      App: desktop    
+  Actions:
+  # In the Home page, click on the Bell icon and verify user is redirected to Notifications page.
+    - Type: case
+      Value: NotificationsPageNavigationHelper
+  # Verify that the number next to notifications header shows he number of the new notifications present.
+  # Get actual number of notifications.
+    - Type: wait_not_visible
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_notifications.no_new_notification$
+      Time: 10
+    - Type: return_element_attribute
+      Strategy: xpath
+      Id: $PAGE.seniors_app_notifications.notifications_number_label$
+      Attribute: label
+      ResultVar: NOTIFICATIONS_NUMBER_LABEL
+  # Add a notification
+    - Type: case
+      Value: SetScheduledCallForSeniors
+  # Verify that there is one more.
+    - Type: sleep
+      Time: 10
+    - Type: operation
+      Operation: "$AND_CLI_NOTIFICATIONS_NUMBER_LABEL$ + 1"
+      ResultVar: UPDATED_NOTIFICATION_NUMBER_LABEL
+    - Type: return_element_attribute
+      Strategy: xpath
+      Id: $PAGE.seniors_app_notifications.notifications_number_label$
+      Attribute: label
+      ResultVar: NOTIFICATIONS_NUMBER_LABEL
+    - Type: assert
+      Asserts:
+        - Type: eq
+          Var: UPDATED_NOTIFICATION_NUMBER_LABEL
+          Value: $AND_CLI_NOTIFICATIONS_NUMBER_LABEL$
+
+  # Click on the notification created on this run.
+  # Verify the notification is not appearing on the "New" tab anymore.
+  # Click on "All" at the top of the page.
+  # Verify that the notification appears on the "All" tab.

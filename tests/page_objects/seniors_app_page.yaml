@@ -108,5 +108,9 @@ seniors_app_notifications:
   notifications_label: "**/XCUIElementTypeStaticText[`label == 'Notifications'`]"
   first_notification: "**/XCUIElementTypeScrollView/XCUIElementTypeOther[1]/**/XCUIElementTypeOther[`enabled == 1 AND accessible == 1`][1]"
   close_btn: "**/XCUIElementTypeButton[`label CONTAINS 'Close'`]"
+  no_new_notification: "**/XCUIElementTypeStaticText[`label == 'No new notifications'`]"
+  notifications_number_label: //XCUIElementTypeStaticText[@name='Notifications']/preceding::XCUIElementTypeStaticText
+  all_tab: "**/XCUIElementTypeStaticText[`label == 'All'`]"
+  new_tab: "**/XCUIElementTypeStaticText[`label == 'New'`]"
   appointment_header_modal: "**/XCUIElementTypeStaticText[`label BEGINSWITH 'Appointment'`][-1]"
   appointment_starting_soon_header_modal: "**/XCUIElementTypeStaticText[`label BEGINSWITH 'Appointment' and label ENDSWITH 'Soon'`][-1]"
