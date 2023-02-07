@@ -30,21 +30,23 @@ TestNotificationsPage:
   # In the Home page, click on the Bell icon and verify user is redirected to Notifications page.
     - Type: case
       Value: NotificationsPageNavigationHelper
-  # Verify that the number next to notifications header shows he number of the new notifications present.
-  # Get actual number of notifications.
-    - Type: wait_not_visible
-      Strategy: class_chain
-      Id: $PAGE.seniors_app_notifications.no_new_notification$
+    - Type: sleep
       Time: 10
+  # Get actual number of notifications.
     - Type: return_element_attribute
       Strategy: xpath
       Id: $PAGE.seniors_app_notifications.notifications_number_label$
       Attribute: label
       ResultVar: NOTIFICATIONS_NUMBER_LABEL
+  # Verify that the number next to notifications header shows he number of the new notifications present.
   # Add a notification
     - Type: case
       Value: SetScheduledCallForSeniors
-  # Verify that there is one more.
+    - Type: wait_not_visible
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_notifications.no_new_notification$
+      Time: 10
+  # Verify that there is one more since there was a new notification added on this run.
     - Type: sleep
       Time: 10
     - Type: operation
@@ -84,5 +86,11 @@ TestNotificationsPage:
       Strategy: class_chain
       Id: $PAGE.seniors_app_notifications.all_tab$
   # Verify that the notification appears under the "All" tab.
+    - Type: wait_for
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_notifications.appointment_based_on_name_element$
   # Click on the notification.
+    - Type: wait_for
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_notifications.appointment_based_on_name_element$
   # Verify user can see when it was sent.
