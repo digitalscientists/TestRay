@@ -38,7 +38,7 @@ TestNotificationsPage:
       Id: $PAGE.seniors_app_notifications.notifications_number_label$
       Attribute: label
       ResultVar: NOTIFICATIONS_NUMBER_LABEL
-  # Verify that the number next to notifications header shows he number of the new notifications present.
+  # Verify that the number next to notifications header shows the number of the new notifications present.
   # Add a notification
     - Type: case
       Value: SetScheduledCallForSeniors
