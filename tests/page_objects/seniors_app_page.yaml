@@ -84,6 +84,7 @@ seniors_app_appointment_modal:
   where_label: "**/XCUIElementTypeStaticText[`label == 'Where:'`]"
   description_label: "**/XCUIElementTypeStaticText[`label == 'Description'`]"
   live_label: "**/XCUIElementTypeOther[`label == 'Live'`]"
+  appointment_added_label: "**/XCUIElementTypeStaticText[`label BEGINSWITH 'Added'`]"
 
 seniors_app_connection_error_modal:
   device_offline_label: "**/XCUIElementTypeStaticText[`label == 'Device is offline.'`]"

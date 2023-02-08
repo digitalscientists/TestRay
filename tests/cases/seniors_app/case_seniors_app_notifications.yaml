@@ -90,7 +90,27 @@ TestNotificationsPage:
       Strategy: class_chain
       Id: $PAGE.seniors_app_notifications.appointment_based_on_name_element$
   # Click on the notification.
-    - Type: wait_for
+  # This sleep is to reduce flakyness, if we assert by seconds then there are higher chances that test will fail.
+  # With this sleep we will assert once it has passed a minute and the label says taht was added 1 minute ago.
+    - Type: sleep
+      Time: 55
+    - Type: click
       Strategy: class_chain
       Id: $PAGE.seniors_app_notifications.appointment_based_on_name_element$
   # Verify user can see when it was sent.
+    - Type: wait_for
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_appointment_modal.appointment_added_label$
+    - Type: calculate_minutes_passed_by_from_event_creation
+      Timestamp: $AND_CLI_EVENT_SENT_TIMESTAMP$
+      ResultVar: ADDED_EVENT_X_TIME_AGO
+    - Type: return_element_attribute
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_appointment_modal.appointment_added_label$
+      Attribute: label
+      ResultVar: APPOINTMENT_ADDED_X_TIME_AGO
+    - Type: assert
+      Asserts:
+        - Type: eq
+          Var: APPOINTMENT_ADDED_X_TIME_AGO
+          Value: $AND_CLI_ADDED_EVENT_X_TIME_AGO$
