@@ -63,6 +63,8 @@ TestEmployeeHealthPortalUserCall:
     - Type: click
       Strategy: xpath
       Id: $PAGE.employee_health_on_demand_call_page.video_settings_button$
+    - Type: sleep
+      Time: 2
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.employee_health_on_demand_call_page.video_settings_modal_title$
@@ -78,6 +80,10 @@ TestEmployeeHealthPortalUserCall:
     - Type: click
       Strategy: xpath
       Id: $PAGE.employee_health_on_demand_call_page.video_settings_modal_close_button$
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id: $PAGE.employee_health_on_demand_call_page.video_settings_modal_close_button$
+  #Opening new tab for the provider's part of the process
     - Type: new_tab
     - Type: switch_window
       Value: 1
@@ -85,6 +91,7 @@ TestEmployeeHealthPortalUserCall:
       Value: ProvidersCarePlatformLogin
     - Type: case
       Value: ProvidersCarePlatformEndCall
+  #Switch back to the Employee Health Portal tab
     - Type: switch_window
       Value: 0
   #Wait for notification that call ended
