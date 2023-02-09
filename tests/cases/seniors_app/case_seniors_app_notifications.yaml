@@ -143,7 +143,8 @@ TestAppointmentAddedNotifications:
     - Type: wait_for
       Strategy: class_chain
       Id: $PAGE.seniors_app_appointment_modal.appointment_header_modal$
-  # Verify "Appointment Added" detail window opens, showing the related event details.
+  # Verify "Appointment Added" detail window opens, showing the related event details:
+  # What, Date, Time, Where, Description.
     - Type: return_element_attribute
       Strategy: class_chain
       Id: $PAGE.seniors_app_appointment_modal.appointment_header_modal$
