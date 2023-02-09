@@ -14,8 +14,8 @@ TestNotificationsPageNavigation:
     - Type: case
       Value: TerminateApp
 
-# CXTB-22: Verify Notifications Page
-TestNotificationsPage:
+# CXTB-22: Verify Notifications Page on Senior App
+TestNotificationsPageOnSeniorApp:
   Environment: Settings
   Precases:
     - LoginNeverAloneHelper
