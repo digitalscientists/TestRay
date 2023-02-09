@@ -117,12 +117,15 @@ care_platform_call_portal:
   category_select: category
   create_event_btn: //button[text()='Create Event']
   teleheath_appointment_option: //option[@value='telehealthAppointment']
+  manual_appointment_option: //option[@value='manualAppointment']
   subject_input: //div[label[text()='Subject']]//input
+  location_input: //input[@id='location']
   date_container: //div[@class='react-datepicker__input-container']
   today_date_date_picker: //div[@aria-current='date']
   start_time_picker: startTime
   end_time_picker: endTime
   next_btn: //button[text()='Next']
+  save_and_close_btn: //button[text()='Save and Close']
   urgent_patient_matter_select: priorityLevel
   urgent_patient_matter_yes_option: //option[text()='Yes']
   reason_for_request_select: reasonForRequest

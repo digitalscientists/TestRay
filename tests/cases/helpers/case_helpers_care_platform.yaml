@@ -495,3 +495,73 @@ SetScheduledCallForSeniorsToStartIn11Minutes:
       Id: $PAGE.care_platform.navigation_home$
     - Type: case
       Value: CarePlatformLogout
+
+SetNonTelehealthAppointmentForSenior:
+  Environment: Settings
+  Vars:
+    LOGOUT_OPTION: "Go Off Shift"
+  Roles:
+    - Role: desktopChrome
+      App: desktop       
+  Actions:
+    # Login to the Care Platform app with Care Partners account
+    - Type: case
+      Value: CarePartnerLogin   
+    # Navigate to Participants
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform.navigation_participant$
+    # Open the Call Portal
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant.senior_1_td$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant.call_portal_btn$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.create_event_btn$    
+    # Create the event
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.create_event_btn$    
+    - Type: click
+      Strategy: id
+      Id: $PAGE.care_platform_call_portal.category_select$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.manual_appointment_option$
+    - Type: generate_unique_name
+      Name: "Automation Manual Appointment"
+      ResultVar: UNIQUE_MANUAL_APPOINTMENT
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.subject_input$
+      Value: $AND_CLI_UNIQUE_MANUAL_APPOINTMENT$
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.location_input$
+      Value: Automation manual appointment
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.date_container$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.today_date_date_picker$
+    - Type: send_keys
+      Strategy: id
+      Id: $PAGE.care_platform_call_portal.start_time_picker$
+      Value: 800a
+    - Type: send_keys
+      Strategy: id
+      Id: $PAGE.care_platform_call_portal.end_time_picker$
+      Value: 900p
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.save_and_close_btn$
+    # Navigate back to home 
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform.navigation_home$
+    - Type: case
+      Value: CarePlatformLogout

@@ -114,3 +114,75 @@ TestNotificationsPageOnSeniorApp:
         - Type: eq
           Var: APPOINTMENT_ADDED_X_TIME_AGO
           Value: $AND_CLI_ADDED_EVENT_X_TIME_AGO$
+
+# CXTB-31: Verify appointment added notifications
+TestAppointmentAddedNotifications:
+  Environment: Settings
+  Precases:
+    - LoginNeverAloneHelper
+  Aftercases:
+    - TerminateApp
+  Roles:
+    - Role: localiOS
+      App: NeverAlone
+    - Role: desktopChrome
+      App: desktop    
+  Actions:
+  # In the Home page, click on the Bell icon and verify user is redirected to Notifications page.
+    - Type: case
+      Value: NotificationsPageNavigationHelper
+    - Type: sleep
+      Time: 10
+  # Add manual appointment
+    - Type: case
+      Value: SetNonTelehealthAppointmentForSenior
+  # Click on the notification created on this run.
+    - Type: click
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_notifications.manual_appointment_based_on_name_element$
+    - Type: wait_for
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_appointment_modal.appointment_header_modal$
+  # Verify "Appointment Added" detail window opens, showing the related event details.
+    - Type: return_element_attribute
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_appointment_modal.appointment_header_modal$
+      Attribute: label
+      ResultVar: APPOINTMENT_HEADER_TEXT
+    - Type: assert
+      Asserts:
+        - Type: eq
+          Var: APPOINTMENT_HEADER_TEXT
+          Value: Appointment Added
+    - Type: wait_for
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_appointment_modal.what_label$
+    - Type: wait_for
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_appointment_modal.date_label$
+    - Type: wait_for
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_appointment_modal.time_label$
+    - Type: return_element_attribute
+      Strategy: xpath
+      Id: $PAGE.seniors_app_appointment_modal.time_value$
+      Attribute: label
+      ResultVar: TIME_VALUE
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: TIME_VALUE
+          Value: $AND_CLI_FUTURE_START_6MINUTES_FOR_COMPARISON$
+    - Type: wait_for
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_appointment_modal.where_label$
+    - Type: wait_for
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_appointment_modal.description_label$
+    - Type: click
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_appointment_modal.close_btn$
+    - Type: wait_not_visible
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_appointment_modal.appointment_header_modal$
+      Time: 10
