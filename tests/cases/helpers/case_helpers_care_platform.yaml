@@ -615,7 +615,12 @@ AnswerCallAndRescheduleForOneHourLater:
     - Type: get_timestamp_plus_minutes
       Minutes: 60
       Format: "%I%M%p"
-      Var: FUTURE_START_6MINUTES
+      Var: FUTURE_START_60MINUTES
+    # Get the schedule time to compare on the future.
+    - Type: get_timestamp_plus_minutes
+      Minutes: 60
+      Format: "%-I:%M%P"
+      Var: FUTURE_START_60MINUTES_FOR_COMPARISON
     - Type: send_keys
       Role: desktopChrome
       Strategy: id
@@ -626,6 +631,11 @@ AnswerCallAndRescheduleForOneHourLater:
       Minutes: 90
       Format: "%I%M%p"
       Var: FUTURE_START_90MINUTES
+    # Get the schedule time to compare on the future.
+    - Type: get_timestamp_plus_minutes
+      Minutes: 90
+      Format: "%-I:%M%P"
+      Var: FUTURE_START_90MINUTES_FOR_COMPARISON
     - Type: send_keys
       Role: desktopChrome
       Strategy: id
