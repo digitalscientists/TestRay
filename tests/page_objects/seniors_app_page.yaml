@@ -75,6 +75,8 @@ seniors_app_appointment_modal:
   reschedule_btn: "**/XCUIElementTypeButton[`label == 'Reschedule'`]"
   close_btn: "**/XCUIElementTypeButton[`label CONTAINS 'Close'`]"
   join_button: "**/XCUIElementTypeButton[`label == 'Join'`]"
+  cancel_or_reschedule_button: "**/XCUIElementTypeButton[`label == 'Cancel or Reschedule'`]"
+  reschedule_button: "**/XCUIElementTypeButton[`label == 'Reschedule'`]"
   appointment_header_modal: "**/XCUIElementTypeStaticText[`label BEGINSWITH 'Appointment'`][-1]"
   appointment_starting_soon_header_modal: "**/XCUIElementTypeStaticText[`label BEGINSWITH 'Appointment' and label ENDSWITH 'Soon'`][-1]"
   what_label: "**/XCUIElementTypeStaticText[`label == 'What:'`]"
