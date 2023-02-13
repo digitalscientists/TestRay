@@ -279,6 +279,8 @@ SetPastEventForSeniors:
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform.navigation_home$
+    - Type: case
+      Value: CarePlatformLogout
 
 SetScheduledCallForSeniorsToStartIn7Minutes:
   Environment: Settings
