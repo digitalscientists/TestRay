@@ -118,7 +118,7 @@ care_platform_call_portal:
   create_event_btn: //button[text()='Create Event']
   teleheath_appointment_option: //option[@value='telehealthAppointment']
   manual_appointment_option: //option[@value='manualAppointment']
-  subject_input: //div[label[text()='Subject']]//input
+  subject_input: //div[@class='app-modals']//input[@id='subject']
   location_input: //input[@id='location']
   date_container: //div[@class='react-datepicker__input-container']
   today_date_date_picker: //div[@aria-current='date']

@@ -215,16 +215,16 @@ TestAppointmentAddedNotifications:
     - Type: wait_for
       Strategy: class_chain
       Id: $PAGE.seniors_app_appointment_modal.description_label$
-    # Verify that there is a button that has the following text: "Cancel or Reschedule".
+  # Verify that there is a button that has the following text: "Cancel or Reschedule".
     - Type: wait_for
       Strategy: class_chain
       Id: $PAGE.seniors_app_appointment_modal.cancel_or_reschedule_button$
-    # Click the "Cancel or Reschedule" button.
+  # Click the "Cancel or Reschedule" button.
     - Type: click
       Strategy: class_chain
       Id: $PAGE.seniors_app_appointment_modal.cancel_or_reschedule_button$
-    # Device screen updates to show screen asking what kind of need you help:
-    # Medical, Non-Medical and Cancel
+  # Device screen updates to show screen asking what kind of need you help:
+  # Medical, Non-Medical and Cancel
     - Type: wait_for
       Strategy: class_chain
       Id: $PAGE.seniors_app_call.medical_call_button$
@@ -234,25 +234,25 @@ TestAppointmentAddedNotifications:
     - Type: wait_for
       Strategy: class_chain
       Id: $PAGE.seniors_app_call.cancel_call_button$
-    # Click on the Medical option.
+  # Click on the Medical option.
     - Type: click
       Strategy: class_chain
       Id: $PAGE.seniors_app_call.medical_call_button$
-    # Verify that screen redirects to the call waiting room.
+  # Verify that screen redirects to the call waiting room.
     - Type: wait_for
       Strategy: class_chain
       Id: $PAGE.seniors_app_call.waiting_room_label$
-    # Log in as a Care partner and reschedule the event.
+  # Log in as a Care partner and reschedule the event.
     - Type: case
       Value: AnswerCallAndRescheduleForOneHourLater
-    # Go back to the iPad and fill in the Post Call Survey.
+  # Go back to the iPad and fill in the Post Call Survey.
     - Type: case
       Value: SeniorGreatPostSurveyCallHelper
-    # Verify that the appointment appears in the schedule listing.
+  # Verify that the appointment appears in the schedule listing.
     - Type: wait_for
       Strategy: class_chain
       Id: $PAGE.seniors_app_home.event_based_on_name_element$
-    # Click on it and verify the Time value.
+  # Click on it and verify the Time value.
     - Type: click
       Strategy: class_chain
       Id: $PAGE.seniors_app_home.event_based_on_name_element$
@@ -279,8 +279,8 @@ TestAppointmentAddedNotifications:
       Strategy: class_chain
       Id: $PAGE.seniors_app_appointment_modal.appointment_header_modal$
       Time: 10
-    # Do the same validations for the "Past Appointment" workflow.
-    # Set up past event on Care Platform.
+  # Do the same validations for the "Past Appointment" workflow.
+  # Set up past event on Care Platform.
     - Type: case
       Value: SetPastEventForSeniors
     - Type: click
@@ -290,7 +290,7 @@ TestAppointmentAddedNotifications:
       - Value: 5
         Operation: visible
         Result: true
-    # In the Home page, click on the Bell icon and verify user is redirected to Notifications page.
+  # In the Home page, click on the Bell icon and verify user is redirected to Notifications page.
     - Type: case
       Value: NotificationsPageNavigationHelper
     - Type: sleep
@@ -327,8 +327,67 @@ TestAppointmentAddedNotifications:
     - Type: wait_for
       Strategy: class_chain
       Id: $PAGE.seniors_app_appointment_modal.description_label$
-    # Verify that there is a button that has the following text: "Reschedule".
+  # Verify that there is a button that has the following text: "Reschedule".
     - Type: wait_for
       Strategy: class_chain
       Id: $PAGE.seniors_app_appointment_modal.reschedule_button$
-    
+  # Click the "Reschedule" button.
+    - Type: click
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_appointment_modal.reschedule_button$
+  # Device screen updates to show screen asking what kind of need you help:
+  # Medical, Non-Medical and Cancel
+    - Type: wait_for
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_call.medical_call_button$
+    - Type: wait_for
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_call.non_medical_call_button$
+    - Type: wait_for
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_call.cancel_call_button$
+  # Click on the Medical option.
+    - Type: click
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_call.medical_call_button$
+  # Verify that screen redirects to the call waiting room.
+    - Type: wait_for
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_call.waiting_room_label$
+  # Log in as a Care partner and reschedule the event.
+    - Type: case
+      Value: AnswerPastCallAndRescheduleForOneHourLater
+  # Go back to the iPad and fill in the Post Call Survey.
+    - Type: case
+      Value: SeniorGreatPostSurveyCallHelper
+  # Verify that the appointment appears in the schedule listing.
+    - Type: wait_for
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_home.event_based_on_name_element$
+  # Click on it and verify the Time value.
+    - Type: click
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_home.event_based_on_name_element$
+    - Type: wait_for
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_appointment_modal.appointment_header_modal$
+    - Type: return_element_attribute
+      Strategy: xpath
+      Id: $PAGE.seniors_app_appointment_modal.time_value$
+      Attribute: label
+      ResultVar: TIME_VALUE
+    - Type: operation
+      Operation: "'$AND_CLI_FUTURE_START_60MINUTES_FOR_COMPARISON$' + ' - ' + '$AND_CLI_FUTURE_START_90MINUTES_FOR_COMPARISON$'"
+      ResultVar: EXPECTED_SCHEDULE_TIME
+    - Type: assert
+      Asserts:
+        - Type: eq
+          Var: TIME_VALUE
+          Value: $AND_CLI_EXPECTED_SCHEDULE_TIME$
+    - Type: click
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_appointment_modal.close_btn$
+    - Type: wait_not_visible
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_appointment_modal.appointment_header_modal$
+      Time: 10
