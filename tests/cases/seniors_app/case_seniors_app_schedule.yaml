@@ -121,7 +121,7 @@ TestSchedulesPageNavigation:
       Value: TerminateApp
 
 # CXTB-39: Automatically Return to Full Schedule Page After Period of Inactivity
-TestAutomaticReturnAfterInacitivty:
+TestAutomaticReturnAfterInactivty:
   Environment: Settings
   Precases:
     - LoginNeverAloneHelper
