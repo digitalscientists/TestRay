@@ -106,6 +106,7 @@ seniors_app_schedule:
   offline_call_button: "**/XCUIElementTypeOther[`label BEGINSWITH 'Personal' AND label ENDSWITH 'Offline'`][-1]"
   offline_yellow_bar: "**/XCUIElementTypeStaticText[`label ENDSWITH 'please call 911.'`][-1]"
   event_based_on_name_element: "**/XCUIElementTypeOther[`label CONTAINS '$AND_CLI_UNIQUE_EVENT_NAME$'`][-1]"
+  call_care_partner: "**/XCUIElementTypeOther[`label BEGINSWITH 'Call Personal' AND label ENDSWITH 'Care Partner'`]"
 
 seniors_app_notifications:
   notifications_label: "**/XCUIElementTypeStaticText[`label == 'Notifications'`]"
