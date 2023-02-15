@@ -1,5 +1,4 @@
 ProvidersCarePlatformLogin:
-  Environment: Settings 
   Roles:
     - Role: desktopChrome
       App: desktop       
@@ -35,7 +34,6 @@ ProvidersCarePlatformLogin:
       Id: $PAGE.care_platform_login_page.login_button$
 
 ProvidersCarePlatformEndCall:
-  Environment: Settings 
   Roles:
     - Role: desktopChrome
       App: desktop       
@@ -108,3 +106,6 @@ ProvidersCarePlatformEndCall:
     - Type: click
       Strategy: xpath
       Id: $PAGE.providers_call_queue_page.submit_exit_session_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.home_title$
