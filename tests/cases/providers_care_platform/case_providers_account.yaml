@@ -60,7 +60,7 @@ TestProviderUpdateAccountInfo:
   Actions:
   # Log in with the second user.
     - Type: case
-      Value: CarePartnerLoginSecondaryUser
+      Value: ProviderLoginSecondaryUser
   # Call case to update info
     - Type: case
       Value: CarePlatformUpdateInfo
