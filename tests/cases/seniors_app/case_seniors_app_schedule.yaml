@@ -152,7 +152,7 @@ TestAutomaticReturnAfterInactivty:
   # Wait for 5 minutes without performing any actions.
     - Type: sleep
       Time: 300
-  # Schedules age should be displayed.
+  # Schedules page should be displayed.
     - Type: wait_for
       Strategy: class_chain
       Id: $PAGE.seniors_app_schedule.schedule_label$
