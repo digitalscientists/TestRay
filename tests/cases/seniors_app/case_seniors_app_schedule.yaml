@@ -157,6 +157,7 @@ TestAutomaticReturnAfterInactivty:
       Strategy: class_chain
       Id: $PAGE.seniors_app_schedule.schedule_label$
 
+# Only for physical devices.
 # CXTB-16: Call Personal Care Partner Button on Full Schedule
 TestCallPersonalCareButtonOnFullSchedule:
   Environment: Settings
