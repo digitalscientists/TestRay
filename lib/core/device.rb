@@ -1364,7 +1364,7 @@ class Device
             "#{default_wait_time} seconds\nError Screenshot: #{path}"
   end
 
-  # guarantee that the checkbox is checked or unched depending on the option
+  # guarantee that the checkbox is checked or unchecked depending on the option
   # Accepts:
   #   Strategy
   #   Id
@@ -1385,7 +1385,6 @@ class Device
       span.click
     elsif (option == "check") && (!is_checked)
       span.click
-    else
     end
   end
 
