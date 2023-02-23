@@ -560,3 +560,43 @@ TestCarePartnerParticipantReview:
       Role: desktopChrome
       Strategy: xpath
       Id: $PAGE.care_platform_participant_details.specialist_button$
+  #Check Call History tab
+    - Type: click
+      Role: desktopChrome
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_details.call_history_tab_button$
+    - Type: get_attribute
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.care_platform_participant_details.call_history_tab_button$
+      Greps:
+        - var: TAB_CLASS
+          attr: class
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Role: desktopChrome
+      Asserts:
+        - Type: contain
+          Var: TAB_CLASS
+          Value: 'active'
+  #Go to follow-up tickets tab
+    - Type: click
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.care_platform_participant_details.follow_up_tab_button$
+    - Type: get_attribute
+      Role: desktopChrome
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_details.follow_up_tab_button$
+      Greps:
+        - var: TAB_CLASS
+          attr: class
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Role: desktopChrome
+      Asserts:
+        - Type: contain
+          Var: TAB_CLASS
+          Value: 'active'
