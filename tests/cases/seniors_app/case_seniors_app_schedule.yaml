@@ -426,6 +426,9 @@ TestNonMissedPastAppoinmentWindow:
       Strategy: xpath
       Id: $PAGE.seniors_app_call.end_call_button$
   # Skip the survey.
+    - Type: wait_for
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_post_call_survey.skip_survey_button$
     - Type: click
       Strategy: class_chain
       Id: $PAGE.seniors_app_post_call_survey.skip_survey_button$
