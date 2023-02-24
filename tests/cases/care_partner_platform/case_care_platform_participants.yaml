@@ -601,7 +601,7 @@ TestCarePartnerParticipantReview:
           Var: TAB_CLASS
           Value: 'active'
   #These action beyond this point are not part of the test
-  #but a way to avoid an unanswerd call
+  #but a way to avoid an unanswered call
     - Type: scroll_to
       Role: desktopChrome
       Strategy: xpath
