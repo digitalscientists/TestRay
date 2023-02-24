@@ -157,6 +157,7 @@ care_platform_call_portal:
   medical_transfer_btn: //button[span[text()='Medical']]
   verify_video_is_full_screen: //div[@class='app-video app-video-fullscreen']
   leave_call_btn: //button[span/span[@class='icon-phone-end']]
+  end_call_button: //div[@class='video-controls']//span[@class='icon-phone-end']//ancestor::button
   submit_btn: //button[text()='Submit']
   complete_session_btn: //button[text()='Complete Session']
   issue_resolved_yes_radiobutton: //label[input[@name='resolved'][@value='true']]

@@ -385,7 +385,7 @@ TestParticipantRecordListing:
           Var: SUBTAB_CLASS
           Value: 'active'
 
-#Care Partner Platform - Review Participant Summary
+#CXTB-93 Care Partner Platform - Review Participant Summary
 TestCarePartnerParticipantReview:
   Environment: Settings
   Precases:
@@ -600,3 +600,25 @@ TestCarePartnerParticipantReview:
         - Type: contain
           Var: TAB_CLASS
           Value: 'active'
+  #These action beyond this point are not part of the test
+  #but a way to avoid an unanswerd call
+    - Type: scroll_to
+      Role: desktopChrome
+      Strategy: xpath
+      Id: $PAGE.care_platform_home.answer_call$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_home.answer_call$
+      Role: desktopChrome
+      # Click "End Call".
+    - Type: click
+      Strategy: xpath
+      Condition:
+      - Value: 20
+        Operation: visible
+        Result: true
+      Id: $PAGE.care_platform_call_portal.end_call_button$
+      Role: desktopChrome
+    - Type: case
+      Value: PostCallSurveyCarePartner
+      Role: desktopChrome
