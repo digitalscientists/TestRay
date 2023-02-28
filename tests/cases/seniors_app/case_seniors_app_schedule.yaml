@@ -388,8 +388,8 @@ TestFutureAppointmentCancelOrRescheduleButton:
       Strategy: class_chain
       Id: $PAGE.seniors_app_home.event_based_on_name_element$
 
-# CXTB-21: Verify Past appontment window (non-missed)
-TestNonMissedPastAppoinmentWindow:
+# CXTB-21: Verify Past appointment window (non-missed)
+TestNonMissedPastAppointmentWindow:
   Environment: Settings
   Precases:
     - LoginNeverAloneHelper
