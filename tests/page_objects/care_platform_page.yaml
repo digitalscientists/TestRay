@@ -172,7 +172,8 @@ care_platform_call_portal:
   edit_event_modal_header: //div[@class='box has-scrollable-content box-tight has-shadow has-border max-h-full']//h4[@class='font-bold text-md']
   delete_event_button: //div[@class='accordion-item is-open']//button[text()='Delete']
   yes_delete_button: //div[@class='app-dialogs']//button[text()='Yes, Delete']
-  telehealth_request_form_header: //div[@id='modals']//h4[@class='font-bold text-md' and text()='Telehealth Request Form']  
+  telehealth_request_form_header: //div[@id='modals']//h4[@class='font-bold text-md' and text()='Telehealth Request Form']
+  telehealth_form_situation_errors: //div[@class='flex-col flex-col-6']//div[@class='text-xs color-red-400'][string-length(text())>0]
 
 care_platform_notifications:
   call_completed_notification: //div[text()='Call completed']

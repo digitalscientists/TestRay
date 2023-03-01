@@ -505,15 +505,18 @@ TestAnswerCallFromQueueAndCompleteMedicalTransfer:
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.care_platform_call_portal.telehealth_request_form_header$
-  # "Submit" button should not be enabled.
+  # Click on "Submit" and verify that the form can't be submitted.
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.submit_btn$
 
   # Fill in the required fields:
   # Priority level, Reason for request and When did symptoms start?
 
-  # "Submit" button is enabled.
-
   # Click on "Submit".
-
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.submit_btn$
   # Telehealth request form window disappears.
 
   # Verify "End Call" button has been replaced with "Leave Call" button.
