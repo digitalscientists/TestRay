@@ -459,3 +459,61 @@ TestAccessAndReviewTeamMembersAvailability:
         - Type: n_contain
           Var: IS_LIST_OPEN
           Value: users-dropdown-open
+
+#CXTB-96: Answer Call from Queue & Complete a Medical Transfer
+TestAnswerCallFromQueueAndCompleteMedicalTransfer:
+  Environment: Settings
+  Roles:
+    - Role: desktopChrome
+      App: desktop
+    - Role: localiOS
+      App: NeverAlone
+  Actions:
+  # Login as a senior.
+    - Type: case
+      Value: LoginNeverAloneHelper
+  # Generate a medical call as a senior.
+    - Type: case
+      Value: CallCarePartner
+  # Login and answer call as a care partner,
+    - Type: case
+      Value: AnswerCallAsCarePartner
+  # Panel slides to the left, bringing you to the Call portal with the active call represented in the call video, and your user status has been automatically updated to "In session" (red dot). 
+  # Both cameras default to off as they do currently.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.end_call_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_header.user_dropdown_avatar$
+    - Type: return_element_attribute
+      Strategy: xpath
+      Id: $PAGE.care_platform_header.user_dropdown_avatar$
+      Attribute: className
+      ResultVar: IS_RED
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: IS_RED
+          Value: is-red
+    # TODO: verify best way to assert both camera are turned off because it may make this test be physical device dependent.
+  # Click "Medical" button in video call window so the participant speaks to a doctor while on the call.
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.medical_transfer_btn$
+  # "Telehealth request form" appears to the left of video call window.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.telehealth_request_form_header$
+  # "Submit" button should not be enabled.
+
+  # Fill in the required fields:
+  # Priority level, Reason for request and When did symptoms start?
+
+  # "Submit" button is enabled.
+
+  # Click on "Submit".
+
+  # Telehealth request form window disappears.
+
+  # Verify "End Call" button has been replaced with "Leave Call" button.

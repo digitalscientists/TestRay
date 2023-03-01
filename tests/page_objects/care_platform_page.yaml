@@ -34,6 +34,7 @@ care_platform_header:
   user_dropdown_button: //header//div[contains(@class,'user-dropdown')]/button
   users_dropdown_button: //button[@class='users-dropdown-toggle']
   users_dropdown_list: //button[@class='users-dropdown-toggle']/ancestor::div[contains(@class, 'users-dropdown')]
+  user_dropdown_avatar: //button/div[contains(@class, 'user-dropdown-avatar')]
   dropdown_username: //header//div[@class='user-dropdown-name']
   headset_icon: //header//button/span[@class='icon-headset']
   status_menu_header: //header//nav//div[contains(text(),'Status')]
@@ -171,6 +172,7 @@ care_platform_call_portal:
   edit_event_modal_header: //div[@class='box has-scrollable-content box-tight has-shadow has-border max-h-full']//h4[@class='font-bold text-md']
   delete_event_button: //div[@class='accordion-item is-open']//button[text()='Delete']
   yes_delete_button: //div[@class='app-dialogs']//button[text()='Yes, Delete']
+  telehealth_request_form_header: //div[@id='modals']//h4[@class='font-bold text-md' and text()='Telehealth Request Form']  
 
 care_platform_notifications:
   call_completed_notification: //div[text()='Call completed']
