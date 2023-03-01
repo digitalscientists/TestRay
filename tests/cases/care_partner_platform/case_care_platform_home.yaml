@@ -495,7 +495,7 @@ TestAnswerCallFromQueueAndCompleteMedicalTransfer:
       Asserts:
         - Type: contain
           Var: IS_RED
-          Value: is-red
+          Value: is-red #TODO: use the one debbie made.
     # TODO: verify best way to assert both camera are turned off because it may make this test be physical device dependent.
   # Click "Medical" button in video call window so the participant speaks to a doctor while on the call.
     - Type: click
@@ -509,14 +509,47 @@ TestAnswerCallFromQueueAndCompleteMedicalTransfer:
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_call_portal.submit_btn$
-
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.urgent_patient_matter_error_label$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.reason_for_request_error_label$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.symptoms_start_input_error_label$
   # Fill in the required fields:
   # Priority level, Reason for request and When did symptoms start?
-
+  # Urgent patient matter
+    - Type: click
+      Strategy: id
+      Id: $PAGE.care_platform_call_portal.urgent_patient_matter_select$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.urgent_patient_matter_yes_option$
+  # Reason for request
+    - Type: click
+      Strategy: id
+      Id: $PAGE.care_platform_call_portal.reason_for_request_select$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.reason_for_request_covid_options$
+  # When did symptoms start      
+    - Type: click
+      Strategy: class
+      Id: $PAGE.care_platform_call_portal.symptoms_start_input_container$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.today_date_date_picker$
   # Click on "Submit".
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_call_portal.submit_btn$
   # Telehealth request form window disappears.
-
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id : $PAGE.care_platform_call_portal.telehealth_request_form_header$
   # Verify "End Call" button has been replaced with "Leave Call" button.
+    - Type: wait_for
+      Strategy: xpath
+      Id : $PAGE.care_platform_call_portal.leave_call_btn$
