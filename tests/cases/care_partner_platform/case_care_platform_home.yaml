@@ -463,11 +463,15 @@ TestAccessAndReviewTeamMembersAvailability:
 #CXTB-96: Answer Call from Queue & Complete a Medical Transfer
 TestAnswerCallFromQueueAndCompleteMedicalTransfer:
   Environment: Settings
+  Aftercases:
+    - TerminateApp
   Roles:
     - Role: desktopChrome
       App: desktop
     - Role: localiOS
       App: NeverAlone
+    - Role: desktopChrome1
+      App: desktop
   Actions:
   # Login as a senior.
     - Type: case
@@ -553,3 +557,62 @@ TestAnswerCallFromQueueAndCompleteMedicalTransfer:
     - Type: wait_for
       Strategy: xpath
       Id : $PAGE.care_platform_call_portal.leave_call_btn$
+  # Log in as a provider and join the call
+    - Type: case
+      Value: ProvidersCarePlatformLogin
+      Role: desktopChrome1
+    - Type: case
+      Value: JoinMedicalTransfer
+      Role: desktopChrome1
+  # Care partner leaves the call after provider has joined.
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.leave_call_btn$
+  # Verify that the video updates to show the "The call has ended" text.
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.video_status$
+      Greps:
+        - var: CALL_MESSAGE
+          attr: textContent
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: CALL_MESSAGE
+          Value: 'The call has ended.'
+  # Fill up the post call survey to complete the session.
+    - Type: case
+      Value: PostCallSurveyCarePartner
+  # Verify that care partner was returned to the "Call queue" page.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform.call_queue_title$
+  # Verify that care partner is no longer showing as "In Session (red dot)".
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_header.user_dropdown_avatar$
+    - Type: return_element_attribute
+      Strategy: xpath
+      Id: $PAGE.care_platform_header.user_dropdown_avatar$
+      Attribute: className
+      ResultVar: IS_RED
+    - Type: assert
+      Asserts:
+        - Type: n_contain
+          Var: IS_RED
+          Value: is-red #TODO: use the one debbie made.
+  # Provider and senior tear down.
+  # Provider ends call.
+    - Type: click
+      Role: desktopChrome1
+      Strategy: xpath
+      Id: $PAGE.providers_call_queue_page.end_call_btn$
+  # Provider fills up Post call Survey.
+    - Type: case
+      Value: PostCallSurveyProvider
+      Role: desktopChrome1
+  # Senior fills up Post call Survey.
+    - Type: case
+      Value: SeniorGreatPostSurveyCallHelper
