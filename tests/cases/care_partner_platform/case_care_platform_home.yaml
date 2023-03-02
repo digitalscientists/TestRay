@@ -489,18 +489,36 @@ TestAnswerCallFromQueueAndCompleteMedicalTransfer:
       Id: $PAGE.care_platform_call_portal.end_call_button$
     - Type: wait_for
       Strategy: xpath
-      Id: $PAGE.care_platform_header.user_dropdown_avatar$
+      Id: $PAGE.care_platform_header.status_indicator$
     - Type: return_element_attribute
       Strategy: xpath
-      Id: $PAGE.care_platform_header.user_dropdown_avatar$
+      Id: $PAGE.care_platform_header.status_indicator$
       Attribute: className
       ResultVar: IS_RED
     - Type: assert
       Asserts:
         - Type: contain
           Var: IS_RED
-          Value: is-red #TODO: use the one debbie made.
-    # TODO: verify best way to assert both camera are turned off because it may make this test be physical device dependent.
+          Value: is-red
+  # Verify video is disabled by default on the care partners.
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.call_camera_button$
+      Greps:
+        - var: CLASS
+          attr: innerHTML
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: CLASS
+          Value: 'off'
+  # Verify video is disabled by default on the seniors.
+    - Type: wait_not_visible
+      Role: localiOS
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_call.video_window$
   # Click "Medical" button in video call window so the participant speaks to a doctor while on the call.
     - Type: click
       Strategy: xpath
@@ -592,17 +610,17 @@ TestAnswerCallFromQueueAndCompleteMedicalTransfer:
   # Verify that care partner is no longer showing as "In Session (red dot)".
     - Type: wait_for
       Strategy: xpath
-      Id: $PAGE.care_platform_header.user_dropdown_avatar$
+      Id: $PAGE.care_platform_header.status_indicator$
     - Type: return_element_attribute
       Strategy: xpath
-      Id: $PAGE.care_platform_header.user_dropdown_avatar$
+      Id: $PAGE.care_platform_header.status_indicator$
       Attribute: className
       ResultVar: IS_RED
     - Type: assert
       Asserts:
         - Type: n_contain
           Var: IS_RED
-          Value: is-red #TODO: use the one debbie made.
+          Value: is-red
   # Provider and senior tear down.
   # Provider ends call.
     - Type: click
