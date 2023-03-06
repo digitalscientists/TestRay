@@ -164,7 +164,7 @@ care_platform_call_portal:
   urgent_patient_matter_yes_option: //option[text()='Yes']
   urgent_patient_matter_error_label: //select[@id='priorityLevel']/following-sibling::div/div/div[@class='text-xs color-red-400']
   reason_for_request_select: reasonForRequest
-  reason_for_request_covid_options: //option[text()='COVID-19 concerns']
+  first_reason_for_request_available_option: //select[@id='reasonForRequest']/option[not(@value)][1]
   reason_for_request_error_label: //select[@id='reasonForRequest']/following-sibling::div/div/div[@class='text-xs color-red-400']
   symptoms_start_input_container: react-datepicker__input-container
   symptoms_start_input_error_label: //div[@class='react-datepicker-wrapper']/following-sibling::div/div/div[@class='text-xs color-red-400']
