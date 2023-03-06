@@ -80,6 +80,9 @@ OnboardersCarePlatformUpdatePassword:
       Strategy: xpath
       Id: $PAGE.care_platform_myaccount_info.confirm_new_password_input$
       Value: "Neural123"
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_myaccount_info.change_my_password_button$
   #Verify a red alert text showed up
     - Type: wait_for
       Strategy: xpath
