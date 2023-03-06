@@ -1,0 +1,193 @@
+OnboarderCarePartnerLogin:
+  Roles:
+    - Role: desktopChrome
+      App: desktop
+  Actions:
+    - Type: navigate
+      Role: desktopChrome
+      Value: $AND_CLI_care_platform_url$
+    - Type: maximize
+    - Type: send_keys
+      Strategy: id
+      Id: $PAGE.care_platform_login.email_input$
+      Value: $AND_CLI_onboarder_user1$
+    - Type: send_keys
+      Strategy: id
+      Id: $PAGE.care_platform_login.password_input$
+      Value: $AND_CLI_onboarder_user1_pwd$
+    - Type: click
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.care_platform_login.login_button$
+    - Type: sleep
+      Time: 2
+
+#Update Password on the CarePlatform
+OnboardersCarePlatformUpdatePassword:
+  Roles:
+    - Role: desktopChrome
+      App: desktop       
+  Actions:
+    #Going to My Account
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_header.user_dropdown_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_header.user_dropdown_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_header.myaccount_menu_button$
+  #Click in Update Password
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_myaccount_info.update_password_button$
+  #Verify the elements
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_myaccount_info.confirm_new_password_input$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_myaccount_info.confirm_new_password_label$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_myaccount_info.new_password_input$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_myaccount_info.new_password_label$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_myaccount_info.current_password_input$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_myaccount_info.current_password_label$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_login.dialog_cancel_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_myaccount_info.change_my_password_button$
+  #Fill the fields with invalid values
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.care_platform_myaccount_info.current_password_input$
+      Value: $AND_CLI_onboarder_user1_pwd$
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.care_platform_myaccount_info.new_password_input$
+      Value: "Neural123"
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.care_platform_myaccount_info.confirm_new_password_input$
+      Value: "Neural123"
+  #Verify a red alert text showed up
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_myaccount_info.password_requirements_alert_text$
+  #Click in Cancel
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_login.dialog_cancel_button$
+  #Verify the dialog is closed
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id: $PAGE.care_platform_login.dialog_cancel_button$
+      Time: 10
+  #Going to My Account
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_header.user_dropdown_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_header.myaccount_menu_button$
+  #Click in Update Password
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_myaccount_info.update_password_button$
+  #Fill the fields
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.care_platform_myaccount_info.current_password_input$
+      Value: $AND_CLI_onboarder_user1_pwd$
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.care_platform_myaccount_info.new_password_input$
+      Value: "Neural123!"
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.care_platform_myaccount_info.confirm_new_password_input$
+      Value: "Neural123!"
+  #Click the Change My Password button
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_myaccount_info.change_my_password_button$
+  #Verify the alert for "Password updated successfully" is displayed
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_myaccount_info.password_updated_successfully_alert_msg$
+  #Calling Logout case
+    - Type: case
+      Value: OnboarderCarePlatformLogout
+  #Setting the password var to the new value
+    - Type: set_env_var
+      Value: Neural123!
+      Var: onboarder_user1_pwd
+  #Calling Login case
+    - Type: case
+      Value: OnboarderCarePartnerLogin
+  #Verify the login with the new password was successful
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_header.app_time$
+  #Restore the password
+  #Going to My Account
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_header.user_dropdown_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_header.myaccount_menu_button$
+  #Click in Update Password
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_myaccount_info.update_password_button$
+  #Set the password var to the new value
+    - Type: set_env_var
+      Value: $AND_CLI_ENV_PASS_STORE$
+      Var: onboarder_user1_pwd
+  #Fill the fields
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.care_platform_myaccount_info.current_password_input$
+      Value: "Neural123!"
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.care_platform_myaccount_info.new_password_input$
+      Value: $AND_CLI_onboarder_user1_pwd$
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.care_platform_myaccount_info.confirm_new_password_input$
+      Value: $AND_CLI_onboarder_user1_pwd$
+  #Click the Change My Password button
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_myaccount_info.change_my_password_button$
+
+OnboarderCarePlatformLogout:
+  Roles:
+    - Role: desktopChrome
+      App: desktop       
+  Actions:     
+      # Log out to the Care Platform app with Care Partners account
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_header.user_dropdown_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_header.logout_menu_button$
+    - Type: click
+      Strategy: xpath
+      Id: //button[contains(text(),'$AND_CLI_LOGOUT_OPTION$')]
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_login.login_button$
