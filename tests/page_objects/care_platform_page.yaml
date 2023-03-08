@@ -178,7 +178,7 @@ care_platform_call_portal:
   video_btn: //button[@class='video-control']//span[@class='icon-video-off']
   video_mirror_care_partner: //div[@class='video-mirror']
   video_grid_from_senior_btn: //div[@class='video-feed']/div[@data-testid='video-grid']
-  full_screen_call_btn: //button[@class='video-control video-control-top-right']
+  full_screen_call_btn: //button[contains(@class, 'video-control video-control-top-right')]
   medical_transfer_btn: //button[span[text()='Medical']]
   verify_video_is_full_screen: //div[@class='app-video app-video-fullscreen']
   leave_call_btn: //button[span/span[@class='icon-phone-end']]
