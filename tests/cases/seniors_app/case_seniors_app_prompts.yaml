@@ -3,11 +3,15 @@
 TestPersonalCarePartnerMessagePromptAndCallBackButton:
   Environment: Settings
   Vars:
+  # Log out option
     LOGOUT_OPTION: "Go Off Shift"
+  # Video quality variables
     TIME: 5
     INTERFACE: en0
     VIDEO_IN: "1"
     TEST_FOLDER: $AND_CMD_pwd$/Reports/executions/$AND_CMD_date +%s$
+  # Message from Care Partner to Senior
+    MESSAGE_TO_PARTICIPANT: Automation Message
   Precases:
     - LoginNeverAloneHelper
   Aftercases:
@@ -30,7 +34,6 @@ TestPersonalCarePartnerMessagePromptAndCallBackButton:
       Value: CarePartnerSendMessageToSenior
   # Device automatically displays "Personal Care Partner Message" window displaying
   # the message sent and indicating the details of who/when sent.
-  # TODO: make more assertions on the values.
     - Type: wait_for
       Strategy: class_chain
       Id: $PAGE.seniors_app_message_modal.message_header$
@@ -47,12 +50,32 @@ TestPersonalCarePartnerMessagePromptAndCallBackButton:
     - Type: wait_for
       Strategy: class_chain
       Id: $PAGE.seniors_app_message_modal.from_label$
+    - Type: return_element_attribute
+      Strategy: xpath
+      Id: $PAGE.seniors_app_message_modal.from_value$
+      Attribute: label
+      ResultVar: FROM_VALUE
+    - Type: assert
+      Asserts:
+        - Type: eq
+          Var: FROM_VALUE
+          Value: $AND_CLI_carepartner_user1_name$ $AND_CLI_carepartner_user1_lastname$
     - Type: wait_for
       Strategy: class_chain
       Id: $PAGE.seniors_app_message_modal.sent_label$
     - Type: wait_for
       Strategy: class_chain
       Id: $PAGE.seniors_app_message_modal.message_label$
+    - Type: return_element_attribute
+      Strategy: xpath
+      Id: $PAGE.seniors_app_message_modal.message_value$
+      Attribute: label
+      ResultVar: MESSAGE_VALUE
+    - Type: assert
+      Asserts:
+        - Type: eq
+          Var: MESSAGE_VALUE
+          Value: $AND_CLI_MESSAGE_TO_PARTICIPANT$
   # Click the "Call Back Personal Care Partner" button.
     - Type: wait_for
       Strategy: class_chain
@@ -138,6 +161,9 @@ TestPersonalCarePartnerMessagePromptAndCallBackButton:
   # These steps are related to XCUI limitations and an existing bug
   # Please refer to the following ticket for more information: https://digitalscientists.atlassian.net/browse/CXTB-317
   # Click "End Call".
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.seniors_app_call.end_call_button$
     - Type: click
       Strategy: xpath
       Id: $PAGE.seniors_app_call.end_call_button$

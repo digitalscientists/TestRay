@@ -1405,7 +1405,7 @@ CarePartnerSendMessageToSenior:
     - Type: send_keys
       Strategy: xpath
       Id: $PAGE.care_platform_participant_records.message_input$
-      Value: Automation Message to Care Partner
+      Value: $AND_CLI_MESSAGE_TO_PARTICIPANT$
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_participant_records.message_submit_button$
