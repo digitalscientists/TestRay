@@ -24,4 +24,4 @@ submit_options:
   no_cancel_call_button: "**/XCUIElementTypeButton[`label ENDSWITH 'No, Cancel Call'`]"
 
 call_portal:
-  end_call_button: "**/XCUIElementTypeOther[`label ENDSWITH 'End Call'`]"
+  end_call_button: "**/XCUIElementTypeOther[`label ENDSWITH 'End Call'`][-1]"

@@ -107,23 +107,18 @@ TestRequestSuccessfulCallConnect:
       Role: desktopChrome
       Id: $PAGE.providers_home_page.first_on_demand_row$
   #Answer call
-#    - Type: wait_for
-#      Strategy: xpath
-#      Id: $PAGE.providers_call_queue_page.answer_call_button$
-#      Role: desktopChrome
     - Type: click
       Strategy: xpath
       Id: $PAGE.providers_call_queue_page.answer_call_button$
       Role: desktopChrome
   ## back to SNF and end call
-  # HERE'S THE PROBLEM
-    - Type: sleep
-      Time: 10
     - Type: wait_for
       Role: localiOS
       Strategy: class_chain
       Id: $PAGE.call_portal.end_call_button$
-    - Type: tap
+    - Type: sleep
+      Time: 20
+    - Type: click
       Role: localiOS
       Strategy: class_chain
       Id: $PAGE.call_portal.end_call_button$
