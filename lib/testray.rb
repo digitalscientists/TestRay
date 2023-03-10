@@ -145,7 +145,7 @@ module TestRay
       end
     end
 
-    desc "execute_file <file>", "Execute all cases within the case_*.yaml file. Give relative path from project folder Ex: cases/case_*.yaml"
+    desc "execute_file <file>", "Execute all cases within the case_*.yaml file. Give relative path from cases folder Ex: case_*.yaml or */case_*yaml"
     option :retries,
            :desc => "number of test retries",
            :default => 0,
