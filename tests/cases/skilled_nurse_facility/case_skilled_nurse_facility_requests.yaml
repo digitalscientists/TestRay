@@ -173,3 +173,5 @@ TestRequestSuccessfulCallConnect:
       Role: localiOS
       Strategy: xpath
       Id: $PAGE.snf_home.new_request_btn$
+    - Type: case
+      Value: PostCallSurveyProvider
