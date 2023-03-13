@@ -53,7 +53,7 @@ TestRequestSuccessfulCallConnect:
       Role: localiOS
       Id: $PAGE.snf_new_request_form.patient_name_select$
     - Type: click
-      Strategy: xpath
+      Strategy: class_chain
       Role: localiOS
       Id: $PAGE.snf_new_request_form.first_patient_select_option$
       Condition:
@@ -81,7 +81,7 @@ TestRequestSuccessfulCallConnect:
       Role: localiOS
       Id: $PAGE.snf_new_request_form.reason_for_request_dropdown$
     - Type: click
-      Strategy: xpath
+      Strategy: class_chain
       Role: localiOS
       Id: $PAGE.snf_new_request_form.reason_for_request_option_one$
       Condition:
