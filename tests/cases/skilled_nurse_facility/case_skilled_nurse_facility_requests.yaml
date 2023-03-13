@@ -56,6 +56,10 @@ TestRequestSuccessfulCallConnect:
       Strategy: xpath
       Role: localiOS
       Id: $PAGE.snf_new_request_form.first_patient_select_option$
+      Condition:
+      - Value: 5
+        Operation: visible
+        Result: true
     - Type: click
       Strategy: xpath
       Role: localiOS
@@ -68,6 +72,10 @@ TestRequestSuccessfulCallConnect:
       Strategy: class_chain
       Role: localiOS
       Id: $PAGE.snf_new_request_form.urgent_reason_option_no$
+      Condition:
+      - Value: 5
+        Operation: visible
+        Result: true
     - Type: click
       Strategy: xpath
       Role: localiOS
@@ -76,6 +84,10 @@ TestRequestSuccessfulCallConnect:
       Strategy: xpath
       Role: localiOS
       Id: $PAGE.snf_new_request_form.reason_for_request_option_one$
+      Condition:
+      - Value: 5
+        Operation: visible
+        Result: true
   # Submit button gets enabled
     - Type: wait_for_attribute
       Strategy: class_chain
