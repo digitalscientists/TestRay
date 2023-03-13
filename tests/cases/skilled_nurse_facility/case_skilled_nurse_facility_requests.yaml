@@ -38,12 +38,12 @@ TestRequestSuccessfulCallConnect:
       Strategy: xpath
       Role: localiOS
       Id: $PAGE.snf_new_request_form.requester_first_name$
-      Value: $AND_CLI_facility_devices_user1_name$
+      Value: $AND_CLI_facility_devices_requester_name$
     - Type: send_keys
       Strategy: xpath
       Role: localiOS
       Id: $PAGE.snf_new_request_form.requester_last_name$
-      Value: $AND_CLI_facility_devices_user1_lastname$
+      Value: $AND_CLI_facility_devices_requester_lastname$
     - Type: click
       Strategy: class_chain
       Role: localiOS
