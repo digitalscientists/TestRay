@@ -61,11 +61,11 @@ TestRequestSuccessfulCallConnect:
         Operation: visible
         Result: true
     - Type: click
-      Strategy: xpath
+      Strategy: class_chain
       Role: localiOS
       Id: $PAGE.snf_new_request_form.urgent_reason_dropdown$
     - Type: click
-      Strategy: xpath
+      Strategy: class_chain
       Role: localiOS
       Id: $PAGE.snf_new_request_form.urgent_reason_dropdown$
     - Type: click
@@ -77,7 +77,7 @@ TestRequestSuccessfulCallConnect:
         Operation: visible
         Result: true
     - Type: click
-      Strategy: xpath
+      Strategy: class_chain
       Role: localiOS
       Id: $PAGE.snf_new_request_form.reason_for_request_dropdown$
     - Type: click
