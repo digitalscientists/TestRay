@@ -1412,7 +1412,10 @@ TestCarePartnerCallParticipantsDevice:
   # Fill up the post call survey.
     - Type: case
       Value: PostCallSurveyCarePartner
-  # Verify you are returned to the Call queue page and your user status is no longer showing as "In session" (red dot)
+  # Fill up Senior post call survey.
+    - Type: case
+      Value: SeniorGreatPostSurveyCallHelper
+  # Verify you are returned to the Call queue page and your user status is no longer showing as "In session" (red dot).
     - Type: get_attribute
       Strategy: xpath
       Id: $PAGE.care_platform_header.status_indicator$
