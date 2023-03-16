@@ -175,3 +175,144 @@ TestRequestSuccessfulCallConnect:
       Id: $PAGE.snf_home.new_request_btn$
     - Type: case
       Value: PostCallSurveyProvider
+
+#CXTB-127 See Call Appear in Queue, Assign and Review Details
+TestCheckQueueandReviewDetails:
+  Environment: Settings
+  Aftercases:
+    - TerminateApp
+  Roles:
+    - Role: localiOS
+      App: NeverAlone
+    - Role: desktopChrome
+      App: desktop 
+  Actions:
+  #Call login for nurses
+    - Type: case
+      Role: localiOS
+      Value: LoginSNFHelper
+    - Type: return_element_attribute
+      Strategy: class_chain
+      Id: $PAGE.snf_home.facility_name$
+      Attribute: label
+      ResultVar: FACILITY_NAME_SNF
+  #Verify that the user has successfully logged in.
+    - Type: case
+      Value: SNFNewRequestHelper
+    - Type: case
+      Value: MissedCallHelper
+    - Type: wait_for
+      Role: localiOS
+      Strategy: class_chain
+      Id: $PAGE.call_portal.end_call_button$
+    - Type: click
+      Role: localiOS
+      Strategy: class_chain
+      Id: $PAGE.call_portal.end_call_button$
+    - Type: click
+      Role: localiOS
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_post_call_survey.skip_survey_button$
+    - Type: wait_for
+      Role: localiOS
+      Strategy: id
+      Id: $PAGE.snf_notifications.missed_call_modal_title$
+    - Type: click
+      Role: localiOS
+      Strategy: class_chain
+      Id: $PAGE.snf_notifications.missed_call_modal_close_button$
+    - Type: wait_for
+      Role: localiOS
+      Strategy: class_chain
+      Id: $PAGE.snf_home.existing_request_button$
+    - Type: click
+      Role: localiOS
+      Strategy: class_chain
+      Id: $PAGE.snf_home.existing_request_button$
+    - Type: click
+      Role: localiOS
+      Strategy: class_chain
+      Id: $PAGE.snf_existing_request.last_existing_request$
+    - Type: click
+      Role: localiOS
+      Strategy: class_chain
+      Id: $PAGE.submit_options.yes_call_provider_button$
+  # Provider side
+    - Type: case
+      Value: ProvidersCarePlatformLogin
+      Role: desktopChrome
+    #Selects first on demand call
+    - Type: click
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_home_page.scheduled_calls$
+    #Check data matches
+    - Type: get_attribute
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_call_queue_page.details_title$
+      Greps:
+      - var: CALL_FACILITY_NAME
+        attr: innerText
+        match: "(.*)"
+    - Type: assert
+      Role: desktopChrome
+      Asserts:
+        - Type: eq
+          Var: FACILITY_NAME_SNF
+          Value: $AND_CLI_CALL_FACILITY_NAME$
+  #Assign call to me
+    - Type: click
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_call_queue_page.assign_to_me_button$
+    - Type: wait_for
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_call_queue_page.unnasign_button$
+  #Check patient name
+    - Type: get_attribute
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_call_queue_page.details_patient_name$
+      Greps:
+      - var: PATIENT_NAME
+        attr: innerText
+        match: "(.*)"
+    - Type: assert
+      Role: desktopChrome
+      Asserts:
+        - Type: contain
+          Var: PATIENT_NAME_SNF
+          Value: $AND_CLI_PATIENT_NAME$
+  #Check requester info
+    - Type: get_attribute
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_call_queue_page.details_requester_name$
+      Greps:
+      - var: REQUESTER_NAME
+        attr: innerText
+        match: "(.*)"
+    - Type: assert
+      Role: desktopChrome
+      Asserts:
+        - Type: contain
+          Var: REQUESTER_NAME
+          Value: $AND_CLI_facility_devices_requester_name$
+    - Type: assert
+      Role: desktopChrome
+      Asserts:
+        - Type: contain
+          Var: REQUESTER_NAME
+          Value: $AND_CLI_facility_devices_requester_lastname$
+  #Answer call
+    - Type: click
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_call_queue_page.answer_call_button$
+  ## back to SNF and end call
+    - Type: wait_for
+      Role: localiOS
+      Strategy: class_chain
+      Id: $PAGE.call_portal.end_call_button$

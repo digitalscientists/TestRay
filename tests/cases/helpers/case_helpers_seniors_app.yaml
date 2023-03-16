@@ -138,3 +138,36 @@ CallCarePartner:
     - Type: wait_for
       Strategy: class_chain
       Id: $PAGE.seniors_app_call.waiting_room_label$
+
+# Workaround: to make it appear Missed, it has to be waiting for 60 seconds. 
+# If appium passes 30+ seconds in sleep, it fails.
+MissedCallHelper:
+  Roles:
+    - Role: localiOS
+      App: NeverAlone      
+  Actions:
+    - Type: wait_for
+      Role: localiOS
+      Strategy: xpath
+      Id: $PAGE.seniors_app_call.mute_call_button$
+    - Type: click
+      Role: localiOS
+      Strategy: xpath
+      Id: $PAGE.seniors_app_call.mute_call_button$
+    - Type: sleep
+      Role: localiOS
+      Time: 20
+    - Type: click
+      Role: localiOS
+      Strategy: xpath
+      Id: $PAGE.seniors_app_call.mute_call_button$
+    - Type: sleep
+      Role: localiOS
+      Time: 20
+    - Type: click
+      Role: localiOS
+      Strategy: xpath
+      Id: $PAGE.seniors_app_call.mute_call_button$
+    - Type: sleep
+      Role: localiOS
+      Time: 20
