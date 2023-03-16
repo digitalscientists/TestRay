@@ -28,6 +28,9 @@ LoginSNFHelper:
       Strategy: xpath
       Id: $PAGE.snf_home.new_request_btn$
 
+#Making a New Request with only the required data, and call to the provider.
+#the first option on all dropdowns: patients, urgency and reasons.
+#Requester name and lastname are filled with config variables: facility_devices_requester_name and facility_devices_requester_lastname
 SNFNewRequestHelper:
   Roles:
     - Role: localiOS
