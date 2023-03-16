@@ -1309,7 +1309,7 @@ TestCarePartnerBrowsingWhileOnCall:
       Value: PostCallSurveyCarePartner
 
 # CXTB-124: Call Participant's device - Call Complete.
-TestCarePartnerCallParticipantsDevice:
+TestCarePartnerCallParticipantsDeviceCallComplete:
   Environment: Settings
   Precases:
     - LoginNeverAloneHelper
