@@ -317,15 +317,17 @@ TestCheckQueueandReviewDetails:
       Strategy: xpath
       Role: desktopChrome
       Id: $PAGE.providers_call_queue_page.answer_call_button$
-  #Back to SNF and end call
-    - Type: wait_for
-      Role: localiOS
-      Strategy: class_chain
-      Id: $PAGE.call_portal.end_call_button$
+  #Provider ends call.
+    - Type: click
+      Role: desktopChrome
+      Strategy: xpath
+      Id: $PAGE.providers_call_queue_page.end_call_btn$
+  #Provider fills up Post call Survey.
+    - Type: case
+      Value: PostCallSurveyProvider
+      Role: desktopChrome
+  #Senior skips the survey
     - Type: click
       Role: localiOS
       Strategy: class_chain
       Id: $PAGE.seniors_app_post_call_survey.skip_survey_button$
-  #Fill survey on Provider side
-    - Type: case
-      Value: PostCallSurveyProvider
