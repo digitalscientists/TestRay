@@ -191,16 +191,19 @@ TestCheckQueueandReviewDetails:
     - Type: case
       Role: localiOS
       Value: LoginSNFHelper
+  #Taking name of facility on SNF app
     - Type: return_element_attribute
       Strategy: class_chain
       Id: $PAGE.snf_home.facility_name$
       Attribute: label
       ResultVar: FACILITY_NAME_SNF
-  #Verify that the user has successfully logged in.
+  #Make a new request
     - Type: case
       Value: SNFNewRequestHelper
+  #Call MissedCallHelper to wait for the time needed to make a missed call
     - Type: case
       Value: MissedCallHelper
+  #End New Request
     - Type: wait_for
       Role: localiOS
       Strategy: class_chain
@@ -213,6 +216,7 @@ TestCheckQueueandReviewDetails:
       Role: localiOS
       Strategy: class_chain
       Id: $PAGE.seniors_app_post_call_survey.skip_survey_button$
+  #Close Missed Call alert
     - Type: wait_for
       Role: localiOS
       Strategy: id
@@ -221,6 +225,7 @@ TestCheckQueueandReviewDetails:
       Role: localiOS
       Strategy: class_chain
       Id: $PAGE.snf_notifications.missed_call_modal_close_button$
+  #Open an existing request
     - Type: wait_for
       Role: localiOS
       Strategy: class_chain
@@ -233,20 +238,21 @@ TestCheckQueueandReviewDetails:
       Role: localiOS
       Strategy: class_chain
       Id: $PAGE.snf_existing_request.last_existing_request$
+  #Call provider
     - Type: click
       Role: localiOS
       Strategy: class_chain
       Id: $PAGE.submit_options.yes_call_provider_button$
-  # Provider side
+  #Provider side
     - Type: case
       Value: ProvidersCarePlatformLogin
       Role: desktopChrome
-    #Selects first on demand call
+  #Selects first on demand call
     - Type: click
       Strategy: xpath
       Role: desktopChrome
       Id: $PAGE.providers_home_page.scheduled_calls$
-    #Check data matches
+  #Check data matches
     - Type: get_attribute
       Strategy: xpath
       Role: desktopChrome
@@ -311,8 +317,15 @@ TestCheckQueueandReviewDetails:
       Strategy: xpath
       Role: desktopChrome
       Id: $PAGE.providers_call_queue_page.answer_call_button$
-  ## back to SNF and end call
+  #Back to SNF and end call
     - Type: wait_for
       Role: localiOS
       Strategy: class_chain
       Id: $PAGE.call_portal.end_call_button$
+    - Type: click
+      Role: localiOS
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_post_call_survey.skip_survey_button$
+  #Fill survey on Provider side
+    - Type: case
+      Value: PostCallSurveyProvider
