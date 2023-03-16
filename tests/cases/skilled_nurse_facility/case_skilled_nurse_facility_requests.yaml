@@ -183,6 +183,8 @@ TestCheckQueueandReviewDetails:
     - TerminateApp
   Roles:
     - Role: localiOS
+      Capabilities:
+        newCommandTimeout: 100
       App: NeverAlone
     - Role: desktopChrome
       App: desktop 
@@ -200,9 +202,9 @@ TestCheckQueueandReviewDetails:
   #Make a new request
     - Type: case
       Value: SNFNewRequestHelper
-  #Call MissedCallHelper to wait for the time needed to make a missed call
-    - Type: case
-      Value: MissedCallHelper
+  #Wait for a minute to make a missed call
+    - Type: sleep
+      Time: 61
   #End New Request
     - Type: wait_for
       Role: localiOS
