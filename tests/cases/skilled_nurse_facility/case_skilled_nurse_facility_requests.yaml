@@ -13,11 +13,6 @@ TestRequestSuccessfulCallConnect:
     - Type: case
       Role: localiOS
       Value: LoginSNFHelper
-  #Verify that the user has successfully logged in.
-    - Type: wait_for
-      Role: localiOS
-      Strategy: xpath
-      Id: $PAGE.snf_home.new_request_btn$
   #New request
     - Type: click
       Strategy: xpath

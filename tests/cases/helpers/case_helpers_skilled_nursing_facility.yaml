@@ -36,7 +36,7 @@ SNFNewRequestHelper:
     - Role: localiOS
       App: NeverAlone      
   Actions:
-  #Verify that the user has successfully logged in.
+  #Verify that the button is visible
     - Type: wait_for
       Role: localiOS
       Strategy: xpath
