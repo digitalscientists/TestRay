@@ -29,7 +29,7 @@ LoginSNFHelper:
       Id: $PAGE.snf_home.new_request_btn$
 
 # Making a New Request with only the required data, and call to the provider.
-# the first option on all dropdowns: patients, urgency and reasons.
+# the first option on the following dropdowns: urgency and reasons.
 # Requester name and lastname are filled with config variables: facility_devices_requester_name and facility_devices_requester_lastname
 # Request will be scheduled for the participant used in the variables.
 SNFNewRequestHelper:
