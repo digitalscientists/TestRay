@@ -555,7 +555,10 @@ TestStatusNotOnActiveCallForProviders:
 
 # CXTB-133: Verify that Providers answer SNF call and completes session.
 TestProvidersAnswerSNFCallAndCompletesSession:
-  Environment: Settings  
+  Environment: Settings
+  Vars:
+    PROVIDERS_SUBJECT:  Automation Test Call SNF.
+    PROVIDERS_DETAILS:  Automation Test Notes Verify that Providers answer SNF call and completes session.
   Precases:
     - LoginSNFHelper
   Aftercases:
@@ -663,14 +666,11 @@ TestProvidersAnswerSNFCallAndCompletesSession:
     - Type: send_keys
       Strategy: xpath
       Id: $PAGE.providers_call_queue_page.call_notes_subject_input$
-      Value: 'Automation Test Call SNF'
+      Value: $AND_CLI_PROVIDERS_SUBJECT$
     - Type: send_keys
       Strategy: xpath
       Id: $PAGE.providers_call_queue_page.call_notes_provider_input$
-      Value: 'Automation Test Notes: Verify that Providers answer SNF call and completes session.'
-    # - Type: scroll_to
-    #   Strategy: xpath
-    #   Id: $PAGE.providers_call_queue_page.call_notes_save_button$
+      Value: $AND_CLI_PROVIDERS_DETAILS$
     # Click the "Complete session" button.
     - Type: wait_for_property
       Strategy: xpath
@@ -684,7 +684,26 @@ TestProvidersAnswerSNFCallAndCompletesSession:
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.providers_call_queue_page.post_call_survey_title$
-      #TODO: verify the pre-populated assert.
+    - Type: return_element_attribute
+      Strategy: xpath
+      Id: $PAGE.providers_call_queue_page.call_notes_subject_input$
+      Attribute: value
+      ResultVar: SUBJECT_SUBJECT_CURRENT_TEXT
+    - Type: assert
+      Asserts:
+        - Type: eq
+          Var: SUBJECT_SUBJECT_CURRENT_TEXT
+          Value: $AND_CLI_PROVIDERS_SUBJECT$
+    - Type: return_element_attribute
+      Strategy: xpath
+      Id: $PAGE.providers_call_queue_page.call_notes_provider_input$
+      Attribute: value
+      ResultVar: SUBJECT_NOTES_CURRENT_TEXT
+    - Type: assert
+      Asserts:
+        - Type: eq
+          Var: SUBJECT_NOTES_CURRENT_TEXT
+          Value: $AND_CLI_PROVIDERS_DETAILS$
     # Change to "No" on the "Was issue resolved" question.
     - Type: click
       Strategy: xpath
