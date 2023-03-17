@@ -555,7 +555,7 @@ TestProvidersAnswerSNFCallAndCompletesSession:
       Value: ProvidersCarePlatformLogin
     # Call Provider from SNF.
     - Type: case
-      Value: SNFCallProvider
+      Value: SNFNewRequestHelper
     # Click on the corresponding call on the Home page to and click on the "Answer" button.
     - Type: wait_for
       Strategy: xpath
