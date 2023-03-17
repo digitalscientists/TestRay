@@ -30,7 +30,7 @@ LoginSNFHelper:
 
 # Making a New Request with only the required data, and call to the provider.
 # the first option on all dropdowns: patients, urgency and reasons.
-# Requester name and lastname are filled with config variables: senior_user1_name and senior_user1_lastname.
+# Requester name and lastname are filled with config variables: facility_devices_requester_name and facility_devices_requester_lastname
 # Request will be scheduled for the participant used in the variables.
 SNFNewRequestHelper:
   Roles:
@@ -55,12 +55,12 @@ SNFNewRequestHelper:
       Strategy: class_chain
       Role: localiOS
       Id: $PAGE.snf_new_request_form.requester_first_name$
-      Value: $AND_CLI_senior_user1_name$
+      Value: $AND_CLI_facility_devices_requester_name$
     - Type: send_keys
       Strategy: class_chain
       Role: localiOS
       Id: $PAGE.snf_new_request_form.requester_last_name$
-      Value: $AND_CLI_senior_user1_lastname$
+      Value: $AND_CLI_facility_devices_requester_lastname$
     - Type: click
       Strategy: class_chain
       Role: localiOS
