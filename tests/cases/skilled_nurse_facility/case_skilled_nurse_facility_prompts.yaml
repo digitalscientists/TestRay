@@ -1,0 +1,16 @@
+#CXTB-42: Verify Provider Incoming Call - Answer Call.
+TestProviderIncomingCallAnswerCallOnSNF:
+  Environment: Settings
+  Precases:
+    - LoginSNFHelper
+  Aftercases:
+    - TerminateApp
+  Roles:
+    - Role: localiOS
+      App: NeverAlone
+    - Role: desktopChrome
+      App: desktop 
+  Actions:
+    # Generate a call from Provider to Facility Device.
+    - Type: case
+      Value: ProviderCallFacility

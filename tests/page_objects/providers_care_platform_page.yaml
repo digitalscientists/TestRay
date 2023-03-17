@@ -34,8 +34,12 @@ providers_account_modal:
   cancel_button: //*[@id='modals']//button[contains(.,'Cancel')]
 
 providers_facilities_page:
+  facilities_header_title: //div[@class='box-unscrollable-content']//h3
   alpha_center_td: //tr//td[contains(text(),'$AND_CLI_facility_devices_user1_number$')]
   call_portal_btn: //button[text()='Call Portal']
+  facility_based_on_name: //td/strong[text()='$AND_CLI_facility_name1$']
+  devices_tab: //div[@class='tabs box-scrollable-content -mb']//button[@id='2']
+  call_based_on_device_button: //strong[text()='Device $AND_CLI_facility_devices_user1_number$:']/ancestor::tr//a[@class='button button-basic text-xs']
 
 providers_call_queue_page:
   end_call_btn: //button[span[text()='End Call']]
