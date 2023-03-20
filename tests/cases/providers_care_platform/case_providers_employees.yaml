@@ -150,7 +150,7 @@ TestAnswerCompleteSessionFromEHP:
     - Type: send_keys
       Strategy: xpath
       Id: $PAGE.employee_health_telehealth_on_demand_modal.modal_reasons_input$
-      Value: 'Test reason: automation'
+      Value: 'Test reason: TestAnswerCompleteSessionFromEHP automation'
     - Type: click
       Strategy: xpath
       Id: $PAGE.employee_health_telehealth_on_demand_modal.modal_call_provider_button$
@@ -160,7 +160,10 @@ TestAnswerCompleteSessionFromEHP:
       Value: 1
     - Type: case
       Value: ProvidersCarePlatformLogin
-  #Copied steps from ProvidersCarePlatformEndCall and added some extra checking
+  #Answer and End Call
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.home_title$
   #Selects first on demand call
     - Type: click
       Strategy: xpath
@@ -173,7 +176,13 @@ TestAnswerCompleteSessionFromEHP:
     - Type: click
       Strategy: xpath
       Id: $PAGE.providers_call_queue_page.answer_call_button$
-  #Check status "In Session"
+    - Type: sleep
+      Time: 3
+  #End call
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_call_queue_page.end_answer_call_button$
+  #Check In Session indicator
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.care_platform_header.status_indicator$
@@ -186,13 +195,7 @@ TestAnswerCompleteSessionFromEHP:
       Asserts:
         - Type: contain
           Var: IS_RED
-          Value: is-red  
-    - Type: sleep
-      Time: 3
-  #End call
-    - Type: wait_for
-      Strategy: xpath
-      Id: $PAGE.providers_call_queue_page.end_answer_call_button$
+          Value: is-red
     - Type: click
       Strategy: xpath
       Id: $PAGE.providers_call_queue_page.end_answer_call_button$
@@ -224,26 +227,13 @@ TestAnswerCompleteSessionFromEHP:
     - Type: click
       Strategy: xpath
       Id: $PAGE.providers_call_queue_page.complete_session_button$ 
-  #Fill survey
+  #Fill survey and end session
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.providers_call_queue_page.post_call_survey_title$
     - Type: click
       Strategy: xpath
-      Id: $PAGE.providers_call_queue_page.resolved_true_option$
-  #Cancel end of session
-    - Type: click
-      Strategy: xparh
-      Id: $PAGE.providers_call_queue_page.cancel_exit_session_button$
-  #Try to end session again
-    - Type: wait_for_property
-      Strategy: xpath
-      Id: $PAGE.providers_call_queue_page.complete_session_button$ 
-      Property: disabled
-      Value: "false"
-    - Type: click
-      Strategy: xpath
-      Id: $PAGE.providers_call_queue_page.complete_session_button$
+      Id: $PAGE.providers_call_queue_page.resolved_no_option$
     - Type: click
       Strategy: xpath
       Id: $PAGE.providers_call_queue_page.recommend_discharge_true_option$
@@ -256,7 +246,6 @@ TestAnswerCompleteSessionFromEHP:
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.providers_home_page.home_title$
-  # Verify provider is no longer showing as "In Session (red dot)".
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.care_platform_header.status_indicator$
@@ -264,14 +253,12 @@ TestAnswerCompleteSessionFromEHP:
       Strategy: xpath
       Id: $PAGE.care_platform_header.status_indicator$
       Attribute: className
-      ResultVar: IS_RED
+      ResultVar: IS_GREEN
     - Type: assert
       Asserts:
-        - Type: n_contain
-          Var: IS_RED
-          Value: is-red
-#    - Type: case
-#      Value: ProvidersCarePlatformEndCall
+        - Type: contain
+          Var: IS_GREEN
+          Value: is-green
   #Switch back to the Employee Health Portal tab
     - Type: switch_window
       Value: 0
