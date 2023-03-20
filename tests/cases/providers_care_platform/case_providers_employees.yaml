@@ -164,6 +164,8 @@ TestAnswerCompleteSessionFromEHP:
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.providers_home_page.home_title$
+    - Type: case
+      Value: ProviderSetStateCredential 
   #Selects first on demand call
     - Type: click
       Strategy: xpath
