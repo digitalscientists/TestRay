@@ -54,13 +54,13 @@ TestProviderIncomingCallAnswerCallOnSNF:
     - Type: case
       Value: SNFAnswerIncomingCall
     # Turn on Nurse camera.
-    # - Type: click
-    #   Strategy: class_chain
-    #   Id: $PAGE.snf_call_portal.video_button$
+    - Type: click
+      Strategy: class_chain
+      Id: $PAGE.snf_call_portal.video_button$
     # Verify that a video tumbnail will appear in the upper right corner giving a preview of what the Provider is seeing.
-    # - Type: wait_for
-    #   Strategy: class_chain
-    #   Id: $PAGE.snf_call_portal.video_window$
+    - Type: wait_for
+      Strategy: class_chain
+      Id: $PAGE.snf_call_portal.video_window$
     # Click the end call button.
     - Type: click
       Strategy: class_chain
