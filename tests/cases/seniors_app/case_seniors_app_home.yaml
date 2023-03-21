@@ -242,7 +242,7 @@ TestSeniorAppCallPersonalCarePartnerOnHomePage:
       Id: $PAGE.care_platform_notifications.call_completed_notification$
 
 # CXTB-47: Verify in App Offline Behavior
-TestVerifyInAppOfflineBehavior:
+TestSeniorAppVerifyInAppOfflineBehavior:
   Environment: Settings
   Precases:
     - SetScheduledCallForSeniors

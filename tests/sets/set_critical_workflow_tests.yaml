@@ -1,15 +1,17 @@
 SetCriticalWorkflows:
   Cases:
     - Case: TestCarePartnerAnswerCallFromQueueAndCompleteMedicalTransfer
-    - Case: TestProviderAnswerCompleteSessionFromEHP
-    - Case: TestSNFProviderIncomingCallAnswerCallOnSNF
-    - Case: TestProvidersAnswerSNFCallAndCompletesSession
-    - Case: TestSNFCheckQueueandReviewDetails
-    - Case: TestCarePartnerCallParticipantsDeviceCallComplete
-    - Case: TestSeniorAppPersonalCarePartnerMessagePromptAndCallBackButton
-    - Case: TestSeniorAppAnswerCallForProviderCalling
-    - Case: TestSNFRequestSuccessfulCallConnect
-    - Case: TestSeniorAppCallPersonalCarePartnerOnHomePage
     - Case: TestCarePartnerAnswerAndComplete
     - Case: TestCarePartnerBrowsingWhileOnCall
+    - Case: TestCarePartnerCallParticipantsDeviceCallComplete
+    - Case: TestProviderAnswerCompleteSessionFromEHP
+    - Case: TestProvidersAnswerSNFCallAndCompletesSession
+    - Case: TestSNFRequestSuccessfulCallConnect
+    - Case: TestSNFCheckQueueandReviewDetails
+    - Case: TestSNFProviderIncomingCallAnswerCallOnSNF
+    - Case: TestSeniorAppVerifyInAppOfflineBehavior
+    - Case: TestSeniorAppPersonalCarePartnerMessagePromptAndCallBackButton
+    - Case: TestSeniorAppAnswerCallForProviderCalling
+    - Case: TestSeniorAppCallPersonalCarePartnerOnHomePage
     - Case: TestEmployeeHealthPortalUserCall
+
