@@ -1,5 +1,5 @@
 # CXTB-70: Verify Call Personal Care Partner Button on Page
-TestCallPersonalCarePartnerOnHomePage:
+TestSeniorAppCallPersonalCarePartnerOnHomePage:
   Vars:
     TIME: 5
     INTERFACE: en0
