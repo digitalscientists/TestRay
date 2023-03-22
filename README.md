@@ -397,6 +397,10 @@ This is not a type but can be used in different Types as a Validation for the ac
 12. [get_tomorrow_date](#get_tomorrow_date)
 13. [get_past_timestamp](#get_past_timestamp)
 14. [get_timestamp_plus_minutes](#get_timestamp_plus_minutes)
+15. [generate_unique_name](#generate_unique_name)
+16. [calculate_minutes_passed_by_from_event_creation](#calculate_minutes_passed_by_from_event_creation)
+17. [verify_event_went_to_bottom](#verify_event_went_to_bottom)
+18. [verify_all_events_match_todays_date](#verify_all_events_match_todays_date)
 
 ## Appium/Selenium
 
@@ -1089,3 +1093,40 @@ Prints and Writes now time + # minutes.
       Format: time format
       Var: Result Var with now time + # minutes
       File: File path (Optional)
+
+### <a id="generate_unique_name"></a>generate_unique_name
+
+Returns a variable with a unique name using timestamps at the end
+i.e. method receives "Hey" and then returns "Hey ~timestamp~"
+
+    - Type: generate_unique_name
+      Name: string that user needs to be unique
+      ResultVar: Var that will have the unique name value
+
+### <a id="calculate_minutes_passed_by_from_event_creation"></a>calculate_minutes_passed_by_from_event_creation
+
+Custom method to calculate the minutes/seconds from when an event was created
+i.e. returns "Added x minutes ago" or "Added x seconds ago"
+
+    - Type: calculate_minutes_passed_by_from_event_creation
+      Timestamp: Timestamp in a variable (or hard coded) e.g. $AND_CLI_EVENT_SENT_TIMESTAMP$
+      ResultVar: ADDED_EVENT_X_TIME_AGO
+
+### <a id="verify_event_went_to_bottom"></a>verify_event_went_to_bottom
+
+Custom method to verify that an event on Never Alone went to the bottom after its time has passed.
+
+    - Type: verify_event_went_to_bottom
+      Strategy: class_chain | xpath | etc.
+      Id: //some//path
+      EventName: Variable with the event that you are looking for e.g. $AND_CLI_UNIQUE_EVENT_NAME$
+
+### <a id="verify_all_events_match_todays_date"></a>verify_all_events_match_todays_date
+
+Custom method to verify that all events are matching today's date.
+
+    - Type: verify_all_events_match_todays_date
+      Strategy: class_chain | xpath | etc.
+      Id: Path to the event element e.g. $PAGE.seniors_app_home.events_elements$
+      SecondStrategy: xpath | class_chain | etc.
+      SecondId: Path to the date element e.g. $PAGE.seniors_app_home.date_value_appointment_modal$
