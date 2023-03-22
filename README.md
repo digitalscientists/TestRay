@@ -388,7 +388,7 @@ Actions:
 5. [sleep](#sleep)
 6. [assert](#assert)
 7. [sync](#sync)
-8. [operation](#sync)
+8. [operation](#operation)
 
 This is not a type but can be used in different Types as a Validation for the action to happen: `Condition`
 
