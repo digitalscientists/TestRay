@@ -336,6 +336,7 @@ Actions:
 19. [collection_visible_for](#collection_visible_for)
 20. [wait_not_visible](#wait_not_visible)
 21. [return_element_attribute](#return_element_attribute)
+22. [hover](#hover)
 
 ## Only Browser
 
@@ -350,7 +351,7 @@ Actions:
 9. [click_js](#click_js)
 10. [add_cookie](#add_cookie)
 11. [wait_for_property](#wait_for_property)
-
+12. [new_tab](#new_tab)
 
 ## Only Mobile
 
@@ -398,9 +399,13 @@ This is not a type but can be used in different Types as a Validation for the ac
 13. [get_past_timestamp](#get_past_timestamp)
 14. [get_timestamp_plus_minutes](#get_timestamp_plus_minutes)
 15. [generate_unique_name](#generate_unique_name)
-16. [calculate_minutes_passed_by_from_event_creation](#calculate_minutes_passed_by_from_event_creation)
-17. [verify_event_went_to_bottom](#verify_event_went_to_bottom)
-18. [verify_all_events_match_todays_date](#verify_all_events_match_todays_date)
+
+## Custom actions made for the project
+
+1. [calculate_minutes_passed_by_from_event_creation](#calculate_minutes_passed_by_from_event_creation)
+2. [verify_event_went_to_bottom](#verify_event_went_to_bottom)
+3. [verify_all_events_match_todays_date](#verify_all_events_match_todays_date)
+4. [credentials_checkbox](#credentials_checkbox)
 
 ## Appium/Selenium
 
@@ -630,6 +635,15 @@ Returns the attribute of the element in a variable.
       Attribute:  element_attribute e.g. class
       ResultVar:  Var that will receive the attribute's value
 
+### <a id="hover"></a>hover
+
+Hovers over an element.
+
+    - Type: hover
+      Strategy: xpath | id | etc
+      Role: role1 (Optional)
+      Id: //some//path
+
 ## Only Browser
 
 ### <a id="clear_field"></a>clear_field
@@ -740,6 +754,12 @@ Waits for the element to have a specific JS property value.
     Property: Js Property e.g. className
     Value:  Desired value
     Time: Time (int) e.g. 10
+
+### <a id="new_tab"></a>new_tab
+
+Opens a new tab.
+
+  - Type: new_tab
 ## Only Mobile
 
 ### <a id="set_orientation"></a>set_orientation (Mobile)
@@ -1103,6 +1123,7 @@ i.e. method receives "Hey" and then returns "Hey ~timestamp~"
       Name: string that user needs to be unique
       ResultVar: Var that will have the unique name value
 
+## Custom actions made for the project
 ### <a id="calculate_minutes_passed_by_from_event_creation"></a>calculate_minutes_passed_by_from_event_creation
 
 Custom method to calculate the minutes/seconds from when an event was created
@@ -1130,3 +1151,12 @@ Custom method to verify that all events are matching today's date.
       Id: Path to the event element e.g. $PAGE.seniors_app_home.events_elements$
       SecondStrategy: xpath | class_chain | etc.
       SecondId: Path to the date element e.g. $PAGE.seniors_app_home.date_value_appointment_modal$
+
+### <a id="credentials_checkbox"></a>credentials_checkbox
+
+Guarantee that the checkbox is checked or unchecked depending on the option.
+
+    - Type: credentials_checkbox
+      Strategy: xpath | id | etc.
+      Option: check | uncheck
+      Id: //some//path

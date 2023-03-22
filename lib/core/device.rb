@@ -516,6 +516,7 @@ class Device
     end
   end
 
+  # Hovers over an element.
   # Accepts:
   #   Strategy
   #   Id
@@ -988,7 +989,7 @@ class Device
     @driver.switch_to.window @driver.window_handles[index.to_i]
   end
 
-  #open new tab
+  # open new tab
   def new_tab(action = nil)
     @driver.manage.new_window(:tab)
   end
