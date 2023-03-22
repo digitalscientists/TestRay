@@ -13,7 +13,8 @@ TestRay is a Ruby gem used to run YAML-based automation tests, using Selenium an
 7. [Create Test Case](#test_case)
 8. [Vars](#vars)
 9. [Roles](#roles)
-10. [Action Types](#actions)
+10. [Page Object Model](#pageobjectmodel)
+11. [Action Types](#actions)
 
 
 ## <a id="installation"></a>Installation
@@ -347,6 +348,8 @@ Actions:
 8. [submit](#submit)
 9. [click_js](#click_js)
 10. [add_cookie](#add_cookie)
+11. [wait_for_property](#wait_for_property)
+12. [return_element_attribute](#return_element_attribute)
 
 
 ## Only Mobile
@@ -366,6 +369,9 @@ Actions:
 13. [terminate_app](#terminate_app)
 14. [notifications](#notifications)
 15. [back](#back)
+16. [hide_keyboard](#hide_keyboard)
+17. [toggle_wifi](#toggle_wifi)
+18. [tap](#tap)
 
 ## API
 
@@ -386,6 +392,11 @@ Actions:
 This is not a type but can be used in different Types as a Validation for the action to happen: `Condition`
 
 9. [Conditions](#condition)
+10. [get_local_timestamp](#get_local_timestamp)
+11. [get_yesterday_date](#get_yesterday_date)
+12. [get_tomorrow_date](#get_tomorrow_date)
+13. [get_past_timestamp](#get_past_timestamp)
+14. [get_timestamp_plus_minutes](#get_timestamp_plus_minutes)
 
 ## Appium/Selenium
 
@@ -604,6 +615,17 @@ Waits until the element specified is not visible.
       Id: //div[contains(text(), "http")]
       Time: 10
 
+### <a id="return_element_attribute"></a>return_element_attribute
+
+Returns the attribute of the element in a variable.
+
+    - Type: return_element_attribute
+      Role: role1 (Optional. if not specified will use the first one defined in the case Roles)
+      Strategy: id/css/xpath/uiautomator/class_chain/predicate
+      Id: //some//path
+      Attribute:  element_attribute e.g. class
+      ResultVar:  Var that will receive the attribute's value
+
 ## Only Browser
 
 ### <a id="clear_field"></a>clear_field
@@ -703,6 +725,17 @@ It adds a cookie to the current browser.
 	  Name: cookie_name
 	  Value: Value
 
+### <a id="wait_for_property"></a>wait_for_property
+
+Waits for the element to have a specific JS property value.
+
+  - Type: wait_for_property
+    Role: role1 (Optional)
+    Strategy: xpath | id | etc.
+    Id: //some//path
+    Property: Js Property e.g. className
+    Value:  Desired value
+    Time: Time (int) e.g. 10
 ## Only Mobile
 
 ### <a id="set_orientation"></a>set_orientation (Mobile)
@@ -830,6 +863,28 @@ Works as pressing the button `back` on the phone to go to the previous screen.
   	- Type: back
       Role: role1 (Optional. if not specified will use the first one defined in the case Roles)
 
+### <a id="hide_keyboard"></a>hide_keyboard
+
+Hides keyboard on Mobile devices.
+
+    - Type: hide_keyboard
+      Role: mobileRole(e.g. localiOS)
+
+### <a id="toggle_wifi"></a>toggle_wifi
+
+Toggles wifi using the iOS Control Center (**available only for iOS with Physical Devices, not simulators**).
+
+    - Type: toggle_wifi
+      Role: mobileRole(e.g. localiOS)
+
+### <a id="tap"></a>tap
+
+Taps on a mobile element.
+
+    - Type: tap
+      Role: mobileRole (Optional)
+      Strategy: id | xpath | classchain | etc.
+      Id: //some//path//depending/on/strategy
 ## API
 
 ### <a id="get_call"></a>get_call
@@ -989,4 +1044,48 @@ Operation examples:
           Operation: visible/eq/neq/visible_for
           Raise: true/false # If you want the condition to raise an error
 
+### <a id="get_local_timestamp"></a>get_local_timestamp
 
+Prints and Writes local timestamp with given format.
+
+    - Type: get_local_timestamp
+      Format: time format
+      Var: Result Var with the local timestamp
+      File: File path (Optional)
+
+### <a id="get_yesterday_date"></a>get_yesterday_date
+
+Prints and Writes yesterday's date with given format.
+
+    - Type: get_yesterday_date
+      Format: time format
+      Var: Result Var with yesterday's date
+      File: File path (Optional)
+
+### <a id="get_tomorrow_date"></a>get_tomorrow_date
+
+Prints and Writes tomorrow's date with given format.
+
+    - Type: get_tomorrow_date
+      Format: time format
+      Var: Result Var with tomorrow's date
+      File: File path (Optional)
+
+### <a id="get_past_timestamp"></a>get_past_timestamp
+
+Prints and Writes now time -5 minutes.
+
+    - Type: get_past_timestamp
+      Format: time format
+      Var: Result Var with now time -5 time
+      File: File path (Optional)
+
+### <a id="get_timestamp_plus_minutes"></a>get_timestamp_plus_minutes
+
+Prints and Writes now time + # minutes.
+
+    - Type: get_timestamp_plus_minutes
+      Minutes: Minutes(int) e.g. 10
+      Format: time format
+      Var: Result Var with now time + # minutes
+      File: File path (Optional)
