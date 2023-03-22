@@ -335,6 +335,7 @@ Actions:
 18. [wait_for_page_to_load](#wait_for_page_to_load)
 19. [collection_visible_for](#collection_visible_for)
 20. [wait_not_visible](#wait_not_visible)
+21. [return_element_attribute](#return_element_attribute)
 
 ## Only Browser
 
@@ -349,7 +350,6 @@ Actions:
 9. [click_js](#click_js)
 10. [add_cookie](#add_cookie)
 11. [wait_for_property](#wait_for_property)
-12. [return_element_attribute](#return_element_attribute)
 
 
 ## Only Mobile
