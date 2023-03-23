@@ -1,0 +1,7 @@
+SetPhysicalDevicesTests:
+  Cases:
+    - Case: TestSeniorAppPersonalCarePartnerMessagePromptAndCallBackButton
+    - Case: TestSeniorAppAnswerCallForProviderCalling
+    - Case: TestCallPersonalCareButtonOnFullSchedule
+    - Case: TestSeniorAppVerifyInAppOfflineBehavior
+    - Case: TestSeniorAppCallPersonalCarePartnerOnHomePage
