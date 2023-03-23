@@ -1126,8 +1126,10 @@ i.e. method receives "Hey" and then returns "Hey ~timestamp~"
 ## Custom actions made for the project
 ### <a id="calculate_minutes_passed_by_from_event_creation"></a>calculate_minutes_passed_by_from_event_creation
 
-Custom method to calculate the minutes/seconds from when an event was created
-i.e. returns "Added x minutes ago" or "Added x seconds ago"
+Custom method to calculate the minutes or seconds from when an event was created
+i.e. User enters a timestamp like 10:50 and the action
+returns "Added x minutes ago" if some mintues have passed 
+or "Added x seconds ago" if the timestamp is < 60 seconds.
 
     - Type: calculate_minutes_passed_by_from_event_creation
       Timestamp: Timestamp in a variable (or hard coded) e.g. $AND_CLI_EVENT_SENT_TIMESTAMP$
