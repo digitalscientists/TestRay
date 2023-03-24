@@ -335,7 +335,7 @@ TestLogoutGoOffShift:
   # Click on the users dropdown.
     - Type: click
       Strategy: xpath
-      Id: $PAGE.care_platform_header.users_dropdown_button$
+      Id: $PAGE.care_platform_header.headset_dropdown_button$
   # Verify that the first user has gone off shift.
     - Type: wait_for
       Strategy: xpath
@@ -407,7 +407,7 @@ TestAccessAndReviewTeamMembersAvailability:
   # Click on the users dropdown.
     - Type: click
       Strategy: xpath
-      Id: $PAGE.care_platform_header.users_dropdown_button$
+      Id: $PAGE.care_platform_header.headset_dropdown_button$
   # Care Partner list appears from right side of screen.
     - Type: wait_for
       Strategy: xpath

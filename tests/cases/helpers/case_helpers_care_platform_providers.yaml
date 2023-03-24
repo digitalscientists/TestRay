@@ -453,7 +453,7 @@ SetScheduledCallTicket:
       # Open the Call Portal
     - Type: click
       Strategy: xpath
-      Id: $PAGE.care_platform_participant.senior_1_td$
+      Id: $PAGE.care_platform_participant.senior_complete_name$
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_participant.call_portal_btn$
@@ -542,7 +542,7 @@ SetMissedCallTicket:
       # Open the Call Portal
     - Type: click
       Strategy: xpath
-      Id: $PAGE.care_platform_participant.senior_1_td$
+      Id: $PAGE.care_platform_participant.senior_complete_name$
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_participant.call_portal_btn$
