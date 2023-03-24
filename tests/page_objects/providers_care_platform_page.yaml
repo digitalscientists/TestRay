@@ -11,7 +11,6 @@ providers_home_page:
   time_dropdown: //div[div[contains(text(),'Time')]]//button
   time_all_option: //div[div[contains(text(),'Time')]]//button[contains(text(),'All')]
   last_medical_transfer_row: (//div[contains(text(),'Medical Transfer')])[last()]
-  last_on_demand_row: (//div[contains(text(),'On Demand Call')])[last()]
   first_row: //table/tbody/tr[@role='row'][1]
   first_on_demand_row: //tbody/tr//div[text()='On Demand Call'][1]/ancestor::tr
   facilities_navigation: //a//div[contains(text(),'Facilities')]

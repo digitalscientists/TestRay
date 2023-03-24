@@ -66,7 +66,7 @@ TestHomePageListingView:
       Id: $PAGE.providers_home_page.last_medical_transfer_row$  
     - Type: wait_not_visible
       Strategy: xpath
-      Id: $PAGE.providers_home_page.last_on_demand_row$  
+      Id: $PAGE.providers_home_page.on_demand_calls$  
       # Verify Missed calls are present
     - Type: get_text  
       Strategy: xpath
