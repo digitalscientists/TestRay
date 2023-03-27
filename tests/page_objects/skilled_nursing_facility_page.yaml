@@ -46,7 +46,7 @@ snf_notifications:
 snf_offline_prompt:
   connection_error_header:  "**/XCUIElementTypeStaticText[`label == 'Connection Error'`]"
   device_offline_label: "**/XCUIElementTypeStaticText[`label == 'Device is offline.'`]"
-  close_button: "**/XCUIElementTypeButton[`label ENDSWITH 'Close'`][-1]"
+  close_button: "**/XCUIElementTypeOther[`label BEGINSWITH 'Connection Error'`]/**/XCUIElementTypeButton[`label ENDSWITH 'Close'`]"
 
 snf_incoming_call:
   incoming_call_header: "**/XCUIElementTypeOther[`label CONTAINS 'Incoming' AND label ENDSWITH 'Call'`]/XCUIElementTypeOther/**/XCUIElementTypeStaticText[`label CONTAINS 'Incoming'`]"

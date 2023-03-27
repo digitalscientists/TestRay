@@ -476,9 +476,10 @@ TestSNFVerifyInAppOfflineBehavior:
     - Type: click
       Strategy: class_chain
       Id: $PAGE.snf_offline_prompt.close_button$
+    - Type: wait_not_visible
+      Strategy: class_chain
+      Id: $PAGE.snf_offline_prompt.close_btn$
   # Click on the Close button to go back to Home page.
-    - Type: sleep
-      Time: 20
     - Type: wait_for
       Strategy: class_chain
       Id: $PAGE.seniors_app_notifications.close_btn$
