@@ -166,11 +166,11 @@ TestProviderAnswerCompleteSessionFromEHP:
       Id: $PAGE.providers_home_page.home_title$
     - Type: case
       Value: ProviderSetStateCredential 
-  #Selects first on demand call
+  #Selects on demand call
     - Type: click
       Strategy: xpath
       Role: desktopChrome
-      Id: $PAGE.providers_home_page.first_on_demand_row$
+      Id: $PAGE.providers_home_page.on_demand_calls$
   #Answer call
     - Type: wait_for
       Strategy: xpath

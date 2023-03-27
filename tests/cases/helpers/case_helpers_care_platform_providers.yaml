@@ -42,7 +42,7 @@ ProvidersCarePlatformEndCall:
     - Type: click
       Strategy: xpath
       Role: desktopChrome
-      Id: $PAGE.providers_home_page.first_on_demand_row$
+      Id: $PAGE.providers_home_page.on_demand_calls$
   #Answer call
     - Type: wait_for
       Strategy: xpath
@@ -138,10 +138,10 @@ JoinMedicalTransfer:
   Actions:
     - Type: wait_for
       Strategy: xpath
-      Id: $PAGE.providers_home_page.first_medical_transfer$
+      Id: $PAGE.providers_home_page.on_demand_calls$
     - Type: click
       Strategy: xpath
-      Id: $PAGE.providers_home_page.first_medical_transfer$
+      Id: $PAGE.providers_home_page.on_demand_calls$
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.providers_call_queue_page.answer_call_button$
