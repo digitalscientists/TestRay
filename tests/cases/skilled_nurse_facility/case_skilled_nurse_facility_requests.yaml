@@ -377,6 +377,8 @@ TestSNFCheckQueueandReviewDetails:
 # CXTB-47: Verify in App Offline Behavior
 TestSNFVerifyInAppOfflineBehavior:
   Environment: Settings
+  Vars:
+    MESSAGE_TO_FACILITY: Automation Message
   Precases:
     - LoginSNFHelper
   Aftercases:
@@ -384,11 +386,21 @@ TestSNFVerifyInAppOfflineBehavior:
   Roles:
     - Role: localiOS
       App: NeverAlone
-    # - Role: desktopChrome
-    #   App: desktop
-    - Role: command1
-      App: command
+    - Role: desktopChrome
+      App: desktop
+    # - Role: command1
+    #   App: command
   Actions:
+  # Generate a notification with a message.
+    - Type: case
+      Value: ProviderSendsMessageToFacility
+    - Type: click
+      Strategy: class_chain
+      Id: $PAGE.snf_notifications.missed_call_modal_close_button$
+      Condition:
+      - Value: 5
+        Operation: visible
+        Result: true
   # Navigate to Notifications page.
     - Type: case
       Value: NotificationsPageNavigationHelper
