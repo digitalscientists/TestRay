@@ -373,6 +373,7 @@ TestSNFCheckQueueandReviewDetails:
       Strategy: class_chain
       Id: $PAGE.seniors_app_post_call_survey.skip_survey_button$
 
+# Physical Device
 # CXTB-47: Verify in App Offline Behavior
 TestSNFVerifyInAppOfflineBehavior:
   Environment: Settings
@@ -404,13 +405,13 @@ TestSNFVerifyInAppOfflineBehavior:
       Strategy: class_chain
       Id: $PAGE.seniors_app_notifications.close_btn$
   # Disconnect from wi-fi to get device offline while viewing the home page.
-    # - Type: toggle_wifi
-    #   Role: localiOS
+    - Type: toggle_wifi
+      Role: localiOS
     # - Type: sleep
     #   Time: 30
-    - Type: command
-      Value:  networksetup -setairportpower airport off
-      Role: command1
+    # - Type: command
+    #   Value:  networksetup -setairportpower airport off
+    #   Role: command1
   # After a moment, page updates to show the home page in offline mode:
   # Verify that the Call buttons are replaced with gray inactive buttons saying: "Telehealth Request is Offline"
     - Type: wait_for
@@ -460,24 +461,27 @@ TestSNFVerifyInAppOfflineBehavior:
   # Conection Error message window appears indicatng that the device is offline.
     - Type: wait_for_attribute
       Strategy: class_chain
-      Role: localiOS
       Id: $PAGE.snf_offline_prompt.connection_error_header$
       Attribute: label
       Value: "Connection Error"
     - Type: wait_for_attribute
       Strategy: class_chain
-      Role: localiOS
       Id: $PAGE.snf_offline_prompt.device_offline_label$
       Attribute: label
       Value: "Device is offline."
   # Close the prompt.
+    - Type: wait_for
+      Strategy: class_chain
+      Id: $PAGE.snf_offline_prompt.close_button$
     - Type: click
       Strategy: class_chain
       Id: $PAGE.snf_offline_prompt.close_button$
-    - Type: wait_not_visible
-      Strategy: class_chain
-      Id: $PAGE.snf_offline_prompt.close_button$
   # Click on the Close button to go back to Home page.
+    - Type: sleep
+      Time: 20
+    - Type: wait_for
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_notifications.close_btn$
     - Type: click
       Strategy: class_chain
       Id: $PAGE.seniors_app_notifications.close_btn$
@@ -485,13 +489,123 @@ TestSNFVerifyInAppOfflineBehavior:
       Strategy: class_chain
       Id: $PAGE.seniors_app_notifications.close_btn$
   # Get online long enough to access the Telehealth Request form and then disconnect wifi.
-
-  # Verify that Yellow message appears at top of the sceen and Submit b7utton remains disabled even with all required fields populated.
-
+    # - Type: command
+    #   Value:  networksetup -setairportpower airport on
+    #   Role: command1
+    - Type: toggle_wifi
+      Role: localiOS
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.snf_home.new_request_btn$
+      Time: 45
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.snf_home.new_request_btn$
+    - Type: wait_for
+      Strategy: class_chain
+      Id: $PAGE.snf_new_request_form.patient_information_title$
+  # Verify that Yellow message appears at top of the screen and Submit button remains disabled even with all required fields populated.
+    - Type: send_keys
+      Strategy: class_chain
+      Id: $PAGE.snf_new_request_form.requester_first_name$
+      Value: $AND_CLI_facility_devices_requester_name$
+    - Type: send_keys
+      Strategy: class_chain
+      Id: $PAGE.snf_new_request_form.requester_last_name$
+      Value: $AND_CLI_facility_devices_requester_lastname$
+    - Type: click
+      Strategy: class_chain
+      Id: $PAGE.snf_new_request_form.patient_information_title$
+    - Type: click
+      Strategy: class_chain
+      Role: localiOS
+      Id: $PAGE.snf_new_request_form.patient_name_select$
+    - Type: click
+      Strategy: class_chain
+      Id: $PAGE.snf_new_request_form.patient_based_on_name$
+      Condition:
+      - Value: 5
+        Operation: visible
+        Result: true
+    - Type: click
+      Strategy: class_chain
+      Id: $PAGE.snf_new_request_form.urgent_reason_dropdown$
+    - Type: click
+      Strategy: class_chain
+      Id: $PAGE.snf_new_request_form.urgent_reason_dropdown$
+    - Type: click
+      Strategy: class_chain
+      Id: $PAGE.snf_new_request_form.urgent_reason_option_no$
+      Condition:
+      - Value: 5
+        Operation: visible
+        Result: true
+    - Type: click
+      Strategy: class_chain
+      Id: $PAGE.snf_new_request_form.reason_for_request_dropdown$
+    - Type: click
+      Strategy: class_chain
+      Id: $PAGE.snf_new_request_form.reason_for_request_option_one$
+      Condition:
+      - Value: 5
+        Operation: visible
+        Result: true
+    - Type: wait_for_attribute
+      Strategy: class_chain
+      Id: $PAGE.snf_new_request_form.submit_button$
+      Attribute: enabled
+      Value: "true"
+    # - Type: command
+    #   Value:  networksetup -setairportpower airport off
+    #   Role: command1
+    - Type: toggle_wifi
+      Role: localiOS
+    - Type: wait_for
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_home.offline_yellow_bar$
+      Time: 45
+    - Type: return_element_attribute
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_home.offline_yellow_bar$
+      Attribute: label
+      ResultVar: OFFLINE_YELLOW_BAR_LABEL_VALUE
+      NoNewLine: true
+    - Type: assert
+      Asserts:
+        - Type: eq
+          Var: OFFLINE_YELLOW_BAR_LABEL_VALUE
+          Value: If this is a medical emergency, please call 911.
+    - Type: wait_for_attribute
+      Strategy: class_chain
+      Id: $PAGE.snf_new_request_form.submit_button$
+      Attribute: enabled
+      Value: "false"
   # Get online long enough to complete ansd submit the request and then disconnect from wifi again.
-
+    # - Type: command
+    #   Value:  networksetup -setairportpower airport off
+    #   Role: command1
+    - Type: toggle_wifi
+      Role: localiOS
+    - Type: wait_for_attribute
+      Strategy: class_chain
+      Id: $PAGE.snf_new_request_form.submit_button$
+      Attribute: enabled
+      Value: "true"
+      Time: 45
+    - Type: click
+      Strategy: class_chain
+      Id: $PAGE.snf_new_request_form.submit_button$
+    # - Type: command
+    #   Value:  networksetup -setairportpower airport off
+    #   Role: command1
+    - Type: toggle_wifi
+      Role: localiOS
   # Verify that the "Yes, call Provider" button becomes disabled.
-
-    - Type: command
-      Value:  networksetup -setairportpower airport on
-      Role: command1
+    - Type: wait_for_attribute
+      Strategy: class_chain
+      Id: $PAGE.snf_submit_options.yes_call_provider_button$
+      Attribute: enabled
+      Value: "false"
+      Time: 45
+    - Type: toggle_wifi
+      Role: localiOS
