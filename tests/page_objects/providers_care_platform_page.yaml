@@ -43,7 +43,6 @@ providers_call_queue_page:
   call_device_btn: //button[text()='Call Device']
   subject_input: //div[label[text()='Subject']]//input
   details_textarea: //div[label[text()='Details']]//textarea
-  complete_session_btn: //button[text()='Complete Session']
   yes_issue_resolved_radio_btn: //label[input[@name='resolved'][@value='true']]
   no_radiobtn: //label[input[@name='resolved'][@value='false']]
   yes_recommended_discharge_radio_btn: //label[input[@name='recommendedDischarge'][@value='true']]
@@ -54,7 +53,6 @@ providers_call_queue_page:
   call_notes_subject_input: //*[@id='providerSubject']
   call_notes_provider_input: //*[@id='providerNotes']
   call_notes_save_button: //button[text()='Save Notes']
-  end_answer_call_button: //span[text()='End Call']//ancestor::button
   complete_session_button: //button[text()='Complete Session']
   post_call_survey_title: //h3[text()='Post-call Survey']
   resolved_true_option: //input[@name='resolved' and @value='true']/following-sibling::span

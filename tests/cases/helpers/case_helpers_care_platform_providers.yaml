@@ -55,10 +55,10 @@ ProvidersCarePlatformEndCall:
   #End call
     - Type: wait_for
       Strategy: xpath
-      Id: $PAGE.providers_call_queue_page.end_answer_call_button$
+      Id: $PAGE.providers_call_queue_page.end_call_btn$
     - Type: click
       Strategy: xpath
-      Id: $PAGE.providers_call_queue_page.end_answer_call_button$
+      Id: $PAGE.providers_call_queue_page.end_call_btn$
   #Fill the Provider's call notes
     - Type: wait_for
       Strategy: xpath
@@ -161,7 +161,7 @@ PostCallSurveyProvider:
     # Verify that the "Complete Session" is disabled.
     - Type: wait_for_property
       Strategy: xpath
-      Id: $PAGE.providers_call_queue_page.complete_session_btn$ 
+      Id: $PAGE.providers_call_queue_page.complete_session_button$ 
       Property: disabled
       Value: "true"
     # Fill the notes
@@ -175,12 +175,12 @@ PostCallSurveyProvider:
       Value: Automation call    
     - Type: wait_for_property
       Strategy: xpath
-      Id: $PAGE.providers_call_queue_page.complete_session_btn$ 
+      Id: $PAGE.providers_call_queue_page.complete_session_button$ 
       Property: disabled
       Value: "false"
     - Type: click
       Strategy: xpath
-      Id: $PAGE.providers_call_queue_page.complete_session_btn$             
+      Id: $PAGE.providers_call_queue_page.complete_session_button$             
     # Fill the Post-call Survey
     - Type: wait_for
       Strategy: xpath
@@ -422,10 +422,10 @@ SetFollowUpTicket:
       # Complete the session 
     - Type: wait_for
       Strategy: xpath
-      Id: $PAGE.providers_call_queue_page.complete_session_btn$
+      Id: $PAGE.providers_call_queue_page.complete_session_button$
     - Type: click
       Strategy: xpath
-      Id: $PAGE.providers_call_queue_page.complete_session_btn$
+      Id: $PAGE.providers_call_queue_page.complete_session_button$
       # Set and Fill the follow up ticket
     - Type: click
       Strategy: xpath

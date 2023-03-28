@@ -289,10 +289,10 @@ TestProvidersAnswerSNFCallAndCompletesSession:
     # Click the "End Call" button.
     - Type: wait_for
       Strategy: xpath
-      Id: $PAGE.providers_call_queue_page.end_answer_call_button$
+      Id: $PAGE.providers_call_queue_page.end_call_btn$
     - Type: click
       Strategy: xpath
-      Id: $PAGE.providers_call_queue_page.end_answer_call_button$
+      Id: $PAGE.providers_call_queue_page.end_call_btn$
     # Video area updates to show a message showing that the call has ended.
     - Type: get_attribute
       Strategy: xpath
