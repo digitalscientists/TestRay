@@ -41,7 +41,7 @@ snf_call_portal:
 
 snf_notifications:
   missed_call_modal_title: Missed Outgoing Call
-  missed_call_modal_close_button: "**/XCUIElementTypeButton[`label ENDSWITH 'Close'`]"
+  modal_close_button: "**/XCUIElementTypeButton[`label ENDSWITH 'Close'`]"
 
 snf_offline_prompt:
   connection_error_header:  "**/XCUIElementTypeStaticText[`label == 'Connection Error'`]"
