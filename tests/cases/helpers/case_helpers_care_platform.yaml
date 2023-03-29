@@ -1429,7 +1429,7 @@ CarePartnerCallSenior:
     # Click on the desired participant.
     - Type: click
       Strategy: xpath
-      Id: $PAGE.care_platform_participant.senior_1_td$
+      Id: $PAGE.care_platform_participant.senior_complete_name$
     # Click on the Call Portal button.
     - Type: wait_for
       Strategy: xpath
