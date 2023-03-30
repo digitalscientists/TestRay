@@ -272,7 +272,7 @@ TestSeniorAppAnswerCallForProviderCalling:
         - Type: eq
           Var: HEADER_TITLE
           Value: Incoming Call...
-  # Verify that it shows who is calling and their details, giving you the option to answer ore ignore the call.
+  # Verify that it shows who is calling and their details, giving you the option to answer or ignore the call.
     - Type: wait_for
       Strategy: class_chain
       Id: $PAGE.seniors_app_incoming_call.called_name$
@@ -379,7 +379,7 @@ TestSeniorAppIgnoreCarePartnerCall:
         - Type: eq
           Var: HEADER_TITLE
           Value: Incoming Call...
-  # Verify that it shows who is calling and their details, giving you the option to answer ore ignore the call.
+  # Verify that it shows who is calling and their details, giving you the option to answer or ignore the call.
     - Type: wait_for
       Strategy: class_chain
       Id: $PAGE.seniors_app_incoming_call.called_name$
