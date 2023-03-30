@@ -8,7 +8,7 @@ snf_new_request_form:
   requester_first_name: "**/XCUIElementTypeOther[`label == 'Requester First Name*'`]/**/XCUIElementTypeTextField[`name == 'RNE__Input__text-input'`]"
   requester_last_name: "**/XCUIElementTypeOther[`label == 'Requester Last Name*'`]/**/XCUIElementTypeTextField[`name == 'RNE__Input__text-input'`]"
   patient_name_select: "**/XCUIElementTypeStaticText[`label == 'Select a Patient'`]"
-  selected_patient_name: $AND_CLI_senior_user1_name$ $AND_CLI_senior_user1_lastname$
+  selected_patient_name: "$AND_CLI_senior_user1_name$ $AND_CLI_senior_user1_lastname$"
   first_patient_select_option: "**/XCUIElementTypeOther[`name BEGINSWITH 'default-'`][1]"
   patient_name_section: "**/XCUIElementTypeOther[`label BEGINSWITH 'Patient Name*'`]/XCUIElementTypeOther/**/XCUIElementTypeStaticText[1]"
   patient_based_on_name: "**/XCUIElementTypeOther[`name BEGINSWITH 'default-$AND_CLI_senior_user1_name$ $AND_CLI_senior_user1_lastname$'`]"

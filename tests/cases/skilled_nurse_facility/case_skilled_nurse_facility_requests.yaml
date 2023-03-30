@@ -43,7 +43,7 @@ TestSNFNewRequestFormBehavior:
         Result: true
     - Type: wait_for
       Strategy: id
-      Id: $AND_CLI_senior_user1_name$ $AND_CLI_senior_user1_lastname$
+      Id: $PAGE.snf_new_request_form.selected_patient_name$
     - Type: return_element_attribute
       Strategy: class_chain
       Id: $PAGE.snf_new_request_form.patient_mrn$
