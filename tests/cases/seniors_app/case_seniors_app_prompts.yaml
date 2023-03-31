@@ -548,8 +548,6 @@ TestSeniorAppAnswerCallCarePartnerCall:
     - Type: wait_for
       Strategy: class_chain
       Id: $PAGE.seniors_app_call.video_button$
-  
-
   # Turn on Senior camera.
     - Type: click
       Strategy: class_chain
@@ -588,8 +586,6 @@ TestSeniorAppAnswerCallCarePartnerCall:
       Role: desktopChrome
       Strategy: xpath
       Id: $PAGE.care_platform_call_portal.full_screen_call_btn$
-  
-
   # Then click "End Call".
     - Type: wait_for
       Strategy: class_chain
