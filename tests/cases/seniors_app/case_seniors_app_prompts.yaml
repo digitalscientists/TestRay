@@ -477,6 +477,7 @@ TestSeniorAppIgnoreProviderCall:
       Id: $PAGE.seniors_app_call.video_button$
       Time: 10
 
+# Physical Device Only
 # CXTB-53: Verify Answer Call for Care Partner on Never Alone Seniors app.
 TestSeniorAppAnswerCallCarePartnerCall:
   Environment: Settings
