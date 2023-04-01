@@ -65,15 +65,15 @@ TestManuallyLogOutOfThePortalOnboarder:
     Value: CarePlatformLogout
 
   # CXTB-254: Access Participant Directory & Filter
-  TestOnboarderAccessParticipantDirectory&Filter:
+TestOnboarderAccessParticipantDirectoryandFilter:
     Environment: Settings 
     Roles:
     - Role: desktopChrome
       App: "desktop"
     Actions:
-  # Calling Login case
+  # Log in Care Platform as an Onboarder
     - Type: case
-      Value: CarePartnerLogin
+      Value: OnboarderCarePartnerLogin
   # Go to Participants
     - Type: click
       Strategy: xpath
@@ -110,7 +110,7 @@ TestManuallyLogOutOfThePortalOnboarder:
       Strategy: xpath
       Id: $PAGE.care_platform_participant.first_senior_in_list_strong$
       Greps:
-        - var: LASTNAME_FIRST_PARTICIPANT_NO_FILTER
+        - var: LASTNAME_FIRST_PARTICIPANTS_NO_FILTER
           match: (.*)
   # Add the search filter.
     - Type: click
@@ -147,9 +147,21 @@ TestManuallyLogOutOfThePortalOnboarder:
   # Click on a participant.
     - Type: click
       Strategy: xpath
-      Id: $PAGE.care_platform_participant.senior_4_row$
-  # Verify that the info is showing after selecting the participant.
+      Id: $PAGE.care_platform_participant.senior_1_row$
     - Type: wait_for
       Strategy: xpath
-      Id: $PAGE.care_platform_participant.employee_dob_label$
-  
+      Id: //h3[@class='text-xl color-white font-normal']
+  # filter by status
+    - Type: click
+      Strategy: xpath
+      Id: //button[contains(@class,'queue-filter-dropdown-toggle')]
+    - Type: click
+      Strategy: xpath
+      Id: //button[text()='Suspended']
+    - Type: click
+      Strategy: xpath
+      Id: //div[contains(@class, 'queue-filter-dropdown')]
+    - Type: click
+      Strategy: xpath
+      Id: //button[text()='All']
+    
