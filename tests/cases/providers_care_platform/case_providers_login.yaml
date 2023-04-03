@@ -9,4 +9,4 @@
       Value: $AND_CLI_provider_user1$
       Var: carepartner_user1
     - Type: case
-      Value: ForgotPasswordCarePartnerLoginLink
+      Value: ForgotPasswordCarePlatformLoginLink

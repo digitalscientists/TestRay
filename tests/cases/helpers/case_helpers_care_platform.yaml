@@ -1449,7 +1449,7 @@ CarePartnerCallSenior:
       Strategy: xpath
       Id: $PAGE.care_platform_call_portal.call_camera_button$
 
-ForgotPasswordCarePartnerLoginLink:
+ForgotPasswordCarePlatformLoginLink:
   Roles:
     - Role: desktopChrome
       App: desktop       

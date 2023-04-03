@@ -6,4 +6,4 @@ TestForgotPassword:
       App: "desktop"
   Actions:
     - Type: case
-      Value: ForgotPasswordCarePartnerLoginLink
+      Value: ForgotPasswordCarePlatformLoginLink
