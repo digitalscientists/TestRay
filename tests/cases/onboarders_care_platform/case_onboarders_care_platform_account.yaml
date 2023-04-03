@@ -152,4 +152,16 @@ TestOnboardersAccessFacilitiesDirectoryFilter:
      Strategy: xpath
      Id: $PAGE.care_platform_facility.facility_name$
   
-
+# CXTB-168: Access “My account” Window & Review “My info” Page
+TestOnboardersAccessMyAcountWindowAndReviewMyInfoPage:
+   Environment: Settings
+   Roles: 
+   - Role: desktopChrome
+     App: "desktop"
+   Actions:
+  # Log in with my onboarder user.
+   - Type: case
+     Value: OnboarderCarePartnerLogin
+  # Call case to access "My Account" Window and Review "My Info" Page.
+   - Type: case
+     Value: CarePlatformUpdateInfo
