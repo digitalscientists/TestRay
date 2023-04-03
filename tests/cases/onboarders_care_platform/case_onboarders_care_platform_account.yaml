@@ -166,7 +166,7 @@ TestOnboardersForgotPasswordLoginLink:
       Value: ForgotPasswordCarePlatformLoginLink
   
 # CXTB-168: Access “My account” Window & Review “My info” Page
-TestOnboardersAccessMyAcountWindowAndReviewMyInfoPage:
+TestOnboardersAccessMyAcountWindowAndReviewMyInfo:
    Environment: Settings
    Roles: 
    - Role: desktopChrome
