@@ -207,7 +207,7 @@ TestOnboarderAccessParticipantDirectoryandFilter:
   # Verify it was filtered by the selected letter.
     - Type: get_text
       Strategy: xpath
-      Id: $PAGE.care_platform_participant.first_senior_in_list_strong$
+      Id: $PAGE.care_platform_participant.first_senior_lastname$
       Greps:
         - var: LASTNAME_FIRST_LETTER
           match: ^[a-zA-Z]  
@@ -223,7 +223,7 @@ TestOnboarderAccessParticipantDirectoryandFilter:
   # Get the first lastname in the list.
     - Type: get_text
       Strategy: xpath
-      Id: $PAGE.care_platform_participant.first_senior_in_list_strong$
+      Id: $PAGE.care_platform_participant.first_senior_lastname$
       Greps:
         - var: LASTNAME_FIRST_PARTICIPANT_NO_FILTER
           match: (.*)
@@ -238,10 +238,10 @@ TestOnboarderAccessParticipantDirectoryandFilter:
   # Verify there is at least one participant with that name.
     - Type: wait_for
       Strategy: xpath
-      Id: $PAGE.care_platform_participant.first_senior_in_list_strong$
+      Id: $PAGE.care_platform_participant.first_senior_lastname$
     - Type: get_text
       Strategy: xpath
-      Id: $PAGE.care_platform_participant.first_senior_in_list_strong$
+      Id: $PAGE.care_platform_participant.first_senior_lastname$
       Greps:
         - var: LASTNAME_FIRST_PARTICIPANT
           match: (.*)
@@ -258,11 +258,11 @@ TestOnboarderAccessParticipantDirectoryandFilter:
   # Verify there is at least one participant.
     - Type: wait_for
       Strategy: xpath
-      Id: $PAGE.care_platform_participant.first_senior_in_list_strong$
+      Id: $PAGE.care_platform_participant.first_senior_lastname$
   # Click on a participant.
     - Type: click
       Strategy: xpath
-      Id: $PAGE.care_platform_participant.senior_4_row$
+      Id: $PAGE.care_platform_participant.senior_1_row$
   # Verify that the info is showing after selecting the participant.
     - Type: wait_for
       Strategy: xpath
