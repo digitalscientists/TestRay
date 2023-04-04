@@ -127,4 +127,3 @@ Environments:
 #Alternative credentials
       alternative_correct_password: add_your_info #this password is used to update momentarily the current password
       alternative_incorrect_password: add_your_info #this password shouldn't comply with all requirements
-      
