@@ -1,0 +1,12 @@
+#CXTB-206: Use Forgot Password Link on Login Page
+  TestProviderUseForgotPasswordLink:
+    Environment: Settings 
+    Roles:
+      - Role: desktopChrome
+        App: "desktop"
+    Actions:
+    - Type: set_env_var
+      Value: $AND_CLI_provider_user1$
+      Var: carepartner_user1
+    - Type: case
+      Value: ForgotPasswordCarePlatformLoginLink
