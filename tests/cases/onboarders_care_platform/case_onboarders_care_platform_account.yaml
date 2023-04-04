@@ -280,5 +280,3 @@ TestOnboarderAccessParticipantDirectoryandFilter:
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_participant.status_dropdown_options$
-      
-
