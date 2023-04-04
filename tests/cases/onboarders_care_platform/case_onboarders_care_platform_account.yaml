@@ -179,7 +179,7 @@ TestOnboardersAccessMyAcountWindowAndReviewMyInfo:
    - Type: case
      Value: CarePlatformUpdateInfo
 
-# CXTB-254: Access Participant Directory & Filter
+# CXTB-143: Access Participant Directory & Filter
 TestOnboarderAccessParticipantDirectoryandFilter:
     Environment: Settings 
     Roles:
@@ -271,14 +271,25 @@ TestOnboarderAccessParticipantDirectoryandFilter:
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_participant.status_dropdown_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant.status_dropdown_options$
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_participant.status_dropdown_options$
+  # Verify that the info is showing after selecting the filter.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant.senior_1_row$
+  # filter back to all
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_participant.status_dropdown_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant.status_dropdown_options$
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_participant.status_dropdown_options$
-      
+
 
