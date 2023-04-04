@@ -64,8 +64,8 @@ TestManuallyLogOutOfThePortalOnboarder:
   - Type: case
     Value: CarePlatformLogout
 
-  # CXTB-254: Access Participant Directory & Filter
-  TestOnboarderAccessParticipantDirectory&Filter:
+# CXTB-254: Access Participant Directory & Filter
+TestOnboarderAccessParticipantDirectoryandFilter:
     Environment: Settings 
     Roles:
     - Role: desktopChrome
