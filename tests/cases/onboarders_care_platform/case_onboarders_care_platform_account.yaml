@@ -186,9 +186,9 @@ TestOnboarderAccessParticipantDirectoryandFilter:
     - Role: desktopChrome
       App: "desktop"
     Actions:
-  # Calling Login case
+  # Log in Care Platform as an Onboarder
     - Type: case
-      Value: CarePartnerLogin
+      Value: OnboarderCarePartnerLogin
   # Go to Participants
     - Type: click
       Strategy: xpath
@@ -266,5 +266,18 @@ TestOnboarderAccessParticipantDirectoryandFilter:
   # Verify that the info is showing after selecting the participant.
     - Type: wait_for
       Strategy: xpath
-      Id: $PAGE.care_platform_participant.employee_dob_label$
-  
+      Id: $PAGE.care_platform_participant.senior_1_row$
+  # filter by status
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant.status_dropdown_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant.status_dropdown_options$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant.status_dropdown_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant.status_dropdown_options$
+
