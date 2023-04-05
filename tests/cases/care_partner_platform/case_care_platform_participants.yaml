@@ -901,6 +901,10 @@ TestCarePartnerAnswerAndComplete:
     - Type: case
       Value: PostCallSurveyCarePartner
   # Green indicator for 'Available'
+    - Type: wait_for
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.care_platform_header.status_indicator$
     - Type: get_attribute
       Strategy: xpath
       Role: desktopChrome
