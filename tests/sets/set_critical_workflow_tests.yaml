@@ -1,19 +1,20 @@
 SetCriticalWorkflows:
   Cases:
+  # TODO: make something to clean calls on queue.
     - Case: TestCarePartnerAnswerCallFromQueueAndCompleteMedicalTransfer
     - Case: TestCarePartnerAnswerAndComplete
     - Case: TestCarePartnerBrowsingWhileOnCall
     - Case: TestCarePartnerCallParticipantsDeviceCallComplete
-
     # - Case: TestProviderAnswerCompleteSessionFromEHP
     # - Case: TestProvidersAnswerSNFCallAndCompletesSession
     # - Case: TestSNFRequestSuccessfulCallConnect
     # - Case: TestSNFCheckQueueandReviewDetails
     # - Case: TestSNFProviderIncomingCallAnswerCallOnSNF
-    # - Case: TestSeniorAppVerifyInAppOfflineBehavior
-    # - Case: TestSeniorAppPersonalCarePartnerMessagePromptAndCallBackButton
-    # - Case: TestSeniorAppAnswerCallForProviderCalling
-    # - Case: TestSeniorAppCallPersonalCarePartnerOnHomePage
+  # TODO: make something to clean unwanted prompts.
+    # - Case: TestSeniorAppVerifyInAppOfflineBehavior # Physical
+    # - Case: TestSeniorAppPersonalCarePartnerMessagePromptAndCallBackButton  # Physical
+    # - Case: TestSeniorAppAnswerCallForProviderCalling # Physical
+    # - Case: TestSeniorAppCallPersonalCarePartnerOnHomePage  # Physical
     # - Case: TestEmployeeHealthPortalUserCall
     # - Case: TestSNFVerifyInAppOfflineBehavior
 
