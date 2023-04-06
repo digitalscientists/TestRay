@@ -2009,4 +2009,17 @@ def verify_all_events_match_todays_date(action)
 
 end
 
+# 
+def clean_call_queue_and_hanged_calls(action)
+  # hanged call path
+  if @driver.find_element(:xpath, "//div[contains(@class,'app-video app-video-fixed')]")
+    
+  end
+
+  # call queue calls
+  if @driver.find_elements(:xpath, "//table//tbody/tr")
+    
+  end
+end
+
 # END OF DEVICE CLASS

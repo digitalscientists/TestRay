@@ -27,6 +27,7 @@ care_platform_home:
   first_call_of_queue: //tbody[@role='rowgroup']/tr[1]
   answer_call: //button[text()='Answer Call']
   call_based_on_participant_name: //tbody[@role='rowgroup']/tr//strong[text() = '$AND_CLI_senior_user1_name$ $AND_CLI_senior_user1_lastname$']
+  active_call_section: //div[contains(@class,'app-video app-video-fixed')] # doesn't matter if its expanded/collapsed
 
 care_platform_header:
   app_logo: //header//div[@class='app-header-logo']/img
