@@ -203,3 +203,27 @@ TestProviderUpdateCredentials:
           Value: "is-disabled"
     - Type: case
       Value: ProvidersCarePlatformEndCall
+
+# CXTB-199 Manually Log Out of Portal and Go Off Shift
+TestProviderLogOutPortalGoOffShift:
+  Environment: Settings
+  Vars:
+    LOGOUT_OPTION: "Go Off Shift"
+    CARE_PARTNER_USER1_FULLNAME: $AND_CLI_provider_user1_name$ $AND_CLI_provider_user1_lastname$
+  Roles:
+    - Role: desktopChrome
+      App: "desktop"
+  Actions:
+    # Calling Login case.
+    - Type: case
+      Value: ProvidersCarePlatformLogin
+    # Calling Logout case.
+    - Type: case
+      Value: CarePlatformLogout
+    - Type: set_env_var
+      Value: $AND_CLI_provider_user1$
+      Var: provider_user1
+    - Type: set_env_var
+      Value: $AND_CLI_provider_user1_pwd$
+      Var: provider_user1_pwd
+    # Step 7 skipped, needed to call from SNF and then validate that provider did receive text notification.
