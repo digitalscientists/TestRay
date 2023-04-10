@@ -1,5 +1,5 @@
 # CXTB-199 Manually Log Out of Portal and Go Off Shift
-TestProviderLogOutStayOnShift:
+TestProviderLogOutPortalEndShift:
   Environment: Settings
   Vars:
     LOGOUT_OPTION: "Stay Off Shift"
