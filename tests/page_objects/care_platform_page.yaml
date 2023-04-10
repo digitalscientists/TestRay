@@ -195,6 +195,7 @@ care_platform_call_portal:
   medical_question_option: //option[@value='medicalQuestion']
   subcategory_select: subcategory
   located_provider_option: //option[@value='locatedProvider']
+  accidental_call_option: //option[@value='accidentalCall']
   submit_and_exit_session_button: //button[contains(text(),'Submit and Exit Session')]
   participant_schedule_based_on_element: //strong[text()='$AND_CLI_UNIQUE_EVENT_NAME$']
   edit_event_button: //div[@class='accordion-item is-open']//button[text()='Edit']
