@@ -1,6 +1,5 @@
 SetCriticalWorkflows:
   Cases:
-  # TODO: make something to clean calls on queue.
     - Case: TestCarePartnerAnswerCallFromQueueAndCompleteMedicalTransfer
     - Case: TestCarePartnerAnswerAndComplete
     - Case: TestCarePartnerBrowsingWhileOnCall
