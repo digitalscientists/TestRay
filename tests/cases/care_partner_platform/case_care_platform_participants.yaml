@@ -637,6 +637,9 @@ TestCarePartnerAnswerAndComplete:
     - Role: desktopChrome
       App: desktop 
   Actions:
+  # Clean calls on Care partner side.
+    - Type: case
+      Value: CarePartnerCleanCallQueueAndHangedCalls
   #Calling Login case
     - Type: case
       Value: CarePartnerLogin
@@ -934,6 +937,9 @@ TestCarePartnerAnswerCallFromQueueAndCompleteMedicalTransfer:
     - Role: desktopChrome1
       App: desktop
   Actions:
+  # Clean calls on Care partner side.
+    - Type: case
+      Value: CarePartnerCleanCallQueueAndHangedCalls
   # Login as a senior.
     - Type: case
       Value: LoginNeverAloneHelper
@@ -1109,6 +1115,9 @@ TestCarePartnerBrowsingWhileOnCall:
     - Role: desktopChrome
       App: desktop 
   Actions:
+  # Clean calls on Care partner side.
+    - Type: case
+      Value: CarePartnerCleanCallQueueAndHangedCalls
   #Calling Login case
     - Type: case
       Value: CarePartnerLogin
@@ -1325,6 +1334,9 @@ TestCarePartnerCallParticipantsDeviceCallComplete:
     - Role: localiOS
       App: NeverAlone
   Actions:
+  # Clean calls on Care partner side.
+    - Type: case
+      Value: CarePartnerCleanCallQueueAndHangedCalls
   # Calling Login case.
     - Type: case
       Value: CarePartnerLogin
