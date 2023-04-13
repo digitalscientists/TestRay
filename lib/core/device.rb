@@ -2047,7 +2047,7 @@ def wait_for_element_collection_to_exist(locator)
     wait = Selenium::WebDriver::Wait.new(:timeout => @timeout)
     elements = wait.until {@driver.find_elements(:xpath, convert_value_pageobjects(locator))}
     return elements
-  # rescue Selenium::WebDriver::Error::NoSuchElementError
+    # rescue Selenium::WebDriver::Error::NoSuchElementError
   rescue Exception => e
     # puts "Element not found"
     # return nil
@@ -2058,10 +2058,10 @@ end
 
 # 
 def clean_call_queue_and_hanged_calls(action)
-
+  
   log_info("checking if there is any hanged call")
   if wait_for_element_to_exist("//div[contains(@class,'app-video app-video-fixed')]")#.displayed?
-
+    
     log_info("open the show video if it is hidden")
     if wait_for_enabled_element("$PAGE.care_platform_floating_video_call.video_show_button$")#.displayed?
       @driver.find_element(:xpath, convert_value_pageobjects("$PAGE.care_platform_floating_video_call.video_show_button$")).click
@@ -2069,7 +2069,7 @@ def clean_call_queue_and_hanged_calls(action)
     
     log_info("navigate to the call queue")
     @driver.find_element(:xpath, convert_value_pageobjects("$PAGE.care_platform_floating_video_call.video_return_button$")).click
-
+    
     log_info("verify it was redirected to the call queue, if call is running, click on hang call")
     if wait_for_enabled_element("$PAGE.care_platform_call_portal.end_call_button$")#.displayed?
       @driver.find_element(:xpath, convert_value_pageobjects("$PAGE.care_platform_call_portal.end_call_button$")).click
@@ -2089,13 +2089,13 @@ def clean_call_queue_and_hanged_calls(action)
     
     log_info("wait for the post-call survey options")
     wait_for_enabled_element("$PAGE.care_platform_call_portal.non_medical_radiobtn$")
-
+    
     log_info("select the non medical radio button")
     @driver.find_element(:xpath, convert_value_pageobjects("$PAGE.care_platform_call_portal.non_medical_radiobtn$")).click
-
+    
     log_info("select the issue resolved radio button")
     @driver.find_element(:xpath, convert_value_pageobjects("$PAGE.care_platform_call_portal.issue_resolved_yes_radiobutton$")).click
-
+    
     log_info("select the Accidental call category")
     @driver.find_element(:id, convert_value_pageobjects("$PAGE.care_platform_call_portal.category_select$")).click
     wait_for_enabled_element("$PAGE.care_platform_call_portal.accidental_call_option$")
@@ -2130,10 +2130,10 @@ def clean_call_queue_and_hanged_calls(action)
       else
         log_info("wait for the end call button")
         wait_for_element_to_exist("$PAGE.care_platform_call_portal.end_call_button$")
-  
+        
         log_info("click on the end call")
         @driver.find_element(:xpath, convert_value_pageobjects("$PAGE.care_platform_call_portal.end_call_button$")).click
-  
+        
         log_info("fill in the details to complete the session, complete the session")
         wait_for_element_to_exist("$PAGE.care_platform_call_portal.video_status$")
         
@@ -2148,13 +2148,13 @@ def clean_call_queue_and_hanged_calls(action)
         
         log_info("wait for the post-call survey options")
         wait_for_element_to_exist("$PAGE.care_platform_call_portal.non_medical_radiobtn$")
-  
+        
         log_info("select the non medical radio button")
         @driver.find_element(:xpath, convert_value_pageobjects("$PAGE.care_platform_call_portal.non_medical_radiobtn$")).click
-  
+        
         log_info("select the issue resolved radio button")
         @driver.find_element(:xpath, convert_value_pageobjects("$PAGE.care_platform_call_portal.issue_resolved_yes_radiobutton$")).click
-  
+        
         log_info("select the Accidental call category")
         @driver.find_element(:id, convert_value_pageobjects("$PAGE.care_platform_call_portal.category_select$")).click
         wait_for_element_to_exist("$PAGE.care_platform_call_portal.accidental_call_option$")
@@ -2165,11 +2165,61 @@ def clean_call_queue_and_hanged_calls(action)
         @driver.find_element(:xpath, convert_value_pageobjects("$PAGE.care_platform.navigation_home$")).click
         wait_for_enabled_element("$PAGE.care_platform.call_queue_title$")
       end
-
+      
     end
   end
-
+  
   # TODO: assert that the call queue is clean
 end
 
+#
+def wait_for_mobile_element_to_exist(locator)
+  begin
+    wait = Selenium::WebDriver::Wait.new(:timeout => @timeout)
+    # element = wait.until {@driver.find_element(:class_chain, convert_value_pageobjects(locator))}
+    element = wait.until {@driver.find_element(:class_chain, locator)}
+    return element
+  # rescue Selenium::WebDriver::Error::NoSuchElementError
+  rescue Exception => e
+    # puts "Element not found"
+    # return nil
+    log_info("Exception: #{e}")
+    return false
+  end
+end
+
+def wait_for_mobile_element_to_not_exist(locator)
+  element_exists = wait_for_mobile_element_to_exist(locator)
+  unless element_exists
+    return true
+  end
+end
+
+#
+def clean_unwanted_prompts(action)
+  count = 0
+  loop do
+    log_info("check if there is an existing prompt")
+
+    if wait_for_mobile_element_to_exist("**/XCUIElementTypeButton[`label CONTAINS 'Close'`]")
+      log_info("close the unwanted prompt")
+      prompt = wait_for_mobile_element_to_exist("**/XCUIElementTypeButton[`label CONTAINS 'Close'`]")
+      if prompt
+        prompt.click
+      end
+    end
+    
+    sleep 3
+    if wait_for_mobile_element_to_not_exist("**/XCUIElementTypeButton[`label CONTAINS 'Close'`]") && count <=30
+      log_info("no prompts on the app")
+      break
+    end
+    
+    if count >= 30
+      log_info("there is too many prompts")
+      break
+    end
+    count += 1
+  end
+end
 # END OF DEVICE CLASS
