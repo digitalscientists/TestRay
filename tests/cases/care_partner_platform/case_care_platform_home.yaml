@@ -304,11 +304,6 @@ TestLogoutGoOffShift:
   # Calling Login case.
     - Type: case
       Value: CarePartnerLogin
-
-
-    - Type: clean_call_queue_and_hanged_calls
-
-
   # Clicking the name.
     - Type: click
       Strategy: xpath
