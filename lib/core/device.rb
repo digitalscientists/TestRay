@@ -2060,10 +2060,10 @@ end
 def clean_call_queue_and_hanged_calls(action)
   
   log_info("checking if there is any hanged call")
-  if wait_for_element_to_exist("//div[contains(@class,'app-video app-video-fixed')]")#.displayed?
+  if wait_for_element_to_exist("$PAGE.care_platform_home.active_call_section$")
     
     log_info("open the show video if it is hidden")
-    if wait_for_enabled_element("$PAGE.care_platform_floating_video_call.video_show_button$")#.displayed?
+    if wait_for_enabled_element("$PAGE.care_platform_floating_video_call.video_show_button$")
       @driver.find_element(:xpath, convert_value_pageobjects("$PAGE.care_platform_floating_video_call.video_show_button$")).click
     end
     
@@ -2071,7 +2071,7 @@ def clean_call_queue_and_hanged_calls(action)
     @driver.find_element(:xpath, convert_value_pageobjects("$PAGE.care_platform_floating_video_call.video_return_button$")).click
     
     log_info("verify it was redirected to the call queue, if call is running, click on hang call")
-    if wait_for_enabled_element("$PAGE.care_platform_call_portal.end_call_button$")#.displayed?
+    if wait_for_enabled_element("$PAGE.care_platform_call_portal.end_call_button$")
       @driver.find_element(:xpath, convert_value_pageobjects("$PAGE.care_platform_call_portal.end_call_button$")).click
     end
     
@@ -2084,7 +2084,7 @@ def clean_call_queue_and_hanged_calls(action)
     @driver.find_element(:xpath, convert_value_pageobjects("$PAGE.providers_call_queue_page.details_textarea$")).send_keys("Automation Tear Down Details")
     
     log_info("wait for the Complete Sesion button to be enabled and click on it")
-    wait_for_enabled_element("$PAGE.care_platform_call_portal.complete_session_btn$")#.enabled?
+    wait_for_enabled_element("$PAGE.care_platform_call_portal.complete_session_btn$")
     @driver.find_element(:xpath, convert_value_pageobjects("$PAGE.care_platform_call_portal.complete_session_btn$")).click
     
     log_info("wait for the post-call survey options")
@@ -2107,7 +2107,7 @@ def clean_call_queue_and_hanged_calls(action)
   end
   
   log_info("checking if there is any pending call on the call queue page")
-  call_queue_call_elements = wait_for_element_collection_to_exist("//table//tbody/tr")
+  call_queue_call_elements = wait_for_element_collection_to_exist("$PAGE.care_platform_home.call_queue_calls$")
   if call_queue_call_elements.nil? || call_queue_call_elements.empty?
     puts "Call queue call elements collection is null/empty."
   end
@@ -2165,11 +2165,8 @@ def clean_call_queue_and_hanged_calls(action)
         @driver.find_element(:xpath, convert_value_pageobjects("$PAGE.care_platform.navigation_home$")).click
         wait_for_enabled_element("$PAGE.care_platform.call_queue_title$")
       end
-      
     end
   end
-  
-  # TODO: assert that the call queue is clean
 end
 
 # Custom action to wait for a mobile element to exist
