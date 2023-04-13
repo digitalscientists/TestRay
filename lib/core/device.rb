@@ -2009,7 +2009,7 @@ def verify_all_events_match_todays_date(action)
 
 end
 
-#
+# Custom action to wait for an element to be enabled
 def wait_for_enabled_element(locator)
   begin
     # element = @driver.find_element(:xpath, convert_value_pageobjects(locator))
@@ -2024,7 +2024,7 @@ def wait_for_enabled_element(locator)
   end
 end
 
-#
+# Custom action to wait for an element to exist
 def wait_for_element_to_exist(locator)
   begin
     # element = @driver.find_element(:xpath, convert_value_pageobjects(locator))
@@ -2040,7 +2040,7 @@ def wait_for_element_to_exist(locator)
   end
 end
 
-#
+# Custom action to wait for an element collection to exist
 def wait_for_element_collection_to_exist(locator)
   begin
     # element = @driver.find_element(:xpath, convert_value_pageobjects(locator))
@@ -2056,7 +2056,7 @@ def wait_for_element_collection_to_exist(locator)
   end
 end
 
-# 
+# Custom action to clean calls from queue and hanged calls on the care partner site
 def clean_call_queue_and_hanged_calls(action)
   
   log_info("checking if there is any hanged call")
@@ -2172,7 +2172,7 @@ def clean_call_queue_and_hanged_calls(action)
   # TODO: assert that the call queue is clean
 end
 
-#
+# Custom action to wait for a mobile element to exist
 def wait_for_mobile_element_to_exist(locator)
   begin
     wait = Selenium::WebDriver::Wait.new(:timeout => @timeout)
@@ -2188,7 +2188,8 @@ def wait_for_mobile_element_to_exist(locator)
   end
 end
 
-def wait_for_mobile_element_to_not_exist(locator)
+# Custom action to wait for a mobile element to disappear
+def wait_for_mobile_element_to_disappear(locator)
   element_exists = wait_for_mobile_element_to_exist(locator)
   unless element_exists
     return true
@@ -2210,7 +2211,7 @@ def clean_unwanted_prompts(action)
     end
     
     sleep 3
-    if wait_for_mobile_element_to_not_exist("**/XCUIElementTypeButton[`label CONTAINS 'Close'`]") && count <=30
+    if wait_for_mobile_element_to_disappear("**/XCUIElementTypeButton[`label CONTAINS 'Close'`]") && count <=30
       log_info("no prompts on the app")
       break
     end
