@@ -2195,7 +2195,7 @@ def wait_for_mobile_element_to_not_exist(locator)
   end
 end
 
-#
+# Custom action to clean all the unwanted prompts on Never Alone app before starting test.
 def clean_unwanted_prompts(action)
   count = 0
   loop do
