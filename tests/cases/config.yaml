@@ -29,10 +29,8 @@ Devices:
   - role: localiOS
     platform: iOS
     capabilities:
-      # deviceName:  "Apple’s iPad (15.5)" #"iPad Pro (12.9-inch) (5th generation) Simulator (15.5)" #THIS DEVICE CAN BE UPDATED BY YOUR DEVICE
-      # udid: "00008101-001510200E04001E" #"D017D231-AAF1-4050-946B-B9FC0838D146" #THIS UDID CAN BE UPDATEDED WITH YOUR DEVICE UDID 
-      deviceName:  "iPad Pro (12.9-inch) (5th generation) Simulator (15.5)" #THIS DEVICE CAN BE UPDATED BY YOUR DEVICE
-      udid: "A983C29F-11AD-4A97-8347-AF6EAE94F4E0" #THIS UDID CAN BE UPDATEDED WITH YOUR DEVICE UDID 
+      deviceName:  "Apple’s iPad (15.5)" #"iPad Pro (12.9-inch) (5th generation) Simulator (15.5)" #THIS DEVICE CAN BE UPDATED BY YOUR DEVICE
+      udid: "00008101-001510200E04001E" #"D017D231-AAF1-4050-946B-B9FC0838D146" #THIS UDID CAN BE UPDATEDED WITH YOUR DEVICE UDID 
       newCommandTimeout: 60
 
 #VARS
@@ -46,28 +44,28 @@ Environments:
       facility_bhc:  beta health center
       facility_chc:  charlie health center
 #Onboarder users      
-      onboarder_user1: mhenriquez+onboarder1@neural.com.do
-      onboarder_user1_pwd: Neuralneural001!
-      onboarder_user1_name: Miguel
-      onboarder_user1_lastname: Henriquezone
+      onboarder_user1: add_your_info
+      onboarder_user1_pwd: add_your_info
+      onboarder_user1_name: add_your_info
+      onboarder_user1_lastname: add_your_info
       onboarder_user2: add_your_info
       onboarder_user2_pwd: add_your_info
       onboarder_user2_name: add_your_info
       onboarder_user2_lastname: add_your_info
 #Carepartmer users
-      carepartner_user1: mhenriquez+carepartner1@neural.com.do
-      carepartner_user1_pwd: Neuralneural001!
-      carepartner_user1_name: Miguel
-      carepartner_user1_lastname: Henriquezone
-      carepartner_user2: mhenriquez+carepartner2@neural.com.do
-      carepartner_user2_pwd: Neuralneural001!
-      carepartner_user2_name: Miguel
-      carepartner_user2_lastname: Henriqueztwo
+      carepartner_user1: add_your_info
+      carepartner_user1_pwd: add_your_info
+      carepartner_user1_name: add_your_info
+      carepartner_user1_lastname: add_your_info
+      carepartner_user2: add_your_info
+      carepartner_user2_pwd: add_your_info
+      carepartner_user2_name: add_your_info
+      carepartner_user2_lastname: add_your_info
 #Provider users      
-      provider_user1: mhenriquez+provider1@neural.com.do
-      provider_user1_pwd: Neuralneural001!
-      provider_user1_name: Miguel
-      provider_user1_lastname: Henriquezone      
+      provider_user1: add_your_info
+      provider_user1_pwd: add_your_info
+      provider_user1_name: add_your_info
+      provider_user1_lastname: add_your_info     
       provider_user2: add_your_info
       provider_user2_pwd: add_your_info
       provider_user2_name: add_your_info
@@ -83,31 +81,31 @@ Environments:
       admincall_user2: add_your_info
       admincall_user2_pwd: add_your_info
 #Senior users    
-      senior_user1: mhenriquez+senior1@neural.com.do
-      senior_user1_pwd: 796e10cee
-      senior_user1_name: Miguel
-      senior_user1_lastname: Henriquezone
+      senior_user1: add_your_info
+      senior_user1_pwd: add_your_info
+      senior_user1_name: add_your_info
+      senior_user1_lastname: add_your_info
       senior_user2: add_your_info
       senior_user2_pwd: add_your_info
       senior_user2_name: add_your_info
       senior_user2_lastname: add_your_info
 #Facility devices users   
-      facility_devices_user1: mhenriquez+facilitydevice1@neural.com.do
-      facility_devices_user1_pwd: c261deca8
-      facility_name1: Alpha Healthcare Center
-      facility_devices_user1_number: 5
-      facility_devices_user2: Miguel
-      facility_devices_user2_pwd: Henriquezone  
+      facility_devices_user1: add_your_info
+      facility_devices_user1_pwd: add_your_info
+      facility_devices_user1_number: add_your_info
+      facility_devices_user2: add_your_info
+      facility_devices_user2_pwd: add_your_info  
+      facility_name1: add_your_info #i.e. Alpha Healthcare Center
       facility_devices_user2_number: add_your_info
       facility_devices_requester_name: add_your_info
       facility_devices_requester_lastname: add_your_info
 #Employee users    
-      employee_user1: mhenriquez+employee1@neural.com.do
-      employee_user1_pwd: Neuralneural001!
-      employee_user1_name: Miguel
-      employee_user1_lastname: Henriquezone
-      employee_user1_dob: "1956-06-27" #you need to keep the date between quotation marks
-      employee_user1_card_member_id: 123844CCD01
+      employee_user1: add_your_info
+      employee_user1_pwd: add_your_info
+      employee_user1_name: add_your_info
+      employee_user1_lastname: add_your_info
+      employee_user1_dob: "YYYY-MM-DD" #you need to keep the date between quotation marks
+      employee_user1_card_member_id: add_your_info
       employee_user1_phone_number: add_your_info #phone number is a combination of 10 digits, without parenthesis or dashes
       employee_dependent_user1: add_your_info
       employee_dependent_user1_pwd: add_your_info
@@ -127,5 +125,5 @@ Environments:
       employee_user2_dob: "YYYY-MM-DD" #you need to keep the date between quotation marks
       employee_user2_phone_number: add_your_info #phone number is a combination of 10 digits, without parenthesis or dashes
 #Alternative credentials
-      alternative_correct_password: Neural123! #this password is used to update momentarily the current password
-      alternative_incorrect_password: Neural123 #this password shouldn't comply with all requirements
+      alternative_correct_password: add_your_info #this password is used to update momentarily the current password
+      alternative_incorrect_password: add_your_info #this password shouldn't comply with all requirements
