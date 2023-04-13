@@ -211,6 +211,8 @@ TestSNFNewRequestFormBehavior:
 #CXTB-17 - New Request to Provider - Successful Call Connect
 TestSNFRequestSuccessfulCallConnect:
   Environment: Settings
+#  Precases:
+#    - ProviderCleanSlack
   Aftercases:
     - TerminateApp
   Roles:
@@ -340,20 +342,28 @@ TestSNFRequestSuccessfulCallConnect:
   # Select the Bad option on the Post Survey screen.
     - Type: wait_for
       Role: localiOS
-      Strategy: xpath
+      Strategy: class_chain
       Id: $PAGE.seniors_app_post_call_survey.bad_answer_button$
     - Type: click
       Role: localiOS
-      Strategy: xpath
+      Strategy: class_chain
       Id: $PAGE.seniors_app_post_call_survey.bad_answer_button$
   # Click on the back to select button.
+    - Type: wait_for
+      Role: localiOS
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_post_call_survey.back_to_select_button$
     - Type: click
       Strategy: class_chain
       Role: localiOS
       Id: $PAGE.seniors_app_post_call_survey.back_to_select_button$
+    - Type: wait_not_visible
+      Role: localiOS
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_post_call_survey.back_to_select_button$
   # Select the Ok option.
     - Type: click
-      Strategy: xpath
+      Strategy: class_chain
       Role: localiOS
       Id: $PAGE.seniors_app_post_call_survey.ok_answer_button$
   # Select reason
@@ -386,8 +396,11 @@ TestSNFRequestSuccessfulCallConnect:
 #CXTB-127 See Call Appear in Queue, Assign and Review Details
 TestSNFCheckQueueandReviewDetails:
   Environment: Settings
+  Precases:
+    - ProviderCleanSlack
   Aftercases:
     - TerminateApp
+    - ProviderCleanAfterTest
   Roles:
     - Role: localiOS
       Capabilities:

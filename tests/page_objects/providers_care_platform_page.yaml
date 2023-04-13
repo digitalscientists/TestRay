@@ -20,6 +20,7 @@ providers_home_page:
   save_and_close_ticket_button: //button[text()='Save and Close Ticket']
   dropdown_username: userName
   button_help: //button[text() = 'Help']
+  session_return_button: //button[@class='video-return']
 
 providers_account_modal:
   credentials_navigation_tab: //*[@id='modals']//nav/button[text()='Credentials']
