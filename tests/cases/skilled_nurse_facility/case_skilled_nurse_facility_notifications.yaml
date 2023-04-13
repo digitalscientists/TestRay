@@ -1,0 +1,40 @@
+#CXTB-26 SNF - Verify Notifications Page
+TestSNFVerifyNotificationsPage:
+  Environment: Settings
+  Vars:
+    MESSAGE_TO_FACILITY: CXTB-26 SNF Verify Notification Page Message
+  Aftercases:
+    - TerminateApp
+  Roles:
+    - Role: localiOS
+      App: NeverAlone
+    - Role: desktopChrome
+      App: desktop  
+  Actions:
+  #Call login for nurses
+    - Type: case
+      Value: LoginSNFHelper
+  #Check Bell Icon
+    - Type: wait_for
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_home.notifications_icon$
+    - Type: click
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_home.notifications_icon$
+  #Check Notifications page header
+    - Type: wait_for
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_notifications.notifications_label$
+  
+  #Generate a notification
+    - Type: case
+      Value: ProviderSendsMessageToFacility
+  #Check notification badge change
+  #Change toggle
+  #Check notification details
+  #Close details and go back to notifications
+
+  #Close and go back to home
+    - Type: click
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_notifications.close_btn$
