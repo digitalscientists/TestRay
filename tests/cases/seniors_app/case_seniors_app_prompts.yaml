@@ -30,6 +30,8 @@ TestSeniorAppPersonalCarePartnerMessagePromptAndCallBackButton:
     - Role: command1
       App: command  
   Actions:
+  # Clean unwanted prompts on Never Alone app before starting test.
+    - Type: clean_unwanted_prompts
   # Send a message to the Senior through the Care Platform logged in as a Care Partner.
     - Type: case
       Value: CarePartnerSendMessageToSenior
@@ -255,6 +257,8 @@ TestSeniorAppAnswerCallForProviderCalling:
     - Role: command1
       App: command  
   Actions:
+  # Clean unwanted prompts on Never Alone app before starting test.
+    - Type: clean_unwanted_prompts
   # Call participant(Senior) logged in as a Provider.
     - Type: case
       Value: ProviderCallParticipant

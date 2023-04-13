@@ -24,6 +24,8 @@ TestSeniorAppCallPersonalCarePartnerOnHomePage:
     - Role: command1
       App: command
   Actions:
+    # Clean unwanted prompts on Never Alone app before starting test.
+    - Type: clean_unwanted_prompts
     # Login to the Care Platform app with Care Partners account.
     - Type: case
       Value: CarePartnerLogin
@@ -254,6 +256,8 @@ TestSeniorAppVerifyInAppOfflineBehavior:
     - Role: desktopChrome
       App: desktop
   Actions:
+    # Clean unwanted prompts on Never Alone app before starting test.
+    - Type: clean_unwanted_prompts
     # Navigate to Notifications page.
     - Type: case
       Value: NotificationsPageNavigationHelper

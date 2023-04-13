@@ -9,11 +9,10 @@ SetCriticalWorkflows:
     # - Case: TestSNFRequestSuccessfulCallConnect
     # - Case: TestSNFCheckQueueandReviewDetails
     # - Case: TestSNFProviderIncomingCallAnswerCallOnSNF
-  # TODO: make something to clean unwanted prompts.
-    # - Case: TestSeniorAppVerifyInAppOfflineBehavior # Physical
-    # - Case: TestSeniorAppPersonalCarePartnerMessagePromptAndCallBackButton  # Physical
-    # - Case: TestSeniorAppAnswerCallForProviderCalling # Physical
-    # - Case: TestSeniorAppCallPersonalCarePartnerOnHomePage  # Physical
+    - Case: TestSeniorAppVerifyInAppOfflineBehavior # Physical
+    - Case: TestSeniorAppPersonalCarePartnerMessagePromptAndCallBackButton  # Physical
+    - Case: TestSeniorAppAnswerCallForProviderCalling # Physical
+    - Case: TestSeniorAppCallPersonalCarePartnerOnHomePage  # Physical
     # - Case: TestEmployeeHealthPortalUserCall
     # - Case: TestSNFVerifyInAppOfflineBehavior
 
