@@ -211,10 +211,11 @@ TestSNFNewRequestFormBehavior:
 #CXTB-17 - New Request to Provider - Successful Call Connect
 TestSNFRequestSuccessfulCallConnect:
   Environment: Settings
-#  Precases:
-#    - ProviderCleanSlack
+  Precases:
+    - ProviderCleanBeforeTest
   Aftercases:
     - TerminateApp
+    - ProviderCleanSlack
   Roles:
     - Role: localiOS
       App: NeverAlone
@@ -342,12 +343,12 @@ TestSNFRequestSuccessfulCallConnect:
   # Select the Bad option on the Post Survey screen.
     - Type: wait_for
       Role: localiOS
-      Strategy: class_chain
-      Id: $PAGE.seniors_app_post_call_survey.bad_answer_button$
+      Strategy: id
+      Id: $PAGE.snf_post_call_survey.bad_answer_button$
     - Type: click
       Role: localiOS
-      Strategy: class_chain
-      Id: $PAGE.seniors_app_post_call_survey.bad_answer_button$
+      Strategy: id
+      Id: $PAGE.snf_post_call_survey.bad_answer_button$
   # Click on the back to select button.
     - Type: wait_for
       Role: localiOS
@@ -397,10 +398,10 @@ TestSNFRequestSuccessfulCallConnect:
 TestSNFCheckQueueandReviewDetails:
   Environment: Settings
   Precases:
-    - ProviderCleanSlack
+    - ProviderCleanBeforeTest
   Aftercases:
     - TerminateApp
-    - ProviderCleanAfterTest
+    - ProviderCleanSlack
   Roles:
     - Role: localiOS
       Capabilities:

@@ -725,8 +725,20 @@ ProviderSendsMessageToFacility:
           Var: LAST_MESSAGE_HISTORY
           Value: $AND_CLI_MESSAGE_TO_FACILITY$
 
-#Clear un-ended sessions before test. Have Login
 ProviderCleanSlack:
+  Environment: Settings
+  Roles:
+    - Role: desktopChrome
+      App: desktop       
+  Actions:
+    - Type: if
+      If_Cases: 
+        - If_Case: IfReturnSession
+        - If_Case: ProviderVisibleEndCall
+        - If_Case: CompleteEndCallOnProviderSide
+
+#Clear un-ended sessions before test. Have Login
+ProviderCleanBeforeTest:
   Environment: Settings
   Vars:
     LOGOUT_OPTION: "Go Off Shift"
@@ -739,29 +751,8 @@ ProviderCleanSlack:
     # Login to the Care Platform app with Providers account.
     - Type: case
       Value: ProvidersCarePlatformLogin
-    - Type: if
-      If_Cases: 
-        - If_Case: IfReturnSession
-    - Type: if
-      If_Cases: 
-        - If_Case: ProviderVisibleEndCall
-
-#Clear un-ended sessions after the test
-ProviderCleanAfterTest:
-  Vars:
-    LOGOUT_OPTION: "Go Off Shift"
-  Aftercases:
-    - CarePlatformLogout
-  Roles:
-    - Role: desktopChrome
-      App: desktop       
-  Actions:
-    - Type: if
-      If_Cases: 
-        - If_Case: IfReturnSession
-    - Type: if
-      If_Cases: 
-        - If_Case: ProviderVisibleEndCall
+    - Type: case
+      Value: ProviderCleanSlack
 
 IfReturnSession:
   Roles:

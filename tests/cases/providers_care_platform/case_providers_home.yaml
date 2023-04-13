@@ -222,9 +222,11 @@ TestProvidersAnswerSNFCallAndCompletesSession:
     PROVIDERS_SUBJECT:  Automation Test Call SNF.
     PROVIDERS_DETAILS:  Automation Test Notes Verify that Providers answer SNF call and completes session.
   Precases:
+    - ProviderCleanBeforeTest
     - LoginSNFHelper
   Aftercases:
     - TerminateApp
+    - ProviderCleanSlack
   Roles:
     - Role: desktopChrome
       App: desktop
