@@ -725,6 +725,7 @@ ProviderSendsMessageToFacility:
           Var: LAST_MESSAGE_HISTORY
           Value: $AND_CLI_MESSAGE_TO_FACILITY$
 
+#Clear un-ended sessions before test. Have Login
 ProviderCleanSlack:
   Environment: Settings
   Vars:
@@ -741,7 +742,11 @@ ProviderCleanSlack:
     - Type: if
       If_Cases: 
         - If_Case: IfReturnSession
+    - Type: if
+      If_Cases: 
+        - If_Case: ProviderVisibleEndCall
 
+#Clear un-ended sessions after the test
 ProviderCleanAfterTest:
   Vars:
     LOGOUT_OPTION: "Go Off Shift"
@@ -753,7 +758,10 @@ ProviderCleanAfterTest:
   Actions:
     - Type: if
       If_Cases: 
-        - If_Case: IfReturnSession  
+        - If_Case: IfReturnSession
+    - Type: if
+      If_Cases: 
+        - If_Case: ProviderVisibleEndCall
 
 IfReturnSession:
   Roles:
@@ -766,11 +774,8 @@ IfReturnSession:
     - Type: click
       Strategy: xpath
       Id: $PAGE.providers_home_page.session_return_button$
-    - Type: if
-      If_Cases:
-        - If_Case: ProviderVisibleEndCall
     - Type: case
-      Value: CompleteEndCallOnProviderSide
+      Value: ProviderVisibleEndCall
 
 ProviderVisibleEndCall:
   Roles:
@@ -784,6 +789,8 @@ ProviderVisibleEndCall:
     - Type: click
       Strategy: xpath
       Id: $PAGE.providers_call_queue_page.end_call_btn$
+    - Type: case
+      Value: CompleteEndCallOnProviderSide
 
 CompleteEndCallOnProviderSide:
   Roles:
