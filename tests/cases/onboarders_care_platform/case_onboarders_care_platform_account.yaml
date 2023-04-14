@@ -290,6 +290,41 @@ TestOnboarderAccessParticipantDirectoryandFilter:
       Id: $PAGE.care_platform_participant.status_dropdown_options$
     - Type: click
       Strategy: xpath
-      Id: $PAGE.care_platform_participant.status_dropdown_options$
-      
+      Id: $PAGE.care_platform_participant.status_dropdown_options$      
+
+# CXTB-256: Click and View Participant Record from Listing
+TestOnboarderClickandViewParticipantRecordfromListing:
+    Environment: Settings 
+    Roles:
+    - Role: desktopChrome
+      App: "desktop"
+    Actions:
+  # Log in Care Platform as an Onboarder
+    - Type: case
+      Value: OnboarderCarePartnerLogin
+  # Go to Participants
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform.navigation_participant$
+  # Click on a participant.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant.senior_1_row$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant.senior_1_row$
+  # Click on Records Button
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_details.participant_details_title$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_details.records_button$
+  # Go to Medical Tab
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_records.demographics_tab$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_records.medical_tab$
 
