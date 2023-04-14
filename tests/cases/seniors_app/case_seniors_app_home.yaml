@@ -26,6 +26,9 @@ TestSeniorAppCallPersonalCarePartnerOnHomePage:
   Actions:
     # Clean unwanted prompts on Never Alone app before starting test.
     - Type: clean_unwanted_prompts
+    # Clean calls on Care partner side.
+    - Type: case
+      Value: CarePartnerCleanCallQueueAndHangedCalls
     # Login to the Care Platform app with Care Partners account.
     - Type: case
       Value: CarePartnerLogin

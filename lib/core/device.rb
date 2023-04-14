@@ -2071,7 +2071,7 @@ def clean_call_queue_and_hanged_calls(action)
     @driver.find_element(:xpath, convert_value_pageobjects("$PAGE.care_platform_floating_video_call.video_return_button$")).click
     
     log_info("verify it was redirected to the call queue, if call is running, click on hang call")
-    if wait_for_enabled_element("$PAGE.care_platform_call_portal.end_call_button$")
+    if wait_for_element_to_exist("$PAGE.care_platform_call_portal.end_call_button$")
       @driver.find_element(:xpath, convert_value_pageobjects("$PAGE.care_platform_call_portal.end_call_button$")).click
     end
     
@@ -2199,6 +2199,11 @@ def clean_unwanted_prompts(action)
   loop do
     log_info("check if there is an existing prompt")
 
+    if wait_for_mobile_element_to_disappear("**/XCUIElementTypeButton[`label CONTAINS 'Close'`]") && count <=30
+      log_info("no prompts on the app")
+      break
+    end
+    
     if wait_for_mobile_element_to_exist("**/XCUIElementTypeButton[`label CONTAINS 'Close'`]")
       log_info("close the unwanted prompt")
       prompt = wait_for_mobile_element_to_exist("**/XCUIElementTypeButton[`label CONTAINS 'Close'`]")
@@ -2206,12 +2211,7 @@ def clean_unwanted_prompts(action)
         prompt.click
       end
     end
-    
     sleep 3
-    if wait_for_mobile_element_to_disappear("**/XCUIElementTypeButton[`label CONTAINS 'Close'`]") && count <=30
-      log_info("no prompts on the app")
-      break
-    end
     
     if count >= 30
       log_info("there is too many prompts")
