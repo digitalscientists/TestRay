@@ -331,15 +331,18 @@ TestSNFRequestSuccessfulCallConnect:
       Strategy: xpath
       Role: desktopChrome
       Id: $PAGE.providers_call_queue_page.answer_call_button$
-  ## back to SNF and end call
+  #End Call
     - Type: wait_for
-      Role: localiOS
-      Strategy: class_chain
-      Id: $PAGE.snf_call_portal.end_call_button$
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_call_queue_page.end_call_btn$
     - Type: click
-      Role: localiOS
-      Strategy: class_chain
-      Id: $PAGE.snf_call_portal.end_call_button$
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_call_queue_page.end_call_btn$
+  #Complete Session
+    - Type: case
+      Value: PostCallSurveyProvider
   # Select the Bad option on the Post Survey screen.
     - Type: wait_for
       Role: localiOS
@@ -389,8 +392,6 @@ TestSNFRequestSuccessfulCallConnect:
       Role: localiOS
       Strategy: xpath
       Id: $PAGE.snf_home.new_request_btn$
-    - Type: case
-      Value: PostCallSurveyProvider
 
 #CXTB-24 New Request to Provider - Missed Call
 #CXTB-25 Existing Request - Place Call to Provider

@@ -3,7 +3,7 @@ providers_home_page:
   table : email
   follow_up_calls: (//div[contains(text(),'Follow-up')])[last()]
   missed_calls_text: (//div[contains(text(),'Missed Call')])[last()]
-  scheduled_calls: (//div[contains(text(),'Scheduled Call')])[last()]
+  scheduled_calls: (//tr[not(contains(@class,'is-disabled'))]//div[contains(text(),'Scheduled Call')])[last()]
   on_demand_calls: (//div[contains(text(),'On Demand Call')])[last()]
   datetime: //time
   time_dropdown: //div[div[contains(text(),'Time')]]//button
