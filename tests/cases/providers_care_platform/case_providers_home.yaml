@@ -215,6 +215,7 @@ TestStatusNotOnActiveCallForProviders:
           Var: STATUS_VAR
           Value: "is-green"
 
+# Physical Device only.
 # CXTB-133: Verify that Providers answer SNF call and completes session.
 TestProvidersAnswerSNFCallAndCompletesSession:
   Environment: Settings
