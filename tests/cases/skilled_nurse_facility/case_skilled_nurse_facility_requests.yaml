@@ -514,7 +514,7 @@ TestSNFCheckQueueandReviewDetails:
     - Type: case
       Value: ProvidersCarePlatformLogin
       Role: desktopChrome
-  #Selects first on demand call
+  #Selects on demand call
     - Type: click
       Strategy: xpath
       Role: desktopChrome

@@ -38,7 +38,7 @@ ProvidersCarePlatformEndCall:
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.providers_home_page.home_title$
-  #Selects first on demand call
+  #Selects on demand call
     - Type: click
       Strategy: xpath
       Role: desktopChrome
