@@ -291,5 +291,29 @@ TestOnboarderAccessParticipantDirectoryandFilter:
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_participant.status_dropdown_options$
+
+# CTBX-262- Click and View Facility Device Record From Listing
+TestOnboarderClickAndViewFacilitiesDevice:
+    Environment: Settings
+    Roles:
+    - Role: desktopChrome
+      App: "desktop"
+    Actions:
+    - Type: case
+      Value: TestOnboardersAccessFacilitiesDirectoryFilter 
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_facility.facilities_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant.first_senior_lastname$
+    - Type: click
+      Strategy: xpath
+      Id: //button[text()='Records']
+    - Type: click
+      Strategy: xpath
+      Id: //button[text()='Devices']
+    - Type: sleep
+      Time: 3
       
 
