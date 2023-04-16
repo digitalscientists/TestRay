@@ -327,4 +327,31 @@ TestOnboarderClickandViewParticipantRecordfromListing:
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_participant_records.medical_tab$
-
+  # Go to Medical Subtasks
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_records.medical_tab$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_records.medical_medication_subtab$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_records.medical_medication_subtab$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_records.medical_medical_needs_subtab$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_records.medical_medical_needs_subtab$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_records.medical_behavioral_subtab$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_records.medical_behavioral_subtab$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_records.medical_medical_history_subtab$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_records.medical_medical_history_subtab$
