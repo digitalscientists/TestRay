@@ -102,7 +102,7 @@ TestSeniorAppPersonalCarePartnerMessagePromptAndCallBackButton:
     - Type: wait_not_visible
       Strategy: class_chain
       Id: $PAGE.seniors_app_message_modal.call_back_button$
-      Time: 10
+      Time: 15
   # Device screen updates to show screen asking what kind of need you help:
   # Medical, Non-Medical and Cancel
     - Type: wait_for

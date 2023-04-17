@@ -368,7 +368,14 @@ TestSeniorAppVerifyInAppOfflineBehavior:
     # Navigate to Notifications page.
     - Type: case
       Value: NotificationsPageNavigationHelper
+    # Navigate to the All tab.
+    - Type: click
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_notifications.all_tab$
     # Click a notification from the notifications listing.
+    - Type: wait_for
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_notifications.first_notification$
     - Type: click
       Strategy: class_chain
       Id: $PAGE.seniors_app_notifications.first_notification$
