@@ -4,9 +4,11 @@
 TestSNFProviderIncomingCallAnswerCallOnSNF:
   Environment: Settings
   Precases:
+    - ProviderCleanBeforeTest
     - LoginSNFHelper
   Aftercases:
     - TerminateApp
+    - ProviderCleanSlack
   Roles:
     - Role: localiOS
       App: NeverAlone
