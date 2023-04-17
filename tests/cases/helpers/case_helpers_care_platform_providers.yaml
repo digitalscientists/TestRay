@@ -721,7 +721,7 @@ ProviderSendsMessageToFacility:
           Var: LAST_MESSAGE_HISTORY
           Value: $AND_CLI_MESSAGE_TO_FACILITY$
 
-ProviderCleanSlack:
+ProviderCleanSlate:
   Environment: Settings
   Roles:
     - Role: desktopChrome
@@ -748,7 +748,7 @@ ProviderCleanBeforeTest:
     - Type: case
       Value: ProvidersCarePlatformLogin
     - Type: case
-      Value: ProviderCleanSlack
+      Value: ProviderCleanSlate
 
 IfReturnSession:
   Roles:

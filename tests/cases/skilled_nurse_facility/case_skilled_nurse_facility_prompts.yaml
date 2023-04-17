@@ -8,7 +8,7 @@ TestSNFProviderIncomingCallAnswerCallOnSNF:
     - LoginSNFHelper
   Aftercases:
     - TerminateApp
-    - ProviderCleanSlack
+    - ProviderCleanSlate
   Roles:
     - Role: localiOS
       App: NeverAlone

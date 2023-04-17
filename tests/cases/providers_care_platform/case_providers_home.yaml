@@ -227,7 +227,7 @@ TestProvidersAnswerSNFCallAndCompletesSession:
     - LoginSNFHelper
   Aftercases:
     - TerminateApp
-    - ProviderCleanSlack
+    - ProviderCleanSlate
   Roles:
     - Role: desktopChrome
       App: desktop
