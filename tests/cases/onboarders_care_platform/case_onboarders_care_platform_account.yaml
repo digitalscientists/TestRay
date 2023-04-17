@@ -314,44 +314,31 @@ TestOnboarderClickandViewParticipantRecordfromListing:
       Strategy: xpath
       Id: $PAGE.care_platform_participant.senior_1_row$
   # Click on Records Button
-    - Type: wait_for
-      Strategy: xpath
-      Id: $PAGE.care_platform_participant_details.participant_details_title$
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_participant_details.records_button$
   # Go to Medical Tab
-    - Type: wait_for
-      Strategy: xpath
-      Id: $PAGE.care_platform_participant_records.demographics_tab$
     - Type: click
       Strategy: xpath
-      Id: $PAGE.care_platform_participant_records.medical_tab$
-  # Go to Medical Subtasks
-    - Type: wait_for
-      Strategy: xpath
-      Id: $PAGE.care_platform_participant_records.medical_tab$
-    - Type: click
-      Strategy: xpath
-      Id: $PAGE.care_platform_participant_records.medical_medication_subtab$
-    - Type: wait_for
-      Strategy: xpath
-      Id: $PAGE.care_platform_participant_records.medical_medication_subtab$
-    - Type: click
-      Strategy: xpath
-      Id: $PAGE.care_platform_participant_records.medical_medical_needs_subtab$
+      Id: $PAGE.care_platform_participant_records.medical_tab$ 
+  # Click on Medical Needs Subtask
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.care_platform_participant_records.medical_medical_needs_subtab$
     - Type: click
       Strategy: xpath
-      Id: $PAGE.care_platform_participant_records.medical_behavioral_subtab$
+      Id: $PAGE.care_platform_participant_records.medical_medical_needs_subtab$
+  # Click on Behavioral Subtask
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.care_platform_participant_records.medical_behavioral_subtab$
     - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_records.medical_behavioral_subtab$
+  # Click on Medical History Subtask
+    - Type: wait_for
       Strategy: xpath
       Id: $PAGE.care_platform_participant_records.medical_medical_history_subtab$
-    - Type: wait_for
+    - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_participant_records.medical_medical_history_subtab$
