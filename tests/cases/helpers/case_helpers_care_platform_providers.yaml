@@ -152,10 +152,6 @@ JoinMedicalTransfer:
       Strategy: xpath
       Id: $PAGE.providers_call_queue_page.end_call_btn$
 
-#Part of cleanup
-EndCallOnProviderSide:
-
-
 # Post Call survey when the call ends.
 PostCallSurveyProvider:
   Roles:

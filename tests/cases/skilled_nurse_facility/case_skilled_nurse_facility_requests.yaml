@@ -215,7 +215,7 @@ TestSNFRequestSuccessfulCallConnect:
     - ProviderCleanBeforeTest
   Aftercases:
     - TerminateApp
-    - ProviderCleanSlack
+    - ProviderCleanSlate
   Roles:
     - Role: localiOS
       App: NeverAlone
@@ -402,7 +402,7 @@ TestSNFCheckQueueandReviewDetails:
     - ProviderCleanBeforeTest
   Aftercases:
     - TerminateApp
-    - ProviderCleanSlack
+    - ProviderCleanSlate
   Roles:
     - Role: localiOS
       Capabilities:
