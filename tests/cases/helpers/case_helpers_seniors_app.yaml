@@ -170,4 +170,4 @@ SeniorCleanPrompts:
       App: NeverAlone
   Actions:
     # Close prompts on Never Alone.
-    - Type: clean_unwanted_prompts
+    - Type: senior_clean_unwanted_prompts

@@ -9,6 +9,8 @@ TestSeniorAppCallPersonalCarePartnerOnHomePage:
   Environment: Settings
   Precases:
     - LoginNeverAloneHelper
+    - SeniorCleanPrompts
+    - CarePartnerCleanCallQueueAndHangedCalls
   Aftercases:
     - TerminateApp
   Roles:
@@ -24,11 +26,6 @@ TestSeniorAppCallPersonalCarePartnerOnHomePage:
     - Role: command1
       App: command
   Actions:
-    # Clean unwanted prompts on Never Alone app before starting test.
-    - Type: clean_unwanted_prompts
-    # Clean calls on Care partner side.
-    - Type: case
-      Value: CarePartnerCleanCallQueueAndHangedCalls
     # Login to the Care Platform app with Care Partners account.
     - Type: case
       Value: CarePartnerLogin
@@ -251,6 +248,7 @@ TestSeniorAppVerifyInAppOfflineBehavior:
   Precases:
     - SetScheduledCallForSeniors
     - LoginNeverAloneHelper
+    - SeniorCleanPrompts
   Aftercases:
     - TerminateApp
   Roles:
@@ -259,8 +257,6 @@ TestSeniorAppVerifyInAppOfflineBehavior:
     - Role: desktopChrome
       App: desktop
   Actions:
-    # Clean unwanted prompts on Never Alone app before starting test.
-    - Type: clean_unwanted_prompts
     # Navigate to Notifications page.
     - Type: case
       Value: NotificationsPageNavigationHelper

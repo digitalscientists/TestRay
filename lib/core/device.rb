@@ -2057,7 +2057,7 @@ def wait_for_element_collection_to_exist(locator)
 end
 
 # Custom action to clean calls from queue and hanged calls on the care partner site
-def clean_call_queue_and_hanged_calls(action)
+def care_partner_clean_call_queue_and_hanged_calls(action)
   
   log_info("checking if there is any hanged call")
   if wait_for_element_to_exist("$PAGE.care_platform_home.active_call_section$")
@@ -2202,7 +2202,7 @@ def wait_for_mobile_element_to_disappear(locator)
 end
 
 # Custom action to clean all the unwanted prompts on Never Alone app before starting test.
-def clean_unwanted_prompts(action)
+def senior_clean_unwanted_prompts(action)
   count = 0
   loop do
     log_info("check if there is an existing prompt")

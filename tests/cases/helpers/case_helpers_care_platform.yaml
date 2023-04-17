@@ -1527,7 +1527,7 @@ CarePartnerCleanCallQueueAndHangedCalls:
     - Type: case
       Value: CarePartnerLogin
     # Clean Care Partner Call Queue and Hanged Calls.
-    - Type: clean_call_queue_and_hanged_calls
+    - Type: care_partner_clean_call_queue_and_hanged_calls
     # Log out.
     - Type: case
       Value: CarePlatformLogout

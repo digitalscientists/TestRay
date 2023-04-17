@@ -15,6 +15,8 @@ TestSeniorAppPersonalCarePartnerMessagePromptAndCallBackButton:
     MESSAGE_TO_PARTICIPANT: Automation Message
   Precases:
     - LoginNeverAloneHelper
+    - SeniorCleanPrompts
+    - CarePartnerCleanCallQueueAndHangedCalls
   Aftercases:
     - TerminateApp
   Roles:
@@ -30,11 +32,6 @@ TestSeniorAppPersonalCarePartnerMessagePromptAndCallBackButton:
     - Role: command1
       App: command  
   Actions:
-  # Clean unwanted prompts on Never Alone app before starting test.
-    - Type: clean_unwanted_prompts
-  # Clean calls on Care partner side.
-    - Type: case
-      Value: CarePartnerCleanCallQueueAndHangedCalls
   # Send a message to the Senior through the Care Platform logged in as a Care Partner.
     - Type: case
       Value: CarePartnerSendMessageToSenior
@@ -245,6 +242,7 @@ TestSeniorAppAnswerCallForProviderCalling:
     TEST_FOLDER: $AND_CMD_pwd$/Reports/executions/$AND_CMD_date +%s$
   Precases:
     - LoginNeverAloneHelper
+    - SeniorCleanPrompts
   Aftercases:
     - TerminateApp
   Roles:
@@ -260,8 +258,6 @@ TestSeniorAppAnswerCallForProviderCalling:
     - Role: command1
       App: command  
   Actions:
-  # Clean unwanted prompts on Never Alone app before starting test.
-    - Type: clean_unwanted_prompts
   # Call participant(Senior) logged in as a Provider.
     - Type: case
       Value: ProviderCallParticipant
