@@ -321,7 +321,7 @@ TestOnboarderClickandViewParticipantRecordfromListing:
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_participant_records.medical_tab$ 
-  # Click on Medical Needs Subtask
+  # Click on Medical Needs Subtab
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_participant_records.medical_medical_needs_subtab$
@@ -338,7 +338,7 @@ TestOnboarderClickandViewParticipantRecordfromListing:
         - Type: contain
           Var: SUBTAB_CLASS
           Value: 'active'
-  # Click on Behavioral Subtask
+  # Click on Behavioral Subtab
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_participant_records.medical_behavioral_subtab$
@@ -355,7 +355,7 @@ TestOnboarderClickandViewParticipantRecordfromListing:
         - Type: contain
           Var: SUBTAB_CLASS
           Value: 'active'
-  # Click on Medical History Subtask
+  # Click on Medical History Subtab
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_participant_records.medical_medical_history_subtab$
