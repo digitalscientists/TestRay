@@ -292,7 +292,7 @@ TestOnboarderAccessParticipantDirectoryandFilter:
       Strategy: xpath
       Id: $PAGE.care_platform_participant.status_dropdown_options$      
 
-# CXTB-256: Click and View Participant Record from Listing
+# CXTB-145: Click and View Participant Record from Listing
 TestOnboarderClickandViewParticipantRecordfromListing:
     Environment: Settings 
     Roles:
