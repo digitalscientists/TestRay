@@ -237,7 +237,7 @@ care_platform_facility:
   overview_button: //button[text()='Overview']
   local_hospitals_button: //button[text()='Local Hospitals']
   devices_button: //button[text()='Devices']
-  subtabs: //div[@class='tabs-content']
+  tabs_content: //div[@class='tabs-content']
   title_subtab_devices: //h4[text()='Facility Devices']
   title_subtab_local_hospital: //h4[text()='Local Hospitals & ED Contact']
 
