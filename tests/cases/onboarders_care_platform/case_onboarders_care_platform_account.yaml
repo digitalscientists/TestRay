@@ -316,7 +316,7 @@ TestOnboarderClickAndViewFacilitiesDevice:
       Id: $PAGE.care_platform_facility.overview_button$
     - Type: get_attribute
       Strategy: xpath
-      Id: //div[@class='tabs-content']
+      Id: $PAGE.care_platform_facility.subtabs$
       Greps:
       - var: SUBTAB_CLASS
         attr: tab-title
@@ -327,16 +327,16 @@ TestOnboarderClickAndViewFacilitiesDevice:
       - Type: contain
         Var: SUBTAB_CLASS 
         Value: 'Overview'
-    # click on Local Hospitals button and verify if tab showed belog to Local Hospitals
+    # click on Local Hospitals button and verify if tab showed belong to Local Hospitals
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_facility.local_hospitals_button$
     - Type: wait_for
       Strategy: xpath
-      Id: //h4[text()='Local Hospitals & ED Contact']
+      Id: $PAGE.care_platform_facility.title_subtab_local_hospital$
     - Type: get_attribute
       Strategy: xpath
-      Id: //div[@class='tabs-content']
+      Id: $PAGE.care_platform_facility.subtabs$
       Greps:
       - var: SUBTAB_CLASS
         attr: tab-title
@@ -353,10 +353,10 @@ TestOnboarderClickAndViewFacilitiesDevice:
       Id: $PAGE.care_platform_facility.devices_button$
     - Type: wait_for
       Strategy: xpath
-      Id: //h4[text()='Facility Devices']
+      Id: $PAGE.care_platform_facility.title_subtab_devices$
     - Type: get_attribute
       Strategy: xpath
-      Id: //div[@class='tabs-content']
+      Id: $PAGE.care_platform_facility.subtabs$
       Greps:
       - var: SUBTAB_CLASS
         attr: tab-title
@@ -373,17 +373,14 @@ TestOnboarderClickAndViewFacilitiesDevice:
       Id: $PAGE.care_platform_participant_details.records_button$
     - Type: wait_for
       Strategy: xpath
-      Id: //h4[text()='Facility Information']
-    - Type: wait_for
-      Strategy: xpath
-      Id: //strong[text()='Devices:']
+      Id: $PAGE.care_platform_facility_Record.info_title$
     # Click on Devices button to see the active devices list
     - Type: click
       Strategy: xpath
-      Id: //button[text()='Devices']
+      Id: $PAGE.care_platform_facility_Record.devices_button$
     - Type: get_attribute
       Strategy: xpath
-      Id: //div[@class='account-status account-status-active']
+      Id: $PAGE.care_platform_facility_Record.device_status$
       Greps:
       - var: SUBTAB_CLASS
         attr: class
