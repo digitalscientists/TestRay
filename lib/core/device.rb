@@ -2075,6 +2075,14 @@ def care_partner_clean_call_queue_and_hanged_calls(action)
       @driver.find_element(:xpath, convert_value_pageobjects("$PAGE.care_platform_call_portal.end_call_button$")).click
     end
     
+    log_info("Click on the No Message button if it appears")
+    if wait_for_element_to_exist("$PAGE.care_platform_call_portal.no_message_button$")
+      @driver.find_element(:xpath, convert_value_pageobjects("$PAGE.care_platform_call_portal.no_message_button$")).click
+      @driver.find_element(:xpath, convert_value_pageobjects("$PAGE.care_platform.navigation_home$")).click
+      wait_for_enabled_element("$PAGE.care_platform.call_queue_title$")
+      return
+    end
+
     log_info("complete the session")
     wait_for_enabled_element("$PAGE.care_platform_call_portal.video_status$")
     
