@@ -372,6 +372,7 @@ TestOnboarderClickandViewParticipantRecordfromListing:
         - Type: contain
           Var: SUBTAB_CLASS
           Value: 'active'
+          
 # CTBX-162- Click and View Facility Device Record From Listing
 TestOnboarderClickAndViewFacilitiesDevice:
     Environment: Settings
