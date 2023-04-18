@@ -1504,6 +1504,10 @@ TestCarePartnerCallParticipantsDeviceCallIgnored:
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_call_portal.no_message_button$
+      Condition:
+      - Value: 5
+        Operation: visible
+        Result: true
   # Call portal returns to no active call display.
     - Type: wait_for
       Strategy: xpath
