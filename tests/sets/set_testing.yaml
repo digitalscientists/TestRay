@@ -1,0 +1,4 @@
+SetTests:
+  Cases:
+    - Case: TestProviderLogOutPortalGoOffShift
+    - Case: TestProviderUseForgotPasswordLink

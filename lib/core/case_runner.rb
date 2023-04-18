@@ -49,6 +49,7 @@ class CaseRunner
     end
     begin
       steps_handler(case_name, parent_params["Role"], steps)
+      logger_step(case_name, @main_case, @main_case_id)
       log_info("All cases have finished") if case_name == @main_case
     rescue => e
       # if encountered error, first run any aftercases
