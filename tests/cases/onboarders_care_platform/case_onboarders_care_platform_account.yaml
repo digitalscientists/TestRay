@@ -292,7 +292,7 @@ TestOnboarderAccessParticipantDirectoryandFilter:
       Strategy: xpath
       Id: $PAGE.care_platform_participant.status_dropdown_options$
 
-# CTBX-262- Click and View Facility Device Record From Listing
+# CTBX-162- Click and View Facility Device Record From Listing
 TestOnboarderClickAndViewFacilitiesDevice:
     Environment: Settings
     Roles:
