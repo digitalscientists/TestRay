@@ -1618,7 +1618,7 @@ TestCarePartnerCallParticipantsDeviceCallMissed:
       Asserts:
         - Type: eq
           Var: PARTICIPANT_NOT_AVAILABLE_TEXT
-          Value: 'Miguel is not available.Would you like to leave a text message?'
+          Value: $AND_CLI_carepartner_user1_name$ is not available.Would you like to leave a text message?
   # Verify that there is an option for the care partner to leave a text message.
     - Type: wait_for
       Strategy: xpath
