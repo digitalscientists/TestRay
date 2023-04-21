@@ -50,9 +50,9 @@ providers_call_queue_page:
   call_device_btn: //button[text()='Call Device']
   subject_input: //div[label[text()='Subject']]//input
   details_textarea: //div[label[text()='Details']]//textarea
-  yes_issue_resolved_radio_btn: //label[input[@name='resolved'][@value='true']]
-  no_radiobtn: //label[input[@name='resolved'][@value='false']]
-  yes_recommended_discharge_radio_btn: //label[input[@name='recommendedDischarge'][@value='true']]
+  #yes_issue_resolved_radio_btn: //label[input[@name='resolved'][@value='true']]
+  #no_radiobtn: //label[input[@name='resolved'][@value='false']]
+  #yes_recommended_discharge_radio_btn: //label[input[@name='recommendedDischarge'][@value='true']]
   reason_last_option: //option[last()]
   time_follow_up_two_days_radiobtn: //label[input[@name='followUpTime'][@value=48]]
   submit_session_btn: //button[@type='submit']
@@ -67,8 +67,12 @@ providers_call_queue_page:
   reason_label: //div[@aria-hidden='false']//div[@class='font-bold mb-half mt']
   reason_input: //select[@id='reason']
   first_reason_option: //select[@id='reason']/option[not(@value)][1]
-  recommend_discharge_true_option: //input[@name='recommendedDischarge' and @value='true']/following-sibling::span
-  recommend_discharge_no_option: //input[@name='recommendedDischarge' and @value='false']/following-sibling::span
+  follow_up_reason_option: //*[@id='reason']/option[contains(text(),'Follow-up')]
+  follow_up_now_option: //input/following-sibling::div[text()='Now']
+#  recommend_discharge_true_option: //input[@name='recommendedDischarge' and @value='true']/following-sibling::span
+  recommend_discharge_yes_by_telehealth: //input[@name='recommendedDischarge' and @value='Yes, by telehealth']/following-sibling::span
+  recommend_discharge_yes_by_SNF: //input[@name='recommendedDischarge' and @value='Yes, by facility']/following-sibling::span
+  recommend_discharge_no_option: //input[@name='recommendedDischarge' and @value='No']/following-sibling::span
   follow_up_recommended_checkbox: //input[@id='followUpRecommended']
   assign_to_myself_checkbox: //input[@id='assignToMyself']
   selected_follow_up_time_option: //input[@name='followUpTime' and @checked]

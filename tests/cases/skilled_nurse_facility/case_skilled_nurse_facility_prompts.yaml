@@ -145,3 +145,113 @@ TestSNFMessagePromptFromProvider:
     - Type: click
       Strategy: class_chain
       Id: $PAGE.snf_notifications.modal_close_button$
+
+#CXTB-43 SNF - Provider Incoming Call - Missed
+TestSNFMissedCallFromProvider:
+  Environment: Settings
+  Precases:
+    - ProviderCleanBeforeTest
+  Aftercases:
+    - ProviderCleanSlate
+    - TerminateApp
+  Roles:
+    - Role: localiOS
+      Capabilities:
+        newCommandTimeout: 100
+      App: NeverAlone
+    - Role: desktopChrome
+      App: desktop 
+  Actions:
+    #Call login for nurses
+    - Type: case
+      Role: localiOS
+      Value: LoginSNFHelper
+  #Create follow-up call
+    #Generate a call from Provider to Facility Device.
+    - Type: case
+      Value: ProviderCallFacility
+    #SNF Device begins ringing and automatically displays "Incoming Call".
+    - Type: case
+      Value: SNFAnswerIncomingCall
+    - Type: sleep
+      Time: 3
+    #End call in Provider
+    - Type: wait_for
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_call_queue_page.end_call_btn$
+    - Type: click
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_call_queue_page.end_call_btn$
+    #Fill the Provider's call notes
+    - Type: wait_for
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_call_queue_page.call_notes_subject_input$
+    - Type: send_keys
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_call_queue_page.call_notes_subject_input$
+      Value: 'Automation Test subject'
+    - Type: send_keys
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_call_queue_page.call_notes_provider_input$
+      Value: 'Automation Test Notes: Test TestSNFMissedCallFromProvider'
+    - Type: if
+      If_Cases: 
+        - If_Case: IfSaveNotes
+  #Complete Session
+#    - Type: wait_for_property
+#      Strategy: xpath
+#      Id: $PAGE.providers_call_queue_page.complete_session_button$ 
+#      Property: disabled
+#      Value: "false"
+#    - Type: click
+#      Strategy: xpath
+#      Role: desktopChrome
+#      Id: $PAGE.providers_call_queue_page.complete_session_button$ 
+  #Fill survey for follow-up
+    - Type: wait_for
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_call_queue_page.post_call_survey_title$
+    - Type: click
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_call_queue_page.resolved_no_option$
+    - Type: wait_for
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_call_queue_page.reason_input$
+    - Type: click
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_call_queue_page.reason_input$
+    - Type: click
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_call_queue_page.follow_up_reason_option$
+    - Type: click
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_call_queue_page.follow_up_now_option$
+    - Type: click
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_call_queue_page.recommend_discharge_no_option$
+    - Type: scroll_to
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_call_queue_page.submit_exit_session_button$
+    - Type: click
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_call_queue_page.submit_exit_session_button$
+    - Type: wait_for
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_home_page.home_title$
+
+

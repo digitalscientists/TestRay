@@ -96,7 +96,7 @@ ProvidersCarePlatformEndCall:
       Id: $PAGE.providers_call_queue_page.resolved_true_option$
     - Type: click
       Strategy: xpath
-      Id: $PAGE.providers_call_queue_page.recommend_discharge_true_option$
+      Id: $PAGE.providers_call_queue_page.recommend_discharge_yes_by_SNF$
     - Type: scroll_to
       Strategy: xpath
       Id: $PAGE.providers_call_queue_page.submit_exit_session_button$
@@ -184,16 +184,16 @@ PostCallSurveyProvider:
     # Fill the Post-call Survey
     - Type: wait_for
       Strategy: xpath
-      Id: $PAGE.providers_call_queue_page.yes_issue_resolved_radio_btn$
+      Id: $PAGE.providers_call_queue_page.resolved_true_option$
     - Type: click
       Strategy: xpath
-      Id: $PAGE.providers_call_queue_page.yes_issue_resolved_radio_btn$             
+      Id: $PAGE.providers_call_queue_page.resolved_true_option$             
     - Type: wait_for
       Strategy: xpath
-      Id: $PAGE.providers_call_queue_page.yes_recommended_discharge_radio_btn$          
+      Id: $PAGE.providers_call_queue_page.recommend_discharge_yes_by_SNF$          
     - Type: click
       Strategy: xpath
-      Id: $PAGE.providers_call_queue_page.yes_recommended_discharge_radio_btn$
+      Id: $PAGE.providers_call_queue_page.recommend_discharge_yes_by_SNF$
     - Type: click
       Strategy: xpath
       Id: $PAGE.providers_call_queue_page.submit_exit_session_button$
@@ -429,7 +429,7 @@ SetFollowUpTicket:
       # Set and Fill the follow up ticket
     - Type: click
       Strategy: xpath
-      Id: $PAGE.providers_call_queue_page.no_radiobtn$   
+      Id: $PAGE.providers_call_queue_page.resolved_no_option$   
     - Type: click
       Strategy: xpath
       Id: $PAGE.providers_call_queue_page.reason_last_option$     
@@ -785,6 +785,35 @@ CompleteEndCallOnProviderSide:
       App: desktop       
   Actions:      
   #Fill the Provider's call notes
+      #If goes to survey de una vez, no habra call notes
+    - Type: if
+      If_Cases: 
+        - If_Case: IfSaveNotes
+  #Fill survey and end session
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_call_queue_page.post_call_survey_title$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_queue_page.resolved_true_option$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_queue_page.recommend_discharge_yes_by_SNF$
+    - Type: scroll_to
+      Strategy: xpath
+      Id: $PAGE.providers_call_queue_page.submit_exit_session_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_queue_page.submit_exit_session_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.home_title$
+
+IfSaveNotes:
+  Roles:
+    - Role: desktopChrome
+      App: desktop       
+  Actions:
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.providers_call_queue_page.call_notes_subject_input$
@@ -812,22 +841,3 @@ CompleteEndCallOnProviderSide:
     - Type: click
       Strategy: xpath
       Id: $PAGE.providers_call_queue_page.complete_session_button$ 
-  #Fill survey and end session
-    - Type: wait_for
-      Strategy: xpath
-      Id: $PAGE.providers_call_queue_page.post_call_survey_title$
-    - Type: click
-      Strategy: xpath
-      Id: $PAGE.providers_call_queue_page.resolved_true_option$
-    - Type: click
-      Strategy: xpath
-      Id: $PAGE.providers_call_queue_page.recommend_discharge_true_option$
-    - Type: scroll_to
-      Strategy: xpath
-      Id: $PAGE.providers_call_queue_page.submit_exit_session_button$
-    - Type: click
-      Strategy: xpath
-      Id: $PAGE.providers_call_queue_page.submit_exit_session_button$
-    - Type: wait_for
-      Strategy: xpath
-      Id: $PAGE.providers_home_page.home_title$

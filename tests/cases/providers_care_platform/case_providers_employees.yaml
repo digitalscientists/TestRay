@@ -238,7 +238,7 @@ TestProviderAnswerCompleteSessionFromEHP:
       Id: $PAGE.providers_call_queue_page.resolved_no_option$
     - Type: click
       Strategy: xpath
-      Id: $PAGE.providers_call_queue_page.recommend_discharge_true_option$
+      Id: $PAGE.providers_call_queue_page.recommend_discharge_yes_by_SNF$
     - Type: scroll_to
       Strategy: xpath
       Id: $PAGE.providers_call_queue_page.submit_exit_session_button$
