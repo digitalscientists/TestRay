@@ -1,15 +1,16 @@
 # CXTB-131: Call Portal View - Create Event for Participant.
 TestCarePartnerCreateEventForParticipant:
   Environment: Settings
-  # Precases:
-  #   - LoginNeverAloneHelper
-  #   - CarePartnerCleanCallQueueAndHangedCalls
-  #   - SeniorCleanPrompts
-  # Aftercases:
-  #   - TerminateApp
+  Precases:
+    - LoginNeverAloneHelper
+    - SeniorCleanPrompts
+  Aftercases:
+    - TerminateApp
   Roles:
     - Role: desktopChrome
-      App: desktop 
+      App: desktop
+    - Role: localiOS
+      App: NeverAlone
   Actions:
   # Calling Login case.
     - Type: case
@@ -198,8 +199,11 @@ TestCarePartnerCreateEventForParticipant:
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.care_platform_call_portal.participant_schedule_based_on_element$
-  # TODO: The participant’s device schedule will now also reflect this new event with all the details as entered.
-
+  # The participant’s device schedule will now also reflect this new event with all the details as entered.
+    - Type: wait_for
+      Role: localiOS
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_home.event_based_on_name_element$
   # Click on Create Event, Select "Telehealth Appointment" and then fill up the required fields.
     - Type: click
       Strategy: xpath
@@ -289,7 +293,6 @@ TestCarePartnerCreateEventForParticipant:
       Strategy: xpath
       Id: $PAGE.care_platform_call_portal.today_date_date_picker$
   # Click "Create event" button.
-  # Click on "Submit". ??
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_call_portal.submit_create_event_btn$
@@ -301,4 +304,8 @@ TestCarePartnerCreateEventForParticipant:
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.care_platform_call_portal.participant_schedule_based_on_element$
-  # TODO: The participant’s device schedule will now also reflect this new event with all the details as entered.
+  # The participant’s device schedule will now also reflect this new event with all the details as entered.
+    - Type: wait_for
+      Role: localiOS
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_home.event_based_on_name_element$
