@@ -74,7 +74,11 @@ module Reports
               keyword = step_description.match(/\w+ /)[0] 
             end
           end
-          step_description.slice! keyword
+          begin
+           step_description.slice! keyword
+          rescue => e
+            step_description.dup.slice! keyword
+          end
           # GETS MAIN CASE INFO: FILE AND LINE WHERE IT START, LINE WHERE THE STEP IS CALLED
           case_info = get_case_info(main_case, case_file, step_description)
           # GETS STEP CASE INFO: FILE AND LINE WHERE IT START

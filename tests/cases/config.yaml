@@ -66,10 +66,10 @@ Environments:
       provider_user1_pwd: e0fa218d6a41284ccb842d52a25c3750
       provider_user1_name: Cristian
       provider_user1_lastname: Sanchezone     
-      provider_user2: add_your_info
-      provider_user2_pwd: add_your_info
-      provider_user2_name: add_your_info
-      provider_user2_lastname: add_your_info      
+      provider_user2: csanchez+provider2@neural.com.do
+      provider_user2_pwd: 5c2fdcd6106c278ce610a335b90d4c32
+      provider_user2_name: Cristian
+      provider_user2_lastname: Sancheztwo      
 #Admin users      
       admin_user1: add_your_info
       admin_user1_pwd: add_your_info
@@ -100,10 +100,10 @@ Environments:
       facility_devices_requester_name: add_your_info
       facility_devices_requester_lastname: add_your_info
 #Employee users    
-      employee_user1: add_your_info
-      employee_user1_pwd: add_your_info
-      employee_user1_name: add_your_info
-      employee_user1_lastname: add_your_info
+      employee_user1: csanchez+employee1@neural.com.do
+      employee_user1_pwd: Neural123!
+      employee_user1_name: Cristian
+      employee_user1_lastname: Sanchezone
       employee_user1_dob: "YYYY-MM-DD" #you need to keep the date between quotation marks
       employee_user1_card_member_id: add_your_info
       employee_user1_phone_number: add_your_info #phone number is a combination of 10 digits, without parenthesis or dashes

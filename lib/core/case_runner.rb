@@ -65,7 +65,7 @@ class CaseRunner
 
       # fail case unless specified otherwise
       unless steps["NoRaise"]
-        logger_step_fail(case_name, @main_case, @main_case_id, e.message) if case_name != @main_case
+        logger_step_fail(case_name, @main_case, @main_case_id, e.message) #if case_name != @main_case
         raise "There was an error in case '#{case_name}': #{e.message}" 
       end
         
