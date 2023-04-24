@@ -170,78 +170,8 @@ TestSNFMissedCallFromProvider:
     - Type: case
       Role: localiOS
       Value: SeniorCleanPrompts
-  #Create follow-up call
-    #Generate a call from Provider to Facility Device.
     - Type: case
-      Value: ProviderCallFacility
-    - Type: sleep
-      Time: 3
-    - Type: case
-      Value: SNFAnswerIncomingCall
-    #End call in Provider
-    - Type: wait_for
-      Strategy: xpath
-      Role: desktopChrome
-      Id: $PAGE.providers_call_handling_page.end_call_btn$
-    - Type: click
-      Strategy: xpath
-      Role: desktopChrome
-      Id: $PAGE.providers_call_handling_page.end_call_btn$
-    #Fill the Provider's call notes
-    - Type: wait_for
-      Strategy: xpath
-      Role: desktopChrome
-      Id: $PAGE.providers_call_handling_page.call_notes_subject_input$
-    - Type: send_keys
-      Strategy: xpath
-      Role: desktopChrome
-      Id: $PAGE.providers_call_handling_page.call_notes_subject_input$
-      Value: 'Automation Test subject'
-    - Type: send_keys
-      Strategy: xpath
-      Role: desktopChrome
-      Id: $PAGE.providers_call_handling_page.call_notes_provider_input$
-      Value: 'Automation Test Notes: Test TestSNFMissedCallFromProvider'
-    - Type: if
-      If_Cases: 
-        - If_Case: IfSaveNotes
-    #Fill survey for follow-up
-    - Type: wait_for
-      Strategy: xpath
-      Role: desktopChrome
-      Id: $PAGE.providers_call_handling_page.post_call_survey_title$
-    - Type: click
-      Strategy: xpath
-      Role: desktopChrome
-      Id: $PAGE.providers_call_handling_page.resolved_no_option$
-    - Type: wait_for
-      Strategy: xpath
-      Role: desktopChrome
-      Id: $PAGE.providers_call_handling_page.reason_input$
-    - Type: click
-      Strategy: xpath
-      Role: desktopChrome
-      Id: $PAGE.providers_call_handling_page.reason_input$
-    - Type: click
-      Strategy: xpath
-      Role: desktopChrome
-      Id: $PAGE.providers_call_handling_page.follow_up_reason_option$
-    - Type: click
-      Strategy: xpath
-      Role: desktopChrome
-      Id: $PAGE.providers_call_handling_page.follow_up_now_option$
-    - Type: click
-      Strategy: xpath
-      Role: desktopChrome
-      Id: $PAGE.providers_call_handling_page.recommend_discharge_no_option$
-    - Type: scroll_to
-      Strategy: xpath
-      Role: desktopChrome
-      Id: $PAGE.providers_call_handling_page.submit_exit_session_button$
-    - Type: click
-      Strategy: xpath
-      Role: desktopChrome
-      Id: $PAGE.providers_call_handling_page.submit_exit_session_button$
+      Value: CreateAFollowUpForSNFMissedCall
     # Skip the survey.
     - Type: wait_for
       Strategy: class_chain
@@ -251,9 +181,6 @@ TestSNFMissedCallFromProvider:
       Strategy: class_chain
       Role: localiOS
       Id: $PAGE.seniors_app_post_call_survey.skip_survey_button$
-    - Type: sleep
-      Role: desktopChrome
-      Time: 1
     #Navigate again to home
     - Type: click
       Strategy: xpath
@@ -263,6 +190,7 @@ TestSNFMissedCallFromProvider:
       Strategy: xpath
       Role: desktopChrome
       Id: $PAGE.providers_home_page.home_title$
+    #Select a Follow-Up Call
     - Type: click
       Strategy: xpath
       Role: desktopChrome
@@ -270,8 +198,10 @@ TestSNFMissedCallFromProvider:
     - Type: sleep
       Role: desktopChrome
       Time: 1
-    - Type: case
-      Value: helperclickoncalldevice
+    - Type: click
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_follow_up_call_details_page.call_device_button$
     - Type: sleep
       Time: 61
       Role: desktopChrome
