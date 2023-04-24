@@ -197,9 +197,9 @@ PostCallSurveyProvider:
     - Type: click
       Strategy: xpath
       Id: $PAGE.providers_call_handling_page.submit_exit_session_button$
-#    - Type: wait_for
-#      Strategy: xpath
-#      Id: $PAGE.providers_notifications.call_completed_notification$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_notifications.call_completed_notification$
 
 ProviderNavigateToParticipants:
   Environment: Settings
@@ -841,3 +841,13 @@ IfSaveNotes:
     - Type: click
       Strategy: xpath
       Id: $PAGE.providers_call_handling_page.complete_session_button$ 
+
+helperclickoncalldevice:
+  Roles:
+    - Role: desktopChrome
+      App: desktop       
+  Actions:
+    - Type: click
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_follow_up_call_details_page.call_device_button$
