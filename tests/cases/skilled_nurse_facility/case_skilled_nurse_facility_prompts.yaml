@@ -170,88 +170,158 @@ TestSNFMissedCallFromProvider:
     #Generate a call from Provider to Facility Device.
     - Type: case
       Value: ProviderCallFacility
-    #SNF Device begins ringing and automatically displays "Incoming Call".
-    - Type: case
-      Value: SNFAnswerIncomingCall
     - Type: sleep
       Time: 3
+    - Type: case
+      Value: SNFAnswerIncomingCall
     #End call in Provider
     - Type: wait_for
       Strategy: xpath
       Role: desktopChrome
-      Id: $PAGE.providers_call_queue_page.end_call_btn$
+      Id: $PAGE.providers_call_handling_page.end_call_btn$
     - Type: click
       Strategy: xpath
       Role: desktopChrome
-      Id: $PAGE.providers_call_queue_page.end_call_btn$
+      Id: $PAGE.providers_call_handling_page.end_call_btn$
     #Fill the Provider's call notes
     - Type: wait_for
       Strategy: xpath
       Role: desktopChrome
-      Id: $PAGE.providers_call_queue_page.call_notes_subject_input$
+      Id: $PAGE.providers_call_handling_page.call_notes_subject_input$
     - Type: send_keys
       Strategy: xpath
       Role: desktopChrome
-      Id: $PAGE.providers_call_queue_page.call_notes_subject_input$
+      Id: $PAGE.providers_call_handling_page.call_notes_subject_input$
       Value: 'Automation Test subject'
     - Type: send_keys
       Strategy: xpath
       Role: desktopChrome
-      Id: $PAGE.providers_call_queue_page.call_notes_provider_input$
+      Id: $PAGE.providers_call_handling_page.call_notes_provider_input$
       Value: 'Automation Test Notes: Test TestSNFMissedCallFromProvider'
     - Type: if
       If_Cases: 
         - If_Case: IfSaveNotes
-  #Complete Session
-#    - Type: wait_for_property
-#      Strategy: xpath
-#      Id: $PAGE.providers_call_queue_page.complete_session_button$ 
-#      Property: disabled
-#      Value: "false"
-#    - Type: click
-#      Strategy: xpath
-#      Role: desktopChrome
-#      Id: $PAGE.providers_call_queue_page.complete_session_button$ 
   #Fill survey for follow-up
     - Type: wait_for
       Strategy: xpath
       Role: desktopChrome
-      Id: $PAGE.providers_call_queue_page.post_call_survey_title$
+      Id: $PAGE.providers_call_handling_page.post_call_survey_title$
     - Type: click
       Strategy: xpath
       Role: desktopChrome
-      Id: $PAGE.providers_call_queue_page.resolved_no_option$
+      Id: $PAGE.providers_call_handling_page.resolved_no_option$
     - Type: wait_for
       Strategy: xpath
       Role: desktopChrome
-      Id: $PAGE.providers_call_queue_page.reason_input$
+      Id: $PAGE.providers_call_handling_page.reason_input$
     - Type: click
       Strategy: xpath
       Role: desktopChrome
-      Id: $PAGE.providers_call_queue_page.reason_input$
+      Id: $PAGE.providers_call_handling_page.reason_input$
     - Type: click
       Strategy: xpath
       Role: desktopChrome
-      Id: $PAGE.providers_call_queue_page.follow_up_reason_option$
+      Id: $PAGE.providers_call_handling_page.follow_up_reason_option$
     - Type: click
       Strategy: xpath
       Role: desktopChrome
-      Id: $PAGE.providers_call_queue_page.follow_up_now_option$
+      Id: $PAGE.providers_call_handling_page.follow_up_now_option$
     - Type: click
       Strategy: xpath
       Role: desktopChrome
-      Id: $PAGE.providers_call_queue_page.recommend_discharge_no_option$
+      Id: $PAGE.providers_call_handling_page.recommend_discharge_no_option$
     - Type: scroll_to
       Strategy: xpath
       Role: desktopChrome
-      Id: $PAGE.providers_call_queue_page.submit_exit_session_button$
+      Id: $PAGE.providers_call_handling_page.submit_exit_session_button$
     - Type: click
       Strategy: xpath
       Role: desktopChrome
-      Id: $PAGE.providers_call_queue_page.submit_exit_session_button$
+      Id: $PAGE.providers_call_handling_page.submit_exit_session_button$
     - Type: wait_for
       Strategy: xpath
       Role: desktopChrome
       Id: $PAGE.providers_home_page.home_title$
+    - Type: click
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_home_page.follow_up_calls$
+    - Type: click_js
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_call_handling_page.call_device_btn$
+    - Type: sleep
+      Time: 61
+    - Type: wait_for
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_call_handling_page.end_call_btn$  
+    - Type: click_js
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_call_handling_page.end_call_btn$
+    #No message
+    - Type: wait_for
+      Strategy: class_chain
+      Role: desktopChrome
+      Id: $PAGE.providers_call_handling_page.no_message_button$
+    - Type: click
+      Strategy: class_chain
+      Role: desktopChrome
+      Id: $PAGE.providers_call_handling_page.no_message_button$
+    #Check sender
+    - Type: return_element_attribute
+      Strategy: class_chain
+      Role: localiOS
+      Id: $PAGE.snf_notifications.notification_details_from$
+      Attribute: label
+      ResultVar: FROM_VALUE
+    - Type: assert
+      Role: localiOS
+      Asserts:
+        - Type: contain
+          Var: FROM_VALUE
+          Value: Dr. $AND_CLI_provider_user1_name$ $AND_CLI_provider_user1_lastname$
+    #Check when
+    - Type: return_element_attribute
+      Strategy: class_chain
+      Role: localiOS
+      Id: $PAGE.snf_notifications.notification_details_sent$
+      Attribute: label
+      ResultVar: SENT_VALUE
+    - Type: assert
+      Role: localiOS
+      Asserts:
+        - Type: contain
+          Var: SENT_VALUE
+          Value: "Today at"
+    #Check follow up:
+    - Type: return_element_attribute
+      Strategy: class_chain
+      Role: localiOS
+      Id: $PAGE.snf_notifications.notification_details_follow_up$
+      Attribute: label
+      ResultVar: FOLLOW_VALUE
+    - Type: get_local_timestamp
+      Format: "%B %d, %Y"
+      Var: FOLLOW_UP_TIMESTAMP
+    - Type: assert
+      Role: localiOS
+      Asserts:
+        - Type: contain
+          Var: FOLLOW_VALUE
+          Value: $AND_CLI_provider_user1_name$ $AND_CLI_provider_user1_lastname$
+    - Type: assert
+      Role: localiOS
+      Asserts:
+        - Type: contain
+          Var: FOLLOW_VALUE
+          Value: $AND_CLI_FOLLOW_UP_TIMESTAMP$
+    #Close Message Prompt
+    - Type: click
+      Strategy: class_chain
+      Role: localiOS
+      Id: $PAGE.snf_notifications.modal_close_button$
+    
 
 
