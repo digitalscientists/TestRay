@@ -248,9 +248,6 @@ TestCarePartnerCreateEventForParticipant:
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_call_portal.next_btn$
-
-  
-
   # Verify that create event window is replaced with the "Telehealth request form" 
     - Type: wait_for
       Strategy: xpath
