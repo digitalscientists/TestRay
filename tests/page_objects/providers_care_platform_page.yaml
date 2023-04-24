@@ -1,4 +1,5 @@
 providers_home_page:
+  home_button: //nav/a[contains(.,'Home')]
   home_title: //h3[text()='Home']
   table : email
   follow_up_calls: //tr[contains(.,'Follow-up')][last()]
@@ -82,6 +83,9 @@ providers_call_handling_page:
   unnasign_button: //button[contains(text(),'Unassign')]
   video_status: //div[contains(@class,'video')]//div[@class='video-status']
   no_message_button: //button[contains(.,'No Message')]
+
+providers_follow_up_call_details_page:
+  call_device_button: //button[contains(.,'Call Device')]
   
 providers_employees_page:
   employees_label: //h3[text()='Employees']
