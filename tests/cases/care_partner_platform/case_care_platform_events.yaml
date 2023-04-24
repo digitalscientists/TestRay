@@ -3,6 +3,7 @@ TestCarePartnerCreateEventForParticipant:
   Environment: Settings
   Precases:
     - LoginNeverAloneHelper
+    - CarePartnerCleanCallQueueAndHangedCalls
     - SeniorCleanPrompts
   Aftercases:
     - TerminateApp
