@@ -381,22 +381,17 @@ TestCarePartnerEditEventForParticipant:
       Id: $PAGE.care_platform_call_portal.edit_event_modal_header$
   # You should not be able to Save and close the event unless all of these fields have been populate:
   # Subject, Date, Start Time and End Time
-    - Type: clear_field
+    - Type: loop
+      Times: 50
+      Case: CarePartnerClearSubjectInputField
+    - Type: wait_for_property
       Strategy: xpath
       Id: $PAGE.care_platform_call_portal.subject_input$
-    - Type: wait_for_attribute
-      Strategy: xpath
-      Id: $PAGE.care_platform_call_portal.subject_input$
-      Property: value
+      Property: defaultValue
       Value: ""
-    - Type: sleep
-      Time: 10
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_call_portal.save_and_close_btn$
-    - Type: wait_for
-      Strategy: xpath
-      Id: $PAGE.care_platform_notifications.event_saved_notification$
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.care_platform_call_portal.subject_input_error_label$
@@ -415,13 +410,16 @@ TestCarePartnerEditEventForParticipant:
       Value: $AND_CLI_UNIQUE_EVENT_NAME$
   # Click the "Save and close" button.
   # Create event window disappears.
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.save_and_close_btn$
     - Type: wait_not_visible
       Strategy: xpath
       Role: desktopChrome
       Id: $PAGE.care_platform_create_event_modal.modal_title$
     - Type: wait_for
       Strategy: xpath
-      Id: $PAGE.care_platform_notifications.event_created_notification$
+      Id: $PAGE.care_platform_notifications.event_saved_notification$
   # Schedule listing is updated to include the event you’ve just updated.
     - Type: wait_for
       Strategy: xpath
