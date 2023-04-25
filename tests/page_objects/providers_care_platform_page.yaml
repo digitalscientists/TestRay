@@ -22,6 +22,7 @@ providers_home_page:
   dropdown_username: userName
   button_help: //button[text() = 'Help']
   session_return_button: //button[@class='video-return']
+  toast_closed_ticket: //div[@class='Toastify']//div[text()='Follow-up ticket closed']
 
 providers_account_modal:
   credentials_navigation_tab: //*[@id='modals']//nav/button[text()='Credentials']
@@ -86,6 +87,11 @@ providers_call_handling_page:
 
 providers_follow_up_call_details_page:
   call_device_button: //button[contains(.,'Call Device')]
+  update_status_dropdown: //button[@class='status-filter-dropdown-toggle']
+  status_option_close_ticket: //button[@class='status-filter-dropdown-button' and contains(.,'Close Ticket')]
+  close_ticket_modal_title: //*[@id='dialogs']//h4[text()='Close Ticket']
+  close_ticket_reason_input: //*[@id='dialogs']//input[@name='reasonForClosing']
+  close_ticket_save_button: //*[@id='dialogs']//button[text()='Save and Close Ticket']
   
 providers_employees_page:
   employees_label: //h3[text()='Employees']

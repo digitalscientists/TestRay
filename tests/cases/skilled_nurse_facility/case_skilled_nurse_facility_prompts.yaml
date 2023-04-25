@@ -153,6 +153,7 @@ TestSNFMissedCallFromProvider:
     - ProviderCleanBeforeTest
   Aftercases:
     - TerminateApp
+    - CleanUsedFollowUp
     - ProviderCleanSlate
   Roles:
     - Role: localiOS
@@ -262,3 +263,8 @@ TestSNFMissedCallFromProvider:
       Strategy: class_chain
       Role: localiOS
       Id: $PAGE.snf_notifications.modal_close_button$
+    #Close Message in Provider
+    - Type: click
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_call_handling_page.no_message_button$
