@@ -37,7 +37,7 @@ Devices:
 Environments:
   Settings:
     Vars:
-      care_platform_url: https://care-platform-qa.chs-ds.com/
+      care_platform_url: https://chs.care-platform-support.chs-ds.com/
       employee_health_url: https://employee-health-portal-qa.chs-ds.com/
       backend_qa_url: https://never-alone-backend-qa.chs-ds.com/
       facility_ahc: alpha health center
@@ -62,8 +62,8 @@ Environments:
       carepartner_user2_name: add_your_info
       carepartner_user2_lastname: add_your_info
 #Provider users      
-      provider_user1: add_your_info
-      provider_user1_pwd: add_your_info
+      provider_user1: ksantana+provider@neural.com.do
+      provider_user1_pwd: ca92d98bd4fb39dd4abdb24ce8ac127f
       provider_user1_name: add_your_info
       provider_user1_lastname: add_your_info     
       provider_user2: add_your_info
