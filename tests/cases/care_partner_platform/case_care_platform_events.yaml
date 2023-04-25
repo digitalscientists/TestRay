@@ -371,3 +371,63 @@ TestCarePartnerEditEventForParticipant:
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.care_platform_call_portal.delete_event_button$
+  # Click the "Edit" button.
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.edit_event_button$
+  # "Edit event" window appears to the left of the Events panel, showing all information as currently entered.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.edit_event_modal_header$
+  # You should not be able to Save and close the event unless all of these fields have been populate:
+  # Subject, Date, Start Time and End Time
+    - Type: clear_field
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.subject_input$
+    - Type: wait_for_attribute
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.subject_input$
+      Property: value
+      Value: ""
+    - Type: sleep
+      Time: 10
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.save_and_close_btn$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_notifications.event_saved_notification$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.subject_input_error_label$
+    - Type: wait_for_attribute
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.subject_input_error_label$
+      Attribute: aria-hidden
+      Value: "false"
+  # Fill in the following fields to update the event.
+    - Type: generate_unique_name
+      Name: "Auto Event Update"
+      ResultVar: UNIQUE_EVENT_NAME
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.subject_input$
+      Value: $AND_CLI_UNIQUE_EVENT_NAME$
+  # Click the "Save and close" button.
+  # Create event window disappears.
+    - Type: wait_not_visible
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.care_platform_create_event_modal.modal_title$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_notifications.event_created_notification$
+  # Schedule listing is updated to include the event you’ve just updated.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.participant_schedule_based_on_element$
+  # The participant’s device schedule will now also reflect this updated event with all the details as entered.
+    - Type: wait_for
+      Role: localiOS
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_home.event_based_on_name_element$
