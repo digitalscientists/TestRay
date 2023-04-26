@@ -110,6 +110,7 @@ providers_employees_page:
   clear_search_button: //button[contains(@class,'button-circle')]
   first_darkened_letter_button: //button[@class='alphabet-letter'][not(@disabled)][1]
   selected_darkened_letter_button: //button[contains(@class,'is-selected')]
+  first_employee_in_list_strong: //*[@id='containerElement']/table[1]/tbody/tr[1]//strong
   first_facility: //*[@id='containerElement']/table[1]/tbody/tr[1]//strong
   first_employee: //*[@id='containerElement']/table[1]/tbody/tr[1]
   employee_dob_label: //strong[@class='color-green-300' and text()='DOB']
