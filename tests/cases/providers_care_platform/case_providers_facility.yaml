@@ -1,0 +1,99 @@
+# CXTB-185 Provider Can Click and View Facility Device Record from Listing
+TestProviderCanClickAndViewFacilitiesDevice:
+  Environment: Settings
+  Roles:
+    - Role: desktopChrome
+      App: "desktop"
+  Actions:
+    # Login-in provider Care Partner
+    - Type: case
+      Value: ProvidersCarePlatformLogin
+    # Click facilities button
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.facilities_navigation$
+    # click on the first listing record
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_employees_page.first_employee_in_list_strong$
+    # click on Overview button and verify if tab showing belongs to Overview
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_facilities_page.overview_button$
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.providers_facilities_page.tabs_content$
+      Greps:
+        - var: TAB_CLASS
+          attr: tab-title
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: TAB_CLASS
+          Value: "Overview"
+    # click on Local Hospitals button and verify if tab showing belongs to Local Hospitals
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_facilities_page.local_hospitals_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_facilities_page.title_subtab_local_hospital$
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.providers_facilities_page.tabs_content$
+      Greps:
+        - var: TAB_CLASS
+          attr: tab-title
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: TAB_CLASS
+          Value: "Local Hospitals"
+    # click on Devices button and verify if tab showeing belogs to Devices
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_facilities_page.devices_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_facilities_page.title_subtab_devices$
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.providers_facilities_page.tabs_content$
+      Greps:
+        - var: TAB_CLASS
+          attr: tab-title
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: TAB_CLASS
+          Value: "Devices"
+    # Click on record button and check the Overview Tab
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_facilities_page.records_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_facilities_page.info_title$
+    # Click on Devices button to see the facility device list
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_facilities_page.devices_button$
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.providers_facilities_page.device_status$
+      Greps:
+        - var: STATUS_CLASS
+          attr: class
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: STATUS_CLASS
+          Value: "active"
