@@ -1,0 +1,19 @@
+#CXTB-390: Access participant Listing, filter and View Facility Device Record.
+TestAccessParticipantDirectoryandViewDeviceRecordfromListing:
+  Environment: Settings 
+  Roles:
+  - Role: desktopChrome
+    App: "desktop"
+  Actions:
+  # Log in Care Platform as an Onboarder
+    - Type: case
+      Value: ProvidersCarePlatformLogin
+  # Go to Participants
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform.navigation_participant$
+      match: "(.*)"
+  # Click the first darkened letter button.
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant.first_darkened_letter_button$
