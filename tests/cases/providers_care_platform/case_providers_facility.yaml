@@ -15,7 +15,7 @@ TestProviderCanClickAndViewFacilitiesDevice:
     # click on the first listing record
     - Type: click
       Strategy: xpath
-      Id: $PAGE.providers_employees_page.first_facility$
+      Id: $PAGE.providers_home_page.first_row$
     # click on Overview button and verify if tab showing belongs to Overview
     - Type: click
       Strategy: xpath
