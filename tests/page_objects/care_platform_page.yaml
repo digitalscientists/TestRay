@@ -83,7 +83,7 @@ care_platform_participant:
   first_participant_row: //table/thead[contains(.,'Participant')]/following-sibling::tbody/tr[contains(.,'$AND_CLI_senior_user1_name$') and contains(.,'$AND_CLI_senior_user1_lastname$')][1]
   first_darkened_letter_button: //button[@class='alphabet-letter'][not(@disabled)][1]
   selected_darkened_letter_button: //button[contains(@class,'is-selected')]
-  senior_complete_name: //td[contains(text(),'$AND_CLI_senior_user1_name$')][strong[contains(text(),'$AND_CLI_senior_user1_lastname$')]]
+  senior_complete_name: //div[starts-with(@class, 'SearchableListTemplate_record')]//div[contains(text(),'$AND_CLI_senior_user1_name$')][strong[contains(text(),'$AND_CLI_senior_user1_lastname$')]]
   senior_1_row: //*[@id='containerElement']/table[1]/tbody/tr[1]
   first_senior_lastname: //*[@id='containerElement']/table[1]/tbody/tr[1]//strong
   call_portal_btn: //button[text()='Call Portal']
@@ -164,8 +164,11 @@ care_platform_call_portal:
   teleheath_appointment_option: //option[@value='telehealthAppointment']
   manual_appointment_option: //option[@value='manualAppointment']
   subject_input: //div[@class='app-modals']//input[@id='subject']
+  subject_input_error_label: //div[@class='app-modals']//input[@id='subject']/following-sibling::div
   location_input: //input[@id='location']
+  location_input_error_label: //input[@id='location']/following-sibling::div
   date_container: //div[@class='react-datepicker__input-container']
+  date_container_error_label: //label[@for='date']/following-sibling::div[@aria-hidden]
   today_date_date_picker: //div[@aria-current='date']
   start_time_picker: startTime
   end_time_picker: endTime
@@ -208,6 +211,9 @@ care_platform_call_portal:
   call_participant_records: //a[contains(text(),'Records')]
   telehealth_request_form_header: //div[@id='modals']//h4[@class='font-bold text-md' and text()='Telehealth Request Form']
   no_message_button: //div[@class='video video-ref']//a/button[contains(., 'No Message')]
+  yes_message_button: //form[contains(@class, 'video-message-form-box')]//button
+  participant_not_available_text: //div[@class='video-message-form text-center']//p
+  leave_message_participant_input: //textarea[@id='message']
 
 care_platform_call_settings_modal:
   video_settings_modal_title: //*[@id='modals']//h4[text()='Call Settings']
