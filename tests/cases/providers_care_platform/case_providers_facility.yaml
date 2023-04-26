@@ -19,7 +19,7 @@ TestProviderCanClickAndViewFacilitiesDevice:
     # click on Overview button and verify if tab showing belongs to Overview
     - Type: click
       Strategy: xpath
-      Id: $PAGE.providers_facilities_page.overview_button$
+      Id: $PAGE.providers_facilities_page.overview_tab$
     - Type: get_attribute
       Strategy: xpath
       Id: $PAGE.providers_facilities_page.tabs_content$
@@ -36,7 +36,7 @@ TestProviderCanClickAndViewFacilitiesDevice:
     # click on Local Hospitals button and verify if tab showing belongs to Local Hospitals
     - Type: click
       Strategy: xpath
-      Id: $PAGE.providers_facilities_page.local_hospitals_button$
+      Id: $PAGE.providers_facilities_page.local_hospitals_tab$
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.providers_facilities_page.title_subtab_local_hospital$
@@ -56,7 +56,7 @@ TestProviderCanClickAndViewFacilitiesDevice:
     # click on Devices button and verify if tab showeing belogs to Devices
     - Type: click
       Strategy: xpath
-      Id: $PAGE.providers_facilities_page.devices_button$
+      Id: $PAGE.providers_facilities_page.devices_tab$
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.providers_facilities_page.title_subtab_devices$
@@ -83,7 +83,7 @@ TestProviderCanClickAndViewFacilitiesDevice:
     # Click on Devices button to see the facility device list
     - Type: click
       Strategy: xpath
-      Id: $PAGE.providers_facilities_page.devices_button$
+      Id: $PAGE.providers_facilities_page.facility_devices_tab$
     - Type: get_attribute
       Strategy: xpath
       Id: $PAGE.providers_facilities_page.device_status$
