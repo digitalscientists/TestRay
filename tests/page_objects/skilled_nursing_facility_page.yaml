@@ -44,6 +44,10 @@ snf_call_portal:
 snf_notifications:
   missed_call_modal_title: Missed Outgoing Call
   modal_close_button: "**/XCUIElementTypeButton[`label ENDSWITH 'Close'`]"
+  notification_details_from: "**/XCUIElementTypeOther[`label BEGINSWITH 'From:'`][-1]"
+  notification_details_sent: "**/XCUIElementTypeOther[`label BEGINSWITH 'Sent:'`]"
+  notification_details_when: "**/XCUIElementTypeOther[`label BEGINSWITH 'When:'`][-1]"
+  notification_details_follow_up: "**/XCUIElementTypeOther[`label BEGINSWITH 'Follow-up:'`][-1]"
 
 snf_offline_prompt:
   connection_error_header:  "**/XCUIElementTypeStaticText[`label == 'Connection Error'`]"
@@ -58,5 +62,6 @@ snf_incoming_call:
 
 snf_post_call_survey:
   great_answer_button: "**/XCUIElementTypeOther[`label == 'Great'`]"
+  bad_answer_button: "Bad"
   thank_you_label: "**/XCUIElementTypeStaticText[`label == 'Thank you for your feedback'`]"
   to_home_button: "**/XCUIElementTypeOther[`label == 'To Home'`]"

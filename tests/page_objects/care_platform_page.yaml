@@ -27,6 +27,8 @@ care_platform_home:
   first_call_of_queue: //tbody[@role='rowgroup']/tr[1]
   answer_call: //button[text()='Answer Call']
   call_based_on_participant_name: //tbody[@role='rowgroup']/tr//strong[text() = '$AND_CLI_senior_user1_name$ $AND_CLI_senior_user1_lastname$']
+  active_call_section: //div[contains(@class,'app-video app-video-fixed')] # doesn't matter if its expanded/collapsed
+  call_queue_calls: //table//tbody/tr
 
 care_platform_header:
   app_logo: //header//div[@class='app-header-logo']/img
@@ -81,7 +83,7 @@ care_platform_participant:
   first_participant_row: //table/thead[contains(.,'Participant')]/following-sibling::tbody/tr[contains(.,'$AND_CLI_senior_user1_name$') and contains(.,'$AND_CLI_senior_user1_lastname$')][1]
   first_darkened_letter_button: //button[@class='alphabet-letter'][not(@disabled)][1]
   selected_darkened_letter_button: //button[contains(@class,'is-selected')]
-  senior_complete_name: //td[contains(text(),'$AND_CLI_senior_user1_name$')][strong[contains(text(),'$AND_CLI_senior_user1_lastname$')]]
+  senior_complete_name: //div[starts-with(@class, 'SearchableListTemplate_record')]//div[contains(text(),'$AND_CLI_senior_user1_name$')][strong[contains(text(),'$AND_CLI_senior_user1_lastname$')]]
   senior_1_row: //*[@id='containerElement']/table[1]/tbody/tr[1]
   first_senior_lastname: //*[@id='containerElement']/table[1]/tbody/tr[1]//strong
   call_portal_btn: //button[text()='Call Portal']
@@ -162,8 +164,11 @@ care_platform_call_portal:
   teleheath_appointment_option: //option[@value='telehealthAppointment']
   manual_appointment_option: //option[@value='manualAppointment']
   subject_input: //div[@class='app-modals']//input[@id='subject']
+  subject_input_error_label: //div[@class='app-modals']//input[@id='subject']/following-sibling::div
   location_input: //input[@id='location']
+  location_input_error_label: //input[@id='location']/following-sibling::div
   date_container: //div[@class='react-datepicker__input-container']
+  date_container_error_label: //label[@for='date']/following-sibling::div[@aria-hidden]
   today_date_date_picker: //div[@aria-current='date']
   start_time_picker: startTime
   end_time_picker: endTime
@@ -194,6 +199,7 @@ care_platform_call_portal:
   medical_question_option: //option[@value='medicalQuestion']
   subcategory_select: subcategory
   located_provider_option: //option[@value='locatedProvider']
+  accidental_call_option: //option[@value='accidentalCall']
   submit_and_exit_session_button: //button[contains(text(),'Submit and Exit Session')]
   participant_schedule_based_on_element: //strong[text()='$AND_CLI_UNIQUE_EVENT_NAME$']
   edit_event_button: //div[@class='accordion-item is-open']//button[text()='Edit']
@@ -204,6 +210,10 @@ care_platform_call_portal:
   unanswered_call_icon: //div[@class='video-unanswered']
   call_participant_records: //a[contains(text(),'Records')]
   telehealth_request_form_header: //div[@id='modals']//h4[@class='font-bold text-md' and text()='Telehealth Request Form']
+  no_message_button: //div[@class='video video-ref']//a/button[contains(., 'No Message')]
+  yes_message_button: //form[contains(@class, 'video-message-form-box')]//button
+  participant_not_available_text: //div[@class='video-message-form text-center']//p
+  leave_message_participant_input: //textarea[@id='message']
 
 care_platform_call_settings_modal:
   video_settings_modal_title: //*[@id='modals']//h4[text()='Call Settings']
@@ -228,9 +238,23 @@ care_platform_notifications:
   event_created_notification: //div[text()='Event created']
   event_saved_notification: //div[@class='Toastify']//div[text()='Event saved']
   event_deleted_notification: //div[@class='Toastify']//div[text()='Event deleted']
+  failed_to_join_call_notification: //div[@class='Toastify']//div[text()='Failed to join call']
+  call_already_answered_notification: //div[@class='Toastify']//div[text()='Call already answered']
 
 care_platform_facility:
   search_button: searchButton
   search_text: searchText
   facility_name: //h3[@class='text-xl color-white font-normal']
   facilities_button: //div[@class='app-sidebar-menu-item-label'][text()='Facilities']
+  overview_button: //button[text()='Overview']
+  local_hospitals_button: //button[text()='Local Hospitals']
+  devices_button: //button[text()='Devices']
+  tabs_content: //div[@class='tabs-content']
+  title_subtab_devices: //h4[text()='Facility Devices']
+  title_subtab_local_hospital: //h4[text()='Local Hospitals & ED Contact']
+
+care_platform_facility_Record:
+  info_title: //h4[text()='Facility Information']
+  devices_button: //button[text()='Devices']
+  device_status: //div[@class='account-status account-status-active']
+  

@@ -211,8 +211,11 @@ TestSNFNewRequestFormBehavior:
 #CXTB-17 - New Request to Provider - Successful Call Connect
 TestSNFRequestSuccessfulCallConnect:
   Environment: Settings
+  Precases:
+    - ProviderCleanBeforeTest
   Aftercases:
     - TerminateApp
+    - ProviderCleanSlate
   Roles:
     - Role: localiOS
       App: NeverAlone
@@ -327,33 +330,44 @@ TestSNFRequestSuccessfulCallConnect:
     - Type: click
       Strategy: xpath
       Role: desktopChrome
-      Id: $PAGE.providers_call_queue_page.answer_call_button$
-  ## back to SNF and end call
+      Id: $PAGE.providers_call_handling_page.answer_call_button$
+  #End Call
     - Type: wait_for
-      Role: localiOS
-      Strategy: class_chain
-      Id: $PAGE.snf_call_portal.end_call_button$
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_call_handling_page.end_call_btn$
     - Type: click
-      Role: localiOS
-      Strategy: class_chain
-      Id: $PAGE.snf_call_portal.end_call_button$
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_call_handling_page.end_call_btn$
+  #Complete Session
+    - Type: case
+      Value: PostCallSurveyProvider
   # Select the Bad option on the Post Survey screen.
     - Type: wait_for
       Role: localiOS
-      Strategy: xpath
-      Id: $PAGE.seniors_app_post_call_survey.bad_answer_button$
+      Strategy: id
+      Id: $PAGE.snf_post_call_survey.bad_answer_button$
     - Type: click
       Role: localiOS
-      Strategy: xpath
-      Id: $PAGE.seniors_app_post_call_survey.bad_answer_button$
+      Strategy: id
+      Id: $PAGE.snf_post_call_survey.bad_answer_button$
   # Click on the back to select button.
+    - Type: wait_for
+      Role: localiOS
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_post_call_survey.back_to_select_button$
     - Type: click
       Strategy: class_chain
       Role: localiOS
       Id: $PAGE.seniors_app_post_call_survey.back_to_select_button$
+    - Type: wait_not_visible
+      Role: localiOS
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_post_call_survey.back_to_select_button$
   # Select the Ok option.
     - Type: click
-      Strategy: xpath
+      Strategy: class_chain
       Role: localiOS
       Id: $PAGE.seniors_app_post_call_survey.ok_answer_button$
   # Select reason
@@ -378,16 +392,17 @@ TestSNFRequestSuccessfulCallConnect:
       Role: localiOS
       Strategy: xpath
       Id: $PAGE.snf_home.new_request_btn$
-    - Type: case
-      Value: PostCallSurveyProvider
 
 #CXTB-24 New Request to Provider - Missed Call
 #CXTB-25 Existing Request - Place Call to Provider
 #CXTB-127 See Call Appear in Queue, Assign and Review Details
 TestSNFCheckQueueandReviewDetails:
   Environment: Settings
+  Precases:
+    - ProviderCleanBeforeTest
   Aftercases:
     - TerminateApp
+    - ProviderCleanSlate
   Roles:
     - Role: localiOS
       Capabilities:
@@ -499,7 +514,7 @@ TestSNFCheckQueueandReviewDetails:
     - Type: case
       Value: ProvidersCarePlatformLogin
       Role: desktopChrome
-  #Selects first on demand call
+  #Selects on demand call
     - Type: click
       Strategy: xpath
       Role: desktopChrome
@@ -508,7 +523,7 @@ TestSNFCheckQueueandReviewDetails:
     - Type: get_attribute
       Strategy: xpath
       Role: desktopChrome
-      Id: $PAGE.providers_call_queue_page.details_title$
+      Id: $PAGE.providers_call_handling_page.details_title$
       Greps:
       - var: CALL_FACILITY_NAME
         attr: innerText
@@ -523,16 +538,16 @@ TestSNFCheckQueueandReviewDetails:
     - Type: click
       Strategy: xpath
       Role: desktopChrome
-      Id: $PAGE.providers_call_queue_page.assign_to_me_button$
+      Id: $PAGE.providers_call_handling_page.assign_to_me_button$
     - Type: wait_for
       Strategy: xpath
       Role: desktopChrome
-      Id: $PAGE.providers_call_queue_page.unnasign_button$
+      Id: $PAGE.providers_call_handling_page.unnasign_button$
   #Check patient name
     - Type: get_attribute
       Strategy: xpath
       Role: desktopChrome
-      Id: $PAGE.providers_call_queue_page.details_patient_name$
+      Id: $PAGE.providers_call_handling_page.details_patient_name$
       Greps:
       - var: PATIENT_NAME
         attr: innerText
@@ -547,7 +562,7 @@ TestSNFCheckQueueandReviewDetails:
     - Type: get_attribute
       Strategy: xpath
       Role: desktopChrome
-      Id: $PAGE.providers_call_queue_page.details_requester_name$
+      Id: $PAGE.providers_call_handling_page.details_requester_name$
       Greps:
       - var: REQUESTER_NAME
         attr: innerText
@@ -568,12 +583,12 @@ TestSNFCheckQueueandReviewDetails:
     - Type: click
       Strategy: xpath
       Role: desktopChrome
-      Id: $PAGE.providers_call_queue_page.answer_call_button$
+      Id: $PAGE.providers_call_handling_page.answer_call_button$
   #Provider ends call.
     - Type: click
       Role: desktopChrome
       Strategy: xpath
-      Id: $PAGE.providers_call_queue_page.end_call_btn$
+      Id: $PAGE.providers_call_handling_page.end_call_btn$
   #Provider fills up Post call Survey.
     - Type: case
       Value: PostCallSurveyProvider
