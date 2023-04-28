@@ -1,4 +1,5 @@
 #CXTB-170: Participant Page Navigation
+#CXTB-171: Access Participant Directory & Filter
 TestAccessParticipantDirectoryandViewDeviceRecordfromListing:
   Environment: Settings 
   Roles:
@@ -12,7 +13,6 @@ TestAccessParticipantDirectoryandViewDeviceRecordfromListing:
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform.navigation_participant$      
-#CXTB-171: Access Participant Directory & Filter
   # Get the value to compare.
     - Type: get_text
       Strategy: xpath
