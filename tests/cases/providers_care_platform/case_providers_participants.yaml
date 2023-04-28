@@ -13,7 +13,13 @@ TestAccessParticipantDirectoryandViewDeviceRecordfromListing:
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform.navigation_participant$
-      match: "(.*)"
+  # Get the value to compare later.
+    - Type: get_text
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant.first_darkened_letter_button$
+      Greps:
+        - var: LASTNAME_FILTER_LETTER
+          match: "(.*)"
   # Click the first darkened letter button.
     - Type: click
       Strategy: xpath
@@ -24,11 +30,23 @@ TestAccessParticipantDirectoryandViewDeviceRecordfromListing:
       Id: $PAGE.care_platform_participant.first_senior_lastname$
       Greps:
         - var: LASTNAME_FIRST_LETTER
-          match: ^[a-zA-Z]      
+          match: ^[a-zA-Z]  
+    - Type: assert
+      Asserts: 
+      - Type: eq
+        Var: LASTNAME_FIRST_LETTER
+        Value: $AND_CLI_LASTNAME_FILTER_LETTER$
   # Remove the filter by clicking on the letter.
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_participant.selected_darkened_letter_button$
+  # Get the first lastname in the list.
+    - Type: get_text
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant.first_senior_lastname$
+      Greps:
+        - var: LASTNAME_FIRST_PARTICIPANT_NO_FILTER
+          match: (.*)
   # Add the search filter.
     - Type: click
       Strategy: xpath
@@ -37,10 +55,38 @@ TestAccessParticipantDirectoryandViewDeviceRecordfromListing:
       Strategy: xpath
       Id: $PAGE.care_platform_participant.search_input$
       Value: $AND_CLI_LASTNAME_FIRST_PARTICIPANT_NO_FILTER$
-  # Clear the search by clicking "x" on right of the field.
+  # Verify there is at least one participant with that name.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant.first_senior_lastname$
+    - Type: get_text
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant.first_senior_lastname$
+      Greps:
+        - var: LASTNAME_FIRST_PARTICIPANT
+          match: (.*)
+  # Verify the first participant lastname contains the text filtered.
+    - Type: assert
+      Asserts: 
+      - Type: contain
+        Var: LASTNAME_FIRST_PARTICIPANT
+        Value: $AND_CLI_LASTNAME_FIRST_PARTICIPANT_NO_FILTER$
+  # Clear the search by clicking small "x" on right of the field.
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_participant.clear_search_button$
+  # Verify there is at least one participant.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant.first_senior_lastname$
+  # Click on a participant.
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant.senior_1_row$
+  # Verify that the info is showing after selecting the participant.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant.senior_1_row$
   # filter by status
     - Type: click
       Strategy: xpath
@@ -64,7 +110,7 @@ TestAccessParticipantDirectoryandViewDeviceRecordfromListing:
       Id: $PAGE.care_platform_participant.status_dropdown_options$
     - Type: click
       Strategy: xpath
-      Id: $PAGE.care_platform_participant.status_dropdown_options$
+      Id: $PAGE.care_platform_participant.status_dropdown_options$      
 #Click and View Facility Device Record from Listing
   # Click facilities button
     - Type: click
