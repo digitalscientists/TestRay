@@ -1,4 +1,4 @@
-#CXTB-390: Access participant Listing, filter and View Facility Device Record.
+#CXTB-170: Participant Page Navigation
 TestAccessParticipantDirectoryandViewDeviceRecordfromListing:
   Environment: Settings 
   Roles:
@@ -8,12 +8,12 @@ TestAccessParticipantDirectoryandViewDeviceRecordfromListing:
   # Log in Care Platform as an Provider
     - Type: case
       Value: ProvidersCarePlatformLogin
-#Access Participant Directory & Filter
   # Go to Participants
     - Type: click
       Strategy: xpath
-      Id: $PAGE.care_platform.navigation_participant$
-  # Get the value to compare later.
+      Id: $PAGE.care_platform.navigation_participant$      
+#CXTB-171: Access Participant Directory & Filter
+  # Get the value to compare.
     - Type: get_text
       Strategy: xpath
       Id: $PAGE.care_platform_participant.first_darkened_letter_button$
