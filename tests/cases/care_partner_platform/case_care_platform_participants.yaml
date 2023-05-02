@@ -1739,3 +1739,69 @@ TestCarePartnerCallParticipantsDeviceCallMissed:
         - Type: eq
           Var: MESSAGE_VALUE
           Value: $AND_CLI_MESSAGE_TO_PARTICIPANT$
+
+# CXTB-148: Participant Component - Track Time and Edit Follow-up Tickets for Participant
+TestCarePartnerTrackTimeAndEditFollowUpTicketsParticipantComponent:
+  Environment: Settings
+  Precases:
+    - LoginNeverAloneHelper
+    - CarePartnerCleanCallQueueAndHangedCalls
+    - SeniorCleanPrompts
+  Aftercases:
+    - TerminateApp
+  Roles:
+    - Role: desktopChrome
+      App: desktop 
+    - Role: localiOS
+      App: NeverAlone
+  Actions:
+  # Calling Login case.
+    - Type: case
+      Value: CarePartnerLogin
+  # Generate unique name for the follow up ticket.
+    - Type: generate_unique_name
+      Name: "FollowUp Ticket"
+      ResultVar: FOLLOW_UP_TICKET
+  # Generate a Follow Up Ticket.
+    - Type: case
+      Value: CarePartnerCreateFollowUpTicket
+  # Navigate to Participants.
+    - Type: case
+      Value: CarePartnerNavigateToParticipants
+  # Click on the corresponding participant.
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant.senior_complete_name$
+  # Click on the "Call Portal" button.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant.call_portal_btn$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant.call_portal_btn$
+  # Click on the "Follow-up Tickets" tab on the left bottom of the page.
+    #  Todo: remove this sleep.
+    - Type: sleep
+      Time: 5
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_details.follow_up_tab_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_details.follow_up_tab_button$
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_details.call_history_list$
+  # User should see a list of Follow-up Tickets.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_details.follow_up_tickets_list$
+  # Click on a follow-up ticket in the listing.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_details.follow_up_ticket_based_on_name$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_details.follow_up_ticket_based_on_name$
+  # Participant component appears on the right side of the screen, with the related follow-up ticket expanded for review.
+  
