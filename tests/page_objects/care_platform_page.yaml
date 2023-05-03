@@ -88,7 +88,7 @@ care_platform_participant:
   first_senior_lastname: //*[@id='containerElement']/div[@role='button'][1]//strong
   call_portal_btn: //button[text()='Call Portal']
   search_button: //button[span[@class='icon-search']]
-  search_input: //input[contains(@placeholder,'Search by participant name')]
+  search_input: //input[@id='searchText']
   clear_search_button: //button[contains(@class,'button-circle')]
   status_dropdown_button: //button[contains(@class,'queue-filter-dropdown-toggle')]
   status_dropdown_options: //div[contains(@class, 'queue-filter-dropdown')]  
