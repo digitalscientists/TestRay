@@ -1803,5 +1803,56 @@ TestCarePartnerTrackTimeAndEditFollowUpTicketsParticipantComponent:
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_participant_details.follow_up_ticket_based_on_name$
-  # Participant component appears on the right side of the screen, with the related follow-up ticket expanded for review.
-  
+  # Participant component appears on the left side of the screen, with the related follow-up ticket expanded for review.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_details.completed_follow_up_ticket_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_details.edit_follow_up_ticket_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_details.time_to_complete_input$
+  # Click "Edit" button on expanded follow-up ticket.
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_details.edit_follow_up_ticket_button$
+  # Section updates to show the current follow-up ticket details in editable fields.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_details.ticket_subject_input$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_details.ticket_kind_input$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_details.ticket_assigned_input$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_details.ticket_date_input$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_details.delayed_checkbox$
+  # Note: "Details of delay" field will only be present if the "This is delayed" box is selected
+  # Click on the "This is delayed" checkbox and verify that the "Details of Delay" appears.
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_details.delayed_label$
+    - Type: wait_for_attribute
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_details.details_of_delay_element$
+      Attribute: aria-hidden
+      Value: "false"
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_details.delayed_label$
+    - Type: wait_for_property
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_details.delayed_checkbox$
+      Property: value
+      Value: "false"
+    - Type: wait_for_attribute
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_details.details_of_delay_element$
+      Attribute: aria-hidden
+      Value: "true"
