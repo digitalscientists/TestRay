@@ -116,7 +116,9 @@ care_platform_participant_details:
   follow_up_tickets_list: //div[@class='tabs-content' and @id='follow-up-tickets-tab']
   call_history_list: ///div[@class='tabs-content' and @id='call-history-tab']
   follow_up_ticket_based_on_name: //div[@class='accordion-item']//div[text()='$AND_CLI_FOLLOW_UP_TICKET$']
+  follow_up_ticket_category_label: //div[@class='accordion-item']//div[text()='$AND_CLI_FOLLOW_UP_TICKET$']/preceding-sibling::div//div[contains(@class, 'call-type-label')]
   create_ticket_button: //div[@tab-title='Follow-up Tickets']//button[contains(text(),'Create Ticket')]
+  follow_up_ticket_details_label: //div[@id='follow-up-tickets-tab']//div[contains(@class, 'is-open')]//form/p
   completed_follow_up_ticket_button: //div[@id='follow-up-tickets-tab']//button[text()='Completed']
   edit_follow_up_ticket_button: //div[@id='follow-up-tickets-tab']//div[contains(@class, 'is-open')]//button[text()='Edit']
   time_to_complete_input: //input[@name='timeToComplete']
@@ -131,7 +133,10 @@ care_platform_participant_details:
   delayed_checkbox: //input[@id='delayed']
   delayed_label: //input[@id='delayed']/following-sibling::span
   details_of_delay_element: //textarea[@id='detailsOfDelay']/ancestor::div[@aria-hidden]
+  details_of_delay_input: //textarea[@id='detailsOfDelay']
+  details_input: //textarea[@id='details']
   save_ticket_button: //button[contains(text(),'Save Ticket')]
+  save_edits_button: //button[text()='Save Edits']
   new_ticket_notification: //div[@class='Toastify']//div[text()='Follow-up ticket created']
   new_ticket_subject: //div[@tab-title='Follow-up Tickets']//div[@class='accordion-item-toggle']//div[contains(text(),'Automated test')]
   new_ticket_date: (//div[@class='accordion-item']//div[contains(text(),'Automated test')]/preceding-sibling::div/time[contains(text(),'$AND_CLI_TODAYS_DATE$')])[last()]
@@ -252,6 +257,7 @@ care_platform_notifications:
   event_deleted_notification: //div[@class='Toastify']//div[text()='Event deleted']
   failed_to_join_call_notification: //div[@class='Toastify']//div[text()='Failed to join call']
   call_already_answered_notification: //div[@class='Toastify']//div[text()='Call already answered']
+  follow_up_ticket_saved_notification: //div[@class='Toastify']//div[text()='Follow-up ticket saved']
 
 care_platform_facility:
   search_button: searchButton
