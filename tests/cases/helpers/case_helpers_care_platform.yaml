@@ -1546,17 +1546,11 @@ CarePartnerCleanCallQueueAndHangedCalls:
 
 # Creates a Follow-up Ticket.
 CarePartnerCreateFollowUpTicket:
-  Vars:
-  #   LOGOUT_OPTION: "Go Off Shift"
-      FOLLOW_UP_TICKET_NAME: 
   Environment: Settings
   Roles:
     - Role: desktopChrome
       App: desktop
   Actions:
-    # # Log in.
-    # - Type: case
-    #   Value: CarePartnerLogin
     # Go to participants
     - Type: click
       Strategy: xpath
@@ -1573,6 +1567,9 @@ CarePartnerCreateFollowUpTicket:
       Strategy: xpath
       Id: $PAGE.care_platform_participant_details.follow_up_tab_button$
     # Click on Create Ticket.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_details.create_ticket_button$
     - Type: scroll_to
       Strategy: xpath
       Id: $PAGE.care_platform_participant_details.create_ticket_button$
@@ -1616,6 +1613,3 @@ CarePartnerCreateFollowUpTicket:
   # Navigate to Home.  
     - Type: case
       Value: CarePartnerNavigateToHome
-    # # Log out.
-    # - Type: case
-    #   Value: CarePlatformLogout
