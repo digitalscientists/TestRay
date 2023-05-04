@@ -137,6 +137,7 @@ care_platform_participant_details:
   details_input: //textarea[@id='details']
   save_ticket_button: //button[contains(text(),'Save Ticket')]
   save_edits_button: //button[text()='Save Edits']
+  save_and_archive_button: //div[@id='dialogs']//button[text()='Save and Archive']
   new_ticket_notification: //div[@class='Toastify']//div[text()='Follow-up ticket created']
   new_ticket_subject: //div[@tab-title='Follow-up Tickets']//div[@class='accordion-item-toggle']//div[contains(text(),'Automated test')]
   new_ticket_date: (//div[@class='accordion-item']//div[contains(text(),'Automated test')]/preceding-sibling::div/time[contains(text(),'$AND_CLI_TODAYS_DATE$')])[last()]
@@ -258,6 +259,7 @@ care_platform_notifications:
   failed_to_join_call_notification: //div[@class='Toastify']//div[text()='Failed to join call']
   call_already_answered_notification: //div[@class='Toastify']//div[text()='Call already answered']
   follow_up_ticket_saved_notification: //div[@class='Toastify']//div[text()='Follow-up ticket saved']
+  follow_up_ticket_completed_notification: //div[@class='Toastify']//div[text()='Follow-up ticket completed']
 
 care_platform_facility:
   search_button: searchButton
