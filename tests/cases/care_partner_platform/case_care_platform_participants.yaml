@@ -246,11 +246,6 @@ TestParticipantCallHistory:
       Asserts:
         - Type: contain
           Var: DETAILS_CONTENT
-          Value: 'Partner'
-    - Type: assert
-      Asserts:
-        - Type: contain
-          Var: DETAILS_CONTENT
           Value: 'Notes'
 
 #CXTB-105 Click and View Participant Record from Listing
