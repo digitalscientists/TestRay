@@ -16,3 +16,42 @@ TestCallNowButtonOnHomePageESIDDNeverAlone:
     - Type: click
       Strategy: class_chain
       Id: $PAGE.idd_never_alone_app_home.call_now_button$
+  # Device screen updates to show screen to verify you would like to call:
+  # Yes, Place Call and Cancel Call
+    - Type: wait_for
+      Strategy: class_chain
+      Id: $PAGE.idd_never_alone_app_call.yes_place_call_button$
+    - Type: wait_for
+      Strategy: class_chain
+      Id: $PAGE.idd_never_alone_app_call.cancel_call_button$
+  # Click the "Cancel Call" button.
+    - Type: click
+      Strategy: class_chain
+      Id: $PAGE.idd_never_alone_app_call.cancel_call_button$
+  # Device screen is returned to home page.
+    - Type: wait_for
+      Strategy: class_chain
+      Id: $PAGE.idd_never_alone_app_home.call_now_button$
+  # Click the "Call Now" button again.
+    - Type: click
+      Strategy: class_chain
+      Id: $PAGE.idd_never_alone_app_home.call_now_button$
+  # Device screen updates to show screen to verify you would like to call:
+  # Yes, Place Call and Cancel Call
+    - Type: wait_for
+      Strategy: class_chain
+      Id: $PAGE.idd_never_alone_app_call.yes_place_call_button$
+    - Type: wait_for
+      Strategy: class_chain
+      Id: $PAGE.idd_never_alone_app_call.cancel_call_button$
+  # Click "Yes, Place Call" button.
+    - Type: wait_for
+      Strategy: class_chain
+      Id: $PAGE.idd_never_alone_app_call.yes_place_call_button$
+    - Type: click
+      Strategy: class_chain
+      Id: $PAGE.idd_never_alone_app_call.yes_place_call_button$
+  # Device screen updates showing you the waiting room.
+    - Type: wait_for
+      Strategy: class_chain
+      Id: $PAGE.idd_never_alone_app_call.waiting_room_label$
