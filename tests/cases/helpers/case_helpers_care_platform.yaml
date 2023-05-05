@@ -1567,12 +1567,10 @@ CarePartnerCreateFollowUpTicket:
       Strategy: xpath
       Id: $PAGE.care_platform_participant_details.follow_up_tab_button$
     # Click on Create Ticket.
-    - Type: wait_for
-      Strategy: xpath
-      Id: $PAGE.care_platform_participant_details.create_ticket_button$
     - Type: scroll_to
       Strategy: xpath
-      Id: $PAGE.care_platform_participant_details.create_ticket_button$
+      Id: $PAGE.care_platform_participant_details.create_ticket_division$
+      Options: false
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_participant_details.create_ticket_button$
@@ -1581,6 +1579,9 @@ CarePartnerCreateFollowUpTicket:
       Strategy: xpath
       Id: $PAGE.care_platform_participant_details.ticket_subject_input$
       Value: $AND_CLI_FOLLOW_UP_TICKET$
+    - Type: scroll_to
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_details.ticket_kind_label$
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_participant_details.ticket_kind_input$

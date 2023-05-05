@@ -26,7 +26,8 @@ TestCreateFollowUpTicket:
   #Click on Create Ticket
     - Type: scroll_to
       Strategy: xpath
-      Id: $PAGE.care_platform_participant_details.create_ticket_button$
+      Id: $PAGE.care_platform_participant_details.create_ticket_division$
+      Options: false
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_participant_details.create_ticket_button$
@@ -1788,9 +1789,10 @@ TestCarePartnerTrackTimeAndEditFollowUpTicketsParticipantComponent:
       Strategy: xpath
       Id: $PAGE.care_platform_participant_details.follow_up_tickets_list$
   # Click on a follow-up ticket in the listing.
-    - Type: wait_for
+    - Type: scroll_to
       Strategy: xpath
       Id: $PAGE.care_platform_participant_details.follow_up_ticket_based_on_name$
+      Options: false
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_participant_details.follow_up_ticket_based_on_name$
@@ -1805,6 +1807,10 @@ TestCarePartnerTrackTimeAndEditFollowUpTicketsParticipantComponent:
       Strategy: xpath
       Id: $PAGE.care_platform_participant_details.time_to_complete_input$
   # Click "Edit" button on expanded follow-up ticket.
+    - Type: scroll_to
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_details.edit_follow_up_ticket_button$
+      Options: false 
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_participant_details.edit_follow_up_ticket_button$
@@ -1873,9 +1879,10 @@ TestCarePartnerTrackTimeAndEditFollowUpTicketsParticipantComponent:
       Strategy: xpath
       Id: $PAGE.care_platform_notifications.follow_up_ticket_saved_notification$
   # Follow-up ticket listing returns, with any updates you made now visible.
-    - Type: wait_for
+    - Type: scroll_to
       Strategy: xpath
       Id: $PAGE.care_platform_participant_details.follow_up_ticket_based_on_name$
+      Options: false
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_participant_details.follow_up_ticket_based_on_name$
