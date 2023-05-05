@@ -1,0 +1,18 @@
+# Only for physical devices.
+# CXTB-367: Call Now Button on Home Page for IDD Never Alone.
+TestCallNowButtonOnHomePageESIDDNeverAlone:
+  Environment: Settings
+  Precases:
+    - LoginESIDDNeverAloneHelper
+  Aftercases:
+    - TerminateApp
+  Roles:
+    - Role: localiOS
+      App: NeverAlone
+    # - Role: desktopChrome
+    #   App: desktop 
+  Actions:
+  # On the Home page, Click the "Call Now" button.
+    - Type: click
+      Strategy: class_chain
+      Id: $PAGE.idd_never_alone_app_home.call_now_button$

@@ -1,0 +1,2 @@
+idd_never_alone_app_home:
+  call_now_button: "**/XCUIElementTypeOther[`label ENDSWITH 'Call Now'`][-1]"
