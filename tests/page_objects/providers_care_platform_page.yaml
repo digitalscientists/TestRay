@@ -142,6 +142,21 @@ providers_participants_page:
   status_dropdown_button: //button[contains(@class,'queue-filter-dropdown-toggle')]
   status_dropdown_active: //button[text()='Active']
   status_dropdown_suspended: //button[text()='Suspended']
+  records_button: //button[text()='Records']
+
+
+providers_participants_records_page:
+  demographics_tab: //nav[contains(@class,'box-tabs-nav')]/button[text()='Demographics']
+  demographics_vendors_subtab: //nav/button[text()='Vendors']
+  medical_tab: //nav[contains(@class,'box-tabs-nav')]/button[text()='Medical']
+  medications_subtab: //nav/button[text()='Medications']
+  medical_needs_subtab: //nav/button[text()='Medical Needs']
+  medical_behavioral_subtab: //nav/button[text()='Behavioral']
+  medical_history_subtab: //nav/button[text()='Medical History']  
+  call_history_tab: //nav/button[contains(text(),'Call History')]
+  emergency_calls_tab: //nav/button[contains(text(),'Emergency Calls')]
+  follow_up_tickets_tab: //nav/button[contains(text(),'Follow-up Tickets')]
+
 
 providers_participant_modal:
   call_portal_button: //button[text()='Call Portal']

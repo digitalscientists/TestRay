@@ -1,6 +1,6 @@
 #CXTB-170: Participant Page Navigation
 #CXTB-171: Access Participant Directory & Filter
-#CXTB-172: Click and View Facility Device Record from Listing
+#CXTB-172: Can Click and View Participant Record from Listing
 TestAccessParticipantDirectoryandViewDeviceRecordfromListing:
   Environment: Settings 
   Roles:
@@ -66,12 +66,6 @@ TestAccessParticipantDirectoryandViewDeviceRecordfromListing:
       Greps:
         - var: LASTNAME_FIRST_PARTICIPANT
           match: (.*)
-  # #Verify the first participant lastname contains the text filtered.
-  #   - Type: assert
-  #     Asserts: 
-  #     - Type: contain
-  #       Var: LASTNAME_FIRST_PARTICIPANT
-  #       Value: $AND_CLI_LASTNAME_FIRST_PARTICIPANT_NO_FILTER$
   # Clear the search by clicking small "x" on right of the field.
     - Type: click
       Strategy: xpath
@@ -105,56 +99,45 @@ TestAccessParticipantDirectoryandViewDeviceRecordfromListing:
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.providers_participants_page.senior_1_row$
-  # #  filter back to all
-  #   - Type: click
-  #     Strategy: xpath
-  #     Id: $PAGE.providers_participants_page.status_dropdown_button$
-  #   - Type: wait_for
-  #     Strategy: xpath
-  #     Id: $PAGE.providers_participants_page.status_dropdown_options$
-  #   - Type: click
-  #     Strategy: xpath
-  #     Id: $PAGE.providers_participants_page.status_dropdown_options$      
-  # Click facilities button
+  # Click on Records Button
     - Type: click
       Strategy: xpath
-      Id: $PAGE.providers_home_page.facilities_navigation$
-  # click on the first listing record
+      Id: $PAGE.providers_participants_page.records_button$
+  # Click to Demographics Tab
     - Type: click
       Strategy: xpath
-      Id: $PAGE.providers_facilities_page.first_facility_name$
-  # click on Devices button and verify if tab showeing belogs to Devices
+      Id: $PAGE.providers_participants_records_page.demographics_tab$ 
     - Type: click
       Strategy: xpath
-      Id: $PAGE.providers_facilities_page.devices_tab$
-    - Type: wait_for
-      Strategy: xpath
-      Id: $PAGE.providers_facilities_page.title_subtab_devices$
-    - Type: get_attribute
-      Strategy: xpath
-      Id: $PAGE.providers_facilities_page.tabs_content$
-      Greps:
-      - var: TAB_CLASS
-        attr: tab-title
-        condition: nempty
-        match: "(.*)"
-    - Type: assert
-      Asserts:
-      - Type: contain
-        Var: TAB_CLASS
-        Value: 'Devices'
-  # Click on record button and check the Overview Tab
+      Id: $PAGE.providers_participants_records_page.demographics_vendors_subtab$ 
+  # Click to Medical Tab
     - Type: click
       Strategy: xpath
-      Id: $PAGE.providers_facilities_page.records_button$
-    - Type: wait_for
-      Strategy: xpath
-      Id: $PAGE.providers_facilities_page.info_title$
-  # Click on Devices button to see the facility device list
+      Id: $PAGE.providers_participants_records_page.medical_tab$
     - Type: click
       Strategy: xpath
-      Id: $PAGE.providers_facilities_page.devices_button$
-    - Type: get_attribute
+      Id: $PAGE.providers_participants_records_page.medications_subtab$
+    - Type: click
       Strategy: xpath
-      Id: $PAGE.providers_facilities_records_page.device_status$
+      Id: $PAGE.providers_participants_records_page.medical_needs_subtab$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_participants_records_page.medical_behavioral_subtab$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_participants_records_page.medical_history_subtab$
+  # Click to Call History Tab
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_participants_records_page.call_history_tab$
+  # Click to Emergency Calls tab
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_participants_records_page.emergency_calls_tab$
+ # Click to Follow-up Tickets Tab
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_participants_records_page.follow_up_tickets_tab$
+
+
 
