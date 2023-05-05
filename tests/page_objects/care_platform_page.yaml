@@ -121,9 +121,9 @@ care_platform_participant_details:
   create_ticket_button: //div[@tab-title='Follow-up Tickets']//button[contains(text(),'Create Ticket')]
   create_ticket_division: //*[@id='follow-up-tickets']/div/div[@class='mt-half text-center']
   follow_up_ticket_details_label: //div[@id='follow-up-tickets-tab']//div[contains(@class, 'is-open')]//form/p
-  completed_follow_up_ticket_button: //div[@id='follow-up-tickets-tab']//button[text()='Completed']
+  completed_follow_up_ticket_button: //div[@id='follow-up-tickets-tab']//div[contains(@class, 'is-open')]//button[text()='Completed']
   edit_follow_up_ticket_button: //div[@id='follow-up-tickets-tab']//div[contains(@class, 'is-open')]//button[text()='Edit']
-  time_to_complete_input: //input[@name='timeToComplete']
+  time_to_complete_input: //div[contains(@class, 'is-open')]//input[@name='timeToComplete']
   ticket_subject_input: //*[@id='subject']
   ticket_kind_label: //label[@for='kind']
   ticket_kind_input: //*[@id='kind']
