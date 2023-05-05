@@ -1903,7 +1903,10 @@ TestCarePartnerTrackTimeAndEditFollowUpTicketsParticipantComponent:
       Property: textContent
       Value:  $AND_CLI_FOLLOW_UP_TICKET$
   # Click "Edit" again on expanded follow-up ticket.
-    - Type: click
+    - Type: scroll_to
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_details.edit_follow_up_ticket_button$
+    - Type: click_js
       Strategy: xpath
       Id: $PAGE.care_platform_participant_details.edit_follow_up_ticket_button$
     - Type: scroll_to
