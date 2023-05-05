@@ -1571,7 +1571,7 @@ CarePartnerCreateFollowUpTicket:
       Strategy: xpath
       Id: $PAGE.care_platform_participant_details.create_ticket_division$
       Options: false
-    - Type: click
+    - Type: click_js
       Strategy: xpath
       Id: $PAGE.care_platform_participant_details.create_ticket_button$
     # Fill Create Ticket's form.
