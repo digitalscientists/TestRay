@@ -38,6 +38,7 @@ Environments:
   Settings:
     Vars:
       care_platform_url: https://care-platform-qa.chs-ds.com/
+      easterseals_care_platform_url: https://es.care-platform-qa.chs-ds.com/
       employee_health_url: https://employee-health-portal-qa.chs-ds.com/
       backend_qa_url: https://never-alone-backend-qa.chs-ds.com/
       facility_ahc: alpha health center
@@ -61,6 +62,15 @@ Environments:
       carepartner_user2_pwd: add_your_info
       carepartner_user2_name: add_your_info
       carepartner_user2_lastname: add_your_info
+#EasterSeals Care Partner users
+      es_carepartner_user:  csanchez+escarepartneres@neural.com.do
+      es_carepartner_user_pwd: cd9eed28d011647ed07c6495bc5b62d0
+      es_carepartner_user_name: Cristian
+      es_carepartner_user_lastname: Sanchez
+      ch_carepartner_user: mhenriquez+escarepartnerch@neural.com.do
+      ch_carepartner_user_pwd: 2816209b8dcbecf1651f5186ca4ef4ad
+      ch_carepartner_user_name: Miguel
+      ch_carepartner_user_lastname: Henriquez
 #Provider users      
       provider_user1: add_your_info
       provider_user1_pwd: add_your_info

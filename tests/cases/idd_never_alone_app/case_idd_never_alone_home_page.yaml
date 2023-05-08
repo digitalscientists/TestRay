@@ -9,8 +9,8 @@ TestCallNowButtonOnHomePageESIDDNeverAlone:
   Roles:
     - Role: localiOS
       App: NeverAlone
-    # - Role: desktopChrome
-    #   App: desktop 
+    - Role: desktopChrome
+      App: desktop 
   Actions:
   # On the Home page, Click the "Call Now" button.
     - Type: click
