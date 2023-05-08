@@ -1,4 +1,5 @@
 ESCarePartnerLogin:
+  Environment: Settings
   Roles:
     - Role: desktopChrome
       App: desktop
@@ -30,13 +31,13 @@ AnswerCallAsESCarePartner:
   Actions:
     # Login to the Care Platform app with Care Partners account.
     - Type: case
-      Value: CarePartnerLogin
+      Value: ESCarePartnerLogin
     - Type: wait_for
       Strategy: xpath
-      Id: $PAGE.care_platform_home.call_based_on_participant_name$
+      Id: $PAGE.care_platform_home.call_based_on_es_idd_participant_name$
     - Type: click
       Strategy: xpath
-      Id: $PAGE.care_platform_home.call_based_on_participant_name$
+      Id: $PAGE.care_platform_home.call_based_on_es_idd_participant_name$
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.care_platform_home.answer_call$

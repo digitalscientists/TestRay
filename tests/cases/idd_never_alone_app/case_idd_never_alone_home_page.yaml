@@ -55,3 +55,40 @@ TestCallNowButtonOnHomePageESIDDNeverAlone:
     - Type: wait_for
       Strategy: class_chain
       Id: $PAGE.idd_never_alone_app_call.waiting_room_label$
+  # Care Partner answers the call.
+    - Type: case
+      Value: AnswerCallAsESCarePartner
+  # Turn your camera on using the button along the bottom of the page.
+  # Thumbnail will appear in upper right corner of the video window, indicating your camera is on and giving a preview of what the Care Partner is seeing.
+    - Type: sleep
+      Time: 10
+  
+  # Click "End Call" button.
+    - Type: wait_for
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_call.end_call_button$
+    - Type: click
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_call.end_call_button$
+  # Call is disconnected and screen updates to show the Post Call Survey.
+  # Select any option on the page.
+    - Type: wait_for
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_post_call_survey.great_answer_button$
+    - Type: click
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_post_call_survey.great_answer_button$
+  # Page updates to show Thank you for your feedback message.
+    - Type: wait_for
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_post_call_survey.thank_you_label$
+  # Do not click the "To Home" button on Thank you for your feedback screen.
+    - Type: sleep
+      Time: 8
+  # Device is automatically returned to home page after a few seconds.
+    - Type: wait_for
+      Strategy: class_chain
+      Id: $PAGE.idd_never_alone_app_home.call_now_button$
+  # Care Partner fills in post survey call.
+    - Type: case
+      Value: PostCallSurveyCarePartner
