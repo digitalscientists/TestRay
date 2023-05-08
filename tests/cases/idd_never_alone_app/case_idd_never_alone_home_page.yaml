@@ -4,6 +4,8 @@ TestCallNowButtonOnHomePageESIDDNeverAlone:
   Environment: Settings
   Precases:
     - LoginESIDDNeverAloneHelper
+    - ESCarePartnerCleanCallQueueAndHangedCalls
+    - IDDESParticipantCleanPrompts
   Aftercases:
     - TerminateApp
   Roles:

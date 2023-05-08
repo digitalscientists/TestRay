@@ -27,3 +27,13 @@ LoginESIDDNeverAloneHelper:
     - Type: wait_for
       Strategy: class_chain
       Id: $PAGE.idd_never_alone_app_home.call_now_button$
+
+# IDD ES Participant Helper to clean prompts on Never Alone.
+IDDESParticipantCleanPrompts:
+  Environment: Settings
+  Roles:
+    - Role: localiOS
+      App: NeverAlone
+  Actions:
+    # Close prompts on Never Alone IDD ES.
+    - Type: senior_clean_unwanted_prompts

@@ -44,3 +44,20 @@ AnswerCallAsESCarePartner:
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_home.answer_call$
+
+ESCarePartnerCleanCallQueueAndHangedCalls:
+  Vars:
+    LOGOUT_OPTION: "Go Off Shift"
+  Environment: Settings
+  Roles:
+    - Role: desktopChrome
+      App: desktop
+  Actions:
+    # Log in.
+    - Type: case
+      Value: ESCarePartnerLogin
+    # Clean Care Partner Call Queue and Hanged Calls.
+    - Type: care_partner_clean_call_queue_and_hanged_calls
+    # Log out.
+    - Type: case
+      Value: CarePlatformLogout
