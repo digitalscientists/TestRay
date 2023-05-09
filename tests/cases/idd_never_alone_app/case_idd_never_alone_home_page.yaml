@@ -1,6 +1,6 @@
 # Only for physical devices.
 # CXTB-367: Call Now Button on Home Page for IDD Never Alone.
-TestCallNowButtonOnHomePageESIDDNeverAlone:
+TestIDDESCallNowButtonOnHomePage:
   Vars:
     TIME: 5
     INTERFACE: en0
