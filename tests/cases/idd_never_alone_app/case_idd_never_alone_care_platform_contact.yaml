@@ -1,0 +1,31 @@
+# Only for physical devices.
+# CXTB-399: Verify “Answer Call” for Care Partner Calling Device.
+TestAnswerCalForCarePArtnerCallingDeviceCallCompletedESIDDNeverAlone:
+  Vars:
+    TIME: 5
+    INTERFACE: en0
+    VIDEO_IN: "1"
+    TEST_FOLDER: $AND_CMD_pwd$/Reports/executions/$AND_CMD_date +%s$
+  Environment: Settings
+  Precases:
+    - LoginESIDDNeverAloneHelper
+    - ESCarePartnerCleanCallQueueAndHangedCalls
+    - IDDESParticipantCleanPrompts
+  Aftercases:
+    - TerminateApp
+  Roles:
+    - Role: localiOS
+      App: NeverAlone
+    - Role: desktopChrome
+      Capabilities:
+        chromeOptions:
+          args:
+            - use-file-for-fake-audio-capture=$AND_CMD_pwd$/video_audio_samples/sample3.wav
+            - use-file-for-fake-video-capture=$AND_CMD_pwd$/video_audio_samples/sample_640x360.mjpeg
+      App: desktop
+    - Role: command1
+      App: command
+  Actions:
+  # Generate a call to the ES IDD Participant from ES Care Platform.
+  # Device displays an "Incoming Call" prompt, showing the details of who is calling, and giving the option to answer or ignore call.
+  # Click on the "Answer Call" button.

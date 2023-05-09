@@ -17,6 +17,11 @@ TestCallNowButtonOnHomePageESIDDNeverAlone:
     - Role: localiOS
       App: NeverAlone
     - Role: desktopChrome
+      Capabilities:
+        chromeOptions:
+          args:
+            - use-file-for-fake-audio-capture=$AND_CMD_pwd$/video_audio_samples/sample3.wav
+            - use-file-for-fake-video-capture=$AND_CMD_pwd$/video_audio_samples/sample_640x360.mjpeg
       App: desktop
     - Role: command1
       App: command
