@@ -472,3 +472,37 @@ TestOnboarderClickAndViewFacilitiesDevice:
       - Type: contain
         Var: STATUS_CLASS 
         Value: 'active'
+
+#CXTB-144-Onboarders-Create New Participant
+TestOnboarderCreateNewParticipant:
+    Environment: Settings
+    Roles:
+    - Role: desktopChrome
+      App: "desktop"
+    Actions:
+  # login in onboarder Care Partner
+    - Type: case
+      Value: OnboarderCarePartnerLogin 
+  # Go to Participants
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform.navigation_participant$
+  # click in Add button 
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant.add_participant_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_add_participant_portal.create_participant_title$
+  # Click on Create Participants to check required fields
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_add_participant_portal.create_participants_button$
+  # Select a Call Center
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_add_participant_portal.call_center_dropdown_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_add_participant_portal.dropdown_option$
+    
