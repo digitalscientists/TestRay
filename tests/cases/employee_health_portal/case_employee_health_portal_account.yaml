@@ -330,7 +330,7 @@ TestEmployeeHealthPortalRequestAnAppointmentForUser:
   #Going to Request an Appointment
     - Type: wait_for
       Strategy: xpath
-      Id: $PAGE.employee_health_request_appointment_modal.modal$
+      Id: $PAGE.employee_health_request_appointment_modal.tab$
     - Type: click
       Strategy: xpath
       Id: $PAGE.employee_health_request_appointment_modal.request_appointment_button$
@@ -351,7 +351,7 @@ TestEmployeeHealthPortalRequestAnAppointmentForUser:
   # waiting for appointment view
     - Type: wait_for
       Strategy: xpath
-      Id: $PAGE.employee_health_request_appointment_modal.modal$
+      Id: $PAGE.employee_health_request_appointment_modal.tab$
     - Type: click
       Strategy: xpath
       Id: $PAGE.employee_health_request_appointment_modal.request_appointment_button$
@@ -407,6 +407,3 @@ TestEmployeeHealthPortalRequestAnAppointmentForUser:
         - Type: eq
           Var: SHOWED_DESCRIPTION
           Value: $AND_CLI_PAIN_DESCRIPTION$
-
-
-

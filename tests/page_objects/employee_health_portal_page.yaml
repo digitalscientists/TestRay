@@ -111,10 +111,4 @@ employee_health_request_appointment_modal:
   appointment_list: //div[@class = 'accordion-item']
   appointment_list_description: //div[@class = 'flex-col font-bold']
   calendar_month_view: //div[@id='modals']//div[@class = 'calendar-days fade-quick-enter-done']
-  modal: //div[@class = 'box has-scrollable-content is-white has-shadow -ml -mb -mr-third']
-
-
-
-
-
-
+  tab: //div[@class = 'box has-scrollable-content is-white has-shadow -ml -mb -mr-third']
