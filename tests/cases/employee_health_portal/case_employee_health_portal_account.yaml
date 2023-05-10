@@ -383,7 +383,7 @@ TestEmployeeHealthPortalRequestAnAppointmentForUser:
       Id: $PAGE.employee_health_request_appointment_modal.calendar_month_view$
     - Type: click
       Strategy: xpath
-      Id: //div[@class="app-modals"]//div[text()="15"]
+      Id: $PAGE.employee_health_request_appointment_modal.calendar_day_button$
     - Type: click
       Strategy: xpath
       Id: $PAGE.employee_health_request_appointment_modal.calendar_hour_button$
