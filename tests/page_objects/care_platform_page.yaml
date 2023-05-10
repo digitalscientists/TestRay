@@ -81,7 +81,7 @@ care_platform_logout_modal:
 
 care_platform_participant:
   participants_title: //div[@class='text-lg font-bold']//h3[@class='text-lg font-bold']
-  add_participant_button: //button[text()='Add'] #cambiar por el classname
+  add_participant_button: //button[text()='Add'] #Add Button
   first_participant_row: //table/thead[contains(.,'Participant')]/following-sibling::tbody/tr[contains(.,'$AND_CLI_senior_user1_name$') and contains(.,'$AND_CLI_senior_user1_lastname$')][1]
   first_darkened_letter_button: //button[@class='alphabet-letter'][not(@disabled)][1]
   selected_darkened_letter_button: //button[contains(@class,'is-selected')]
@@ -99,8 +99,16 @@ care_platform_add_participant_portal:
   create_participant_title: //div[@class='flex flex-wrap flex-half-gutters']
   call_center_dropdown_button: //select[contains(@class,'input')]
   dropdown_option: //select[@id='callCenterId']//option[contains(text(),'CHS')]
-  account_status:
+  account_status: //select[@id='accountStatus']
+  account_status_option_active: //select[@id='accountStatus']//option[contains(text(),'Active')]
+  is_test: //select[@id='isTest']
+  is_test_options: //select[@id='isTest']//option[contains(text(),'Yes')]
+  firstname_input: //input[@id='firstName'] #steps to add info on fields
+  lastname_input: //input[@id='firstName'] #steps to add info on fields
+  email_input: //input[@id='email'] #steps to add info on fields
+  phone_input: //*[@id='phone'] #steps to add info on fields
   create_participants_button: //button[text()='Create Participant']
+
 
 care_platform_participant_details:
   participant_details_title: //h3[contains(.,'$AND_CLI_senior_user1_name$') and contains(.,'$AND_CLI_senior_user1_lastname$')]

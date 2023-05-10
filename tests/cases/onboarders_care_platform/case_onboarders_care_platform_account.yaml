@@ -494,10 +494,7 @@ TestOnboarderCreateNewParticipant:
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.care_platform_add_participant_portal.create_participant_title$
-  # Click on Create Participants to check required fields
-    - Type: click
-      Strategy: xpath
-      Id: $PAGE.care_platform_add_participant_portal.create_participants_button$
+# Participant Information
   # Select a Call Center
     - Type: click
       Strategy: xpath
@@ -505,4 +502,25 @@ TestOnboarderCreateNewParticipant:
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_add_participant_portal.dropdown_option$
-    
+  # Select Account Status
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_add_participant_portal.account_status$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_add_participant_portal.account_status_option_active$
+  # Select if it is a Test
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_add_participant_portal.is_test$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_add_participant_portal.is_test_options$
+  # Add First Name
+  # Add Last name
+  # Add Preferred Name
+  # Choose a Date of Birth
+  # Add a Gender
+  # Select a Preferred Gender
+  # Add Mobile Phone number
+  # Add an Email Address
