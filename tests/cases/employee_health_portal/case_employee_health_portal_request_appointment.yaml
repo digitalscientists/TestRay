@@ -82,8 +82,9 @@ TestEmployeeHealthPortalRequestAnAppointmentForUser:
     - Type: click
       Strategy: xpath
       Id: $PAGE.employee_health_telehealth_request_form.select_location_option$
-      Vars:
-        PAIN_DESCRIPTION: I have something to say about my health.
+    - Type: generate_unique_name
+      Name: "I have something to say about my health."
+      ResultVar: PAIN_DESCRIPTION
     - Type: send_keys
       Strategy: id
       Id: $PAGE.employee_health_telehealth_request_form.comments$
@@ -110,7 +111,7 @@ TestEmployeeHealthPortalRequestAnAppointmentForUser:
       Id: $PAGE.employee_health_telehealth_request_form.appointment_list$
     - Type: get_attribute
       Strategy: xpath
-      Id: $PAGE.employee_health_telehealth_request_form.appointment_list_description$
+      Id: //div/div[contains(text(), '$AND_CLI_PAIN_DESCRIPTION$')]
       Greps:
         - var: SHOWED_DESCRIPTION
           attr: textContent
