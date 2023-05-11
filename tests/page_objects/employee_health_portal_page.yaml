@@ -99,7 +99,9 @@ employee_health_request_appointment_modal:
   request_appointment_button: //button[text()='Request Appointment']
   form_modal: //form[@class='box-scrollable-content']
   create_event_button: //button[text() = 'Create Event']
-  error_message: //div[@class ='text-xs color-red-400']
+  alert_location: //div[@class ='text-xs color-red-400']
+  alert_describe_reason: //div[@class = 'input-group text-sm mb-half']//div[@class = 'text-xs color-red-400']
+  alert_calendar: //div[@class='flex-col max-w-330']//div[@class = 'text-xs color-red-400']
   cancel_button: //button[text()= 'Cancel']
   select_location_drop_down: //select[@id='state']
   select_location_option: //option[text()='Maryland']
@@ -111,4 +113,5 @@ employee_health_request_appointment_modal:
   appointment_list: //div[@class = 'accordion-item']
   appointment_list_description: //div[@class = 'flex-col font-bold']
   calendar_month_view: //div[@id='modals']//div[@class = 'calendar-days fade-quick-enter-done']
-  tab: //div[@class = 'box has-scrollable-content is-white has-shadow -ml -mb -mr-third']
+  tab_section: //div[@class = 'box has-scrollable-content is-white has-shadow -ml -mb -mr-third']
+  comments : comments
