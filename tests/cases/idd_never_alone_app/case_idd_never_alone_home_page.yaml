@@ -176,11 +176,11 @@ TestIDDESVerifyOfflineMode:
       Attribute: label
       ResultVar: OFFLINE_CALL_BUTTON_VALUE
       NoNewLine: true
-    # - Type: assert #TODO: fix encoding.
-    #   Asserts:
-    #     - Type: contain
-    #       Var: OFFLINE_CALL_BUTTON_VALUE
-    #       Value: "Calling Is Unavailable"
+    - Type: assert
+      Asserts:
+        - Type: contain_encode_utf8
+          Var: OFFLINE_CALL_BUTTON_VALUE
+          Value: "Calling Is Unavailable"
   # Click to open an event detail window of any type from the schedule listing.
     - Type: click
       Strategy: class_chain
