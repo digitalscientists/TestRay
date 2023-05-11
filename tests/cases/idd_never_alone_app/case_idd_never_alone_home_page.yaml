@@ -147,7 +147,7 @@ TestIDDESVerifyOfflineMode:
   Precases:
     - LoginESIDDNeverAloneHelper
     - ESCarePartnerCleanCallQueueAndHangedCalls
-    - ESSetScheduledCallForSeniors
+    - ESCarePartnerSetScheduledCallForSeniors
     - IDDESParticipantCleanPrompts
   Aftercases:
     - TerminateApp

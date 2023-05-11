@@ -146,7 +146,7 @@ ESCarePartnerSendMessageToSenior:
     - Type: case
       Value: CarePlatformLogout
 
-ESSetScheduledCallForSeniors:
+ESCarePartnerSetScheduledCallForSeniors:
   Environment: Settings 
   Roles:
     - Role: desktopChrome
