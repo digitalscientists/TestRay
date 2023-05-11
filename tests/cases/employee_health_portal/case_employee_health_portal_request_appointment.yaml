@@ -111,7 +111,7 @@ TestEmployeeHealthPortalRequestAnAppointmentForUser:
       Id: $PAGE.employee_health_telehealth_request_form.appointment_list$
     - Type: get_attribute
       Strategy: xpath
-      Id: //div/div[contains(text(), '$AND_CLI_PAIN_DESCRIPTION$')]
+      Id: $PAGE.employee_health_telehealth_request_form.appointment_list_description$
       Greps:
         - var: SHOWED_DESCRIPTION
           attr: textContent
