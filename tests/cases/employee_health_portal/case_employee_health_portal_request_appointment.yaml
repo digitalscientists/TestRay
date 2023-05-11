@@ -11,31 +11,31 @@ TestEmployeeHealthPortalRequestAnAppointmentForUser:
   #Going to Request an Appointment
     - Type: wait_for
       Strategy: xpath
-      Id: $PAGE.employee_health_request_appointment_modal.tab_section$
+      Id: $PAGE.employee_health_telehealth_request_form.tab_section$
     - Type: click
       Strategy: xpath
-      Id: $PAGE.employee_health_request_appointment_modal.request_appointment_button$
+      Id: $PAGE.employee_health_telehealth_request_form.request_appointment_button$
     - Type: wait_for
       Strategy: xpath
-      Id: $PAGE.employee_health_request_appointment_modal.form_modal$
+      Id: $PAGE.employee_health_telehealth_request_form.form_modal$
   # closing form
     - Type: click
       Strategy: xpath
-      Id: $PAGE.employee_health_request_appointment_modal.cancel_button$
+      Id: $PAGE.employee_health_telehealth_request_form.cancel_button$
     # waiting for appointment view
     - Type: click
       Strategy: xpath
-      Id: $PAGE.employee_health_request_appointment_modal.request_appointment_button$
+      Id: $PAGE.employee_health_telehealth_request_form.request_appointment_button$
     - Type: click
       Strategy: xpath
-      Id: $PAGE.employee_health_request_appointment_modal.create_event_button$
+      Id: $PAGE.employee_health_telehealth_request_form.create_event_button$
   # Checking error message
     - Type: wait_for
       Strategy: xpath
-      Id: $PAGE.employee_health_request_appointment_modal.alert_location$
+      Id: $PAGE.employee_health_telehealth_request_form.alert_location$
     - Type: get_text
       Strategy: xpath
-      Id: $PAGE.employee_health_request_appointment_modal.alert_location$
+      Id: $PAGE.employee_health_telehealth_request_form.alert_location$
       Greps:
         - var: ERROR_MESSAGE
           condition: nempty
@@ -47,10 +47,10 @@ TestEmployeeHealthPortalRequestAnAppointmentForUser:
           Value: Please select a state.
     - Type: wait_for
       Strategy: xpath
-      Id: $PAGE.employee_health_request_appointment_modal.alert_describe_reason$
+      Id: $PAGE.employee_health_telehealth_request_form.alert_describe_reason$
     - Type: get_text
       Strategy: xpath
-      Id: $PAGE.employee_health_request_appointment_modal.alert_describe_reason$
+      Id: $PAGE.employee_health_telehealth_request_form.alert_describe_reason$
       Greps:
         - var: ERROR_MESSAGE
           condition: nempty
@@ -62,10 +62,10 @@ TestEmployeeHealthPortalRequestAnAppointmentForUser:
           Value: Please enter a reason for this request.
     - Type: wait_for
       Strategy: xpath
-      Id: $PAGE.employee_health_request_appointment_modal.alert_calendar$
+      Id: $PAGE.employee_health_telehealth_request_form.alert_calendar$
     - Type: get_text
       Strategy: xpath
-      Id: $PAGE.employee_health_request_appointment_modal.alert_calendar$
+      Id: $PAGE.employee_health_telehealth_request_form.alert_calendar$
       Greps:
         - var: ERROR_MESSAGE
           condition: nempty
@@ -78,39 +78,39 @@ TestEmployeeHealthPortalRequestAnAppointmentForUser:
   # filling form
     - Type: click
       Strategy: xpath
-      Id: $PAGE.employee_health_request_appointment_modal.select_location_drop_down$
+      Id: $PAGE.employee_health_telehealth_request_form.select_location_drop_down$
     - Type: click
       Strategy: xpath
-      Id: $PAGE.employee_health_request_appointment_modal.select_location_option$
+      Id: $PAGE.employee_health_telehealth_request_form.select_location_option$
       Vars:
         PAIN_DESCRIPTION: I have something to say about my health.
     - Type: send_keys
       Strategy: id
-      Id: $PAGE.employee_health_request_appointment_modal.comments$
+      Id: $PAGE.employee_health_telehealth_request_form.comments$
       Value: $AND_CLI_PAIN_DESCRIPTION$
     # choosing Date and time
     - Type: click
       Strategy: xpath
-      Id: $PAGE.employee_health_request_appointment_modal.calendar_right_button$
+      Id: $PAGE.employee_health_telehealth_request_form.calendar_right_button$
     - Type: wait_for
       Strategy: xpath
-      Id: $PAGE.employee_health_request_appointment_modal.calendar_month_view$
+      Id: $PAGE.employee_health_telehealth_request_form.calendar_month_view$
     - Type: click
       Strategy: xpath
-      Id: $PAGE.employee_health_request_appointment_modal.calendar_day_button$
+      Id: $PAGE.employee_health_telehealth_request_form.calendar_day_button$
     - Type: click
       Strategy: xpath
-      Id: $PAGE.employee_health_request_appointment_modal.calendar_hour_button$
+      Id: $PAGE.employee_health_telehealth_request_form.calendar_hour_button$
     - Type: click
       Strategy: xpath
-      Id: $PAGE.employee_health_request_appointment_modal.create_event_button$
+      Id: $PAGE.employee_health_telehealth_request_form.create_event_button$
   # Verify if the appointment is showing on the list
     - Type: wait_for
       Strategy: xpath
-      Id: $PAGE.employee_health_request_appointment_modal.appointment_list$
+      Id: $PAGE.employee_health_telehealth_request_form.appointment_list$
     - Type: get_attribute
       Strategy: xpath
-      Id: $PAGE.employee_health_request_appointment_modal.appointment_list_description$
+      Id: $PAGE.employee_health_telehealth_request_form.appointment_list_description$
       Greps:
         - var: SHOWED_DESCRIPTION
           attr: textContent

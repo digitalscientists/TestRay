@@ -95,7 +95,7 @@ employee_health_on_demand_call_page:
   video_settings_modal_camera_select: //div[text()='Camera']/following-sibling::div//select
   video_settings_modal_close_button: //*[@id='modals']//button[text()='Close']
 
-employee_health_request_appointment_modal:
+employee_health_telehealth_request_form:
   request_appointment_button: //button[text()='Request Appointment']
   form_modal: //form[@class='box-scrollable-content']
   create_event_button: //button[text() = 'Create Event']
@@ -105,7 +105,7 @@ employee_health_request_appointment_modal:
   cancel_button: //button[text()= 'Cancel']
   select_location_drop_down: //select[@id='state']
   select_location_option: //option[text()='Maryland']
-  select_patient_drop_down: //select[@id='dependentIdentifier']
+  select_patient_drop_down: //*[@id='dependentIdentifier']/option[1]
   select_patient_option: //option[text()='Lon Cataldi']
   calendar_right_button: //div[@id='modals']//span[@class='icon-chevron-right']
   calendar_day_button: //div[@class='app-modals']//div[text()='15']
@@ -113,5 +113,5 @@ employee_health_request_appointment_modal:
   appointment_list: //div[@class = 'accordion-item']
   appointment_list_description: //div[@class = 'flex-col font-bold']
   calendar_month_view: //div[@id='modals']//div[@class = 'calendar-days fade-quick-enter-done']
-  tab_section: //div[@class = 'box has-scrollable-content is-white has-shadow -ml -mb -mr-third']
+  tab_section: //div[contains(@class, 'box has-scrollable-content')]
   comments : comments
