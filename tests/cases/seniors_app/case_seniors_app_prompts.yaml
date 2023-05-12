@@ -611,9 +611,6 @@ TestSeniorStartingSoonNotificationWaitUntilCallSurveyIsCompleted:
     - LoginNeverAloneHelper
     - CarePartnerCleanCallQueueAndHangedCalls
     - SeniorCleanPrompts
-    # - SetScheduledCallForSeniorsToStartIn7Minutes
-    # - SetScheduledCallForSeniorsToStartIn11Minutes
-    - SeniorCleanPrompts
   Aftercases:
     - TerminateApp
   Roles:
