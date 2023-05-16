@@ -6,4 +6,7 @@ SetPhysicalDevicesTests:
     - Case: TestSeniorAppVerifyInAppOfflineBehavior
     - Case: TestSeniorAppCallPersonalCarePartnerOnHomePage
     - Case: TestSNFVerifyInAppOfflineBehavior
-    - Case: TestCallNowButtonOnHomePageESIDDNeverAlone
+    - Case: TestIDDESCallNowButtonOnHomePage
+    - Case: TestIDDESAnswerCallForCarePartnerCallingDeviceCallCompleted
+    - Case: TestIDDESCompleteCallBackButtonCallAfterReceivingMessage
+    - Case: TestIDDESVerifyOfflineMode
