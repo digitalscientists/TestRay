@@ -493,34 +493,146 @@ TestOnboarderCreateNewParticipant:
       Id: $PAGE.care_platform_participant.add_participant_button$
     - Type: wait_for
       Strategy: xpath
-      Id: $PAGE.care_platform_add_participant_portal.create_participant_title$
+      Id: $PAGE.care_platform_add_participant_form.create_participant_title$
 # Participant Information
   # Select a Call Center
     - Type: click
       Strategy: xpath
-      Id: $PAGE.care_platform_add_participant_portal.call_center_dropdown_button$
+      Id: $PAGE.care_platform_add_participant_form.call_center_dropdown_button$
     - Type: click
       Strategy: xpath
-      Id: $PAGE.care_platform_add_participant_portal.dropdown_option$
+      Id: $PAGE.care_platform_add_participant_form.call_center_option$
   # Select Account Status
     - Type: click
       Strategy: xpath
-      Id: $PAGE.care_platform_add_participant_portal.account_status$
+      Id: $PAGE.care_platform_add_participant_form.account_status_dropdown_button$
     - Type: click
       Strategy: xpath
-      Id: $PAGE.care_platform_add_participant_portal.account_status_option_active$
+      Id: $PAGE.care_platform_add_participant_form.account_status_option_active$
   # Select if it is a Test
     - Type: click
       Strategy: xpath
-      Id: $PAGE.care_platform_add_participant_portal.is_test$
+      Id: $PAGE.care_platform_add_participant_form.is_test$
     - Type: click
       Strategy: xpath
-      Id: $PAGE.care_platform_add_participant_portal.is_test_options$
+      Id: $PAGE.care_platform_add_participant_form.is_test_options$
   # Add First Name
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.care_platform_add_participant_form.firstname_input$
+      Value: "Tanjiro"
   # Add Last name
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.care_platform_add_participant_form.lastname_input$
+      Value: "Kamado"
   # Add Preferred Name
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.care_platform_add_participant_form.preferred_name_input$
+      Value: "Naruto Kamado"
   # Choose a Date of Birth
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_add_participant_form.date_of_birth_picker$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_add_participant_form.calendar_day$
   # Add a Gender
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.care_platform_add_participant_form.gender_input$
+      Value: "UltraGay"
   # Select a Preferred Gender
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_add_participant_form.preferred_gender_dropdown_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_add_participant_form.preferred_gender_option$
   # Add Mobile Phone number
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.care_platform_add_participant_form.phone_input$
+      Value: "8286968565"
   # Add an Email Address
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.care_platform_add_participant_form.email_input$
+      Value: "nezukominena@pilares.com.jp"
+# Participant Insurance Informacion
+  # Add Insurance Provider Name
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.care_platform_add_participant_form.insurance_provider_name_input$
+      Value: ""
+  # Add Insurance Provider Phone Number
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.care_platform_add_participant_form.insurance_provider_phone_number_input$
+      Value: ""
+  # Add Member ID 
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.care_platform_add_participant_form.insurance_member_id_input$
+      Value: ""
+  # Add Group ID
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.care_platform_add_participant_form.insurance_group_id_input$
+      Value: ""
+  # Add Insurance Provider Address
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.care_platform_add_participant_form.insurance_provider_address_input$
+      Value: ""
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.care_platform_add_participant_form.insurance_provider_address_numbers_input$
+      Value: ""
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.care_platform_add_participant_form.insurance_provider_address_city_input$
+      Value: ""
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_add_participant_form.insurance_provider_address_state_dropdown_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_add_participant_form.insurance_provider_address_state_option$
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.care_platform_add_participant_form.insurance_provider_address_zip_input$
+      Value: ""
+  # Choose a Race or Ethnicity
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_add_participant_form.race_checkbox$
+# Emergency Contact Information
+   # Add First Name
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.care_platform_add_participant_form.$ # Missing
+      Value: " "
+  # Add Last name
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.care_platform_add_participant_form.$ # Missing
+      Value: " "
+  # Add Phone number
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.care_platform_add_participant_form.phone_input$ # Missing
+      Value: " "
+  # Add an Email Address
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.care_platform_add_participant_form.email_input$ # Missing
+      Value: " "
+  # Select a relationship
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_add_participant_form.$ # Missing
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_add_participant_form.$ # Missing

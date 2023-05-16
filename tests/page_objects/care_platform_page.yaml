@@ -96,18 +96,49 @@ care_platform_participant:
   status_dropdown_button: //button[contains(@class,'queue-filter-dropdown-toggle')]
   status_dropdown_options: //div[contains(@class, 'queue-filter-dropdown')]  
 
-care_platform_add_participant_portal:
+care_platform_add_participant_form:
   create_participant_title: //div[@class='flex flex-wrap flex-half-gutters']
-  call_center_dropdown_button: //select[contains(@class,'input')]
-  dropdown_option: //select[@id='callCenterId']//option[contains(text(),'CHS')]
-  account_status: //select[@id='accountStatus']
+  call_center_dropdown_button: //select[@id='callCenterId']
+  call_center_option: //select[@id='callCenterId']//option[contains(text(),'CHS')]
+  account_status_dropdown_button: //select[@id='accountStatus']
   account_status_option_active: //select[@id='accountStatus']//option[contains(text(),'Active')]
   is_test: //select[@id='isTest']
   is_test_options: //select[@id='isTest']//option[contains(text(),'Yes')]
-  firstname_input: //input[@id='firstName'] #steps to add info on fields
-  lastname_input: //input[@id='firstName'] #steps to add info on fields
-  email_input: //input[@id='email'] #steps to add info on fields
-  phone_input: //*[@id='phone'] #steps to add info on fields
+  firstname_input: //input[@id='firstName'] 
+  lastname_input: //input[@id='lastName'] 
+  preferred_name_input: //input[@id='preferredName']
+  date_of_birth_picker:  //*[@id='dateOfBirth']
+  calendar_day: //div[contains(@class, 'react-datepicker__day--012')]
+  gender_input: //input[@id='gender']
+  preferred_gender_dropdown_button: //select[@id='preferredGender']
+  preferred_gender_option: //select[@id='preferredGender']//option[contains(text(),'Other')]
+  phone_input: //*[@id='phone'] 
+  email_input: //input[@id='emailAddress'] 
+  insurance_provider_name_input: //input[@id='insuranceCompany']
+  insurance_provider_phone_number_input: //input[@id='insurancePhone']
+  insurance_member_id_input: //input[@id= 'insuranceMemberIdentification']
+  insurance_group_id_input: //input[@id='insuranceGroupIdentification']
+  insurance_provider_address_input: //input[@id='insuranceAddress']
+  insurance_provider_address_numbers_input: //input[@id='insuranceAddress2']
+  insurance_provider_address_city_input: //input[@id='insuranceCity']
+  insurance_provider_address_state_dropdown_button: //select[@id='insuranceState']
+  insurance_provider_address_state_option: //select[@id='insuranceState']//option[contains(text(),'CA')]
+  insurance_provider_address_zip_input: //input[@id='insuranceZip']
+  race_checkbox: //span[contains(@class, 'input-checkbox-label')]
+  emergency_contact_first_name_input: //input[@id='emergencyContactFirstName'] #aqui
+  emergency_contact_last_name_input: //input[@id='emergencyContactLastName']
+  emergency_contact_phone_number_input: //input[@id='emergencyContactPhone']
+  emergency_contact_email_input: //input[@id='emergencyContactEmailAddress']
+  emergency_contact_relationship_dropdown_button: //select[@id='emergencyContactRelationship']
+  emergency_contact_relationship_options: //select[@id='emergencyContactRelationship']//option[contains(text(),'Other family member')]
+  emergency_contact_address_input: //input[@id='emergencyContactAddress']
+  emergency_contact_address_numbers_input: //input[@id='emergencyContactAddress2']
+  emergency_contact_address_city_input: //input[@id='emergencyContactCity']
+  emergency_contact_address_state_dropdown_button: //select[@id='emergencyContactState']
+  emergency_contact_address_state_option: //select[@id='emergencyContactState']//option[contains(text(),'CA')]
+  emergency_contact_address_zip_input: //input[@id='emergencyContactZip']
+   
+
   create_participants_button: //button[text()='Create Participant']
 
 
