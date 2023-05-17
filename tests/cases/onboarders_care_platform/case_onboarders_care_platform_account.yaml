@@ -497,101 +497,101 @@ TestOnboarderCreateNewParticipant:
 # Participant Information
   # Select a Call Center
     - Type: click
-      Strategy: xpath
+      Strategy: id
       Id: $PAGE.care_platform_add_participant_form.call_center_dropdown_button$
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_add_participant_form.call_center_option$
   # Select Account Status
     - Type: click
-      Strategy: xpath
+      Strategy: id
       Id: $PAGE.care_platform_add_participant_form.account_status_dropdown_button$
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_add_participant_form.account_status_option_active$
   # Select if it is a Test
     - Type: click
-      Strategy: xpath
+      Strategy: id
       Id: $PAGE.care_platform_add_participant_form.is_test$
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_add_participant_form.is_test_options$
   # Add First Name
     - Type: send_keys
-      Strategy: xpath
+      Strategy: id
       Id: $PAGE.care_platform_add_participant_form.firstname_input$
       Value: "Cesar"
   # Add Last name
     - Type: send_keys
-      Strategy: xpath
+      Strategy: id
       Id: $PAGE.care_platform_add_participant_form.lastname_input$
       Value: "Moreno"
   # Add Preferred Name
     - Type: send_keys
-      Strategy: xpath
+      Strategy: id
       Id: $PAGE.care_platform_add_participant_form.preferred_name_input$
       Value: "Wind"
   # Choose a Date of Birth
     - Type: click
-      Strategy: xpath
+      Strategy: id
       Id: $PAGE.care_platform_add_participant_form.date_of_birth_picker$
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_add_participant_form.calendar_day$
   # Add a Gender
     - Type: send_keys
-      Strategy: xpath
+      Strategy: id
       Id: $PAGE.care_platform_add_participant_form.gender_input$
       Value: "N/A"
   # Select a Preferred Gender
     - Type: click
-      Strategy: xpath
+      Strategy: id
       Id: $PAGE.care_platform_add_participant_form.preferred_gender_dropdown_button$
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_add_participant_form.preferred_gender_option$
   # Add Mobile Phone number
     - Type: send_keys
-      Strategy: xpath
+      Strategy: id
       Id: $PAGE.care_platform_add_participant_form.phone_input$
       Value: "8286968565"
   # Add an Email Address
     - Type: send_keys
-      Strategy: xpath
+      Strategy: id
       Id: $PAGE.care_platform_add_participant_form.email_input$
       Value: "cemn@neural.com"
 # Participant Insurance Informacion
   # Add Insurance Provider Name
     - Type: send_keys
-      Strategy: xpath
+      Strategy: id
       Id: $PAGE.care_platform_add_participant_form.insurance_provider_name_input$
       Value: "Alpha Healthcare Center"
   # Add Insurance Provider Phone Number
     - Type: send_keys
-      Strategy: xpath
+      Strategy: id
       Id: $PAGE.care_platform_add_participant_form.insurance_provider_phone_number_input$
       Value: "5278412525"
   # Add Member ID 
     - Type: send_keys
-      Strategy: xpath
+      Strategy: id
       Id: $PAGE.care_platform_add_participant_form.insurance_member_id_input$
       Value: "120688CCD"
   # Add Group ID
     - Type: send_keys
-      Strategy: xpath
+      Strategy: id
       Id: $PAGE.care_platform_add_participant_form.insurance_group_id_input$
       Value: "00012"
   # Add Insurance Provider Address
     - Type: send_keys
-      Strategy: xpath
+      Strategy: id
       Id: $PAGE.care_platform_add_participant_form.insurance_provider_address_input$
       Value: "W Town St"
     - Type: send_keys
-      Strategy: xpath
+      Strategy: id
       Id: $PAGE.care_platform_add_participant_form.insurance_provider_address_numbers_input$
       Value: "424"
     - Type: send_keys
-      Strategy: xpath
+      Strategy: id
       Id: $PAGE.care_platform_add_participant_form.insurance_provider_address_city_input$
       Value: "Columbus"
     - Type: click
