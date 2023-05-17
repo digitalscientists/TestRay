@@ -520,17 +520,17 @@ TestOnboarderCreateNewParticipant:
     - Type: send_keys
       Strategy: xpath
       Id: $PAGE.care_platform_add_participant_form.firstname_input$
-      Value: "Tanjiro"
+      Value: "Cesar"
   # Add Last name
     - Type: send_keys
       Strategy: xpath
       Id: $PAGE.care_platform_add_participant_form.lastname_input$
-      Value: "Kamado"
+      Value: "Moreno"
   # Add Preferred Name
     - Type: send_keys
       Strategy: xpath
       Id: $PAGE.care_platform_add_participant_form.preferred_name_input$
-      Value: "Naruto Kamado"
+      Value: "Wind"
   # Choose a Date of Birth
     - Type: click
       Strategy: xpath
@@ -542,7 +542,7 @@ TestOnboarderCreateNewParticipant:
     - Type: send_keys
       Strategy: xpath
       Id: $PAGE.care_platform_add_participant_form.gender_input$
-      Value: "UltraGay"
+      Value: "N/A"
   # Select a Preferred Gender
     - Type: click
       Strategy: xpath
@@ -559,41 +559,41 @@ TestOnboarderCreateNewParticipant:
     - Type: send_keys
       Strategy: xpath
       Id: $PAGE.care_platform_add_participant_form.email_input$
-      Value: "nezukominena@pilares.com.jp"
+      Value: "cemn@neural.com"
 # Participant Insurance Informacion
   # Add Insurance Provider Name
     - Type: send_keys
       Strategy: xpath
       Id: $PAGE.care_platform_add_participant_form.insurance_provider_name_input$
-      Value: ""
+      Value: "Alpha Healthcare Center"
   # Add Insurance Provider Phone Number
     - Type: send_keys
       Strategy: xpath
       Id: $PAGE.care_platform_add_participant_form.insurance_provider_phone_number_input$
-      Value: ""
+      Value: "5278412525"
   # Add Member ID 
     - Type: send_keys
       Strategy: xpath
       Id: $PAGE.care_platform_add_participant_form.insurance_member_id_input$
-      Value: ""
+      Value: "120688CCD"
   # Add Group ID
     - Type: send_keys
       Strategy: xpath
       Id: $PAGE.care_platform_add_participant_form.insurance_group_id_input$
-      Value: ""
+      Value: "00012"
   # Add Insurance Provider Address
     - Type: send_keys
       Strategy: xpath
       Id: $PAGE.care_platform_add_participant_form.insurance_provider_address_input$
-      Value: ""
+      Value: "W Town St"
     - Type: send_keys
       Strategy: xpath
       Id: $PAGE.care_platform_add_participant_form.insurance_provider_address_numbers_input$
-      Value: ""
+      Value: "424"
     - Type: send_keys
       Strategy: xpath
       Id: $PAGE.care_platform_add_participant_form.insurance_provider_address_city_input$
-      Value: ""
+      Value: "Columbus"
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_add_participant_form.insurance_provider_address_state_dropdown_button$
@@ -603,7 +603,7 @@ TestOnboarderCreateNewParticipant:
     - Type: send_keys
       Strategy: xpath
       Id: $PAGE.care_platform_add_participant_form.insurance_provider_address_zip_input$
-      Value: ""
+      Value: "43215"
   # Choose a Race or Ethnicity
     - Type: click
       Strategy: xpath
@@ -612,27 +612,77 @@ TestOnboarderCreateNewParticipant:
    # Add First Name
     - Type: send_keys
       Strategy: xpath
-      Id: $PAGE.care_platform_add_participant_form.$ # Missing
-      Value: " "
+      Id: $PAGE.care_platform_add_participant_form.emergency_contact_first_name_input$
+      Value: "Laura"
   # Add Last name
     - Type: send_keys
       Strategy: xpath
-      Id: $PAGE.care_platform_add_participant_form.$ # Missing
-      Value: " "
+      Id: $PAGE.care_platform_add_participant_form.emergency_contact_last_name_input$
+      Value: "Agatsuma"
   # Add Phone number
     - Type: send_keys
       Strategy: xpath
-      Id: $PAGE.care_platform_add_participant_form.phone_input$ # Missing
-      Value: " "
+      Id: $PAGE.care_platform_add_participant_form.emergency_contact_phone_number_input$
+      Value: "8546859656"
   # Add an Email Address
     - Type: send_keys
       Strategy: xpath
-      Id: $PAGE.care_platform_add_participant_form.email_input$ # Missing
-      Value: " "
+      Id: $PAGE.care_platform_add_participant_form.emergency_contact_email_input$
+      Value: "lmentor@neural.com"
   # Select a relationship
     - Type: click
       Strategy: xpath
-      Id: $PAGE.care_platform_add_participant_form.$ # Missing
+      Id: $PAGE.care_platform_add_participant_form.emergency_contact_relationship_dropdown_button$
     - Type: click
       Strategy: xpath
-      Id: $PAGE.care_platform_add_participant_form.$ # Missing
+      Id: $PAGE.care_platform_add_participant_form.emergency_contact_relationship_options$
+   # Add Insurance Provider Address
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.care_platform_add_participant_form.emergency_contact_address_input$
+      Value: "Linway Terrace"
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.care_platform_add_participant_form.emergency_contact_address_numbers_input$
+      Value: "6422"
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.care_platform_add_participant_form.emergency_contact_address_city_input$
+      Value: "McLean"
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_add_participant_form.emergency_contact_address_state_dropdown_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_add_participant_form.emergency_contact_address_state_option$
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.care_platform_add_participant_form.emergency_contact_address_zip_input$
+      Value: "22101"
+  # HIPAA Clearence Confirmation
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_add_participant_form.hipaa_clearence_boolean$
+  # Choose Social History
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_add_participant_form.relationship_status_dropdown_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_add_participant_form.relationship_status_options$
+  # Caregiver Support
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_add_participant_form.caregiver_support_checkbox$
+  # Advance Directive
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_add_participant_form.advance_directive_checkbox$
+  # Do Not Resiscitate
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_add_participant_form.do_not_resuscitate_checkbox$
+  # click on Create Participant Button 
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_add_participant_form.create_participants_button$

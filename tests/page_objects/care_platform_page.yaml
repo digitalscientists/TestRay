@@ -122,10 +122,10 @@ care_platform_add_participant_form:
   insurance_provider_address_numbers_input: //input[@id='insuranceAddress2']
   insurance_provider_address_city_input: //input[@id='insuranceCity']
   insurance_provider_address_state_dropdown_button: //select[@id='insuranceState']
-  insurance_provider_address_state_option: //select[@id='insuranceState']//option[contains(text(),'CA')]
+  insurance_provider_address_state_option: //select[@id='insuranceState']//option[contains(text(),'OH')]
   insurance_provider_address_zip_input: //input[@id='insuranceZip']
-  race_checkbox: //span[contains(@class, 'input-checkbox-label')]
-  emergency_contact_first_name_input: //input[@id='emergencyContactFirstName'] #aqui
+  race_checkbox: //span[contains(text(),'Asian')]
+  emergency_contact_first_name_input: //input[@id='emergencyContactFirstName']
   emergency_contact_last_name_input: //input[@id='emergencyContactLastName']
   emergency_contact_phone_number_input: //input[@id='emergencyContactPhone']
   emergency_contact_email_input: //input[@id='emergencyContactEmailAddress']
@@ -135,10 +135,14 @@ care_platform_add_participant_form:
   emergency_contact_address_numbers_input: //input[@id='emergencyContactAddress2']
   emergency_contact_address_city_input: //input[@id='emergencyContactCity']
   emergency_contact_address_state_dropdown_button: //select[@id='emergencyContactState']
-  emergency_contact_address_state_option: //select[@id='emergencyContactState']//option[contains(text(),'CA')]
+  emergency_contact_address_state_option: //select[@id='emergencyContactState']//option[contains(text(),'VA')]
   emergency_contact_address_zip_input: //input[@id='emergencyContactZip']
-   
-
+  hipaa_clearence_boolean: //input[@name='emergencyContactHipaaClearance']/following-sibling::span[text()='Yes']
+  relationship_status_dropdown_button: //select[@id='relationshipStatus']
+  relationship_status_options: //select[@id='relationshipStatus']//option[contains(text(),'Married')]
+  caregiver_support_checkbox: //input[@name='caregiverSupport']/following-sibling::span[text()='Yes']
+  advance_directive_checkbox: //input[@name='advanceDirective']/following-sibling::span[text()='No']
+  do_not_resuscitate_checkbox: //input[@name='dnr']/following-sibling::span[text()='Yes']
   create_participants_button: //button[text()='Create Participant']
 
 
