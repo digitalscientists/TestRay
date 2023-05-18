@@ -595,13 +595,13 @@ TestOnboarderCreateNewParticipant:
       Id: $PAGE.care_platform_add_participant_form.insurance_provider_address_city_input$
       Value: "Columbus"
     - Type: click
-      Strategy: xpath
+      Strategy: id
       Id: $PAGE.care_platform_add_participant_form.insurance_provider_address_state_dropdown_button$
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_add_participant_form.insurance_provider_address_state_option$
     - Type: send_keys
-      Strategy: xpath
+      Strategy: id
       Id: $PAGE.care_platform_add_participant_form.insurance_provider_address_zip_input$
       Value: "43215"
   # Choose a Race or Ethnicity
@@ -611,52 +611,52 @@ TestOnboarderCreateNewParticipant:
 # Emergency Contact Information
    # Add First Name
     - Type: send_keys
-      Strategy: xpath
+      Strategy: id
       Id: $PAGE.care_platform_add_participant_form.emergency_contact_first_name_input$
       Value: "Laura"
   # Add Last name
     - Type: send_keys
-      Strategy: xpath
+      Strategy: id
       Id: $PAGE.care_platform_add_participant_form.emergency_contact_last_name_input$
       Value: "Agatsuma"
   # Add Phone number
     - Type: send_keys
-      Strategy: xpath
+      Strategy: id
       Id: $PAGE.care_platform_add_participant_form.emergency_contact_phone_number_input$
       Value: "8546859656"
   # Add an Email Address
     - Type: send_keys
-      Strategy: xpath
+      Strategy: id
       Id: $PAGE.care_platform_add_participant_form.emergency_contact_email_input$
       Value: "lmentor@neural.com"
   # Select a relationship
     - Type: click
-      Strategy: xpath
+      Strategy: id
       Id: $PAGE.care_platform_add_participant_form.emergency_contact_relationship_dropdown_button$
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_add_participant_form.emergency_contact_relationship_options$
    # Add Insurance Provider Address
     - Type: send_keys
-      Strategy: xpath
+      Strategy: id
       Id: $PAGE.care_platform_add_participant_form.emergency_contact_address_input$
       Value: "Linway Terrace"
     - Type: send_keys
-      Strategy: xpath
+      Strategy: id
       Id: $PAGE.care_platform_add_participant_form.emergency_contact_address_numbers_input$
       Value: "6422"
     - Type: send_keys
-      Strategy: xpath
+      Strategy: id
       Id: $PAGE.care_platform_add_participant_form.emergency_contact_address_city_input$
       Value: "McLean"
     - Type: click
-      Strategy: xpath
+      Strategy: id
       Id: $PAGE.care_platform_add_participant_form.emergency_contact_address_state_dropdown_button$
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_add_participant_form.emergency_contact_address_state_option$
     - Type: send_keys
-      Strategy: xpath
+      Strategy: id
       Id: $PAGE.care_platform_add_participant_form.emergency_contact_address_zip_input$
       Value: "22101"
   # HIPAA Clearence Confirmation
@@ -665,7 +665,7 @@ TestOnboarderCreateNewParticipant:
       Id: $PAGE.care_platform_add_participant_form.hipaa_clearence_boolean$
   # Choose Social History
     - Type: click
-      Strategy: xpath
+      Strategy: id
       Id: $PAGE.care_platform_add_participant_form.relationship_status_dropdown_button$
     - Type: click
       Strategy: xpath
