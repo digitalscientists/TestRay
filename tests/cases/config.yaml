@@ -104,10 +104,10 @@ Environments:
       idd_es_never_alone_user1_pwd: add_your_info
       idd_es_never_alone_user1_name: add_your_info
       idd_es_never_alone_user1_lastname: add_your_info
-      idd_chs_never_alone_user2: add_your_info
-      idd_chs_never_alone_user2_pwd: add_your_info
-      idd_chs_never_alone_user2_name: add_your_info
-      idd_chs_never_alone_user2_lastname: add_your_info
+      idd_ch_never_alone_user2: add_your_info
+      idd_ch_never_alone_user2_pwd: add_your_info
+      idd_ch_never_alone_user2_name: add_your_info
+      idd_ch_never_alone_user2_lastname: add_your_info
 #Facility devices users   
       facility_devices_user1: add_your_info
       facility_devices_user1_pwd: add_your_info
