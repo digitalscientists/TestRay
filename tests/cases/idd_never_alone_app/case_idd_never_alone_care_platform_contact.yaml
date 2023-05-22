@@ -330,7 +330,7 @@ TestIDDESAnswerCallForCarePartnerCallingDeviceIgnoreCall:
       Asserts:
         - Type: eq
           Var: CALLER_VALUE
-          Value: $AND_CLI_es_carepartner_user_name$ $AND_CLI_es_carepartner_user_lastname$ Personal Care Partner
+          Value: $AND_CLI_es_carepartner_user_name$ $AND_CLI_es_carepartner_user_lastname$
     - Type: wait_for
       Strategy: class_chain
       Id: $PAGE.seniors_app_incoming_call.answer_call_button$
