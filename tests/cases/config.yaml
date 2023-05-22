@@ -37,9 +37,9 @@ Devices:
 Environments:
   Settings:
     Vars:
-      care_platform_url: https://chs.careplatform.qa.neveralone.com/login
-      easterseals_care_platform_url: https://es.careplatform.qa.neveralone.com/login
-      employee_health_url: https://employee.qa.neveralone.com/login
+      care_platform_url: https://chs.careplatform.qa.neveralone.com
+      easterseals_care_platform_url: https://es.careplatform.qa.neveralone.com
+      employee_health_url: https://employee.qa.neveralone.com
       backend_qa_url: https://api.qa.neveralone.com
       facility_ahc: alpha health center
       facility_bhc:  beta health center
