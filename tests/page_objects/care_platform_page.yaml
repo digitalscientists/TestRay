@@ -81,7 +81,7 @@ care_platform_logout_modal:
 
 care_platform_participant:
   participants_title: //div[@class='text-lg font-bold']//h3[@class='text-lg font-bold']
-  add_participant_button: //button[text()='Add'] #Add Button
+  add_participant_button: //button[text()='Add']
   first_participant_row: //table/thead[contains(.,'Participant')]/following-sibling::tbody/tr[contains(.,'$AND_CLI_senior_user1_name$') and contains(.,'$AND_CLI_senior_user1_lastname$')][1]
   first_darkened_letter_button: //button[@class='alphabet-letter'][not(@disabled)][1]
   selected_darkened_letter_button: //button[contains(@class,'is-selected')]
@@ -124,7 +124,7 @@ care_platform_add_participant_form:
   insurance_provider_address_state_dropdown_button: insuranceState
   insurance_provider_address_state_option: //select[@id='insuranceState']//option[contains(text(),'OH')]
   insurance_provider_address_zip_input: insuranceZip
-  race_checkbox: //span[contains(text(),'Asian')]
+  asian_race_checkbox: //span[contains(text(),'Asian')]
   emergency_contact_first_name_input: emergencyContactFirstName
   emergency_contact_last_name_input: emergencyContactLastName
   emergency_contact_phone_number_input: emergencyContactPhone

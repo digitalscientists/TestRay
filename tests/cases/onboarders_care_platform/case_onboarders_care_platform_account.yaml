@@ -517,20 +517,31 @@ TestOnboarderCreateNewParticipant:
       Strategy: xpath
       Id: $PAGE.care_platform_add_participant_form.is_test_options$
   # Add First Name
+    # - Type: generate_unique_name
+    #   Name: "Carlos"
+    #   ResultVar: PARTICIPANT_FIRSTNAME
     - Type: send_keys
       Strategy: id
       Id: $PAGE.care_platform_add_participant_form.firstname_input$
-      Value: "Cesar"
+      Value: "Carlos"
+    # Value: $AND_CLI_PARTICIPANT_FIRSTNAME$
   # Add Last name
+    # - Type: generate_unique_name
+    #   Name: "Rodriguez"
+    #   ResultVar: PARTICIPANT_LASTNAME
     - Type: send_keys
       Strategy: id
       Id: $PAGE.care_platform_add_participant_form.lastname_input$
-      Value: "Moreno"
+      Value: "Rodriguez"
+    # Value: $AND_CLI_PARTICIPANT_LASTNAME$
   # Add Preferred Name
+    - Type: generate_unique_name
+      Name: "Carlos"
+      ResultVar: PARTICIPANT_PREFERRED_NAME
     - Type: send_keys
       Strategy: id
       Id: $PAGE.care_platform_add_participant_form.preferred_name_input$
-      Value: "Wind"
+      Value: $AND_CLI_PARTICIPANT_PREFERRED_NAME$
   # Choose a Date of Birth
     - Type: click
       Strategy: id
@@ -551,11 +562,17 @@ TestOnboarderCreateNewParticipant:
       Strategy: xpath
       Id: $PAGE.care_platform_add_participant_form.preferred_gender_option$
   # Add Mobile Phone number
+    - Type: generate_unique_name
+      Name: "8589896969"
+      ResultVar: PARTICIPANT_MOBILE_PHONE_NUMBER
     - Type: send_keys
       Strategy: id
       Id: $PAGE.care_platform_add_participant_form.phone_input$
-      Value: "8286968565"
-  # Add an Email Address
+      Value: $AND_CLI_PARTICIPANT_MOBILE_PHONE_NUMBER$
+  # Add an Email Address 
+    # - Type: generate_unique_name   #May change due to validation error
+    #   Name: "cemn@neural.com"
+    #   ResultVar: PARTICIPANT_EMAIL_ADDRESS
     - Type: send_keys
       Strategy: id
       Id: $PAGE.care_platform_add_participant_form.email_input$
@@ -572,15 +589,21 @@ TestOnboarderCreateNewParticipant:
       Id: $PAGE.care_platform_add_participant_form.insurance_provider_phone_number_input$
       Value: "5278412525"
   # Add Member ID 
+    - Type: generate_unique_name
+      Name: "120688CCD"
+      ResultVar: MEMBER_ID
     - Type: send_keys
       Strategy: id
       Id: $PAGE.care_platform_add_participant_form.insurance_member_id_input$
-      Value: "120688CCD"
+      Value: $AND_CLI_MEMBER_ID$
   # Add Group ID
+    - Type: generate_unique_name
+      Name: "00012"
+      ResultVar: GROUP_ID
     - Type: send_keys
       Strategy: id
       Id: $PAGE.care_platform_add_participant_form.insurance_group_id_input$
-      Value: "00012"
+      Value: $AND_CLI_GROUP_ID$
   # Add Insurance Provider Address
     - Type: send_keys
       Strategy: id
@@ -607,28 +630,40 @@ TestOnboarderCreateNewParticipant:
   # Choose a Race or Ethnicity
     - Type: click
       Strategy: xpath
-      Id: $PAGE.care_platform_add_participant_form.race_checkbox$
+      Id: $PAGE.care_platform_add_participant_form.asian_race_checkbox$
 # Emergency Contact Information
    # Add First Name
+    - Type: generate_unique_name
+      Name: "Kentaro"
+      ResultVar: EMERGENCY_CONTACT_FIRSTNAME
     - Type: send_keys
       Strategy: id
       Id: $PAGE.care_platform_add_participant_form.emergency_contact_first_name_input$
-      Value: "Laura"
+      Value: $AND_CLI_EMERGENCY_CONTACT_FIRSTNAME$
   # Add Last name
+    - Type: generate_unique_name
+      Name: "Miura"
+      ResultVar: EMERGENCY_CONTACT_LASTNAME
     - Type: send_keys
       Strategy: id
       Id: $PAGE.care_platform_add_participant_form.emergency_contact_last_name_input$
-      Value: "Agatsuma"
+      Value: $AND_CLI_EMERGENCY_CONTACT_LASTNAME$
   # Add Phone number
+    - Type: generate_unique_name
+      Name: "5656525632"
+      ResultVar: EMERGENCY_CONTACT_PHONE_NUMBER
     - Type: send_keys
       Strategy: id
       Id: $PAGE.care_platform_add_participant_form.emergency_contact_phone_number_input$
-      Value: "8546859656"
+      Value: $AND_CLI_EMERGENCY_CONTACT_PHONE_NUMBER$
   # Add an Email Address
+    - Type: generate_unique_name
+      Name: "kmiura@gmail.com"
+      ResultVar: EMERGENCY_CONTACT_EMAIL_ADDRESS
     - Type: send_keys
       Strategy: id
       Id: $PAGE.care_platform_add_participant_form.emergency_contact_email_input$
-      Value: "lmentor@neural.com"
+      Value: $AND_CLI_EMERGENCY_CONTACT_EMAIL_ADDRESS$
   # Select a relationship
     - Type: click
       Strategy: id
@@ -678,7 +713,7 @@ TestOnboarderCreateNewParticipant:
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_add_participant_form.advance_directive_checkbox$
-  # Do Not Resiscitate
+  # Do Not Resuscitate
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_add_participant_form.do_not_resuscitate_checkbox$
@@ -686,3 +721,35 @@ TestOnboarderCreateNewParticipant:
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_add_participant_form.create_participants_button$
+  # Confirm if the participant has been created
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform.navigation_participant$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform.navigation_participant$
+ # click on search button
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant.search_button$
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant.search_input$
+      Value: $AND_CLI_PARTICIPANT_PREFERRED_NAME$
+  # Verify that match.
+    - Type: get_text
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant.senior_1_row$
+      Greps:
+        - var: PARTICIPANT_LASTNAME
+          match: (.*)
+  # Verify the first participant lastname contains the text filtered.
+    - Type: assert
+      Asserts: 
+      - Type: contain
+        Var: PARTICIPANT_LASTNAME
+        Value: $AND_CLI_PARTICIPANT_LASTNAME$
+  # Clear the search by clicking small "x" on right of the field.
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant.clear_search_button$
