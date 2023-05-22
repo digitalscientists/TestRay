@@ -1933,6 +1933,14 @@ def return_element_attribute(action)
 
 end
 
+# Returns a variable with a unique name adding a ramdon string at the end
+# i.e. method receives "Hey" and then returns "Hey<fjh>"
+def generate_unique_string(action)
+  name = convert_value(action["Name"])
+  unique_string = "#{name}#{2.times.map{(0...(rand(10))).map { ('a'..'z').to_a[rand(26)] }.join }.join(" ")}"
+  ENV[convert_value(action["ResultVar"])] = unique_string
+end
+
 # Returns a variable with a unique name using timestamps at the end
 # i.e. method receives "Hey" and then returns "Hey <timestamp>"
 def generate_unique_name(action)

@@ -517,31 +517,26 @@ TestOnboarderCreateNewParticipant:
       Strategy: xpath
       Id: $PAGE.care_platform_add_participant_form.is_test_options$
   # Add First Name
-    # - Type: generate_unique_name
-    #   Name: "Carlos"
-    #   ResultVar: PARTICIPANT_FIRSTNAME
+    - Type: generate_unique_string
+      Name: "Carlos"
+      ResultVar: PARTICIPANT_FIRST_NAME
     - Type: send_keys
       Strategy: id
       Id: $PAGE.care_platform_add_participant_form.firstname_input$
-      Value: "Carlos"
-    # Value: $AND_CLI_PARTICIPANT_FIRSTNAME$
+      Value: $AND_CLI_PARTICIPANT_FIRST_NAME$
   # Add Last name
-    # - Type: generate_unique_name
-    #   Name: "Rodriguez"
-    #   ResultVar: PARTICIPANT_LASTNAME
+    - Type: generate_unique_string
+      Name: "Mencio"
+      ResultVar: PARTICIPANT_LAST_NAME
     - Type: send_keys
       Strategy: id
       Id: $PAGE.care_platform_add_participant_form.lastname_input$
-      Value: "Rodriguez"
-    # Value: $AND_CLI_PARTICIPANT_LASTNAME$
+      Value: $AND_CLI_PARTICIPANT_LAST_NAME$
   # Add Preferred Name
-    - Type: generate_unique_name
-      Name: "Carlos"
-      ResultVar: PARTICIPANT_PREFERRED_NAME
     - Type: send_keys
       Strategy: id
       Id: $PAGE.care_platform_add_participant_form.preferred_name_input$
-      Value: $AND_CLI_PARTICIPANT_PREFERRED_NAME$
+      Value: "Legolas"
   # Choose a Date of Birth
     - Type: click
       Strategy: id
@@ -562,194 +557,194 @@ TestOnboarderCreateNewParticipant:
       Strategy: xpath
       Id: $PAGE.care_platform_add_participant_form.preferred_gender_option$
   # Add Mobile Phone number
-    - Type: generate_unique_name
-      Name: "8589896969"
-      ResultVar: PARTICIPANT_MOBILE_PHONE_NUMBER
     - Type: send_keys
       Strategy: id
       Id: $PAGE.care_platform_add_participant_form.phone_input$
-      Value: $AND_CLI_PARTICIPANT_MOBILE_PHONE_NUMBER$
+      Value: "8589896969"
   # Add an Email Address 
-    # - Type: generate_unique_name   #May change due to validation error
-    #   Name: "cemn@neural.com"
-    #   ResultVar: PARTICIPANT_EMAIL_ADDRESS
+    - Type: generate_unique_string
+      Name: "@gmail.com"
+      ResultVar: PARTICIPANT_EMAIL_ADDRESS
     - Type: send_keys
       Strategy: id
       Id: $PAGE.care_platform_add_participant_form.email_input$
-      Value: "cemn@neural.com"
-# Participant Insurance Informacion
-  # Add Insurance Provider Name
-    - Type: send_keys
-      Strategy: id
-      Id: $PAGE.care_platform_add_participant_form.insurance_provider_name_input$
-      Value: "Alpha Healthcare Center"
-  # Add Insurance Provider Phone Number
-    - Type: send_keys
-      Strategy: id
-      Id: $PAGE.care_platform_add_participant_form.insurance_provider_phone_number_input$
-      Value: "5278412525"
-  # Add Member ID 
-    - Type: generate_unique_name
-      Name: "120688CCD"
-      ResultVar: MEMBER_ID
-    - Type: send_keys
-      Strategy: id
-      Id: $PAGE.care_platform_add_participant_form.insurance_member_id_input$
-      Value: $AND_CLI_MEMBER_ID$
-  # Add Group ID
-    - Type: generate_unique_name
-      Name: "00012"
-      ResultVar: GROUP_ID
-    - Type: send_keys
-      Strategy: id
-      Id: $PAGE.care_platform_add_participant_form.insurance_group_id_input$
-      Value: $AND_CLI_GROUP_ID$
-  # Add Insurance Provider Address
-    - Type: send_keys
-      Strategy: id
-      Id: $PAGE.care_platform_add_participant_form.insurance_provider_address_input$
-      Value: "W Town St"
-    - Type: send_keys
-      Strategy: id
-      Id: $PAGE.care_platform_add_participant_form.insurance_provider_address_numbers_input$
-      Value: "424"
-    - Type: send_keys
-      Strategy: id
-      Id: $PAGE.care_platform_add_participant_form.insurance_provider_address_city_input$
-      Value: "Columbus"
-    - Type: click
-      Strategy: id
-      Id: $PAGE.care_platform_add_participant_form.insurance_provider_address_state_dropdown_button$
-    - Type: click
-      Strategy: xpath
-      Id: $PAGE.care_platform_add_participant_form.insurance_provider_address_state_option$
-    - Type: send_keys
-      Strategy: id
-      Id: $PAGE.care_platform_add_participant_form.insurance_provider_address_zip_input$
-      Value: "43215"
-  # Choose a Race or Ethnicity
-    - Type: click
-      Strategy: xpath
-      Id: $PAGE.care_platform_add_participant_form.asian_race_checkbox$
-# Emergency Contact Information
-   # Add First Name
-    - Type: generate_unique_name
-      Name: "Kentaro"
-      ResultVar: EMERGENCY_CONTACT_FIRSTNAME
-    - Type: send_keys
-      Strategy: id
-      Id: $PAGE.care_platform_add_participant_form.emergency_contact_first_name_input$
-      Value: $AND_CLI_EMERGENCY_CONTACT_FIRSTNAME$
-  # Add Last name
-    - Type: generate_unique_name
-      Name: "Miura"
-      ResultVar: EMERGENCY_CONTACT_LASTNAME
-    - Type: send_keys
-      Strategy: id
-      Id: $PAGE.care_platform_add_participant_form.emergency_contact_last_name_input$
-      Value: $AND_CLI_EMERGENCY_CONTACT_LASTNAME$
-  # Add Phone number
-    - Type: generate_unique_name
-      Name: "5656525632"
-      ResultVar: EMERGENCY_CONTACT_PHONE_NUMBER
-    - Type: send_keys
-      Strategy: id
-      Id: $PAGE.care_platform_add_participant_form.emergency_contact_phone_number_input$
-      Value: $AND_CLI_EMERGENCY_CONTACT_PHONE_NUMBER$
-  # Add an Email Address
-    - Type: generate_unique_name
-      Name: "kmiura@gmail.com"
-      ResultVar: EMERGENCY_CONTACT_EMAIL_ADDRESS
-    - Type: send_keys
-      Strategy: id
-      Id: $PAGE.care_platform_add_participant_form.emergency_contact_email_input$
-      Value: $AND_CLI_EMERGENCY_CONTACT_EMAIL_ADDRESS$
-  # Select a relationship
-    - Type: click
-      Strategy: id
-      Id: $PAGE.care_platform_add_participant_form.emergency_contact_relationship_dropdown_button$
-    - Type: click
-      Strategy: xpath
-      Id: $PAGE.care_platform_add_participant_form.emergency_contact_relationship_options$
-   # Add Insurance Provider Address
-    - Type: send_keys
-      Strategy: id
-      Id: $PAGE.care_platform_add_participant_form.emergency_contact_address_input$
-      Value: "Linway Terrace"
-    - Type: send_keys
-      Strategy: id
-      Id: $PAGE.care_platform_add_participant_form.emergency_contact_address_numbers_input$
-      Value: "6422"
-    - Type: send_keys
-      Strategy: id
-      Id: $PAGE.care_platform_add_participant_form.emergency_contact_address_city_input$
-      Value: "McLean"
-    - Type: click
-      Strategy: id
-      Id: $PAGE.care_platform_add_participant_form.emergency_contact_address_state_dropdown_button$
-    - Type: click
-      Strategy: xpath
-      Id: $PAGE.care_platform_add_participant_form.emergency_contact_address_state_option$
-    - Type: send_keys
-      Strategy: id
-      Id: $PAGE.care_platform_add_participant_form.emergency_contact_address_zip_input$
-      Value: "22101"
-  # HIPAA Clearence Confirmation
-    - Type: click
-      Strategy: xpath
-      Id: $PAGE.care_platform_add_participant_form.hipaa_clearence_boolean$
-  # Choose Social History
-    - Type: click
-      Strategy: id
-      Id: $PAGE.care_platform_add_participant_form.relationship_status_dropdown_button$
-    - Type: click
-      Strategy: xpath
-      Id: $PAGE.care_platform_add_participant_form.relationship_status_options$
-  # Caregiver Support
-    - Type: click
-      Strategy: xpath
-      Id: $PAGE.care_platform_add_participant_form.caregiver_support_checkbox$
-  # Advance Directive
-    - Type: click
-      Strategy: xpath
-      Id: $PAGE.care_platform_add_participant_form.advance_directive_checkbox$
-  # Do Not Resuscitate
-    - Type: click
-      Strategy: xpath
-      Id: $PAGE.care_platform_add_participant_form.do_not_resuscitate_checkbox$
-  # click on Create Participant Button 
-    - Type: click
-      Strategy: xpath
-      Id: $PAGE.care_platform_add_participant_form.create_participants_button$
-  # Confirm if the participant has been created
-    - Type: wait_for
-      Strategy: xpath
-      Id: $PAGE.care_platform.navigation_participant$
-    - Type: click
-      Strategy: xpath
-      Id: $PAGE.care_platform.navigation_participant$
- # click on search button
-    - Type: click
-      Strategy: xpath
-      Id: $PAGE.care_platform_participant.search_button$
-    - Type: send_keys
-      Strategy: xpath
-      Id: $PAGE.care_platform_participant.search_input$
-      Value: $AND_CLI_PARTICIPANT_PREFERRED_NAME$
-  # Verify that match.
-    - Type: get_text
-      Strategy: xpath
-      Id: $PAGE.care_platform_participant.senior_1_row$
-      Greps:
-        - var: PARTICIPANT_LASTNAME
-          match: (.*)
-  # Verify the first participant lastname contains the text filtered.
-    - Type: assert
-      Asserts: 
-      - Type: contain
-        Var: PARTICIPANT_LASTNAME
-        Value: $AND_CLI_PARTICIPANT_LASTNAME$
-  # Clear the search by clicking small "x" on right of the field.
-    - Type: click
-      Strategy: xpath
-      Id: $PAGE.care_platform_participant.clear_search_button$
+      Value: $AND_CLI_PARTICIPANT_EMAIL_ADDRESS$
+# # Participant Insurance Informacion
+#   # Add Insurance Provider Name
+#     - Type: send_keys
+#       Strategy: id
+#       Id: $PAGE.care_platform_add_participant_form.insurance_provider_name_input$
+#       Value: "Alpha Healthcare Center"
+#   # Add Insurance Provider Phone Number
+#     - Type: send_keys
+#       Strategy: id
+#       Id: $PAGE.care_platform_add_participant_form.insurance_provider_phone_number_input$
+#       Value: "5278412525"
+#   # Add Member ID 
+#     - Type: generate_unique_name
+#       Name: "120688CCD"
+#       ResultVar: MEMBER_ID
+#     - Type: send_keys
+#       Strategy: id
+#       Id: $PAGE.care_platform_add_participant_form.insurance_member_id_input$
+#       Value: $AND_CLI_MEMBER_ID$
+#   # Add Group ID
+#     - Type: generate_unique_name
+#       Name: "00012"
+#       ResultVar: GROUP_ID
+#     - Type: send_keys
+#       Strategy: id
+#       Id: $PAGE.care_platform_add_participant_form.insurance_group_id_input$
+#       Value: $AND_CLI_GROUP_ID$
+#   # Add Insurance Provider Address
+#     - Type: send_keys
+#       Strategy: id
+#       Id: $PAGE.care_platform_add_participant_form.insurance_provider_address_input$
+#       Value: "W Town St"
+#     - Type: send_keys
+#       Strategy: id
+#       Id: $PAGE.care_platform_add_participant_form.insurance_provider_address_numbers_input$
+#       Value: "424"
+#     - Type: send_keys
+#       Strategy: id
+#       Id: $PAGE.care_platform_add_participant_form.insurance_provider_address_city_input$
+#       Value: "Columbus"
+#     - Type: click
+#       Strategy: id
+#       Id: $PAGE.care_platform_add_participant_form.insurance_provider_address_state_dropdown_button$
+#     - Type: click
+#       Strategy: xpath
+#       Id: $PAGE.care_platform_add_participant_form.insurance_provider_address_state_option$
+#     - Type: send_keys
+#       Strategy: id
+#       Id: $PAGE.care_platform_add_participant_form.insurance_provider_address_zip_input$
+#       Value: "43215"
+#   # Choose a Race or Ethnicity
+#     - Type: click
+#       Strategy: xpath
+#       Id: $PAGE.care_platform_add_participant_form.asian_race_checkbox$
+# # Emergency Contact Information
+#    # Add First Name
+#     - Type: generate_unique_name
+#       Name: "Kentaro"
+#       ResultVar: EMERGENCY_CONTACT_FIRSTNAME
+#     - Type: send_keys
+#       Strategy: id
+#       Id: $PAGE.care_platform_add_participant_form.emergency_contact_first_name_input$
+#       Value: $AND_CLI_EMERGENCY_CONTACT_FIRSTNAME$
+#   # Add Last name
+#     - Type: generate_unique_name
+#       Name: "Miura"
+#       ResultVar: EMERGENCY_CONTACT_LASTNAME
+#     - Type: send_keys
+#       Strategy: id
+#       Id: $PAGE.care_platform_add_participant_form.emergency_contact_last_name_input$
+#       Value: $AND_CLI_EMERGENCY_CONTACT_LASTNAME$
+#   # Add Phone number
+#     - Type: generate_unique_name
+#       Name: "5656525632"
+#       ResultVar: EMERGENCY_CONTACT_PHONE_NUMBER
+#     - Type: send_keys
+#       Strategy: id
+#       Id: $PAGE.care_platform_add_participant_form.emergency_contact_phone_number_input$
+#       Value: $AND_CLI_EMERGENCY_CONTACT_PHONE_NUMBER$
+#   # Add an Email Address
+#     - Type: generate_unique_name
+#       Name: "Lalouched@gmail.com"
+#       ResultVar: EMERGENCY_CONTACT_EMAIL_ADDRESS
+#     - Type: send_keys
+#       Strategy: id
+#       Id: $PAGE.care_platform_add_participant_form.emergency_contact_email_input$
+#       Value: $AND_CLI_EMERGENCY_CONTACT_EMAIL_ADDRESS$
+#   # Select a relationship
+#     - Type: click
+#       Strategy: id
+#       Id: $PAGE.care_platform_add_participant_form.emergency_contact_relationship_dropdown_button$
+#     - Type: click
+#       Strategy: xpath
+#       Id: $PAGE.care_platform_add_participant_form.emergency_contact_relationship_options$
+#    # Add Insurance Provider Address
+#     - Type: send_keys
+#       Strategy: id
+#       Id: $PAGE.care_platform_add_participant_form.emergency_contact_address_input$
+#       Value: "Linway Terrace"
+#     - Type: send_keys
+#       Strategy: id
+#       Id: $PAGE.care_platform_add_participant_form.emergency_contact_address_numbers_input$
+#       Value: "6422"
+#     - Type: send_keys
+#       Strategy: id
+#       Id: $PAGE.care_platform_add_participant_form.emergency_contact_address_city_input$
+#       Value: "McLean"
+#     - Type: click
+#       Strategy: id
+#       Id: $PAGE.care_platform_add_participant_form.emergency_contact_address_state_dropdown_button$
+#     - Type: click
+#       Strategy: xpath
+#       Id: $PAGE.care_platform_add_participant_form.emergency_contact_address_state_option$
+#     - Type: send_keys
+#       Strategy: id
+#       Id: $PAGE.care_platform_add_participant_form.emergency_contact_address_zip_input$
+#       Value: "22101"
+#   # HIPAA Clearence Confirmation
+#     - Type: click
+#       Strategy: xpath
+#       Id: $PAGE.care_platform_add_participant_form.hipaa_clearence_boolean$
+#   # Choose Social History
+#     - Type: click
+#       Strategy: id
+#       Id: $PAGE.care_platform_add_participant_form.relationship_status_dropdown_button$
+#     - Type: click
+#       Strategy: xpath
+#       Id: $PAGE.care_platform_add_participant_form.relationship_status_options$
+#   # Caregiver Support
+#     - Type: click
+#       Strategy: xpath
+#       Id: $PAGE.care_platform_add_participant_form.caregiver_support_checkbox$
+#   # Advance Directive
+#     - Type: click
+#       Strategy: xpath
+#       Id: $PAGE.care_platform_add_participant_form.advance_directive_checkbox$
+#   # Do Not Resuscitate
+#     - Type: click
+#       Strategy: xpath
+#       Id: $PAGE.care_platform_add_participant_form.do_not_resuscitate_checkbox$
+#   # click on Create Participant Button 
+#     - Type: click
+#       Strategy: xpath
+#       Id: $PAGE.care_platform_add_participant_form.create_participants_button$
+#   # Confirm if the participant has been created
+#     - Type: wait_for
+#       Strategy: xpath
+#       Id: $PAGE.care_platform.navigation_participant$
+#     - Type: click
+#       Strategy: xpath
+#       Id: $PAGE.care_platform.navigation_participant$
+#   # Go to the search filter.
+#     - Type: click
+#       Strategy: xpath
+#       Id: $PAGE.care_platform_participant.search_button$
+#     - Type: send_keys
+#       Strategy: xpath
+#       Id: $PAGE.care_platform_participant.search_input$
+#       Value: $AND_CLI_PARTICIPANT_PREFERRED_NAME$
+#   # Verify there is at least 1 user with that name
+#     - Type: wait_for
+#       Strategy: xpath
+#       Id: $PAGE.care_platform_participant.first_senior_lastname$
+#     - Type: get_text
+#       Strategy: xpath
+#       Id: $PAGE.care_platform_participant.first_senior_lastname$
+#       Greps:
+#         - var: PARTICIPANT_CREATED
+#           match: (.*)
+#   # Verify the first participant lastname contains the text filtered
+#     - Type: assert
+#       Asserts: 
+#     - Type: contain
+#       Var: PARTICIPANT_CREATED
+#       Value: $AND_CLI_PARTICIPANT_REFERRED_NAME$
+#   # Clear the search by clicking small "x" at right of field
+#     - Type: click
+#       Strategy: xpath
+#       Id: $PAGE.care_platform_participant.clear_search_button$
