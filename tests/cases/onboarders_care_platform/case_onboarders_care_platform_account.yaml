@@ -22,7 +22,7 @@ TestOnboarderCarePartnerUpdatePassword:
       Value: CarePlatformUpdatePassword
 
 #CXTB-164: Manually Log out of the Portal 
-TestManuallyLogOutOfThePortalOnboarder:
+TestOnboarderManuallyLogOutOfThePortal:
   Environment: Settings 
   Vars:
     LOGOUT_OPTION: "Go Off Shift"

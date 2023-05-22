@@ -58,7 +58,7 @@ employee_health_my_account_modal:
   notifications_email_checkbox: //*[@id='minBeforeAppointmentToEmail']/following-sibling::span
   notifications_sms_checkbox: //*[@id='minBeforeAppointmentToText']/following-sibling::span
   my_info_phone_input: //input[@id='phone']
-  my_info_phone_alert_message: //*[@id='modals']//input[@id='phone']//following-sibling::div[@aria-hidden='false']//div[contains(@class,'color-red-400')]
+  my_info_phone_alert_message: //label[@for='phone']//following-sibling::div[@aria-hidden='false']//div[contains(@class,'color-red-400')]
   my_info_firstname_input: //input[@id='firstName']
   my_info_lastname_input: //*[@id='lastName']
   my_info_email_input: //*[@id='email']

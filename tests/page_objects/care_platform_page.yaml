@@ -87,7 +87,7 @@ care_platform_participant:
   senior_complete_name: //div[starts-with(@class, 'SearchableListTemplate_record')]//div[contains(text(),'$AND_CLI_senior_user1_name$')][strong[contains(text(),'$AND_CLI_senior_user1_lastname$')]]
   esidd_senior_complete_name: //div[starts-with(@class, 'SearchableListTemplate_record')]//div[contains(text(),'$AND_CLI_idd_es_never_alone_user1_name$')][strong[contains(text(),'$AND_CLI_idd_es_never_alone_user1_lastname$')]]
   senior_1_row: //*[@id='containerElement']/div[@role='button'][1]
-  first_senior_lastname: //*[@id='containerElement']/div[@role='button'][1]//strong
+  first_senior_lastname: //*[@id='containerElement']/div[@role='button'][1]//div[contains(@class,'bold')]
   call_portal_btn: //button[text()='Call Portal']
   search_button: //button[span[@class='icon-search']]
   search_input: //input[@id='searchText']
