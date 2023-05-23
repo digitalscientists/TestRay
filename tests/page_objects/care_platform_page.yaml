@@ -19,9 +19,9 @@ care_platform_verify_account:
 care_platform:
   page_title: //h3
   call_queue_title: //h3[text()='Call Queue']
-  navigation_participant: //nav//div[contains(text(),'Participants')]
-  navigation_followup: //nav//div[contains(text(),'Follow-up')]
-  navigation_home: //nav//div[contains(text(),'Home')]
+  navigation_participant: //nav//a[contains(text(),'Participants')]
+  navigation_followup: //nav//a[contains(text(),'Follow-up')]
+  navigation_home: //nav//a[contains(text(),'Home')]
 
 care_platform_home:
   first_call_of_queue: //div[@id='containerElement']/div[starts-with(@class, 'ListRow_listRow')][1]
