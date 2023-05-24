@@ -395,7 +395,7 @@ TestSeniorAppVerifyInAppOfflineBehavior:
       Role: localiOS
 
 # CXTB-38: Verify app automatically returns to Home page after inactivity period.
-TestAutoReturnToHomePageAfterInactivityPeriod:
+TestSeniorAutoReturnToHomePageAfterInactivityPeriod:
   Environment: Settings
   Precases:
     - SetScheduledCallForSeniors
@@ -502,7 +502,7 @@ TestSeniorAppointmentsAppearAsExpectedHomePage:
       EventName: $AND_CLI_UNIQUE_EVENT_NAME$
 
 # CXTB-83: Verify starting soon notification while in the notification window.
-TestStartingSoonNotification:
+TestSeniorStartingSoonNotification:
   Environment: Settings
   Precases:
     - SetScheduledCallForSeniorsToStartIn7Minutes
