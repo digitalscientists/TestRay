@@ -569,7 +569,7 @@ TestOnboarderCreateNewParticipant:
       Value: $AND_CLI_PARTICIPANT_PHONE_NUMBER$
   # Add an Email Address 
     - Type: generate_unique_email
-      Name: "lego@gmail.com"
+      Name: "@gmail.com"
       ResultVar: PARTICIPANT_EMAIL_ADDRESS
     - Type: send_keys
       Strategy: id
@@ -733,11 +733,24 @@ TestOnboarderCreateNewParticipant:
     - Type: send_keys
       Strategy: xpath
       Id: $PAGE.care_platform_participant.search_input$
-      Value: $AND_CLI_PARTICIPANT_LAST_NAME$
+      Value: $AND_CLI_PARTICIPANT_FIRST_NAME$
   # Verify there is at least 1 user with that name
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.care_platform_participant.senior_1_row$
+    - Type: get_text
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant.first_senior_lastname$
+      Greps:
+        - var: PARTICIPANT_CREATED
+          match: (.*)
+  # Verify the first participant lastname contains the text filtered
+    - Type: assert
+      Asserts: 
+    - Type: contain
+      Var: PARTICIPANT_CREATED
+      Value: $AND_CLI_PARTICIPANT_FIRST_NAME$
+  # Clear the search by clicking small "x" at right of field
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_participant.clear_search_button$
