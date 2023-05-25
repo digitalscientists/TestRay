@@ -1,10 +1,8 @@
 Apps:
   NeverAlone:
     iOSBundle: com.eastwaterleasing.neveraloneb2b  
-
 chromeDriverPath: chromedriver
 Timeout: 15
-
 Devices:
   - role: command1,command2,command3
   - role: desktopChrome,desktopChrome1   
@@ -32,18 +30,34 @@ Devices:
       deviceName:  "Apple’s iPad (15.5)" #"iPad Pro (12.9-inch) (5th generation) Simulator (15.5)" #THIS DEVICE CAN BE UPDATED BY YOUR DEVICE
       udid: "00008101-001510200E04001E" #"D017D231-AAF1-4050-946B-B9FC0838D146" #THIS UDID CAN BE UPDATEDED WITH YOUR DEVICE UDID 
       newCommandTimeout: 60
-
 #VARS
 Environments:
   Settings:
     Vars:
-      care_platform_url: https://care-platform-qa.chs-ds.com/
-      easterseals_care_platform_url: https://es.care-platform-qa.chs-ds.com/
-      employee_health_url: https://employee-health-portal-qa.chs-ds.com/
-      backend_qa_url: https://never-alone-backend-qa.chs-ds.com/
+      care_platform_url: https://chs.careplatform.qa.neveralone.com
+      easterseals_care_platform_url: https://es.careplatform.qa.neveralone.com
+      employee_health_url: https://employee.qa.neveralone.com
+      backend_qa_url: https://api.qa.neveralone.com
       facility_ahc: alpha health center
       facility_bhc:  beta health center
       facility_chc:  charlie health center
+
+    
+          
+            
+    
+
+          
+          Expand Down
+          
+            
+    
+
+          
+          Expand Up
+    
+    @@ -104,10 +104,10 @@ Environments:
+  
 #Onboarder users      
       onboarder_user1: add_your_info
       onboarder_user1_pwd: add_your_info
@@ -104,13 +118,24 @@ Environments:
       idd_es_never_alone_user1_pwd: add_your_info
       idd_es_never_alone_user1_name: add_your_info
       idd_es_never_alone_user1_lastname: add_your_info
-      idd_chs_never_alone_user2: add_your_info
-      idd_chs_never_alone_user2_pwd: add_your_info
-      idd_chs_never_alone_user2_name: add_your_info
-      idd_chs_never_alone_user2_lastname: add_your_info
+      idd_ch_never_alone_user2: add_your_info
+      idd_ch_never_alone_user2_pwd: add_your_info
+      idd_ch_never_alone_user2_name: add_your_info
+      idd_ch_never_alone_user2_lastname: add_your_info
 #Facility devices users   
       facility_devices_user1: add_your_info
       facility_devices_user1_pwd: add_your_info
+
+    
+          
+            
+    
+
+          
+          Expand Down
+    
+    
+  
       facility_devices_user1_number: add_your_info
       facility_devices_user2: add_your_info
       facility_devices_user2_pwd: add_your_info  
