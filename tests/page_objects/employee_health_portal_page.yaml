@@ -43,6 +43,17 @@ employee_health_home_page:
   alert_success_update_password: //div[@class='Toastify']//div[contains(text(),'Password updated successfully')]
   call_now_button: //button[text()='Call Now']
   alert_call_ended: //div[@role='alert']//div[contains(text(),'Call has ended')]
+  calendar_right_button: //span[@class='icon-chevron-right']
+  calendar_month_view: //div[@class = 'calendar-days fade-quick-enter-done']
+  calendar_day_button: //div[text()='30']
+  upcoming_appointment_title: //div[contains(@class,'text-lg font-bold color-green-300')]
+  tabs_no_results: //div[@class = 'tabs-no-results']
+  view_upcoming_appointment_button: //button[text()='View upcoming appointments']
+  schedule_tab_button: //button[@class = 'box-tabs-nav-item active']
+  container_tab: //div[contains(@class, 'box has-scrollable-content is-white has-shadow')]
+
+
+
 
 employee_health_my_account_modal:
   modal_title: //*[@id='modals']//h4[text()='My Account']
