@@ -122,9 +122,3 @@ TestEmployeeHealthPortalRequestAnAppointmentForUser:
         - Type: eq
           Var: SHOWED_DESCRIPTION
           Value: $AND_CLI_PAIN_DESCRIPTION$
-
-    
-
-
-
-  
