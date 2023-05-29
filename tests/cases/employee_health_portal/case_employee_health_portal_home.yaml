@@ -7,7 +7,7 @@ TestEmployeeHealthPortalReviewUpcomingAppointment:
   Actions:
   #Creating appointment
     - Type: case
-      Case: TestEmployeeHealthPortalRequestAnAppointmentForUser
+      Value: TestEmployeeHealthPortalRequestAnAppointmentForUser
   #View information in "My schedule" tab on portal home page
     - Type: click
       Strategy: xpath
