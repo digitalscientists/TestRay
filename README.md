@@ -1116,6 +1116,31 @@ Prints and Writes now time + # minutes.
       Var: Result Var with now time + # minutes
       File: File path (Optional)
 
+### <a id="generate_unique_number"></a>generate_unique_number
+
+Returns a variable with a unique number generated at the end of it.
+The method receives "Carlos" and then returns "Carlos~452~"
+
+    - Type: generate_unique_number
+      Name: number that user needs to be unique
+      ResultVar: Var that will have the unique number value
+### <a id="generate_unique_email"></a>generate_unique_email
+
+Returns a variable with a unique email using ramson string at the begining 
+method receives "@gmail.com" and then returns "ujrb@gmail.com"
+
+    - Type: generate_unique_email
+      Name: domain will be along the string created
+      ResultVar: Var that will have the unique email value
+
+### <a id="generate_unique_string"></a>generate_unique_string
+
+Returns a variable with a unique string using ramdon letters from a to z. 
+The method receives "Hello" and then returns "Hello ~th~"
+
+    - Type: generate_unique_string
+      Name: string that will be added to a name the user want to have it as unique
+      ResultVar: Var that will have the unique string value
 ### <a id="generate_unique_name"></a>generate_unique_name
 
 Returns a variable with a unique name using timestamps at the end
@@ -1124,7 +1149,6 @@ i.e. method receives "Hey" and then returns "Hey ~timestamp~"
     - Type: generate_unique_name
       Name: string that user needs to be unique
       ResultVar: Var that will have the unique name value
-
 ## Custom actions made for the project
 ### <a id="calculate_minutes_passed_by_from_event_creation"></a>calculate_minutes_passed_by_from_event_creation
 

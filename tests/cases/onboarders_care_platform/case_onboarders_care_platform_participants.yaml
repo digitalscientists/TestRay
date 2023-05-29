@@ -1,0 +1,475 @@
+#CXTB-144-Onboarders-Create New Participant
+TestOnboarderCreateNewParticipant:
+    Environment: Settings
+    Roles:
+    - Role: desktopChrome
+      App: "desktop"
+    Actions:
+  # login in onboarder Care Partner
+    - Type: case
+      Value: OnboarderCarePartnerLogin 
+  # Go to Participants
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform.navigation_participant$
+  # click in Add button 
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant.add_participant_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_add_participant_form.create_participant_title$
+# Participant Information
+  # Select a Call Center
+    - Type: click
+      Strategy: id
+      Id: $PAGE.care_platform_add_participant_form.call_center_dropdown_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_add_participant_form.call_center_option$
+  # Select Account Status
+    - Type: click
+      Strategy: id
+      Id: $PAGE.care_platform_add_participant_form.account_status_dropdown_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_add_participant_form.account_status_option_active$
+  # Select if it is a Test
+    - Type: click
+      Strategy: id
+      Id: $PAGE.care_platform_add_participant_form.is_test$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_add_participant_form.is_test_options$
+  # Add First Name
+    - Type: generate_unique_string
+      Name: "Bryan"
+      ResultVar: PARTICIPANT_FIRST_NAME
+    - Type: send_keys
+      Strategy: id
+      Id: $PAGE.care_platform_add_participant_form.firstname_input$
+      Value: $AND_CLI_PARTICIPANT_FIRST_NAME$
+  # Add Last name
+    - Type: generate_unique_string
+      Name: "Mencio"
+      ResultVar: PARTICIPANT_LAST_NAME
+    - Type: send_keys
+      Strategy: id
+      Id: $PAGE.care_platform_add_participant_form.lastname_input$
+      Value: $AND_CLI_PARTICIPANT_LAST_NAME$
+  # Add Preferred Name
+    - Type: generate_unique_string
+      Name: "Dent"
+      ResultVar: PARTICIPANT_PREFERRED_NAME
+    - Type: send_keys
+      Strategy: id
+      Id: $PAGE.care_platform_add_participant_form.preferred_name_input$
+      Value: $AND_CLI_PARTICIPANT_PREFERRED_NAME$
+  # Choose a Date of Birth
+    - Type: click
+      Strategy: id
+      Id: $PAGE.care_platform_add_participant_form.date_of_birth_picker$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_add_participant_form.calendar_day$
+  # Add a Gender
+    - Type: send_keys
+      Strategy: id
+      Id: $PAGE.care_platform_add_participant_form.gender_input$
+      Value: "N/A"
+  # Select a Preferred Gender
+    - Type: click
+      Strategy: id
+      Id: $PAGE.care_platform_add_participant_form.preferred_gender_dropdown_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_add_participant_form.preferred_gender_option$
+  # Add Mobile Phone number
+    - Type: generate_unique_number
+      Name: "88855550"
+      ResultVar: PARTICIPANT_PHONE_NUMBER
+    - Type: send_keys
+      Strategy: id
+      Id: $PAGE.care_platform_add_participant_form.phone_input$
+      Value: $AND_CLI_PARTICIPANT_PHONE_NUMBER$
+  # Add an Email Address 
+    - Type: generate_unique_email
+      Name: "@gmail.com"
+      ResultVar: PARTICIPANT_EMAIL_ADDRESS
+    - Type: send_keys
+      Strategy: id
+      Id: $PAGE.care_platform_add_participant_form.email_input$
+      Value: $AND_CLI_PARTICIPANT_EMAIL_ADDRESS$
+# Participant Insurance Informacion
+  # Add Insurance Provider Name
+    - Type: send_keys
+      Strategy: id
+      Id: $PAGE.care_platform_add_participant_form.insurance_provider_name_input$
+      Value: "Alpha Healthcare Center"
+  # Add Insurance Provider Phone Number
+    - Type: send_keys
+      Strategy: id
+      Id: $PAGE.care_platform_add_participant_form.insurance_provider_phone_number_input$
+      Value: "5278412525"
+  # Add Member ID 
+    - Type: generate_unique_string
+      Name: "120688CD"
+      ResultVar: MEMBER_ID
+    - Type: send_keys
+      Strategy: id
+      Id: $PAGE.care_platform_add_participant_form.insurance_member_id_input$
+      Value: $AND_CLI_MEMBER_ID$
+  # Add Group ID
+    - Type: generate_unique_number
+      Name: "00"
+      ResultVar: GROUP_ID
+    - Type: send_keys
+      Strategy: id
+      Id: $PAGE.care_platform_add_participant_form.insurance_group_id_input$
+      Value: $AND_CLI_GROUP_ID$
+  # Add Insurance Provider Address
+    - Type: send_keys
+      Strategy: id
+      Id: $PAGE.care_platform_add_participant_form.insurance_provider_address_input$
+      Value: "W Town St"
+    - Type: send_keys
+      Strategy: id
+      Id: $PAGE.care_platform_add_participant_form.insurance_provider_address_numbers_input$
+      Value: "424"
+    - Type: send_keys
+      Strategy: id
+      Id: $PAGE.care_platform_add_participant_form.insurance_provider_address_city_input$
+      Value: "Columbus"
+    - Type: click
+      Strategy: id
+      Id: $PAGE.care_platform_add_participant_form.insurance_provider_address_state_dropdown_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_add_participant_form.insurance_provider_address_state_option$
+    - Type: send_keys
+      Strategy: id
+      Id: $PAGE.care_platform_add_participant_form.insurance_provider_address_zip_input$
+      Value: "43215"
+  # Choose a Race or Ethnicity
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_add_participant_form.asian_race_checkbox$
+# Emergency Contact Information
+   # Add First Name
+    - Type: generate_unique_name
+      Name: "Kentaro"
+      ResultVar: EMERGENCY_CONTACT_FIRSTNAME
+    - Type: send_keys
+      Strategy: id
+      Id: $PAGE.care_platform_add_participant_form.emergency_contact_first_name_input$
+      Value: $AND_CLI_EMERGENCY_CONTACT_FIRSTNAME$
+  # Add Last name
+    - Type: generate_unique_name
+      Name: "Miura"
+      ResultVar: EMERGENCY_CONTACT_LASTNAME
+    - Type: send_keys
+      Strategy: id
+      Id: $PAGE.care_platform_add_participant_form.emergency_contact_last_name_input$
+      Value: $AND_CLI_EMERGENCY_CONTACT_LASTNAME$
+  # Add Phone number
+    - Type: generate_unique_number
+      Name: "56562056"
+      ResultVar: EMERGENCY_CONTACT_PHONE_NUMBER
+    - Type: send_keys
+      Strategy: id
+      Id: $PAGE.care_platform_add_participant_form.emergency_contact_phone_number_input$
+      Value: $AND_CLI_EMERGENCY_CONTACT_PHONE_NUMBER$
+  # Add an Email Address
+    - Type: generate_unique_email
+      Name: "login@gmail.com"
+      ResultVar: EMERGENCY_CONTACT_EMAIL_ADDRESS
+    - Type: send_keys
+      Strategy: id
+      Id: $PAGE.care_platform_add_participant_form.emergency_contact_email_input$
+      Value: $AND_CLI_EMERGENCY_CONTACT_EMAIL_ADDRESS$
+  # Select a relationship
+    - Type: click
+      Strategy: id
+      Id: $PAGE.care_platform_add_participant_form.emergency_contact_relationship_dropdown_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_add_participant_form.emergency_contact_relationship_options$
+   # Add Insurance Provider Address
+    - Type: send_keys
+      Strategy: id
+      Id: $PAGE.care_platform_add_participant_form.emergency_contact_address_input$
+      Value: "Linway Terrace"
+    - Type: send_keys
+      Strategy: id
+      Id: $PAGE.care_platform_add_participant_form.emergency_contact_address_numbers_input$
+      Value: "6422"
+    - Type: send_keys
+      Strategy: id
+      Id: $PAGE.care_platform_add_participant_form.emergency_contact_address_city_input$
+      Value: "McLean"
+    - Type: click
+      Strategy: id
+      Id: $PAGE.care_platform_add_participant_form.emergency_contact_address_state_dropdown_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_add_participant_form.emergency_contact_address_state_option$
+    - Type: send_keys
+      Strategy: id
+      Id: $PAGE.care_platform_add_participant_form.emergency_contact_address_zip_input$
+      Value: "22101"
+  # HIPAA Clearence Confirmation
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_add_participant_form.hipaa_clearence_boolean$
+  # Choose Social History
+    - Type: click
+      Strategy: id
+      Id: $PAGE.care_platform_add_participant_form.relationship_status_dropdown_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_add_participant_form.relationship_status_options$
+  # Caregiver Support
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_add_participant_form.caregiver_support_checkbox$
+  # Advance Directive
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_add_participant_form.advance_directive_checkbox$
+  # Do Not Resuscitate
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_add_participant_form.do_not_resuscitate_checkbox$
+  # click on Create Participant Button 
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_add_participant_form.create_participants_button$
+  # Confirm if the participant has been created
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform.navigation_participant$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform.navigation_participant$
+  # Go to the search filter.
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant.search_button$
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant.search_input$
+      Value: $AND_CLI_PARTICIPANT_FIRST_NAME$
+  # Verify there is at least 1 user with that name
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant.senior_1_row$
+    - Type: get_text
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant.first_senior_lastname$
+      Greps:
+        - var: PARTICIPANT_CREATED
+          match: (.*)
+  # Verify the first participant lastname contains the text filtered
+    - Type: assert
+      Asserts: 
+    - Type: contain
+      Var: PARTICIPANT_CREATED
+      Value: $AND_CLI_PARTICIPANT_FIRST_NAME$
+  # Clear the search by clicking small "x" at right of field
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant.clear_search_button$
+
+# CXTB-143: Access Participant Directory & Filter
+TestOnboarderAccessParticipantDirectoryandFilter:
+    Environment: Settings 
+    Roles:
+    - Role: desktopChrome
+      App: "desktop"
+    Actions:
+  # Log in Care Platform as an Onboarder
+    - Type: case
+      Value: OnboarderCarePartnerLogin
+  # Go to Participants
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform.navigation_participant$
+  # Get the value to compare later.
+    - Type: get_text
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant.first_darkened_letter_button$
+      Greps:
+        - var: LASTNAME_FILTER_LETTER
+          match: "(.*)"
+  # Click the first darkened letter button.
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant.first_darkened_letter_button$
+  # Verify it was filtered by the selected letter.
+    - Type: get_text
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant.first_senior_lastname$
+      Greps:
+        - var: LASTNAME_FIRST_LETTER
+          match: ^[a-zA-Z]  
+    - Type: assert
+      Asserts: 
+      - Type: eq
+        Var: LASTNAME_FIRST_LETTER
+        Value: $AND_CLI_LASTNAME_FILTER_LETTER$
+  # Remove the filter by clicking on the letter.
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant.selected_darkened_letter_button$
+  # Get the first lastname in the list.
+    - Type: get_text
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant.first_senior_lastname$
+      Greps:
+        - var: LASTNAME_FIRST_PARTICIPANT_NO_FILTER
+          match: (.*)
+  # Add the search filter.
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant.search_button$
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant.search_input$
+      Value: $AND_CLI_LASTNAME_FIRST_PARTICIPANT_NO_FILTER$
+  # Verify there is at least one participant with that name.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant.first_senior_lastname$
+    - Type: get_text
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant.first_senior_lastname$
+      Greps:
+        - var: LASTNAME_FIRST_PARTICIPANT
+          match: (.*)
+  # Verify the first participant lastname contains the text filtered.
+    - Type: assert
+      Asserts: 
+      - Type: contain
+        Var: LASTNAME_FIRST_PARTICIPANT
+        Value: $AND_CLI_LASTNAME_FIRST_PARTICIPANT_NO_FILTER$
+  # Clear the search by clicking small "x" on right of the field.
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant.clear_search_button$
+  # Verify there is at least one participant.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant.first_senior_lastname$
+  # Click on a participant.
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant.senior_1_row$
+  # Verify that the info is showing after selecting the participant.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant.senior_1_row$
+  # filter by status
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant.status_dropdown_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant.status_dropdown_options$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant.status_dropdown_options$
+  # Verify that the info is showing after selecting the filter.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant.senior_1_row$
+  # filter back to all
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant.status_dropdown_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant.status_dropdown_options$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant.status_dropdown_options$  
+
+# CXTB-145: Click and View Participant Record from Listing
+TestOnboarderClickandViewParticipantRecordfromListing:
+    Environment: Settings 
+    Roles:
+    - Role: desktopChrome
+      App: "desktop"
+    Actions:
+  # Log in Care Platform as an Onboarder
+    - Type: case
+      Value: OnboarderCarePartnerLogin
+  # Go to Participants
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform.navigation_participant$
+  # Click on a participant.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant.senior_1_row$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant.senior_1_row$
+  # Click on Records Button
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_details.records_button$
+  # Click to Medical Tab
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_records.medical_tab$ 
+  # Click on Medical Needs Subtab
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_records.medical_medical_needs_subtab$
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_records.medical_medical_needs_subtab$
+      Greps:
+        - var: SUBTAB_CLASS
+          attr: class
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: SUBTAB_CLASS
+          Value: 'active'
+  # Click on Behavioral Subtab
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_records.medical_behavioral_subtab$
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_records.medical_behavioral_subtab$
+      Greps:
+        - var: SUBTAB_CLASS
+          attr: class
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: SUBTAB_CLASS
+          Value: 'active'
+  # Click on Medical History Subtab
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_records.medical_medical_history_subtab$
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_records.medical_medical_history_subtab$
+      Greps:
+        - var: SUBTAB_CLASS
+          attr: class
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: SUBTAB_CLASS
+          Value: 'active'
