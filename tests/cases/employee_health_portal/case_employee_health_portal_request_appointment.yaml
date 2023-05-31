@@ -106,6 +106,9 @@ TestEmployeeHealthPortalReviewUpcomingAppointment:
     - Type: loop
       Times: 3
       Case: EmployeeHealthPortalAppointmentsRequest
+  # get the  upcoming appointment month
+    - Type: get_next_month
+      ResultVar: NEXT_MONTH
   #View information in "My schedule" tab on portal home page
     - Type: click
       Strategy: xpath

@@ -51,9 +51,9 @@ employee_health_home_page:
   view_upcoming_appointment_button: //button[text()='View upcoming appointments']
   schedule_tab_button: //button[@class = 'box-tabs-nav-item active']
   container_tab: //div[contains(@class, 'box has-scrollable-content is-white has-shadow')]
-  first_day: //div[@class='accordion']/div[@class='accordion-item'][1]//time
-  second_day: //div[@class='accordion']/div[@class='accordion-item'][2]//time
-  third_day: //div[@class='accordion']/div[@class='accordion-item'][3]//time
+  first_day: (//time[contains(text(), $AND_CLI_NEXT_MONTH$)])[1]
+  second_day: (//time[contains(text(), $AND_CLI_NEXT_MONTH$)])[2]
+  third_day: (//time[contains(text(), $AND_CLI_NEXT_MONTH$)])[3]
 
 
 

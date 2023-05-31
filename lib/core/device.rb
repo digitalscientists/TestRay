@@ -1941,6 +1941,13 @@ def get_day(action)
   ENV[convert_value(action["ResultVar"])] = time.day.to_s
 end
 
+#return the next month
+def get_next_month(action)
+  current_date = Time.now
+  next_month = current_date.month + 1
+  ENV[convert_value(action["ResultVar"])] = next_month.to_s
+end
+
 # Return a random day
 def generate_random_day(action)
   unique_number = "#{format('%02d', rand(1..30))}"
