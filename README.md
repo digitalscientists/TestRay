@@ -398,7 +398,10 @@ This is not a type but can be used in different Types as a Validation for the ac
 12. [get_tomorrow_date](#get_tomorrow_date)
 13. [get_past_timestamp](#get_past_timestamp)
 14. [get_timestamp_plus_minutes](#get_timestamp_plus_minutes)
-15. [generate_unique_name](#generate_unique_name)
+15. [generate_unique_number](#generate_unique_number)
+16. [generate_unique_email](#generate_unique_email)
+17. [generate_unique_string](#generate_unique_string)
+18. [generate_unique_name](#generate_unique_name)
 
 ## Custom actions made for the project
 
@@ -1124,6 +1127,7 @@ The method receives "Carlos" and then returns "Carlos~452~"
     - Type: generate_unique_number
       Name: number that user needs to be unique
       ResultVar: Var that will have the unique number value
+
 ### <a id="generate_unique_email"></a>generate_unique_email
 
 Returns a variable with a unique email using ramson string at the begining 
@@ -1141,6 +1145,7 @@ The method receives "Hello" and then returns "Hello ~th~"
     - Type: generate_unique_string
       Name: string that will be added to a name the user want to have it as unique
       ResultVar: Var that will have the unique string value
+
 ### <a id="generate_unique_name"></a>generate_unique_name
 
 Returns a variable with a unique name using timestamps at the end
