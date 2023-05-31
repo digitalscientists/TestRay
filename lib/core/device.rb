@@ -1933,6 +1933,20 @@ def return_element_attribute(action)
 
 end
 
+# Recieve a timestamp and return the related day
+def get_day(action)
+  timestamp_string = convert_value(action["Timestamp"])
+  timestamp = timestamp_string.to_i
+  time = Time.at(timestamp/1000)
+  ENV[convert_value(action["ResultVar"])] = time.day.to_s
+end
+
+# Return a random day
+def generate_random_day(action)
+  unique_number = "#{format('%02d', rand(1..30))}"
+  ENV[convert_value(action["ResultVar"])] = unique_number
+end
+
 # Returns a variable with a unique name using timestamps at the end
 # i.e. method receives "Hey" and then returns "Hey <timestamp>"
 def generate_unique_name(action)
