@@ -1174,7 +1174,7 @@ obtain a random day but 31 is not included
 
 ### <a id="get_day"></a>get_day
 
-need insert a timestamp to return a day number
+Recieve a timestamp and return the related day
 
     - Type: get_day
       Timestamp: $AND_CLI_FIRST_SCHEDULED_DAY$
