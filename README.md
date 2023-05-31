@@ -1130,7 +1130,7 @@ The method receives "Carlos" and then returns "Carlos~452~"
 
 ### <a id="generate_unique_email"></a>generate_unique_email
 
-Returns a variable with a unique email using ramson string at the begining 
+Returns a variable with a unique email using ramdon string at the begining 
 method receives "@gmail.com" and then returns "ujrb@gmail.com"
 
     - Type: generate_unique_email
