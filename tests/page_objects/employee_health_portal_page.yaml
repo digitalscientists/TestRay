@@ -45,12 +45,15 @@ employee_health_home_page:
   alert_call_ended: //div[@role='alert']//div[contains(text(),'Call has ended')]
   calendar_right_button: //span[@class='icon-chevron-right']
   calendar_month_view: //div[@class = 'calendar-days fade-quick-enter-done']
-  calendar_day_button: //div[text()='30']
+  calendar_day_button: //div[text()=$AND_CLI_DAY$]
   upcoming_appointment_title: //div[contains(@class,'text-lg font-bold color-green-300')]
   tabs_no_results: //div[@class = 'tabs-no-results']
   view_upcoming_appointment_button: //button[text()='View upcoming appointments']
   schedule_tab_button: //button[@class = 'box-tabs-nav-item active']
   container_tab: //div[contains(@class, 'box has-scrollable-content is-white has-shadow')]
+  first_day: //div[@class='accordion']/div[@class='accordion-item'][1]//time
+  second_day: //div[@class='accordion']/div[@class='accordion-item'][2]//time
+  third_day: //div[@class='accordion']/div[@class='accordion-item'][3]//time
 
 
 
@@ -119,7 +122,7 @@ employee_health_telehealth_request_form:
   select_patient_drop_down: //select[@id='dependentIdentifier']
   select_patient_option: //select[@id='dependentIdentifier']/option[1]
   calendar_right_button: //div[@id='modals']//span[@class='icon-chevron-right']
-  calendar_day_button: //div[@class='app-modals']//div[text()='15']
+  calendar_day_button: //div[@class='app-modals']//div[text()=$AND_CLI_DAY$]
   calendar_hour_button: //div[@id='modals']//div[text()= '11:30 am']
   appointment_list: //div[@class = 'accordion-item']
   appointment_list_description: //div/div[contains(text(), '$AND_CLI_PAIN_DESCRIPTION$')]
