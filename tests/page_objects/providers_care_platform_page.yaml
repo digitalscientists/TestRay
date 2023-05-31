@@ -56,8 +56,8 @@ providers_facilities_page:
   search_button: searchButton
   search_text: searchText
   facility_name: //h3[@class='text-xl color-white font-normal']
-  facilities_button: //div[@class='app-sidebar-menu-item-label'][text()='Facilities']
-  overview_button: //button[text()='Overview']
+  facilities_button: //nav//a[text()='Facilities']
+  overview_button: //button[contains(text(),'Overview')]
   local_hospitals_button: //button[text()='Local Hospitals']
   devices_tab: //button[text()='Devices']
   title_subtab_local_hospital: //h4[text()='Local Hospitals & ED Contact']
