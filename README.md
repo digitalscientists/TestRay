@@ -1164,3 +1164,24 @@ Guarantee that the checkbox is checked or unchecked depending on the option.
       Strategy: xpath | id | etc.
       Option: check | uncheck
       Id: //some//path
+
+### <a id="generate_random_day"></a>generate_random_day
+
+obtain a random day but 31 is not included
+
+    - Type: generate_random_day
+      ResultVar: Day
+
+### <a id="get_day"></a>get_day
+
+need insert a timestamp to return a day number
+
+    - Type: get_day
+      Timestamp: $AND_CLI_FIRST_SCHEDULED_DAY$
+      ResultVar: DAY
+
+### <a id="get_next_month"></a>get_next_month
+
+return the following month of the current date
+     - Type: get_next_month
+      ResultVar: NEXT_MONTH
