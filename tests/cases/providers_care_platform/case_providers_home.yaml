@@ -1,5 +1,5 @@
 # CXTB-217 Providers Care Platform - Homepage Listing View
-TestProvicerHomePageListingView:
+TestProviderHomePageListingView:
   Environment: Settings
   Vars:
     LOGOUT_OPTION: "Stay On Shift"   
