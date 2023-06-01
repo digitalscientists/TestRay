@@ -47,16 +47,14 @@ employee_health_home_page:
   calendar_month_view: //div[@class = 'calendar-days fade-quick-enter-done']
   calendar_day_button: //div[text()=$AND_CLI_DAY$]
   upcoming_appointment_title: //div[contains(@class,'text-lg font-bold color-green-300')]
-  tabs_no_results: //div[@class = 'tabs-no-results']
+  tabs_results: //div[container(class, 'flex-col overflow-y-scroll')]
   view_upcoming_appointment_button: //button[text()='View upcoming appointments']
   schedule_tab_button: //button[@class = 'box-tabs-nav-item active']
-  container_tab: //div[contains(@class, 'box has-scrollable-content is-white has-shadow')]
+  container_tab: //div[contains(@class, 'accordion')]
   first_day: (//time[contains(text(), $AND_CLI_NEXT_MONTH$)])[1]
   second_day: (//time[contains(text(), $AND_CLI_NEXT_MONTH$)])[2]
   third_day: (//time[contains(text(), $AND_CLI_NEXT_MONTH$)])[3]
-
-
-
+  no_appointment_label: //div[text()= 'No appointments on this date']
 
 employee_health_my_account_modal:
   modal_title: //*[@id='modals']//h4[text()='My Account']
