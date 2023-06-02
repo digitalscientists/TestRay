@@ -292,7 +292,7 @@ TestSNFMissedCallFromProvider:
       Attribute: label
       ResultVar: FOLLOW_VALUE
     - Type: get_local_timestamp
-      Format: "%B %d, %Y"
+      Format: "%B %-e, %Y"
       Var: FOLLOW_UP_TIMESTAMP
     - Type: assert
       Role: localiOS

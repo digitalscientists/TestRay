@@ -1,7 +1,7 @@
 providers_home_page:
-  home_button: //nav/a[contains(.,'Home')]
+  home_button: //nav//a[contains(.,'Home')]
   home_title: //h3[text()='Home']
-  follow_up_calls: //tr[contains(.,'Follow-up')][last()]
+  follow_up_calls: //*[@role='button'][contains(.,'Follow-up')][last()] #//tr[contains(.,'Follow-up')][last()]
   missed_calls_text: (//div[contains(text(),'Missed Call')])[last()]
   scheduled_calls: (//tr[not(contains(@class,'is-disabled'))]//div[contains(text(),'Scheduled Call')])[last()]
   on_demand_calls: //*[@role='button'][contains(.,'On Demand Call')][last()]
