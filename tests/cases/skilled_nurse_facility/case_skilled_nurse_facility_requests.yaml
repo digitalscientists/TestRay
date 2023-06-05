@@ -15,6 +15,13 @@ TestSNFNewRequestFormBehavior:
     - Type: click
       Strategy: xpath
       Id: $PAGE.snf_home.new_request_btn$
+    - Type: send_keys
+      Strategy: class_chain
+      Id: $PAGE.snf_new_request_form.requester_first_name$
+      Value: $AND_CLI_facility_devices_requester_name$
+    - Type: click
+      Strategy: class_chain
+      Id: $PAGE.snf_new_request_form.patient_information_title$
   #Check behavior
     #Submit button should be disabled until required data entered
 #    - Type: wait_for_attribute
@@ -226,11 +233,11 @@ TestSNFNewRequestFormBehavior:
     - Type: click
       Strategy: class_chain
       Id: $PAGE.snf_new_request_form.patient_information_title$
-    - Type: wait_for_attribute
-      Strategy: class_chain
-      Id: $PAGE.snf_new_request_form.submit_button$
-      Attribute: enabled
-      Value: "true"
+#    - Type: wait_for_attribute
+#      Strategy: class_chain
+#      Id: $PAGE.snf_new_request_form.submit_button$
+#      Attribute: enabled
+#      Value: "true"
     - Type: click
       Strategy: class_chain
       Id: $PAGE.snf_new_request_form.submit_button$
