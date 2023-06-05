@@ -33,6 +33,7 @@ snf_new_request_form:
   respiratory_input: "**/XCUIElementTypeOther[`label == 'Respiratory*'`]/**/XCUIElementTypeTextField[`name == 'RNE__Input__text-input'`]"
   temperature_input: "**/XCUIElementTypeOther[`label == 'Temperature*'`]/**/XCUIElementTypeTextField[`name == 'RNE__Input__text-input'`]"
   oxygen_input: "**/XCUIElementTypeOther[`label == 'SpO2 (O2 = Oxygen)*'`]/**/XCUIElementTypeTextField[`name == 'RNE__Input__text-input'`]"
+  oxygen_label: "**/XCUIElementTypeStaticText[`label == 'SpO2 (O2 = Oxygen)*'`]"
   reason_for_request_option_one: "**/XCUIElementTypeOther[`name BEGINSWITH 'default-'`][1]"
   clear_form_button: "**/XCUIElementTypeButton[`label == 'Clear Form'`]"
   back_to_home_button: "**/XCUIElementTypeButton[`label ENDSWITH 'Back to Home'`]"
