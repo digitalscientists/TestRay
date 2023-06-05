@@ -67,7 +67,11 @@ module Reports
       main_case_info.each do |step_type, steps_report|
         # step_type CAN BE failed/succeed FOR NOW, BUT MIGHT INCREASE TO warn/others
         steps_report.each do |step|
-          keyword, step_description = "Then ", ""
+          if(step["step"].include? "Action: ")
+            keyword, step_description = "Step ", ""
+          else
+            keyword, step_description = "Case ", ""
+          end
           if step["error_message"]
             # ERROR STEPS DO NOT HAVE GHERKIN PREFIX
             step_description = keyword + step["step"] if step["step"]
@@ -83,19 +87,19 @@ module Reports
             step_description.dup.slice! keyword
           end
           # GETS MAIN CASE INFO: FILE AND LINE WHERE IT START, LINE WHERE THE STEP IS CALLED
-          case_info = get_case_info(main_case, case_file, step_description)
+          #case_info = get_case_info(main_case, case_file, step_description)
           # GETS STEP CASE INFO: FILE AND LINE WHERE IT START
-          step_info = get_case_info(step_description, find_case_file(step_description))
+        #  step_info = get_case_info(step_description, find_case_file(step_description))
           data = _convert_into_cucumber_emb(step)
           steps_cucumber.append(
             {
               "arguments" => [],
               "keyword" => keyword,
               "embeddings" => data,
-              "line" => case_info["step_line"].to_i,
+              #"line" => case_info["step_line"].to_i,
               "name" => step_description,
               "match" => {
-              "location" => "#{step_info["case_file"]}:#{step_info["case_line"]}"
+              #"location" => "#{step_info["case_file"]}:#{step_info["case_line"]}"
               },
               "result" => {
               "status" => step_type,
@@ -111,7 +115,7 @@ module Reports
         {
           "id" => main_case,
           "keyword" => "Scenario",
-          "line" => case_info["case_line"],
+          #"line" => case_info["case_line"],
           "name" => main_case,
           "tags" => [], # Case Tags,
           "type" => "scenario",
