@@ -51,10 +51,13 @@ employee_health_home_page:
   view_upcoming_appointment_button: //button[text()='View upcoming appointments']
   schedule_tab_button: //button[@class = 'box-tabs-nav-item active']
   container_tab: //div[contains(@class, 'accordion')]
-  first_day: (//time[contains(text(), $AND_CLI_NEXT_MONTH$)])[1]
-  second_day: (//time[contains(text(), $AND_CLI_NEXT_MONTH$)])[2]
-  third_day: (//time[contains(text(), $AND_CLI_NEXT_MONTH$)])[3]
+  date_field: //div[contains(text(),'Date')]
+  first_day: (//div[@class='accordion-item']//time[contains(text(), $AND_CLI_NEXT_MONTH$)])[1]
+  second_day: (//div[@class='accordion-item']//time[contains(text(), $AND_CLI_NEXT_MONTH$)])[2]
+  third_day: (//div[@class='accordion-item']//time[contains(text(), $AND_CLI_NEXT_MONTH$)])[3]
   no_appointment_label: //div[text()= 'No appointments on this date']
+  schedule_table: //div[@class = 'accordion-item']
+
 
 employee_health_my_account_modal:
   modal_title: //*[@id='modals']//h4[text()='My Account']

@@ -162,7 +162,7 @@ TestEmployeeHealthPortalReviewUpcomingAppointment:
     # validate if there is a scheduled date
     - Type: wait_for
       Strategy: xpath
-      Id: $PAGE.employee_health_home_page.scheduled_date$
+      Id: $PAGE.employee_health_home_page.schedule_table$
     - Type: get_attribute
       Strategy: xpath
       Id: $PAGE.employee_health_home_page.date_field$
@@ -234,7 +234,7 @@ TestEmployeeHealthPortalReviewUpcomingAppointment:
     # validate if there is a scheduled date
     - Type: wait_for
       Strategy: xpath
-      Id: $PAGE.employee_health_home_page.scheduled_date$
+      Id: $PAGE.employee_health_home_page.schedule_table$
     - Type: get_attribute
       Strategy: xpath
       Id: $PAGE.employee_health_home_page.date_field$
@@ -303,7 +303,7 @@ TestEmployeeHealthPortalReviewUpcomingAppointment:
     # validate if there is a scheduled date
     - Type: wait_for
       Strategy: xpath
-      Id: $PAGE.employee_health_home_page.scheduled_date$
+      Id: $PAGE.employee_health_home_page.schedule_table$
     - Type: get_attribute
       Strategy: xpath
       Id: $PAGE.employee_health_home_page.date_field$
