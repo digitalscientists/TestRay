@@ -1945,7 +1945,6 @@ end
 def get_next_month(action)
   current_date = Time.now
   next_month = current_date.month + 1
-  year = current_date.year
   ENV[convert_value(action["ResultVar"])] = "0#{next_month}"
 end
 
