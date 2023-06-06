@@ -159,6 +159,23 @@ TestEmployeeHealthPortalReviewUpcomingAppointment:
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.employee_health_home_page.container_tab$
+    # validate if there is a scheduled date
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.employee_health_home_page.scheduled_date$
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.employee_health_home_page.date_field$
+      Greps:
+        - var: DATE
+          attr: textContent
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: DATE
+          Value: Date
     # look for another day without even scheduled a date.
     - Type: generate_random_day
       ResultVar: DAY
@@ -214,6 +231,23 @@ TestEmployeeHealthPortalReviewUpcomingAppointment:
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.employee_health_home_page.container_tab$
+    # validate if there is a scheduled date
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.employee_health_home_page.scheduled_date$
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.employee_health_home_page.date_field$
+      Greps:
+        - var: DATE
+          attr: textContent
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: DATE
+          Value: Date
     # look for another day without even scheduled a date.
     - Type: generate_random_day
       ResultVar: Day
@@ -266,6 +300,23 @@ TestEmployeeHealthPortalReviewUpcomingAppointment:
     - Type: click
       Strategy: xpath
       Id: $PAGE.employee_health_home_page.calendar_day_button$
+    # validate if there is a scheduled date
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.employee_health_home_page.scheduled_date$
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.employee_health_home_page.date_field$
+      Greps:
+        - var: DATE
+          attr: textContent
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: DATE
+          Value: Date
     # look for another day without even scheduled a date.
     - Type: generate_random_day
       ResultVar: DAY
