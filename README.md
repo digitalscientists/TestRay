@@ -1167,7 +1167,7 @@ Guarantee that the checkbox is checked or unchecked depending on the option.
 
 ### <a id="generate_random_day"></a>generate_random_day
 
-obtain a random day but 31 is not included
+Obtain a random day but 31 is not included
 
     - Type: generate_random_day
       ResultVar: Day
@@ -1182,6 +1182,6 @@ Recieve a timestamp and return the related day
 
 ### <a id="get_next_month"></a>get_next_month
 
-return the following month of the current date
+Return the following month of the current date
      - Type: get_next_month
       ResultVar: NEXT_MONTH
