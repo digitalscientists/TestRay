@@ -1372,6 +1372,9 @@ CarePartnerNavigateToParticipants:
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform.navigation_participant$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant.participants_title$ 
     - Type: wait_for_property
       Strategy: xpath
       Id: $PAGE.care_platform_participant.participants_title$ 
