@@ -1938,14 +1938,15 @@ def get_day(action)
   timestamp_string = convert_value(action["Timestamp"])
   timestamp = timestamp_string.to_i
   time = Time.at(timestamp/1000)
-  ENV[convert_value(action["ResultVar"])] = time.day.to_s
+  ENV[convert_value(action["ResultVar"])] = "0#{time.day}"
 end
 
 #return the next month
 def get_next_month(action)
   current_date = Time.now
   next_month = current_date.month + 1
-  ENV[convert_value(action["ResultVar"])] = next_month.to_s
+  year = current_date.year
+  ENV[convert_value(action["ResultVar"])] = "0#{next_month}"
 end
 
 # Return a random day
