@@ -69,23 +69,28 @@ module Reports
         steps_report.each do |step|
           if(step["step"].include? "Action: ")
             keyword, step_description = "Step ", ""
-          else
-            keyword, step_description = "Case ", ""
           end
           if step["error_message"]
             # ERROR STEPS DO NOT HAVE GHERKIN PREFIX
-            step_description = keyword + step["step"] if step["step"]
+            step_description = step["step"] if step["step"]
           else
-            step_description = step["step"]
-            if step_description.match(/\w+ /)
-              keyword = step_description.match(/\w+ /)[0] 
+            base_step_description = step["step"]
+            if base_step_description.match(/\w+ /)
+              step_description = base_step_description.match(/\w+ /)[0] 
+            else 
+              step_description = base_step_description
             end
           end
-          begin
-           step_description.slice! keyword
-          rescue => e
-            step_description.dup.slice! keyword
-          end
+         # main_case = main_case_id.match(/(.*)\$.*\$/)[1]
+          starting_time = main_case_id.match(/[0-2][0-9]:[0-5][0-9]:[0-5][0-9]/)[0]  
+          temporal_time = base_step_description.match(/[0-2][0-9]:[0-5][0-9]:[0-5][0-9]/)[0] 
+          duration =  Time.parse(temporal_time) -  Time.parse(starting_time) 
+          duration = duration.to_s
+          # begin
+          #  step_description.slice! keyword
+          # rescue => e
+          #   step_description.dup.slice! keyword
+          # end
           # GETS MAIN CASE INFO: FILE AND LINE WHERE IT START, LINE WHERE THE STEP IS CALLED
           #case_info = get_case_info(main_case, case_file, step_description)
           # GETS STEP CASE INFO: FILE AND LINE WHERE IT START
@@ -94,7 +99,7 @@ module Reports
           steps_cucumber.append(
             {
               "arguments" => [],
-              "keyword" => keyword,
+              "keyword" => keyword ||= step_description,
               "embeddings" => data,
               #"line" => case_info["step_line"].to_i,
               "name" => step_description,
@@ -104,7 +109,7 @@ module Reports
               "result" => {
               "status" => step_type,
               "error_message" => step["error_message"],
-              "duration" => 0
+              "duration" => duration
               }
             }
           )

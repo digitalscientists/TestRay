@@ -49,9 +49,9 @@ class CaseRunner
     end
     begin
           
-      logger_step(case_name + ' Started ' + Time.now.strftime("%Y-%m-%d-%H:%M:%S"), @main_case, @main_case_id)
+      logger_step(case_name + ' Started ' + Time.now.strftime("%Y-%m-%d %H:%M:%S"), @main_case, @main_case_id)
       steps_handler(case_name, parent_params["Role"], steps)
-      logger_step(case_name + ' Completed ' + Time.now.strftime("%Y-%m-%d-%H:%M:%S"), @main_case, @main_case_id)
+      logger_step(case_name + ' Completed ' + Time.now.strftime("%Y-%m-%d %H:%M:%S"), @main_case, @main_case_id)
       log_info("All cases have finished") if case_name == @main_case
     rescue => e
       # if encountered error, first run any aftercases
