@@ -1,9 +1,9 @@
 providers_home_page:
   home_button: //nav//a[contains(.,'Home')]
   home_title: //h3[text()='Home']
-  follow_up_calls: //*[@role='button'][contains(.,'Follow-up')][last()] #//tr[contains(.,'Follow-up')][last()]
+  follow_up_calls: //*[@role='button'][contains(.,'Follow-up')][last()]
   missed_calls_text: (//div[contains(text(),'Missed Call')])[last()]
-  scheduled_calls: //*[@role='button'][contains(.,'Scheduled Call')][last()] #(//tr[not(contains(@class,'is-disabled'))]//div[contains(text(),'Scheduled Call')])[last()]
+  scheduled_calls: //*[@role='button'][contains(.,'Scheduled Call') and not(contains(@class,'disabled'))][last()]
   on_demand_calls: //*[@role='button'][contains(.,'On Demand Call')][last()]
   on_demand_call_state: //*[@role='button'][contains(.,'On Demand Call')][last()]/div[5]
   time_dropdown: //div[div[contains(text(),'Time')]]//button
@@ -35,7 +35,7 @@ providers_account_modal:
   cancel_button: //*[@id='modals']//button[contains(.,'Cancel')]
 
 providers_facilities_page:
-  facilities_header_title: //h3
+  facilities_header_title: //h3[text()='Facilities']
   alpha_center_td: //div[@role='button']//div[text()='Alpha Healthcare Center']
   call_portal_btn: //button[text()='Call Portal']
   records_button: //a/button[text()='Records']
@@ -67,7 +67,7 @@ providers_facilities_records_page:
 
 providers_call_handling_page:
   end_call_btn: //button[span[text()='End Call']]
-  call_device_btn: //button[text()='Call Device']
+  call_device_btn: //button[text()='Call Device' or text()='Answer Call']
   subject_input: //div[label[text()='Subject']]//input
   details_textarea: //div[label[text()='Details']]//textarea
   reason_last_option: //option[last()]
