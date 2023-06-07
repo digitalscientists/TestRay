@@ -1943,7 +1943,6 @@ def get_day(action)
   timestamp = timestamp_string.to_i
   time = Time.at(timestamp/1000)
   position_found_day = $days_month.index(time.day.to_s)
-  puts position_found_day
   if position_found_day.nil?
     ENV[convert_value(action["ResultVar"])] = "0#{time.day}"
   else
@@ -1968,13 +1967,11 @@ def generate_random_day(action)
     unique_number = format('%02d', rand(0..($days_month.length-1))).to_i
     day = $days_month[unique_number]
     ENV[convert_value(action["ResultVar"])] = day
-    puts $days_month
   else
   $days_month.delete(inserted_day)
   unique_number = format('%02d', rand(0..($days_month.length-1))).to_i
   day = $days_month[unique_number]
   ENV[convert_value(action["ResultVar"])] = day
-  puts $days_month
   end
 end
 
