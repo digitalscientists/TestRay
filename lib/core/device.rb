@@ -1944,28 +1944,29 @@ def get_day(action)
   time = Time.at(timestamp/1000)
   position_found_day = $days_month.index(time.day.to_s)
   if position_found_day.nil?
-    ENV[convert_value(action["ResultVar"])] = "0#{time.day}"
+    ENV[convert_value(action["ResultVar"])] = format('%02d',time.day) 
   else
     found_day = $days_month[position_found_day]
     $days_month.delete(found_day)
-    ENV[convert_value(action["ResultVar"])] = "0#{time.day}"
+    ENV[convert_value(action["ResultVar"])] = format('%02d',found_day) 
   end
 end
 
-#return the next month
+# Return the following month of the current date
 def get_next_month(action)
   current_date = Time.now
   next_month = current_date.month + 1
-  ENV[convert_value(action["ResultVar"])] = "0#{next_month}"
+  ENV[convert_value(action["ResultVar"])] = format('%02d',next_month)
 end
 
-
-# Return a random day
+#Obtain a random day difference to inserted day (inserted day could be undefined) 
+#and day = 31 is not included
 def generate_random_day(action)
   inserted_day = convert_value(action["InsertedDay"])
-  if inserted_day == "NONE"
+  if inserted_day.nil?
     unique_number = format('%02d', rand(0..($days_month.length-1))).to_i
     day = $days_month[unique_number]
+    $days_month.delete(day)
     ENV[convert_value(action["ResultVar"])] = day
   else
   $days_month.delete(inserted_day)

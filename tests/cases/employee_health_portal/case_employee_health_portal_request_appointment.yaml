@@ -102,8 +102,6 @@ TestEmployeeHealthPortalReviewUpcomingAppointment:
   #Calling Login case
     - Type: case
       Value: EmployeeHealthPortalLogIn
-      Vars:
-        DAY: NONE
   #Creating many appointment
     - Type: loop
       Times: 3

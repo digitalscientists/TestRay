@@ -1167,10 +1167,11 @@ Guarantee that the checkbox is checked or unchecked depending on the option.
 
 ### <a id="generate_random_day"></a>generate_random_day
 
-Obtain a random day but 31 is not included
+Obtain a random day difference to inserted day (inserted day could be undefined) and day = 31 is not included
 
     - Type: generate_random_day
-      ResultVar: Day
+      InsertedDay: $AND_CLI_DAY$
+      ResultVar: DAY
 
 ### <a id="get_day"></a>get_day
 
