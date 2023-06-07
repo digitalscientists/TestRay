@@ -399,9 +399,6 @@ This is not a type but can be used in different Types as a Validation for the ac
 13. [get_past_timestamp](#get_past_timestamp)
 14. [get_timestamp_plus_minutes](#get_timestamp_plus_minutes)
 15. [generate_unique_name](#generate_unique_name)
-16. [get_day](#get_day)
-17. [get_next_month](#get_next_month)
-18. [generate_random_day](#generate_random_day)
 
 ## Custom actions made for the project
 
@@ -409,7 +406,9 @@ This is not a type but can be used in different Types as a Validation for the ac
 2. [verify_event_went_to_bottom](#verify_event_went_to_bottom)
 3. [verify_all_events_match_todays_date](#verify_all_events_match_todays_date)
 4. [credentials_checkbox](#credentials_checkbox)
-
+5. [get_day](#get_day)
+6. [get_next_month](#get_next_month)
+7. [generate_random_day](#generate_random_day)
 ## Appium/Selenium
 
 #### <a id="click"></a>click 
