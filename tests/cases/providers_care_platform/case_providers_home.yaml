@@ -4,7 +4,7 @@ TestProviderHomePageListingView:
   Vars:
     LOGOUT_OPTION: "Stay On Shift"   
   Precases:
-    - ProviderCleanBeforeTest
+    - CarePartnerCleanCallQueueAndHangedCalls
   Aftercases:
     - TerminateApp
   Roles:
