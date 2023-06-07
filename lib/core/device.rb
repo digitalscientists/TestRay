@@ -1933,12 +1933,24 @@ def return_element_attribute(action)
 
 end
 
+# day of month is use to select a random day inside of the days_month
+$days_month = ["1", "2", "3", "4", "5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24",
+"24","25","26","27","28","29","30"]
+
 # Recieve a timestamp and return the related day
 def get_day(action)
   timestamp_string = convert_value(action["Timestamp"])
   timestamp = timestamp_string.to_i
   time = Time.at(timestamp/1000)
-  ENV[convert_value(action["ResultVar"])] = "0#{time.day}"
+  position_found_day = $days_month.index(time.day.to_s)
+  puts position_found_day
+  if position_found_day.nil?
+    ENV[convert_value(action["ResultVar"])] = "0#{time.day}"
+  else
+    found_day = $days_month[position_found_day]
+    $days_month.delete(found_day)
+    ENV[convert_value(action["ResultVar"])] = "0#{time.day}"
+  end
 end
 
 #return the next month
@@ -1948,10 +1960,22 @@ def get_next_month(action)
   ENV[convert_value(action["ResultVar"])] = "0#{next_month}"
 end
 
+
 # Return a random day
 def generate_random_day(action)
-  unique_number = "#{format('%02d', rand(1..30))}"
-  ENV[convert_value(action["ResultVar"])] = unique_number
+  inserted_day = convert_value(action["InsertedDay"])
+  if inserted_day == "NONE"
+    unique_number = format('%02d', rand(0..($days_month.length-1))).to_i
+    day = $days_month[unique_number]
+    ENV[convert_value(action["ResultVar"])] = day
+    puts $days_month
+  else
+  $days_month.delete(inserted_day)
+  unique_number = format('%02d', rand(0..($days_month.length-1))).to_i
+  day = $days_month[unique_number]
+  ENV[convert_value(action["ResultVar"])] = day
+  puts $days_month
+  end
 end
 
 # Returns a variable with a unique name using timestamps at the end
