@@ -396,6 +396,7 @@ EmployeeHealthPortalAppointmentsRequest:
       Strategy: xpath
       Id: $PAGE.employee_health_telehealth_request_form.calendar_month_view$
     - Type: generate_random_day
+      InsertedDay: $AND_CLI_DAY$
       ResultVar: DAY
     - Type: click
       Strategy: xpath

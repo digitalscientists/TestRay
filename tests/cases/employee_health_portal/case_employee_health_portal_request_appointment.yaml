@@ -102,6 +102,8 @@ TestEmployeeHealthPortalReviewUpcomingAppointment:
   #Calling Login case
     - Type: case
       Value: EmployeeHealthPortalLogIn
+      Vars:
+        DAY: NONE
   #Creating many appointment
     - Type: loop
       Times: 3
@@ -178,6 +180,7 @@ TestEmployeeHealthPortalReviewUpcomingAppointment:
           Value: Date
     # look for another day without even scheduled a date.
     - Type: generate_random_day
+      InsertedDay: $AND_CLI_DAY$
       ResultVar: DAY
     # checking a RandomDay
     - Type: click
@@ -250,6 +253,7 @@ TestEmployeeHealthPortalReviewUpcomingAppointment:
           Value: Date
     # look for another day without even scheduled a date.
     - Type: generate_random_day
+      InsertedDay: $AND_CLI_DAY$
       ResultVar: Day
     # checking a RandomDay
     - Type: click
@@ -319,6 +323,7 @@ TestEmployeeHealthPortalReviewUpcomingAppointment:
           Value: Date
     # look for another day without even scheduled a date.
     - Type: generate_random_day
+      InsertedDay: $AND_CLI_DAY$
       ResultVar: DAY
     # checking a RandomDay
     - Type: click
