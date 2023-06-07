@@ -3,6 +3,8 @@ TestProviderHomePageListingView:
   Environment: Settings
   Vars:
     LOGOUT_OPTION: "Stay On Shift"   
+  Precases:
+    - ProviderCleanBeforeTest
   Aftercases:
     - TerminateApp
   Roles:
