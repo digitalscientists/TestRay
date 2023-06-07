@@ -176,14 +176,10 @@ TestEmployeeHealthPortalReviewUpcomingAppointment:
         - Type: contain
           Var: DATE
           Value: Date
-    # look for another day without even scheduled a date.
-    - Type: generate_random_day
-      InsertedDay: $AND_CLI_DAY$
-      ResultVar: DAY
-    # checking a RandomDay
+    # # look for another day without even scheduled a date.
     - Type: click
       Strategy: xpath
-      Id: $PAGE.employee_health_home_page.calendar_day_button$
+      Id: $PAGE.employee_health_home_page.calendar_day_without_event1$
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.employee_health_home_page.container_tab$
@@ -249,14 +245,10 @@ TestEmployeeHealthPortalReviewUpcomingAppointment:
         - Type: contain
           Var: DATE
           Value: Date
-    # look for another day without even scheduled a date.
-    - Type: generate_random_day
-      InsertedDay: $AND_CLI_DAY$
-      ResultVar: Day
-    # checking a RandomDay
+    # # look for another day without even scheduled a date.
     - Type: click
       Strategy: xpath
-      Id: $PAGE.employee_health_home_page.calendar_day_button$
+      Id: $PAGE.employee_health_home_page.calendar_day_without_event2$
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.employee_health_home_page.container_tab$
@@ -319,14 +311,10 @@ TestEmployeeHealthPortalReviewUpcomingAppointment:
         - Type: contain
           Var: DATE
           Value: Date
-    # look for another day without even scheduled a date.
-    - Type: generate_random_day
-      InsertedDay: $AND_CLI_DAY$
-      ResultVar: DAY
-    # checking a RandomDay
+    # # look for another day without even scheduled a date.
     - Type: click
       Strategy: xpath
-      Id: $PAGE.employee_health_home_page.calendar_day_button$
+      Id: $PAGE.employee_health_home_page.calendar_day_without_event3$
     # Validate if there is a date scheduled
     - Type: wait_for
       Strategy: xpath
