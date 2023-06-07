@@ -82,8 +82,8 @@ module Reports
             end
           end
          # main_case = main_case_id.match(/(.*)\$.*\$/)[1]
-          starting_time = main_case_id.match(/[0-2][0-9]:[0-5][0-9]:[0-5][0-9]/)[0]  
-          temporal_time = base_step_description.match(/[0-2][0-9]:[0-5][0-9]:[0-5][0-9]/)[0] 
+          starting_time = main_case_id.match(/[0-2][0-9]:[0-5][0-9]:[0-5][0-9]:\d*/)[0]  
+          temporal_time = base_step_description.match(/[0-2][0-9]:[0-5][0-9]:[0-5][0-9]:\d*/)[0] 
           duration =  Time.parse(temporal_time) -  Time.parse(starting_time) 
           duration = duration.to_s
           # begin

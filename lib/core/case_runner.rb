@@ -27,7 +27,7 @@ class CaseRunner
   def run(case_name, parent_params = {})
     unless @main_case
       @main_case = case_name
-      @main_case_id = "$#{Time.now.to_s}$"
+      @main_case_id = "$#{Time.now.strftime("%Y-%m-%d %H:%M:%S:%N")}$"
       log_info("Starting main case #{case_name}")
       steps = @main_steps
     else
@@ -49,9 +49,11 @@ class CaseRunner
     end
     begin
           
-      logger_step(case_name + ' Started ' + Time.now.strftime("%Y-%m-%d %H:%M:%S"), @main_case, @main_case_id)
+       time = Time.now.strftime("%Y-%m-%d %H:%M:%S:%N")
+      # time2 = Time.now.nsec.to_s
+      logger_step(case_name + ' Started ' + Time.now.strftime("%Y-%m-%d %H:%M:%S:%N"), @main_case, @main_case_id)
       steps_handler(case_name, parent_params["Role"], steps)
-      logger_step(case_name + ' Completed ' + Time.now.strftime("%Y-%m-%d %H:%M:%S"), @main_case, @main_case_id)
+      logger_step(case_name + ' Completed ' + Time.now.strftime("%Y-%m-%d %H:%M:%S:%N"), @main_case, @main_case_id)
       log_info("All cases have finished") if case_name == @main_case
     rescue => e
       # if encountered error, first run any aftercases
