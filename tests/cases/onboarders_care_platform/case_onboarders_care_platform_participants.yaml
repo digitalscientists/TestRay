@@ -69,9 +69,6 @@ TestOnboarderCreateNewParticipant:
     - Type: click
       Strategy: id
       Id: $PAGE.care_platform_add_participant_form.date_of_birth_picker$
-    # - Type: click
-    #   Strategy: xpath
-    #   Id: $PAGE.care_platform_add_participant_form.calendar_day$
     - Type: generate_unique_number
       Name: "1992"
       ResultVar: PARTICIPANT_DATE_OF_BIRTH
