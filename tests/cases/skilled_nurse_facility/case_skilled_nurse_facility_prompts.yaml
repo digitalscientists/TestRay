@@ -114,6 +114,8 @@ TestSNFMessagePromptFromProvider:
     - Type: case
       Role: localiOS
       Value: LoginSNFHelper
+    - Type: case
+      Value: SeniorCleanPrompts
   #Create message from provider
     - Type: case
       Value: ProviderSendsMessageToFacility
