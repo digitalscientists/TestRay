@@ -108,7 +108,6 @@ care_platform_add_participant_form:
   lastname_input: lastName
   preferred_name_input: preferredName
   date_of_birth_picker: dateOfBirth
-  calendar_day: //div[contains(@class, 'react-datepicker__day--012')]
   gender_input: gender
   preferred_gender_dropdown_button: preferredGender
   preferred_gender_option: //select[@id='preferredGender']//option[contains(text(),'Other')]
