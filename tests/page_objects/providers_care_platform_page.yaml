@@ -6,6 +6,7 @@ providers_home_page:
   scheduled_calls: //*[@role='button'][contains(.,'Scheduled Call') and not(contains(@class,'disabled'))][last()]
   on_demand_calls: //*[@role='button'][contains(.,'On Demand Call')][last()]
   on_demand_call_state: //*[@role='button'][contains(.,'On Demand Call')][last()]/div[5]
+  on_demand_by_state: (//*[@role='button'][contains(.,'On Demand Call')]/div[5][contains(text(),'$AND_CLI_STATE$')])[last()]
   time_dropdown: //div[div[contains(text(),'Time')]]//button
   time_all_option: //div[div[contains(text(),'Time')]]//button[contains(text(),'All')]
   last_medical_transfer_row: (//div[contains(text(),'Medical Transfer')])[last()]
@@ -22,6 +23,8 @@ providers_home_page:
   session_return_button: //button[@class='video-return']
   toast_closed_ticket: //div[@class='Toastify']//div[text()='Follow-up ticket closed']
   toast_credentials_updated: //*[@role='alert']//div[contains(text(),'Credentials updated')]
+  call_history_navigation: //header//a[text()='Call History']
+  call_history_title_tab: //nav/button[text()='Call History']
 
 providers_account_modal:
   credentials_navigation_tab: //*[@id='modals']//nav/button[text()='Credentials']

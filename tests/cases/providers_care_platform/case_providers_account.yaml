@@ -199,6 +199,26 @@ TestProviderUpdateCredentials:
     - Type: wait_not_visible
       Strategy: xpath
       Id: $PAGE.providers_home_page.toast_credentials_updated$
+    #shuffle between tabs for updating
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.call_history_navigation$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.call_history_title_tab$
+    #Navigate again to home
+    - Type: click
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_home_page.home_button$
+    - Type: wait_for
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_home_page.home_title$
+    #Check button status again
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.on_demand_by_state$
     - Type: wait_for_property
       Strategy: xpath
       Id: $PAGE.providers_call_handling_page.answer_call_button$
