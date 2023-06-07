@@ -258,7 +258,7 @@ TestProviderLogOutPortalGoOffShift:
     # Continued on Step 8.
     # Log in with the second user.
     - Type: case
-      Value: CarePartnerLoginSecondaryUser
+      Value: ProviderLoginSecondaryUser
     # Click on the users dropdown.
     - Type: click
       Strategy: xpath
