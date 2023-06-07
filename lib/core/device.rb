@@ -1959,7 +1959,7 @@ def get_next_month(action)
   ENV[convert_value(action["ResultVar"])] = format('%02d',next_month)
 end
 
-#Obtain a random day difference to inserted day (inserted day could be undefined) 
+#Obtain a random day difference to inserted day (InsertedDay could be undefined) 
 #and day = 31 is not included
 def generate_random_day(action)
   inserted_day = convert_value(action["InsertedDay"])

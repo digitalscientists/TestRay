@@ -399,6 +399,9 @@ This is not a type but can be used in different Types as a Validation for the ac
 13. [get_past_timestamp](#get_past_timestamp)
 14. [get_timestamp_plus_minutes](#get_timestamp_plus_minutes)
 15. [generate_unique_name](#generate_unique_name)
+16. [get_day](#get_day)
+17. [get_next_month](#get_next_month)
+18. [generate_random_day](#generate_random_day)
 
 ## Custom actions made for the project
 
@@ -1167,7 +1170,7 @@ Guarantee that the checkbox is checked or unchecked depending on the option.
 
 ### <a id="generate_random_day"></a>generate_random_day
 
-Obtain a random day difference to inserted day (inserted day could be undefined) and day = 31 is not included
+Obtain a random day difference to inserted day (InsertedDay could be undefined) and day = 31 is not included
 
     - Type: generate_random_day
       InsertedDay: $AND_CLI_DAY$
