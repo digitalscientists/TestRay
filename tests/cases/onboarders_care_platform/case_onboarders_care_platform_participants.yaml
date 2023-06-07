@@ -19,6 +19,10 @@ TestOnboarderCreateNewParticipant:
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.care_platform_add_participant_form.create_participant_title$
+  # Check Validation fields
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_add_participant_form.create_participants_button$
 # Participant Information
   # Select a Call Center
     - Type: click
