@@ -950,9 +950,14 @@ TestSeniorVerifyCallWillNotRedirectToHomePageAfter10MinutesWithoutAction:
     - Type: click
       Strategy: class_chain
       Id: $PAGE.seniors_app_appointment_modal.join_button$
+    - Type: wait_not_visible
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_appointment_modal.join_button$
+      Time: 30
     - Type: wait_for
       Strategy: class_chain
       Id: $PAGE.seniors_app_call.waiting_room_label$
+      Time: 30
     # Provider step - Join the call.
     - Type: case
       Value: ProvidersCarePlatformLogin
