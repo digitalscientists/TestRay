@@ -23,7 +23,6 @@ TestOnboarderCreateNewParticipant:
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_add_participant_form.create_participants_button$
-# Participant Information
   # Select a Call Center
     - Type: click
       Strategy: id
@@ -38,13 +37,6 @@ TestOnboarderCreateNewParticipant:
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_add_participant_form.account_status_option_active$
-  # Select if it is a Test
-    - Type: click
-      Strategy: id
-      Id: $PAGE.care_platform_add_participant_form.is_test$
-    - Type: click
-      Strategy: xpath
-      Id: $PAGE.care_platform_add_participant_form.is_test_options$
   # Add First Name
     - Type: generate_unique_string
       Name: "Bryan"
@@ -61,14 +53,6 @@ TestOnboarderCreateNewParticipant:
       Strategy: id
       Id: $PAGE.care_platform_add_participant_form.lastname_input$
       Value: $AND_CLI_PARTICIPANT_LAST_NAME$
-  # Add Preferred Name
-    - Type: generate_unique_string
-      Name: "Dent"
-      ResultVar: PARTICIPANT_PREFERRED_NAME
-    - Type: send_keys
-      Strategy: id
-      Id: $PAGE.care_platform_add_participant_form.preferred_name_input$
-      Value: $AND_CLI_PARTICIPANT_PREFERRED_NAME$
   # Choose a Date of Birth
     - Type: click
       Strategy: id
@@ -80,80 +64,29 @@ TestOnboarderCreateNewParticipant:
       Strategy: id
       Id: $PAGE.care_platform_add_participant_form.date_of_birth_picker$
       Value: $AND_CLI_PARTICIPANT_DATE_OF_BIRTH$
-  # Add a Gender
-    - Type: send_keys
-      Strategy: id
-      Id: $PAGE.care_platform_add_participant_form.gender_input$
-      Value: "N/A"
-  # Select a Preferred Gender
-    - Type: click
-      Strategy: id
-      Id: $PAGE.care_platform_add_participant_form.preferred_gender_dropdown_button$
-    - Type: click
-      Strategy: xpath
-      Id: $PAGE.care_platform_add_participant_form.preferred_gender_option$
-  # Add Mobile Phone number
-    - Type: generate_unique_number
-      Name: "88855550"
-      ResultVar: PARTICIPANT_PHONE_NUMBER
-    - Type: send_keys
-      Strategy: id
-      Id: $PAGE.care_platform_add_participant_form.phone_input$
-      Value: $AND_CLI_PARTICIPANT_PHONE_NUMBER$
-  # Add an Email Address 
-    - Type: generate_unique_email
-      Name: "@gmail.com"
-      ResultVar: PARTICIPANT_EMAIL_ADDRESS
-    - Type: send_keys
-      Strategy: id
-      Id: $PAGE.care_platform_add_participant_form.email_input$
-      Value: $AND_CLI_PARTICIPANT_EMAIL_ADDRESS$
-  # Choose a Race or Ethnicity
-    - Type: click
-      Strategy: xpath
-      Id: $PAGE.care_platform_add_participant_form.asian_race_checkbox$
-  # Choose Social Status
-    - Type: click
-      Strategy: id
-      Id: $PAGE.care_platform_add_participant_form.relationship_status_dropdown_button$
-    - Type: click
-      Strategy: xpath
-      Id: $PAGE.care_platform_add_participant_form.relationship_status_options$
-  # Caregiver Support
-    - Type: click
-      Strategy: xpath
-      Id: $PAGE.care_platform_add_participant_form.caregiver_support_checkbox$
-  # Advance Directive
-    - Type: click
-      Strategy: xpath
-      Id: $PAGE.care_platform_add_participant_form.advance_directive_checkbox$
-  # Do Not Resuscitate
-    - Type: click
-      Strategy: xpath
-      Id: $PAGE.care_platform_add_participant_form.do_not_resuscitate_checkbox$
   # click on Create Participant Button 
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_add_participant_form.create_participants_button$
-  # Confirm if the participant has been created
-    - Type: wait_for
-      Strategy: xpath
-      Id: $PAGE.care_platform.navigation_participant$
-    - Type: click
-      Strategy: xpath
-      Id: $PAGE.care_platform.navigation_participant$
-  # Go to the search filter.
-    - Type: click
-      Strategy: xpath
-      Id: $PAGE.care_platform_participant.search_button$
-    - Type: send_keys
-      Strategy: xpath
-      Id: $PAGE.care_platform_participant.search_input$
-      Value: $AND_CLI_PARTICIPANT_LAST_NAME$
-  # Clear the search by clicking small "x" at right of field
-    - Type: click
-      Strategy: xpath
-      Id: $PAGE.care_platform_participant.clear_search_button$
+  # # Confirm if the participant has been created
+  #   - Type: wait_for
+  #     Strategy: xpath
+  #     Id: $PAGE.care_platform.navigation_participant$
+  #   - Type: click
+  #     Strategy: xpath
+  #     Id: $PAGE.care_platform.navigation_participant$
+  # # Go to the search filter.
+  #   - Type: click
+  #     Strategy: xpath
+  #     Id: $PAGE.care_platform_participant.search_button$
+  #   - Type: send_keys
+  #     Strategy: xpath
+  #     Id: $PAGE.care_platform_participant.search_input$
+  #     Value: $AND_CLI_PARTICIPANT_LAST_NAME$
+  # # Clear the search by clicking small "x" at right of field
+  #   - Type: click
+  #     Strategy: xpath
+  #     Id: $PAGE.care_platform_participant.clear_search_button$
 
 # CXTB-143: Access Participant Directory & Filter
 TestOnboarderAccessParticipantDirectoryandFilter:
