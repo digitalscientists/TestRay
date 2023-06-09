@@ -1084,7 +1084,7 @@ CarePlatformUpdatePassword:
   #Verify the login with the new password was successful
     - Type: wait_for
       Strategy: xpath
-      Id: $PAGE.care_platform_header.app_time$
+      Id: $PAGE.care_platform_header.headset_icon$
   #Restore the password
   #Going to My Account
     - Type: click
@@ -1181,10 +1181,13 @@ CarePlatformUpdateInfo:
       Strategy: xpath
       Id: $PAGE.care_platform_myaccount_info.success_alert_msg$
       Time: 10
-  #Verify that the name in the header reflects the new change to the firstname
+  # Open the user dropdown on header and verify that the name in the dropdown reflects the new change to the firstname
+    - Type: click
+      Strategy: xpath
+      Id : $PAGE.care_platform_header.user_dropdown_button$
     - Type: get_text
-      Strategy: id
-      Id : $PAGE.care_platform_header.dropdown_username$
+      Strategy: xpath
+      Id : $PAGE.care_platform_header.user_dropdown_user_name$ # Update TC
       Greps:
         - var: NEW_NAME
           condition: nempty
@@ -1195,9 +1198,6 @@ CarePlatformUpdateInfo:
           Var: NEW_NAME
           Value: $AND_CLI_FIRSTNAME_NEW$
   #Going again to the My Account Modal
-    - Type: click
-      Strategy: xpath
-      Id : $PAGE.care_platform_header.user_dropdown_button$
     - Type: click
       Strategy: xpath
       Id : $PAGE.care_platform_header.myaccount_menu_button$  
@@ -1372,6 +1372,9 @@ CarePartnerNavigateToParticipants:
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform.navigation_participant$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant.participants_title$ 
     - Type: wait_for_property
       Strategy: xpath
       Id: $PAGE.care_platform_participant.participants_title$ 
