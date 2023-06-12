@@ -351,6 +351,7 @@ TestIDDESAnswerCallForCarePartnerCallingDeviceIgnoreCall:
       Id: $PAGE.seniors_app_call.video_button$
       Time: 10
 
+# Only for physical devices.
 # CXTB-415: “Message” Prompt & Call Back Button.
 TestIDDESPersonalCarePartnerMessagePromptAndCallBackButton:
   Environment: Settings
