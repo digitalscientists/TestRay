@@ -241,7 +241,7 @@ ESCarePartnerSetScheduledCallForSeniors:
       Strategy: xpath
       Id: $PAGE.care_platform.navigation_home$
 
-# TODO: write what this does
+# Creates an schedule to start in X amount of minutes.
 ESSetScheduledCallForSeniorsToStartInXMinutes:
   Environment: Settings
   Vars:
