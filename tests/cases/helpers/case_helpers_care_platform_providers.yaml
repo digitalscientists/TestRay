@@ -769,6 +769,29 @@ ProviderCleanBeforeTest:
     - Type: case
       Value: ProviderCleanSlate
 
+ProviderNewCleaner:
+  Environment: Settings
+  Vars:
+    LOGOUT_OPTION: "Go Off Shift"
+  Aftercases:
+    - CarePlatformLogout
+  Roles:
+    - Role: desktopChrome
+      App: desktop       
+  Actions:
+    # Login to the Care Platform app with Providers account.
+    - Type: case
+      Value: ProvidersCarePlatformLogin
+    - Type: case
+      Value: ProviderEndCurrentCall
+
+ProviderEndCurrentCall:
+  Roles:
+    - Role: desktopChrome
+      App: desktop       
+  Actions:
+    - Type: provider_clean_hanged_call_or_session
+
 IfReturnSession:
   Roles:
     - Role: desktopChrome
