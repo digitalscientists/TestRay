@@ -2064,7 +2064,7 @@ def verify_all_events_match_todays_date(action)
 
 end
 
-# Custom action to wait for an element to be enabled
+# Custom internal method to wait for an element to be enabled
 def wait_for_enabled_element(locator)
   begin
     wait = Selenium::WebDriver::Wait.new(:timeout => 5)
@@ -2077,7 +2077,7 @@ def wait_for_enabled_element(locator)
   end
 end
 
-# Custom action to wait for an element to exist
+# Custom internal method to wait for an element to exist
 def wait_for_element_to_exist(locator)
   begin
     wait = Selenium::WebDriver::Wait.new(:timeout => 5)
@@ -2089,7 +2089,7 @@ def wait_for_element_to_exist(locator)
   end
 end
 
-# Custom action to wait for element to dissapear
+# Custom internal method to wait for element to dissapear
 def wait_for_element_not_visible(locator)
   begin
     wait = Selenium::WebDriver::Wait.new(:timeout => 5)
@@ -2099,7 +2099,7 @@ def wait_for_element_not_visible(locator)
   end
 end
 
-# Custom action to wait for an element collection to exist
+# Custom internal method to wait for an element collection to exist
 def wait_for_element_collection_to_exist(locator)
   begin
     wait = Selenium::WebDriver::Wait.new(:timeout => 5)
