@@ -1,10 +1,10 @@
-# CXTB-217 Providers Care Platform - Homepage Listing View
+# CXTB-118 Providers Care Platform - Homepage Listing View
 TestProviderHomePageListingView:
   Environment: Settings
   Vars:
     LOGOUT_OPTION: "Stay On Shift"   
-  Precases:
-    - CarePartnerCleanCallQueueAndHangedCalls
+  #Precases:
+  #  - CarePartnerCleanCallQueueAndHangedCalls
   Aftercases:
     - TerminateApp
   Roles:
@@ -16,6 +16,9 @@ TestProviderHomePageListingView:
       # Login to the Care Platform app with Care Partners account
     - Type: case
       Value: CarePartnerLogin
+    - Type: care_partner_clean_call_queue_and_hanged_calls
+    - Type: sleep
+      Time: 25
       # Setup for the test data
       # Missed call 
     - Type: case
