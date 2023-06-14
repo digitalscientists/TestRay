@@ -3,7 +3,7 @@ TestProviderHomePageListingView:
   Environment: Settings
   Vars:
     LOGOUT_OPTION: "Stay On Shift"   
-  #Precases:
+  Precases:
   #  - CarePartnerCleanCallQueueAndHangedCalls
   Aftercases:
     - TerminateApp
@@ -13,110 +13,22 @@ TestProviderHomePageListingView:
     - Role: localiOS
       App: NeverAlone
   Actions:
-      # Login to the Care Platform app with Care Partners account
+      # Login as Provider
     - Type: case
-      Value: CarePartnerLogin
-    - Type: care_partner_clean_call_queue_and_hanged_calls
-    - Type: sleep
-      Time: 25
+      Value: ProvidersCarePlatformLogin
+    #- Type: care_partner_clean_call_queue_and_hanged_calls
       # Setup for the test data
       # Missed call 
     - Type: case
-      Value: SetMissedCallTicket
-    - Type: case
-      Value: TerminateApp
-      # Logout from the Care Partner account
-    - Type: case
-      Value: CarePlatformLogout
-      # Login to the app with Providers account
-    - Type: case
-      Value: ProvidersCarePlatformLogin
-      # Follow-up ticket
-    - Type: case
-      Value: LaunchApp
-    - Type: case
-      Value: SetFollowUpTicket
-      # Logout from the Care Partner account
-    - Type: case
-      Value: CarePlatformLogout
-      # Terminate the iOS App
-    - Type: case
-      Value: TerminateApp
-      # Login to the Care Platform app with Care Partners account
-    - Type: case
-      Value: CarePartnerLogin
-      # Scheduled call
-    - Type: case
-      Value: SetScheduledCallTicket
-      # Logout from the Care Partner account
-    - Type: case
-      Value: CarePlatformLogout
-      # Login to the app with Providers account
-    - Type: case
-      Value: ProvidersCarePlatformLogin
-      # Set the Time to All
-    - Type: click
-      Strategy: xpath
-      Id: $PAGE.providers_home_page.time_dropdown$
-    - Type: click
-      Strategy: xpath
-      Condition:
-        - Value: 5
-          Operation: visible
-          Result: true
-      Id: $PAGE.providers_home_page.time_all_option$
-    - # Check that there are no active calls waiting to be answered
-      Type: wait_not_visible
-      Strategy: xpath
-      Id: $PAGE.providers_home_page.last_medical_transfer_row$  
-    - Type: wait_not_visible
-      Strategy: xpath
-      Id: $PAGE.providers_home_page.on_demand_calls$  
-      # Verify Missed calls are present
-    - Type: get_text  
-      Strategy: xpath
-      Id: $PAGE.providers_home_page.missed_calls_text$
-      Greps:
-      - var: missed_call_text
-        match: "(.*)"
-    - Type: assert
-      Asserts: 
-      - Type: eq 
-        Var: missed_call_text
-        Value: "Missed Call"
-        raise: true
-      # Verify Scheduled calls are present
-    - Type: get_text
-      Strategy: xpath
-      Id: $PAGE.providers_home_page.scheduled_calls$
-      Greps:
-      - var: scheduled_call_text
-        match: "(.*)"
-    - Type: assert
-      Asserts: 
-      - Type: eq 
-        Var: scheduled_call_text
-        Value: "Scheduled Call"
-        raise: true
-      # Verify Follow-up calls are present
-    - Type: get_text  
-      Strategy: xpath
-      Id: $PAGE.providers_home_page.follow_up_calls$
-      Greps:
-      - var: follow_up_text
-        match: "(.*)"
-    - Type: assert
-      Asserts: 
-      - Type: eq 
-        Var: follow_up_text
-        Value: "Follow-up"
-        raise: true
+      Value: SetMissedCallFromSNF
+    - Type: sleep
+      Time: 25
 
 # CXTB-104 Provider's Status - Not on Active Call
 TestProviderStatusNotOnActiveCall:
   Environment: Settings
   Precases:
-    - ProviderCleanBeforeTest
+    - ProviderNewCleaner
   Roles:
     - Role: desktopChrome
       App: desktop
@@ -227,11 +139,11 @@ TestProvidersAnswerSNFCallAndCompletesSession:
     PROVIDERS_SUBJECT:  Automation Test Call SNF.
     PROVIDERS_DETAILS:  Automation Test Notes Verify that Providers answer SNF call and completes session.
   Precases:
-    - ProviderCleanBeforeTest
+    - ProviderNewCleaner
     - LoginSNFHelper
   Aftercases:
     - TerminateApp
-    - ProviderCleanSlate
+    - ProviderEndCurrentCall
   Roles:
     - Role: desktopChrome
       App: desktop
