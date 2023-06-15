@@ -161,6 +161,10 @@ care_platform_participant_records:
   message_submit_button: //span[@class='icon-send text-md']/ancestor::button[@type='submit']
   message_historical_arrow_button: //div[@data-testid='box']//span[@class='button button-circle-lg -mr-5']
   last_message_historical: (//div[@class='message message-to'])[last()]
+  edit_info_button: //div[@class='participant-profile-contact']//button/span[contains(@class, 'icon-edit')]
+
+care_platform_edit_participant_records:
+  address_emergency_phone: //ul[@class='form-navigation']/li/button[text()='Address / Emergency Phone']
 
 care_platform_call_portal:
   call_volume_button: //span[contains(@class,'icon-volume')]/ancestor::button
