@@ -210,9 +210,9 @@ TestIDDESActiveAppointmentTimeWindowWhenNotJoinedPrior:
   Vars:
     SCHED_TIME_START: 7
   Precases:
+    - ESCarePartnerCleanCallQueueAndHangedCalls
     - ESSetScheduledCallForSeniorsToStartInXMinutes
     - LoginESIDDNeverAloneHelper
-    - ESCarePartnerCleanCallQueueAndHangedCalls
     - IDDESParticipantCleanPrompts
   Aftercases:
     - TerminateApp
