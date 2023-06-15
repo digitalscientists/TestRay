@@ -2,8 +2,9 @@
 TestProviderHomePageListingView:
   Environment: Settings
   Vars:
-    LOGOUT_OPTION: "Stay On Shift"   
+    LOGOUT_OPTION: "Go Off Shift"  
   Precases:
+    - ProviderNewCleaner
   #  - CarePartnerCleanCallQueueAndHangedCalls
   Aftercases:
     - TerminateApp
@@ -13,16 +14,101 @@ TestProviderHomePageListingView:
     - Role: localiOS
       App: NeverAlone
   Actions:
-      # Login as Provider
-    - Type: case
-      Value: ProvidersCarePlatformLogin
-    #- Type: care_partner_clean_call_queue_and_hanged_calls
       # Setup for the test data
-      # Missed call 
+      #Call login for nurses
+    - Type: case
+      Role: localiOS
+      Value: LoginSNFHelper
+      #Missed call 
     - Type: case
       Value: SetMissedCallFromSNF
-    - Type: sleep
-      Time: 25
+      #Clean any prompt notification from the start
+    - Type: case
+      Role: localiOS
+      Value: SeniorCleanPrompts
+      #Login as Provider
+    - Type: case
+      Value: ProvidersCarePlatformLogin
+      #Follow-up ticket
+    - Type: case
+      Value: CreateAFollowUpForSNFCall
+      #Making sure that the provider is logged out
+    - Type: case
+      Value: CarePlatformLogout
+      #Scheduled call from Employee
+      #Opening new tab for the employee's part of the process
+    - Type: new_tab
+    - Type: switch_window
+      Value: 1
+    - Type: case
+      Value: SetScheduledCallTicketFromEmployee
+      #Switch back to providers tab
+    - Type: switch_window
+      Value: 0
+      #Login again
+    - Type: case
+      Value: ProvidersCarePlatformLogin
+      #Checking there's no call or session open right now
+    - Type: case
+      Value: ProviderEndCurrentCall
+      #Navigating to Home
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform.navigation_home$
+      #Set Time to All
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.time_dropdown$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.time_all_option$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.time_all_option$
+      Condition:
+        - Value: 5
+          Operation: visible
+          Result: true
+      #Check the different calls on the queue
+      # Verify Missed calls are present
+    - Type: get_text  
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.missed_call$
+      Greps:
+      - var: missed_call_text
+        match: "(.*)"
+    - Type: assert
+      Asserts: 
+      - Type: contain
+        Var: missed_call_text
+        Value: "Missed Call"
+        raise: true
+      # Verify Scheduled calls are present
+    - Type: get_text
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.scheduled_call$
+      Greps:
+      - var: scheduled_call_text
+        match: "(.*)"
+    - Type: assert
+      Asserts: 
+      - Type: contain
+        Var: scheduled_call_text
+        Value: "Scheduled Call"
+        raise: true
+      # Verify Follow-up calls are present
+    - Type: get_text  
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.follow_up_calls$
+      Greps:
+      - var: follow_up_text
+        match: "(.*)"
+    - Type: assert
+      Asserts: 
+      - Type: contain
+        Var: follow_up_text
+        Value: "Follow-up"
+        raise: true
 
 # CXTB-104 Provider's Status - Not on Active Call
 TestProviderStatusNotOnActiveCall:
