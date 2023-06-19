@@ -164,7 +164,10 @@ care_platform_participant_records:
   edit_info_button: //div[@class='participant-profile-contact']//button/span[contains(@class, 'icon-edit')]
 
 care_platform_edit_participant_records:
-  address_emergency_phone: //ul[@class='form-navigation']/li/button[text()='Address / Emergency Phone']
+  edit_participant_form_label: //form//h4
+  address_emergency_phone_navigation: //ul[@class='form-navigation']/li/button[text()='Address / Emergency Phone']
+  enable_ems_calls_yes_option: //input[@name='deviceEmsOverride' and @value='true']
+  save_changes_button: //form//button[@type='submit']
 
 care_platform_call_portal:
   call_volume_button: //span[contains(@class,'icon-volume')]/ancestor::button
@@ -265,6 +268,8 @@ care_platform_notifications:
   call_already_answered_notification: //div[@class='Toastify']//div[text()='Call already answered']
   follow_up_ticket_saved_notification: //div[@class='Toastify']//div[text()='Follow-up ticket saved']
   follow_up_ticket_completed_notification: //div[@class='Toastify']//div[text()='Follow-up ticket completed']
+  ems_data_updating_notification: //div[@class='Toastify']//div[text()='Updating EMS data...']
+  ems_data_updated_notification: //div[@class='Toastify']//div[text()='EMS data updated']
 
 care_platform_facility:
   search_button: searchButton
