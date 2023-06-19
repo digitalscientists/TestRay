@@ -11,6 +11,8 @@ TestProviderHomePageListingView:
     - Role: desktopChrome
       App: desktop
     - Role: localiOS
+      Capabilities:
+        newCommandTimeout: 120
       App: NeverAlone
   Actions:
       # Setup for the test data
@@ -18,6 +20,10 @@ TestProviderHomePageListingView:
     - Type: case
       Role: localiOS
       Value: LoginSNFHelper
+      #Calling Prompt cleaner
+    - Type: case
+      Role: localiOS
+      Value: SeniorCleanPrompts
       #Missed call 
     - Type: case
       Value: SetMissedCallFromSNF

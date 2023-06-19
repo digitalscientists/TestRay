@@ -413,16 +413,18 @@ SetScheduledCallTicketFromEmployee:
     - Type: click
       Strategy: xpath
       Id: $PAGE.employee_health_telehealth_request_form.first_day_available_button$
+    - Type: sleep
+      Time: 1
     - Type: wait_for
       Strategy: xpath
-      Id: $PAGE.employee_health_telehealth_request_form.first_hour_available_button$
+      Id: $PAGE.employee_health_telehealth_request_form.calendar_18hr_button$
       Condition:
         - Value: 5
           Result: true
           Operation: visible
     - Type: click
       Strategy: xpath
-      Id: $PAGE.employee_health_telehealth_request_form.first_hour_available_button$
+      Id: $PAGE.employee_health_telehealth_request_form.calendar_18hr_button$
     - Type: click
       Strategy: xpath
       Id: $PAGE.employee_health_telehealth_request_form.create_event_button$
