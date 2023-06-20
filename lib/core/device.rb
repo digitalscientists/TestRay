@@ -1816,9 +1816,14 @@ class Device
       src_var = ENV[convert_value(assert["Var"])]
       cmp_var = assert["Value"].is_a?(Numeric) ? assert["Value"] : convert_value(assert["Value"])
       op = assert["Type"].downcase
-    
+      
+      if ["contain_encode_utf8"].include?(op)
+        src_not_frozen_var = src_var.dup.force_encoding("ASCII-8BIT")
+        utf8_string = src_not_frozen_var.encode("UTF-8", "ASCII-8BIT", invalid: :replace, undef: :replace, replace: "")
+      end
+
       # check for class mismatches
-      if ["contain", "n_contain"].include?(op)
+      if ["contain", "n_contain", "contain_encode_utf8"].include?(op)
         raise "#{@role}: Value '#{cmp_var}' should be a String!" unless cmp_var.is_a?(String)
       elsif ["eq", "ne"].include?(op)
         if cmp_var.is_a?(Numeric)
@@ -1843,6 +1848,9 @@ class Device
       case op
       when "contain"
         on_fail_text = "contain" unless src_var.include?(cmp_var)
+      # Custom option made to handle those non UTF-8 characters that Never Alone returns.
+      when "contain_encode_utf8"
+        on_fail_text = "contain" unless utf8_string.include?(cmp_var)
       when "n_contain"
         on_fail_text = "NOT contain" unless !src_var.include?(cmp_var)
       when "eq"
@@ -1865,7 +1873,11 @@ class Device
         raise "#{@role}: The Var was '#{src_var}', but it was expected " + 
               "to #{on_fail_text} '#{cmp_var}'#{screenshot_error}"
       end 
-      log_info "#{@role}: Succesful Assert -> '#{src_var}' - #{assert["Type"]} - '#{cmp_var}'"
+      if ["contain_encode_utf8"].include?(op)
+        log_info "#{@role}: Succesful Assert -> '#{utf8_string}' - #{assert["Type"]} - '#{cmp_var}'"
+      else
+        log_info "#{@role}: Succesful Assert -> '#{src_var}' - #{assert["Type"]} - '#{cmp_var}'"
+      end
     end
   end 
 
@@ -1919,6 +1931,49 @@ def return_element_attribute(action)
     ENV[convert_value(action["ResultVar"])] = attr_value.to_s
   end
 
+end
+
+# day_month is use to select a random day inside of it
+$days_month = ["1", "2", "3", "4", "5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24",
+"24","25","26","27","28","29","30"]
+
+# Recieve a timestamp and return the related day
+def get_day(action)
+  timestamp_string = convert_value(action["Timestamp"])
+  timestamp = timestamp_string.to_i
+  time = Time.at(timestamp/1000)
+  position_found_day = $days_month.index(time.day.to_s)
+  if position_found_day.nil?
+    ENV[convert_value(action["ResultVar"])] = format('%02d',time.day) 
+  else
+    found_day = $days_month[position_found_day]
+    $days_month.delete(found_day)
+    ENV[convert_value(action["ResultVar"])] = format('%02d',found_day) 
+  end
+end
+
+# Return the following month of the current date
+def get_next_month(action)
+  current_date = Time.now
+  next_month = current_date.month + 1
+  ENV[convert_value(action["ResultVar"])] = format('%02d',next_month)
+end
+
+#Obtain a random day difference to inserted day (InsertedDay could be undefined) 
+#and day = 31 is not included
+def generate_random_day(action)
+  inserted_day = convert_value(action["InsertedDay"])
+  if inserted_day.nil?
+    unique_number = format('%02d', rand(0..($days_month.length-1))).to_i
+    day = $days_month[unique_number]
+    $days_month.delete(day)
+    ENV[convert_value(action["ResultVar"])] = day
+  else
+  $days_month.delete(inserted_day)
+  unique_number = format('%02d', rand(0..($days_month.length-1))).to_i
+  day = $days_month[unique_number]
+  ENV[convert_value(action["ResultVar"])] = day
+  end
 end
 
 # Returns a variable with a unique name using timestamps at the end
@@ -2009,7 +2064,7 @@ def verify_all_events_match_todays_date(action)
 
 end
 
-# Custom action to wait for an element to be enabled
+# Custom internal method to wait for an element to be enabled
 def wait_for_enabled_element(locator)
   begin
     wait = Selenium::WebDriver::Wait.new(:timeout => 5)
@@ -2022,7 +2077,7 @@ def wait_for_enabled_element(locator)
   end
 end
 
-# Custom action to wait for an element to exist
+# Custom internal method to wait for an element to exist
 def wait_for_element_to_exist(locator)
   begin
     wait = Selenium::WebDriver::Wait.new(:timeout => 5)
@@ -2034,7 +2089,17 @@ def wait_for_element_to_exist(locator)
   end
 end
 
-# Custom action to wait for an element collection to exist
+# Custom internal method to wait for element to dissapear
+def wait_for_element_not_visible(locator)
+  begin
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until { !@driver.find_element(:xpath, convert_value_pageobjects(locator)).visible? }
+  rescue Selenium::WebDriver::Error::TimeoutError
+    log_info("Exception: Element still visible")
+  end
+end
+
+# Custom internal method to wait for an element collection to exist
 def wait_for_element_collection_to_exist(locator)
   begin
     wait = Selenium::WebDriver::Wait.new(:timeout => 5)
@@ -2043,6 +2108,47 @@ def wait_for_element_collection_to_exist(locator)
   rescue Exception => e
     log_info("Exception: #{e}")
     return false
+  end
+end
+
+# Custome action to clean hanged calls and sessions
+def provider_clean_hanged_call_or_session(action)
+  have_call = false
+  if wait_for_element_to_exist("$PAGE.providers_home_page.session_return_button$")
+    log_info("There's a return session")
+    @driver.find_element(:xpath, convert_value_pageobjects("$PAGE.providers_home_page.session_return_button$")).click
+    have_call = true
+  end
+  if wait_for_element_to_exist("$PAGE.providers_call_handling_page.end_call_btn$")
+    log_info("there's an end call button")
+    wait_for_enabled_element("$PAGE.providers_call_handling_page.end_call_btn$")
+    @driver.find_element(:xpath, convert_value_pageobjects("$PAGE.providers_call_handling_page.end_call_btn$")).click
+    have_call = true
+  end
+  if wait_for_enabled_element("$PAGE.providers_call_handling_page.complete_session_button$")
+    log_info("there's a complete session button")
+    wait_for_enabled_element("$PAGE.providers_call_handling_page.complete_session_button$")
+    @driver.find_element(:xpath, convert_value_pageobjects("$PAGE.providers_call_handling_page.complete_session_button$")).click
+    have_call = true
+  end
+  if wait_for_element_to_exist("$PAGE.providers_call_handling_page.post_call_survey_title$")
+    log_info("We are at the provider's survey")
+    have_call = true
+  end
+  if have_call
+    @driver.find_element(:xpath, convert_value_pageobjects("$PAGE.providers_call_handling_page.resolved_true_option$")).click
+    wait_for_enabled_element("$PAGE.providers_call_handling_page.recommend_discharge_yes_by_SNF$")
+    @driver.find_element(:xpath, convert_value_pageobjects("$PAGE.providers_call_handling_page.recommend_discharge_yes_by_SNF$")).click
+    wait_for_enabled_element("$PAGE.providers_call_handling_page.call_notes_subject_input$")
+    @driver.find_element(:xpath, convert_value_pageobjects("$PAGE.providers_call_handling_page.call_notes_subject_input$")).send_keys("Automation Test subject")
+    wait_for_enabled_element("$PAGE.providers_call_handling_page.call_notes_provider_input$")
+    @driver.find_element(:xpath, convert_value_pageobjects("$PAGE.providers_call_handling_page.call_notes_provider_input$")).send_keys("Automation Test Notes: Ended by provider's cleaner")
+    wait_for_enabled_element("$PAGE.providers_call_handling_page.submit_exit_session_button$")
+    @driver.find_element(:xpath, convert_value_pageobjects("$PAGE.providers_call_handling_page.submit_exit_session_button$")).click
+    
+    wait_for_element_not_visible("$PAGE.providers_call_handling_page.submit_exit_session_button$")
+    @driver.find_element(:xpath, convert_value_pageobjects("$PAGE.providers_home_page.home_button$")).click
+    wait_for_enabled_element("$PAGE.providers_home_page.home_title$")
   end
 end
 

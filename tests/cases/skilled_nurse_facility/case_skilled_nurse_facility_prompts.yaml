@@ -4,11 +4,11 @@
 TestSNFProviderIncomingCallAnswerCallOnSNF:
   Environment: Settings
   Precases:
-    - ProviderCleanBeforeTest
+    - ProviderNewCleaner
     - LoginSNFHelper
   Aftercases:
     - TerminateApp
-    - ProviderCleanSlate
+    - ProviderEndCurrentCall
   Roles:
     - Role: localiOS
       App: NeverAlone
@@ -53,6 +53,8 @@ TestSNFProviderIncomingCallAnswerCallOnSNF:
       Strategy: class_chain
       Id: $PAGE.snf_incoming_call.ignore_call_button$
     # Nurse answers the call from Provider.
+    - Type: sleep
+      Time: 3
     - Type: case
       Value: SNFAnswerIncomingCall
     # Turn on Nurse camera.
@@ -99,7 +101,7 @@ TestSNFMessagePromptFromProvider:
   Vars:
     MESSAGE_TO_FACILITY: Automation Message CXTB-40
   Precases:
-    - ProviderCleanBeforeTest
+    - ProviderNewCleaner
   Aftercases:
     - TerminateApp
   Roles:
@@ -112,6 +114,8 @@ TestSNFMessagePromptFromProvider:
     - Type: case
       Role: localiOS
       Value: LoginSNFHelper
+    - Type: case
+      Value: SeniorCleanPrompts
   #Create message from provider
     - Type: case
       Value: ProviderSendsMessageToFacility
@@ -150,7 +154,7 @@ TestSNFMessagePromptFromProvider:
 TestSNFIgnoreCallFromProvider:
   Environment: Settings
   Precases:
-    - ProviderCleanBeforeTest
+    - ProviderNewCleaner
   Aftercases:
     - TerminateApp
   Roles:
@@ -198,11 +202,11 @@ TestSNFIgnoreCallFromProvider:
 TestSNFMissedCallFromProvider:
   Environment: Settings
   Precases:
-    - ProviderCleanBeforeTest
+    - ProviderNewCleaner
   Aftercases:
     - TerminateApp
     - CleanUsedFollowUp
-    - ProviderCleanSlate
+    - ProviderEndCurrentCall
   Roles:
     - Role: localiOS
       Capabilities:
@@ -220,7 +224,7 @@ TestSNFMissedCallFromProvider:
       Role: localiOS
       Value: SeniorCleanPrompts
     - Type: case
-      Value: CreateAFollowUpForSNFMissedCall
+      Value: CreateAFollowUpForSNFCall
     # Skip the survey.
     - Type: wait_for
       Strategy: class_chain
@@ -292,7 +296,7 @@ TestSNFMissedCallFromProvider:
       Attribute: label
       ResultVar: FOLLOW_VALUE
     - Type: get_local_timestamp
-      Format: "%B %d, %Y"
+      Format: "%B %-e, %Y"
       Var: FOLLOW_UP_TIMESTAMP
     - Type: assert
       Role: localiOS

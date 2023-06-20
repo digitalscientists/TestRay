@@ -1,5 +1,5 @@
 # CXTB-23: Notifications Page Navigation
-TestNotificationsPageNavigation:
+TestSeniorNotificationsPageNavigation:
   Environment: Settings
   Aftercases:
     - TerminateApp
@@ -14,12 +14,14 @@ TestNotificationsPageNavigation:
       Value: NotificationsPageNavigationHelper
 
 # CXTB-22: Verify Notifications Page on Senior App
-TestNotificationsPageOnSeniorApp:
+TestSeniorNotificationsPageOnSeniorApp:
   Environment: Settings
   Vars:
     LOGOUT_OPTION: "Go Off Shift"
   Precases:
     - LoginNeverAloneHelper
+    - CarePartnerCleanCallQueueAndHangedCalls
+    - SeniorCleanPrompts
   Aftercases:
     - TerminateApp
   Roles:
@@ -83,7 +85,7 @@ TestNotificationsPageOnSeniorApp:
     - Type: wait_not_visible
       Strategy: class_chain
       Id: $PAGE.seniors_app_notifications.appointment_based_on_name_element$
-      Time: 10
+      Time: 20
   # Click on "All" at the top of the page.
     - Type: click
       Strategy: class_chain
@@ -96,7 +98,7 @@ TestNotificationsPageOnSeniorApp:
   # This sleep is to reduce flakyness, if we assert by seconds then there are higher chances that test will fail.
   # With this sleep we will assert once it has passed a minute and the label says that was added 1 minute ago.
     - Type: sleep
-      Time: 55
+      Time: 40
     - Type: click
       Strategy: class_chain
       Id: $PAGE.seniors_app_notifications.appointment_based_on_name_element$
@@ -181,10 +183,12 @@ TestNotificationsPageOnSeniorApp:
           Value: 0
 
 # CXTB-31: Verify appointment added notifications
-TestAppointmentAddedNotifications:
+TestSeniorAppointmentAddedNotifications:
   Environment: Settings
   Precases:
     - LoginNeverAloneHelper
+    - CarePartnerCleanCallQueueAndHangedCalls
+    - SeniorCleanPrompts
   Aftercases:
     - TerminateApp
   Roles:
@@ -458,10 +462,12 @@ TestAppointmentAddedNotifications:
       Time: 10
 
 # CXTB-32: Verify Access to Appointment Canceled and Appointment Missed Notifications
-TestCanceledAndMissedAppointments:
+TestSeniorCanceledAndMissedAppointments:
   Environment: Settings
   Precases:
     - LoginNeverAloneHelper
+    - CarePartnerCleanCallQueueAndHangedCalls
+    - SeniorCleanPrompts
   Aftercases:
     - TerminateApp
   Roles:
