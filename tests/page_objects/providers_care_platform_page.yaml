@@ -13,7 +13,7 @@ providers_home_page:
   first_row: //table/tbody/tr[@role='row'][1]
   last_on_demand_row: //tbody/tr//div[text()='On Demand Call'][last()]/ancestor::tr
   participants_navigation: //a//div[contains(text(),'Participants')]
-  facilities_navigation: //a//div[contains(text(),'Facilities')]
+  facilities_navigation: //div//a[text()='Facilities']
   employees_navigation: //a//div[contains(text(),'Employees')]
   call_based_on_participant_name: //tbody[@role='rowgroup']//strong[text()='$AND_CLI_senior_user1_name$ $AND_CLI_senior_user1_lastname$']
   follow_up_ticket_based_on_participant_name: //div[contains(text(), 'Follow-up')]/ancestor::tr//strong[text()='$AND_CLI_senior_user1_name$ $AND_CLI_senior_user1_lastname$']
@@ -24,6 +24,7 @@ providers_home_page:
   button_help: //button[text() = 'Help']
   session_return_button: //button[@class='video-return']
   toast_closed_ticket: //div[@class='Toastify']//div[text()='Follow-up ticket closed']
+
 
 providers_account_modal:
   credentials_navigation_tab: //*[@id='modals']//nav/button[text()='Credentials']
@@ -61,6 +62,8 @@ providers_facilities_page:
   local_hospitals_button: //button[text()='Local Hospitals']
   devices_tab: //button[text()='Devices']
   title_subtab_local_hospital: //h4[text()='Local Hospitals & ED Contact']
+  call_history_accordion: (//div[@class='accordion box-scrollable-content pl -ml text-sm']/div[starts-with(@class, 'accordion-item')])
+  telehealth_request_form: //button[text()='Telehealth Request Form']
 
 providers_facilities_records_page:
   info_title: //h4[text()='Facility Information']
@@ -165,4 +168,5 @@ providers_notifications:
   call_completed_notification:  //div[text()='Call completed']
   follow_up_ticket_closed_notification:  //div[text()='Follow-up ticket closed']
 
- 
+providers_call_history_page:
+  facility_tab: //div//a[text()='Facilities']

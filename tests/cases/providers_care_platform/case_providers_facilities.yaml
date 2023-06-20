@@ -98,3 +98,44 @@ TestProviderCanClickAndViewFacilitiesDevice:
         - Type: contain
           Var: STATUS_CLASS
           Value: 'active'
+
+
+# CXTB-186-Can-Click-and-View-Facility-Device-Call-History-and-Access-Call-Recordings
+TestProviderCanClickAndViewFacilitiesDeviceCallHistoryAndAccessCallRecordings:
+  Environment: Settings
+  Roles:
+    - Role: desktopChrome
+      App: "desktop"
+  Actions:
+    # Login-in provider Care Partner
+    - Type: case
+      Value: ProvidersCarePlatformLogin
+    # Click facilities button
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.facilities_navigation$
+    # click on the first listing record
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_facilities_page.alpha_center_td$
+    # Click on Record button and check the Devices
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_details.records_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_facilities_records_page.info_title$
+    # Click to check Call History Tab
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_employees_page.employee_call_history_tab$
+    - Type: sleep
+      Time: 3
+    # Click to open first option Accordion sub-tab for Call History
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_facilities_page.call_history_accordion$
+    # Click on Telehealth request form
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_facilities_page.telehealth_request_form$
