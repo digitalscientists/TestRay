@@ -139,3 +139,5 @@ TestProviderCanClickAndViewFacilitiesDeviceCallHistoryAndAccessCallRecordings:
     - Type: click
       Strategy: xpath
       Id: $PAGE.providers_facilities_page.telehealth_request_form$
+    - Type: sleep
+      Time: 3
