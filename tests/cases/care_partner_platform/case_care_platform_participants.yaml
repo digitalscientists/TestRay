@@ -2056,3 +2056,40 @@ TestCarePartnerTrackTimeAndEditFollowUpTicketsParticipantComponent:
     - Type: wait_not_visible
       Strategy: xpath
       Id: $PAGE.care_platform_notifications.follow_up_ticket_completed_notification$
+
+#CXTB-435 Participant Pane - Edit EMS Setting & Address
+TestCarePartnerEditEMSSettingAndAddressParticipant:
+  Environment: Settings
+  Precases:
+    - CarePartnerCleanCallQueueAndHangedCalls
+  Roles:
+    - Role: desktopChrome
+      App: desktop
+  Actions:
+  # Calling Login case.
+    - Type: case
+      Value: CarePartnerLogin
+  # Navigate to Participants
+    - Type: click
+      Strategy: xpath
+      Id : $PAGE.care_platform.navigation_participant$
+  # Select first participant by name in the list
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant.first_participant_row$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant.first_participant_row$
+  # Go to Records
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_details.records_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_records.participant_name$
+  # Edit Info
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_records.edit_info_button$
+    
+    
