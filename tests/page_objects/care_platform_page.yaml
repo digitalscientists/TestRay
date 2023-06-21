@@ -97,9 +97,9 @@ care_platform_add_participant_form:
   call_center_dropdown_button: callCenterId
   call_center_option: //select[@id='callCenterId']//option[contains(text(),'CHS')]
   account_status_dropdown_button: accountStatus
-  account_status_option_active: //select[@id='accountStatus']//option[contains(text(),'Active')]
+  account_status_pre_delivery_option: //select[@id='accountStatus']//option[contains(text(),'Pre-delivery')]
   is_test: isTest
-  is_test_options: //select[@id='isTest']//option[contains(text(),'Yes')]
+  is_test_yes_option: //select[@id='isTest']//option[contains(text(),'Yes')]
   firstname_input: firstName
   lastname_input: lastName
   preferred_name_input: preferredName
@@ -109,35 +109,23 @@ care_platform_add_participant_form:
   preferred_gender_option: //select[@id='preferredGender']//option[contains(text(),'Other')]
   phone_input: phone
   email_input: emailAddress
-  insurance_provider_name_input: insuranceCompany
-  insurance_provider_phone_number_input: insurancePhone
-  insurance_member_id_input: insuranceMemberIdentification
-  insurance_group_id_input: insuranceGroupIdentification
-  insurance_provider_address_input: insuranceAddress
-  insurance_provider_address_numbers_input: insuranceAddress2
-  insurance_provider_address_city_input: insuranceCity
-  insurance_provider_address_state_dropdown_button: insuranceState
-  insurance_provider_address_state_option: //select[@id='insuranceState']//option[contains(text(),'OH')]
-  insurance_provider_address_zip_input: insuranceZip
   asian_race_checkbox: //span[contains(text(),'Asian')]
-  emergency_contact_first_name_input: emergencyContactFirstName
-  emergency_contact_last_name_input: emergencyContactLastName
-  emergency_contact_phone_number_input: emergencyContactPhone
-  emergency_contact_email_input: emergencyContactEmailAddress
-  emergency_contact_relationship_dropdown_button: emergencyContactRelationship
-  emergency_contact_relationship_options: //select[@id='emergencyContactRelationship']//option[contains(text(),'Other family member')]
-  emergency_contact_address_input: emergencyContactAddress
-  emergency_contact_address_numbers_input: emergencyContactAddress2
-  emergency_contact_address_city_input: emergencyContactCity
-  emergency_contact_address_state_dropdown_button: emergencyContactState
-  emergency_contact_address_state_option: //select[@id='emergencyContactState']//option[contains(text(),'VA')]
-  emergency_contact_address_zip_input: emergencyContactZip
-  hipaa_clearence_boolean: //input[@name='emergencyContactHipaaClearance']/following-sibling::span[text()='Yes']
+  address_input: address
+  address_numbers_input: address2
+  address_city_input: city
+  address_state_dropdown_button: state
+  address_state_option: //select[@id='state']//option[contains(text(),'VA')]
+  address_zip_input: emergencyContactZip
   relationship_status_dropdown_button: relationshipStatus
   relationship_status_options: //select[@id='relationshipStatus']//option[contains(text(),'Married')]
   caregiver_support_checkbox: //input[@name='caregiverSupport']/following-sibling::span[text()='Yes']
   advance_directive_checkbox: //input[@name='advanceDirective']/following-sibling::span[text()='No']
   do_not_resuscitate_checkbox: //input[@name='dnr']/following-sibling::span[text()='Yes']
+  submission_status_toaster: //div[contains(@class, 'Toastify')]
+  address_emergency_phone: //button[text()='Address / Emergency Phone']
+  enable_ems_calls: //input[@name='deviceEmsOverride']/following-sibling::span[text()='Yes']
+  disable_ems_calls: //input[@name='deviceEmsOverride']/following-sibling::span[text()='No']
+  default_ems_calls: //input[@name='deviceEmsOverride']/following-sibling::span[text()='Use default setting (Yes)']
   create_participants_button: //button[text()='Create Participant']
 
 

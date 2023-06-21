@@ -36,7 +36,7 @@ TestOnboarderCreateNewParticipant:
       Id: $PAGE.care_platform_add_participant_form.account_status_dropdown_button$
     - Type: click
       Strategy: xpath
-      Id: $PAGE.care_platform_add_participant_form.account_status_option_active$
+      Id: $PAGE.care_platform_add_participant_form.account_status_pre_delivery_option$
   # Add First Name
     - Type: generate_unique_string
       Name: "Bryan"
@@ -64,10 +64,45 @@ TestOnboarderCreateNewParticipant:
       Strategy: id
       Id: $PAGE.care_platform_add_participant_form.date_of_birth_picker$
       Value: $AND_CLI_PARTICIPANT_DATE_OF_BIRTH$
+  # Add email address
+    - Type: generate_unique_email
+      Name: "@ocali.com"
+      ResultVar: PARTICIPANT_EMAIL_ADDRESS
+    - Type: send_keys
+      Strategy: id
+      Id: $PAGE.care_platform_add_participant_form.email_input$
+      Value: $AND_CLI_PARTICIPANT_EMAIL_ADDRESS$     
   # click on Create Participant Button 
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_add_participant_form.create_participants_button$
+  # Check on the submission status
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_add_participant_form.submission_status_toaster$
+  # Go to Address/Emergency Phone
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_add_participant_form.address_emergency_phone$
+  # Select “No” for the enable EMS question
+    # - Type: click
+    #   Strategy: xpath
+    #   Id: $PAGE.care_platform_add_participant_form.enable_ems_calls$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_add_participant_form.disable_ems_calls$
+    # - Type: click
+    #   Strategy: xpath
+    #   Id: $PAGE.care_platform_add_participant_form.default_ems_calls$
+  # Add address info
+    - Type: send_keys
+      Strategy: id
+      Id: $PAGE.care_platform_add_participant_form.address_input$
+      Value: "W Town St"
+  # Check Validation fields
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_add_participant_form.create_participants_buttonn$   
   # # Confirm if the participant has been created
   #   - Type: wait_for
   #     Strategy: xpath
