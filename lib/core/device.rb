@@ -997,8 +997,17 @@ class Device
   end
 
   # open new tab
-  def new_tab(action = nil)
+  def new_tab(action = nil,main_case, main_case_id)
+    begin
     @driver.manage.new_window(:tab)
+    rescue => e 
+      log_info("#{@role}: There was an error while switching frames: #{e.message}", "error")
+      if !action["NoRaise"]
+        path = take_error_screenshot(main_case, main_case_id)
+        raise "\n#{@role}: Element '#{id}' is not visible after #{wait_time} " +
+                "seconds \nException: #{exception}\nError Screenshot: #{path}"
+      end
+    end 
   end
 
   # switches to the provided window index.
