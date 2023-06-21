@@ -80,6 +80,27 @@ TestSNFNewRequestFormBehavior:
     - Type: click
       Strategy: class_chain
       Id: $PAGE.snf_new_request_form.patient_name_select$
+    #Check there's no CCA status label on patient
+    - Type: return_element_attribute
+      Strategy: class_chain
+      Id: $PAGE.snf_new_request_form.first_patient_select_option$
+      Attribute: label
+      ResultVar: FIRST_PATIENT_LABEL
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: FIRST_PATIENT_LABEL
+          Value: "MRN"
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: FIRST_PATIENT_LABEL
+          Value: "Birthdate"
+    - Type: assert
+      Asserts:
+        - Type: n_contain
+          Var: FIRST_PATIENT_LABEL
+          Value: "CCA"
     - Type: click
       Strategy: class_chain
       Id: $PAGE.snf_new_request_form.first_patient_select_option$
@@ -264,10 +285,10 @@ TestSNFNewRequestFormBehavior:
 TestSNFRequestSuccessfulCallConnect:
   Environment: Settings
   Precases:
-    - ProviderCleanBeforeTest
+    - ProviderNewCleaner
   Aftercases:
     - TerminateApp
-    - ProviderCleanSlate
+    - ProviderEndCurrentCall
   Roles:
     - Role: localiOS
       App: NeverAlone
@@ -364,10 +385,10 @@ TestSNFRequestSuccessfulCallConnect:
 TestSNFCheckQueueandReviewDetails:
   Environment: Settings
   Precases:
-    - ProviderCleanBeforeTest
+    - ProviderNewCleaner
   Aftercases:
     - TerminateApp
-    - ProviderCleanSlate
+    - ProviderEndCurrentCall
   Roles:
     - Role: localiOS
       Capabilities:
@@ -483,7 +504,7 @@ TestSNFCheckQueueandReviewDetails:
     - Type: click
       Strategy: xpath
       Role: desktopChrome
-      Id: $PAGE.providers_home_page.scheduled_calls$
+      Id: $PAGE.providers_home_page.scheduled_call_enabled$
   #Check data matches
     - Type: get_attribute
       Strategy: xpath
