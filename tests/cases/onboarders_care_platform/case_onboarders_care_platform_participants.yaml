@@ -84,25 +84,104 @@ TestOnboarderCreateNewParticipant:
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_add_participant_form.address_emergency_phone$
-  # Select “No” for the enable EMS question
-    # - Type: click
-    #   Strategy: xpath
-    #   Id: $PAGE.care_platform_add_participant_form.enable_ems_calls$
+  # Select EMS option
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_add_participant_form.disable_ems_calls$
-    # - Type: click
-    #   Strategy: xpath
-    #   Id: $PAGE.care_platform_add_participant_form.default_ems_calls$
   # Add address info
     - Type: send_keys
       Strategy: id
       Id: $PAGE.care_platform_add_participant_form.address_input$
-      Value: "W Town St"
-  # Check Validation fields
+      Value: "21 S Main St"
+    - Type: send_keys
+      Strategy: id
+      Id: $PAGE.care_platform_add_participant_form.city_input$
+      Value: "Alpharetta"
+    - Type: click
+      Strategy: id
+      Id: $PAGE.care_platform_add_participant_form.state_dropdown_button$
     - Type: click
       Strategy: xpath
-      Id: $PAGE.care_platform_add_participant_form.create_participants_buttonn$   
+      Id: $PAGE.care_platform_add_participant_form.state_option$
+    - Type: send_keys
+      Strategy: id
+      Id: $PAGE.care_platform_add_participant_form.zip_input$
+      Value: "30009"
+  # Add Emergency Call Back Phone back
+    - Type: generate_unique_number
+      Name: "000000000"
+      ResultVar: PARTICIPANT_EMERGENCY_PHONE_NUMBER
+    - Type: send_keys
+      Strategy: id
+      Id: $PAGE.care_platform_add_participant_form.emergency_phone$
+      Value: $AND_CLI_PARTICIPANT_EMERGENCY_PHONE_NUMBER$   
+  # Save changes
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_add_participant_form.save_changes_button$  
+  # Check on the submission status
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_add_participant_form.submission_status_toaster$
+  # Select “Yes” for the enable EMS question
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_add_participant_form.enable_ems_calls$
+  # Save changes
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_add_participant_form.save_changes_button$  
+  # Check on the submission status
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_add_participant_form.submission_status_toaster$
+  # Adding a valid address 
+    - Type: clear_field
+      Strategy: id
+      Id: $PAGE.care_platform_add_participant_form.address_input$
+    - Type: send_keys
+      Strategy: id
+      Id: $PAGE.care_platform_add_participant_form.address_input$
+      Value: "reet"
+  # Save changes
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_add_participant_form.save_changes_button$ 
+  # Go back from suggestion window
+    - Type: wait_for
+      Strategy: id
+      Id: $PAGE.care_platform_add_participant_form.confirmation_window$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_add_participant_form.go_back_button_from_suggestion_window$ 
+  # Adding a valid address 
+    - Type: generate_unique_number
+      Name: "00"
+      ResultVar: PARTICIPANT_APT_NUMBER
+    - Type: send_keys
+      Strategy: id
+      Id: $PAGE.care_platform_add_participant_form.address_numbers_input$
+      Value: $AND_CLI_PARTICIPANT_APT_NUMBER$
+  # Save changes
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_add_participant_form.save_changes_button$ 
+  # Confirm from suggestion window
+    - Type: wait_for
+      Strategy: id
+      Id: $PAGE.care_platform_add_participant_form.confirmation_window$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_add_participant_form.confirm_button_from_suggestion_window$ 
+  # Check on the submission status
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_add_participant_form.submission_status_toaster$  
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_add_participant_form.save_changes_buttonn$
+
+
   # # Confirm if the participant has been created
   #   - Type: wait_for
   #     Strategy: xpath
