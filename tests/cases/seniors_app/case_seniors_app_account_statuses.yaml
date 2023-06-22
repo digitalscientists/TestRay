@@ -1,0 +1,32 @@
+# CXTB-434: Verify “Pre-Delivery” Account Status Visuals & Behavior on Never Alone
+TestSeniorPreDeliveryAccountStatusVisualsAndBehavior:
+  Environment: Settings
+  Vars:
+    ACCOUNT_STATUS: 'predelivery'
+  Precases:
+    - LoginNeverAloneHelper
+  Aftercases:
+    - TerminateApp
+  Roles:
+    - Role: localiOS
+      App: NeverAlone
+    - Role: desktopChrome
+      App: desktop
+  Actions:
+    # Set the Account Status to "Pre-delivery" to the Participant with the Onboarder on Care Platform.
+    - Type: case
+      Value: OnboarderCarePartnerLogin
+    - Type: case
+      Value: OnboarderSetsAccountStatus
+    # Device is automatically logged out when account status change is saved.
+    - Type: wait_for
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_login.provision_device_btn$
+    - Type: case
+      Value: LoginNeverAloneHelper
+    # Set back the Account Status to "Active" to the Participant.
+    - Type: set_env_var
+      Value: 'active'
+      Var: ACCOUNT_STATUS
+    - Type: case
+      Value: OnboarderSetsAccountStatus
