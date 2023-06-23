@@ -1937,6 +1937,16 @@ def return_element_attribute(action)
 
 end
 
+# returns the location of the element in a variable
+def return_element_location(action)
+  el = wait_for(action)
+  return unless el
+
+  el_location = el.location.to_s
+  log_info("Element location: #{el_location}")
+  ENV[convert_value(action["ResultVar"])] = el_location
+end
+
 # day_month is use to select a random day inside of it
 $days_month = ["1", "2", "3", "4", "5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24",
 "24","25","26","27","28","29","30"]
