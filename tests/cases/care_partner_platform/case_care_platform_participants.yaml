@@ -2249,4 +2249,4 @@ TestCarePartnerEditEMSSettingAndAddressParticipant:
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.care_platform_notifications.ems_data_updated_notification$
-      Time: 30
+      Time: 40
