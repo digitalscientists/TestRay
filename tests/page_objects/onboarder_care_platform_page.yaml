@@ -1,0 +1,9 @@
+onboarders_participant_records:
+  edit_info_button: //*[@id='participant-component']//button[text()='Edit Info']
+  participant_account_status: accountStatus
+  participant_suspended_status_option: //*[@id='accountStatus']/option[@value='suspended']
+  participant_active_status_option: //*[@id='accountStatus']/option[@value='active']
+  save_changes_button: //button[text()='Save Changes']
+
+onboarders_notifications:
+  participant_changes_saved_toast: //div[@class='Toastify']//div[text()='Participant changes saved']

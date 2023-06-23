@@ -21,3 +21,57 @@ OnboarderCarePartnerLogin:
       Id: $PAGE.care_platform_login.login_button$
     - Type: sleep
       Time: 2
+
+OnboarderCarePartnerSetParticipantStateToActive:
+  Roles:
+    - Role: desktopChrome
+      App: desktop
+  Actions:
+    # Calling Onboarder Login case
+    - Type: case
+      Value: OnboarderCarePartnerLogin
+      # Go to Participants
+    - Type: click
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.care_platform.navigation_participant$
+  # Select first participant by name in the list
+    - Type: wait_for
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.care_platform_participant.senior_complete_name$
+    - Type: click
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.care_platform_participant.senior_complete_name$
+  # Click on the "Edit Info" button.
+    - Type: wait_for
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.onboarders_participant_records.edit_info_button$
+    - Type: click
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.onboarders_participant_records.edit_info_button$
+  # Select "Suspended" in the status dropdown
+    - Type: wait_for
+      Strategy: id
+      Role: desktopChrome
+      Id: $PAGE.onboarders_participant_records.participant_account_status$
+    - Type: click
+      Strategy: id
+      Role: desktopChrome
+      Id: $PAGE.onboarders_participant_records.participant_account_status$
+    - Type: click
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.onboarders_participant_records.participant_active_status_option$
+  # Save changes
+    - Type: click
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.onboarders_participant_records.save_changes_button$
+    - Type: wait_for
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.onboarders_notifications.participant_changes_saved_toast$
