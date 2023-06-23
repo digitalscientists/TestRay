@@ -1187,7 +1187,7 @@ class Device
 
   def scroll_to(action)
     el = wait_for(action)
-    options = (action["Options"] ? action["Options"].eql?("false") : "true")
+    options = (action["Options"] ? action["Options"] : "true")
     @driver.execute_script("arguments[0].scrollIntoView(#{options});", el)
   end
  
