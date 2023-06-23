@@ -181,6 +181,10 @@ class Device
       rescue => e
         log_warn(e.message) if try == 4
         sleep 0.5
+        # Assign error message to variable.
+        if action["ErrorMessage"]
+          ENV[convert_value(action["ErrorMessage"])] = e.message
+        end
       end
       try += 1
     end
@@ -1172,10 +1176,10 @@ class Device
 
   def scroll_to(action)
     el = wait_for(action)
-    options = (action["Options"] ? action["Options"] : "true")
+    options = (action["Options"] ? action["Options"].eql?("false") : "true")
     @driver.execute_script("arguments[0].scrollIntoView(#{options});", el)
   end
-
+ 
   def click_js(action)
     el = wait_for(action)
     @driver.execute_script("arguments[0].click();", el)

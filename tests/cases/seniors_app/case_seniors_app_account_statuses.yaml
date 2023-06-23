@@ -62,7 +62,25 @@ TestSeniorPreDeliveryAccountStatusVisualsAndBehavior:
       Attribute: enabled
       Value: false
     # Rotate device and verify that the device is locked into landscape view.
+    - Type: set_orientation
+      Role: localiOS
+      Value: portrait
+      ErrorMessage: ERROR_MESSAGE_VAR
+    - Type: assert
+      Asserts:
+        - Type: eq
+          Var: ERROR_MESSAGE_VAR
+          Value: "An unknown server-side error occurred while processing the command. Original error: Unable To Rotate Device"
     # Rotate device back to normal and verify that the device is locked into landscape view.
+    - Type: set_orientation
+      Role: localiOS
+      Value: landscape
+      ErrorMessage: SECOND_ERROR_MESSAGE_VAR
+    - Type: assert
+      Asserts:
+        - Type: ne
+          Var: SECOND_ERROR_MESSAGE_VAR
+          Value: "An unknown server-side error occurred while processing the command. Original error: Unable To Rotate Device"
     # Click the "Call Personal Care Partner" button.
     - Type: wait_for
       Strategy: class_chain
