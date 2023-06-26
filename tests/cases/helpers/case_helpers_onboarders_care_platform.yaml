@@ -45,7 +45,7 @@ OnboarderSetsAccountStatus:
       Id: $PAGE.onboarders_participant_details_pane.edit_info$
     # Set the account status to "Pre-delivery" in the "Demographics" pane.
     - Type: click
-      Strategy: xpath
+      Strategy: id
       Id: $PAGE.onboarders_edit_participant_records.account_status_select$
     - Type: wait_for
       Strategy: xpath
@@ -96,30 +96,30 @@ OnboarderCarePartnerSetParticipantStateToActive:
     - Type: wait_for
       Strategy: xpath
       Role: desktopChrome
-      Id: $PAGE.onboarders_participant_records.edit_info_button$
+      Id: $PAGE.onboarders_participant_details_pane.edit_info$
     - Type: click
       Strategy: xpath
       Role: desktopChrome
-      Id: $PAGE.onboarders_participant_records.edit_info_button$
+      Id: $PAGE.onboarders_participant_details_pane.edit_info$
   # Select "Suspended" in the status dropdown
     - Type: wait_for
       Strategy: id
       Role: desktopChrome
-      Id: $PAGE.onboarders_participant_records.participant_account_status$
+      Id: $PAGE.onboarders_edit_participant_records.account_status_select$
     - Type: click
       Strategy: id
       Role: desktopChrome
-      Id: $PAGE.onboarders_participant_records.participant_account_status$
+      Id: $PAGE.onboarders_edit_participant_records.account_status_select$
     - Type: click
       Strategy: xpath
       Role: desktopChrome
-      Id: $PAGE.onboarders_participant_records.participant_active_status_option$
+      Id: $PAGE.onboarders_edit_participant_records.participant_active_status_option$
   # Save changes
     - Type: click
       Strategy: xpath
       Role: desktopChrome
-      Id: $PAGE.onboarders_participant_records.save_changes_button$
+      Id: $PAGE.onboarders_edit_participant_records.save_changes_button$
     - Type: wait_for
       Strategy: xpath
       Role: desktopChrome
-      Id: $PAGE.onboarders_notifications.participant_changes_saved_toast$
+      Id: $PAGE.onboarders_notifications.participant_changes_saved_notification$
