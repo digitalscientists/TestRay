@@ -83,7 +83,7 @@ care_platform_participant:
   selected_darkened_letter_button: //button[contains(@class,'is-selected')]
   senior_complete_name: //div[starts-with(@class, 'SearchableListTemplate_record')]//div[contains(text(),'$AND_CLI_senior_user1_name$')][strong[contains(text(),'$AND_CLI_senior_user1_lastname$')]]
   esidd_senior_complete_name: //div[starts-with(@class, 'SearchableListTemplate_record')]//div[contains(text(),'$AND_CLI_idd_es_never_alone_user1_name$')][strong[contains(text(),'$AND_CLI_idd_es_never_alone_user1_lastname$')]]
-  senior_1_row: //*[@id='containerElement']/div[@role='button'][1]
+  senior_1_row: //div[@class='ListRow_listRow__8VQfX ListRow_lastRight__1QmEH']
   first_senior_lastname: //*[contains(text(),'strong')]
   call_portal_btn: //button[text()='Call Portal']
   search_button: //span[@class='icon-search']

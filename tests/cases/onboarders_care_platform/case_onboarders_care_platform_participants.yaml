@@ -180,27 +180,28 @@ TestOnboarderCreateNewParticipant:
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_add_participant_form.save_changes_button$
-
-
-  # # Confirm if the participant has been created
-  #   - Type: wait_for
-  #     Strategy: xpath
-  #     Id: $PAGE.care_platform.navigation_participant$
-  #   - Type: click
-  #     Strategy: xpath
-  #     Id: $PAGE.care_platform.navigation_participant$
-  # # Go to the search filter.
-  #   - Type: click
-  #     Strategy: xpath
-  #     Id: $PAGE.care_platform_participant.search_button$
-  #   - Type: send_keys
-  #     Strategy: xpath
-  #     Id: $PAGE.care_platform_participant.search_input$
-  #     Value: $AND_CLI_PARTICIPANT_LAST_NAME$
-  # # Clear the search by clicking small "x" at right of field
-  #   - Type: click
-  #     Strategy: xpath
-  #     Id: $PAGE.care_platform_participant.clear_search_button$
+  # Confirm if the participant has been created
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform.navigation_participant$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform.navigation_participant$
+  # Go to the search filter.
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant.search_button$
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant.search_input$
+      Value: $AND_CLI_PARTICIPANT_LAST_NAME$
+    # - Type: wait_for
+    #   Strategy: xpath
+    #   Id: $PAGE.care_platform_participant.first_participant_row$
+  # Clear the search by clicking small "x" at right of field
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant.clear_search_button$
 
 # CXTB-143: Access Participant Directory & Filter
 TestOnboarderAccessParticipantDirectoryandFilter:
