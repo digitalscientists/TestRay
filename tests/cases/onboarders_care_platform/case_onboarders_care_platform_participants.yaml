@@ -179,7 +179,7 @@ TestOnboarderCreateNewParticipant:
       Id: $PAGE.care_platform_add_participant_form.submission_status_toaster$  
     - Type: click
       Strategy: xpath
-      Id: $PAGE.care_platform_add_participant_form.save_changes_buttonn$
+      Id: $PAGE.care_platform_add_participant_form.save_changes_button$
 
 
   # # Confirm if the participant has been created
