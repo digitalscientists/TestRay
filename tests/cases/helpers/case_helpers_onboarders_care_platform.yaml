@@ -68,7 +68,7 @@ OnboarderSetsAccountStatus:
       Id: $PAGE.onboarders_notifications.participant_changes_saved_notification$
     # Navigate back to participants 
     - Type: case
-      Value: CarePartnerNavigateToParticipants      Time: 2
+      Value: CarePartnerNavigateToParticipants
 
 OnboarderCarePartnerSetParticipantStateToActive:
   Roles:
