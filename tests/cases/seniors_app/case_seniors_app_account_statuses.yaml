@@ -34,6 +34,7 @@ TestSeniorPreDeliveryAccountStatusVisualsAndBehavior:
     - Type: wait_for
       Strategy: class_chain
       Id: $PAGE.seniors_app_login.provision_device_btn$
+      Time: 20
     - Type: case
       Value: LoginNeverAloneHelper
     # Validate that visuals of the device appear in the following way:
