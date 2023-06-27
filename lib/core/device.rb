@@ -181,6 +181,10 @@ class Device
       rescue => e
         log_warn(e.message) if try == 4
         sleep 0.5
+        # Assign error message to variable.
+        if action["ErrorMessage"]
+          ENV[convert_value(action["ErrorMessage"])] = e.message
+        end
       end
       try += 1
     end
@@ -750,6 +754,17 @@ class Device
     end
   end
 
+  #Clears a provided text field with JavaScript
+  # Accepts:
+  #   Strategy
+  #   Id
+  def clear_field_js(action) 
+    action = convert_value_pageobjects(action);
+    el = wait_for(action)
+    
+    @driver.execute_script("arguments[0].value='';", el)
+    sleep(1.0)
+  end
 
   # Accepts:
   #   Strategy
@@ -1175,7 +1190,7 @@ class Device
     options = (action["Options"] ? action["Options"] : "true")
     @driver.execute_script("arguments[0].scrollIntoView(#{options});", el)
   end
-
+ 
   def click_js(action)
     el = wait_for(action)
     @driver.execute_script("arguments[0].click();", el)
@@ -1930,6 +1945,16 @@ def return_element_attribute(action)
     log_info("Element attribute is " + attr_value.to_s)
     ENV[convert_value(action["ResultVar"])] = attr_value.to_s
   end
+end
+
+# returns the location of the element in a variable
+def return_element_location(action)
+  el = wait_for(action)
+  return unless el
+
+  el_location = el.location.to_s
+  log_info("Element location: #{el_location}")
+  ENV[convert_value(action["ResultVar"])] = el_location
 end
 
 # day_month is use to select a random day inside of it
