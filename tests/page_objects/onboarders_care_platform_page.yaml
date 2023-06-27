@@ -1,3 +1,10 @@
+onboarders_platform_home:
+  page_title: //h3
+  call_queue_title: //h3[text()='Call Queue']
+  navigation_participant: //nav//a[contains(text(),'Participants')]
+  navigation_followup: //nav//a[contains(text(),'Follow-up')]
+  navigation_home: //nav//a[contains(text(),'Home')]
+
 onboarders_participant_details_pane:
   edit_info: //a/button[text()='Edit Info']
 
@@ -10,3 +17,61 @@ onboarders_edit_participant_records:
 
 onboarders_notifications:
   participant_changes_saved_notification: //div[@class='Toastify']//div[text()='Participant changes saved']
+
+onboarders_participant_page:
+  participants_title: //div[@class='text-lg font-bold']//h3[@class='text-lg font-bold']
+  add_participant_button: //button[text()='Add']
+  first_participant_row: //div[@class='class=SearchableListTemplate_record__gc5a6']
+  first_darkened_letter_button: //button[@class='alphabet-letter'][not(@disabled)][1]
+  selected_darkened_letter_button: //button[contains(@class,'is-selected')]
+  senior_complete_name: //div[starts-with(@class, 'SearchableListTemplate_record')]//div[contains(text(),'$AND_CLI_senior_user1_name$')][strong[contains(text(),'$AND_CLI_senior_user1_lastname$')]]
+  esidd_senior_complete_name: //div[starts-with(@class, 'SearchableListTemplate_record')]//div[contains(text(),'$AND_CLI_idd_es_never_alone_user1_name$')][strong[contains(text(),'$AND_CLI_idd_es_never_alone_user1_lastname$')]]
+  senior_1_row: //div[@class='ListRow_listRow__8VQfX ListRow_lastRight__1QmEH']
+  first_senior_lastname: //*[contains(text(),'strong')]
+  call_portal_btn: //button[text()='Call Portal']
+  search_button: //span[@class='icon-search']
+  search_input: //input[@id='searchText']
+  clear_search_button: //button[contains(@class,'button-circle')]
+  status_dropdown_button: //button[contains(@class,'queue-filter-dropdown-toggle')]
+  status_dropdown_options: //div[contains(@class, 'queue-filter-dropdown')]  
+
+onboarders_add_participant_form:
+  create_participant_title: //div[@class='flex flex-wrap flex-half-gutters']
+  call_center_dropdown_button: callCenterId
+  call_center_option: //select[@id='callCenterId']//option[contains(text(),'CHS')]
+  account_status_dropdown_button: accountStatus
+  account_status_pre_delivery_option: //select[@id='accountStatus']//option[contains(text(),'Pre-delivery')]
+  is_test: isTest
+  is_test_yes_option: //select[@id='isTest']//option[contains(text(),'Yes')]
+  firstname_input: firstName
+  lastname_input: lastName
+  preferred_name_input: preferredName
+  date_of_birth_picker: dateOfBirth
+  gender_input: gender
+  preferred_gender_dropdown_button: preferredGender
+  preferred_gender_option: //select[@id='preferredGender']//option[contains(text(),'Other')]
+  phone_input: phone
+  email_input: emailAddress
+  asian_race_checkbox: //span[contains(text(),'Asian')]
+  address_input: address
+  address_numbers_input: address2
+  city_input: city
+  state_dropdown_button: state
+  state_option: //select[@id='state']//option[contains(text(),'GA')]
+  zip_input: zip
+  emergency_phone: phoneEmergency
+  relationship_status_dropdown_button: relationshipStatus
+  relationship_status_options: //select[@id='relationshipStatus']//option[contains(text(),'Married')]
+  caregiver_support_checkbox: //input[@name='caregiverSupport']/following-sibling::span[text()='Yes']
+  advance_directive_checkbox: //input[@name='advanceDirective']/following-sibling::span[text()='No']
+  do_not_resuscitate_checkbox: //input[@name='dnr']/following-sibling::span[text()='Yes']
+  submission_status_toaster: //div[contains(@class, 'Toastify')]
+  address_emergency_phone: //button[text()='Address / Emergency Phone']
+  enable_ems_calls: //input[@name='deviceEmsOverride']/following-sibling::span[text()='Yes']
+  disable_ems_calls: //input[@name='deviceEmsOverride']/following-sibling::span[text()='No']
+  default_ems_calls: //input[@name='deviceEmsOverride']/following-sibling::span[text()='Use default setting (Yes)']
+  confirmation_window: dialogs
+  go_back_button_from_suggestion_window: //button[text()= 'Go Back']
+  confirm_button_from_suggestion_window: //button[text()= 'Confirm']
+  create_participants_button: //button[text()='Create Participant']
+  save_changes_button: //button[text()='Save Changes']

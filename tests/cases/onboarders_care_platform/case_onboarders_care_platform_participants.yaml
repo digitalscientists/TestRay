@@ -11,39 +11,39 @@ TestOnboarderCreateNewParticipant:
   # Go to Participants
     - Type: click
       Strategy: xpath
-      Id: $PAGE.care_platform.navigation_participant$
+      Id: $PAGE.onboarders_platform_home.navigation_participant$
   # click in Add button 
     - Type: click
       Strategy: xpath
-      Id: $PAGE.care_platform_participant.add_participant_button$
+      Id: $PAGE.onboarders_participant_page.add_participant_button$
     - Type: wait_for
       Strategy: xpath
-      Id: $PAGE.care_platform_add_participant_form.create_participant_title$
+      Id: $PAGE.onboarders_add_participant_form.create_participant_title$
   # Check Validation fields
     - Type: click
       Strategy: xpath
-      Id: $PAGE.care_platform_add_participant_form.create_participants_button$
+      Id: $PAGE.onboarders_add_participant_form.create_participants_button$
   # Select a Call Center
     - Type: click
       Strategy: id
-      Id: $PAGE.care_platform_add_participant_form.call_center_dropdown_button$
+      Id: $PAGE.onboarders_add_participant_form.call_center_dropdown_button$
     - Type: click
       Strategy: xpath
-      Id: $PAGE.care_platform_add_participant_form.call_center_option$
+      Id: $PAGE.onboarders_add_participant_form.call_center_option$
   # Select Account Status
     - Type: click
       Strategy: id
-      Id: $PAGE.care_platform_add_participant_form.account_status_dropdown_button$
+      Id: $PAGE.onboarders_add_participant_form.account_status_dropdown_button$
     - Type: click
       Strategy: xpath
-      Id: $PAGE.care_platform_add_participant_form.account_status_pre_delivery_option$
+      Id: $PAGE.onboarders_add_participant_form.account_status_pre_delivery_option$
   # Add First Name
     - Type: generate_unique_string
       Name: "Bryan"
       ResultVar: PARTICIPANT_FIRST_NAME
     - Type: send_keys
       Strategy: id
-      Id: $PAGE.care_platform_add_participant_form.firstname_input$
+      Id: $PAGE.onboarders_add_participant_form.firstname_input$
       Value: $AND_CLI_PARTICIPANT_FIRST_NAME$
   # Add Last name
     - Type: generate_unique_string
@@ -51,18 +51,18 @@ TestOnboarderCreateNewParticipant:
       ResultVar: PARTICIPANT_LAST_NAME
     - Type: send_keys
       Strategy: id
-      Id: $PAGE.care_platform_add_participant_form.lastname_input$
+      Id: $PAGE.onboarders_add_participant_form.lastname_input$
       Value: $AND_CLI_PARTICIPANT_LAST_NAME$
   # Choose a Date of Birth
     - Type: click
       Strategy: id
-      Id: $PAGE.care_platform_add_participant_form.date_of_birth_picker$
+      Id: $PAGE.onboarders_add_participant_form.date_of_birth_picker$
     - Type: generate_unique_number
       Name: "1992"
       ResultVar: PARTICIPANT_DATE_OF_BIRTH
     - Type: send_keys
       Strategy: id
-      Id: $PAGE.care_platform_add_participant_form.date_of_birth_picker$
+      Id: $PAGE.onboarders_add_participant_form.date_of_birth_picker$
       Value: $AND_CLI_PARTICIPANT_DATE_OF_BIRTH$
   # Add email address
     - Type: generate_unique_email
@@ -70,42 +70,42 @@ TestOnboarderCreateNewParticipant:
       ResultVar: PARTICIPANT_EMAIL_ADDRESS
     - Type: send_keys
       Strategy: id
-      Id: $PAGE.care_platform_add_participant_form.email_input$
+      Id: $PAGE.onboarders_add_participant_form.email_input$
       Value: $AND_CLI_PARTICIPANT_EMAIL_ADDRESS$     
   # click on Create Participant Button 
     - Type: click
       Strategy: xpath
-      Id: $PAGE.care_platform_add_participant_form.create_participants_button$
+      Id: $PAGE.onboarders_add_participant_form.create_participants_button$
   # Check on the submission status
     - Type: wait_for
       Strategy: xpath
-      Id: $PAGE.care_platform_add_participant_form.submission_status_toaster$
+      Id: $PAGE.onboarders_add_participant_form.submission_status_toaster$
   # Go to Address/Emergency Phone
     - Type: click
       Strategy: xpath
-      Id: $PAGE.care_platform_add_participant_form.address_emergency_phone$
+      Id: $PAGE.onboarders_add_participant_form.address_emergency_phone$
   # Select EMS option
     - Type: click
       Strategy: xpath
-      Id: $PAGE.care_platform_add_participant_form.disable_ems_calls$
+      Id: $PAGE.onboarders_add_participant_form.disable_ems_calls$
   # Add address info
     - Type: send_keys
       Strategy: id
-      Id: $PAGE.care_platform_add_participant_form.address_input$
+      Id: $PAGE.onboarders_add_participant_form.address_input$
       Value: "21 S Main St"
     - Type: send_keys
       Strategy: id
-      Id: $PAGE.care_platform_add_participant_form.city_input$
+      Id: $PAGE.onboarders_add_participant_form.city_input$
       Value: "Alpharetta"
     - Type: click
       Strategy: id
-      Id: $PAGE.care_platform_add_participant_form.state_dropdown_button$
+      Id: $PAGE.onboarders_add_participant_form.state_dropdown_button$
     - Type: click
       Strategy: xpath
-      Id: $PAGE.care_platform_add_participant_form.state_option$
+      Id: $PAGE.onboarders_add_participant_form.state_option$
     - Type: send_keys
       Strategy: id
-      Id: $PAGE.care_platform_add_participant_form.zip_input$
+      Id: $PAGE.onboarders_add_participant_form.zip_input$
       Value: "30009"
   # Add Emergency Call Back Phone back
     - Type: generate_unique_number
@@ -113,95 +113,95 @@ TestOnboarderCreateNewParticipant:
       ResultVar: PARTICIPANT_EMERGENCY_PHONE_NUMBER
     - Type: send_keys
       Strategy: id
-      Id: $PAGE.care_platform_add_participant_form.emergency_phone$
+      Id: $PAGE.onboarders_add_participant_form.emergency_phone$
       Value: $AND_CLI_PARTICIPANT_EMERGENCY_PHONE_NUMBER$   
   # Save changes
     - Type: click
       Strategy: xpath
-      Id: $PAGE.care_platform_add_participant_form.save_changes_button$  
+      Id: $PAGE.onboarders_add_participant_form.save_changes_button$  
   # Check on the submission status
     - Type: wait_for
       Strategy: xpath
-      Id: $PAGE.care_platform_add_participant_form.submission_status_toaster$
+      Id: $PAGE.onboarders_add_participant_form.submission_status_toaster$
   # Select “Yes” for the enable EMS question
     - Type: click
       Strategy: xpath
-      Id: $PAGE.care_platform_add_participant_form.enable_ems_calls$
+      Id: $PAGE.onboarders_add_participant_form.enable_ems_calls$
   # Save changes
     - Type: click
       Strategy: xpath
-      Id: $PAGE.care_platform_add_participant_form.save_changes_button$  
+      Id: $PAGE.onboarders_add_participant_form.save_changes_button$  
   # Check on the submission status
     - Type: wait_for
       Strategy: xpath
-      Id: $PAGE.care_platform_add_participant_form.submission_status_toaster$
+      Id: $PAGE.onboarders_add_participant_form.submission_status_toaster$
   # Adding a valid address 
     - Type: clear_field
       Strategy: id
-      Id: $PAGE.care_platform_add_participant_form.address_input$
+      Id: $PAGE.onboarders_add_participant_form.address_input$
     - Type: send_keys
       Strategy: id
-      Id: $PAGE.care_platform_add_participant_form.address_input$
+      Id: $PAGE.onboarders_add_participant_form.address_input$
       Value: "reet"
   # Save changes
     - Type: click
       Strategy: xpath
-      Id: $PAGE.care_platform_add_participant_form.save_changes_button$ 
+      Id: $PAGE.onboarders_add_participant_form.save_changes_button$ 
   # Go back from suggestion window
     - Type: wait_for
       Strategy: id
-      Id: $PAGE.care_platform_add_participant_form.confirmation_window$
+      Id: $PAGE.onboarders_add_participant_form.confirmation_window$
     - Type: click
       Strategy: xpath
-      Id: $PAGE.care_platform_add_participant_form.go_back_button_from_suggestion_window$ 
+      Id: $PAGE.onboarders_add_participant_form.go_back_button_from_suggestion_window$ 
   # Adding a valid address 
     - Type: generate_unique_number
       Name: "00"
       ResultVar: PARTICIPANT_APT_NUMBER
     - Type: send_keys
       Strategy: id
-      Id: $PAGE.care_platform_add_participant_form.address_numbers_input$
+      Id: $PAGE.onboarders_add_participant_form.address_numbers_input$
       Value: $AND_CLI_PARTICIPANT_APT_NUMBER$
   # Save changes
     - Type: click
       Strategy: xpath
-      Id: $PAGE.care_platform_add_participant_form.save_changes_button$ 
+      Id: $PAGE.onboarders_add_participant_form.save_changes_button$ 
   # Confirm from suggestion window
     - Type: wait_for
       Strategy: id
-      Id: $PAGE.care_platform_add_participant_form.confirmation_window$
+      Id: $PAGE.onboarders_add_participant_form.confirmation_window$
     - Type: click
       Strategy: xpath
-      Id: $PAGE.care_platform_add_participant_form.confirm_button_from_suggestion_window$ 
+      Id: $PAGE.onboarders_add_participant_form.confirm_button_from_suggestion_window$ 
   # Check on the submission status
     - Type: wait_for
       Strategy: xpath
-      Id: $PAGE.care_platform_add_participant_form.submission_status_toaster$  
+      Id: $PAGE.onboarders_add_participant_form.submission_status_toaster$  
     - Type: click
       Strategy: xpath
-      Id: $PAGE.care_platform_add_participant_form.save_changes_button$
+      Id: $PAGE.onboarders_add_participant_form.save_changes_button$
   # Confirm if the participant has been created
     - Type: wait_for
       Strategy: xpath
-      Id: $PAGE.care_platform.navigation_participant$
+      Id: $PAGE.onboarders_platform_home.navigation_participant$
     - Type: click
       Strategy: xpath
-      Id: $PAGE.care_platform.navigation_participant$
+      Id: $PAGE.onboarders_platform_home.navigation_participant$
   # Go to the search filter.
     - Type: click
       Strategy: xpath
-      Id: $PAGE.care_platform_participant.search_button$
+      Id: $PAGE.onboarders_participant_page.search_button$
     - Type: send_keys
       Strategy: xpath
-      Id: $PAGE.care_platform_participant.search_input$
+      Id: $PAGE.onboarders_participant_page.search_input$
       Value: $AND_CLI_PARTICIPANT_LAST_NAME$
-    # - Type: wait_for
-    #   Strategy: xpath
-    #   Id: $PAGE.care_platform_participant.first_participant_row$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.onboarders_participant_page.first_participant_row$
   # Clear the search by clicking small "x" at right of field
     - Type: click
       Strategy: xpath
-      Id: $PAGE.care_platform_participant.clear_search_button$
+      Id: $PAGE.onboarders_participant_page.clear_search_button$
 
 # CXTB-143: Access Participant Directory & Filter
 TestOnboarderAccessParticipantDirectoryandFilter:
