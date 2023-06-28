@@ -2273,8 +2273,11 @@ TestCarePartnerEditInfoForExistingParticipant:
       Value: CarePartnerEditParticipantNavigation
   # Update existing info in Demographics
     # If you leave a required field blank should show you an alert
+    - Type: wait_for
+      Strategy: id
+      Id: $PAGE.care_platform_edit_participant_demographics.first_name_input$
     - Type: get_attribute
-      Strategy: xpath
+      Strategy: id
       Id: $PAGE.care_platform_edit_participant_demographics.first_name_input$
       Greps:
         - var: FIRST_NAME_PARTICIPANT
@@ -2286,10 +2289,7 @@ TestCarePartnerEditInfoForExistingParticipant:
       Id: $PAGE.care_platform_edit_participant_demographics.empty_first_name_error$
       Attribute: aria-hidden
       Value: "true"
-    - Type: click
-      Strategy: id
-      Id: $PAGE.care_platform_edit_participant_demographics.first_name_input$
-    - Type: clear_field_js
+    - Type: clear_field_by_backspace
       Strategy: id
       Id: $PAGE.care_platform_edit_participant_demographics.first_name_input$
     - Type: click
@@ -2300,3 +2300,9 @@ TestCarePartnerEditInfoForExistingParticipant:
       Id: $PAGE.care_platform_edit_participant_demographics.empty_first_name_error$
       Attribute: aria-hidden
       Value: "false"
+    - Type: send_keys
+      Strategy: id
+      Id: $PAGE.care_platform_edit_participant_demographics.first_name_input$
+      Value: $AND_CLI_FIRST_NAME_PARTICIPANT$
+    - Type: sleep
+      Time: 20

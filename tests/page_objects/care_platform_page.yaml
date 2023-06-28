@@ -173,6 +173,8 @@ care_platform_edit_participant_records:
 care_platform_edit_participant_demographics:
   first_name_input: firstName
   empty_first_name_error: //div[contains(@class,'red') and contains(text(),'Please enter a first name')]/ancestor::div[attribute::*[contains(local-name(), 'aria-hidden')]]
+  last_name_input: lastName
+  empty_last_name_error: //div[contains(@class,'red') and contains(text(),'Please enter a last name')]/ancestor::div[attribute::*[contains(local-name(), 'aria-hidden')]]
 
 care_platform_edit_participant_address_emergency_phone:
   adress_input: address
