@@ -169,6 +169,12 @@ care_platform_edit_participant_records:
   address_emergency_phone_navigation: //ul[contains(@class,'form-navigation')]//button[contains(text(),'Address') and contains(text(),'Emergency Phone')]
   enable_ems_calls_option_based_on_user_input: //input[@name='deviceEmsOverride' and @value='$AND_CLI_EMS_OPTION$']/following-sibling::span # values: true, false and default
   save_changes_button: //form//button[@type='submit']
+  
+care_platform_edit_participant_demographics:
+  first_name_input: firstName
+  empty_first_name_error: //div[contains(@class,'red') and contains(text(),'Please enter a first name')]/ancestor::div[attribute::*[contains(local-name(), 'aria-hidden')]]
+
+care_platform_edit_participant_address_emergency_phone:
   adress_input: address
   adress_2_input: address2
   state_dropdown: state
