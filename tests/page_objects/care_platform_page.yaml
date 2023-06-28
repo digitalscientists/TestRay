@@ -167,6 +167,7 @@ care_platform_edit_participant_records:
   edit_title: //span[contains(text(),'Edit')]
   edit_participant_form_label: //form//h4
   address_emergency_phone_navigation: //ul[contains(@class,'form-navigation')]//button[contains(text(),'Address') and contains(text(),'Emergency Phone')]
+  contacts_navigation: //ul[contains(@class,'form-navigation')]//button[contains(text(),'Contacts')]
   enable_ems_calls_option_based_on_user_input: //input[@name='deviceEmsOverride' and @value='$AND_CLI_EMS_OPTION$']/following-sibling::span # values: true, false and default
   save_changes_button: //form//button[@type='submit']
   adress_input: address
@@ -181,6 +182,10 @@ care_platform_edit_participant_records:
   ems_address_suggestion_dialog: //*[@id='dialogs'][contains(.,'Suggested') and contains(.,'Address')]
   ems_address_suggestion_go_back_button: //*[@id='dialogs'][contains(.,'Suggested') and contains(.,'Address')]//button[text()='Go Back']
   ems_address_suggestion_confirm_button: //*[@id='dialogs'][contains(.,'Suggested') and contains(.,'Address')]//button[text()='Confirm']
+
+care_platform_edit_participant_contacts:
+  add_contact_button: //button[text()='Add Contact'] 
+  add_contact_modal_title: //div[@id='modals']//h4
 
 care_platform_call_portal:
   call_volume_button: //span[contains(@class,'icon-volume')]/ancestor::button
