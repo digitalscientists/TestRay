@@ -167,7 +167,15 @@ care_platform_edit_participant_records:
   edit_title: //span[contains(text(),'Edit')]
   edit_participant_form_label: //form//h4
   address_emergency_phone_navigation: //ul[contains(@class,'form-navigation')]//button[contains(text(),'Address') and contains(text(),'Emergency Phone')]
-  enable_ems_calls_option_based_on_user_input: //input[@name='deviceEmsOverride' and @value='$AND_CLI_EMS_OPTION$']/following-sibling::span # values: true, false and default
+  medical_history_navigation: //button[contains(@class,'form-navigation-link') and contains(text(),'Medical History')]
+  special_treatment_navigation: //button[contains(@class,'form-navigation-link') and contains(text(),'Special Treatments')]
+  dme_navigation: //button[contains(@class,'form-navigation-link') and contains(text(),'DME')]
+  hospitalization_navigation: //button[contains(@class,'form-navigation-link') and contains(text(),'Hospitalizations')]
+  social_history_navigation: //button[contains(@class,'form-navigation-link') and contains(text(),'Social History')]
+  housing_navigation: //button[contains(@class,'form-navigation-link') and contains(text(),'Housing')]
+  member_safety_navigation: //button[contains(@class,'form-navigation-link') and contains(text(),'Member Safety')]
+  community_support_backup_plan_navigation: //button[contains(@class,'form-navigation-link') and contains(text(),'Community Support') and contains(text(),'Backup Plan')]
+  community_engagement_navigation: //button[contains(@class,'form-navigation-link') and contains(text(),'Community Engagement')]
   save_changes_button: //form//button[@type='submit']
   
 care_platform_edit_participant_demographics:
@@ -189,6 +197,62 @@ care_platform_edit_participant_address_emergency_phone:
   ems_address_suggestion_dialog: //*[@id='dialogs'][contains(.,'Suggested') and contains(.,'Address')]
   ems_address_suggestion_go_back_button: //*[@id='dialogs'][contains(.,'Suggested') and contains(.,'Address')]//button[text()='Go Back']
   ems_address_suggestion_confirm_button: //*[@id='dialogs'][contains(.,'Suggested') and contains(.,'Address')]//button[text()='Confirm']
+  enable_ems_calls_option_based_on_user_input: //input[@name='deviceEmsOverride' and @value='$AND_CLI_EMS_OPTION$']/following-sibling::span # values: true, false and default
+  
+care_platform_edit_participant_medical_history:
+  medical_history_subtitle: //h4[contains(text(),'Medical History')]
+  coronary_artery_diseases_select: mhCaCoronaryArteryDiseaseCad
+  coronary_artery_diseases_none_option: //*[@id='mhCaCoronaryArteryDiseaseCad']/option[contains(text(),'None')]
+  coronary_artery_diseases_active_option: //*[@id='mhCaCoronaryArteryDiseaseCad']/option[contains(@value,'active')]
+  coronary_artery_diseases_resolved_option: //*[@id='mhCaCoronaryArteryDiseaseCad']/option[contains(@value,'resolved')]
+
+care_platform_edit_participant_special_treatment:
+  special_treatment_subtitle: //h4[contains(text(),'Special Treatments')]
+  chemotherapy_input_checkbox: //*[@id='Chemotherapy']/ancestor::label
+  chemotherapy_input: Chemotherapy
+  radiation_therapy_input_checkbox: //*[@id='Radiationtherapy']/ancestor::label
+
+care_platform_edit_participant_dme:
+  dme_subtitle: //h4[contains(text(),'DME')]
+  wheelchair_input_checkbox: //*[@id='Wheelchair']/ancestor::label
+  wheelchair_input: Wheelchair
+  lift_input_checkbox: //*[@id='Lift']/ancestor::label
+  lift_input: Lift
+
+care_platform_edit_participant_hospitalization:
+  hospitalization_tab: //nav/button[contains(text(),'Hospitalizations')]
+  hospitalization_subtitle: //h4[contains(text(),'Hospitalizations')]
+  hospitalization_textarea: hospitalizations
+  emergency_room_tab: //nav/button[contains(text(),'Emergency room admissions')]
+  emergency_room_subtitle: //h4[contains(text(),'Emergency Room Admissions')]
+  emergency_room_add_admission_button: //div[@tab-title='Emergency room admissions']//button[contains(text(),'Add Emergency Room Admission')]
+
+care_platform_edit_participant_social_history:
+  social_history_subtitle: //h4[contains(text(),'Social History')]
+  relationship_status_select: relationshipStatus
+  relationship_married_option: //*[@id='relationshipStatus']/option[@value='married']
+  relationship_single_option: //*[@id='relationshipStatus']/option[@value='single']
+  education_status_input: educationStatus
+
+care_platform_edit_participant_housing:
+  housing_subtitle: //h4[contains(text(),'Housing')]
+  own_or_rent_select: ownOrRent
+  own_select_option: //*[@id='ownOrRent']/option[text()='Own']
+  rent_select_option: //*[@id='ownOrRent']/option[text()='Rent']
+  type_of_home_select: typeOfHome
+
+care_platform_edit_participant_member_safety:
+  member_safety_subtitle: //h4[contains(text(),'Member Safety')]
+  feels_safe_yes_option: //input[@name='feelsSafe' and @value='true']/ancestor::label
+  feels_safe_no_option: //input[@name='feelsSafe' and @value='false']/ancestor::label
+
+care_platform_edit_participant_community_backup:
+  community_backup_family_option: //*[@id='Family']/ancestor::label
+  community_backup_friends_option: //*[@id='Friends']/ancestor::label
+
+care_platform_edit_participant_community_engagement:
+  community_engagement_yes_option: //input[@name='communityEngagement' and @value='true']/ancestor::label
+  community_engagement_no_option: //input[@name='communityEngagement' and @value='false']/ancestor::label
 
 care_platform_call_portal:
   call_volume_button: //span[contains(@class,'icon-volume')]/ancestor::button

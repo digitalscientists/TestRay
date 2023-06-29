@@ -1662,10 +1662,10 @@ CarePartnerSetsEMSEnabledToXOption:
     # Set "EMS Enabled" to "Yes/No/Default" depending on the user input on participant profile and save changes.
     - Type: wait_for
       Strategy: xpath
-      Id: $PAGE.care_platform_edit_participant_records.enable_ems_calls_option_based_on_user_input$
+      Id: $PAGE.care_platform_edit_participant_address_emergency_phone.enable_ems_calls_option_based_on_user_input$
     - Type: click
       Strategy: xpath
-      Id: $PAGE.care_platform_edit_participant_records.enable_ems_calls_option_based_on_user_input$
+      Id: $PAGE.care_platform_edit_participant_address_emergency_phone.enable_ems_calls_option_based_on_user_input$
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_edit_participant_records.save_changes_button$
