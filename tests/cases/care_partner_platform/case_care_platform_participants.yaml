@@ -2378,7 +2378,9 @@ TestCarePartnerEditOrAddContactsInfoEditParticipantInfo:
       Strategy: xpath
       Id: $PAGE.care_platform_edit_participant_contacts.cancel_button$
   # Window closes and no contact is added for participant.
-  # TODO
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_contacts.edit_button_based_on_contact_name$
   # Click "Add Contact" button in upper right corner.
     - Type: click
       Strategy: xpath
