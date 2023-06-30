@@ -181,6 +181,10 @@ class Device
       rescue => e
         log_warn(e.message) if try == 4
         sleep 0.5
+        # Assign error message to variable.
+        if action["ErrorMessage"]
+          ENV[convert_value(action["ErrorMessage"])] = e.message
+        end
       end
       try += 1
     end
@@ -244,17 +248,17 @@ class Device
   end
 
   # closes the currently opened app and puts it in the background
-  def close_app(action = nil)
+  def close_app(action = nil, main_case, main_case_id)
     @driver.background_app(-1)
   end
 
   # hides keyboard (Only Mobile)
-  def hide_keyboard(action = nil)
+  def hide_keyboard(action = nil, main_case, main_case_id)
     @driver.hide_keyboard
   end
 
   # Toggles wifi using the iOS Control Center (available only for iOS with Physical Devices, not simulators)
-  def toggle_wifi(action = nil)
+  def toggle_wifi(action = nil, main_case, main_case_id)
     # Get the window size 
     size = @driver.window_size
 
@@ -756,6 +760,17 @@ class Device
     end
   end
 
+  #Clears a provided text field with JavaScript
+  # Accepts:
+  #   Strategy
+  #   Id
+  def clear_field_js(action, main_case, main_case_id) 
+    action = convert_value_pageobjects(action);
+    el = wait_for(action)
+    
+    @driver.execute_script("arguments[0].value='';", el)
+    sleep(1.0)
+  end
 
   # Accepts:
   #   Strategy
@@ -1955,6 +1970,16 @@ def return_element_attribute(action, main_case, main_case_id)
     ENV[convert_value(action["ResultVar"])] = attr_value.to_s
   end
 
+end
+
+# returns the location of the element in a variable
+def return_element_location(action, main_case, main_case_id)
+  el = wait_for(action)
+  return unless el
+
+  el_location = el.location.to_s
+  log_info("Element location: #{el_location}")
+  ENV[convert_value(action["ResultVar"])] = el_location
 end
 
 # day_month is use to select a random day inside of it

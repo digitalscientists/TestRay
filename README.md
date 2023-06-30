@@ -338,6 +338,7 @@ Actions:
 21. [return_element_attribute](#return_element_attribute)
 22. [hover](#hover)
 23. [clear_field](#clear_field)
+24. [return_element_location](#return_element_location)
 
 ## Only Browser
 
@@ -352,6 +353,7 @@ Actions:
 9. [click_js](#click_js)
 10. [add_cookie](#add_cookie)
 11. [wait_for_property](#wait_for_property)
+12. [clear_field_js](#clear_field_js)
 
 ## Only Mobile
 
@@ -653,6 +655,13 @@ Hovers over an element.
 	  Strategy: id/css/xpath/uiautomator/class_chain/...
 	  Id: //some/path
 	  NoRaise: false/true (Default - false -> will rise error on fail)
+### <a id="return_element_location"></a>return_element_location
+
+	- Type: return_element_location
+	  Role: role1 (Optional. if not specified will use the first one defined in the case Roles)
+	  Strategy: id/css/xpath/uiautomator/class_chain/...
+	  Id: //some/path
+	  ResultVar: var1
 
 
 ## Only Browser
@@ -763,6 +772,15 @@ Waits for the element to have a specific JS property value.
     Property: Js Property e.g. className
     Value:  Desired value
     Time: Time (int) e.g. 10
+
+### <a id="clear_field_js"></a>clear_field_js
+
+Sets empty value for element.
+
+  - Type: clear_field_js
+    Role: role1 (Optional)
+    Strategy: xpath | id | etc.
+    Id: //some//path
 
 ## Only Mobile
 
