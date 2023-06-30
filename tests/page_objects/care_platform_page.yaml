@@ -187,6 +187,7 @@ care_platform_edit_participant_contacts:
   add_contact_button: //button[text()='Add Contact']
   edit_button_based_on_contact_name: //span[text()='$AND_CLI_UNIQUE_FIRST_NAME$' and text()='$AND_CLI_UNIQUE_LAST_NAME$']/../following-sibling::div//button[text()='Edit']
   delete_button_based_on_contact_name: //span[text()='$AND_CLI_UNIQUE_FIRST_NAME$' and text()='$AND_CLI_UNIQUE_LAST_NAME$']/../following-sibling::div//button[text()='Delete']
+  phone_number_label_based_on_contact_name: //span[text()='$AND_CLI_UNIQUE_FIRST_NAME$' and text()='$AND_CLI_UNIQUE_LAST_NAME$']/../following-sibling::div/span
   add_or_edit_contact_modal_title: //div[@id='modals']//h4
   add_contact_first_name_input: //input[@id='firstName']
   add_contact_last_name_input:  //input[@id='lastName']

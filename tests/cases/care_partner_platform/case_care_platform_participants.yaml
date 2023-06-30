@@ -2421,6 +2421,15 @@ TestCarePartnerEditOrAddContactsInfoEditParticipantInfo:
     - Type: wait_not_visible
       Strategy: xpath
       Id: $PAGE.care_platform_notifications.contact_created_notification$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_contacts.phone_number_label_based_on_contact_name$
+    - Type: get_text
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_contacts.phone_number_label_based_on_contact_name$
+      Greps:
+        - var: FIRST_PHONE_VALUE
+          match: "(.*)"
   # Click "Edit" button for an existing contact.
     - Type: wait_for
       Strategy: xpath
@@ -2446,7 +2455,20 @@ TestCarePartnerEditOrAddContactsInfoEditParticipantInfo:
       Strategy: xpath
       Id: $PAGE.care_platform_edit_participant_contacts.cancel_button$
   # Returned to the page; without any changes being saved to the contact.
-  # TODO
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_contacts.phone_number_label_based_on_contact_name$
+    - Type: get_text
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_contacts.phone_number_label_based_on_contact_name$
+      Greps:
+        - var: SECOND_PHONE_VALUE
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: eq
+          Var: FIRST_PHONE_VALUE
+          Value: $AND_CLI_SECOND_PHONE_VALUE$
   # Click "Edit" button for an existing contact.
     - Type: wait_for
       Strategy: xpath
