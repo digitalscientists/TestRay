@@ -2252,7 +2252,7 @@ TestCarePartnerEditEMSSettingAndAddressParticipant:
       Time: 40
 
 #CXTB-440 Edit or Add Contacts Info - Edit Participant Info
-TestCarePartnerEditOrAddContactsInfoEditParticipantInfo:
+TestCarePartnerParticipantInfoEditOrAddContactsInfo:
   Environment: Settings
   Roles:
     - Role: desktopChrome
