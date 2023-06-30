@@ -2432,7 +2432,7 @@ TestCarePartnerEditInfoForExistingParticipant:
       Strategy: id
       Id: $PAGE.care_platform_edit_participant_hospitalization.hospitalization_textarea$
     - Type: generate_unique_name
-      Name: " Automation text"
+      Name: "Automation text"
       ResultVar: UNIQUE_TEXT
     - Type: send_keys
       Strategy: id
@@ -2441,6 +2441,9 @@ TestCarePartnerEditInfoForExistingParticipant:
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_edit_participant_records.save_changes_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_records.changes_saved_notification$
     - Type: get_attribute
       Strategy: id
       Id: $PAGE.care_platform_edit_participant_hospitalization.hospitalization_textarea$
@@ -2461,7 +2464,7 @@ TestCarePartnerEditInfoForExistingParticipant:
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.care_platform_edit_participant_social_history.social_history_subtitle$
-    # Edit fields
+    # Edit fields and dropdown selections
     - Type: wait_for
       Strategy: id
       Id: $PAGE.care_platform_edit_participant_social_history.education_status_input$
@@ -2651,6 +2654,7 @@ TestCarePartnerEditInfoForExistingParticipant:
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.care_platform_edit_participant_cognitive_learning.cognitive_learning_subtitle$
+    # Checking and unchecking some checkboxes
     - Type: credentials_checkbox
       Strategy: xpath
       Option: check
@@ -2674,6 +2678,7 @@ TestCarePartnerEditInfoForExistingParticipant:
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.care_platform_edit_participant_dietary_restrictions.dietary_restrictions_subtitle$
+    # Check and uncheck some checkboxes
     - Type: credentials_checkbox
       Strategy: xpath
       Option: check
@@ -2682,6 +2687,7 @@ TestCarePartnerEditInfoForExistingParticipant:
       Strategy: xpath
       Option: check
       Id: $PAGE.care_platform_edit_participant_dietary_restrictions.dash_option$
+    # Changing tabs to ensure that the data is preserved
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_edit_participant_records.housing_navigation$
@@ -2689,8 +2695,9 @@ TestCarePartnerEditInfoForExistingParticipant:
       Strategy: xpath
       Id: $PAGE.care_platform_edit_participant_records.dietary_destrictions_navigation$
     - Type: wait_for
-      Strategy: xpath
+      Strategy: id
       Id: $PAGE.care_platform_edit_participant_dietary_restrictions.diabetic_input$
+    # Checking the attributes match the selection done to the checkboxes
     - Type: wait_for_attribute
       Strategy: id
       Id: $PAGE.care_platform_edit_participant_dietary_restrictions.diabetic_input$
@@ -2701,25 +2708,33 @@ TestCarePartnerEditInfoForExistingParticipant:
       Id: $PAGE.care_platform_edit_participant_dietary_restrictions.dash_input$
       Attribute: checked
       Value: "true"
-    # Financial
+  # Financial
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_edit_participant_records.financial_navigation$
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.care_platform_edit_participant_financial.financial_subtitle$
+    # Check and uncheck some checkboxes
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_financial.transportation_option$
+    - Type: credentials_checkbox
+      Strategy: xpath
+      Option: check
+      Id: $PAGE.care_platform_edit_participant_financial.transportation_option$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_financial.transportation_option$
     - Type: credentials_checkbox
       Strategy: xpath
       Option: check
       Id: $PAGE.care_platform_edit_participant_financial.rent_option$
-    - Type: credentials_checkbox
-      Strategy: xpath
-      Option: check
-      Id: $PAGE.care_platform_edit_participant_financial.other_option$
     - Type: credentials_checkbox
       Strategy: xpath
       Option: uncheck
       Id: $PAGE.care_platform_edit_participant_financial.rent_option$
+    # Changing tabs to ensure the data is getting preserved
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_edit_participant_records.housing_navigation$
@@ -2728,7 +2743,10 @@ TestCarePartnerEditInfoForExistingParticipant:
       Id: $PAGE.care_platform_edit_participant_records.financial_navigation$
     - Type: wait_for
       Strategy: xpath
-      Id: $PAGE.care_platform_edit_participant_financial.rent_input$
+      Id: $PAGE.care_platform_edit_participant_financial.transportation_option$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_financial.rent_option$
     - Type: get_attribute
       Strategy: xpath
       Id: $PAGE.care_platform_edit_participant_financial.rent_option$
@@ -2742,18 +2760,27 @@ TestCarePartnerEditInfoForExistingParticipant:
         - Type: n_contain
           Var: UNCHECK_RENT
           Value: 'checked'
-    - Type: wait_for_attribute
-      Strategy: id
-      Id: $PAGE.care_platform_edit_participant_financial.other_input$
-      Attribute: checked
-      Value: "true"
-    # ADL's
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_financial.transportation_option$
+      Greps:
+        - var: CHECK_TRANSPORTATION
+          attr: innerHTML
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: CHECK_TRANSPORTATION
+          Value: 'checked'
+  # ADL's
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_edit_participant_records.adls_navigation$
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.care_platform_edit_participant_adls.adls_subtitle$
+    # Check and uncheck some checkboxes
     - Type: credentials_checkbox
       Strategy: xpath
       Option: check
@@ -2775,6 +2802,7 @@ TestCarePartnerEditInfoForExistingParticipant:
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.care_platform_edit_participant_adls.toileting_option$
+    # Check that the attributes matches the status of the checkboxes
     - Type: get_attribute
       Strategy: xpath
       Id: $PAGE.care_platform_edit_participant_adls.shopping_option$
@@ -2806,12 +2834,126 @@ TestCarePartnerEditInfoForExistingParticipant:
       Id: $PAGE.care_platform_edit_participant_adls.house_cleaning_input$
       Attribute: checked
       Value: "true"
-    # Surgical History
+  # Surgical History
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_edit_participant_records.surgical_history_navigation$
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.care_platform_edit_participant_surgical_history.surgical_history_subtitle$
-    # Prevention Care Screening
-    # Notes
+    # Check and uncheck some checkboxes
+    - Type: credentials_checkbox
+      Strategy: xpath
+      Option: check
+      Id: $PAGE.care_platform_edit_participant_surgical_history.resection_of_tumor_option$
+    - Type: credentials_checkbox
+      Strategy: xpath
+      Option: uncheck
+      Id: $PAGE.care_platform_edit_participant_surgical_history.sinus_surgery_option$
+    - Type: credentials_checkbox
+      Strategy: xpath
+      Option: check
+      Id: $PAGE.care_platform_edit_participant_surgical_history.valve_replacement_option$
+    - Type: credentials_checkbox
+      Strategy: xpath
+      Option: uncheck
+      Id: $PAGE.care_platform_edit_participant_surgical_history.endoscopy_option$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_records.save_changes_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_records.changes_saved_notification$
+  # Prevention Care Screening
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_records.prevention_care_screening_navigation$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_prevention_care_screening.prevention_care_screening_subtitle$
+    # Check some checkboxes
+    - Type: credentials_checkbox
+      Strategy: xpath
+      Option: check
+      Id: $PAGE.care_platform_edit_participant_prevention_care_screening.col_option$
+    - Type: credentials_checkbox
+      Strategy: xpath
+      Option: uncheck
+      Id: $PAGE.care_platform_edit_participant_prevention_care_screening.art_screening_option$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_records.surgical_history_navigation$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_records.prevention_care_screening_navigation$
+    # Check that the attributes match the checking and unchecking of the checkboxes
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_prevention_care_screening.col_option$
+      Greps:
+        - var: CHECK_COL
+          attr: innerHTML
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: CHECK_COL
+          Value: 'checked'
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_prevention_care_screening.art_screening_option$
+      Greps:
+        - var: UNCHECK_ART
+          attr: innerHTML
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: n_contain
+          Var: UNCHECK_ART
+          Value: 'checked'
+  # Notes
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_records.notes_navigation$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_notes.notes_subtitle$
+    # Add new text to the notes
+    - Type: clear_field_js
+      Strategy: id
+      Id: $PAGE.care_platform_edit_participant_notes.notes_text_area$
+    - Type: send_keys
+      Strategy: id
+      Id: $PAGE.care_platform_edit_participant_notes.notes_text_area$
+      Value: $AND_CLI_UNIQUE_TEXT$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_records.save_changes_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_records.changes_saved_notification$
+    #Change tabs and check the change persist
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_records.prevention_care_screening_navigation$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_records.notes_navigation$  
+    - Type: wait_for
+      Strategy: id
+      Id: $PAGE.care_platform_edit_participant_notes.notes_text_area$
+    - Type: get_attribute
+      Strategy: id
+      Id: $PAGE.care_platform_edit_participant_notes.notes_text_area$
+      Greps:
+        - var: NOTES_TEXT
+          attr: value
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: NOTES_TEXT
+          Value: $AND_CLI_UNIQUE_TEXT$
