@@ -408,7 +408,7 @@ This is not a type but can be used in different Types as a Validation for the ac
 1. [calculate_minutes_passed_by_from_event_creation](#calculate_minutes_passed_by_from_event_creation)
 2. [verify_event_went_to_bottom](#verify_event_went_to_bottom)
 3. [verify_all_events_match_todays_date](#verify_all_events_match_todays_date)
-4. [credentials_checkbox](#credentials_checkbox)
+4. [set_checkbox_status](#set_checkbox_status)
 5. [get_day](#get_day)
 6. [get_next_month](#get_next_month)
 7. [generate_random_day](#generate_random_day)
@@ -1186,11 +1186,11 @@ Custom method to verify that all events are matching today's date.
       SecondStrategy: xpath | class_chain | etc.
       SecondId: Path to the date element e.g. $PAGE.seniors_app_home.date_value_appointment_modal$
 
-### <a id="credentials_checkbox"></a>credentials_checkbox
+### <a id="set_checkbox_status"></a>set_checkbox_status
 
 Guarantee that the checkbox is checked or unchecked depending on the option.
 
-    - Type: credentials_checkbox
+    - Type: set_checkbox_status
       Strategy: xpath | id | etc.
       Option: check | uncheck
       Id: //some//path

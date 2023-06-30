@@ -2346,11 +2346,11 @@ TestCarePartnerEditInfoForExistingParticipant:
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.care_platform_edit_participant_special_treatment.chemotherapy_input_checkbox$
-    - Type: credentials_checkbox
+    - Type: set_checkbox_status
       Strategy: xpath
       Option: check
       Id: $PAGE.care_platform_edit_participant_special_treatment.chemotherapy_input_checkbox$
-    - Type: credentials_checkbox
+    - Type: set_checkbox_status
       Strategy: xpath
       Option: uncheck
       Id: $PAGE.care_platform_edit_participant_special_treatment.radiation_therapy_input_checkbox$
@@ -2368,11 +2368,11 @@ TestCarePartnerEditInfoForExistingParticipant:
       Strategy: xpath
       Id: $PAGE.care_platform_edit_participant_dme.dme_subtitle$
     # Checkboxes behaviour
-    - Type: credentials_checkbox
+    - Type: set_checkbox_status
       Strategy: xpath
       Option: check
       Id: $PAGE.care_platform_edit_participant_dme.wheelchair_input_checkbox$
-    - Type: credentials_checkbox
+    - Type: set_checkbox_status
       Strategy: xpath
       Option: check
       Id: $PAGE.care_platform_edit_participant_dme.lift_input_checkbox$
@@ -2387,7 +2387,7 @@ TestCarePartnerEditInfoForExistingParticipant:
       Id: $PAGE.care_platform_edit_participant_dme.lift_input$
       Attribute: checked
       Value: "true"
-    - Type: credentials_checkbox
+    - Type: set_checkbox_status
       Strategy: xpath
       Option: uncheck
       Id: $PAGE.care_platform_edit_participant_dme.lift_input_checkbox$
@@ -2571,11 +2571,11 @@ TestCarePartnerEditInfoForExistingParticipant:
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.care_platform_edit_participant_community_backup.community_backup_family_option$
-    - Type: credentials_checkbox
+    - Type: set_checkbox_status
       Strategy: xpath
       Option: uncheck
       Id: $PAGE.care_platform_edit_participant_community_backup.community_backup_family_option$
-    - Type: credentials_checkbox
+    - Type: set_checkbox_status
       Strategy: xpath
       Option: check
       Id: $PAGE.care_platform_edit_participant_community_backup.community_backup_friends_option$
@@ -2655,19 +2655,19 @@ TestCarePartnerEditInfoForExistingParticipant:
       Strategy: xpath
       Id: $PAGE.care_platform_edit_participant_cognitive_learning.cognitive_learning_subtitle$
     # Checking and unchecking some checkboxes
-    - Type: credentials_checkbox
+    - Type: set_checkbox_status
       Strategy: xpath
       Option: check
       Id: $PAGE.care_platform_edit_participant_cognitive_learning.reading_option$
-    - Type: credentials_checkbox
+    - Type: set_checkbox_status
       Strategy: xpath
       Option: check
       Id: $PAGE.care_platform_edit_participant_cognitive_learning.games_option$
-    - Type: credentials_checkbox
+    - Type: set_checkbox_status
       Strategy: xpath
       Option: uncheck
       Id: $PAGE.care_platform_edit_participant_cognitive_learning.writing_option$
-    - Type: credentials_checkbox
+    - Type: set_checkbox_status
       Strategy: xpath
       Option: uncheck
       Id: $PAGE.care_platform_edit_participant_cognitive_learning.discovery_option$
@@ -2679,11 +2679,11 @@ TestCarePartnerEditInfoForExistingParticipant:
       Strategy: xpath
       Id: $PAGE.care_platform_edit_participant_dietary_restrictions.dietary_restrictions_subtitle$
     # Check and uncheck some checkboxes
-    - Type: credentials_checkbox
+    - Type: set_checkbox_status
       Strategy: xpath
       Option: check
       Id: $PAGE.care_platform_edit_participant_dietary_restrictions.diabetic_option$
-    - Type: credentials_checkbox
+    - Type: set_checkbox_status
       Strategy: xpath
       Option: check
       Id: $PAGE.care_platform_edit_participant_dietary_restrictions.dash_option$
@@ -2719,18 +2719,18 @@ TestCarePartnerEditInfoForExistingParticipant:
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.care_platform_edit_participant_financial.transportation_option$
-    - Type: credentials_checkbox
+    - Type: set_checkbox_status
       Strategy: xpath
       Option: check
       Id: $PAGE.care_platform_edit_participant_financial.transportation_option$
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.care_platform_edit_participant_financial.transportation_option$
-    - Type: credentials_checkbox
+    - Type: set_checkbox_status
       Strategy: xpath
       Option: check
       Id: $PAGE.care_platform_edit_participant_financial.rent_option$
-    - Type: credentials_checkbox
+    - Type: set_checkbox_status
       Strategy: xpath
       Option: uncheck
       Id: $PAGE.care_platform_edit_participant_financial.rent_option$
@@ -2781,15 +2781,15 @@ TestCarePartnerEditInfoForExistingParticipant:
       Strategy: xpath
       Id: $PAGE.care_platform_edit_participant_adls.adls_subtitle$
     # Check and uncheck some checkboxes
-    - Type: credentials_checkbox
+    - Type: set_checkbox_status
       Strategy: xpath
       Option: check
       Id: $PAGE.care_platform_edit_participant_adls.toileting_option$
-    - Type: credentials_checkbox
+    - Type: set_checkbox_status
       Strategy: xpath
       Option: check
       Id: $PAGE.care_platform_edit_participant_adls.house_cleaning_option$
-    - Type: credentials_checkbox
+    - Type: set_checkbox_status
       Strategy: xpath
       Option: uncheck
       Id: $PAGE.care_platform_edit_participant_adls.shopping_option$
@@ -2842,19 +2842,19 @@ TestCarePartnerEditInfoForExistingParticipant:
       Strategy: xpath
       Id: $PAGE.care_platform_edit_participant_surgical_history.surgical_history_subtitle$
     # Check and uncheck some checkboxes
-    - Type: credentials_checkbox
+    - Type: set_checkbox_status
       Strategy: xpath
       Option: check
       Id: $PAGE.care_platform_edit_participant_surgical_history.resection_of_tumor_option$
-    - Type: credentials_checkbox
+    - Type: set_checkbox_status
       Strategy: xpath
       Option: uncheck
       Id: $PAGE.care_platform_edit_participant_surgical_history.sinus_surgery_option$
-    - Type: credentials_checkbox
+    - Type: set_checkbox_status
       Strategy: xpath
       Option: check
       Id: $PAGE.care_platform_edit_participant_surgical_history.valve_replacement_option$
-    - Type: credentials_checkbox
+    - Type: set_checkbox_status
       Strategy: xpath
       Option: uncheck
       Id: $PAGE.care_platform_edit_participant_surgical_history.endoscopy_option$
@@ -2872,11 +2872,11 @@ TestCarePartnerEditInfoForExistingParticipant:
       Strategy: xpath
       Id: $PAGE.care_platform_edit_participant_prevention_care_screening.prevention_care_screening_subtitle$
     # Check some checkboxes
-    - Type: credentials_checkbox
+    - Type: set_checkbox_status
       Strategy: xpath
       Option: check
       Id: $PAGE.care_platform_edit_participant_prevention_care_screening.col_option$
-    - Type: credentials_checkbox
+    - Type: set_checkbox_status
       Strategy: xpath
       Option: uncheck
       Id: $PAGE.care_platform_edit_participant_prevention_care_screening.art_screening_option$

@@ -1451,7 +1451,7 @@ class Device
   #   Strategy
   #   Id
   #   Option -> check or uncheck
-  def credentials_checkbox(action)
+  def set_checkbox_status(action)
     action = convert_value_pageobjects(action);
     option = convert_value(action["Option"])
     el = @driver.find_element(convert_value(action["Strategy"]), convert_value(action["Id"]))
