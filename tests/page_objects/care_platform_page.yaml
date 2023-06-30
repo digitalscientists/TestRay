@@ -184,8 +184,17 @@ care_platform_edit_participant_records:
   ems_address_suggestion_confirm_button: //*[@id='dialogs'][contains(.,'Suggested') and contains(.,'Address')]//button[text()='Confirm']
 
 care_platform_edit_participant_contacts:
-  add_contact_button: //button[text()='Add Contact'] 
-  add_contact_modal_title: //div[@id='modals']//h4
+  add_contact_button: //button[text()='Add Contact']
+  edit_button_based_on_contact_name: //span[text()='$AND_CLI_UNIQUE_FIRST_NAME$' and text()='$AND_CLI_UNIQUE_LAST_NAME$']/../following-sibling::div//button[text()='Edit']
+  delete_button_based_on_contact_name: //span[text()='$AND_CLI_UNIQUE_FIRST_NAME$' and text()='$AND_CLI_UNIQUE_LAST_NAME$']/../following-sibling::div//button[text()='Delete']
+  add_or_edit_contact_modal_title: //div[@id='modals']//h4
+  add_contact_first_name_input: //input[@id='firstName']
+  add_contact_last_name_input:  //input[@id='lastName']
+  add_contact_phone_number_input: //input[@id='phone']
+  save_and_close_button: //button[@type='submit']
+  cancel_button: //button[text()='Cancel']
+  delete_contact_dialog_title: //div[@id='dialogs']//h4
+  yes_delete_button: //button[text()='Yes, Delete']
 
 care_platform_call_portal:
   call_volume_button: //span[contains(@class,'icon-volume')]/ancestor::button
@@ -292,6 +301,9 @@ care_platform_notifications:
   ems_data_updated_notification: //div[@class='Toastify']//div[text()='EMS data updated']
   ems_address_error_notification: //div[@class='Toastify']//div[text()='Unable to validate address']
   ems_adjustments_needed_notification: //div[@class='Toastify']//div[@role='alert']//div[text()='Some adjustments needed']
+  contact_created_notification: //div[@class='Toastify']//div[@role='alert']//div[text()='Contact created']
+  contact_saved_notification: //div[@class='Toastify']//div[@role='alert']//div[text()='Contact saved']
+  contact_deleted_notification: //div[@class='Toastify']//div[@role='alert']//div[text()='Contact deleted']
   dismiss_notification_button: //div[@class='Toastify']//button[text()='Dismiss']
 
 care_platform_facility:
