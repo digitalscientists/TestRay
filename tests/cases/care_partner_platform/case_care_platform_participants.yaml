@@ -2251,7 +2251,7 @@ TestCarePartnerEditEMSSettingAndAddressParticipant:
       Id: $PAGE.care_platform_notifications.ems_data_updated_notification$
       Time: 40
 
-#CXTB-440 Edit or Add Contacts Info - Edit Participant Info
+#CXTB-440 Edit or Add Contacts Info - Edit Participant Info.
 TestCarePartnerParticipantInfoEditOrAddContactsInfo:
   Environment: Settings
   Roles:
