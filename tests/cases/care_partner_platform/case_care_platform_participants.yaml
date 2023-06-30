@@ -2428,6 +2428,9 @@ TestCarePartnerEditInfoForExistingParticipant:
     - Type: wait_for
       Strategy: id
       Id: $PAGE.care_platform_edit_participant_hospitalization.hospitalization_textarea$
+    - Type: clear_field_js
+      Strategy: id
+      Id: $PAGE.care_platform_edit_participant_hospitalization.hospitalization_textarea$
     - Type: generate_unique_name
       Name: " Automation text"
       ResultVar: UNIQUE_TEXT
@@ -2583,4 +2586,232 @@ TestCarePartnerEditInfoForExistingParticipant:
       Id: $PAGE.care_platform_edit_participant_community_engagement.community_engagement_yes_option$
     - Type: click
       Strategy: xpath
-      Id: $PAGE.care_platform_edit_participant_community_engagement.community_engagement_no_option$  
+      Id: $PAGE.care_platform_edit_participant_community_engagement.community_engagement_no_option$
+    # Change tabs, it should save and show the change when going back to Community Engagement
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_records.housing_navigation$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_records.community_engagement_navigation$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_community_engagement.community_engagement_no_option$
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_community_engagement.community_engagement_no_option$
+      Greps:
+        - var: SELECTED_NO
+          attr: innerHTML
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: SELECTED_NO
+          Value: 'checked'
+  # Spiritual
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_records.spiritual_navigation$
+    # Change radio button values
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_spiritual.spiritual_no_option$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_spiritual.spiritual_yes_option$
+    # Change tabs, it should save and show the change when going back to Spiritual
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_records.housing_navigation$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_records.spiritual_navigation$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_spiritual.spiritual_yes_option$
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_spiritual.spiritual_yes_option$
+      Greps:
+        - var: SELECTED_YES
+          attr: innerHTML
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: SELECTED_YES
+          Value: 'checked'
+  # Cognitive / Learning
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_records.cognitive_learning_navigation$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_cognitive_learning.cognitive_learning_subtitle$
+    - Type: credentials_checkbox
+      Strategy: xpath
+      Option: check
+      Id: $PAGE.care_platform_edit_participant_cognitive_learning.reading_option$
+    - Type: credentials_checkbox
+      Strategy: xpath
+      Option: check
+      Id: $PAGE.care_platform_edit_participant_cognitive_learning.games_option$
+    - Type: credentials_checkbox
+      Strategy: xpath
+      Option: uncheck
+      Id: $PAGE.care_platform_edit_participant_cognitive_learning.writing_option$
+    - Type: credentials_checkbox
+      Strategy: xpath
+      Option: uncheck
+      Id: $PAGE.care_platform_edit_participant_cognitive_learning.discovery_option$
+  # Dietary Restrictions
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_records.dietary_destrictions_navigation$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_dietary_restrictions.dietary_restrictions_subtitle$
+    - Type: credentials_checkbox
+      Strategy: xpath
+      Option: check
+      Id: $PAGE.care_platform_edit_participant_dietary_restrictions.diabetic_option$
+    - Type: credentials_checkbox
+      Strategy: xpath
+      Option: check
+      Id: $PAGE.care_platform_edit_participant_dietary_restrictions.dash_option$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_records.housing_navigation$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_records.dietary_destrictions_navigation$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_dietary_restrictions.diabetic_input$
+    - Type: wait_for_attribute
+      Strategy: id
+      Id: $PAGE.care_platform_edit_participant_dietary_restrictions.diabetic_input$
+      Attribute: checked
+      Value: "true"
+    - Type: wait_for_attribute
+      Strategy: id
+      Id: $PAGE.care_platform_edit_participant_dietary_restrictions.dash_input$
+      Attribute: checked
+      Value: "true"
+    # Financial
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_records.financial_navigation$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_financial.financial_subtitle$
+    - Type: credentials_checkbox
+      Strategy: xpath
+      Option: check
+      Id: $PAGE.care_platform_edit_participant_financial.rent_option$
+    - Type: credentials_checkbox
+      Strategy: xpath
+      Option: check
+      Id: $PAGE.care_platform_edit_participant_financial.other_option$
+    - Type: credentials_checkbox
+      Strategy: xpath
+      Option: uncheck
+      Id: $PAGE.care_platform_edit_participant_financial.rent_option$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_records.housing_navigation$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_records.financial_navigation$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_financial.rent_input$
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_financial.rent_option$
+      Greps:
+        - var: UNCHECK_RENT
+          attr: innerHTML
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: n_contain
+          Var: UNCHECK_RENT
+          Value: 'checked'
+    - Type: wait_for_attribute
+      Strategy: id
+      Id: $PAGE.care_platform_edit_participant_financial.other_input$
+      Attribute: checked
+      Value: "true"
+    # ADL's
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_records.adls_navigation$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_adls.adls_subtitle$
+    - Type: credentials_checkbox
+      Strategy: xpath
+      Option: check
+      Id: $PAGE.care_platform_edit_participant_adls.toileting_option$
+    - Type: credentials_checkbox
+      Strategy: xpath
+      Option: check
+      Id: $PAGE.care_platform_edit_participant_adls.house_cleaning_option$
+    - Type: credentials_checkbox
+      Strategy: xpath
+      Option: uncheck
+      Id: $PAGE.care_platform_edit_participant_adls.shopping_option$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_records.housing_navigation$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_records.adls_navigation$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_adls.toileting_option$
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_adls.shopping_option$
+      Greps:
+        - var: UNCHECK_SHOPPING
+          attr: innerHTML
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: n_contain
+          Var: UNCHECK_SHOPPING
+          Value: 'checked'
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_adls.toileting_option$
+      Greps:
+        - var: CHECK_TOILETING
+          attr: innerHTML
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: CHECK_TOILETING
+          Value: 'checked'
+    - Type: wait_for_attribute
+      Strategy: id
+      Id: $PAGE.care_platform_edit_participant_adls.house_cleaning_input$
+      Attribute: checked
+      Value: "true"
+    # Surgical History
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_records.surgical_history_navigation$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_surgical_history.surgical_history_subtitle$
+    # Prevention Care Screening
+    # Notes

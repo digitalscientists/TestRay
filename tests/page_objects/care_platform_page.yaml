@@ -176,6 +176,14 @@ care_platform_edit_participant_records:
   member_safety_navigation: //button[contains(@class,'form-navigation-link') and contains(text(),'Member Safety')]
   community_support_backup_plan_navigation: //button[contains(@class,'form-navigation-link') and contains(text(),'Community Support') and contains(text(),'Backup Plan')]
   community_engagement_navigation: //button[contains(@class,'form-navigation-link') and contains(text(),'Community Engagement')]
+  spiritual_navigation: //button[contains(@class,'form-navigation-link') and contains(text(),'Spiritual')]
+  cognitive_learning_navigation: //button[contains(@class,'form-navigation-link') and contains(text(),'Cognitive') and contains(text(),'Learning')]
+  dietary_destrictions_navigation: //button[contains(@class,'form-navigation-link') and contains(text(),'Dietary Restrictions')]
+  financial_navigation: //button[contains(@class,'form-navigation-link') and contains(text(),'Dietary Restrictions')]
+  adls_navigation: //button[contains(@class,'form-navigation-link') and contains(text(),'ADL')]
+  surgical_history_navigation: //button[contains(@class,'form-navigation-link') and contains(text(),'Surgical History')]
+  prevention_care_screening_navigation: //button[contains(@class,'form-navigation-link') and contains(text(),'Preventative Care Screening')]
+  notes_navigation: //button[contains(@class,'form-navigation-link') and contains(text(),'Notes')]
   save_changes_button: //form//button[@type='submit']
   
 care_platform_edit_participant_demographics:
@@ -253,6 +261,45 @@ care_platform_edit_participant_community_backup:
 care_platform_edit_participant_community_engagement:
   community_engagement_yes_option: //input[@name='communityEngagement' and @value='true']/ancestor::label
   community_engagement_no_option: //input[@name='communityEngagement' and @value='false']/ancestor::label
+
+care_platform_edit_participant_spiritual:
+  spiritual_yes_option: //input[@name='spiritual' and @value='true']/ancestor::label
+  spiritual_no_option: //input[@name='spiritual' and @value='false']/ancestor::label
+
+care_platform_edit_participant_cognitive_learning:
+  cognitive_learning_subtitle: //h4[contains(text(),'Cognitive / Learning')]
+  reading_option: //*[@id='Reading']/ancestor::label
+  writing_option: //*[@id='Writing']/ancestor::label
+  games_option: //*[@id='Games']/ancestor::label
+  discovery_option: //*[@id='Discovery']/ancestor::label
+
+care_platform_edit_participant_dietary_restrictions:
+  dietary_restrictions_subtitle: //h4[contains(text(),'Dietary Restrictions')]
+  diabetic_option: //*[@id='Diabetic']/ancestor::label
+  diabetic_input: Diabetic
+  dash_option: //*[@id='Dash']/ancestor::label
+  dash_input: Dash
+
+care_platform_edit_participant_financial:
+  financial_subtitle: //h4[contains(text(),'Dietary Restrictions')]
+  rent_option: //*[@id='Rent']/ancestor::label
+  rent_input: Rent
+  other_option: //*[@id='Other']/ancestor::label
+  other_input: Other
+
+care_platform_edit_participant_adls:
+  adls_subtitle: //h4[contains(text(),'ADL')]
+  toileting_option: //*[@id='Toileting']/ancestor::label
+  house_cleaning_option: //*[@id='House-cleaning']/ancestor::label
+  house_cleaning_input: House-cleaning
+  shopping_option: //*[@id='Shopping']/ancestor::label
+
+care_platform_edit_participant_surgical_history:
+  surgical_history_subtitle: 
+
+care_platform_edit_participant_prevention_care_screening:
+
+care_platform_edit_participant_notes:
 
 care_platform_call_portal:
   call_volume_button: //span[contains(@class,'icon-volume')]/ancestor::button
