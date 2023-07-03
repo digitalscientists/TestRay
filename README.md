@@ -783,11 +783,12 @@ Sets empty value for element.
     Role: role1 (Optional)
     Strategy: xpath | id | etc.
     Id: //some//path
+
 ### <a id="clear_field_by_backspace"></a>clear_field_by_backspace
 
 Sets empty value for element.
 
-    - Type: clear_field_by_backspace
+  - Type: clear_field_by_backspace
     Role: role1 (Optional)
     Strategy: xpath | id | etc.
     Id: //some//path
