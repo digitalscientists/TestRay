@@ -2669,6 +2669,9 @@ TestCarePartnerEditInfoForExistingParticipant:
       Strategy: xpath
       Id: $PAGE.care_platform_edit_participant_dme.dme_subtitle$
     # Checkboxes behaviour
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_dme.wheelchair_input_checkbox$
     - Type: set_checkbox_status
       Strategy: xpath
       Option: check
@@ -2956,6 +2959,9 @@ TestCarePartnerEditInfoForExistingParticipant:
       Strategy: xpath
       Id: $PAGE.care_platform_edit_participant_cognitive_learning.cognitive_learning_subtitle$
     # Checking and unchecking some checkboxes
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_cognitive_learning.reading_option$
     - Type: set_checkbox_status
       Strategy: xpath
       Option: check
@@ -2980,6 +2986,9 @@ TestCarePartnerEditInfoForExistingParticipant:
       Strategy: xpath
       Id: $PAGE.care_platform_edit_participant_dietary_restrictions.dietary_restrictions_subtitle$
     # Check and uncheck some checkboxes
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_dietary_restrictions.diabetic_option$
     - Type: set_checkbox_status
       Strategy: xpath
       Option: check
@@ -3082,6 +3091,9 @@ TestCarePartnerEditInfoForExistingParticipant:
       Strategy: xpath
       Id: $PAGE.care_platform_edit_participant_adls.adls_subtitle$
     # Check and uncheck some checkboxes
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_adls.toileting_option$
     - Type: set_checkbox_status
       Strategy: xpath
       Option: check
@@ -3143,6 +3155,9 @@ TestCarePartnerEditInfoForExistingParticipant:
       Strategy: xpath
       Id: $PAGE.care_platform_edit_participant_surgical_history.surgical_history_subtitle$
     # Check and uncheck some checkboxes
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_surgical_history.resection_of_tumor_option$
     - Type: set_checkbox_status
       Strategy: xpath
       Option: check
@@ -3173,6 +3188,9 @@ TestCarePartnerEditInfoForExistingParticipant:
       Strategy: xpath
       Id: $PAGE.care_platform_edit_participant_prevention_care_screening.prevention_care_screening_subtitle$
     # Check some checkboxes
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_prevention_care_screening.col_option$
     - Type: set_checkbox_status
       Strategy: xpath
       Option: check
