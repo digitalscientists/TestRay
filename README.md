@@ -1,9 +1,11 @@
 ![TestRay Logo](resources/testray_png.png)
 
 # About
+
 TestRay is a Ruby gem used to run YAML-based automation tests, using Selenium and Appium. While originally compatible only with Android, in its current iteration it can also automate iOS, web, Windows and Mac applications - and with multi-platform support!
 
 ## Index
+
 1. [Installation](#installation)
 2. [TestRay Examples](#examples)
 3. [Configuration and Steps](#conf_steps)
@@ -16,8 +18,8 @@ TestRay is a Ruby gem used to run YAML-based automation tests, using Selenium an
 10. [Page Object Model](#pageobjectmodel)
 11. [Action Types](#actions)
 
-
 ## <a id="installation"></a>Installation
+
 TestRay has been tested to work on both Mac (Intel/M1) and Windows.
 
 One way to install the framework is by creating a Gemfile with the following content and then running `bundle install`:
@@ -37,6 +39,7 @@ Another way to install master is to download this project and use `rake install`
 [See here for full installation instructions.](./SETUP.md)
 
 If you do not need the full YAML test suite alongside TestRay, and have set up the prerequisites, you can install TestRay on its own like so:
+
 <pre>rake install</pre>
 
 ## <a id="examples"></a>TestRay Examples
@@ -72,7 +75,7 @@ Template for step file:
 
     <App>:
         Actions:
-        - Type: <type>          
+        - Type: <type>
           Role: <role>
           Strategy: <locator_strategy>
           Id: <element_id>
@@ -88,15 +91,16 @@ Template for step file:
 **strategy** is appium locator strategy like accessibility_id|id|xpath ... \
 **id** is locator for the given strategy
 
-**FailCase** can be specified for a step. This will be executed if *RuntimeError* was encountered while executing step \
-*case* is the name of test case that will be executed \
-*boolean* value can be true|false which will determine if test execution will continue after failcase execution
+**FailCase** can be specified for a step. This will be executed if _RuntimeError_ was encountered while executing step \
+_case_ is the name of test case that will be executed \
+_boolean_ value can be true|false which will determine if test execution will continue after failcase execution
 
 One step file includes all needed apps.
 
 ## <a id="conf_file_app_dev"></a>Creating Config File for Apps and Devices
 
 Adding Apps configuration:
+
 <pre>
 Apps:
   SomeApp:
@@ -114,6 +118,7 @@ This will add all the necessary capabilities to run on iOS, MacOS, Windows and A
 Adding Test Device Configuration:
 
 Selenium Browser (Two roles defined with the same capabilities - desktop1 and desktop2)
+
 <pre>
 Devices:
   - role: desktop1,desktop2
@@ -133,6 +138,7 @@ Devices:
 </pre>
 
 Android Browser
+
 <pre>
 Devices:
   - role: localMobileBrowser
@@ -147,6 +153,7 @@ Devices:
 </pre>
 
 Android App
+
 <pre>
 Devices:
   - role: androidTest
@@ -154,6 +161,7 @@ Devices:
 </pre>
 
 iOS App/Browser
+
 <pre>
 Devices:
   - role: mobileiOS
@@ -161,6 +169,7 @@ Devices:
 </pre>
 
 MacOS/Windows
+
 <pre>
 Devices:
   - role: macLocal
@@ -168,7 +177,6 @@ Devices:
   - role: localWindows
     platform: Windows
 </pre>
-
 
 ## <a id="test_case"></a>Create Test Case
 
@@ -250,22 +258,22 @@ Vars are used to share information among cases or define some specific values th
 
 You can assign values for vars in two ways:
 
-1) directly - at the start of a case/set, or under a specific action/case
+1. directly - at the start of a case/set, or under a specific action/case
 <pre>
 Vars:
   SOME_VAR: value
 </pre>
-2) grepping the returned value of some action:
+2. grepping the returned value of some action:
 <pre>
+
 - Type: get_attribute
-  Strategy: xpath
-  Id: //input[contains(@value, "http")]
-  Greps:
-    - var: SOME_VAR
-      attr: value
-      condition: nempty
-      remove: msngr.com/
-      match: "msngr.com(.*)"
+Strategy: xpath
+Id: //input[contains(@value, "http")]
+Greps: - var: SOME_VAR
+attr: value
+condition: nempty
+remove: msngr.com/
+match: "msngr.com(.\*)"
 </pre>
 You can then access the vars from anywhere by using the wrapper `$AND_CLI_SOME_VAR$`
 
@@ -285,7 +293,7 @@ Roles are ALWAYS defined at the begining of the cases. You have to write always 
 
 ## <a id="pageobjectmodel"></a>Page Object Model
 
-In order to have a more redable and reusable UI test script we have added a functionality to implement a Page Object Model approach. This approach allows users to define page objects yaml files to store all web page/app element locators and easily access them by using a more comprehensive identifier in the tests. 
+In order to have a more redable and reusable UI test script we have added a functionality to implement a Page Object Model approach. This approach allows users to define page objects yaml files to store all web page/app element locators and easily access them by using a more comprehensive identifier in the tests.
 
 First, create a folder `page_objects` then create a yaml file that represents a page of the app to be automated. After that add all the page elements needed to the file as below:
 
@@ -354,7 +362,8 @@ Actions:
 10. [add_cookie](#add_cookie)
 11. [wait_for_property](#wait_for_property)
 12. [clear_field_js](#clear_field_js)
-13. [refresh](#refresh)
+13. [clear_field_by_backspace](#clear_field_by_backspace)
+14. [refresh](#refresh)
 
 ## Only Mobile
 
@@ -408,153 +417,153 @@ This is not a type but can be used in different Types as a Validation for the ac
 1. [calculate_minutes_passed_by_from_event_creation](#calculate_minutes_passed_by_from_event_creation)
 2. [verify_event_went_to_bottom](#verify_event_went_to_bottom)
 3. [verify_all_events_match_todays_date](#verify_all_events_match_todays_date)
-4. [credentials_checkbox](#credentials_checkbox)
+4. [set_checkbox_status](#set_checkbox_status)
 5. [get_day](#get_day)
 6. [get_next_month](#get_next_month)
 7. [generate_random_day](#generate_random_day)
+
 ## Appium/Selenium
 
-#### <a id="click"></a>click 
+#### <a id="click"></a>click
 
-	- Type: click
-	  Role: role1 (Optional. if not specified will use the first one defined in the case Roles)
-	  Strategy: id/css/xpath/uiautomator/class_chain/...
-	  Id: //some/path
-	  NoRaise: false/true (Default - false -> will rise error on fail)
+    - Type: click
+      Role: role1 (Optional. if not specified will use the first one defined in the case Roles)
+      Strategy: id/css/xpath/uiautomator/class_chain/...
+      Id: //some/path
+      NoRaise: false/true (Default - false -> will rise error on fail)
 
 Strategy and Id can by put as a list, in which case it will define a list of elements, and the first one to be clickable will be clicked.
 Both lists for Startegy and Id must have the same size (Number of elements):
 
-	- Type: click
-	  Role: role1 (Optional. if not specified will use the first one defined in the case Roles)
-	  Strategy: 
-	  	- id/css/xpath/uiautomator/class_chain/... (First Strategy goes with the First Id)
-		- id/css/xpath/uiautomator/class_chain/... (Second Strategy goes with the Second Id)
-	  Id: 
-	  	- //some/path
-		- //some/path2
-	  NoRaise: false/true (Default - false -> will rise error on fail)
+    - Type: click
+      Role: role1 (Optional. if not specified will use the first one defined in the case Roles)
+      Strategy:
+      	- id/css/xpath/uiautomator/class_chain/... (First Strategy goes with the First Id)
+    	- id/css/xpath/uiautomator/class_chain/... (Second Strategy goes with the Second Id)
+      Id:
+      	- //some/path
+    	- //some/path2
+      NoRaise: false/true (Default - false -> will rise error on fail)
 
 It is possible to add conditions, in which case it will do the click depending on the condition to be fullfiled:
 
-	- Type: click
-	  Role: role1 (Optional. if not specified will use the first one defined in the case Roles)
-	  Strategy: id/css/xpath/uiautomator/class_chain/...
-	  Id: //some/path
-	  Condition:
-		- Value: 5 (Time in seconds)
-			Operation: visible
-			Result: true
-	  NoRaise: false/true (Default - false -> will rise error on fail)
+    - Type: click
+      Role: role1 (Optional. if not specified will use the first one defined in the case Roles)
+      Strategy: id/css/xpath/uiautomator/class_chain/...
+      Id: //some/path
+      Condition:
+    	- Value: 5 (Time in seconds)
+    		Operation: visible
+    		Result: true
+      NoRaise: false/true (Default - false -> will rise error on fail)
 
 Check [Conditions](#condition) section for more information.
 
 ### <a id="send_keys"></a>send_keys
 
-	- Type: send_keys
-	  Role: role1 (Optional. if not specified will use the first one defined in the case Roles)
-	  Strategy: id/css/xpath/uiautomator/class_chain/...
-	  Id: //some/path
-	  Value: text to send
-	  NoRaise: false/true (Default - false -> will rise error on fail)
+    - Type: send_keys
+      Role: role1 (Optional. if not specified will use the first one defined in the case Roles)
+      Strategy: id/css/xpath/uiautomator/class_chain/...
+      Id: //some/path
+      Value: text to send
+      NoRaise: false/true (Default - false -> will rise error on fail)
 
-You can also set different Strategies and Ids as in the `click`  Type, and also you can set [Conditions](#condition).
+You can also set different Strategies and Ids as in the `click` Type, and also you can set [Conditions](#condition).
 
 ### <a id="wait_for"></a>wait_for
 
-	- Type: wait_for
-	  Role: role1 (Optional. if not specified will use the first one defined in the case Roles)
-	  Strategy: id/css/xpath/uiautomator/class_chain/...
-	  Id: //some/path
-	  NoRaise: false/true (Default - false -> will rise error on fail)
+    - Type: wait_for
+      Role: role1 (Optional. if not specified will use the first one defined in the case Roles)
+      Strategy: id/css/xpath/uiautomator/class_chain/...
+      Id: //some/path
+      NoRaise: false/true (Default - false -> will rise error on fail)
 
-You can also set different Strategies and Ids as in the `click`  Type, and also you can set [Conditions](#condition).
+You can also set different Strategies and Ids as in the `click` Type, and also you can set [Conditions](#condition).
 
 ### <a id="navigate"></a>navigate
 
-	- Type: navigate
-	  Role: role1 (Optional. if not specified will use the first one defined in the case Roles)
-	  Value: https://google.com
+    - Type: navigate
+      Role: role1 (Optional. if not specified will use the first one defined in the case Roles)
+      Value: https://google.com
 
 ### <a id="get_url"></a>get_url
 
-	- Type: get_url
-	  Role: role1 (Optional. if not specified will use the first one defined in the case Roles)
-	  Greps:
-		- var: SOME_VAR
-		  condition: nempty (Optional)
-		  remove: google.com/ (Optional)
-		  match: "google.com(.*)"
+    - Type: get_url
+      Role: role1 (Optional. if not specified will use the first one defined in the case Roles)
+      Greps:
+    	- var: SOME_VAR
+    	  condition: nempty (Optional)
+    	  remove: google.com/ (Optional)
+    	  match: "google.com(.*)"
 
 Greps explained in `command` Type
 
 ### <a id="get_text"></a>get_text
 
-  	- Type: get_text
-      Strategy: id/css/xpath/uiautomator/class_chain/predicate
-      Id: //div[contains(text(), "http")]
-      Condition:
-        - Value: 3
-          Operation: visible
-          Result: true
-      Greps:
-        - var: LINK
-          condition: nempty
-          remove: google.com/
-          match: "google.com(.*)"
-	  NoRaise: false/true (Default - false -> will rise error on fail)
+- Type: get_text
+  Strategy: id/css/xpath/uiautomator/class_chain/predicate
+  Id: //div[contains(text(), "http")]
+  Condition:
+  - Value: 3
+    Operation: visible
+    Result: true
+    Greps:
+  - var: LINK
+    condition: nempty
+    remove: google.com/
+    match: "google.com(.\*)"
+    NoRaise: false/true (Default - false -> will rise error on fail)
 
 You can also set different Strategies and Ids as in the `click` Type. Greps explained in `command` Type and Condition explained in [Conditions](#condition) Section.
 
 ### <a id="get_attribute"></a>get_attribute
 
-  	- Type: get_attribute
-      Strategy: id/css/xpath/uiautomator/class_chain/predicate
-      Id: //div[contains(text(), "http")]
-      Condition:
-          - Value: 3
-            Operation: visible
-            Result: true
-      Greps:
-      - var: SOME_VAR
-        attr: value (Mandatory)
-        condition: nempty (Optional)
-        remove: google.com/ (Optional)
-        match: "google.com(.*)"
-	    NoRaise: false/true (Default - false -> will rise error on fail)
+- Type: get_attribute
+  Strategy: id/css/xpath/uiautomator/class_chain/predicate
+  Id: //div[contains(text(), "http")]
+  Condition: - Value: 3
+  Operation: visible
+  Result: true
+  Greps:
+  - var: SOME_VAR
+    attr: value (Mandatory)
+    condition: nempty (Optional)
+    remove: google.com/ (Optional)
+    match: "google.com(.\*)"
+    NoRaise: false/true (Default - false -> will rise error on fail)
 
 You can also set different Strategies and Ids as in the `click` Type. Greps explained in `command` Type and Condition explained in [Conditions](#condition) Section.
 
 ### <a id="context"></a>context
 
-	- Type: context
-	  Role: role1 (Optional. if not specified will use the first one defined in the case Roles)
-	  Value: context
+    - Type: context
+      Role: role1 (Optional. if not specified will use the first one defined in the case Roles)
+      Value: context
 
 ### <a id="get_current_context"></a>get_current_context
 
-  	- Type: get_current_context
-      Role: role1 (Optional. if not specified will use the first one defined in the case Roles)
-      Greps:
-      - var: SOME_VAR
-        attr: value (Mandatory)
-        condition: nempty (Optional)
-        remove: "" (Optional)
-        match: "(.*)"
+- Type: get_current_context
+  Role: role1 (Optional. if not specified will use the first one defined in the case Roles)
+  Greps:
+  - var: SOME_VAR
+    attr: value (Mandatory)
+    condition: nempty (Optional)
+    remove: "" (Optional)
+    match: "(.\*)"
 
 ### <a id="get_contexts"></a>get_contexts
 
 Prints all the available contexts
 
-  	- Type: get_contexts
-      Role: role1 (Optional. if not specified will use the first one defined in the case Roles)
+- Type: get_contexts
+  Role: role1 (Optional. if not specified will use the first one defined in the case Roles)
 
 ### <a id="get_source"></a>get_source
 
 Gets the page source from the web or mobile app and writes it in `./page_source.xml`
 
-  	- Type: get_source
-      Role: role1 (Optional. if not specified will use the first one defined in the case Roles)
+- Type: get_source
+  Role: role1 (Optional. if not specified will use the first one defined in the case Roles)
 
 ### <a id="set_network"></a>set_network
 
@@ -572,8 +581,8 @@ It uses JavaScript to do the scroll within a webpage by using the injection of t
       Id: //div[contains(text(), "http")]
       Options: true (optional)
 
-
 ### <a id="screenshot"></a>screenshot
+
 Takes a screenshot of the Role device in use. You can specify to take screenshots in an interval, for a specific period of time (Optional). You can specify wether to use the same file name or use timestamps `Overwrite`.
 
     - Type: screenshot
@@ -591,7 +600,6 @@ Takes a screenshot of the Role device in use. You can specify to take screenshot
       Id: //div[contains(text(), "http")]
       Attribute: Name
       Value: Some_Name
-
 
 ### <a id="visible_for"></a>visible_for
 
@@ -651,134 +659,144 @@ Hovers over an element.
 
 ### <a id="clear_field"></a>clear_field
 
-	- Type: clear_field
-	  Role: role1 (Optional. if not specified will use the first one defined in the case Roles)
-	  Strategy: id/css/xpath/uiautomator/class_chain/...
-	  Id: //some/path
-	  NoRaise: false/true (Default - false -> will rise error on fail)
+    - Type: clear_field
+      Role: role1 (Optional. if not specified will use the first one defined in the case Roles)
+      Strategy: id/css/xpath/uiautomator/class_chain/...
+      Id: //some/path
+      NoRaise: false/true (Default - false -> will rise error on fail)
+
 ### <a id="return_element_location"></a>return_element_location
 
-	- Type: return_element_location
-	  Role: role1 (Optional. if not specified will use the first one defined in the case Roles)
-	  Strategy: id/css/xpath/uiautomator/class_chain/...
-	  Id: //some/path
-	  ResultVar: var1
-
+    - Type: return_element_location
+      Role: role1 (Optional. if not specified will use the first one defined in the case Roles)
+      Strategy: id/css/xpath/uiautomator/class_chain/...
+      Id: //some/path
+      ResultVar: var1
 
 ## Only Browser
 
 ### <a id="new_tab"></a>new_tab
 
-  Opens a new tab.
+Opens a new tab.
 
-  - Type: new_tab
+- Type: new_tab
 
 ### <a id="set_attribute"></a>set_attribute
 
-	- Type: set_attribute
-	  Role: role1 (Optional. if not specified will use the first one defined in the case Roles)
-	  Strategy: id/css/xpath/uiautomator/class_chain/... 
-	  Id: //some/path 
-	  Attribute: value
-	  Value: something
-	  NoRaise: false/true (Default - false -> will rise error on fail)
+    - Type: set_attribute
+      Role: role1 (Optional. if not specified will use the first one defined in the case Roles)
+      Strategy: id/css/xpath/uiautomator/class_chain/...
+      Id: //some/path
+      Attribute: value
+      Value: something
+      NoRaise: false/true (Default - false -> will rise error on fail)
 
 ### <a id="remove_attribute"></a>remove_attribute
 
-	- Type: remove_attribute
-	  Role: role1 (Optional. if not specified will use the first one defined in the case Roles)
-	  Strategy: id/css/xpath/uiautomator/class_chain/... 
-	  Id: //some/path 
-	  Attribute: value
-	  Value: something
-	  NoRaise: false/true (Default - false -> will rise error on fail)
+    - Type: remove_attribute
+      Role: role1 (Optional. if not specified will use the first one defined in the case Roles)
+      Strategy: id/css/xpath/uiautomator/class_chain/...
+      Id: //some/path
+      Attribute: value
+      Value: something
+      NoRaise: false/true (Default - false -> will rise error on fail)
 
 ### <a id="switch_window"></a>switch_window
 
 Switches to the provided window index.
 
-	- Type: switch_window
-	  Role: role1 (Optional. if not specified will use the first one defined in the case Roles)
-	  Value: 2 # (It is a number, and it will check if that window number exists)
-	  CheckTime: 10 # (For how long it will check that the windows exist)
+    - Type: switch_window
+      Role: role1 (Optional. if not specified will use the first one defined in the case Roles)
+      Value: 2 # (It is a number, and it will check if that window number exists)
+      CheckTime: 10 # (For how long it will check that the windows exist)
 
 ### <a id="switch_frame"></a>switch_frame
 
-	- Type: switch_frame
-	  Role: role1 (Optional. if not specified will use the first one defined in the case Roles)
-	  Strategy: css (Only if Value isn't declared)
-	  Id: "[name='iFrameName']" (Only if Value isn't declared)
-	  Value: Iframe_ID (Only if Strategy and Id aren't declared)
+    - Type: switch_frame
+      Role: role1 (Optional. if not specified will use the first one defined in the case Roles)
+      Strategy: css (Only if Value isn't declared)
+      Id: "[name='iFrameName']" (Only if Value isn't declared)
+      Value: Iframe_ID (Only if Strategy and Id aren't declared)
 
 ### <a id="maximize"></a>maximize
 
 Maximizes the current window.
 
-	- Type: maximize
-	  Role: role1 (Optional. if not specified will use the first one defined in the case Roles)
-	  Width: 1000 (Optional)
-	  Height: 1000 (Optional)
+    - Type: maximize
+      Role: role1 (Optional. if not specified will use the first one defined in the case Roles)
+      Width: 1000 (Optional)
+      Height: 1000 (Optional)
 
 ### <a id="minimize"></a>minimize
 
 Minimizes the current window.
 
-	- Type: minimize
-	  Role: role1 (Optional. if not specified will use the first one defined in the case Roles)
+    - Type: minimize
+      Role: role1 (Optional. if not specified will use the first one defined in the case Roles)
 
 ### <a id="submit"></a>submit
 
 It only works with forms on web pages, so make sure to point to the form element
 
-	- Type: submit
-	  Role: role1 (Optional. if not specified will use the first one defined in the case Roles)
-	  Strategy: id/css/xpath/uiautomator/class_chain/...
-	  Id: //some/path
-	  Condition:
-		- Value: 5 (Time in seconds)
-			Operation: visible
-			Result: true
-	  NoRaise: false/true (Default - false -> will rise error on fail)
+    - Type: submit
+      Role: role1 (Optional. if not specified will use the first one defined in the case Roles)
+      Strategy: id/css/xpath/uiautomator/class_chain/...
+      Id: //some/path
+      Condition:
+    	- Value: 5 (Time in seconds)
+    		Operation: visible
+    		Result: true
+      NoRaise: false/true (Default - false -> will rise error on fail)
 
 ### <a id="click_js"></a>click_js
+
 It is a different way to click on an element, but it uses Javascript interface.
 
-	- Type: click_js
-	  Role: role1 (Optional. if not specified will use the first one defined in the case Roles)
-	  Strategy: id/css/xpath/uiautomator/class_chain/...
-	  Id: //some/path
-	  Condition:
-		- Value: 5 (Time in seconds)
-			Operation: visible
-			Result: true
-	  NoRaise: false/true (Default - false -> will rise error on fail)
+    - Type: click_js
+      Role: role1 (Optional. if not specified will use the first one defined in the case Roles)
+      Strategy: id/css/xpath/uiautomator/class_chain/...
+      Id: //some/path
+      Condition:
+    	- Value: 5 (Time in seconds)
+    		Operation: visible
+    		Result: true
+      NoRaise: false/true (Default - false -> will rise error on fail)
 
 ### <a id="add_cookie"></a>add_cookie
 
 It adds a cookie to the current browser.
 
-	- Type: add_cookie
-	  Role: role1 (Optional. if not specified will use the first one defined in the case Roles)
-	  Name: cookie_name
-	  Value: Value
+    - Type: add_cookie
+      Role: role1 (Optional. if not specified will use the first one defined in the case Roles)
+      Name: cookie_name
+      Value: Value
 
 ### <a id="wait_for_property"></a>wait_for_property
 
 Waits for the element to have a specific JS property value.
 
-  - Type: wait_for_property
-    Role: role1 (Optional)
-    Strategy: xpath | id | etc.
-    Id: //some//path
-    Property: Js Property e.g. className
-    Value:  Desired value
-    Time: Time (int) e.g. 10
+- Type: wait_for_property
+  Role: role1 (Optional)
+  Strategy: xpath | id | etc.
+  Id: //some//path
+  Property: Js Property e.g. className
+  Value: Desired value
+  Time: Time (int) e.g. 10
 
 ### <a id="clear_field_js"></a>clear_field_js
 
 Sets empty value for element.
 
-  - Type: clear_field_js
+- Type: clear_field_js
+  Role: role1 (Optional)
+  Strategy: xpath | id | etc.
+  Id: //some//path
+
+### <a id="clear_field_by_backspace"></a>clear_field_by_backspace
+
+Sets empty value for element.
+
+  - Type: clear_field_by_backspace
     Role: role1 (Optional)
     Strategy: xpath | id | etc.
     Id: //some//path
@@ -840,11 +858,11 @@ You must use `end_record` after this previous method.
 
 It works the same as click, but it will get the coordinates of the element internally and then click on it, but the labels and options that you can use are exactly the same. Refer to `click` for more information.
 
-	- Type: tap_by_coord
-	  Role: role1 (Optional. if not specified will use the first one defined in the case Roles)
-	  Strategy: id/css/xpath/uiautomator/class_chain/...
-	  Id: //some/path
-	  NoRaise: false/true (Default - false -> will rise error on fail)
+    - Type: tap_by_coord
+      Role: role1 (Optional. if not specified will use the first one defined in the case Roles)
+      Strategy: id/css/xpath/uiautomator/class_chain/...
+      Id: //some/path
+      NoRaise: false/true (Default - false -> will rise error on fail)
 
 ### <a id="press"></a>press (Works simillar as click)
 
@@ -856,38 +874,38 @@ It works simillar as click, but it holds the pressing. The labels and options th
 
 ### <a id="swipe_up/swipe_down"></a>swipe_up/swipe_down (Mobile)
 
-	- Type: swipe_up/swipe_down
-	  Role: role1 (Optional. if not specified will use the first one defined in the case Roles)
-	  Strategy: id/css/xpath/uiautomator/class_chain/... (Element from where to start the swipe)
-	  Id: //some/path (Element from where to start the swipe)
-	  NoRaise: false/true (Default - false -> will rise error on fail)
+    - Type: swipe_up/swipe_down
+      Role: role1 (Optional. if not specified will use the first one defined in the case Roles)
+      Strategy: id/css/xpath/uiautomator/class_chain/... (Element from where to start the swipe)
+      Id: //some/path (Element from where to start the swipe)
+      NoRaise: false/true (Default - false -> will rise error on fail)
 
 ### <a id="swipe_elements"></a>swipe_elements (Mobile)
 
-	- Type: swipe_elements
-	  Role: role1 (Optional. if not specified will use the first one defined in the case Roles)
-	  Element1: (From element)
-		Strategy: id/css/xpath/uiautomator/class_chain/... (Element from where to start the swipe)
-		Id: //some/path (Element from where to start the swipe)
-	  Element2: (To element)
-		Strategy: id/css/xpath/uiautomator/class_chain/... (Element from where to start the swipe)
-		Id: //some/path (Element from where to start the swipe)
+    - Type: swipe_elements
+      Role: role1 (Optional. if not specified will use the first one defined in the case Roles)
+      Element1: (From element)
+    	Strategy: id/css/xpath/uiautomator/class_chain/... (Element from where to start the swipe)
+    	Id: //some/path (Element from where to start the swipe)
+      Element2: (To element)
+    	Strategy: id/css/xpath/uiautomator/class_chain/... (Element from where to start the swipe)
+    	Id: //some/path (Element from where to start the swipe)
 
 ### <a id="swipe_coord"></a>swipe_coord (Mobile)
 
-	- Type: swipe_coord
-	  Role: role1 (Optional. if not specified will use the first one defined in the case Roles)
-	  StartX: 100
-	  StartY: 200
-	  EndX: 300
-	  EndY: 400
+    - Type: swipe_coord
+      Role: role1 (Optional. if not specified will use the first one defined in the case Roles)
+      StartX: 100
+      StartY: 200
+      EndX: 300
+      EndY: 400
 
 ### <a id="click_coord"></a>click_coord (Mobile)
 
-	- Type: click_coord
-	  Role: role1 (Optional. if not specified will use the first one defined in the case Roles)
-	  X: 100
-	  Y: 200
+    - Type: click_coord
+      Role: role1 (Optional. if not specified will use the first one defined in the case Roles)
+      X: 100
+      Y: 200
 
 if `X` and `Y` are not provided then middle of the screen is clicked.
 
@@ -895,27 +913,27 @@ if `X` and `Y` are not provided then middle of the screen is clicked.
 
 Gets the clipboard value from the device and assigns it to some Var using Greps.
 
-  	- Type: clipboard
-      Role: role1 (Optional. if not specified will use the first one defined in the case Roles)
-      Greps:
-        - var: SOME_VAR
-          condition: nempty (Optional)
-          remove: google.com/ (Optional)
-          match: "google.com(.*)"
+- Type: clipboard
+  Role: role1 (Optional. if not specified will use the first one defined in the case Roles)
+  Greps:
+  - var: SOME_VAR
+    condition: nempty (Optional)
+    remove: google.com/ (Optional)
+    match: "google.com(.\*)"
 
 ### <a id="notifications"></a>notifications
 
 Opens notifications var (Only Android)
 
-  	- Type: notifications
-      Role: role1 (Optional. if not specified will use the first one defined in the case Roles)
+- Type: notifications
+  Role: role1 (Optional. if not specified will use the first one defined in the case Roles)
 
 ### <a id="back"></a>back
 
 Works as pressing the button `back` on the phone to go to the previous screen.
 
-  	- Type: back
-      Role: role1 (Optional. if not specified will use the first one defined in the case Roles)
+- Type: back
+  Role: role1 (Optional. if not specified will use the first one defined in the case Roles)
 
 ### <a id="hide_keyboard"></a>hide_keyboard
 
@@ -939,40 +957,41 @@ Taps on a mobile element.
       Role: mobileRole (Optional)
       Strategy: id | xpath | classchain | etc.
       Id: //some//path//depending/on/strategy
+
 ## API
 
 ### <a id="get_call"></a>get_call
 
-	- Type: get_call
+    - Type: get_call
       Role: role1
       Url: http://url.com
       Greps:
         - match: access_token
           var: TOKEN
-	  Asserts: (Optional)
-		- Type: code
+      Asserts: (Optional)
+    	- Type: code
           Value: 200
 
 ### <a id="post_call"></a>post_call
 
-	- Type: post_call
+    - Type: post_call
       Role: role1
       Url: http://url.com
-	  Body: { "data": "data" }
+      Body: { "data": "data" }
       Greps:
         - match: access_token
           var: TOKEN
-	  Asserts: (Optional)
-		- Type: code
+      Asserts: (Optional)
+    	- Type: code
           Value: 200
 
 You can also get files with post_call:
 
-	- Type: post_call
+    - Type: post_call
       Role: role1
       Url: http://url.com
-	  Body: { "file": "./file.wav" }
-	  File_Response: $AND_CLI_folderPath$/file.wav
+      Body: { "file": "./file.wav" }
+      File_Response: $AND_CLI_folderPath$/file.wav
 
 You can also send multiple files:
 
@@ -985,68 +1004,65 @@ You can also send multiple files:
         - Multipart: true
           File: $AND_CLI_folderPath$/file2.txt
 
-
 ## Not Selenium/Appium
 
 ### <a id="command"></a>command
 
-	- Type: command
-	  Role: role1 (Optional. if not specified will use the first one defined in the case Roles)
-	  Value: echo Hello
-	  Raise: true/false (Raises an error if the command fails - Default false)
-	  Detach: true/false (Detaches the command line from main thread. Can't be used with Raise. Default false)
+    - Type: command
+      Role: role1 (Optional. if not specified will use the first one defined in the case Roles)
+      Value: echo Hello
+      Raise: true/false (Raises an error if the command fails - Default false)
+      Detach: true/false (Detaches the command line from main thread. Can't be used with Raise. Default false)
 
 You can use Greps using regex to get specific values from the input command or output:
 
-	- Type: command
-	  Role: role1 (Optional. if not specified will use the first one defined in the case Roles)
-	  Value: echo Hello
-	  Greps:
-		- var: SOME_VAR
-		  condition: nempty (Optional)
-		  remove: google.com/ (Optional)
-		  match: "google.com(.*)"
+    - Type: command
+      Role: role1 (Optional. if not specified will use the first one defined in the case Roles)
+      Value: echo Hello
+      Greps:
+    	- var: SOME_VAR
+    	  condition: nempty (Optional)
+    	  remove: google.com/ (Optional)
+    	  match: "google.com(.*)"
 
 You can access any var throgout the code by using the wrapper `$AND_CLI_*$`, in this case -> `$AND_CLI_SOME_VAR$`
-
 
 ### <a id="write_file"></a>write_file
 
 This type is meant for writing files:
 
-	- Type: write_file
-	  Role: role1 (Optional. if not specified will use the first one defined in the case Roles)
-	  Value: Specific Value Text
-	  Name: name_of_the_file.txt # default is name.txt
-	  Folder: /Path/To/Folder # default is project directory `.`
-
+    - Type: write_file
+      Role: role1 (Optional. if not specified will use the first one defined in the case Roles)
+      Value: Specific Value Text
+      Name: name_of_the_file.txt # default is name.txt
+      Folder: /Path/To/Folder # default is project directory `.`
 
 ### <a id="get_timestamp"></a>get_timestamp
 
 This type retrieves de UTC timestamp when it is executed, and you can write it in a specific file or to specific variable:
 
-	- Type: get_timestamp
-	  Role: role1 (Optional. if not specified will use the first one defined in the case Roles)
-	  Format: Date_Format -> DDMMYY -> check https://www.ibm.com/docs/en/zos/2.4.0?topic=functions-strftime-convert-formatted-time
-	  File: name_of_the_file.txt # relative or full path to the file to write the date (Use when Var is not used)
-	  Var: Variable_Name -> Variable to set with the current timestamp (Use when File is not used)
+    - Type: get_timestamp
+      Role: role1 (Optional. if not specified will use the first one defined in the case Roles)
+      Format: Date_Format -> DDMMYY -> check https://www.ibm.com/docs/en/zos/2.4.0?topic=functions-strftime-convert-formatted-time
+      File: name_of_the_file.txt # relative or full path to the file to write the date (Use when Var is not used)
+      Var: Variable_Name -> Variable to set with the current timestamp (Use when File is not used)
 
 ### <a id="set_env_var"></a>set_env_var
 
 This type sets a Variable to a specific value.
 
-	- Type: set_env_var
-	  Role: role1 (Optional. if not specified will use the first one defined in the case Roles)
-	  Value: Value
-	  Var: Variable_Name
+    - Type: set_env_var
+      Role: role1 (Optional. if not specified will use the first one defined in the case Roles)
+      Value: Value
+      Var: Variable_Name
 
 ### <a id="sleep"></a>sleep
 
 This type stops the execution for the amount of time specifyied for the role that is written.
 
-	- Type: sleep
-	  Role: role1 (Optional. if not specified will use the first one defined in the case Roles)
-	  Time: 10
+    - Type: sleep
+      Role: role1 (Optional. if not specified will use the first one defined in the case Roles)
+      Time: 10
 
 ### <a id="assert"></a>assert
 
@@ -1057,7 +1073,7 @@ There are different types of asserts that you can perform with testray and the v
       Asserts:
         - Type: contain/n_contain/eq/ne/le/gt/ge
           Var: TEST_VAR_NUMBERS
-          Value: 8  
+          Value: 8
 
 <pre>
 contain: "Var" value contains the value within "Value"
@@ -1154,11 +1170,12 @@ i.e. method receives "Hey" and then returns "Hey ~timestamp~"
       ResultVar: Var that will have the unique name value
 
 ## Custom actions made for the project
+
 ### <a id="calculate_minutes_passed_by_from_event_creation"></a>calculate_minutes_passed_by_from_event_creation
 
 Custom method to calculate the minutes or seconds from when an event was created
 i.e. User enters a timestamp like 10:50 and the action
-returns "Added x minutes ago" if some mintues have passed 
+returns "Added x minutes ago" if some mintues have passed
 or "Added x seconds ago" if the timestamp is < 60 seconds.
 
     - Type: calculate_minutes_passed_by_from_event_creation
@@ -1184,11 +1201,11 @@ Custom method to verify that all events are matching today's date.
       SecondStrategy: xpath | class_chain | etc.
       SecondId: Path to the date element e.g. $PAGE.seniors_app_home.date_value_appointment_modal$
 
-### <a id="credentials_checkbox"></a>credentials_checkbox
+### <a id="set_checkbox_status"></a>set_checkbox_status
 
 Guarantee that the checkbox is checked or unchecked depending on the option.
 
-    - Type: credentials_checkbox
+    - Type: set_checkbox_status
       Strategy: xpath | id | etc.
       Option: check | uncheck
       Id: //some//path
@@ -1211,6 +1228,5 @@ Recieve a timestamp and return the related day
 
 ### <a id="get_next_month"></a>get_next_month
 
-Return the following month of the current date
-     - Type: get_next_month
-      ResultVar: NEXT_MONTH
+Return the following month of the current date - Type: get_next_month
+ResultVar: NEXT_MONTH
