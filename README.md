@@ -354,6 +354,7 @@ Actions:
 10. [add_cookie](#add_cookie)
 11. [wait_for_property](#wait_for_property)
 12. [clear_field_js](#clear_field_js)
+13. [refresh](#refresh)
 
 ## Only Mobile
 
@@ -781,6 +782,13 @@ Sets empty value for element.
     Role: role1 (Optional)
     Strategy: xpath | id | etc.
     Id: //some//path
+
+### <a id="refresh"></a>refresh
+
+Refreshes the browsers tab.
+
+  - Type: refresh
+    Role: role1
 
 ## Only Mobile
 

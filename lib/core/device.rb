@@ -251,6 +251,11 @@ class Device
   def close_app(action = nil)
     @driver.background_app(-1)
   end
+  
+  # Refreshes the browsers tab.
+  def refresh(action = nil)
+    @driver.navigate.refresh
+  end
 
   # hides keyboard (Only Mobile)
   def hide_keyboard(action = nil)

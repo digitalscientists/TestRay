@@ -76,3 +76,14 @@ TestEmployeeHealthPortalMinorUserCall:
     - Type: set_env_var
       Value: $AND_CLI_ENV_MEMBER_ID_STORE$
       Var: employee_user1_card_member_id
+
+#CXTB-441: No "Call already answered" Notification if EHP Call Ended By Employee Log Out
+TestEmployeeHealthPortalCallAlreadyAnsweredNotificationWhenEmployeeLogsOut:
+  Environment: Settings
+  Roles:
+    - Role: desktopChrome
+      App: "desktop"
+  Actions:
+  #Calling Login case
+    - Type: case
+      Value: EmployeeHealthPortalCallNow    
