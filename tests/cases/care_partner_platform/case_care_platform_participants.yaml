@@ -2665,6 +2665,9 @@ TestCarePartnerEditInfoForExistingParticipant:
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_edit_participant_records.dme_navigation$
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_records.changes_saved_notification$
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.care_platform_edit_participant_dme.dme_subtitle$
@@ -2726,6 +2729,9 @@ TestCarePartnerEditInfoForExistingParticipant:
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_edit_participant_records.hospitalization_navigation$
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_records.changes_saved_notification$
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.care_platform_edit_participant_hospitalization.hospitalization_subtitle$
@@ -2858,12 +2864,12 @@ TestCarePartnerEditInfoForExistingParticipant:
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_edit_participant_records.housing_navigation$
-    - Type: click
-      Strategy: xpath
-      Id: $PAGE.care_platform_edit_participant_records.member_safety_navigation$
     - Type: wait_not_visible
       Strategy: xpath
       Id: $PAGE.care_platform_edit_participant_records.changes_saved_notification$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_records.member_safety_navigation$
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.care_platform_edit_participant_member_safety.feels_safe_no_option$
@@ -2900,6 +2906,9 @@ TestCarePartnerEditInfoForExistingParticipant:
       Strategy: xpath
       Id: $PAGE.care_platform_edit_participant_records.community_engagement_navigation$
     # Change radio button values
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_community_engagement.community_engagement_yes_option$
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_edit_participant_community_engagement.community_engagement_yes_option$
@@ -2934,6 +2943,9 @@ TestCarePartnerEditInfoForExistingParticipant:
       Strategy: xpath
       Id: $PAGE.care_platform_edit_participant_records.spiritual_navigation$
     # Change radio button values
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_spiritual.spiritual_no_option$
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_edit_participant_spiritual.spiritual_no_option$
@@ -2944,12 +2956,12 @@ TestCarePartnerEditInfoForExistingParticipant:
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_edit_participant_records.housing_navigation$
-    - Type: click
-      Strategy: xpath
-      Id: $PAGE.care_platform_edit_participant_records.spiritual_navigation$
     - Type: wait_not_visible
       Strategy: xpath
       Id: $PAGE.care_platform_edit_participant_records.changes_saved_notification$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_records.spiritual_navigation$
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.care_platform_edit_participant_spiritual.spiritual_yes_option$
@@ -3037,6 +3049,9 @@ TestCarePartnerEditInfoForExistingParticipant:
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_edit_participant_records.financial_navigation$
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_records.changes_saved_notification$  
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.care_platform_edit_participant_financial.financial_subtitle$
@@ -3063,6 +3078,9 @@ TestCarePartnerEditInfoForExistingParticipant:
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_edit_participant_records.housing_navigation$
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_records.changes_saved_notification$ 
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_edit_participant_records.financial_navigation$
@@ -3123,13 +3141,19 @@ TestCarePartnerEditInfoForExistingParticipant:
       Id: $PAGE.care_platform_edit_participant_adls.shopping_option$
     - Type: click
       Strategy: xpath
-      Id: $PAGE.care_platform_edit_participant_records.housing_navigation$
+      Id: $PAGE.care_platform_edit_participant_records.save_changes_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_records.changes_saved_notification$
     - Type: click
       Strategy: xpath
-      Id: $PAGE.care_platform_edit_participant_records.adls_navigation$
+      Id: $PAGE.care_platform_edit_participant_records.housing_navigation$
     - Type: wait_not_visible
       Strategy: xpath
       Id: $PAGE.care_platform_edit_participant_records.changes_saved_notification$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_records.adls_navigation$
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.care_platform_edit_participant_adls.toileting_option$
@@ -3202,12 +3226,12 @@ TestCarePartnerEditInfoForExistingParticipant:
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_edit_participant_records.prevention_care_screening_navigation$
-    - Type: wait_for
-      Strategy: xpath
-      Id: $PAGE.care_platform_edit_participant_prevention_care_screening.prevention_care_screening_subtitle$
     - Type: wait_not_visible
       Strategy: xpath
       Id: $PAGE.care_platform_edit_participant_records.changes_saved_notification$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_prevention_care_screening.prevention_care_screening_subtitle$
     # Check some checkboxes
     - Type: wait_for
       Strategy: xpath

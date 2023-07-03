@@ -283,7 +283,7 @@ care_platform_edit_participant_dietary_restrictions:
   dash_input: Dash
 
 care_platform_edit_participant_financial:
-  financial_subtitle: //h4[contains(text(),'Dietary Restrictions')]
+  financial_subtitle: //h4[contains(text(),'Financial')]
   rent_option: //*[@id='Rent']/ancestor::label
   rent_input: Rent
   other_option: //*[@id='Other']/ancestor::label
