@@ -253,7 +253,7 @@ class Device
   end
   
   # Refreshes the browsers tab.
-  def refresh(action = nil)
+  def refresh(action = nil, main_case, main_case_id)
     @driver.navigate.refresh
   end
 
