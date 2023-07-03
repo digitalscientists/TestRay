@@ -2416,6 +2416,21 @@ def wait_for_mobile_element_to_disappear(locator)
   end
 end
 
+# Custom action to log out of EHP if it is needed.
+def ehp_logout(action, main_case, main_case_id)
+  log_info("Aftercase to log out of EHP.")
+  if wait_for_element_to_exist("$PAGE.employee_health_home_page.user_dropdown_button$")
+    log_info("Click on the user icon to log out")
+    @driver.find_element(:xpath, convert_value_pageobjects("$PAGE.employee_health_home_page.user_dropdown_button$")).click
+    log_info("Select the log out option")
+    @driver.find_element(:xpath, convert_value_pageobjects("$PAGE.employee_health_home_page.dropdown_option_logout$")).click
+    log_info("Wait until the user has logged out")
+    wait_for_element_to_exist("$PAGE.employee_health_login_page.log_in_button$")
+  else
+    log_info("User was already logged out")
+  end
+end
+
 # Custom action to clean all the unwanted prompts on Never Alone app before starting test.
 def senior_clean_unwanted_prompts(action, main_case, main_case_id)
   count = 0

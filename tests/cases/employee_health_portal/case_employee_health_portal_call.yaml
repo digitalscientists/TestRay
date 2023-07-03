@@ -80,6 +80,8 @@ TestEmployeeHealthPortalMinorUserCall:
 #CXTB-441: No "Call already answered" Notification if EHP Call Ended By Employee Log Out
 TestEmployeeHealthPortalCallAlreadyAnsweredNotificationWhenEmployeeLogsOut:
   Environment: Settings
+  Aftercases:
+    - EmployeeHealthPortalLogOutAction
   Roles:
     - Role: desktopChrome
       App: desktop

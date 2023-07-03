@@ -462,3 +462,13 @@ EmployeeHealthPortalCallNow:
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.employee_health_on_demand_call_page.connecting_label$
+
+# Custom action to log out of EHP if it is needed.
+EmployeeHealthPortalLogOutAction:
+  Environment: Settings
+  Roles:
+    - Role: desktopChrome
+      App: desktop
+  Actions:
+    # Log out of EHP if needed.
+    - Type: ehp_logout
