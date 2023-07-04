@@ -251,6 +251,11 @@ class Device
   def close_app(action = nil, main_case, main_case_id)
     @driver.background_app(-1)
   end
+  
+  # Refreshes the browsers tab.
+  def refresh(action = nil, main_case, main_case_id)
+    @driver.navigate.refresh
+  end
 
   # hides keyboard (Only Mobile)
   def hide_keyboard(action = nil, main_case, main_case_id)
@@ -738,10 +743,10 @@ class Device
   # Accepts:
   #   Strategy
   #   Id
-  def clear_field_by_backspace(action) 
+  def clear_field_by_backspace(action, main_case, main_case_id) 
     action = convert_value_pageobjects(action);
     el = nil
-    el = wait_for(action) if (!action["Actions"] && action["Strategy"])
+    el = wait_for(action, main_case, main_case_id) if (!action["Actions"] && action["Strategy"])
     start = Time.now
     error = nil
     len = 0
@@ -755,33 +760,7 @@ class Device
       end
     end
     if error && !action["NoRaise"]
-      path = take_error_screenshot()
-      raise "#{@role}: #{error.message}\nError Screenshot: #{path}"
-    end
-  end
-
-  #Clears by using backspace
-  # Accepts:
-  #   Strategy
-  #   Id
-  def clear_field_by_backspace(action) 
-    action = convert_value_pageobjects(action);
-    el = nil
-    el = wait_for(action) if (!action["Actions"] && action["Strategy"])
-    start = Time.now
-    error = nil
-    len = 0
-    len = el.attribute('value').length().to_i
-    while (Time.now - start) < @timeout
-      begin
-        (len).downto(0) {el.send_keys(:backspace)}
-        return
-      rescue => e
-        error = e
-      end
-    end
-    if error && !action["NoRaise"]
-      path = take_error_screenshot()
+      path = take_error_screenshot(main_case, main_case_id)
       raise "#{@role}: #{error.message}\nError Screenshot: #{path}"
     end
   end
@@ -817,10 +796,25 @@ class Device
   #   Id
   def clear_field_js(action, main_case, main_case_id) 
     action = convert_value_pageobjects(action);
-    el = wait_for(action)
+    el = nil
+    el = wait_for(action, main_case, main_case_id) if (!action["Actions"] && action["Strategy"])
     
-    @driver.execute_script("arguments[0].value='';", el)
-    sleep(1.0)
+    start = Time.now
+    error = nil
+    while (Time.now - start) < @timeout
+      begin
+        @driver.execute_script("arguments[0].value='';", el)
+        sleep(1.0)
+        return
+      rescue => e
+        error = e
+      end
+    end
+    if error && !action["NoRaise"]
+      path = take_error_screenshot(main_case, main_case_id)
+
+      raise "#{@role}: #{error.message}\nError Screenshot: #{path}"
+    end
   end
 
   # Accepts:
@@ -2408,6 +2402,44 @@ def wait_for_mobile_element_to_disappear(locator)
   element_exists = wait_for_mobile_element_to_exist(locator)
   unless element_exists
     return true
+  end
+end
+
+# Custom action to log out of EHP if it is needed.
+def ehp_logout(action, main_case, main_case_id)
+  log_info("Aftercase to log out of EHP.")
+  if wait_for_element_to_exist("$PAGE.employee_health_home_page.user_dropdown_button$")
+    log_info("Click on the user icon to log out")
+    @driver.find_element(:xpath, convert_value_pageobjects("$PAGE.employee_health_home_page.user_dropdown_button$")).click
+    log_info("Select the log out option")
+    @driver.find_element(:xpath, convert_value_pageobjects("$PAGE.employee_health_home_page.dropdown_option_logout$")).click
+    log_info("Wait until the user has logged out")
+    wait_for_element_to_exist("$PAGE.employee_health_login_page.log_in_button$")
+  else
+    log_info("User was already logged out")
+  end
+end
+
+# Custom action to clean EHP hanged calls.
+def ehp_clean_hanged_call(action, main_case, main_case_id)
+  log_info("Verify that there is an ongoing call")
+  if wait_for_element_to_exist("$PAGE.employee_health_on_demand_call_page.page_title$")
+    log_info("Verify that the <End Call> button exists.")
+    if wait_for_element_to_exist("$PAGE.employee_health_on_demand_call_page.video_end_call_button$")
+      log_info("Click on the <End Call> button.")
+      @driver.find_element(:xpath, convert_value_pageobjects("$PAGE.employee_health_on_demand_call_page.video_end_call_button$")).click
+      
+      log_info("Verify that the <End Call> button disappears.")
+      wait_for_element_not_visible("$PAGE.employee_health_on_demand_call_page.video_end_call_button$")
+      
+      log_info("Refresh the web page.")
+      @driver.navigate.refresh
+      
+      log_info("Wait for the call has ended notification.")
+      wait_for_element_to_exist("$PAGE.employee_health_home_page.alert_call_ended$")
+    end
+  else
+    log_info("There isn't any hanged calls.")
   end
 end
 
