@@ -741,7 +741,7 @@ class Device
   def clear_field_by_backspace(action, main_case, main_case_id) 
     action = convert_value_pageobjects(action);
     el = nil
-    el = wait_for(action) if (!action["Actions"] && action["Strategy"])
+    el = wait_for(action, main_case, main_case_id) if (!action["Actions"] && action["Strategy"])
     start = Time.now
     error = nil
     len = 0
