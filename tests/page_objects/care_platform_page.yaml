@@ -186,6 +186,7 @@ care_platform_edit_participant_records:
   surgical_history_navigation: //button[contains(@class,'form-navigation-link') and contains(text(),'Surgical History')]
   prevention_care_screening_navigation: //button[contains(@class,'form-navigation-link') and contains(text(),'Preventative Care Screening')]
   notes_navigation: //button[contains(@class,'form-navigation-link') and contains(text(),'Notes')]
+  allergies_navigation: //ul[contains(@class,'form-navigation')]//button[contains(text(),'Allergies')]
   save_changes_button: //form//button[@type='submit']
   changes_saved_notification: //div[@class='Toastify']//div[contains(text(),'Participant changes saved')]
   medication_saved_notification: //div[@class='Toastify']//div[contains(text(),'Medication created')]
@@ -336,6 +337,9 @@ care_platform_edit_participant_prevention_care_screening:
 care_platform_edit_participant_notes:
   notes_subtitle: //h4[contains(text(),'Notes')]
   notes_text_area: notes
+
+care_platform_edit_participant_allergies:
+  add_allergy_button: //button[text()='Add Allergy']
 
 care_platform_edit_participant_contacts:
   add_contact_button: //button[text()='Add Contact']

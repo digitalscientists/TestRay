@@ -3484,3 +3484,30 @@ TestCarePartnerParticipantInfoEditOrAddMedicationInfo:
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.care_platform_edit_participant_records.medication_deleted_notification$  
+
+#CXTB-446 Edit Participant Info - Edit or Add Allergies Info
+TestCarePartnerParticipantInfoEditOrAddAllergiesInfo:
+  Environment: Settings
+  Aftercases:
+    - CarePlatformLogout
+  Roles:
+    - Role: desktopChrome
+      App: desktop
+  Actions:
+  # Calling Login case.
+    - Type: case
+      Value: CarePartnerLogin
+  # Go to Edit Participant
+    - Type: case
+      Value: CarePartnerEditParticipantNavigation
+  # Click Allergies page in Navigation panel.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_records.allergies_navigation$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_records.allergies_navigation$
+  # Page refreshes to show the edit mode for allergies on the participant’s profile.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_allergies.add_allergy_button$
