@@ -88,6 +88,12 @@ TestEmployeeHealthPortalCallAlreadyAnsweredNotificationWhenEmployeeLogsOut:
     - Role: desktopChrome1
       App: desktop
   Actions:
+  # Calling EHP Login case.
+    - Type: case
+      Value: EmployeeHealthPortalLogIn
+  # Clean EHP hanged calls.
+    - Type: case
+      Value: EmployeeHealthPortalCleanHangedCalls
   # Generate a call from EHP.
     - Type: case
       Value: EmployeeHealthPortalCallNow    

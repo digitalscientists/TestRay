@@ -2431,6 +2431,29 @@ def ehp_logout(action, main_case, main_case_id)
   end
 end
 
+# Custom action to clean EHP hanged calls.
+def ehp_clean_hanged_call(action, main_case, main_case_id)
+  log_info("Verify that there is an ongoing call")
+  if wait_for_element_to_exist("$PAGE.employee_health_on_demand_call_page.page_title$")
+    log_info("Verify that the <End Call> button exists.")
+    if wait_for_element_to_exist("$PAGE.employee_health_on_demand_call_page.video_end_call_button$")
+      log_info("Click on the <End Call> button.")
+      @driver.find_element(:xpath, convert_value_pageobjects("$PAGE.employee_health_on_demand_call_page.video_end_call_button$")).click
+      
+      log_info("Verify that the <End Call> button disappears.")
+      wait_for_element_not_visible("$PAGE.employee_health_on_demand_call_page.video_end_call_button$")
+      
+      log_info("Refresh the web page.")
+      @driver.navigate.refresh
+      
+      log_info("Wait for the call has ended notification.")
+      wait_for_element_to_exist("$PAGE.employee_health_home_page.alert_call_ended$")
+    end
+  else
+    log_info("There isn't any hanged calls.")
+  end
+end
+
 # Custom action to clean all the unwanted prompts on Never Alone app before starting test.
 def senior_clean_unwanted_prompts(action, main_case, main_case_id)
   count = 0

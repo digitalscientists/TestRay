@@ -416,9 +416,6 @@ EmployeeHealthPortalCallNow:
     - Role: desktopChrome
       App: "desktop"
   Actions:
-  #Calling Login case
-    - Type: case
-      Value: EmployeeHealthPortalLogIn
   #Home Page
     - Type: wait_for
       Strategy: xpath
@@ -472,3 +469,13 @@ EmployeeHealthPortalLogOutAction:
   Actions:
     # Log out of EHP if needed.
     - Type: ehp_logout
+
+# Custom action to clean EHP hanged calls.
+EmployeeHealthPortalCleanHangedCalls:
+  Environment: Settings
+  Roles:
+    - Role: desktopChrome
+      App: desktop
+  Actions:
+    # Clean hanged calls.
+    - Type: ehp_clean_hanged_call
