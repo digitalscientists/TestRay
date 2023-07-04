@@ -738,32 +738,6 @@ class Device
   # Accepts:
   #   Strategy
   #   Id
-  def clear_field_by_backspace(action) 
-    action = convert_value_pageobjects(action);
-    el = nil
-    el = wait_for(action) if (!action["Actions"] && action["Strategy"])
-    start = Time.now
-    error = nil
-    len = 0
-    len = el.attribute('value').length().to_i
-    while (Time.now - start) < @timeout
-      begin
-        (len).downto(0) {el.send_keys(:backspace)}
-        return
-      rescue => e
-        error = e
-      end
-    end
-    if error && !action["NoRaise"]
-      path = take_error_screenshot()
-      raise "#{@role}: #{error.message}\nError Screenshot: #{path}"
-    end
-  end
-
-  #Clears by using backspace
-  # Accepts:
-  #   Strategy
-  #   Id
   def clear_field_by_backspace(action, main_case, main_case_id) 
     action = convert_value_pageobjects(action);
     el = nil
