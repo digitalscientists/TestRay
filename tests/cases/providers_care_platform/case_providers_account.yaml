@@ -74,10 +74,10 @@ TestProviderUpdateCredentialsAndCallAnsweringAbilities:
     - Role: desktopChrome
       App: "desktop"
   Actions:
-    # Log in with the second user.
+  # Log in with the second user.
     - Type: case
       Value: ProvidersCarePlatformLogin
-    #Going to My Account
+  # Going to My Account
     - Type: click
       Strategy: xpath
       Id: $PAGE.providers_home_page.dropdown_username$
@@ -87,7 +87,7 @@ TestProviderUpdateCredentialsAndCallAnsweringAbilities:
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.providers_account_modal.modal_title$
-    #Select credentials
+  # Select credentials
     - Type: click
       Strategy: xpath
       Id: $PAGE.providers_account_modal.credentials_navigation_tab$
@@ -101,7 +101,7 @@ TestProviderUpdateCredentialsAndCallAnsweringAbilities:
     - Type: set_checkbox_status
       Strategy: xpath
       Option: check
-      Id: $PAGE.providers_account_modal.maryland_option$
+      Id: $PAGE.providers_account_modal.indiana_option$
     - Type: click
       Strategy: xpath
       Id: $PAGE.providers_account_modal.save_changes_button$
