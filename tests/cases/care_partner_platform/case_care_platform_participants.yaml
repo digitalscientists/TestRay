@@ -3488,8 +3488,6 @@ TestCarePartnerParticipantInfoEditOrAddMedicationInfo:
 #CXTB-446 Edit Participant Info - Edit or Add Allergies Info
 TestCarePartnerParticipantInfoEditOrAddAllergiesInfo:
   Environment: Settings
-  Aftercases:
-    - CarePlatformLogout
   Roles:
     - Role: desktopChrome
       App: desktop
@@ -3511,3 +3509,77 @@ TestCarePartnerParticipantInfoEditOrAddAllergiesInfo:
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.care_platform_edit_participant_allergies.add_allergy_button$
+  # Click "Add Allergy" button in upper right corner.
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_allergies.add_allergy_button$
+  # "Add Allergy" window appears in center of screen.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_allergies.add_or_edit_allergy_modal_title$
+    - Type: wait_for_property
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_allergies.add_or_edit_allergy_modal_title$
+      Property: textContent
+      Value:  Add allergy
+  # Enter some information, then click the "Cancel" button.
+    - Type: generate_unique_name
+      Name: Name
+      ResultVar: UNIQUE_NAME
+    - Type: generate_unique_name
+      Name: Reaction
+      ResultVar: UNIQUE_REACTION
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_allergies.add_allergy_name_input$
+      Value: $AND_CLI_UNIQUE_NAME$
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_allergies.add_allergy_reaction_input$
+      Value: $AND_CLI_UNIQUE_REACTION$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_allergies.cancel_button$
+  # Window closes and no allergy is added for participant.
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_allergies.add_or_edit_allergy_modal_title$
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_allergies.cancel_button$
+    # TODO
+    # - Type: wait_not_visible
+    #   Strategy: xpath
+    #   Id: $PAGE.care_platform_edit_participant_contacts.edit_button_based_on_contact_name$
+  # Click "Add Allergy" button in upper right corner.
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_allergies.add_allergy_button$
+  # "Add Allergy" window appears in center of screen.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_allergies.add_or_edit_allergy_modal_title$
+    - Type: wait_for_property
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_allergies.add_or_edit_allergy_modal_title$
+      Property: textContent
+      Value:  Add allergy
+  # Populate allergy details before clicking "Save and Close" button.
+    - Type: generate_unique_name
+      Name: Name
+      ResultVar: UNIQUE_NAME
+    - Type: generate_unique_name
+      Name: Reaction
+      ResultVar: UNIQUE_REACTION
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_allergies.add_allergy_name_input$
+      Value: $AND_CLI_UNIQUE_NAME$
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_allergies.add_allergy_reaction_input$
+      Value: $AND_CLI_UNIQUE_REACTION$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_allergies.save_and_close_button$
+  # Window closes, the new allergy entered is now displayed on the page, and toast notification appears at the top of the page.

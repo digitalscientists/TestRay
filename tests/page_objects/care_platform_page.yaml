@@ -340,6 +340,11 @@ care_platform_edit_participant_notes:
 
 care_platform_edit_participant_allergies:
   add_allergy_button: //button[text()='Add Allergy']
+  add_or_edit_allergy_modal_title: //div[@id='modals']//h4
+  add_allergy_name_input: //input[@id='name']
+  add_allergy_reaction_input:  //input[@id='reaction']
+  save_and_close_button: //button[@type='submit']
+  cancel_button: //button[text()='Cancel']
 
 care_platform_edit_participant_contacts:
   add_contact_button: //button[text()='Add Contact']
