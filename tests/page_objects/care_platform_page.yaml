@@ -189,6 +189,7 @@ care_platform_edit_participant_records:
   save_changes_button: //form//button[@type='submit']
   changes_saved_notification: //div[@class='Toastify']//div[contains(text(),'Participant changes saved')]
   medication_saved_notification: //div[@class='Toastify']//div[contains(text(),'Medication created')]
+  medication_deleted_notification: //div[@class='Toastify']//div[contains(text(),'Medication deleted')]
   
 care_platform_edit_participant_demographics:
   first_name_input: firstName
@@ -227,7 +228,7 @@ care_platform_edit_participant_medication:
   modal_medication_affordability_input: affordabilityIssues
   modal_medication_self_administration_input: selfAdministrationCapability
   delete_modal_title: //*[@id='dialogs']//h4[text()='Delete Medication']
-  delete_modal_medication_name: //*[@id='dialogs']//p[text()='AutomationMed']
+  delete_modal_medication_name: //*[@id='dialogs']//p[text()='$AND_CLI_MEDICATION$']
   delete_modal_confirm_button: //*[@id='dialogs']//button[text()='Yes, Delete']
   delete_modal_cancel_button: //*[@id='dialogs']//button[text()='Cancel']
 

@@ -3417,6 +3417,22 @@ TestCarePartnerParticipantInfoEditOrAddMedicationInfo:
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.care_platform_edit_participant_medication.modal_edit_title$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_medication.modal_cancel_button$
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_medication.modal_cancel_button$
+  # Edit Medication
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_medication.edit_medication_by_name_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_medication.edit_medication_by_name_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_medication.modal_edit_title$
     - Type: clear_field_by_backspace
       Strategy: id
       Id: $PAGE.care_platform_edit_participant_medication.modal_medication_dose_input$
@@ -3426,7 +3442,45 @@ TestCarePartnerParticipantInfoEditOrAddMedicationInfo:
       Value: '8 mg'
     - Type: click
       Strategy: xpath
-      Id: $PAGE.care_platform_edit_participant_medication.modal_cancel_button$
+      Id: $PAGE.care_platform_edit_participant_medication.modal_save_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_records.medication_saved_notification$
+  # Delete and cancel
     - Type: wait_not_visible
       Strategy: xpath
-      Id: $PAGE.care_platform_edit_participant_medication.modal_cancel_button$
+      Id: $PAGE.care_platform_edit_participant_records.medication_saved_notification$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_medication.delete_medication_by_name_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_medication.delete_medication_by_name_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_medication.delete_modal_title$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_medication.delete_modal_cancel_button$
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_medication.delete_modal_cancel_button$
+  # Delete existing medication
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_medication.delete_medication_by_name_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_medication.delete_medication_by_name_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_medication.delete_modal_title$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_medication.delete_modal_medication_name$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_medication.delete_modal_confirm_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_records.medication_deleted_notification$  
