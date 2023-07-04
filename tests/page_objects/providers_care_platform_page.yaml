@@ -37,6 +37,7 @@ providers_user_dropdown_menu:
 
 providers_account_modal:
   modal_title: //*[@id='modals']//h4[contains(text(),'My Account')]
+  close_modal_button: //button[text()='Close']
   credentials_navigation_tab: //*[@id='modals']//nav/button[text()='Credentials']
   credentials_content: //*[@id='modals']//div[@class='tabs-content' and @tab-title='Credentials']
   pennsylvania_option: //*[@id='PA']/ancestor::label

@@ -104,10 +104,7 @@ TestProviderUpdateCredentialsAndCallAnsweringAbilities:
       Id: $PAGE.providers_account_modal.indiana_option$
     - Type: click
       Strategy: xpath
-      Id: $PAGE.providers_account_modal.save_changes_button$
-    - Type: wait_not_visible
-      Strategy: xpath
-      Id: $PAGE.providers_account_modal.credentials_content$
+      Id: $PAGE.providers_account_modal.close_modal_button$
 
 #CXTB-208 Providers - My Account - Credentials
 TestProviderUpdateCredentials:
