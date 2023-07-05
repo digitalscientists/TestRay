@@ -3547,10 +3547,9 @@ TestCarePartnerParticipantInfoEditOrAddAllergiesInfo:
     - Type: wait_not_visible
       Strategy: xpath
       Id: $PAGE.care_platform_edit_participant_allergies.cancel_button$
-    # TODO
-    # - Type: wait_not_visible
-    #   Strategy: xpath
-    #   Id: $PAGE.care_platform_edit_participant_contacts.edit_button_based_on_contact_name$
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_allergies.edit_button_based_on_allergy_name$
   # Click "Add Allergy" button in upper right corner.
     - Type: click
       Strategy: xpath
