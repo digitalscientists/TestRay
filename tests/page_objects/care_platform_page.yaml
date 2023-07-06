@@ -260,6 +260,9 @@ care_platform_edit_participant_hospitalization:
   emergency_room_tab: //nav/button[contains(text(),'Emergency room admissions')]
   emergency_room_subtitle: //h4[contains(text(),'Emergency Room Admissions')]
   emergency_room_add_admission_button: //div[@tab-title='Emergency room admissions']//button[contains(text(),'Add Emergency Room Admission')]
+  edit_button_based_on_emergency_room_admissions_facility: //p[contains(text(), '$AND_CLI_UNIQUE_FACILITY$')]/../following-sibling::div/button[text()='Edit']
+  delete_button_based_on_emergency_room_admissions_facility: //p[contains(text(), '$AND_CLI_UNIQUE_FACILITY$')]/../following-sibling::div/button[text()='Delete']
+  diagnosis_label_based_on_emergency_room_admissions_facility: //p[contains(text(), '$AND_CLI_UNIQUE_FACILITY$')]
   add_or_edit_emergency_room_admission_modal_title: //div[@id='modals']//h4
   add_or_edit_emergency_room_admission_date_input: //input[@id='date']
   add_or_edit_emergency_room_admission_facility_input: //input[@id='facility']
