@@ -3715,3 +3715,132 @@ TestCarePartnerParticipantInfoEditOrAddAllergiesInfo:
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.care_platform_notifications.allergy_deleted_notification$
+
+#CXTB-449 Edit Participant Info - Edit or Add Emergency Room Admissions Info
+TestCarePartnerParticipantInfoEditOrAddEmergencyRoomAdmissionsInfo:
+  Environment: Settings
+  Roles:
+    - Role: desktopChrome
+      App: desktop
+  Actions:
+  # Calling Login case.
+    - Type: case
+      Value: CarePartnerLogin
+  # Go to Edit Participant
+    - Type: case
+      Value: CarePartnerEditParticipantNavigation
+  # Click Hospitalizations page in Navigation panel.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_records.hospitalization_navigation$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_records.hospitalization_navigation$
+  # Page refreshes to show the edit mode for hospitalization on the participant’s profile.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_hospitalization.emergency_room_tab$
+  # Click Emergency Room Admissions sub-header.
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_hospitalization.emergency_room_tab$
+  # Page refreshes to show the edit mode for emergency room admissions for this participant.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_hospitalization.emergency_room_add_admission_button$
+  # Click "Add Emergency Room Admission" button in upper right corner.
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_hospitalization.emergency_room_add_admission_button$
+  # "Add Emergency Room Admission" window appears in center of screen.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_hospitalization.add_or_edit_emergency_room_admission_modal_title$
+    - Type: wait_for_property
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_hospitalization.add_or_edit_emergency_room_admission_modal_title$
+      Property: textContent
+      Value:  Add Emergency Room Admission
+  # Enter some information, then click the "Cancel" button.
+    - Type: get_timestamp
+      Format: "%Y-%m-%d" #YYYY-MM-DD
+      Var: TODAY_DATE
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_hospitalization.add_or_edit_emergency_room_admission_date_input$
+      Value: $AND_CLI_TODAY_DATE$
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_hospitalization.add_or_edit_emergency_room_admission_facility_input$
+      Value: Automation Facility
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_hospitalization.add_or_edit_emergency_room_admission_diagnosis_input$
+      Value: Automation Diagnosis
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_hospitalization.cancel_button$
+  # Window closes and no admission entry is added for participant.
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_hospitalization.add_or_edit_emergency_room_admission_modal_title$
+      #TODO: DONOTFORGET
+      #TODO: DONOTFORGET
+      #TODO: DONOTFORGET
+      #TODO: DONOTFORGET
+      #TODO: DONOTFORGET
+      #TODO: DONOTFORGET
+  # Click "Add Emergency Room Admission" button in upper right corner.
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_hospitalization.emergency_room_add_admission_button$
+  # "Add Emergency Room Admission" window appears in center of screen.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_hospitalization.add_or_edit_emergency_room_admission_modal_title$
+    - Type: wait_for_property
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_hospitalization.add_or_edit_emergency_room_admission_modal_title$
+      Property: textContent
+      Value:  Add Emergency Room Admission
+  # Populate admission details before clicking "Save and Close" button.
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_hospitalization.add_or_edit_emergency_room_admission_date_input$
+      Value: $AND_CLI_TODAY_DATE$
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_hospitalization.add_or_edit_emergency_room_admission_facility_input$
+      Value: Automation Facility
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_hospitalization.add_or_edit_emergency_room_admission_diagnosis_input$
+      Value: Automation Diagnosis
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_hospitalization.save_and_close_button$
+  # Window closes, the new admission entry entered is now displayed on the page, and toast notification appears at the top of the page.
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_hospitalization.add_or_edit_emergency_room_admission_modal_title$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_notifications.emergency_room_admission_created_notification$
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id: $PAGE.care_platform_notifications.emergency_room_admission_created_notification$
+  # Click "Edit" button for an existing admission.
+
+  # "Edit Emergency Room Admission" window appears in center of screen, showing currently entered information.
+
+  # Update some of the information and click the  "Cancel" button.
+
+  # Returned to the page; without any changes being saved to the entry.
+
+  # Click "Edit" button for an existing admission.
+
+  # "Edit Emergency Room Admission" window appears in center of screen, showing currently entered information.
+
+  # Make any changes desired before clicking "Save and Close" button.
+  
+  # Window closes, the updated admission information is now displayed on the page, and toast notification appears at the top of the page
