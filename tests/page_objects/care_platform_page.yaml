@@ -188,6 +188,7 @@ care_platform_edit_participant_records:
   surgical_history_navigation: //button[contains(@class,'form-navigation-link') and contains(text(),'Surgical History')]
   prevention_care_screening_navigation: //button[contains(@class,'form-navigation-link') and contains(text(),'Preventative Care Screening')]
   notes_navigation: //button[contains(@class,'form-navigation-link') and contains(text(),'Notes')]
+  allergies_navigation: //ul[contains(@class,'form-navigation')]//button[contains(text(),'Allergies')]
   save_changes_button: //form//button[@type='submit']
   changes_saved_notification: //div[@class='Toastify']//div[contains(text(),'Participant changes saved')]
   medication_saved_notification: //div[@class='Toastify']//div[contains(text(),'Medication created')]
@@ -261,6 +262,17 @@ care_platform_edit_participant_hospitalization:
   emergency_room_tab: //nav/button[contains(text(),'Emergency room admissions')]
   emergency_room_subtitle: //h4[contains(text(),'Emergency Room Admissions')]
   emergency_room_add_admission_button: //div[@tab-title='Emergency room admissions']//button[contains(text(),'Add Emergency Room Admission')]
+  edit_button_based_on_emergency_room_admissions_facility: //p[contains(text(), '$AND_CLI_UNIQUE_FACILITY$')]/../following-sibling::div/button[text()='Edit']
+  delete_button_based_on_emergency_room_admissions_facility: //p[contains(text(), '$AND_CLI_UNIQUE_FACILITY$')]/../following-sibling::div/button[text()='Delete']
+  diagnosis_label_based_on_emergency_room_admissions_facility: //p[contains(text(), '$AND_CLI_UNIQUE_FACILITY$')]
+  add_or_edit_emergency_room_admission_modal_title: //div[@id='modals']//h4
+  add_or_edit_emergency_room_admission_date_input: //input[@id='date']
+  add_or_edit_emergency_room_admission_facility_input: //input[@id='facility']
+  add_or_edit_emergency_room_admission_diagnosis_input: //input[@id='diagnosis']
+  save_and_close_button: //button[@type='submit']
+  cancel_button: //button[text()='Cancel']
+  delete_emergency_room_admission_dialog_title: //div[@id='dialogs']//h4
+  yes_delete_button: //button[text()='Yes, Delete']
 
 care_platform_edit_participant_social_history:
   social_history_subtitle: //h4[contains(text(),'Social History')]
@@ -338,6 +350,19 @@ care_platform_edit_participant_prevention_care_screening:
 care_platform_edit_participant_notes:
   notes_subtitle: //h4[contains(text(),'Notes')]
   notes_text_area: notes
+
+care_platform_edit_participant_allergies:
+  add_allergy_button: //button[text()='Add Allergy']
+  edit_button_based_on_allergy_name: //strong[contains(text(),'$AND_CLI_UNIQUE_NAME$')]/../following-sibling::div//button[text()='Edit']
+  delete_button_based_on_allergy_name: //strong[contains(text(),'$AND_CLI_UNIQUE_NAME$')]/../following-sibling::div//button[text()='Delete']
+  reason_label_based_on_allergy_name: //strong[contains(text(),'$AND_CLI_UNIQUE_NAME$')]/../following-sibling::div//div[not(child::*)]
+  add_or_edit_allergy_modal_title: //div[@id='modals']//h4
+  add_allergy_name_input: //input[@id='name']
+  add_allergy_reaction_input:  //input[@id='reaction']
+  save_and_close_button: //button[@type='submit']
+  cancel_button: //button[text()='Cancel']
+  delete_allergy_dialog_title: //div[@id='dialogs']//h4
+  yes_delete_button: //button[text()='Yes, Delete']
 
 care_platform_edit_participant_contacts:
   add_contact_button: //button[text()='Add Contact']
@@ -461,6 +486,12 @@ care_platform_notifications:
   contact_created_notification: //div[@class='Toastify']//div[@role='alert']//div[text()='Contact created']
   contact_saved_notification: //div[@class='Toastify']//div[@role='alert']//div[text()='Contact saved']
   contact_deleted_notification: //div[@class='Toastify']//div[@role='alert']//div[text()='Contact deleted']
+  allergy_created_notification: //div[@class='Toastify']//div[@role='alert']//div[text()='Allergy created']
+  allergy_saved_notification: //div[@class='Toastify']//div[@role='alert']//div[text()='Allergy saved']
+  allergy_deleted_notification: //div[@class='Toastify']//div[@role='alert']//div[text()='Allergy deleted']
+  emergency_room_admission_created_notification: //div[@class='Toastify']//div[@role='alert']//div[text()='Emergency room admission created']
+  emergency_room_admission_saved_notification: //div[@class='Toastify']//div[@role='alert']//div[text()='Emergency room admission saved']
+  emergency_room_admission_deleted_notification: //div[@class='Toastify']//div[@role='alert']//div[text()='Emergency room admission deleted']
   dismiss_notification_button: //div[@class='Toastify']//button[text()='Dismiss']
 
 care_platform_facility:
