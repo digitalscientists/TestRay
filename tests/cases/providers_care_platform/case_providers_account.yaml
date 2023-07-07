@@ -66,6 +66,7 @@ TestProviderUpdateAccountInfo:
       Value: CarePlatformUpdateInfo
 
 #CXTB-120 Access Credentials Page & Update Call Answering Abilities
+#CXTB-208 Access CCA Status Credentials Page & Update Call Answering Abilities
 TestProviderUpdateCredentialsAndCallAnsweringAbilities:
   Environment: Settings
   Vars:
@@ -102,7 +103,6 @@ TestProviderUpdateCredentialsAndCallAnsweringAbilities:
       Strategy: xpath
       Option: check
       Id: $PAGE.providers_account_modal.indiana_option$
-#CXTB-208 Access CCA Status Credentials Page & Update Call Answering Abilities
     - Type: set_checkbox_status
       Strategy: xpath
       Option: check
