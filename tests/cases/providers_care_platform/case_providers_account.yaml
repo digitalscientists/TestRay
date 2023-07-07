@@ -88,7 +88,7 @@ TestProviderUpdateCredentialsAndCallAnsweringAbilities:
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.providers_account_modal.modal_title$
-  # Select credentials
+  # Select state credentials 
     - Type: click
       Strategy: xpath
       Id: $PAGE.providers_account_modal.credentials_navigation_tab$
@@ -103,6 +103,7 @@ TestProviderUpdateCredentialsAndCallAnsweringAbilities:
       Strategy: xpath
       Option: check
       Id: $PAGE.providers_account_modal.indiana_option$
+  # Select special needs credentials 
     - Type: set_checkbox_status
       Strategy: xpath
       Option: check
