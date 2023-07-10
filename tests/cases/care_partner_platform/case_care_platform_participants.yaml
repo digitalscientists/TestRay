@@ -3949,3 +3949,24 @@ TestCarePartnerParticipantInfoEditOrAddEmergencyRoomAdmissionsInfo:
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.care_platform_notifications.emergency_room_admission_deleted_notification$
+
+#CXTB-449 Edit Participant Info - Edit or Add Health Overview Info
+TestCarePartnerParticipantInfoEditOrAddHealthOverviewInfo:
+  Environment: Settings
+  Roles:
+    - Role: desktopChrome
+      App: desktop
+  Actions:
+  # Calling Login case.
+    - Type: case
+      Value: CarePartnerLogin
+  # Go to Edit Participant
+    - Type: case
+      Value: CarePartnerEditParticipantNavigation
+  # Click Hospitalizations page in Navigation panel.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_records.hospitalization_navigation$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_records.hospitalization_navigation$
