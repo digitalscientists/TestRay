@@ -66,7 +66,7 @@ TestProviderUpdateAccountInfo:
       Value: CarePlatformUpdateInfo
 
 #CXTB-120 Access Credentials Page & Update Call Answering Abilities
-#CXTB-208 Access CCA Status Credentials Page & Update Call Answering Abilities
+#CXTB-392 Access CCA Status Credentials Page & Update Call Answering Abilities
 TestProviderUpdateCredentialsAndCallAnsweringAbilities:
   Environment: Settings
   Vars:
@@ -116,8 +116,8 @@ TestProviderUpdateCredentialsAndCallAnsweringAbilities:
       Strategy: xpath
       Id: $PAGE.providers_account_modal.close_modal_button$
 
-#CXTB-208 Providers - My Account - Credentials
-TestProviderUpdateCredentials:
+#CXTB-208 Access Credentials Page & Update Call Answering Abilities for Employee Request.
+TestProviderUpdateCredentialsAndCallAnsweringAbilitiesEHPRequest:
   Environment: Settings
   Vars:
     STATE: IN
