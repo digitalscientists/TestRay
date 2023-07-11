@@ -26,8 +26,9 @@ care_platform:
 care_platform_home:
   first_call_of_queue: //div[@id='containerElement']/div[starts-with(@class, 'ListRow_listRow')][1]
   answer_call: //button[text()='Answer Call']
-  call_based_on_participant_name: //tbody[@role='rowgroup']/tr//strong[text() = '$AND_CLI_senior_user1_name$ $AND_CLI_senior_user1_lastname$']
-  call_based_on_es_idd_participant_name: //tbody[@role='rowgroup']/tr//strong[text() = '$AND_CLI_idd_es_never_alone_user1_name$ $AND_CLI_idd_es_never_alone_user1_lastname$']
+  call_based_on_participant_name: //div[contains(@class, 'ListRow_listRow')]//strong[text() = '$AND_CLI_senior_user1_name$ $AND_CLI_senior_user1_lastname$']
+  call_based_on_es_idd_participant_name: //div[contains(@class, 'ListRow_listRow')]//strong[text() = '$AND_CLI_idd_es_never_alone_user1_name$ $AND_CLI_idd_es_never_alone_user1_lastname$']
+  call_based_on_ch_idd_participant_name: //div[contains(@class, 'ListRow_listRow')]//strong[text() = '$AND_CLI_idd_ch_never_alone_user2_name$ $AND_CLI_idd_ch_never_alone_user2_lastname$']
   active_call_section: //div[contains(@class,'app-video app-video-fixed')] # doesn't matter if its expanded/collapsed
   call_queue_calls: //div[@id='containerElement']/div[starts-with(@class, 'ListRow_listRow')]
 
@@ -81,10 +82,11 @@ care_platform_participant:
   first_participant_row: //div[@class='class=SearchableListTemplate_record__gc5a6']
   first_darkened_letter_button: //button[@class='alphabet-letter'][not(@disabled)][1]
   selected_darkened_letter_button: //button[contains(@class,'is-selected')]
-  senior_complete_name: //div[starts-with(@class, 'SearchableListTemplate_record')]//div[contains(text(),'$AND_CLI_senior_user1_name$')][strong[contains(text(),'$AND_CLI_senior_user1_lastname$')]]
-  esidd_senior_complete_name: //div[starts-with(@class, 'SearchableListTemplate_record')]//div[contains(text(),'$AND_CLI_idd_es_never_alone_user1_name$')][strong[contains(text(),'$AND_CLI_idd_es_never_alone_user1_lastname$')]]
-  senior_1_row: //div[@class='ListRow_listRow__8VQfX ListRow_lastRight__1QmEH']
-  first_senior_lastname: //*[contains(text(),'strong')]
+  senior_complete_name: //div[starts-with(@class, 'ListRow_listRow')]//div[contains(text(),'$AND_CLI_senior_user1_name$')][strong[contains(text(),'$AND_CLI_senior_user1_lastname$')]]
+  esidd_senior_complete_name: //div[starts-with(@class, 'ListRow_listRow')]//div[contains(text(),'$AND_CLI_idd_es_never_alone_user1_name$')][strong[contains(text(),'$AND_CLI_idd_es_never_alone_user1_lastname$')]]
+  chidd_senior_complete_name: //div[starts-with(@class, 'ListRow_listRow')]//div[contains(text(),'$AND_CLI_idd_ch_never_alone_user2_name$')][strong[contains(text(),'$AND_CLI_idd_ch_never_alone_user2_lastname$')]]
+  senior_1_row: //*[@id='containerElement']/div[@role='button'][1]
+  first_senior_lastname: //*[@id='containerElement']/div[@role='button'][1]//strong
   call_portal_btn: //button[text()='Call Portal']
   search_button: //span[@class='icon-search']
   search_input: //input[@id='searchText']
@@ -228,6 +230,7 @@ care_platform_edit_participant_records:
   surgical_history_navigation: //button[contains(@class,'form-navigation-link') and contains(text(),'Surgical History')]
   prevention_care_screening_navigation: //button[contains(@class,'form-navigation-link') and contains(text(),'Preventative Care Screening')]
   notes_navigation: //button[contains(@class,'form-navigation-link') and contains(text(),'Notes')]
+  allergies_navigation: //ul[contains(@class,'form-navigation')]//button[contains(text(),'Allergies')]
   save_changes_button: //form//button[@type='submit']
   changes_saved_notification: //div[@class='Toastify']//div[contains(text(),'Participant changes saved')]
   medication_saved_notification: //div[@class='Toastify']//div[contains(text(),'Medication created')]
@@ -301,6 +304,17 @@ care_platform_edit_participant_hospitalization:
   emergency_room_tab: //nav/button[contains(text(),'Emergency room admissions')]
   emergency_room_subtitle: //h4[contains(text(),'Emergency Room Admissions')]
   emergency_room_add_admission_button: //div[@tab-title='Emergency room admissions']//button[contains(text(),'Add Emergency Room Admission')]
+  edit_button_based_on_emergency_room_admissions_facility: //p[contains(text(), '$AND_CLI_UNIQUE_FACILITY$')]/../following-sibling::div/button[text()='Edit']
+  delete_button_based_on_emergency_room_admissions_facility: //p[contains(text(), '$AND_CLI_UNIQUE_FACILITY$')]/../following-sibling::div/button[text()='Delete']
+  diagnosis_label_based_on_emergency_room_admissions_facility: //p[contains(text(), '$AND_CLI_UNIQUE_FACILITY$')]
+  add_or_edit_emergency_room_admission_modal_title: //div[@id='modals']//h4
+  add_or_edit_emergency_room_admission_date_input: //input[@id='date']
+  add_or_edit_emergency_room_admission_facility_input: //input[@id='facility']
+  add_or_edit_emergency_room_admission_diagnosis_input: //input[@id='diagnosis']
+  save_and_close_button: //button[@type='submit']
+  cancel_button: //button[text()='Cancel']
+  delete_emergency_room_admission_dialog_title: //div[@id='dialogs']//h4
+  yes_delete_button: //button[text()='Yes, Delete']
 
 care_platform_edit_participant_social_history:
   social_history_subtitle: //h4[contains(text(),'Social History')]
@@ -378,6 +392,19 @@ care_platform_edit_participant_prevention_care_screening:
 care_platform_edit_participant_notes:
   notes_subtitle: //h4[contains(text(),'Notes')]
   notes_text_area: notes
+
+care_platform_edit_participant_allergies:
+  add_allergy_button: //button[text()='Add Allergy']
+  edit_button_based_on_allergy_name: //strong[contains(text(),'$AND_CLI_UNIQUE_NAME$')]/../following-sibling::div//button[text()='Edit']
+  delete_button_based_on_allergy_name: //strong[contains(text(),'$AND_CLI_UNIQUE_NAME$')]/../following-sibling::div//button[text()='Delete']
+  reason_label_based_on_allergy_name: //strong[contains(text(),'$AND_CLI_UNIQUE_NAME$')]/../following-sibling::div//div[not(child::*)]
+  add_or_edit_allergy_modal_title: //div[@id='modals']//h4
+  add_allergy_name_input: //input[@id='name']
+  add_allergy_reaction_input:  //input[@id='reaction']
+  save_and_close_button: //button[@type='submit']
+  cancel_button: //button[text()='Cancel']
+  delete_allergy_dialog_title: //div[@id='dialogs']//h4
+  yes_delete_button: //button[text()='Yes, Delete']
 
 care_platform_edit_participant_contacts:
   add_contact_button: //button[text()='Add Contact']
@@ -501,6 +528,12 @@ care_platform_notifications:
   contact_created_notification: //div[@class='Toastify']//div[@role='alert']//div[text()='Contact created']
   contact_saved_notification: //div[@class='Toastify']//div[@role='alert']//div[text()='Contact saved']
   contact_deleted_notification: //div[@class='Toastify']//div[@role='alert']//div[text()='Contact deleted']
+  allergy_created_notification: //div[@class='Toastify']//div[@role='alert']//div[text()='Allergy created']
+  allergy_saved_notification: //div[@class='Toastify']//div[@role='alert']//div[text()='Allergy saved']
+  allergy_deleted_notification: //div[@class='Toastify']//div[@role='alert']//div[text()='Allergy deleted']
+  emergency_room_admission_created_notification: //div[@class='Toastify']//div[@role='alert']//div[text()='Emergency room admission created']
+  emergency_room_admission_saved_notification: //div[@class='Toastify']//div[@role='alert']//div[text()='Emergency room admission saved']
+  emergency_room_admission_deleted_notification: //div[@class='Toastify']//div[@role='alert']//div[text()='Emergency room admission deleted']
   dismiss_notification_button: //div[@class='Toastify']//button[text()='Dismiss']
 
 care_platform_facility:
