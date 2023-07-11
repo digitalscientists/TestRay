@@ -241,6 +241,7 @@ care_platform_edit_participant_health_overview:
   add_or_edit_issue_modal_title: //div[@id='modals']//h4
   category_select: //select[@id='category']
   common_issues_option: //option[@value='commonIssues']
+  communication_option: //option[@value='communication']
   issue_input: //input[@id='issue']
   save_and_close_button: //button[@type='submit']
   cancel_button: //button[text()='Cancel']

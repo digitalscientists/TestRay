@@ -4104,10 +4104,62 @@ TestCarePartnerParticipantInfoEditOrAddHealthOverviewInfo:
       Strategy: xpath
       Id: $PAGE.care_platform_edit_participant_health_overview.add_issue_button$
   # Click "Edit" button for an existing issue.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_health_overview.edit_button_based_on_issue$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_health_overview.edit_button_based_on_issue$
   # "Edit Issue" window appears in center of screen, showing currently entered information.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_health_overview.add_or_edit_issue_modal_title$
+    - Type: wait_for_property
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_health_overview.add_or_edit_issue_modal_title$
+      Property: textContent
+      Value: Edit Issue
   # Make any changes to update both Category and Issue description and then click the "Save and Close" button.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_health_overview.category_select$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_health_overview.category_select$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_health_overview.communication_option$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_health_overview.communication_option$
+    # Saving old issue name.
+    # may not be needed
+      Vars:
+        OLD_ISSUE: $AND_CLI_UNIQUE_ISSUE$
+    # Creating new name for issue.
+    - Type: set_env_var
+      Value: $AND_CLI_UNIQUE_ISSUE$ Edit
+      Var: UNIQUE_ISSUE
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_health_overview.issue_input$
+      Value: $AND_CLI_UNIQUE_ISSUE$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_health_overview.save_and_close_button$
   # Window closes, the updated issue information is now displayed on the profile page, and toast notification appears at the top of the page. Since the category was changed, the issue will now be displayed in the new category section.
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_health_overview.add_or_edit_issue_modal_title$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_notifications.participant_changes_saved_notification$
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id: $PAGE.care_platform_notifications.participant_changes_saved_notification$
+      # add get text action, and verify that it contains the latest issue name
   # Click "Delete" button for an existing issue.
+  
   # "Delete Issue" window will appear confirming you would like to delete the entry.
   # Click "Cancel" button.
   # Returned to page without entry being deleted.
