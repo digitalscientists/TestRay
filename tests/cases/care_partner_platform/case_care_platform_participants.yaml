@@ -3963,10 +3963,155 @@ TestCarePartnerParticipantInfoEditOrAddHealthOverviewInfo:
   # Go to Edit Participant
     - Type: case
       Value: CarePartnerEditParticipantNavigation
-  # Click Hospitalizations page in Navigation panel.
+  # Click Health Overview page in Navigation panel.
     - Type: wait_for
       Strategy: xpath
-      Id: $PAGE.care_platform_edit_participant_records.hospitalization_navigation$
+      Id: $PAGE.care_platform_edit_participant_records.health_overview_navigation$
     - Type: click
       Strategy: xpath
-      Id: $PAGE.care_platform_edit_participant_records.hospitalization_navigation$
+      Id: $PAGE.care_platform_edit_participant_records.health_overview_navigation$
+  # Page refreshes to show the edit mode for key issues and notes on the participant’s profile.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_health_overview.health_overview_subtitle$
+  # Click "Add Issue" button in upper right corner.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_health_overview.add_issue_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_health_overview.add_issue_button$
+  # "Add Issue" window appears in center of screen.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_health_overview.add_or_edit_issue_modal_title$
+    - Type: wait_for_property
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_health_overview.add_or_edit_issue_modal_title$
+      Property: textContent
+      Value:  Add Issue
+  # Enter some information, then click the "Cancel" button.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_health_overview.category_select$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_health_overview.category_select$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_health_overview.common_issues_option$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_health_overview.common_issues_option$
+    - Type: generate_unique_name
+      Name: AutoIssue
+      ResultVar: UNIQUE_ISSUE
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_health_overview.issue_input$
+      Value: $AND_CLI_UNIQUE_ISSUE$
+  # Window closes and no issue is added for participant.
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_health_overview.cancel_button$
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_health_overview.edit_button_based_on_issue$
+  # Click "Add Issue" button in upper right corner.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_health_overview.add_issue_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_health_overview.add_issue_button$
+  # "Add Issue" window appears in center of screen.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_health_overview.add_or_edit_issue_modal_title$
+    - Type: wait_for_property
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_health_overview.add_or_edit_issue_modal_title$
+      Property: textContent
+      Value: Add Issue
+  # Select a Category and enter a description of the issue before clicking "Save and Close" button.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_health_overview.category_select$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_health_overview.category_select$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_health_overview.common_issues_option$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_health_overview.common_issues_option$
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_health_overview.issue_input$
+      Value: $AND_CLI_UNIQUE_ISSUE$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_health_overview.save_and_close_button$
+  # Window closes, the new issue entered is now displayed on the page, and toast notification appears at the top of the page.
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_health_overview.add_or_edit_issue_modal_title$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_notifications.participant_changes_saved_notification$
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id: $PAGE.care_platform_notifications.participant_changes_saved_notification$
+  # Click "Edit" button for an existing issue.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_health_overview.edit_button_based_on_issue$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_health_overview.edit_button_based_on_issue$
+  # "Edit Issue" window appears in center of screen, showing currently entered information.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_health_overview.add_or_edit_issue_modal_title$
+    - Type: wait_for_property
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_health_overview.add_or_edit_issue_modal_title$
+      Property: textContent
+      Value: Edit Issue
+  # Update some of the information and click the "Cancel" button.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_health_overview.category_select$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_health_overview.category_select$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_health_overview.common_issues_option$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_health_overview.common_issues_option$
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_health_overview.issue_input$
+      Value: $AND_CLI_UNIQUE_ISSUE$ Edit
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_health_overview.cancel_button$
+  # Returned to the page; without any changes being saved to the issue.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_health_overview.add_issue_button$
+  # Click "Edit" button for an existing issue.
+  # "Edit Issue" window appears in center of screen, showing currently entered information.
+  # Make any changes to update both Category and Issue description and then click the "Save and Close" button.
+  # Window closes, the updated issue information is now displayed on the profile page, and toast notification appears at the top of the page. Since the category was changed, the issue will now be displayed in the new category section.
+  # Click "Delete" button for an existing issue.
+  # "Delete Issue" window will appear confirming you would like to delete the entry.
+  # Click "Cancel" button.
+  # Returned to page without entry being deleted.
+  # Click "Delete" button for an existing issue.
+  # "Delete Issue" window will appear confirming you would like to delete the entry.
+  # Click "Yes, Delete" to confirm delete request.
+  # Window closes, the deleted issue is no longer present on the profile page, and toast notification appears at the top of the page.

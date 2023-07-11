@@ -168,6 +168,7 @@ care_platform_edit_participant_records:
   edit_participant_form_label: //form//h4
   address_emergency_phone_navigation: //ul[contains(@class,'form-navigation')]//button[contains(text(),'Address') and contains(text(),'Emergency Phone')]
   medication_navigation: //button[contains(@class,'form-navigation-link') and contains(text(),'Medications')]
+  health_overview_navigation: //ul[contains(@class,'form-navigation')]//button[contains(text(),'Health Overview')]
   contacts_navigation: //ul[contains(@class,'form-navigation')]//button[contains(text(),'Contacts')]
   medical_history_navigation: //button[contains(@class,'form-navigation-link') and contains(text(),'Medical History')]
   special_treatment_navigation: //button[contains(@class,'form-navigation-link') and contains(text(),'Special Treatments')]
@@ -232,6 +233,17 @@ care_platform_edit_participant_medication:
   delete_modal_medication_name: //*[@id='dialogs']//p[text()='$AND_CLI_MEDICATION$']
   delete_modal_confirm_button: //*[@id='dialogs']//button[text()='Yes, Delete']
   delete_modal_cancel_button: //*[@id='dialogs']//button[text()='Cancel']
+
+care_platform_edit_participant_health_overview:
+  health_overview_subtitle: //h4[contains(text(),'Health Overview')]
+  add_issue_button: //button[contains(text(),'Add Issue')]
+  edit_button_based_on_issue: //div[contains(text(), '$AND_CLI_UNIQUE_ISSUE$')]/following-sibling::div/button[text()='Edit']
+  add_or_edit_issue_modal_title: //div[@id='modals']//h4
+  category_select: //select[@id='category']
+  common_issues_option: //option[@value='commonIssues']
+  issue_input: //input[@id='issue']
+  save_and_close_button: //button[@type='submit']
+  cancel_button: //button[text()='Cancel']
 
 care_platform_edit_participant_medical_history:
   medical_history_subtitle: //h4[contains(text(),'Medical History')]
@@ -490,6 +502,7 @@ care_platform_notifications:
   emergency_room_admission_created_notification: //div[@class='Toastify']//div[@role='alert']//div[text()='Emergency room admission created']
   emergency_room_admission_saved_notification: //div[@class='Toastify']//div[@role='alert']//div[text()='Emergency room admission saved']
   emergency_room_admission_deleted_notification: //div[@class='Toastify']//div[@role='alert']//div[text()='Emergency room admission deleted']
+  participant_changes_saved_notification: //div[@class='Toastify']//div[@role='alert']//div[text()='Participant changes saved']
   dismiss_notification_button: //div[@class='Toastify']//button[text()='Dismiss']
 
 care_platform_facility:
