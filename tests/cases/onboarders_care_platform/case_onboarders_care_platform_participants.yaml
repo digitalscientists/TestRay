@@ -40,26 +40,22 @@ TestOnboarderCreateNewParticipant:
     - Type: wait_for
       Strategy: id
       Id: $PAGE.onboarders_add_participant_form.account_status_dropdown_button$
-    # # Add First Name
-    #   - Type: generate_unique_string
-    #     Name: "Bryan"
-    #     ResultVar: PARTICIPANT_FIRST_NAME
-    #   - Type: send_keys
-    #     Strategy: id
-    #     Id: $PAGE.onboarders_add_participant_form.firstname_input$
-    #     Value: $AND_CLI_PARTICIPANT_FIRST_NAME$
-  # Add Last name
-    # - Type: generate_unique_string
-    #   Name: "Mencio"
-    #   ResultVar: PARTICIPANT_LAST_NAME
-    # - Type: send_keys
-    #   Strategy: id
-    #   Id: $PAGE.onboarders_add_participant_form.lastname_input$
-    #   Value: $AND_CLI_PARTICIPANT_LAST_NAME$
+  # Add First Name
+    - Type: generate_unique_string
+      Name: "Bryan"
+      ResultVar: PARTICIPANT_FIRST_NAME
     - Type: send_keys
       Strategy: id
       Id: $PAGE.onboarders_add_participant_form.firstname_input$
-      Value: "Laura"
+      Value: $AND_CLI_PARTICIPANT_FIRST_NAME$
+  # Add Last name
+    - Type: generate_unique_string
+      Name: "Mencio"
+      ResultVar: PARTICIPANT_LAST_NAME
+    - Type: send_keys
+      Strategy: id
+      Id: $PAGE.onboarders_add_participant_form.lastname_input$
+      Value: $AND_CLI_PARTICIPANT_LAST_NAME$
 
   # Choose a Date of Birth
     - Type: click
