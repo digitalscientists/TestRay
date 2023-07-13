@@ -932,7 +932,9 @@ TestCarePartnerAnswerAndComplete:
 TestCarePartnerAnswerCallFromQueueAndCompleteMedicalTransfer:
   Environment: Settings
   Precases:
+    - LoginNeverAloneHelper
     - CarePartnerCleanCallQueueAndHangedCalls
+    - SeniorCleanPrompts
   Aftercases:
     - TerminateApp
   Roles:
