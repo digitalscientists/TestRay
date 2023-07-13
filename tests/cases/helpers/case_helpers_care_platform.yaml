@@ -184,6 +184,9 @@ SetPastEventForSeniors:
     - Type: case
       Value: CarePartnerLogin
       # Navigate to Participants
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform.navigation_participant$
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform.navigation_participant$

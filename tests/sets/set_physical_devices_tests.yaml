@@ -12,3 +12,4 @@ SetPhysicalDevicesTests:
     - Case: TestIDDESCompleteCallBackButtonCallAfterReceivingMessage
     - Case: TestIDDESVerifyOfflineMode
     - Case: TestIDDESPersonalCarePartnerMessagePromptAndCallBackButton
+    - Case: TestSeniorVerifyMissedCallPromptAndCallBackButton
