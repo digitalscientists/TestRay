@@ -56,7 +56,6 @@ TestOnboarderCreateNewParticipant:
       Strategy: id
       Id: $PAGE.onboarders_add_participant_form.lastname_input$
       Value: $AND_CLI_PARTICIPANT_LAST_NAME$
-
   # Choose a Date of Birth
     - Type: click
       Strategy: id
@@ -113,7 +112,7 @@ TestOnboarderCreateNewParticipant:
       Value: "30009"
   # Add Emergency Call Back Phone back
     - Type: generate_unique_number
-      Name: "000000000"
+      Name: "0000000"
       ResultVar: PARTICIPANT_EMERGENCY_PHONE_NUMBER
     - Type: send_keys
       Strategy: id
@@ -199,9 +198,6 @@ TestOnboarderCreateNewParticipant:
       Strategy: xpath
       Id: $PAGE.onboarders_participant_page.search_input$
       Value: $AND_CLI_PARTICIPANT_LAST_NAME$
-    - Type: wait_for
-      Strategy: xpath
-      Id: $PAGE.onboarders_participant_page.first_participant_row$
   # Clear the search by clicking small "x" at right of field
     - Type: click
       Strategy: xpath
