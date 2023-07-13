@@ -112,7 +112,7 @@ TestOnboarderCreateNewParticipant:
       Value: "30009"
   # Add Emergency Call Back Phone back
     - Type: generate_unique_number
-      Name: "0000000"
+      Name: "95865655656"
       ResultVar: PARTICIPANT_EMERGENCY_PHONE_NUMBER
     - Type: send_keys
       Strategy: id
@@ -199,6 +199,9 @@ TestOnboarderCreateNewParticipant:
       Id: $PAGE.onboarders_participant_page.search_input$
       Value: $AND_CLI_PARTICIPANT_LAST_NAME$
   # Clear the search by clicking small "x" at right of field
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.onboarders_participant_page.clear_search_button$
     - Type: click
       Strategy: xpath
       Id: $PAGE.onboarders_participant_page.clear_search_button$
