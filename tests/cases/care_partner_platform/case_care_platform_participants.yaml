@@ -4033,7 +4033,7 @@ TestAddEditOrDeletVendorInfo:
     - Role: desktopChrome
       App: desktop
   Actions:
-    # Variables to use for Add Vendor
+  # Variables to use for Add Vendor
     - Type: generate_unique_name
       Name: 'Airport Rides "R" Us'
       ResultVar: NAME
