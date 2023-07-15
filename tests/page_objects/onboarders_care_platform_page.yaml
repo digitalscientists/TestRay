@@ -3,7 +3,7 @@ onboarders_participant_details_pane:
 
 onboarders_edit_participant_records:
   account_status_select: accountStatus
-  account_status_option_based_on_input: //select[@id='accountStatus']/option[@value='$AND_CLI_ACCOUNT_STATUS$']
+  account_status_option_based_on_input: //select[@id='accountStatus']/option[@value='deactivated']
   participant_suspended_status_option: //*[@id='accountStatus']/option[@value='suspended']
   participant_active_status_option: //*[@id='accountStatus']/option[@value='active']
   save_changes_button: //button[text()='Save Changes']

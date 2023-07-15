@@ -452,16 +452,15 @@ TestSeniorAppActiveAccountStatusAndBehavior:
           Var: SECOND_ERROR_MESSAGE_VAR
           Value: "An unknown server-side error occurred while processing the command. Original error: Unable To Rotate Device"
 
-# CXTB-417 Senior app - Verify “Desactivated” Account Status Visuals
-TestSeniorAppDesactivatedAccountStatusAndBehavior:
+# CXTB-417 Senior app - Verify “Deactivated” Account Status Visuals
+TestSeniorAppDeactivatedAccountStatusAndBehavior:
   Environment: Settings
   Vars:
     LOGOUT_OPTION: "Go Off Shift"
-    ACCOUNT_STATUS: 'Desactivated' #this is for the precase
+    ACCOUNT_STATUS: Deactivated #this is for the precase
   Precases:
     - OnboarderPrecaseforActiveState
   Aftercases:
-    - TerminateApp
     - OnboarderCarePartnerSetParticipantStateToActive
   Roles:
     - Role: localiOS
@@ -477,7 +476,7 @@ TestSeniorAppDesactivatedAccountStatusAndBehavior:
       Value: LoginNeverAloneHelper
   # Change Onboarder to Active
     - Type: set_env_var
-      Value: 'active'
+      Value: 'Deactivated'
       Var: ACCOUNT_STATUS
     - Type: case
       Value: OnboarderSetsAccountStatus
