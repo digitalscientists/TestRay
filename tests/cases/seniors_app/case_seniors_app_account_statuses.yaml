@@ -222,7 +222,6 @@ TestSeniorPreDeliveryAccountStatusVisualsAndBehavior:
     - Type: sleep
       Time: 2
 
-
 # CXTB-436 Senior app - Verify “Suspended” Account Status Visuals
 TestSeniorAppSuspendedAccountStatus:
   Environment: Settings
