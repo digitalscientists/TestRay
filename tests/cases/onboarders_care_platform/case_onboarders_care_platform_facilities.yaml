@@ -15,7 +15,7 @@ TestOnboarderClickAndViewFacilitiesDevice:
     # click on the first listing record
     - Type: click
       Strategy: xpath
-      Id: $PAGE.care_platform_participant.first_senior_lastname$
+      Id: $PAGE.care_platform_facility.first_facility$
     # click on Overview button and verify if tab showing belongs to Overview
     - Type: click
       Strategy: xpath
