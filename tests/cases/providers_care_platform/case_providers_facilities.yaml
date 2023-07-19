@@ -122,7 +122,7 @@ TestProviderCanClickAndViewFacilitiesDeviceCallHistoryAndAccessCallRecordings:
     - Type: case
       Role: localiOS
       Value: SNFNewRequestHelper
-    # Log Call from Facility to Provider 
+    # End Call from Facility to Provider 
     - Type: case
       Role: desktopChrome
       Value: ProvidersCarePlatformEndCall
