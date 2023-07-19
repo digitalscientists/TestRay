@@ -3961,6 +3961,15 @@ TestCarePartnerParticipantReviewEditOrAddVendorInfo:
     - Type: case
       Value: CarePartnerLogin
   # looking for a senior profile and click on it
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform.navigation_participant$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform.navigation_participant$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant.search_button$
     - Type: click
       Strategy: xpath 
       Id: $PAGE.care_platform_participant.search_button$
@@ -3999,6 +4008,15 @@ TestCarePartnerParticipantEditOrAddVendorParticipantInfo:
     - Type: case
       Value: CarePartnerLogin
   # looking for a senior profile and click on it
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform.navigation_participant$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform.navigation_participant$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant.search_button$
     - Type: click
       Strategy: xpath 
       Id: $PAGE.care_platform_participant.search_button$
