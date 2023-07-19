@@ -243,7 +243,7 @@ TestOnboarderCreateNewParticipant:
       Id: $PAGE.onboarders_add_participant_form.save_changes_button$
   # Check on the submission status
       Vars:
-        TOAST_MESSAGE_SHOWN: 
+        TOAST_MESSAGE_SHOWN: Updating EMS data... 
     - Type: case
       Value: CarePartnerToastValidation
   # Adding a valid address 
