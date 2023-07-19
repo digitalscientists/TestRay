@@ -91,7 +91,6 @@ TestOnboardersAccessMyAcountWindowAndReviewMyInfo:
     - Type: case
       Value: CarePlatformUpdateInfo
 
-
 # CXTB-457: Negative Toast With No Message If Save Changes for Participant with Duplicated Email
 TestOnboarderNoNegativeToastIfParticipantIsSavedWithDuplicatedEmail:
     Environment: Settings 
