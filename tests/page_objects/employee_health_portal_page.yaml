@@ -85,7 +85,7 @@ employee_health_my_account_modal:
   update_password_current: //*[@id='currentPassword']
   update_password_new: //*[@id='password']
   update_password_confirm: //*[@id='passwordConfirmation']
-  update_password_change_button: //*[@tab-title='Update Password']//button[text()='Change My Password']
+  update_password_change_my_password_button: //button[@type='submit']
   update_password_cancel_button: //*[@tab-title='Update Password']//button[text()='Cancel']
   update_password_requirements_link: //span[text()='see requirements']
   update_password_requirements_text: //*[@id='passwordRequirements']
@@ -138,3 +138,29 @@ employee_health_telehealth_request_form:
   calendar_month_view: //div[@id='modals']//div[@class = 'calendar-days fade-quick-enter-done']
   tab_section: //div[contains(@class, 'box has-scrollable-content')]
   comments: comments
+
+employee_health_mobile_view_home:
+  header_menu_button: //*[@id='root']//header//button
+
+employee_health_mobile_view_menu:
+    my_info_button: //button[text()= 'My Info']
+    notifications_button: //button[text()= 'Notifications']
+    password_button: //button[text()= 'Password']
+    logout_button: //span[text()='Log Out']
+    help_button: //a[text()='Help']
+
+employee_health_mobile_view_notifications:
+    save_changes_button: //button[text()= 'Save Changes']
+    notifications_text: //*[@id='menus']//form
+    close_button: //*[@id='menus']//header//button
+
+employee_health_mobile_view_password:
+    save_changes_button: //button[text()= 'Save Changes']
+    close_button: //*[@id='menus']//header//button
+    password_requirements_text_section: //*[@id='menus']/div/form/div[4]/p
+
+employee_health_mobile_view_logut_dialog:
+    my_info_button: //button[text()= 'My Info']
+    notifications_button: //button[text()= 'Notifications']
+    cancel_button: //button[text()= 'Cancel']
+    logout_button: //button[text()='Log Out']

@@ -136,7 +136,7 @@ EmployeeHealthPortalUpdateAccountPassword:
       Value: $AND_CLI_alternative_correct_password$
     - Type: click
       Strategy: xpath
-      Id: $PAGE.employee_health_my_account_modal.update_password_change_button$
+      Id: $PAGE.employee_health_my_account_modal.update_password_change_my_password_button$
   #Wait for failure alert
     - Type: wait_for
       Strategy: xpath
@@ -197,7 +197,7 @@ EmployeeHealthPortalUpdateAccountPassword:
       Value: $AND_CLI_alternative_correct_password$
     - Type: click
       Strategy: xpath
-      Id: $PAGE.employee_health_my_account_modal.update_password_change_button$
+      Id: $PAGE.employee_health_my_account_modal.update_password_change_my_password_button$
   #Wait for success alert
     - Type: wait_for
       Strategy: xpath
@@ -245,7 +245,7 @@ EmployeeHealthPortalUpdateAccountPassword:
       Value: $AND_CLI_employee_user1_pwd$
     - Type: click
       Strategy: xpath
-      Id: $PAGE.employee_health_my_account_modal.update_password_change_button$
+      Id: $PAGE.employee_health_my_account_modal.update_password_change_my_password_button$
       #Wait for success alert
     - Type: wait_for
       Strategy: xpath
@@ -494,3 +494,243 @@ EmployeeHealthPortalCleanHangedCalls:
   Actions:
     # Clean hanged calls.
     - Type: ehp_clean_hanged_call
+
+NavigateToMyInfo:
+  Roles:
+    - Role: desktopChrome
+      App: desktop       
+  Actions:
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.employee_health_mobile_view_home.header_menu_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.employee_health_mobile_view_home.header_menu_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.employee_health_mobile_view_menu.my_info_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.employee_health_mobile_view_menu.my_info_button$
+
+NavigateToNotifications:
+  Roles:
+    - Role: desktopChrome
+      App: desktop       
+  Actions:
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.employee_health_mobile_view_home.header_menu_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.employee_health_mobile_view_home.header_menu_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.employee_health_mobile_view_menu.my_info_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.employee_health_mobile_view_menu.notifications_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.employee_health_mobile_view_notifications.save_changes_button$
+
+NavigateToPassword:
+  Roles:
+    - Role: desktopChrome
+      App: desktop       
+  Actions:
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.employee_health_mobile_view_home.header_menu_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.employee_health_mobile_view_home.header_menu_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.employee_health_mobile_view_menu.password_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.employee_health_mobile_view_menu.password_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.employee_health_my_account_modal.update_password_current$
+
+NavigateToHelp:
+  Roles:
+    - Role: desktopChrome
+      App: desktop       
+  Actions:
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.employee_health_mobile_view_home.header_menu_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.employee_health_mobile_view_home.header_menu_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.employee_health_mobile_view_menu.help_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.employee_health_mobile_view_menu.help_button$
+
+EmployeeHealthMobilePortalUpdateAccountPassword:
+  Vars:
+    ENV_PASS_STORE: $AND_CLI_employee_user1_pwd$ 
+  Roles:
+    - Role: desktopChrome
+      App: "desktop"
+  Actions:
+  #Calling Login case
+    - Type: case
+      Value: EmployeeHealthPortalLogIn
+  #Navigate into My Account
+    - Type: case
+      Value: NavigateToPassword
+  #Go to Update Password tab and check components visibility
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.employee_health_my_account_modal.update_password_current$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.employee_health_my_account_modal.update_password_new$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.employee_health_my_account_modal.update_password_confirm$
+  #Try incorrect current password
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.employee_health_my_account_modal.update_password_current$
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.employee_health_my_account_modal.update_password_current$
+      Value: "wrongPass!23"
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.employee_health_my_account_modal.update_password_new$
+      Value: $AND_CLI_alternative_correct_password$
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.employee_health_my_account_modal.update_password_confirm$
+      Value: $AND_CLI_alternative_correct_password$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.employee_health_my_account_modal.update_password_change_my_password_button$
+  #Wait for failure alert
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.employee_health_home_page.alert_failed_update_password$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.employee_health_mobile_view_password.close_button$  
+  #Verify the dialog is closed
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id: $PAGE.employee_health_my_account_modal.update_password_new$
+      Time: 5
+  #Navigate to Password
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.employee_health_mobile_view_menu.password_button$
+    - Type: wait_for_page_to_load
+      Time: 5
+  #Check requirements
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.employee_health_mobile_view_password.password_requirements_text_section$
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.employee_health_mobile_view_password.password_requirements_text_section$
+      Greps:
+        - var: PASSWORD_REQUIREMENTS
+          attr: textContent
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: PASSWORD_REQUIREMENTS
+          Value: 'at least 8 characters'
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: PASSWORD_REQUIREMENTS
+          Value: 'one special character'
+  #Fill the fields correctly
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.employee_health_my_account_modal.update_password_current$
+      Value: $AND_CLI_employee_user1_pwd$
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.employee_health_my_account_modal.update_password_new$
+      Value: $AND_CLI_alternative_correct_password$
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.employee_health_my_account_modal.update_password_confirm$
+      Value: $AND_CLI_alternative_correct_password$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.employee_health_my_account_modal.update_password_change_my_password_button$
+  #Wait for success alert
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.employee_health_home_page.alert_success_update_password$
+  #Log Out
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.employee_health_mobile_view_menu.logout_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.employee_health_mobile_view_logut_dialog.logout_button$
+      #Verify logout
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.employee_health_login_page.log_in_button$
+  #Setting the password var to the new value
+    - Type: set_env_var
+      Value: $AND_CLI_alternative_correct_password$
+      Var: employee_user1_pwd
+  #Log In with new credentials
+    - Type: case
+      Value: EmployeeHealthPortalLogIn
+  #Verify the login with the new password was successful
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.employee_health_home_page.call_now_button$
+  #Restore original password
+    - Type: case
+      Value: NavigateToPassword
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.employee_health_my_account_modal.update_password_current$
+      Value: $AND_CLI_employee_user1_pwd$
+      #Restore variables
+    - Type: set_env_var
+      Value: $AND_CLI_ENV_PASS_STORE$
+      Var: employee_user1_pwd
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.employee_health_my_account_modal.update_password_new$
+      Value: $AND_CLI_employee_user1_pwd$
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.employee_health_my_account_modal.update_password_confirm$
+      Value: $AND_CLI_employee_user1_pwd$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.employee_health_my_account_modal.update_password_change_my_password_button$
+      #Wait for success alert
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.employee_health_home_page.alert_success_update_password$  
+      #Log Out
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.employee_health_mobile_view_menu.logout_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.employee_health_mobile_view_logut_dialog.logout_button$
+      #Verify logout
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.employee_health_login_page.log_in_button$
