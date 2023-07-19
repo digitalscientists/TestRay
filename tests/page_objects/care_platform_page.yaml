@@ -539,3 +539,5 @@ care_platform_edit_participants_vendor:
   modal_title_label: //div[@id='modals']//h4[text()='$AND_CLI_MODAL_NAME$']
   dialog_title_label: //div[@id='dialogs']//h4[text()='$AND_CLI_MODAL_NAME$']
   modal: //div[@id='modals']//div[contains(@class,'modal')]
+  nav_vendor_button: //ul[@class='form-navigation']//li/button[text()='Vendors']
+  button_edit_participant_info: //button[text()='Edit Info']

@@ -3988,8 +3988,8 @@ TestCarePartnerParticipantReviewEditOrAddVendorInfo:
     - Type: case
       Value: AddEditOrDeleteParticipantVendorInfo
 
-# CXTB-450 Participant Profile - Review, Edit or Add Vendor Info
-TestCarePartnerParticipantReviewEditOrAddVendorInfothroughtEditInfo:
+# CXTB-495 Edit or Add Vendors Info - Edit Participant Info
+TestCarePartnerParticipantReviewEditOrAddVendorParticipantInfo:
   Environment: Settings
   Roles:
     - Role: desktopChrome
@@ -4015,14 +4015,14 @@ TestCarePartnerParticipantReviewEditOrAddVendorInfothroughtEditInfo:
   # Click on "Edit Info" button 
     - Type: click
       Strategy: xpath 
-      Id: //button[text()='Edit Info']
+      Id: $PAGE.care_platform_edit_participants_vendor.button_edit_participant_info$
   # go to "Vendor" seccion and click on it.
     - Type: scroll_to
       Strategy: xpath
-      Id: //ul[@class='form-navigation']//li/button[text()='Vendors']
+      Id: $PAGE.care_platform_edit_participants_vendor.nav_vendor_button$
     - Type: click
       Strategy: xpath
-      Id: //ul[@class='form-navigation']//li/button[text()='Vendors']
+      Id: $PAGE.care_platform_edit_participants_vendor.nav_vendor_button$
   # Add Edit Or Delete vendor Info
     - Type: case
       Value: AddEditOrDeleteParticipantVendorInfo
