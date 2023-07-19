@@ -87,6 +87,9 @@ SetScheduledCallForSeniors:
     - Type: case
       Value: CarePartnerLogin   
     # Navigate to Participants
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform.navigation_participant$
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform.navigation_participant$
@@ -184,6 +187,9 @@ SetPastEventForSeniors:
     - Type: case
       Value: CarePartnerLogin
       # Navigate to Participants
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform.navigation_participant$
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform.navigation_participant$
@@ -1084,7 +1090,7 @@ CarePlatformUpdatePassword:
   #Verify the login with the new password was successful
     - Type: wait_for
       Strategy: xpath
-      Id: $PAGE.care_platform_header.headset_icon$
+      Id: $PAGE.care_platform_header.user_dropdown_button$
   #Restore the password
   #Going to My Account
     - Type: click
@@ -1715,3 +1721,28 @@ CarePartnerEditParticipantNavigation:
       Id: $PAGE.care_platform_participant_records.edit_info_button$
     - Type: sleep
       Time: 1
+
+CarePartnerToastValidation:
+  Environment: Settings
+  Roles:
+    - Role: desktopChrome
+      App: desktop
+  Actions:
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform.carepartner_toast_notification$
+    - Type: get_text
+      Strategy: xpath
+      Id : $PAGE.care_platform.carepartner_toast_notification$
+      Greps:
+        - var: TOAST_MESSAGE
+          match: "(.*)"
+    - Type: assert
+      Role: desktopChrome
+      Asserts:
+        - Type: eq
+          Var: TOAST_MESSAGE
+          Value: $AND_CLI_TOAST_MESSAGE_SHOWN$
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id: $PAGE.care_platform.carepartner_toast_notification$
