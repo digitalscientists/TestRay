@@ -338,6 +338,7 @@ Actions:
 21. [return_element_attribute](#return_element_attribute)
 22. [hover](#hover)
 23. [clear_field](#clear_field)
+24. [return_element_location](#return_element_location)
 
 ## Only Browser
 
@@ -352,6 +353,9 @@ Actions:
 9. [click_js](#click_js)
 10. [add_cookie](#add_cookie)
 11. [wait_for_property](#wait_for_property)
+12. [clear_field_js](#clear_field_js)
+13. [clear_field_by_backspace](#clear_field_by_backspace)
+14. [refresh](#refresh)
 
 ## Only Mobile
 
@@ -405,7 +409,7 @@ This is not a type but can be used in different Types as a Validation for the ac
 1. [calculate_minutes_passed_by_from_event_creation](#calculate_minutes_passed_by_from_event_creation)
 2. [verify_event_went_to_bottom](#verify_event_went_to_bottom)
 3. [verify_all_events_match_todays_date](#verify_all_events_match_todays_date)
-4. [credentials_checkbox](#credentials_checkbox)
+4. [set_checkbox_status](#set_checkbox_status)
 5. [get_day](#get_day)
 6. [get_next_month](#get_next_month)
 7. [generate_random_day](#generate_random_day)
@@ -653,6 +657,13 @@ Hovers over an element.
 	  Strategy: id/css/xpath/uiautomator/class_chain/...
 	  Id: //some/path
 	  NoRaise: false/true (Default - false -> will rise error on fail)
+### <a id="return_element_location"></a>return_element_location
+
+	- Type: return_element_location
+	  Role: role1 (Optional. if not specified will use the first one defined in the case Roles)
+	  Strategy: id/css/xpath/uiautomator/class_chain/...
+	  Id: //some/path
+	  ResultVar: var1
 
 
 ## Only Browser
@@ -763,6 +774,31 @@ Waits for the element to have a specific JS property value.
     Property: Js Property e.g. className
     Value:  Desired value
     Time: Time (int) e.g. 10
+
+### <a id="clear_field_js"></a>clear_field_js
+
+Sets empty value for element.
+
+  - Type: clear_field_js
+    Role: role1 (Optional)
+    Strategy: xpath | id | etc.
+    Id: //some//path
+
+### <a id="clear_field_by_backspace"></a>clear_field_by_backspace
+
+Sets empty value for element.
+
+  - Type: clear_field_by_backspace
+    Role: role1 (Optional)
+    Strategy: xpath | id | etc.
+    Id: //some//path
+
+### <a id="refresh"></a>refresh
+
+Refreshes the browsers tab.
+
+  - Type: refresh
+    Role: role1
 
 ## Only Mobile
 
@@ -1158,11 +1194,11 @@ Custom method to verify that all events are matching today's date.
       SecondStrategy: xpath | class_chain | etc.
       SecondId: Path to the date element e.g. $PAGE.seniors_app_home.date_value_appointment_modal$
 
-### <a id="credentials_checkbox"></a>credentials_checkbox
+### <a id="set_checkbox_status"></a>set_checkbox_status
 
 Guarantee that the checkbox is checked or unchecked depending on the option.
 
-    - Type: credentials_checkbox
+    - Type: set_checkbox_status
       Strategy: xpath | id | etc.
       Option: check | uncheck
       Id: //some//path

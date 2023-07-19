@@ -629,6 +629,7 @@ TestCarePartnerParticipantReview:
       Role: desktopChrome
 
 # CXTB-95 - Answer Call from Queue & Complete the Session (without Medical Transfer)
+# CXTB-443 - Select Call in Queue and Get Call Answered Notification
 TestCarePartnerAnswerAndComplete:
   Environment: Settings
   Precases:
@@ -931,7 +932,9 @@ TestCarePartnerAnswerAndComplete:
 TestCarePartnerAnswerCallFromQueueAndCompleteMedicalTransfer:
   Environment: Settings
   Precases:
+    - LoginNeverAloneHelper
     - CarePartnerCleanCallQueueAndHangedCalls
+    - SeniorCleanPrompts
   Aftercases:
     - TerminateApp
   Roles:
@@ -942,9 +945,6 @@ TestCarePartnerAnswerCallFromQueueAndCompleteMedicalTransfer:
     - Role: desktopChrome1
       App: desktop
   Actions:
-  # Login as a senior.
-    - Type: case
-      Value: LoginNeverAloneHelper
   # Generate a medical call as a senior.
     - Type: case
       Value: CallCarePartner
@@ -2056,3 +2056,2189 @@ TestCarePartnerTrackTimeAndEditFollowUpTicketsParticipantComponent:
     - Type: wait_not_visible
       Strategy: xpath
       Id: $PAGE.care_platform_notifications.follow_up_ticket_completed_notification$
+
+#CXTB-435 Participant Pane - Edit EMS Setting & Address
+TestCarePartnerEditEMSSettingAndAddressParticipant:
+  Environment: Settings
+  Vars:
+    EMS_OPTION: 'false'
+    LOGOUT_OPTION: 'Go Off Shift'
+  Precases:
+    - CarePartnerCleanCallQueueAndHangedCalls
+  Aftercases:
+    - CarePlatformLogout
+  Roles:
+    - Role: desktopChrome
+      App: desktop
+  Actions:
+  # Calling Login case.
+    - Type: case
+      Value: CarePartnerLogin
+  # Navigate to Participants
+    - Type: click
+      Strategy: xpath
+      Id : $PAGE.care_platform.navigation_participant$
+  # Select first participant by name in the list
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant.senior_complete_name$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant.senior_complete_name$
+  # Go to Records
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_details.records_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_records.participant_name$
+  # Click on the "Edit Info" button.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_records.edit_info_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_records.edit_info_button$
+  # Check title
+    - Type: sleep
+      Time: 1
+    - Type: get_text
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_records.edit_title$
+      Greps:
+        - var: EDIT_TITLE
+          match: "Edit*"
+      Asserts:
+        - Type: contain
+          Var: EDIT_TITLE
+          Value: $AND_CLI_senior_user1_name$ $AND_CLI_senior_user1_lastname$
+  # Select the "Address/Emergency Phone" option on the navigation bar at the left.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_records.address_emergency_phone_navigation$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_records.address_emergency_phone_navigation$
+  # Select EMS option 'NO'
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_address_emergency_phone.enable_ems_calls_option_based_on_user_input$
+    - Type: click
+      Strategy: id
+      Id: $PAGE.care_platform_edit_participant_address_emergency_phone.adress_input$
+    - Type: clear_field_js
+      Strategy: id
+      Id: $PAGE.care_platform_edit_participant_address_emergency_phone.adress_input$
+    - Type: send_keys
+      Strategy: id
+      Id: $PAGE.care_platform_edit_participant_address_emergency_phone.adress_input$
+      Value: Automated test wrong address
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_records.save_changes_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_notifications.ems_data_updated_notification$
+  # Select EMS option 'Yes' and use random/invalid address
+    - Type: set_env_var
+      Value: 'true'
+      Var: EMS_OPTION
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_address_emergency_phone.enable_ems_calls_option_based_on_user_input$
+    - Type: click
+      Strategy: id
+      Id: $PAGE.care_platform_edit_participant_address_emergency_phone.adress_input$
+    - Type: clear_field_js
+      Strategy: id
+      Id: $PAGE.care_platform_edit_participant_address_emergency_phone.adress_input$
+    - Type: send_keys
+      Strategy: id
+      Id: $PAGE.care_platform_edit_participant_address_emergency_phone.adress_input$
+      Value: Automated test wrong address
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_records.save_changes_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_notifications.ems_address_error_notification$
+      Time: 10
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_address_emergency_phone.fix_address_error$
+    # Use valid phone number and enter an address value that’s almost fully valid
+    - Type: click
+      Strategy: id
+      Id: $PAGE.care_platform_edit_participant_address_emergency_phone.adress_input$
+    - Type: clear_field_js
+      Strategy: id
+      Id: $PAGE.care_platform_edit_participant_address_emergency_phone.adress_input$
+    - Type: send_keys
+      Strategy: id
+      Id: $PAGE.care_platform_edit_participant_address_emergency_phone.adress_input$
+      Value: 230 Welcome Way Boulevard
+    - Type: click
+      Strategy: id
+      Id: $PAGE.care_platform_edit_participant_address_emergency_phone.city_input$
+    - Type: clear_field_js
+      Strategy: id
+      Id: $PAGE.care_platform_edit_participant_address_emergency_phone.city_input$
+    - Type: send_keys
+      Strategy: id
+      Id: $PAGE.care_platform_edit_participant_address_emergency_phone.city_input$
+      Value: Indianapolis
+    - Type: click
+      Strategy: id
+      Id: $PAGE.care_platform_edit_participant_address_emergency_phone.state_dropdown$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_address_emergency_phone.state_in_dropdown_option$
+    - Type: click
+      Strategy: id
+      Id: $PAGE.care_platform_edit_participant_address_emergency_phone.zip_code_input$
+    - Type: clear_field_js
+      Strategy: id
+      Id: $PAGE.care_platform_edit_participant_address_emergency_phone.zip_code_input$
+    - Type: send_keys
+      Strategy: id
+      Id: $PAGE.care_platform_edit_participant_address_emergency_phone.zip_code_input$
+      Value: 46214
+    - Type: clear_field_js
+      Strategy: id
+      Id: $PAGE.care_platform_edit_participant_address_emergency_phone.phone_number_input$
+    - Type: send_keys
+      Strategy: id
+      Id: $PAGE.care_platform_edit_participant_address_emergency_phone.phone_number_input$
+      Value: 3175542652
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_records.save_changes_button$
+    # Appears notification for needed adjustments
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_notifications.ems_adjustments_needed_notification$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_address_emergency_phone.ems_address_suggestion_dialog$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_address_emergency_phone.ems_address_suggestion_go_back_button$
+    # Make a light change in the number of street or apartment
+    - Type: click
+      Strategy: id
+      Id: $PAGE.care_platform_edit_participant_address_emergency_phone.adress_2_input$
+    - Type: clear_field_js
+      Strategy: id
+      Id: $PAGE.care_platform_edit_participant_address_emergency_phone.adress_2_input$
+    - Type: send_keys
+      Strategy: id
+      Id: $PAGE.care_platform_edit_participant_address_emergency_phone.adress_2_input$
+      Value: Apt 400
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_records.save_changes_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_notifications.ems_adjustments_needed_notification$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_address_emergency_phone.ems_address_suggestion_dialog$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_address_emergency_phone.ems_address_suggestion_confirm_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_notifications.ems_data_updated_notification$
+      Time: 40
+
+#CXTB-440 Edit or Add Contacts Info - Edit Participant Info.
+TestCarePartnerParticipantInfoEditOrAddContactsInfo:
+  Environment: Settings
+  Roles:
+    - Role: desktopChrome
+      App: desktop
+  Actions:
+  # Calling Login case.
+    - Type: case
+      Value: CarePartnerLogin
+  # Navigate to Participants.
+    - Type: case
+      Value: CarePartnerNavigateToParticipants
+  # Select a participant in listing.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant.senior_complete_name$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant.senior_complete_name$
+  # Right side of screen updates to show the selected participant’s summary pane:
+  # Upper: Key summary info 
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_details.health_overview_tab_nav$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_details.medication_tab_nav$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_details.providers_tab_nav$
+  # Lower: Call History & Follow-up Tickets
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_details.call_history_tab_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_details.follow_up_tab_button$
+  # Click "Records" on right side of screen.
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_details.records_button$
+  # Page refreshes to show the Participant profile:
+  # Name and DOB at top of left panel
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_records.participant_name$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_records.participant_dob$
+  # Right side showing full screen of collected participant profile information.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_records.demographics_tab$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_records.medical_tab$
+  # Click "Edit Info" button below Name and DOB in left panel.  
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_records.edit_info_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_records.edit_info_button$
+  # Screen updates to show full screen edit mode - "Edit [participant name]" 
+  # as header on left, Navigation header showing various sections of data on right.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_records.edit_title$
+    - Type: get_text
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_records.edit_title$
+      Greps:
+        - var: EDIT_TITLE
+          match: "Edit*"
+      Asserts:
+        - Type: contain
+          Var: EDIT_TITLE
+          Value: $AND_CLI_senior_user1_name$ $AND_CLI_senior_user1_lastname$
+  # Click Contacts page in Navigation panel.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_records.contacts_navigation$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_records.contacts_navigation$
+  # Page refreshes to show the edit mode for contacts on the participant’s profile.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_contacts.add_contact_button$
+  # Click "Add Contact" button in upper right corner.
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_contacts.add_contact_button$
+  # "Add Contact" window appears in center of screen.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_contacts.add_or_edit_contact_modal_title$
+  # "Add Contact" window appears in center of screen.  
+    - Type: wait_for_property
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_contacts.add_or_edit_contact_modal_title$
+      Property: textContent
+      Value:  Add Contact
+  # Enter some information, then click the "Cancel" button.
+    - Type: generate_unique_name
+      Name: Auto
+      ResultVar: UNIQUE_FIRST_NAME
+    - Type: generate_unique_name
+      Name: Mation
+      ResultVar: UNIQUE_LAST_NAME
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_contacts.add_contact_first_name_input$
+      Value: $AND_CLI_UNIQUE_FIRST_NAME$
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_contacts.add_contact_last_name_input$
+      Value: $AND_CLI_UNIQUE_LAST_NAME$
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_contacts.add_contact_phone_number_input$
+      Value: "7879910101"
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_contacts.cancel_button$
+  # Window closes and no contact is added for participant.
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_contacts.edit_button_based_on_contact_name$
+  # Click "Add Contact" button in upper right corner.
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_contacts.add_contact_button$
+  # "Add Contact" window appears in center of screen.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_contacts.add_or_edit_contact_modal_title$
+  # "Add Contact" window appears in center of screen.  
+    - Type: wait_for_property
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_contacts.add_or_edit_contact_modal_title$
+      Property: textContent
+      Value:  Add Contact
+  # Populate contact details before clicking "Save and Close" button.
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_contacts.add_contact_first_name_input$
+      Value: $AND_CLI_UNIQUE_FIRST_NAME$
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_contacts.add_contact_last_name_input$
+      Value: $AND_CLI_UNIQUE_LAST_NAME$
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_contacts.add_contact_phone_number_input$
+      Value: "7879910101"
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_contacts.save_and_close_button$
+  # Window closes, the new contact entered is now displayed on the page, and toast notification appears at top of page.
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_contacts.add_or_edit_contact_modal_title$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_notifications.contact_created_notification$
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id: $PAGE.care_platform_notifications.contact_created_notification$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_contacts.phone_number_label_based_on_contact_name$
+    - Type: get_text
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_contacts.phone_number_label_based_on_contact_name$
+      Greps:
+        - var: FIRST_PHONE_VALUE
+          match: "(.*)"
+  # Click "Edit" button for an existing contact.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_contacts.edit_button_based_on_contact_name$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_contacts.edit_button_based_on_contact_name$
+  # "Edit Contact" window appears in center of screen, showing currently entered information.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_contacts.add_or_edit_contact_modal_title$
+    - Type: wait_for_property
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_contacts.add_or_edit_contact_modal_title$
+      Property: textContent
+      Value:  Edit Contact
+  # Update some of the information and click the "Cancel" button.
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_contacts.add_contact_phone_number_input$
+      Value: "7879921101"
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_contacts.cancel_button$
+  # Returned to the page; without any changes being saved to the contact.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_contacts.phone_number_label_based_on_contact_name$
+    - Type: get_text
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_contacts.phone_number_label_based_on_contact_name$
+      Greps:
+        - var: SECOND_PHONE_VALUE
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: eq
+          Var: FIRST_PHONE_VALUE
+          Value: $AND_CLI_SECOND_PHONE_VALUE$
+  # Click "Edit" button for an existing contact.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_contacts.edit_button_based_on_contact_name$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_contacts.edit_button_based_on_contact_name$
+  # "Edit Contact" window appears in center of screen, showing currently entered information.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_contacts.add_or_edit_contact_modal_title$
+    - Type: wait_for_property
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_contacts.add_or_edit_contact_modal_title$
+      Property: textContent
+      Value:  Edit Contact
+  # Make any changes desired before clicking "Save and Close" button.
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_contacts.add_contact_phone_number_input$
+      Value: "7879921101"
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_contacts.save_and_close_button$
+  # Window closes, the updated contact information is now displayed on the page, and toast notification appears at top of page.
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_contacts.add_or_edit_contact_modal_title$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_notifications.contact_saved_notification$
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id: $PAGE.care_platform_notifications.contact_saved_notification$
+  # Click "Delete" button for an existing contact.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_contacts.delete_button_based_on_contact_name$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_contacts.delete_button_based_on_contact_name$
+  # "Delete Contact" window will appear confirming you would like to delete the entry.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_contacts.delete_contact_dialog_title$
+    - Type: wait_for_property
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_contacts.delete_contact_dialog_title$
+      Property: textContent
+      Value:  Delete Contact
+  # Click "Cancel" button.
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_contacts.cancel_button$
+  # Returned to page without entry being deleted.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_contacts.delete_button_based_on_contact_name$
+  # Click "Delete" button for an existing contact.
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_contacts.delete_button_based_on_contact_name$
+  # "Delete Contact" window will appear confirming you would like to delete the entry.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_contacts.delete_contact_dialog_title$
+    - Type: wait_for_property
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_contacts.delete_contact_dialog_title$
+      Property: textContent
+      Value:  Delete Contact
+  # Click "Yes, Delete" to confirm delete request.
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_contacts.yes_delete_button$
+  # Window closes, the deleted contact is no longer present on the page, and toast notification appears at top of page.
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_contacts.delete_contact_dialog_title$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_notifications.contact_deleted_notification$
+
+#CXTB-438 Edit Info for Existing Participant
+TestCarePartnerEditInfoForExistingParticipant:
+  Environment: Settings
+  Vars:
+    EMS_OPTION: 'false'
+    LOGOUT_OPTION: 'Go Off Shift'
+  Precases:
+    - CarePartnerCleanCallQueueAndHangedCalls
+  Aftercases:
+    - CarePlatformLogout
+  Roles:
+    - Role: desktopChrome
+      App: desktop
+  Actions:
+  # Calling Login case.
+    - Type: case
+      Value: CarePartnerLogin
+  # Go to Edit Participant
+    - Type: case
+      Value: CarePartnerEditParticipantNavigation
+  # Update existing info in Demographics
+    # If you leave a required field blank should show you an alert
+    - Type: wait_for
+      Strategy: id
+      Id: $PAGE.care_platform_edit_participant_demographics.first_name_input$
+    - Type: get_attribute
+      Strategy: id
+      Id: $PAGE.care_platform_edit_participant_demographics.first_name_input$
+      Greps:
+        - var: FIRST_NAME_PARTICIPANT
+          attr: value
+          condition: nempty
+          match: "(.*)"
+    - Type: wait_for_attribute
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_demographics.empty_first_name_error$
+      Attribute: aria-hidden
+      Value: "true"
+    - Type: clear_field_by_backspace
+      Strategy: id
+      Id: $PAGE.care_platform_edit_participant_demographics.first_name_input$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_records.edit_title$
+    - Type: wait_for_attribute
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_demographics.empty_first_name_error$
+      Attribute: aria-hidden
+      Value: "false"
+    - Type: send_keys
+      Strategy: id
+      Id: $PAGE.care_platform_edit_participant_demographics.first_name_input$
+      Value: $AND_CLI_FIRST_NAME_PARTICIPANT$
+  # Click on Medical History Page
+    # Dropdown behaviour
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_records.medical_history_navigation$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_medical_history.medical_history_subtitle$
+    - Type: wait_for
+      Strategy: id
+      Id: $PAGE.care_platform_edit_participant_medical_history.coronary_artery_diseases_select$
+    - Type: click
+      Strategy: id
+      Id: $PAGE.care_platform_edit_participant_medical_history.coronary_artery_diseases_select$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_medical_history.coronary_artery_diseases_none_option$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_medical_history.coronary_artery_diseases_active_option$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_medical_history.coronary_artery_diseases_resolved_option$
+    - Type: wait_for_attribute
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_medical_history.coronary_artery_diseases_resolved_option$
+      Attribute: selected
+      Value: "true"
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_medical_history.medical_history_subtitle$
+  # Click on Special Treatment
+    # Checkboxes behaviour
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_records.special_treatment_navigation$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_special_treatment.special_treatment_subtitle$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_special_treatment.chemotherapy_input_checkbox$
+    - Type: set_checkbox_status
+      Strategy: xpath
+      Option: check
+      Id: $PAGE.care_platform_edit_participant_special_treatment.chemotherapy_input_checkbox$
+    - Type: set_checkbox_status
+      Strategy: xpath
+      Option: uncheck
+      Id: $PAGE.care_platform_edit_participant_special_treatment.radiation_therapy_input_checkbox$
+    # Asserting is actually checked
+    - Type: wait_for_attribute
+      Strategy: id
+      Id: $PAGE.care_platform_edit_participant_special_treatment.chemotherapy_input$
+      Attribute: checked
+      Value: "true"
+  # Checking DME
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_records.dme_navigation$
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_records.changes_saved_notification$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_dme.dme_subtitle$
+    # Checkboxes behaviour
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_dme.wheelchair_input_checkbox$
+    - Type: set_checkbox_status
+      Strategy: xpath
+      Option: check
+      Id: $PAGE.care_platform_edit_participant_dme.wheelchair_input_checkbox$
+    - Type: set_checkbox_status
+      Strategy: xpath
+      Option: check
+      Id: $PAGE.care_platform_edit_participant_dme.lift_input_checkbox$
+    # Asserting is actually checked
+    - Type: wait_for_attribute
+      Strategy: id
+      Id: $PAGE.care_platform_edit_participant_dme.wheelchair_input$
+      Attribute: checked
+      Value: "true"
+    - Type: wait_for_attribute
+      Strategy: id
+      Id: $PAGE.care_platform_edit_participant_dme.lift_input$
+      Attribute: checked
+      Value: "true"
+    - Type: set_checkbox_status
+      Strategy: xpath
+      Option: uncheck
+      Id: $PAGE.care_platform_edit_participant_dme.lift_input_checkbox$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_dme.dme_subtitle$
+    - Type: get_attribute
+      Strategy: id
+      Id: $PAGE.care_platform_edit_participant_dme.lift_input$
+      Greps:
+        - var: UNCHECKED
+          attr: checked
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: ne
+          Var: UNCHECKED
+          Value: 'true'
+    - Type: get_attribute
+      Strategy: id
+      Id: $PAGE.care_platform_edit_participant_dme.wheelchair_input$
+      Greps:
+        - var: CHECKED
+          attr: checked
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: eq
+          Var: CHECKED
+          Value: 'true'
+  # Checking Hospitalization
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_records.hospitalization_navigation$
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_records.changes_saved_notification$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_hospitalization.hospitalization_subtitle$
+    - Type: wait_for
+      Strategy: id
+      Id: $PAGE.care_platform_edit_participant_hospitalization.hospitalization_textarea$
+    - Type: clear_field_js
+      Strategy: id
+      Id: $PAGE.care_platform_edit_participant_hospitalization.hospitalization_textarea$
+    - Type: generate_unique_name
+      Name: "Automation text"
+      ResultVar: UNIQUE_TEXT
+    - Type: send_keys
+      Strategy: id
+      Id: $PAGE.care_platform_edit_participant_hospitalization.hospitalization_textarea$
+      Value: $AND_CLI_UNIQUE_TEXT$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_records.save_changes_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_records.changes_saved_notification$
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_records.changes_saved_notification$
+    - Type: wait_for
+      Strategy: id
+      Id: $PAGE.care_platform_edit_participant_hospitalization.hospitalization_textarea$
+    - Type: get_attribute
+      Strategy: id
+      Id: $PAGE.care_platform_edit_participant_hospitalization.hospitalization_textarea$
+      Greps:
+        - var: TEXTAREA_TEXT
+          attr: value
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: TEXTAREA_TEXT
+          Value: $AND_CLI_UNIQUE_TEXT$
+  #Check Social History
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_records.social_history_navigation$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_social_history.social_history_subtitle$
+    # Edit fields and dropdown selections
+    - Type: wait_for
+      Strategy: id
+      Id: $PAGE.care_platform_edit_participant_social_history.education_status_input$
+    - Type: clear_field_by_backspace
+      Strategy: id
+      Id: $PAGE.care_platform_edit_participant_social_history.education_status_input$
+    - Type: send_keys
+      Strategy: id
+      Id: $PAGE.care_platform_edit_participant_social_history.education_status_input$
+      Value: "Automation Academy"
+    - Type: click
+      Strategy: id
+      Id: $PAGE.care_platform_edit_participant_social_history.relationship_status_select$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_social_history.relationship_single_option$
+    - Type: wait_for_attribute
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_social_history.relationship_single_option$
+      Attribute: selected
+      Value: "true"
+    - Type: click
+      Strategy: id
+      Id: $PAGE.care_platform_edit_participant_social_history.relationship_status_select$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_social_history.relationship_married_option$
+    - Type: wait_for_attribute
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_social_history.relationship_married_option$
+      Attribute: selected
+      Value: "true"
+  # Check Housing
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_records.housing_navigation$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_housing.housing_subtitle$
+    # Change dropdown
+    - Type: click
+      Strategy: id
+      Id: $PAGE.care_platform_edit_participant_housing.own_or_rent_select$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_housing.own_select_option$
+    - Type: wait_for_attribute
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_housing.own_select_option$
+      Attribute: selected
+      Value: "true"
+    - Type: click
+      Strategy: id
+      Id: $PAGE.care_platform_edit_participant_housing.own_or_rent_select$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_housing.rent_select_option$
+    - Type: wait_for_attribute
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_housing.rent_select_option$
+      Attribute: selected
+      Value: "true"
+  # Check Member Safety
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_records.member_safety_navigation$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_member_safety.member_safety_subtitle$
+    # Change radio button values
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_member_safety.feels_safe_yes_option$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_member_safety.feels_safe_yes_option$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_member_safety.feels_safe_no_option$
+    # Change tabs, it should save and show the change when going back to Member Safety
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_records.housing_navigation$
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_records.changes_saved_notification$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_records.member_safety_navigation$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_member_safety.feels_safe_no_option$
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_member_safety.feels_safe_no_option$
+      Greps:
+        - var: SELECTED_NO
+          attr: innerHTML
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: SELECTED_NO
+          Value: 'checked'
+  # Community Support / Backup Plan
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_records.community_support_backup_plan_navigation$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_community_backup.community_backup_family_option$
+    - Type: set_checkbox_status
+      Strategy: xpath
+      Option: uncheck
+      Id: $PAGE.care_platform_edit_participant_community_backup.community_backup_family_option$
+    - Type: set_checkbox_status
+      Strategy: xpath
+      Option: check
+      Id: $PAGE.care_platform_edit_participant_community_backup.community_backup_friends_option$
+  # Community Engagement
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_records.community_engagement_navigation$
+    # Change radio button values
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_community_engagement.community_engagement_yes_option$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_community_engagement.community_engagement_yes_option$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_community_engagement.community_engagement_no_option$
+    # Change tabs, it should save and show the change when going back to Community Engagement
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_records.housing_navigation$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_records.community_engagement_navigation$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_community_engagement.community_engagement_no_option$
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_community_engagement.community_engagement_no_option$
+      Greps:
+        - var: SELECTED_NO
+          attr: innerHTML
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: SELECTED_NO
+          Value: 'checked'
+  # Spiritual
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_records.spiritual_navigation$
+    # Change radio button values
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_spiritual.spiritual_no_option$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_spiritual.spiritual_no_option$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_spiritual.spiritual_yes_option$
+    # Change tabs, it should save and show the change when going back to Spiritual
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_records.housing_navigation$
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_records.changes_saved_notification$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_records.spiritual_navigation$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_spiritual.spiritual_yes_option$
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_spiritual.spiritual_yes_option$
+      Greps:
+        - var: SELECTED_YES
+          attr: innerHTML
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: SELECTED_YES
+          Value: 'checked'
+  # Cognitive / Learning
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_records.cognitive_learning_navigation$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_cognitive_learning.cognitive_learning_subtitle$
+    # Checking and unchecking some checkboxes
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_cognitive_learning.reading_option$
+    - Type: set_checkbox_status
+      Strategy: xpath
+      Option: check
+      Id: $PAGE.care_platform_edit_participant_cognitive_learning.reading_option$
+    - Type: set_checkbox_status
+      Strategy: xpath
+      Option: check
+      Id: $PAGE.care_platform_edit_participant_cognitive_learning.games_option$
+    - Type: set_checkbox_status
+      Strategy: xpath
+      Option: uncheck
+      Id: $PAGE.care_platform_edit_participant_cognitive_learning.writing_option$
+    - Type: set_checkbox_status
+      Strategy: xpath
+      Option: uncheck
+      Id: $PAGE.care_platform_edit_participant_cognitive_learning.discovery_option$
+  # Dietary Restrictions
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_records.dietary_destrictions_navigation$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_dietary_restrictions.dietary_restrictions_subtitle$
+    # Check and uncheck some checkboxes
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_dietary_restrictions.diabetic_option$
+    - Type: set_checkbox_status
+      Strategy: xpath
+      Option: check
+      Id: $PAGE.care_platform_edit_participant_dietary_restrictions.diabetic_option$
+    - Type: set_checkbox_status
+      Strategy: xpath
+      Option: check
+      Id: $PAGE.care_platform_edit_participant_dietary_restrictions.dash_option$
+    # Changing tabs to ensure that the data is preserved
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_records.housing_navigation$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_records.dietary_destrictions_navigation$
+    - Type: wait_for
+      Strategy: id
+      Id: $PAGE.care_platform_edit_participant_dietary_restrictions.diabetic_input$
+    # Checking the attributes match the selection done to the checkboxes
+    - Type: wait_for_attribute
+      Strategy: id
+      Id: $PAGE.care_platform_edit_participant_dietary_restrictions.diabetic_input$
+      Attribute: checked
+      Value: "true"
+    - Type: wait_for_attribute
+      Strategy: id
+      Id: $PAGE.care_platform_edit_participant_dietary_restrictions.dash_input$
+      Attribute: checked
+      Value: "true"
+  # Financial
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_records.financial_navigation$
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_records.changes_saved_notification$  
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_financial.financial_subtitle$
+    # Check and uncheck some checkboxes
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_financial.transportation_option$
+    - Type: set_checkbox_status
+      Strategy: xpath
+      Option: check
+      Id: $PAGE.care_platform_edit_participant_financial.transportation_option$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_financial.transportation_option$
+    - Type: set_checkbox_status
+      Strategy: xpath
+      Option: check
+      Id: $PAGE.care_platform_edit_participant_financial.rent_option$
+    - Type: set_checkbox_status
+      Strategy: xpath
+      Option: uncheck
+      Id: $PAGE.care_platform_edit_participant_financial.rent_option$
+    # Changing tabs to ensure the data is getting preserved
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_records.housing_navigation$
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_records.changes_saved_notification$ 
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_records.financial_navigation$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_financial.transportation_option$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_financial.rent_option$
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_financial.rent_option$
+      Greps:
+        - var: UNCHECK_RENT
+          attr: innerHTML
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: n_contain
+          Var: UNCHECK_RENT
+          Value: 'checked'
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_financial.transportation_option$
+      Greps:
+        - var: CHECK_TRANSPORTATION
+          attr: innerHTML
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: CHECK_TRANSPORTATION
+          Value: 'checked'
+  # ADL's
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_records.adls_navigation$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_adls.adls_subtitle$
+    # Check and uncheck some checkboxes
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_adls.toileting_option$
+    - Type: set_checkbox_status
+      Strategy: xpath
+      Option: check
+      Id: $PAGE.care_platform_edit_participant_adls.toileting_option$
+    - Type: set_checkbox_status
+      Strategy: xpath
+      Option: check
+      Id: $PAGE.care_platform_edit_participant_adls.house_cleaning_option$
+    - Type: set_checkbox_status
+      Strategy: xpath
+      Option: uncheck
+      Id: $PAGE.care_platform_edit_participant_adls.shopping_option$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_records.save_changes_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_records.changes_saved_notification$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_records.housing_navigation$
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_records.changes_saved_notification$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_records.adls_navigation$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_adls.toileting_option$
+    # Check that the attributes matches the status of the checkboxes
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_adls.shopping_option$
+      Greps:
+        - var: UNCHECK_SHOPPING
+          attr: innerHTML
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: n_contain
+          Var: UNCHECK_SHOPPING
+          Value: 'checked'
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_adls.toileting_option$
+      Greps:
+        - var: CHECK_TOILETING
+          attr: innerHTML
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: CHECK_TOILETING
+          Value: 'checked'
+    - Type: wait_for_attribute
+      Strategy: id
+      Id: $PAGE.care_platform_edit_participant_adls.house_cleaning_input$
+      Attribute: checked
+      Value: "true"
+  # Surgical History
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_records.surgical_history_navigation$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_surgical_history.surgical_history_subtitle$
+    # Check and uncheck some checkboxes
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_surgical_history.resection_of_tumor_option$
+    - Type: set_checkbox_status
+      Strategy: xpath
+      Option: check
+      Id: $PAGE.care_platform_edit_participant_surgical_history.resection_of_tumor_option$
+    - Type: set_checkbox_status
+      Strategy: xpath
+      Option: uncheck
+      Id: $PAGE.care_platform_edit_participant_surgical_history.sinus_surgery_option$
+    - Type: set_checkbox_status
+      Strategy: xpath
+      Option: check
+      Id: $PAGE.care_platform_edit_participant_surgical_history.valve_replacement_option$
+    - Type: set_checkbox_status
+      Strategy: xpath
+      Option: uncheck
+      Id: $PAGE.care_platform_edit_participant_surgical_history.endoscopy_option$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_records.save_changes_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_records.changes_saved_notification$
+  # Prevention Care Screening
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_records.prevention_care_screening_navigation$
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_records.changes_saved_notification$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_prevention_care_screening.prevention_care_screening_subtitle$
+    # Check some checkboxes
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_prevention_care_screening.col_option$
+    - Type: set_checkbox_status
+      Strategy: xpath
+      Option: check
+      Id: $PAGE.care_platform_edit_participant_prevention_care_screening.col_option$
+    - Type: set_checkbox_status
+      Strategy: xpath
+      Option: uncheck
+      Id: $PAGE.care_platform_edit_participant_prevention_care_screening.art_screening_option$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_records.surgical_history_navigation$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_records.prevention_care_screening_navigation$
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_records.changes_saved_notification$
+    # Check that the attributes match the checking and unchecking of the checkboxes
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_prevention_care_screening.col_option$
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_prevention_care_screening.col_option$
+      Greps:
+        - var: CHECK_COL
+          attr: innerHTML
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: CHECK_COL
+          Value: 'checked'
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_prevention_care_screening.art_screening_option$
+      Greps:
+        - var: UNCHECK_ART
+          attr: innerHTML
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: n_contain
+          Var: UNCHECK_ART
+          Value: 'checked'
+  # Notes
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_records.notes_navigation$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_notes.notes_subtitle$
+    # Add new text to the notes
+    - Type: clear_field_js
+      Strategy: id
+      Id: $PAGE.care_platform_edit_participant_notes.notes_text_area$
+    - Type: send_keys
+      Strategy: id
+      Id: $PAGE.care_platform_edit_participant_notes.notes_text_area$
+      Value: $AND_CLI_UNIQUE_TEXT$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_records.save_changes_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_records.changes_saved_notification$
+    #Change tabs and check the change persist
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_records.prevention_care_screening_navigation$
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_records.changes_saved_notification$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_records.notes_navigation$  
+    - Type: wait_for
+      Strategy: id
+      Id: $PAGE.care_platform_edit_participant_notes.notes_text_area$
+    - Type: get_attribute
+      Strategy: id
+      Id: $PAGE.care_platform_edit_participant_notes.notes_text_area$
+      Greps:
+        - var: NOTES_TEXT
+          attr: value
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: NOTES_TEXT
+          Value: $AND_CLI_UNIQUE_TEXT$
+
+#CXTB-445 Edit Participant Info - Edit or Add Medication Info
+TestCarePartnerParticipantInfoEditOrAddMedicationInfo:
+  Environment: Settings
+  Vars:
+    LOGOUT_OPTION: 'Go Off Shift'
+    MEDICATION: 'AutomationMed'
+  Aftercases:
+    - CarePlatformLogout
+  Roles:
+    - Role: desktopChrome
+      App: desktop
+  Actions:
+  # Calling Login case.
+    - Type: case
+      Value: CarePartnerLogin
+  # Go to Edit Participant
+    - Type: case
+      Value: CarePartnerEditParticipantNavigation
+  # Go to Medication
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_records.medication_navigation$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_medication.medication_subtitle$
+  # Add Medication and Cancel
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_medication.add_medication_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_medication.modal_add_title$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_medication.modal_cancel_button$
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_medication.modal_cancel_button$
+  # Add Medication
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_medication.add_medication_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_medication.modal_add_title$
+    - Type: send_keys
+      Strategy: id
+      Id: $PAGE.care_platform_edit_participant_medication.modal_medication_name_input$
+      Value: $AND_CLI_MEDICATION$
+    - Type: send_keys
+      Strategy: id
+      Id: $PAGE.care_platform_edit_participant_medication.modal_medication_dose_input$
+      Value: '5 mg'
+    - Type: send_keys
+      Strategy: id
+      Id: $PAGE.care_platform_edit_participant_medication.modal_medication_frequency_input$
+      Value: '1 x daily'
+    - Type: send_keys
+      Strategy: id
+      Id: $PAGE.care_platform_edit_participant_medication.modal_medication_diagnosis_input$
+      Value: 'bugs'
+    - Type: send_keys
+      Strategy: id
+      Id: $PAGE.care_platform_edit_participant_medication.modal_medication_affordability_input$
+      Value: 'yes'
+    - Type: send_keys
+      Strategy: id
+      Id: $PAGE.care_platform_edit_participant_medication.modal_medication_self_administration_input$
+      Value: 'yes'
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_medication.modal_save_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_records.medication_saved_notification$
+  # Edit Medication and cancel
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_medication.edit_medication_by_name_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_medication.edit_medication_by_name_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_medication.modal_edit_title$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_medication.modal_cancel_button$
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_medication.modal_cancel_button$
+  # Edit Medication
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_medication.edit_medication_by_name_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_medication.edit_medication_by_name_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_medication.modal_edit_title$
+    - Type: clear_field_by_backspace
+      Strategy: id
+      Id: $PAGE.care_platform_edit_participant_medication.modal_medication_dose_input$
+    - Type: send_keys
+      Strategy: id
+      Id: $PAGE.care_platform_edit_participant_medication.modal_medication_dose_input$
+      Value: '8 mg'
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_medication.modal_save_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_records.medication_saved_notification$
+  # Delete and cancel
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_records.medication_saved_notification$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_medication.delete_medication_by_name_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_medication.delete_medication_by_name_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_medication.delete_modal_title$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_medication.delete_modal_cancel_button$
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_medication.delete_modal_cancel_button$
+  # Delete existing medication
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_medication.delete_medication_by_name_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_medication.delete_medication_by_name_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_medication.delete_modal_title$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_medication.delete_modal_medication_name$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_medication.delete_modal_confirm_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_records.medication_deleted_notification$  
+
+#CXTB-446 Edit Participant Info - Edit or Add Allergies Info
+TestCarePartnerParticipantInfoEditOrAddAllergiesInfo:
+  Environment: Settings
+  Roles:
+    - Role: desktopChrome
+      App: desktop
+  Actions:
+  # Calling Login case.
+    - Type: case
+      Value: CarePartnerLogin
+  # Go to Edit Participant
+    - Type: case
+      Value: CarePartnerEditParticipantNavigation
+  # Click Allergies page in Navigation panel.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_records.allergies_navigation$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_records.allergies_navigation$
+  # Page refreshes to show the edit mode for allergies on the participant’s profile.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_allergies.add_allergy_button$
+  # Click "Add Allergy" button in upper right corner.
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_allergies.add_allergy_button$
+  # "Add Allergy" window appears in center of screen.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_allergies.add_or_edit_allergy_modal_title$
+    - Type: wait_for_property
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_allergies.add_or_edit_allergy_modal_title$
+      Property: textContent
+      Value:  Add allergy
+  # Enter some information, then click the "Cancel" button.
+    - Type: generate_unique_name
+      Name: Name
+      ResultVar: UNIQUE_NAME
+    - Type: generate_unique_name
+      Name: Reaction
+      ResultVar: UNIQUE_REACTION
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_allergies.add_allergy_name_input$
+      Value: $AND_CLI_UNIQUE_NAME$
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_allergies.add_allergy_reaction_input$
+      Value: $AND_CLI_UNIQUE_REACTION$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_allergies.cancel_button$
+  # Window closes and no allergy is added for participant.
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_allergies.add_or_edit_allergy_modal_title$
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_allergies.cancel_button$
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_allergies.edit_button_based_on_allergy_name$
+  # Click "Add Allergy" button in upper right corner.
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_allergies.add_allergy_button$
+  # "Add Allergy" window appears in center of screen.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_allergies.add_or_edit_allergy_modal_title$
+    - Type: wait_for_property
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_allergies.add_or_edit_allergy_modal_title$
+      Property: textContent
+      Value:  Add allergy
+  # Populate allergy details before clicking "Save and Close" button.
+    - Type: generate_unique_name
+      Name: Name
+      ResultVar: UNIQUE_NAME
+    - Type: generate_unique_name
+      Name: Reaction
+      ResultVar: UNIQUE_REACTION
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_allergies.add_allergy_name_input$
+      Value: $AND_CLI_UNIQUE_NAME$
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_allergies.add_allergy_reaction_input$
+      Value: $AND_CLI_UNIQUE_REACTION$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_allergies.save_and_close_button$
+  # Window closes, the new allergy entered is now displayed on the page, and toast notification appears at the top of the page.
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_allergies.add_or_edit_allergy_modal_title$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_notifications.allergy_created_notification$
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id: $PAGE.care_platform_notifications.allergy_created_notification$
+  # Click "Edit" button for an existing allergy.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_allergies.edit_button_based_on_allergy_name$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_allergies.edit_button_based_on_allergy_name$
+  # "Edit Allergy" window appears in center of screen, showing currently entered information.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_allergies.add_or_edit_allergy_modal_title$
+    - Type: wait_for_property
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_allergies.add_or_edit_allergy_modal_title$
+      Property: textContent
+      Value:  Edit Allergy
+  # Update some of the information and click the "Cancel" button.
+    - Type: generate_unique_name
+      Name: Updated
+      ResultVar: SECOND_REACTION
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_allergies.add_allergy_reaction_input$
+      Value: $AND_CLI_SECOND_REACTION$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_allergies.cancel_button$
+  # Returned to the page; without any changes being saved to the allergy.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_allergies.reason_label_based_on_allergy_name$
+    - Type: get_text
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_allergies.reason_label_based_on_allergy_name$
+      Greps:
+        - var: SECOND_REACTION_VALUE
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: eq
+          Var: UNIQUE_REACTION
+          Value: $AND_CLI_SECOND_REACTION_VALUE$
+  # Click "Edit" button for an existing allergy.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_allergies.edit_button_based_on_allergy_name$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_allergies.edit_button_based_on_allergy_name$
+  # "Edit Allergy" window appears in center of screen, showing currently entered information.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_allergies.add_or_edit_allergy_modal_title$
+    - Type: wait_for_property
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_allergies.add_or_edit_allergy_modal_title$
+      Property: textContent
+      Value:  Edit Allergy
+  # Make any changes desired before clicking "Save and Close" button.
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_allergies.add_allergy_reaction_input$
+      Value: $AND_CLI_SECOND_REACTION$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_allergies.save_and_close_button$
+  # Window closes, the updated allergy information is now displayed on the page, and toast notification appears at the top of the page.
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_allergies.add_or_edit_allergy_modal_title$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_notifications.allergy_saved_notification$
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id: $PAGE.care_platform_notifications.allergy_saved_notification$
+  # Click "Delete" button for an existing allergy.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_allergies.delete_button_based_on_allergy_name$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_allergies.delete_button_based_on_allergy_name$
+  # "Delete Allergy" window will appear confirming you would like to delete the entry.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_allergies.delete_allergy_dialog_title$
+    - Type: wait_for_property
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_allergies.delete_allergy_dialog_title$
+      Property: textContent
+      Value:  Delete Allergy
+  # Click "Cancel" button.
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_allergies.cancel_button$
+  # Returned to page without entry being deleted.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_allergies.delete_button_based_on_allergy_name$
+  # Click "Delete" button for an existing allergy.
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_allergies.delete_button_based_on_allergy_name$
+  # "Delete Allergy" window will appear confirming you would like to delete the entry.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_allergies.delete_allergy_dialog_title$
+    - Type: wait_for_property
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_allergies.delete_allergy_dialog_title$
+      Property: textContent
+      Value:  Delete Allergy
+  # Click "Yes, Delete" to confirm delete request.
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_allergies.yes_delete_button$
+  # Window closes, the deleted allergy is no longer present on the page, and toast notification appears at the top of the page.
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_allergies.delete_allergy_dialog_title$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_notifications.allergy_deleted_notification$
+
+#CXTB-449 Edit Participant Info - Edit or Add Emergency Room Admissions Info
+TestCarePartnerParticipantInfoEditOrAddEmergencyRoomAdmissionsInfo:
+  Environment: Settings
+  Roles:
+    - Role: desktopChrome
+      App: desktop
+  Actions:
+  # Calling Login case.
+    - Type: case
+      Value: CarePartnerLogin
+  # Go to Edit Participant
+    - Type: case
+      Value: CarePartnerEditParticipantNavigation
+  # Click Hospitalizations page in Navigation panel.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_records.hospitalization_navigation$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_records.hospitalization_navigation$
+  # Page refreshes to show the edit mode for hospitalization on the participant’s profile.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_hospitalization.emergency_room_tab$
+  # Click Emergency Room Admissions sub-header.
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_hospitalization.emergency_room_tab$
+  # Page refreshes to show the edit mode for emergency room admissions for this participant.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_hospitalization.emergency_room_add_admission_button$
+  # Click "Add Emergency Room Admission" button in upper right corner.
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_hospitalization.emergency_room_add_admission_button$
+  # "Add Emergency Room Admission" window appears in center of screen.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_hospitalization.add_or_edit_emergency_room_admission_modal_title$
+    - Type: wait_for_property
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_hospitalization.add_or_edit_emergency_room_admission_modal_title$
+      Property: textContent
+      Value:  Add Emergency Room Admission
+  # Enter some information, then click the "Cancel" button.
+    - Type: get_timestamp
+      Format: "%Y-%m-%d" #YYYY-MM-DD
+      Var: TODAY_DATE
+    - Type: generate_unique_name
+      Name: AutoFacility
+      ResultVar: UNIQUE_FACILITY
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_hospitalization.add_or_edit_emergency_room_admission_date_input$
+      Value: $AND_CLI_TODAY_DATE$
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_hospitalization.add_or_edit_emergency_room_admission_facility_input$
+      Value: $AND_CLI_UNIQUE_FACILITY$
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_hospitalization.add_or_edit_emergency_room_admission_diagnosis_input$
+      Value: Automation Diagnosis
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_hospitalization.cancel_button$
+  # Window closes and no admission entry is added for participant.
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_hospitalization.add_or_edit_emergency_room_admission_modal_title$
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_hospitalization.edit_button_based_on_emergency_room_admissions_facility$
+  # Click "Add Emergency Room Admission" button in upper right corner.
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_hospitalization.emergency_room_add_admission_button$
+  # "Add Emergency Room Admission" window appears in center of screen.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_hospitalization.add_or_edit_emergency_room_admission_modal_title$
+    - Type: wait_for_property
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_hospitalization.add_or_edit_emergency_room_admission_modal_title$
+      Property: textContent
+      Value:  Add Emergency Room Admission
+  # Populate admission details before clicking "Save and Close" button.
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_hospitalization.add_or_edit_emergency_room_admission_date_input$
+      Value: $AND_CLI_TODAY_DATE$
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_hospitalization.add_or_edit_emergency_room_admission_facility_input$
+      Value: $AND_CLI_UNIQUE_FACILITY$
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_hospitalization.add_or_edit_emergency_room_admission_diagnosis_input$
+      Value: Automation Diagnosis
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_hospitalization.save_and_close_button$
+  # Window closes, the new admission entry entered is now displayed on the page, and toast notification appears at the top of the page.
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_hospitalization.add_or_edit_emergency_room_admission_modal_title$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_notifications.emergency_room_admission_created_notification$
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id: $PAGE.care_platform_notifications.emergency_room_admission_created_notification$
+  # Click "Edit" button for an existing admission.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_hospitalization.edit_button_based_on_emergency_room_admissions_facility$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_hospitalization.edit_button_based_on_emergency_room_admissions_facility$
+  # "Edit Emergency Room Admission" window appears in center of screen, showing currently entered information.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_hospitalization.add_or_edit_emergency_room_admission_modal_title$
+    - Type: wait_for_property
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_hospitalization.add_or_edit_emergency_room_admission_modal_title$
+      Property: textContent
+      Value:  Edit Emergency Room Admission
+  # Update some of the information and click the "Cancel" button.
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_hospitalization.add_or_edit_emergency_room_admission_diagnosis_input$
+      Value: Updated
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_hospitalization.cancel_button$
+  # Returned to the page; without any changes being saved to the entry.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_hospitalization.diagnosis_label_based_on_emergency_room_admissions_facility$
+    - Type: return_element_attribute
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_hospitalization.diagnosis_label_based_on_emergency_room_admissions_facility$
+      Attribute: textContent
+      ResultVar: SECOND_DIAGNOSIS_VALUE
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: SECOND_DIAGNOSIS_VALUE
+          Value: Automation Diagnosis
+  # Click "Edit" button for an existing admission.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_hospitalization.edit_button_based_on_emergency_room_admissions_facility$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_hospitalization.edit_button_based_on_emergency_room_admissions_facility$
+  # "Edit Emergency Room Admission" window appears in center of screen, showing currently entered information.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_hospitalization.add_or_edit_emergency_room_admission_modal_title$
+    - Type: wait_for_property
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_hospitalization.add_or_edit_emergency_room_admission_modal_title$
+      Property: textContent
+      Value:  Edit Emergency Room Admission
+  # Make any changes desired before clicking "Save and Close" button.
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_hospitalization.add_or_edit_emergency_room_admission_diagnosis_input$
+      Value: Updated
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_hospitalization.save_and_close_button$
+  # Window closes, the updated admission information is now displayed on the page, and toast notification appears at the top of the page
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_hospitalization.add_or_edit_emergency_room_admission_modal_title$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_notifications.emergency_room_admission_saved_notification$
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id: $PAGE.care_platform_notifications.emergency_room_admission_saved_notification$
+  # Click "Delete" button for an existing admission.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_hospitalization.delete_button_based_on_emergency_room_admissions_facility$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_hospitalization.delete_button_based_on_emergency_room_admissions_facility$
+  # "Delete Emergency Room Admission" window will appear confirming you would like to delete the entry.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_hospitalization.delete_emergency_room_admission_dialog_title$
+    - Type: wait_for_property
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_hospitalization.delete_emergency_room_admission_dialog_title$
+      Property: textContent
+      Value:  Delete Emergency Room Admission
+  # Click "Cancel" button.
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_hospitalization.cancel_button$
+  # Returned to page without entry being deleted.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_hospitalization.delete_button_based_on_emergency_room_admissions_facility$
+  # Click "Delete" button for an existing admission.
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_hospitalization.delete_button_based_on_emergency_room_admissions_facility$
+  # "Delete Emergency Room Admission" window will appear confirming you would like to delete the entry.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_hospitalization.delete_emergency_room_admission_dialog_title$
+    - Type: wait_for_property
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_hospitalization.delete_emergency_room_admission_dialog_title$
+      Property: textContent
+      Value:  Delete Emergency Room Admission
+  # Click "Yes, Delete" to confirm delete request.
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_hospitalization.yes_delete_button$
+  # Window closes, the deleted admission is no longer present on the page, and toast notification appears at the top of the page.
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_hospitalization.delete_emergency_room_admission_dialog_title$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_notifications.emergency_room_admission_deleted_notification$
+
+#CXTB-111 Participant Profile - Review, Edit or Add Vendor Info
+TestCarePartnerParticipantReviewEditOrAddVendorInfo:
+  Environment: Settings
+  Roles:
+    - Role: desktopChrome
+      App: desktop
+  Actions:
+  # Calling Login case.
+    - Type: case
+      Value: CarePartnerLogin
+  # looking for a senior profile and click on it
+    - Type: click
+      Strategy: xpath 
+      Id: $PAGE.care_platform_participant.search_button$
+    - Type: send_keys
+      Strategy: xpath 
+      Id: $PAGE.care_platform_participant.search_input$
+      Value: $AND_CLI_senior_user1_name$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform.navigation_participant$
+    - Type: click 
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant.first_participant_row$
+  # Click on "records" button 
+    - Type: click
+      Strategy: xpath 
+      Id: $PAGE.care_platform_participant_details.records_button$
+  # Click on "Demographic" and "VENDORS" tab
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_records.demographics_tab$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_records.demographics_vendor_subtab$
+  # Variables to use for Add Vendor
+      Vars:
+        ADDRESS: 1000 Street Name, Somewhere, GA 30024
+        WEBSITE: www.airportridesrus.com
+        CATEGORY: careCoordination
+        PHONE: 4365565897
+        MODAL_NAME: Add Vendor
+    - Type: generate_unique_name
+      Name: 'Airport Rides "R" Us'
+      ResultVar: NAME
+  # Steps to add a vendor
+  # Clicking on "Add Vendor" button
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participants_vendor.add_vendor_button$
+  # Waiting for modal
+    - Type: wait_for
+      Strategy: id
+      Id: $PAGE.care_platform_edit_participants_vendor.vendor_modal$
+  # Validate if "Add vendor" is opened
+    - Type: get_text
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participants_vendor.modal_title_label$
+      Greps:
+        - var: MODAL_TITLE
+          match: "(.*)"
+    - Type: assert
+      Role: desktopChrome
+      Asserts:
+        - Type: eq
+          Var: MODAL_TITLE
+          Value: $AND_CLI_MODAL_NAME$
+  # Filling Vendor form 
+    - Type: click
+      Strategy: id
+      Id: $PAGE.care_platform_edit_participants_vendor.select_category_modal_input$
+  # Selecting a Category
+    - Type:  wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participants_vendor.category_modal_input$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participants_vendor.category_modal_input$
+  # Filling input form
+    - Type: send_keys
+      Strategy: id
+      Id: $PAGE.care_platform_edit_participants_vendor.field_name_modal_input$
+      Value: $AND_CLI_NAME$
+    - Type: send_keys
+      Strategy: id
+      Id: $PAGE.care_platform_edit_participants_vendor.field_address_modal_input$
+      Value: $AND_CLI_ADDRESS$
+    - Type: send_keys
+      Strategy: id
+      Id: $PAGE.care_platform_edit_participants_vendor.field_phone_modal_input$
+      Value: $AND_CLI_PHONE$
+    - Type: send_keys
+      Strategy: id
+      Id: $PAGE.care_platform_edit_participants_vendor.field_website_modal_input$
+      Value: $AND_CLI_WEBSITE$
+  # Closing "Add Vendor" modal
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participants_vendor.cancel_vendor_modal_button$
+  # Wait to close modal
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participants_vendor.modal$
+  # Validate if a Vendor have not been added
+      Vars:
+        NEW_NAME: $AND_CLI_NAME$
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participants_vendor.name_vendor_record$
+  # Open Add "Vendor" modal
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participants_vendor.add_vendor_button$
+  # Filling Vendor form 
+    - Type: click
+      Strategy: id
+      Id: $PAGE.care_platform_edit_participants_vendor.select_category_modal_input$
+  # Selecting a Category
+    - Type:  wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participants_vendor.category_modal_input$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participants_vendor.category_modal_input$
+  # Filling input form
+    - Type: send_keys
+      Strategy: id
+      Id: $PAGE.care_platform_edit_participants_vendor.field_name_modal_input$
+      Value: $AND_CLI_NAME$
+    - Type: send_keys
+      Strategy: id
+      Id: $PAGE.care_platform_edit_participants_vendor.field_address_modal_input$
+      Value: $AND_CLI_ADDRESS$
+    - Type: send_keys
+      Strategy: id
+      Id: $PAGE.care_platform_edit_participants_vendor.field_phone_modal_input$
+      Value: $AND_CLI_PHONE$
+    - Type: send_keys
+      Strategy: id
+      Id: $PAGE.care_platform_edit_participants_vendor.field_website_modal_input$
+      Value: $AND_CLI_WEBSITE$
+  # Click on "save and close" button
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participants_vendor.save_close_modal_button$
+  # Validate toast message and wait until toast is not visible
+      Vars:
+        TOAST_MESSAGE_SHOWN: Vendor created
+    - Type: case
+      Value: CarePartnerToastValidation
+  # Steps to edit a vendor
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participants_vendor.edit_created_vendor_button$
+  # Validate if "Edit vendor" is opened
+      Vars:
+        MODAL_NAME: Edit Vendor
+    - Type: get_text
+      Strategy: xpath
+      Id : $PAGE.care_platform_edit_participants_vendor.modal_title_label$
+      Greps:
+        - var: MODAL_TITLE
+          match: "(.*)"
+    - Type: assert
+      Role: desktopChrome
+      Asserts:
+        - Type: eq
+          Var: MODAL_TITLE
+          Value: $AND_CLI_MODAL_NAME$
+  # Remove current vendor name
+    - Type: clear_field_by_backspace
+      Strategy: id 
+      Id: $PAGE.care_platform_edit_participants_vendor.field_name_modal_input$
+  # Create a new vendor name
+    - Type: generate_unique_name
+      Name: 'New airport "L" Us'
+      ResultVar: NEW_NAME
+  # Fill input name vendor
+    - Type: send_keys
+      Strategy: id
+      Id: $PAGE.care_platform_edit_participants_vendor.field_name_modal_input$
+      Value: $AND_CLI_NEW_NAME$
+  # Closing "Edit Vendor" modal
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participants_vendor.cancel_vendor_modal_button$
+  # Validate if Vendor is edited
+      Vars:
+        NEW_NAME: $AND_CLI_NAME$
+    - Type: get_text
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participants_vendor.name_vendor_record$
+      Greps:
+        - var: CATEGORY_VENDOR_NAME
+          match: "(.*)"
+    - Type: assert
+      Role: desktopChrome
+      Asserts:
+        - Type: eq
+          Var: CATEGORY_VENDOR_NAME
+          Value: $AND_CLI_NAME$
+  # Opend "Edit Vendor" modal
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participants_vendor.edit_created_vendor_button$
+  # Delete current vendor name
+    - Type: clear_field_by_backspace
+      Strategy: id 
+      Id: $PAGE.care_platform_edit_participants_vendor.field_name_modal_input$
+  # Create a new vendor name
+    - Type: generate_unique_name
+      Name: 'New airport "L" Us'
+      ResultVar: NEW_NAME
+  # Fill input name vendor
+    - Type: send_keys
+      Strategy: id
+      Id: $PAGE.care_platform_edit_participants_vendor.field_name_modal_input$
+      Value: $AND_CLI_NEW_NAME$
+  # Click "Save and close" button
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participants_vendor.save_close_modal_button$
+  # Validate toast message
+      Vars:
+        TOAST_MESSAGE_SHOWN: Vendor saved
+    - Type: case
+      Value: CarePartnerToastValidation
+  # Validate if the new change is applied
+    - Type: get_text
+      Strategy: xpath
+      Id : $PAGE.care_platform_edit_participants_vendor.name_vendor_record$
+      Greps:
+        - var: CATEGORY_VENDOR_NAME
+          match: "(.*)"
+    - Type: assert
+      Role: desktopChrome
+      Asserts:
+        - Type: eq
+          Var: CATEGORY_VENDOR_NAME
+          Value: $AND_CLI_NEW_NAME$
+  # Delete category 
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participants_vendor.delete_created_vendor_button$
+    - Type: wait_for
+      Strategy: id
+      Id: $PAGE.care_platform_edit_participants_vendor.vendor_dialog$
+  # Validate if "Delete Vendor" is opened
+      Vars:
+        MODAL_NAME: Delete Vendor
+    - Type: get_text
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participants_vendor.dialog_title_label$
+      Greps:
+        - var: MODAL_TITLE
+          match: "(.*)"
+    - Type: assert
+      Role: desktopChrome
+      Asserts:
+        - Type: eq
+          Var: MODAL_TITLE
+          Value: $AND_CLI_MODAL_NAME$
+  # Closing "Delete Vendor" dialog
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participants_vendor.cancel_vendor_dialogs_button$
+  # Checking if vendor is not deleted
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participants_vendor.name_vendor_record$
+  # Open "Delete Vendor" dialog
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participants_vendor.delete_created_vendor_button$
+    - Type: wait_for
+      Strategy: id
+      Id: $PAGE.care_platform_edit_participants_vendor.vendor_dialog$
+  # Confirm delete vendor
+    - Type: wait_for
+      Strategy: id
+      Id: dialogs
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participants_vendor.delete_confirmation_modal$
+  # Wait to close dialog
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participants_vendor.vendor_dialog$
+  # Validate toast message
+      Vars:
+        TOAST_MESSAGE_SHOWN: Vendor deleted
+    - Type: case
+      Value: CarePartnerToastValidation

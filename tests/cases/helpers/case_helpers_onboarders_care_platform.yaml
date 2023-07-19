@@ -21,3 +21,121 @@ OnboarderCarePartnerLogin:
       Id: $PAGE.care_platform_login.login_button$
     - Type: sleep
       Time: 2
+
+OnboarderSetsAccountStatus:
+  Roles:
+    - Role: desktopChrome
+      App: desktop
+  Actions:
+    # Navigate to Participants.
+    - Type: case
+      Value: CarePartnerNavigateToParticipants
+    # Click on the desired participant.
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant.senior_complete_name$
+    # Click on "Edit Info".
+    - Type: sleep
+      Time: 2
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.onboarders_participant_details_pane.edit_info$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.onboarders_participant_details_pane.edit_info$
+    # Set the account status to "Pre-delivery" in the "Demographics" pane.
+    - Type: click
+      Strategy: id
+      Id: $PAGE.onboarders_edit_participant_records.account_status_select$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.onboarders_edit_participant_records.account_status_option_based_on_input$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.onboarders_edit_participant_records.account_status_option_based_on_input$
+    # Click on "Save Changes".
+    - Type: scroll_to
+      Strategy: xpath
+      Id: $PAGE.onboarders_edit_participant_records.save_changes_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.onboarders_edit_participant_records.save_changes_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.onboarders_edit_participant_records.save_changes_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.onboarders_notifications.participant_changes_saved_notification$
+    # Navigate back to participants 
+    - Type: case
+      Value: CarePartnerNavigateToParticipants
+
+OnboarderCarePartnerSetParticipantStateToActive:
+  Roles:
+    - Role: desktopChrome
+      App: desktop
+  Actions:
+    # Calling Onboarder Login case
+    - Type: case
+      Value: OnboarderCarePartnerLogin
+      # Go to Participants
+    - Type: click
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.care_platform.navigation_participant$
+  # Select first participant by name in the list
+    - Type: wait_for
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.care_platform_participant.senior_complete_name$
+    - Type: click
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.care_platform_participant.senior_complete_name$
+  # Click on the "Edit Info" button.
+    - Type: wait_for
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.onboarders_participant_details_pane.edit_info$
+    - Type: click
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.onboarders_participant_details_pane.edit_info$
+  # Select "Suspended" in the status dropdown
+    - Type: wait_for
+      Strategy: id
+      Role: desktopChrome
+      Id: $PAGE.onboarders_edit_participant_records.account_status_select$
+    - Type: click
+      Strategy: id
+      Role: desktopChrome
+      Id: $PAGE.onboarders_edit_participant_records.account_status_select$
+    - Type: click
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.onboarders_edit_participant_records.participant_active_status_option$
+  # Save changes
+    - Type: click
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.onboarders_edit_participant_records.save_changes_button$
+    - Type: wait_for
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.onboarders_notifications.participant_changes_saved_notification$
+
+#This helper is used to pre-set the Senior state to other than active,
+#to have the expected behavior when making the final change to active
+OnboarderPrecaseforActiveState:
+  Roles:
+    - Role: desktopChrome
+      App: desktop
+  Actions:
+  - Type: case
+    Value: OnboarderCarePartnerLogin
+  - Type: case
+    Value: OnboarderSetsAccountStatus
+  - Type: case
+    Value: CarePlatformLogout
+  - Type: sleep
+    Time: 2

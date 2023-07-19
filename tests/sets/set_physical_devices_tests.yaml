@@ -5,9 +5,12 @@ SetPhysicalDevicesTests:
     - Case: TestSeniorAppCallPersonalCareButtonOnFullSchedule
     - Case: TestSeniorAppVerifyInAppOfflineBehavior
     - Case: TestSeniorAppCallPersonalCarePartnerOnHomePage
+    - Case: TestSeniorPreDeliveryAccountStatusVisualsAndBehavior
+    - Case: TestSeniorAppAnswerCallCarePartnerCall
     - Case: TestSNFVerifyInAppOfflineBehavior
     - Case: TestIDDESCallNowButtonOnHomePage
     - Case: TestIDDESAnswerCallForCarePartnerCallingDeviceCallCompleted
     - Case: TestIDDESCompleteCallBackButtonCallAfterReceivingMessage
     - Case: TestIDDESVerifyOfflineMode
     - Case: TestIDDESPersonalCarePartnerMessagePromptAndCallBackButton
+    - Case: TestSeniorVerifyMissedCallPromptAndCallBackButton

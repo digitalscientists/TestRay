@@ -22,12 +22,14 @@ care_platform:
   navigation_participant: //nav//a[contains(text(),'Participants')]
   navigation_followup: //nav//a[contains(text(),'Follow-up')]
   navigation_home: //nav//a[contains(text(),'Home')]
+  carepartner_toast_notification: //div[@class='Toastify']//div[contains(text(), '$AND_CLI_TOAST_MESSAGE_SHOWN$')]
 
 care_platform_home:
   first_call_of_queue: //div[@id='containerElement']/div[starts-with(@class, 'ListRow_listRow')][1]
   answer_call: //button[text()='Answer Call']
   call_based_on_participant_name: //div[contains(@class, 'ListRow_listRow')]//strong[text() = '$AND_CLI_senior_user1_name$ $AND_CLI_senior_user1_lastname$']
   call_based_on_es_idd_participant_name: //div[contains(@class, 'ListRow_listRow')]//strong[text() = '$AND_CLI_idd_es_never_alone_user1_name$ $AND_CLI_idd_es_never_alone_user1_lastname$']
+  call_based_on_ch_idd_participant_name: //div[contains(@class, 'ListRow_listRow')]//strong[text() = '$AND_CLI_idd_ch_never_alone_user2_name$ $AND_CLI_idd_ch_never_alone_user2_lastname$']
   active_call_section: //div[contains(@class,'app-video app-video-fixed')] # doesn't matter if its expanded/collapsed
   call_queue_calls: //div[@id='containerElement']/div[starts-with(@class, 'ListRow_listRow')]
 
@@ -50,7 +52,7 @@ care_platform_header:
 
 care_platform_myaccount_info:
   modal_title: //*[@id='modals']//h4[contains(text(),'My Account')]
-  close_modal_button: //*[@id="modals"]//button[contains(text(),'Close')]
+  close_modal_button: //*[@id='modals']//button[contains(text(),'Close')]
   firstname_input: //input[@id='firstName']
   email_input: //input[@id='email']
   phone_input: //*[@id='phone']
@@ -77,11 +79,13 @@ care_platform_logout_modal:
 
 care_platform_participant:
   participants_title: //div[@class='text-lg font-bold']//h3[@class='text-lg font-bold']
-  first_participant_row: (//div[contains(@class, 'SearchableListTemplate')]/div[@id='containerElement']/div[starts-with(@class, 'ListRow_listRow')]//strong[text()='$AND_CLI_senior_user1_name$ $AND_CLI_senior_user1_lastname$'])[1]
+  first_participant_row: (//div[@id='containerElement']/div[starts-with(@class, 'ListRow_listRow')]//div[text()='$AND_CLI_senior_user1_name$']//strong[text()='$AND_CLI_senior_user1_lastname$'])[1]
   first_darkened_letter_button: //button[@class='alphabet-letter'][not(@disabled)][1]
   selected_darkened_letter_button: //button[contains(@class,'is-selected')]
   senior_complete_name: //div[starts-with(@class, 'ListRow_listRow')]//div[contains(text(),'$AND_CLI_senior_user1_name$')][strong[contains(text(),'$AND_CLI_senior_user1_lastname$')]]
+  senior2_complete_name: //div[starts-with(@class, 'ListRow_listRow')]//div[contains(text(),'$AND_CLI_senior_user2_name$')][strong[contains(text(),'$AND_CLI_senior_user2_lastname$')]]
   esidd_senior_complete_name: //div[starts-with(@class, 'ListRow_listRow')]//div[contains(text(),'$AND_CLI_idd_es_never_alone_user1_name$')][strong[contains(text(),'$AND_CLI_idd_es_never_alone_user1_lastname$')]]
+  chidd_senior_complete_name: //div[starts-with(@class, 'ListRow_listRow')]//div[contains(text(),'$AND_CLI_idd_ch_never_alone_user2_name$')][strong[contains(text(),'$AND_CLI_idd_ch_never_alone_user2_lastname$')]]
   senior_1_row: //*[@id='containerElement']/div[@role='button'][1]
   first_senior_lastname: //*[@id='containerElement']/div[@role='button'][1]//strong
   call_portal_btn: //button[text()='Call Portal']
@@ -161,6 +165,221 @@ care_platform_participant_records:
   message_submit_button: //span[@class='icon-send text-md']/ancestor::button[@type='submit']
   message_historical_arrow_button: //div[@data-testid='box']//span[@class='button button-circle-lg -mr-5']
   last_message_historical: (//div[@class='message message-to'])[last()]
+  edit_info_button: //div[@class='participant-profile-contact']//button/span[contains(@class, 'icon-edit')]
+  demographics_vendor_subtab: //nav[@class='tabs-nav']/button[text()='Vendors']
+
+care_platform_edit_participant_records:
+  edit_title: //span[contains(text(),'Edit')]
+  edit_participant_form_label: //form//h4
+  address_emergency_phone_navigation: //ul[contains(@class,'form-navigation')]//button[contains(text(),'Address') and contains(text(),'Emergency Phone')]
+  medication_navigation: //button[contains(@class,'form-navigation-link') and contains(text(),'Medications')]
+  contacts_navigation: //ul[contains(@class,'form-navigation')]//button[contains(text(),'Contacts')]
+  medical_history_navigation: //button[contains(@class,'form-navigation-link') and contains(text(),'Medical History')]
+  special_treatment_navigation: //button[contains(@class,'form-navigation-link') and contains(text(),'Special Treatments')]
+  dme_navigation: //button[contains(@class,'form-navigation-link') and contains(text(),'DME')]
+  hospitalization_navigation: //button[contains(@class,'form-navigation-link') and contains(text(),'Hospitalizations')]
+  social_history_navigation: //button[contains(@class,'form-navigation-link') and contains(text(),'Social History')]
+  housing_navigation: //button[contains(@class,'form-navigation-link') and contains(text(),'Housing')]
+  member_safety_navigation: //button[contains(@class,'form-navigation-link') and contains(text(),'Member Safety')]
+  community_support_backup_plan_navigation: //button[contains(@class,'form-navigation-link') and contains(text(),'Community Support') and contains(text(),'Backup Plan')]
+  community_engagement_navigation: //button[contains(@class,'form-navigation-link') and contains(text(),'Community Engagement')]
+  spiritual_navigation: //button[contains(@class,'form-navigation-link') and contains(text(),'Spiritual')]
+  cognitive_learning_navigation: //button[contains(@class,'form-navigation-link') and contains(text(),'Cognitive') and contains(text(),'Learning')]
+  dietary_destrictions_navigation: //button[contains(@class,'form-navigation-link') and contains(text(),'Dietary Restrictions')]
+  financial_navigation: //button[contains(@class,'form-navigation-link') and contains(text(),'Financial')]
+  adls_navigation: //button[contains(@class,'form-navigation-link') and contains(text(),'ADL')]
+  surgical_history_navigation: //button[contains(@class,'form-navigation-link') and contains(text(),'Surgical History')]
+  prevention_care_screening_navigation: //button[contains(@class,'form-navigation-link') and contains(text(),'Preventative Care Screening')]
+  notes_navigation: //button[contains(@class,'form-navigation-link') and contains(text(),'Notes')]
+  allergies_navigation: //ul[contains(@class,'form-navigation')]//button[contains(text(),'Allergies')]
+  save_changes_button: //form//button[@type='submit']
+  changes_saved_notification: //div[@class='Toastify']//div[contains(text(),'Participant changes saved')]
+  medication_saved_notification: //div[@class='Toastify']//div[contains(text(),'Medication created')]
+  medication_deleted_notification: //div[@class='Toastify']//div[contains(text(),'Medication deleted')]
+  
+care_platform_edit_participant_demographics:
+  first_name_input: firstName
+  empty_first_name_error: //div[contains(@class,'red') and contains(text(),'Please enter a first name')]/ancestor::div[attribute::*[contains(local-name(), 'aria-hidden')]]
+  last_name_input: lastName
+  empty_last_name_error: //div[contains(@class,'red') and contains(text(),'Please enter a last name')]/ancestor::div[attribute::*[contains(local-name(), 'aria-hidden')]]
+
+care_platform_edit_participant_address_emergency_phone:
+  adress_input: address
+  adress_2_input: address2
+  state_dropdown: state
+  state_in_dropdown_option: //*[@id='state']/option[@value='IN']
+  zip_code_input: zip
+  city_input: city
+  phone_number_input: phoneEmergency
+  empty_address_error: //div[contains(@class,'red') and contains(text(),'Please enter an address')]
+  fix_address_error: //div[contains(text(),'Please fix address')]
+  ems_address_suggestion_dialog: //*[@id='dialogs'][contains(.,'Suggested') and contains(.,'Address')]
+  ems_address_suggestion_go_back_button: //*[@id='dialogs'][contains(.,'Suggested') and contains(.,'Address')]//button[text()='Go Back']
+  ems_address_suggestion_confirm_button: //*[@id='dialogs'][contains(.,'Suggested') and contains(.,'Address')]//button[text()='Confirm']
+  enable_ems_calls_option_based_on_user_input: //input[@name='deviceEmsOverride' and @value='$AND_CLI_EMS_OPTION$']/following-sibling::span # values: true, false and default
+
+care_platform_edit_participant_medication:
+  medication_subtitle: //h4[contains(text(),'Medications')]
+  add_medication_button: //button[contains(text(),'Add Medication')]
+  edit_medication_by_name_button: //h4[contains(text(),'$AND_CLI_MEDICATION$')]/following-sibling::div/button[text()='Edit']
+  delete_medication_by_name_button: //h4[contains(text(),'$AND_CLI_MEDICATION$')]/following-sibling::div/button[text()='Delete']
+  modal_add_title: //h4[text()='Add Medication']
+  modal_edit_title: //h4[text()='Edit Medication']
+  modal_cancel_button: //div[@id='modals']//button[text()='Cancel']
+  modal_save_button: //div[@id='modals']//button[text()='Save and Close']
+  modal_medication_name_input: name
+  modal_medication_dose_input: dose
+  modal_medication_frequency_input: frequency
+  modal_medication_diagnosis_input: diagnosis
+  modal_medication_affordability_input: affordabilityIssues
+  modal_medication_self_administration_input: selfAdministrationCapability
+  delete_modal_title: //*[@id='dialogs']//h4[text()='Delete Medication']
+  delete_modal_medication_name: //*[@id='dialogs']//p[text()='$AND_CLI_MEDICATION$']
+  delete_modal_confirm_button: //*[@id='dialogs']//button[text()='Yes, Delete']
+  delete_modal_cancel_button: //*[@id='dialogs']//button[text()='Cancel']
+
+care_platform_edit_participant_medical_history:
+  medical_history_subtitle: //h4[contains(text(),'Medical History')]
+  coronary_artery_diseases_select: mhCaCoronaryArteryDiseaseCad
+  coronary_artery_diseases_none_option: //*[@id='mhCaCoronaryArteryDiseaseCad']/option[contains(text(),'None')]
+  coronary_artery_diseases_active_option: //*[@id='mhCaCoronaryArteryDiseaseCad']/option[contains(@value,'active')]
+  coronary_artery_diseases_resolved_option: //*[@id='mhCaCoronaryArteryDiseaseCad']/option[contains(@value,'resolved')]
+
+care_platform_edit_participant_special_treatment:
+  special_treatment_subtitle: //h4[contains(text(),'Special Treatments')]
+  chemotherapy_input_checkbox: //*[@id='Chemotherapy']/ancestor::label
+  chemotherapy_input: Chemotherapy
+  radiation_therapy_input_checkbox: //*[@id='Radiationtherapy']/ancestor::label
+
+care_platform_edit_participant_dme:
+  dme_subtitle: //h4[contains(text(),'DME')]
+  wheelchair_input_checkbox: //*[@id='Wheelchair']/ancestor::label
+  wheelchair_input: Wheelchair
+  lift_input_checkbox: //*[@id='Lift']/ancestor::label
+  lift_input: Lift
+
+care_platform_edit_participant_hospitalization:
+  hospitalization_tab: //nav/button[contains(text(),'Hospitalizations')]
+  hospitalization_subtitle: //h4[contains(text(),'Hospitalizations')]
+  hospitalization_textarea: hospitalizations
+  emergency_room_tab: //nav/button[contains(text(),'Emergency room admissions')]
+  emergency_room_subtitle: //h4[contains(text(),'Emergency Room Admissions')]
+  emergency_room_add_admission_button: //div[@tab-title='Emergency room admissions']//button[contains(text(),'Add Emergency Room Admission')]
+  edit_button_based_on_emergency_room_admissions_facility: //p[contains(text(), '$AND_CLI_UNIQUE_FACILITY$')]/../following-sibling::div/button[text()='Edit']
+  delete_button_based_on_emergency_room_admissions_facility: //p[contains(text(), '$AND_CLI_UNIQUE_FACILITY$')]/../following-sibling::div/button[text()='Delete']
+  diagnosis_label_based_on_emergency_room_admissions_facility: //p[contains(text(), '$AND_CLI_UNIQUE_FACILITY$')]
+  add_or_edit_emergency_room_admission_modal_title: //div[@id='modals']//h4
+  add_or_edit_emergency_room_admission_date_input: //input[@id='date']
+  add_or_edit_emergency_room_admission_facility_input: //input[@id='facility']
+  add_or_edit_emergency_room_admission_diagnosis_input: //input[@id='diagnosis']
+  save_and_close_button: //button[@type='submit']
+  cancel_button: //button[text()='Cancel']
+  delete_emergency_room_admission_dialog_title: //div[@id='dialogs']//h4
+  yes_delete_button: //button[text()='Yes, Delete']
+
+care_platform_edit_participant_social_history:
+  social_history_subtitle: //h4[contains(text(),'Social History')]
+  relationship_status_select: relationshipStatus
+  relationship_married_option: //*[@id='relationshipStatus']/option[@value='married']
+  relationship_single_option: //*[@id='relationshipStatus']/option[@value='single']
+  education_status_input: educationStatus
+
+care_platform_edit_participant_housing:
+  housing_subtitle: //h4[contains(text(),'Housing')]
+  own_or_rent_select: ownOrRent
+  own_select_option: //*[@id='ownOrRent']/option[text()='Own']
+  rent_select_option: //*[@id='ownOrRent']/option[text()='Rent']
+  type_of_home_select: typeOfHome
+
+care_platform_edit_participant_member_safety:
+  member_safety_subtitle: //h4[contains(text(),'Member Safety')]
+  feels_safe_yes_option: //input[@name='feelsSafe' and @value='true']/ancestor::label
+  feels_safe_no_option: //input[@name='feelsSafe' and @value='false']/ancestor::label
+
+care_platform_edit_participant_community_backup:
+  community_backup_family_option: //*[@id='Family']/ancestor::label
+  community_backup_friends_option: //*[@id='Friends']/ancestor::label
+
+care_platform_edit_participant_community_engagement:
+  community_engagement_yes_option: //input[@name='communityEngagement' and @value='true']/ancestor::label
+  community_engagement_no_option: //input[@name='communityEngagement' and @value='false']/ancestor::label
+
+care_platform_edit_participant_spiritual:
+  spiritual_yes_option: //input[@name='spiritual' and @value='true']/ancestor::label
+  spiritual_no_option: //input[@name='spiritual' and @value='false']/ancestor::label
+
+care_platform_edit_participant_cognitive_learning:
+  cognitive_learning_subtitle: //h4[contains(text(),'Cognitive / Learning')]
+  reading_option: //*[@id='Reading']/ancestor::label
+  writing_option: //*[@id='Writing']/ancestor::label
+  games_option: //*[@id='Games']/ancestor::label
+  discovery_option: //*[@id='Discovery']/ancestor::label
+
+care_platform_edit_participant_dietary_restrictions:
+  dietary_restrictions_subtitle: //h4[contains(text(),'Dietary Restrictions')]
+  diabetic_option: //*[@id='Diabetic']/ancestor::label
+  diabetic_input: Diabetic
+  dash_option: //*[@id='Dash']/ancestor::label
+  dash_input: Dash
+
+care_platform_edit_participant_financial:
+  financial_subtitle: //h4[contains(text(),'Financial')]
+  rent_option: //*[@id='Rent']/ancestor::label
+  rent_input: Rent
+  other_option: //*[@id='Other']/ancestor::label
+  other_input: //*[@id='Other']
+  transportation_option: //*[@id='Transportation']/ancestor::label
+  
+care_platform_edit_participant_adls:
+  adls_subtitle: //h4[contains(text(),'ADL')]
+  toileting_option: //*[@id='Toileting']/ancestor::label
+  house_cleaning_option: //*[@id='House-cleaning']/ancestor::label
+  house_cleaning_input: House-cleaning
+  shopping_option: //*[@id='Shopping']/ancestor::label
+
+care_platform_edit_participant_surgical_history:
+  surgical_history_subtitle: //h4[contains(text(),'Surgical History')]
+  resection_of_tumor_option: //*[@id='ResectionofTumor']/ancestor::label
+  sinus_surgery_option: //*[@id='SinusSurgery']/ancestor::label
+  valve_replacement_option: //*[@id='ValveReplacement']/ancestor::label
+  endoscopy_option: //*[@id='Endoscopy']/ancestor::label
+  colonoscopy_option: //*[@id='Colonscopy']/ancestor::label
+
+care_platform_edit_participant_prevention_care_screening:
+  prevention_care_screening_subtitle: //h4[contains(text(),'Preventative Care Screening')]
+  col_option: //*[@id='ColorectalCancerScreening(COL)']/ancestor::label
+  art_screening_option: //*[@id='ARTScreening']/ancestor::label
+
+care_platform_edit_participant_notes:
+  notes_subtitle: //h4[contains(text(),'Notes')]
+  notes_text_area: notes
+
+care_platform_edit_participant_allergies:
+  add_allergy_button: //button[text()='Add Allergy']
+  edit_button_based_on_allergy_name: //strong[contains(text(),'$AND_CLI_UNIQUE_NAME$')]/../following-sibling::div//button[text()='Edit']
+  delete_button_based_on_allergy_name: //strong[contains(text(),'$AND_CLI_UNIQUE_NAME$')]/../following-sibling::div//button[text()='Delete']
+  reason_label_based_on_allergy_name: //strong[contains(text(),'$AND_CLI_UNIQUE_NAME$')]/../following-sibling::div//div[not(child::*)]
+  add_or_edit_allergy_modal_title: //div[@id='modals']//h4
+  add_allergy_name_input: //input[@id='name']
+  add_allergy_reaction_input:  //input[@id='reaction']
+  save_and_close_button: //button[@type='submit']
+  cancel_button: //button[text()='Cancel']
+  delete_allergy_dialog_title: //div[@id='dialogs']//h4
+  yes_delete_button: //button[text()='Yes, Delete']
+
+care_platform_edit_participant_contacts:
+  add_contact_button: //button[text()='Add Contact']
+  edit_button_based_on_contact_name: //span[text()='$AND_CLI_UNIQUE_FIRST_NAME$' and text()='$AND_CLI_UNIQUE_LAST_NAME$']/../following-sibling::div//button[text()='Edit']
+  delete_button_based_on_contact_name: //span[text()='$AND_CLI_UNIQUE_FIRST_NAME$' and text()='$AND_CLI_UNIQUE_LAST_NAME$']/../following-sibling::div//button[text()='Delete']
+  phone_number_label_based_on_contact_name: //span[text()='$AND_CLI_UNIQUE_FIRST_NAME$' and text()='$AND_CLI_UNIQUE_LAST_NAME$']/../following-sibling::div/span
+  add_or_edit_contact_modal_title: //div[@id='modals']//h4
+  add_contact_first_name_input: //input[@id='firstName']
+  add_contact_last_name_input:  //input[@id='lastName']
+  add_contact_phone_number_input: //input[@id='phone']
+  save_and_close_button: //button[@type='submit']
+  cancel_button: //button[text()='Cancel']
+  delete_contact_dialog_title: //div[@id='dialogs']//h4
+  yes_delete_button: //button[text()='Yes, Delete']
 
 care_platform_call_portal:
   call_volume_button: //span[contains(@class,'icon-volume')]/ancestor::button
@@ -263,6 +482,20 @@ care_platform_notifications:
   call_already_answered_notification: //div[@class='Toastify']//div[text()='Call already answered']
   follow_up_ticket_saved_notification: //div[@class='Toastify']//div[text()='Follow-up ticket saved']
   follow_up_ticket_completed_notification: //div[@class='Toastify']//div[text()='Follow-up ticket completed']
+  ems_data_updating_notification: //div[@class='Toastify']//div[text()='Updating EMS data...']
+  ems_data_updated_notification: //div[@class='Toastify']//div[text()='EMS data updated']
+  ems_address_error_notification: //div[@class='Toastify']//div[text()='Unable to validate address']
+  ems_adjustments_needed_notification: //div[@class='Toastify']//div[@role='alert']//div[text()='Some adjustments needed']
+  contact_created_notification: //div[@class='Toastify']//div[@role='alert']//div[text()='Contact created']
+  contact_saved_notification: //div[@class='Toastify']//div[@role='alert']//div[text()='Contact saved']
+  contact_deleted_notification: //div[@class='Toastify']//div[@role='alert']//div[text()='Contact deleted']
+  allergy_created_notification: //div[@class='Toastify']//div[@role='alert']//div[text()='Allergy created']
+  allergy_saved_notification: //div[@class='Toastify']//div[@role='alert']//div[text()='Allergy saved']
+  allergy_deleted_notification: //div[@class='Toastify']//div[@role='alert']//div[text()='Allergy deleted']
+  emergency_room_admission_created_notification: //div[@class='Toastify']//div[@role='alert']//div[text()='Emergency room admission created']
+  emergency_room_admission_saved_notification: //div[@class='Toastify']//div[@role='alert']//div[text()='Emergency room admission saved']
+  emergency_room_admission_deleted_notification: //div[@class='Toastify']//div[@role='alert']//div[text()='Emergency room admission deleted']
+  dismiss_notification_button: //div[@class='Toastify']//button[text()='Dismiss']
 
 care_platform_facility:
   search_button: searchButton
@@ -284,4 +517,24 @@ care_platform_facility_Record:
   info_title: //h4[text()='Facility Information']
   devices_button: //button[text()='Devices']
   device_status: //div[@class='account-status account-status-active']
-  
+
+care_platform_edit_participants_vendor:
+  add_vendor_button: //button[text()='Add Vendor']
+  cancel_vendor_modal_button: //div[@id='modals']//button[text()='Cancel']
+  cancel_vendor_dialogs_button: //div[@id='dialogs']//button[text()='Cancel']
+  category_modal_input: //select[@id='category']/option[@value ='$AND_CLI_CATEGORY$']
+  save_close_modal_button: //button[text()='Save and Close']
+  edit_created_vendor_button: //div[contains(@class, 'vendor')]//div[text()='$AND_CLI_NAME$']//following-sibling::div/button[text()='Edit'] 
+  name_vendor_record: //div[contains(@class, 'vendor')]//div[text()='$AND_CLI_NEW_NAME$']
+  delete_created_vendor_button: //div[contains(@class, 'vendor')]//div[text()='$AND_CLI_NEW_NAME$']//following-sibling::div/button[text()='Delete']    
+  delete_confirmation_modal: //button[text()='Yes, Delete']
+  vendor_modal: modals
+  vendor_dialog: dialogs
+  select_category_modal_input: category
+  field_name_modal_input: name 
+  field_address_modal_input: address
+  field_phone_modal_input: phone
+  field_website_modal_input: website
+  modal_title_label: //div[@id='modals']//h4[text()='$AND_CLI_MODAL_NAME$']
+  dialog_title_label: //div[@id='dialogs']//h4[text()='$AND_CLI_MODAL_NAME$']
+  modal: //div[@id='modals']//div[contains(@class,'modal')]
