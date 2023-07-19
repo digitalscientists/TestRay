@@ -38,7 +38,7 @@ TestOnboarderCreateNewParticipant:
       Strategy: xpath
       Id: $PAGE.onboarders_add_participant_form.account_status_pre_delivery_option$
     - Type: wait_for
-      Strategy: id
+      Strategy: id 
       Id: $PAGE.onboarders_add_participant_form.account_status_dropdown_button$
   # Add First Name
     - Type: generate_unique_string
@@ -66,23 +66,16 @@ TestOnboarderCreateNewParticipant:
     - Type: send_keys
       Strategy: id
       Id: $PAGE.onboarders_add_participant_form.date_of_birth_picker$
-      Value: $AND_CLI_PARTICIPANT_DATE_OF_BIRTH$
-  # Add email address
-    - Type: generate_unique_email
-      Name: "@ocali.com"
-      ResultVar: PARTICIPANT_EMAIL_ADDRESS
-    - Type: send_keys
-      Strategy: id
-      Id: $PAGE.onboarders_add_participant_form.email_input$
-      Value: $AND_CLI_PARTICIPANT_EMAIL_ADDRESS$     
+      Value: $AND_CLI_PARTICIPANT_DATE_OF_BIRTH$ 
   # click on Create Participant Button 
     - Type: click
       Strategy: xpath
       Id: $PAGE.onboarders_add_participant_form.create_participants_button$
   # Check on the submission status
-    - Type: wait_for
-      Strategy: xpath
-      Id: $PAGE.onboarders_add_participant_form.submission_status_toaster$
+      Vars:
+        TOAST_MESSAGE_SHOWN: New participant created
+    - Type: case
+      Value: CarePartnerToastValidation
   # Go to Address/Emergency Phone
     - Type: click
       Strategy: xpath
@@ -123,9 +116,10 @@ TestOnboarderCreateNewParticipant:
       Strategy: xpath
       Id: $PAGE.onboarders_add_participant_form.save_changes_button$  
   # Check on the submission status
-    - Type: wait_for
-      Strategy: xpath
-      Id: $PAGE.onboarders_add_participant_form.submission_status_toaster$
+      Vars:
+        TOAST_MESSAGE_SHOWN: EMS data updated
+    - Type: case
+      Value: CarePartnerToastValidation
   # Select “Yes” for the enable EMS question
     - Type: click
       Strategy: xpath
@@ -133,11 +127,12 @@ TestOnboarderCreateNewParticipant:
   # Save changes
     - Type: click
       Strategy: xpath
-      Id: $PAGE.onboarders_add_participant_form.save_changes_button$  
+      Id: $PAGE.onboarders_add_participant_form.save_changes_button$
   # Check on the submission status
-    - Type: wait_for
-      Strategy: xpath
-      Id: $PAGE.onboarders_add_participant_form.submission_status_toaster$
+      Vars:
+        TOAST_MESSAGE_SHOWN: 
+    - Type: case
+      Value: CarePartnerToastValidation
   # Adding a valid address 
     - Type: clear_field
       Strategy: id
