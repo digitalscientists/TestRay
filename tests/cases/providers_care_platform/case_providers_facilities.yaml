@@ -102,17 +102,30 @@ TestProviderCanClickAndViewFacilitiesDevice:
           Var: DEVICE_STATUS
           Value: $AND_CLI_STATUS_TEXT$
 
-
 # CXTB-186-Can-Click-and-View-Facility-Device-Call-History-and-Access-Call-Recordings
 TestProviderCanClickAndViewFacilitiesDeviceCallHistoryAndAccessCallRecordings:
   Environment: Settings
   Roles:
     - Role: desktopChrome
       App: "desktop"
+    - Role: localiOS
+      App: NeverAlone
   Actions:
     # Login-in provider Care Partner
     - Type: case
       Value: ProvidersCarePlatformLogin
+    # Log-in to App for Facilities   
+    - Type: case
+      Role: localiOS
+      Value: LoginSNFHelper
+    # Log Call from Facility to Provider 
+    - Type: case
+      Role: localiOS
+      Value: SNFNewRequestHelper
+    # Log Call from Facility to Provider 
+    - Type: case
+      Role: desktopChrome
+      Value: ProvidersCarePlatformEndCall
     # Click facilities button
     - Type: click
       Strategy: xpath
@@ -144,4 +157,3 @@ TestProviderCanClickAndViewFacilitiesDeviceCallHistoryAndAccessCallRecordings:
       Id: $PAGE.providers_facilities_page.telehealth_request_form$
     - Type: sleep
       Time: 3
-
