@@ -4280,3 +4280,42 @@ TestCarePartnerClickAndViewParticipantsEmergencyCalls:
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.care_platform_participant_records_emergency_calls.subject_header_label$
+
+# CXTB-108 Click and View Participant’s Follow-up Tickets Information
+TestCarePartnerClickAndViewParticipantsFollowUpTickets:
+  Environment: Settings
+  Roles:
+    - Role: desktopChrome
+      App: desktop
+  Actions:
+  # Calling Login case as Care Partner.
+    - Type: case
+      Value: CarePartnerLogin
+  # # Generate unique name for the follow up ticket.
+  #   - Type: generate_unique_name
+  #     Name: "FollowUp Ticket"
+  #     ResultVar: FOLLOW_UP_TICKET
+  # # Creating Follow up ticket.
+  #   - Type: case
+  #     Value: CarePartnerCreateFollowUpTicket
+  # Navigate to Records.
+    - Type: case
+      Value: CarePartnerParticipantRecordsNavigation
+  # Click the "Follow-up tickets" profile tab.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_records.follow_up_tickets_tab$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_records.follow_up_tickets_tab$
+    # Page refreshes to show a full page view of all the participant’s follow-up tickets:
+    # Left "Ticket history"
+    # Right "Active tickets"
+    # Review the "Ticket history" section listing.
+    # Listing includes all completed Care Partner follow-up tickets. The main table displays the key summary information.
+    # Click to expand a row.
+    # Expands and shows creation information, and additional details about the task that was completed.
+    # Review the "Active tickets" section listing.
+    # Shows active follow-up tickets for the participant ordered by date.
+    # Click to expand a ticket.
+    # Expands and shows creation information and additional details about the task.
