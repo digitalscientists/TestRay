@@ -937,6 +937,9 @@ TestSeniorEmergencyServicesButtonVisibilityEMSEnabledFlag:
     # Set the EMS Enabled flag to "Yes" with the Care Partner.
     - Type: case
       Value: CarePartnerLogin
+    # This is part of a contingency, since you need a valid address when using EMS = Yes. 
+    - Type: case
+      Value: CarePartnerValidAddressAndPhoneInfo
     - Type: case
       Value: CarePartnerSetsEMSEnabledToXOption
     # When log in, device Emergency Services button is present on Home Screen.
@@ -974,9 +977,9 @@ TestSeniorEmergencyServicesButtonVisibilityEMSEnabledFlag:
     - Type: wait_not_visible
       Strategy: class_chain
       Id: $PAGE.seniors_app_schedule.emergency_services_button$
-    # Set the EMS Enabled flag to "Yes" with the Care Partner.
+    # Set the EMS Enabled flag to "Default (Yes)" with the Care Partner.
     - Type: set_env_var
-      Value: 'true'
+      Value: 'default'
       Var: EMS_OPTION
     - Type: case
       Value: CarePartnerSetsEMSEnabledToXOption
