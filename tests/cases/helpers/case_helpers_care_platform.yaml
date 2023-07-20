@@ -1753,7 +1753,7 @@ CarePartnerParticipantRecordsNavigation:
     - Role: desktopChrome
       App: desktop
   Actions:
-# Navigate to Participants
+  # Navigate to Participants
     - Type: click
       Strategy: xpath
       Id : $PAGE.care_platform.navigation_participant$
