@@ -1699,7 +1699,7 @@ CarePartnerEditParticipantNavigation:
       Strategy: xpath
       Id : $PAGE.care_platform.navigation_participant$
   # Decrease by filtering
-    - Type: filter_by_text
+    - Type: search_by_text
       Text: $AND_CLI_senior_user1_name$
   # Select first participant by name in the list
     - Type: wait_for

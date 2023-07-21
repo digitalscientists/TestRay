@@ -4299,7 +4299,7 @@ TestCarePartnerParticipantInfoEditDNRFlag:
       Strategy: xpath
       Id: $PAGE.care_platform.navigation_participant$
   # Decrease by filtering
-    - Type: filter_by_text
+    - Type: search_by_text
       Text: $AND_CLI_senior_user1_name$
   # Select the participant changed
     - Type: wait_for
@@ -4372,7 +4372,7 @@ TestCarePartnerParticipantInfoEditDNRFlag:
       Strategy: xpath
       Id : $PAGE.care_platform.navigation_participant$
   # Decrease by filtering
-    - Type: filter_by_text
+    - Type: search_by_text
       Text: $AND_CLI_senior_user1_name$
   # Select the participant changed
     - Type: wait_for

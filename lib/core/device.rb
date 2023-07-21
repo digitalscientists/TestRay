@@ -2381,9 +2381,9 @@ def care_partner_clean_call_queue_and_hanged_calls(action, main_case, main_case_
   end
 end
 
-# Custom action to filter by text
+# Custom action for searching in NeverAlone listings
 # Text required
-def filter_by_text(action, main_case, main_case_id)
+def search_by_text(action, main_case, main_case_id)
   
   name = convert_value(action["Text"])
 
