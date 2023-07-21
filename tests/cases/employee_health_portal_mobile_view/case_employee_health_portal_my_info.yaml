@@ -1,5 +1,5 @@
 #CXTB-242: Set “Notifications” in “My account” Modal
-TestEmployeeMobileSettingNotification:
+TestEHPMobileSettingNotification:
   Environment: Settings 
   Roles:
     - Role: desktopChrome
@@ -122,7 +122,7 @@ TestEmployeeMobileSettingNotification:
       Id: $PAGE.employee_health_home_page.alert_updated_notification$
 
 #CXTB-252 Information & Update Contact Number
-TestEmployeeMobileInformationUpdateNumber:
+TestEHPMobileInformationUpdateNumber:
   Environment: Settings 
   Roles:
     - Role: desktopChrome
@@ -249,7 +249,7 @@ TestEmployeeMobileInformationUpdateNumber:
       Id: $PAGE.employee_health_home_page.alert_updated_info$
 
 #CXTB-241 “Update password” Workflow in My account Modal
-TestEmployeeMobileUpdateAccountPassword:
+TestEHPMobileUpdateAccountPassword:
   Environment: Settings
   Roles:
     - Role: desktopChrome
@@ -267,7 +267,7 @@ TestEmployeeMobileUpdateAccountPassword:
       Value: EmployeeHealthMobilePortalUpdateAccountPassword  
 
 #CXTB-285 Employee Health Portal - Account - Help
-TestEmployeeHealthPortalMobileAccountHelp:
+TestEEHPMobileAccountHelp:
   Environment: Settings 
   Roles:
     - Role: desktopChrome
