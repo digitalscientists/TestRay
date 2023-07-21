@@ -1863,6 +1863,9 @@ AddEditOrDeleteParticipantVendorInfo:
     - Type: case
       Value: CarePartnerToastValidation
   # Steps to edit a vendor
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participants_vendor.edit_created_vendor_button$
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_edit_participants_vendor.edit_created_vendor_button$
