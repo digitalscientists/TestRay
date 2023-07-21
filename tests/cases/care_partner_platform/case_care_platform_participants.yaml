@@ -4292,14 +4292,15 @@ TestCarePartnerParticipantInfoEditDNRFlag:
       Strategy: xpath
       Id: $PAGE.care_platform_participant_records.dnr_badge$
   # Return to Participants directory by clicking "Participants" in header
-    - Type: refresh
-      Role: desktopChrome
     - Type: wait_for
       Strategy: xpath
-      Id : $PAGE.care_platform.navigation_participant$
+      Id: $PAGE.care_platform.navigation_participant$
     - Type: click
       Strategy: xpath
-      Id : $PAGE.care_platform.navigation_participant$
+      Id: $PAGE.care_platform.navigation_participant$
+  # Decrease by filtering
+    - Type: filter_participant
+      Name: $AND_CLI_senior_user1_name$
   # Select the participant changed
     - Type: wait_for
       Strategy: xpath
@@ -4307,6 +4308,8 @@ TestCarePartnerParticipantInfoEditDNRFlag:
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_participant.senior_complete_name$
+    - Type: refresh
+      Role: desktopChrome
   # Check new details
     - Type: wait_for
       Strategy: xpath
@@ -4368,6 +4371,9 @@ TestCarePartnerParticipantInfoEditDNRFlag:
     - Type: click
       Strategy: xpath
       Id : $PAGE.care_platform.navigation_participant$
+  # Decrease by filtering
+    - Type: filter_participant
+      Name: $AND_CLI_senior_user1_name$
   # Select the participant changed
     - Type: wait_for
       Strategy: xpath

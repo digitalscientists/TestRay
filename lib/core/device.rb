@@ -2381,6 +2381,24 @@ def care_partner_clean_call_queue_and_hanged_calls(action, main_case, main_case_
   end
 end
 
+# Custom action to filter participants
+# Name required
+def filter_participant(action, main_case, main_case_id)
+  
+  name = convert_value(action["Name"])
+
+  if name.nil? || name.empty?
+    raise "Name cannot be null."
+  end
+
+  if wait_for_element_to_exist("$PAGE.care_platform_participant.search_button$")
+    @driver.find_element(:xpath, convert_value_pageobjects("$PAGE.care_platform_participant.search_button$")).click
+    wait_for_enabled_element("$PAGE.care_platform_participant.search_input$")
+    @driver.find_element(:xpath, convert_value_pageobjects("$PAGE.care_platform_participant.search_input$")).send_keys(name)
+  end
+
+end
+
 # Custom action to wait for a mobile element to exist
 def wait_for_mobile_element_to_exist(locator)
   begin
