@@ -4371,7 +4371,7 @@ TestCarePartnerParticipantInfoEditDNRFlag:
     - Type: click
       Strategy: xpath
       Id : $PAGE.care_platform.navigation_participant$
-  # Decrease by filtering
+  # Search Participant by name
     - Type: search_by_text
       Text: $AND_CLI_senior_user1_name$
   # Select the participant changed
@@ -4387,7 +4387,7 @@ TestCarePartnerParticipantInfoEditDNRFlag:
       Id: $PAGE.care_platform_participant_details.dnr_badge$
     - Type: wait_for
       Strategy: xpath
-      Id: $PAGE.care_platform_participant_details.participant_local_time$      Value: CarePartnerToastValidation
+      Id: $PAGE.care_platform_participant_details.participant_local_time$
 
 #CXTB-107 Can Click and View Participant’s Emergency Calls
 TestCarePartnerClickAndViewParticipantsEmergencyCalls:
