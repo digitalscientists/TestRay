@@ -4299,8 +4299,8 @@ TestCarePartnerParticipantInfoEditDNRFlag:
       Strategy: xpath
       Id: $PAGE.care_platform.navigation_participant$
   # Decrease by filtering
-    - Type: filter_participant
-      Name: $AND_CLI_senior_user1_name$
+    - Type: filter_by_text
+      Text: $AND_CLI_senior_user1_name$
   # Select the participant changed
     - Type: wait_for
       Strategy: xpath
@@ -4372,8 +4372,8 @@ TestCarePartnerParticipantInfoEditDNRFlag:
       Strategy: xpath
       Id : $PAGE.care_platform.navigation_participant$
   # Decrease by filtering
-    - Type: filter_participant
-      Name: $AND_CLI_senior_user1_name$
+    - Type: filter_by_text
+      Text: $AND_CLI_senior_user1_name$
   # Select the participant changed
     - Type: wait_for
       Strategy: xpath
