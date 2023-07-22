@@ -1780,6 +1780,12 @@ CarePartnerParticipantRecordsNavigation:
 
 AddEditOrDeleteParticipantVendorInfo:
   Environment: Settings
+  Vars:
+    ADDRESS: 1000 Street Name, Somewhere, GA 30024
+    WEBSITE: www.airportridesrus.com
+    CATEGORY: careCoordination
+    PHONE: 4365565897
+    MODAL_NAME: Add Vendor
   Roles:
     - Role: desktopChrome
       App: desktop
@@ -1788,12 +1794,6 @@ AddEditOrDeleteParticipantVendorInfo:
     - Type: generate_unique_name
       Name: 'Airport Rides "R" Us'
       ResultVar: NAME
-      Vars:
-        ADDRESS: 1000 Street Name, Somewhere, GA 30024
-        WEBSITE: www.airportridesrus.com
-        CATEGORY: careCoordination
-        PHONE: 4365565897
-        MODAL_NAME: Add Vendor
   # Steps to add a vendor
   # Clicking on "Add Vendor" button
     - Type: click
