@@ -4311,11 +4311,37 @@ TestCarePartnerClickAndViewParticipantsFollowUpTickets:
     # Page refreshes to show a full page view of all the participant’s follow-up tickets:
     # Left "Ticket history"
     # Right "Active tickets"
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_records_follow_up_tickets.ticket_history_title$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_records_follow_up_tickets.active_tickets_title$
     # Review the "Ticket history" section listing.
-    # Listing includes all completed Care Partner follow-up tickets. The main table displays the key summary information.
+    # TODO: And verify that listing includes all completed Care Partner follow-up tickets. The main table displays the key summary information.
     # Click to expand a row.
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_records_follow_up_tickets.first_archived_follow_up_ticket$
     # Expands and shows creation information, and additional details about the task that was completed.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_records_follow_up_tickets.expanded_ticket_content$
+      # TODO: regex
+    # Click again the follow up ticket to make the creation information disappear.
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_records_follow_up_tickets.first_archived_follow_up_ticket$
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_records_follow_up_tickets.expanded_ticket_content$
     # Review the "Active tickets" section listing.
     # Shows active follow-up tickets for the participant ordered by date.
     # Click to expand a ticket.
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_records_follow_up_tickets.first_active_follow_up_ticket$
     # Expands and shows creation information and additional details about the task.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_records_follow_up_tickets.expanded_ticket_content$
