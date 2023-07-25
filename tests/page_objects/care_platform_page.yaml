@@ -209,7 +209,7 @@ care_platform_edit_participant_records:
   changes_saved_notification: //div[@class='Toastify']//div[contains(text(),'Participant changes saved')]
   medication_saved_notification: //div[@class='Toastify']//div[contains(text(),'Medication created')]
   medication_deleted_notification: //div[@class='Toastify']//div[contains(text(),'Medication deleted')]
-  nav_vendor_button: //ul[@class='form-navigation']//li/button[text()='Vendors']
+  vendor_navigation_button: //ul[@class='form-navigation']//li/button[text()='Vendors']
 
   
 care_platform_edit_participant_demographics:
