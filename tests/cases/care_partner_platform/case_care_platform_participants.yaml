@@ -4609,7 +4609,6 @@ TestCarePartnerClickAndViewParticipantsFollowUpTickets:
       Strategy: xpath
       Id: $PAGE.care_platform_participant_records_follow_up_tickets.ticket_history_subject_header_label$
 
-# TODO: add test to corresponding sets.
 # CXTB-112 Participant Profile - Review, Edit or Add Behavioral Info
 TestCarePartnerParticipantProfileReviewEditOrAddBehavioralInfo:
   Environment: Settings
