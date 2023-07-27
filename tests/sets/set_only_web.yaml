@@ -20,6 +20,10 @@ SetOnlyWebTests:
   - Case: TestCarePartnerEditInfoForExistingParticipant
   - Case: TestCarePartnerParticipantInfoEditOrAddMedicationInfo
   - Case: TestCarePartnerParticipantInfoEditOrAddAllergiesInfo
+  - Case: TestCarePartnerParticipantReviewEditOrAddVendorInfo
+  - Case: TestCarePartnerParticipantEditOrAddVendorParticipantInfo
+  - Case: TestCarePartnerParticipantInfoEditDNRFlag
+  - Case: TestCarePartnerParticipantInfoEditOrAddHealthOverviewInfo
   - Case: TestCarePartnerParticipantInfoEditOrAddEmergencyRoomAdmissionsInfo
   - Case: TestCarePartnerClickAndViewParticipantsEmergencyCalls
   - Case: TestCarePartnerParticipantProfileEditOrAddContactsInfo
