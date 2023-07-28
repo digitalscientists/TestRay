@@ -4877,11 +4877,11 @@ TestCarePartnerParticipantPaneEditInsuranceOrProviderInformation:
       Strategy: xpath
       Id: $PAGE.care_platform_participant_details.minimize_button$
   # Primary Care Physician
-  # Call helper to test add, edit and delete
+    # Call helper to test add, edit and delete
     - Type: case
       Value: ManageParticipantProviderInformation
   # Health Insurance
-  # Set values to provider “Health Insurance”
+    # Set values to provider “Health Insurance”
     - Type: set_env_var
       Value: Health Insurance Automation
       Var: PROVIDER_NAME
@@ -4899,7 +4899,7 @@ TestCarePartnerParticipantPaneEditInsuranceOrProviderInformation:
     - Type: set_env_var
       Value: Pharmacy
       Var: PROVIDER_TYPE
-  # Call helper to test add, edit and delete
+    # Call helper to test add, edit and delete
     - Type: case
       Value: ManageParticipantProviderInformation
   # Preferred Lab
@@ -4910,7 +4910,7 @@ TestCarePartnerParticipantPaneEditInsuranceOrProviderInformation:
     - Type: set_env_var
       Value: Preferred Lab
       Var: PROVIDER_TYPE
-  # Call helper to test add, edit and delete
+    # Call helper to test add, edit and delete
     - Type: case
       Value: ManageParticipantProviderInformation
   # Specialists
@@ -4921,6 +4921,6 @@ TestCarePartnerParticipantPaneEditInsuranceOrProviderInformation:
     - Type: set_env_var
       Value: Specialists
       Var: PROVIDER_TYPE
-  # Call helper to test add, edit and delete
+    # Call helper to test add, edit and delete
     - Type: case
       Value: ManageParticipantProviderInformation

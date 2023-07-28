@@ -21,6 +21,7 @@ SetOnlyWebTests:
   - Case: TestCarePartnerParticipantInfoEditOrAddMedicationInfo
   - Case: TestCarePartnerParticipantInfoEditOrAddAllergiesInfo
   - Case: TestCarePartnerParticipantInfoEditOrAddEmergencyRoomAdmissionsInfo
+  - Case: TestCarePartnerParticipantPaneEditInsuranceOrProviderInformation
   # Employee Health Portal
   - Case: TestEmployeeSettingNotification
   - Case: TestEmployeeInformationUpdateNumber

@@ -781,6 +781,7 @@ class Device
         return
       end
     rescue => e
+      log_info("Element not present: #{id}")
       return
     end
   end

@@ -2137,7 +2137,7 @@ ManageParticipantProviderInformation:
       Id: $PAGE.care_platform_edit_participant_providers.phone_input$
       Value: $AND_CLI_PROVIDER_DUMMY_PHONE$
     - Type: sleep
-      Time: 0.8
+      Time: 0.5
     - Type: send_keys_if_exist
       Strategy: id
       Id: $PAGE.care_platform_edit_participant_providers.member_id_input$
