@@ -1758,8 +1758,6 @@ CarePartnerParticipantPaneNavigation:
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.care_platform_participant_details.records_button$
-    - Type: sleep
-      Time: 1
 
 CarePartnerToastValidation:
   Environment: Settings
