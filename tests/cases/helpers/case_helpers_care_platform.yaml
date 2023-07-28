@@ -2230,6 +2230,10 @@ AddEditOrDeleteBehavioralInfo:
     - Type: set_env_var
       Value: $AND_CLI_UNIQUE_ISSUE$ Edit
       Var: UNIQUE_ISSUE
+    # Clear existing value from input field.
+    - Type: clear_field_by_backspace
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_health_overview.issue_input$
     - Type: send_keys
       Strategy: xpath
       Id: $PAGE.care_platform_edit_participant_health_overview.issue_input$
