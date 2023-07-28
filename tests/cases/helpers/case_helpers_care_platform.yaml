@@ -2195,11 +2195,12 @@ AddEditOrDeleteBehavioralInfo:
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.care_platform_edit_participant_health_overview.add_or_edit_issue_modal_title$
-    # - Type: wait_for_property
-    #   Strategy: xpath
-    #   Id: $PAGE.care_platform_edit_participant_health_overview.add_or_edit_issue_modal_title$
-    #   Property: textContent
-    #   Value: Edit Issue
+    - Type: wait_for_property
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_health_overview.add_or_edit_issue_modal_title$
+      Property: textContent
+      Value: Edit Issue
+      CaseInsensitive: true
   # Update some of the information and click the "Cancel" button.
     - Type: wait_for
       Strategy: xpath
@@ -2235,11 +2236,12 @@ AddEditOrDeleteBehavioralInfo:
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.care_platform_edit_participant_health_overview.add_or_edit_issue_modal_title$
-    # - Type: wait_for_property
-    #   Strategy: xpath
-    #   Id: $PAGE.care_platform_edit_participant_health_overview.add_or_edit_issue_modal_title$
-    #   Property: textContent
-    #   Value: Edit Issue
+    - Type: wait_for_property
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_health_overview.add_or_edit_issue_modal_title$
+      Property: textContent
+      Value: Edit Issue
+      CaseInsensitive: true
   # Make any changes to update both Category and Issue description and then click the "Save and Close" button.
     - Type: wait_for
       Strategy: xpath
