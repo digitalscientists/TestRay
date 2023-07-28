@@ -540,31 +540,6 @@ TestCarePartnerParticipantReview:
     - Type: scroll_to
       Role: desktopChrome
       Strategy: xpath
-      Id: $PAGE.care_platform_participant_details.health_insurance_button$
-    - Type: scroll_to
-      Role: desktopChrome
-      Strategy: xpath
-      Id: $PAGE.care_platform_participant_details.secondary_health_insurance_button$
-    - Type: scroll_to
-      Role: desktopChrome
-      Strategy: xpath
-      Id: $PAGE.care_platform_participant_details.tertiary_health_insurance_button$
-    - Type: scroll_to
-      Role: desktopChrome
-      Strategy: xpath
-      Id: $PAGE.care_platform_participant_details.primary_care_physician$
-    - Type: scroll_to
-      Role: desktopChrome
-      Strategy: xpath
-      Id: $PAGE.care_platform_participant_details.pharmacy_button$
-    - Type: scroll_to
-      Role: desktopChrome
-      Strategy: xpath
-      Id: $PAGE.care_platform_participant_details.preferred_lab_button$
-    - Type: scroll_to
-      Role: desktopChrome
-      Strategy: xpath
-      Id: $PAGE.care_platform_participant_details.specialists_block$
       Id: $PAGE.care_platform_edit_participant_providers.health_insurance_button$
     - Type: scroll_to
       Role: desktopChrome

@@ -398,21 +398,17 @@ care_platform_edit_participant_notes:
   notes_text_area: notes
 
 care_platform_edit_participant_providers:
-  health_insurance_label: //strong[text()='Health Insurance']
   health_insurance_button: //button[text()='Health Insurance']
   secondary_health_insurance_button: //button[text()='Secondary Health Insurance']
   tertiary_health_insurance_button: //button[text()='Tertiary Health Insurance']
   primary_care_physician: //strong[text()='Primary Care Physician']
   add_provider_by_type: //*[@id='providers']//button[contains(text(),'Add')][contains(.,'$AND_CLI_PROVIDER_TYPE$')]
-  add_provider_by_type_modal_title: //*[@id='modals']//h4[text()='Add $AND_CLI_PROVIDER_TYPE$']
-  add_primary_care_physician_button: //*[@id='providers']//button[contains(text(),'Add')][contains(.,'Primary Care Physician')]
   pharmacy_button: //button[text()='Pharmacy']
   edit_provider_by_name_button: //div[div[text()='$AND_CLI_PROVIDER_NAME$']]//following-sibling::div/button[text()='Edit']
   delete_provider_by_name_button: //div[div[text()='$AND_CLI_PROVIDER_NAME$']]//following-sibling::div/button[text()='Delete']
   provider_by_name_block: //div[div[text()='$AND_CLI_PROVIDER_NAME$']]
   preferred_lab_button: //button[text()='Preferred Lab']
   specialists_block: //*[@id='providers']//*[contains(text(),'Specialists')][@class='is-block']
-  specialist_button: //button[text()='Specialist']
   name_input: name
   address_input: address
   phone_input: phone
