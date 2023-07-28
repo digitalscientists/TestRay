@@ -403,6 +403,8 @@ care_platform_edit_participant_providers:
   secondary_health_insurance_button: //button[text()='Secondary Health Insurance']
   tertiary_health_insurance_button: //button[text()='Tertiary Health Insurance']
   primary_care_physician: //strong[text()='Primary Care Physician']
+  add_provider_by_type: //*[@id='providers']//button[contains(text(),'Add')][contains(.,'$AND_CLI_PROVIDER_TYPE$')]
+  add_provider_by_type_modal_title: //*[@id='modals']//h4[text()='Add $AND_CLI_PROVIDER_TYPE$']
   add_primary_care_physician_button: //*[@id='providers']//button[contains(text(),'Add')][contains(.,'Primary Care Physician')]
   pharmacy_button: //button[text()='Pharmacy']
   edit_provider_by_name_button: //div[div[text()='$AND_CLI_PROVIDER_NAME$']]//following-sibling::div/button[text()='Edit']
@@ -414,6 +416,8 @@ care_platform_edit_participant_providers:
   name_input: name
   address_input: address
   phone_input: phone
+  member_id_input: memberIdentification
+  group_id_input: groupIdentification
   save_and_close_button: //button[contains(text(),'Save and Close')]
   cancel_button: //button[text()='Cancel']
   modal_title: //*[@id='modals']//h4

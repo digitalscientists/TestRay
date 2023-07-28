@@ -4853,6 +4853,8 @@ TestCarePartnerParticipantPaneEditInsuranceOrProviderInformation:
   Vars:
     LOGOUT_OPTION: 'Go Off Shift'
     PROVIDER_NAME: 'Primary Care Physician Automation'
+    PROVIDER_DUMMY_PHONE: 8099999999
+    PROVIDER_TYPE: 'Primary Care Physician'
   Precases:
     - CarePartnerCleanCallQueueAndHangedCalls
   Aftercases:
@@ -4874,18 +4876,26 @@ TestCarePartnerParticipantPaneEditInsuranceOrProviderInformation:
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_participant_details.minimize_button$
-  # Click “Add Primary Care Physician”
+  # Primary Care Physician
     - Type: scroll_to
       Strategy: xpath
       Id: $PAGE.care_platform_edit_participant_providers.primary_care_physician$
+  # Call helper to test add, edit and delete
+    - Type: case
+      Value: ManageParticipantProviderInformation
+  # Health Insurance
+  # Click “Add Health Insurance”
+    - Type: set_env_var
+      Value: Health Insurance Automation
+      Var: PROVIDER_NAME
     - Type: click
       Strategy: xpath
-      Id: $PAGE.care_platform_edit_participant_providers.add_primary_care_physician_button$
+      Id: $PAGE.care_platform_edit_participant_providers.health_insurance_button$
     - Type: wait_for_property
       Strategy: xpath
       Id: $PAGE.care_platform_edit_participant_providers.modal_title$ 
       Property: textContent
-      Value: "Add Primary Care Physician"
+      Value: "Add Health Insurance"
   # Populate some information, then click “Cancel” button
     - Type: send_keys
       Strategy: id
@@ -4894,7 +4904,7 @@ TestCarePartnerParticipantPaneEditInsuranceOrProviderInformation:
     - Type: send_keys
       Strategy: id
       Id: $PAGE.care_platform_edit_participant_providers.phone_input$
-      Value: 8099999999
+      Value: $AND_CLI_PROVIDER_DUMMY_PHONE$
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_edit_participant_providers.cancel_button$
@@ -4903,16 +4913,16 @@ TestCarePartnerParticipantPaneEditInsuranceOrProviderInformation:
       Id: $PAGE.care_platform_edit_participant_providers.cancel_button$
     - Type: wait_for
       Strategy: xpath
-      Id: $PAGE.care_platform_edit_participant_providers.add_primary_care_physician_button$
+      Id: $PAGE.care_platform_edit_participant_providers.health_insurance_button$
   # Enter necessary information, then click “Save and Close”
     - Type: click
       Strategy: xpath
-      Id: $PAGE.care_platform_edit_participant_providers.add_primary_care_physician_button$
+      Id: $PAGE.care_platform_edit_participant_providers.health_insurance_button$
     - Type: wait_for_property
       Strategy: xpath
       Id: $PAGE.care_platform_edit_participant_providers.modal_title$ 
       Property: textContent
-      Value: "Add Primary Care Physician"
+      Value: "Add Health Insurance"
     - Type: send_keys
       Strategy: id
       Id: $PAGE.care_platform_edit_participant_providers.name_input$
@@ -4920,7 +4930,15 @@ TestCarePartnerParticipantPaneEditInsuranceOrProviderInformation:
     - Type: send_keys
       Strategy: id
       Id: $PAGE.care_platform_edit_participant_providers.phone_input$
-      Value: 8099999999
+      Value: $AND_CLI_PROVIDER_DUMMY_PHONE$
+    - Type: send_keys
+      Strategy: id
+      Id: $PAGE.care_platform_edit_participant_providers.member_id_input$
+      Value: 64
+    - Type: send_keys
+      Strategy: id
+      Id: $PAGE.care_platform_edit_participant_providers.group_id_input$
+      Value: 34
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_edit_participant_providers.save_and_close_button$
@@ -4997,6 +5015,9 @@ TestCarePartnerParticipantPaneEditInsuranceOrProviderInformation:
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.care_platform_notifications.provider_saved_notification$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_notifications.dismiss_notification_button$
     - Type: set_env_var
       Value: $AND_CLI_CURRENT_INPUT$
       Var: PROVIDER_NAME
@@ -5035,3 +5056,29 @@ TestCarePartnerParticipantPaneEditInsuranceOrProviderInformation:
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.care_platform_notifications.provider_deleted_notification$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_notifications.dismiss_notification_button$
+  # Pharmacy
+  # Set values to provider “Pharmacy”
+    - Type: set_env_var
+      Value: Pharmacy Automation
+      Var: PROVIDER_NAME
+    - Type: set_env_var
+      Value: Pharmacy
+      Var: PROVIDER_TYPE
+  # Call helper to test add, edit and delete
+    - Type: case
+      Value: ManageParticipantProviderInformation
+  # Preferred Lab
+  # Set values to provider "Preferred Lab”
+    - Type: set_env_var
+      Value: Preferred Lab Automation
+      Var: PROVIDER_NAME
+    - Type: set_env_var
+      Value: Preferred Lab
+      Var: PROVIDER_TYPE
+  # Call helper to test add, edit and delete
+    - Type: case
+      Value: ManageParticipantProviderInformation
+  # Specialists
