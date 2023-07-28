@@ -2107,9 +2107,6 @@ ManageParticipantProviderInformation:
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_edit_participant_providers.add_provider_by_type$
-    - Type: wait_for
-      Strategy: xpath
-      Id: $PAGE.care_platform_edit_participant_providers.add_provider_by_type_modal_title$ 
     - Type: send_keys
       Strategy: id
       Id: $PAGE.care_platform_edit_participant_providers.name_input$
@@ -2131,14 +2128,6 @@ ManageParticipantProviderInformation:
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_edit_participant_providers.add_provider_by_type$
-    - Type: wait_for
-      Strategy: xpath
-      Id: $PAGE.care_platform_edit_participant_providers.add_provider_by_type_modal_title$ 
-  #  - Type: wait_for_property
-  #    Strategy: xpath
-  #    Id: $PAGE.care_platform_edit_participant_providers.modal_title$ 
-  #    Property: textContent
-  #    Value: "Add Primary Care Physician"
     - Type: send_keys
       Strategy: id
       Id: $PAGE.care_platform_edit_participant_providers.name_input$
@@ -2147,6 +2136,20 @@ ManageParticipantProviderInformation:
       Strategy: id
       Id: $PAGE.care_platform_edit_participant_providers.phone_input$
       Value: $AND_CLI_PROVIDER_DUMMY_PHONE$
+    - Type: sleep
+      Time: 0.8
+    - Type: send_keys_if_exist
+      Strategy: id
+      Id: $PAGE.care_platform_edit_participant_providers.member_id_input$
+      Value: 64
+    - Type: send_keys_if_exist
+      Strategy: id
+      Id: $PAGE.care_platform_edit_participant_providers.group_id_input$
+      Value: 34
+    - Type: send_keys_if_exist
+      Strategy: id
+      Id: $PAGE.care_platform_edit_participant_providers.speciality_input$
+      Value: cardio
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_edit_participant_providers.save_and_close_button$
@@ -2157,6 +2160,9 @@ ManageParticipantProviderInformation:
       Strategy: xpath
       Id: $PAGE.care_platform_notifications.provider_created_notification$
     - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_notifications.dismiss_notification_button$
+    - Type: wait_not_visible
       Strategy: xpath
       Id: $PAGE.care_platform_notifications.dismiss_notification_button$
   # Check that the entry is really there, and have a Edit and Delete button
@@ -2223,6 +2229,12 @@ ManageParticipantProviderInformation:
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.care_platform_notifications.provider_saved_notification$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_notifications.dismiss_notification_button$
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id: $PAGE.care_platform_notifications.dismiss_notification_button$
     - Type: set_env_var
       Value: $AND_CLI_CURRENT_INPUT$
       Var: PROVIDER_NAME
@@ -2262,5 +2274,8 @@ ManageParticipantProviderInformation:
       Strategy: xpath
       Id: $PAGE.care_platform_notifications.provider_deleted_notification$
     - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_notifications.dismiss_notification_button$
+    - Type: wait_not_visible
       Strategy: xpath
       Id: $PAGE.care_platform_notifications.dismiss_notification_button$

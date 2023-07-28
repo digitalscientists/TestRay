@@ -418,6 +418,7 @@ care_platform_edit_participant_providers:
   phone_input: phone
   member_id_input: memberIdentification
   group_id_input: groupIdentification
+  speciality_input: specialty
   save_and_close_button: //button[contains(text(),'Save and Close')]
   cancel_button: //button[text()='Cancel']
   modal_title: //*[@id='modals']//h4
