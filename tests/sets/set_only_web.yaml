@@ -15,11 +15,16 @@ SetOnlyWebTests:
   - Case: TestCarePartnerParticipantCallHistory
   - Case: TestCarePartnerParticipantRecordListing
   - Case: TestCarePartnerTrackTimeAndEditFollowUpTicketsParticipantComponent
+  - Case: TestCarePartnerEditEMSSettingAndAddressParticipant
   - Case: TestCarePartnerParticipantPaneEditEMSSettingAndAddress
   - Case: TestCarePartnerParticipantInfoEditOrAddContactsInfo
   - Case: TestCarePartnerEditInfoForExistingParticipant
   - Case: TestCarePartnerParticipantInfoEditOrAddMedicationInfo
   - Case: TestCarePartnerParticipantInfoEditOrAddAllergiesInfo
+  - Case: TestCarePartnerParticipantReviewEditOrAddVendorInfo
+  - Case: TestCarePartnerParticipantEditOrAddVendorParticipantInfo
+  - Case: TestCarePartnerParticipantInfoEditDNRFlag
+  - Case: TestCarePartnerParticipantInfoEditOrAddHealthOverviewInfo
   - Case: TestCarePartnerParticipantInfoEditOrAddEmergencyRoomAdmissionsInfo
   - Case: TestCarePartnerParticipantPaneEditInsuranceOrProviderInformation
   # Employee Health Portal
