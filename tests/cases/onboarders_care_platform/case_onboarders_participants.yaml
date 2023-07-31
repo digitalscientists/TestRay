@@ -193,7 +193,7 @@ TestOnboarderClickandViewParticipantRecordfromListing:
           Value: 'active'
 
 # CXTB-146 Participant Profile - Review, Edit or Add Vendor Info
-TestOnboarderCarePartnerParticipantReviewEditOrAddVendorInfo:
+TestOnboarderCarePartnerParticipantProfileReviewEditOrAddVendorInfo:
   Environment: Settings
   Roles:
     - Role: desktopChrome
