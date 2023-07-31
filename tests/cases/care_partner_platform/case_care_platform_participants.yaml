@@ -4679,7 +4679,7 @@ TestCarePartnerParticipantPaneEditInsuranceOrProviderInformation:
       Value: CarePartnerLogin
   # Navigate to Participant's Detail
     - Type: case
-      Value: CarePartnerParticipantDetailNavigation
+      Value: CarePartnerParticipantPaneNavigation
   # Select Provider's Navigation tab
     - Type: click
       Strategy: xpath

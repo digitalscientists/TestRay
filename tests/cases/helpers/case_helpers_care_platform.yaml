@@ -1758,40 +1758,12 @@ CarePartnerParticipantPaneNavigation:
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.care_platform_participant_details.records_button$
-
-CarePartnerParticipantDetailNavigation:
-  Environment: Settings
-  Roles:
-    - Role: desktopChrome
-      App: desktop
-  Actions:
-  # Navigate to Participants
-    - Type: click
-      Strategy: xpath
-      Id : $PAGE.care_platform.navigation_participant$
-  # Limit listing by searching name
-    - Type: search_by_text
-      Text: $AND_CLI_senior_user1_name$
-  # Select first participant by name in the list
-    - Type: wait_for
-      Strategy: xpath
-      Id: $PAGE.care_platform_participant.senior_complete_name$
-    - Type: click
-      Strategy: xpath
-      Id: $PAGE.care_platform_participant.senior_complete_name$
-  # Check for the details section elements
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.care_platform_participant_details.participant_local_time$
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.care_platform_participant_details.participant_details_title$
-    - Type: wait_for
-      Strategy: xpath
-      Id: $PAGE.care_platform_participant_details.call_history_tab_button$
-    - Type: wait_for
-      Strategy: xpath
-      Id: $PAGE.care_platform_participant_details.follow_up_tab_button$
 
 CarePartnerToastValidation:
   Environment: Settings
