@@ -44,7 +44,7 @@ employee_health_home_page:
   call_now_button: //button[text()='Call Now']
   alert_call_ended: //div[@role='alert']//div[contains(text(),'Call has ended')]
   calendar_right_button: //span[@class='icon-chevron-right']
-  calendar_month_view: //div[@class = 'calendar-days fade-quick-enter-done']
+  calendar_month_days: //div[@class = 'calendar-days fade-quick-enter-done']
   calendar_day_button: //div[text()=$AND_CLI_DAY$]
   upcoming_appointment_title: //div[contains(@class,'text-lg font-bold color-green-300')]
   tabs_results: //div[container(class, 'flex-col overflow-y-scroll')]
@@ -131,16 +131,18 @@ employee_health_telehealth_request_form:
   first_day_available_button: //*[@id='modals']//div[contains(@class,'calendar')]//div[contains(@class,'calendar-days')]/button[not(contains(@class,'is-past'))][1]
   first_hour_available_button: //div[@id='modals']//input[@name='startTime'][not(@disabled)][1]/following-sibling::div
   calendar_18hr_button: //div[@id='modals']//input[@name='startTime' and @value='18:00']/following-sibling::div
-  calendar_day_button: //div[@class='app-modals']//div[text()=$AND_CLI_DAY$]
-  calendar_hour_button: //div[@id='modals']//div[text()= '11:30 am']
+  calendar_day_button: //div[@class='calendar-days fade-quick-enter-done']//div[text()=$AND_CLI_DAY$]
+  calendar_hour_button: //input[@name='startTime']/../div[text()= '11:30 am']
   appointment_list: //div[@class = 'accordion-item']
   appointment_list_description: //div/div[contains(text(), '$AND_CLI_PAIN_DESCRIPTION$')]
-  calendar_month_view: //div[@id='modals']//div[@class = 'calendar-days fade-quick-enter-done']
+  calendar_month_days: //div[@class='calendar']//div[@class='calendar-days fade-quick-enter-done']
   tab_section: //div[contains(@class, 'box has-scrollable-content')]
   comments: comments
 
 employee_health_mobile_view_home:
   header_menu_button: //*[@id='root']//header//button
+  request_appointment_button: //button[text()='Request Appt.']
+  request_appoinment_form: //*[@id='mobile-modals']//span[text()='Request Appointment']
 
 employee_health_mobile_view_menu:
     my_info_button: //button[text()= 'My Info']
@@ -159,8 +161,18 @@ employee_health_mobile_view_password:
     close_button: //*[@id='menus']//header//button
     password_requirements_text_section: //*[@id='menus']/div/form/div[4]/p
 
-employee_health_mobile_view_logut_dialog:
+employee_health_mobile_view_logout_dialog:
     my_info_button: //button[text()= 'My Info']
     notifications_button: //button[text()= 'Notifications']
     cancel_button: //button[text()= 'Cancel']
     logout_button: //button[text()='Log Out']
+
+employee_health_mobile_request_appointment_modal:
+  alert_calendar: //div[@class='text-xs color-red-400'][text()='Please select a date.']
+  close_button: //*[@id='mobile-modals']//span[text()='Request Appointment']/..//button
+  select_date_input: //*[@id='mobile-modals']//label[text()='Select a Date']/../input
+  calendar_right_button: //div[@class='calendar']//div/button/span[@class='icon-chevron-right']
+  save_button: //*[@id='dialogs']//button[text()='Save']
+  select_time_input: //*[@id='mobile-modals']//label[text()='Select a Time']/../input
+  appointment_list: //div[@class = 'mobile-schedule-item-container']
+  appointment_description: //div/span[text()='Description']/..

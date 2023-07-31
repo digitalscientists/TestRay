@@ -151,7 +151,7 @@ TestEmployeeHealthPortalReviewUpcomingAppointment:
       Id: $PAGE.employee_health_home_page.calendar_right_button$
     - Type: wait_for
       Strategy: xpath
-      Id: $PAGE.employee_health_home_page.calendar_month_view$
+      Id: $PAGE.employee_health_home_page.calendar_month_days$
     # checking first date introduced
     - Type: click
       Strategy: xpath
