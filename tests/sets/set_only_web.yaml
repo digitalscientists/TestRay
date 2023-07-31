@@ -62,6 +62,7 @@ SetOnlyWebTests:
   - Case: TestOnboarderClickAndViewFacilitiesDevice
   - Case: TestOnboarderNoNegativeToastIfParticipantIsSavedWithDuplicatedEmail
   - Case: TestOnboarderParticipantProfileReviewEditOrAddBehavioralInfo
+  - Case: TestOnboarderParticipantPaneReviewEditOrAddBehavioralInfo
   # Providers Care Platform
   - Case: TestProvidersUpdatePassword
   - Case: TestProviderLogOutStayOnShift

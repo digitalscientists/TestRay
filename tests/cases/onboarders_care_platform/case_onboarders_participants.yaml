@@ -244,7 +244,7 @@ TestOnboarderParticipantProfileReviewEditOrAddBehavioralInfo:
       Value: AddEditOrDeleteBehavioralInfo
 
 # CXTB-152 Participant Pane - Review, Edit or Add Behavioral Info.
-TestOnboardersParticipantPaneReviewEditOrAddBehavioralInfo:
+TestOnboarderParticipantPaneReviewEditOrAddBehavioralInfo:
   Environment: Settings
   Roles:
     - Role: desktopChrome
