@@ -32,7 +32,6 @@ SetOnlyWebTests:
   - Case: TestCarePartnerParticipantPaneReviewEditOrAddBehavioralInfo
   - Case: TestCarePartnerParticipantPaneEditInsuranceOrProviderInformation
   - Case: TestCarePartnerParticipantInfoEditInsuranceOrProviderInformation
-  - Case: TestCarePartnerParticipantProfileEditInsuranceOrProviderInformation
   # Employee Health Portal
   - Case: TestEmployeeSettingNotification
   - Case: TestEmployeeInformationUpdateNumber
@@ -62,6 +61,7 @@ SetOnlyWebTests:
   - Case: TestOnboarderClickandViewParticipantRecordfromListing
   - Case: TestOnboarderClickAndViewFacilitiesDevice
   - Case: TestOnboarderNoNegativeToastIfParticipantIsSavedWithDuplicatedEmail
+  - Case: TestOnboarderParticipantProfileReviewEditOrAddBehavioralInfo
   - Case: TestOnboarderParticipantProfileEditInsuranceOrProviderInformation
   # Providers Care Platform
   - Case: TestProvidersUpdatePassword
