@@ -2132,6 +2132,17 @@ def generate_unique_name(action, main_case, main_case_id)
   ENV[convert_value(action["ResultVar"])] = unique_name
 end
 
+# Returns an email compoused by the first part of your email (What goes before the '@') 
+# a timestamp and the rest of your email (@domain) i.e. method receives "tzumi" and "@gmail.com"
+# and it returns "tzumi+<timestamp>@gmail.com"
+def generate_unique_email(action, main_case, main_case_id)
+  prefix = convert_value(action["Prefix"])
+  sufix = convert_value(action["Sufix"])
+  timestamp = Time.now.utc.strftime("%d%m%y%H%M%S")
+  unique_email = prefix + "+" + timestamp + sufix
+  ENV[convert_value(action["ResultVar"])] = unique_email
+end
+
 # Custom method to calculate the minutes/seconds from when an event was created
 # i.e. returns "Added x minutes ago" or "Added x seconds ago"
 def calculate_minutes_passed_by_from_event_creation(action, main_case, main_case_id)
