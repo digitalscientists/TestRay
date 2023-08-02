@@ -4714,11 +4714,12 @@ TestCarePartnerParticipantInfoEditInsuranceOrProviderInformation:
     - Type: case
       Value: EditInsuranceOrProviderInformationHelper
 
+# This test calls a real phone number, please make sure to write the correct number on the variable.
 #CXTB-536 Call External 10-Digit Number (Without Participant)
 TestCarePartnerCallExternal10DigitNumberWithoutParticipant:
   Environment: Settings
   Vars:
-    PHONE_NUMBER: 8297661099
+    PHONE_NUMBER: ADD_YOUR_PHONE_NUMBER
   Precases:
     - CarePartnerCleanCallQueueAndHangedCalls
   Aftercases:
