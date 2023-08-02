@@ -143,6 +143,9 @@ employee_health_mobile_view_home:
   header_menu_button: //*[@id='root']//header//button
   request_appointment_button: //button[text()='Request Appt.']
   request_appoinment_form: //*[@id='mobile-modals']//span[text()='Request Appointment']
+  no_upcoming_appointments_label: //div[text() = 'No upcoming appointments']
+  appointment_list: //div[@class = 'mobile-schedule-item-container']
+  appointment_list_element: //span[1]
 
 employee_health_mobile_view_menu:
     my_info_button: //button[text()= 'My Info']
@@ -174,5 +177,4 @@ employee_health_mobile_request_appointment_modal:
   calendar_right_button: //div[@class='calendar']//div/button/span[@class='icon-chevron-right']
   save_button: //*[@id='dialogs']//button[text()='Save']
   select_time_input: //*[@id='mobile-modals']//label[text()='Select a Time']/../input
-  appointment_list: //div[@class = 'mobile-schedule-item-container']
   appointment_description: //div/span[text()='Description']/..

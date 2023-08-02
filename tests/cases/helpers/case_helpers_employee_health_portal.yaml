@@ -786,6 +786,11 @@ EHPMobileAppointmentsRequest:
     - Type: click
       Strategy: xpath
       Id: $PAGE.employee_health_mobile_request_appointment_modal.select_time_input$
+    - Type: sleep
+      Time: 0.5 
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.employee_health_telehealth_request_form.calendar_hour_button$
     - Type: click
       Strategy: xpath
       Id: $PAGE.employee_health_telehealth_request_form.calendar_hour_button$
