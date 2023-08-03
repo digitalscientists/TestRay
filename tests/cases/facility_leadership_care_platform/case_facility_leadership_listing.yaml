@@ -114,9 +114,13 @@ TestFacilityLeadershipDirectoryAndFilter:
     - Type: click
       Strategy: xpath
       Id: $PAGE.facility_leadership_facilities_listing.first_facility$
+  #Check facility details
     - Type : wait_for
       Strategy: xpath
       Id: $PAGE.facility_leadership_facility_details.facility_name$
+    - Type : wait_for
+      Strategy: xpath
+      Id: $PAGE.facility_leadership_facility_details.facility_local_time$
     - Type: click
       Strategy: xpath
       Id: $PAGE.facility_leadership_facility_details.overview_tab$

@@ -12,6 +12,7 @@ facility_leadership_facilities_listing:
 
 facility_leadership_facility_details:
   facility_name: //h3
+  facility_local_time: //div[@class='user-local-time']/span[contains(.,'Times shown are local to') and contains(.,'facility')]
   overview_tab: //button[contains(text(),'Overview')]
   local_hospitals_tab: //button[text()='Local Hospitals']
   devices_tab: //button[text()='Devices']
