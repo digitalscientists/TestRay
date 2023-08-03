@@ -304,6 +304,30 @@ TestOnboarderCreateNewParticipant:
         TOAST_MESSAGE_SHOWN: Updating EMS data...
     - Type: case
       Value: CarePartnerToastValidation
+  # Go to Participants
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.onboarders_platform_home.navigation_participant$      
+  # Add the search filter.
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.onboarders_participant_page.search_button$
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.onboarders_participant_page.search_input$
+      Value: "$AND_CLI_PARTICIPANT_LAST_NAME$"
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.onboarders_participant_page.participant_1_row$
+   # Click on Records Button
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.onboarders_participant_page.records_button$
+  # Click on Records Button
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.onboarders_participant_page.records_button$    
+
   # Login on participant IDD
     - Type: case
       Value: CHCarePartnerLogin
