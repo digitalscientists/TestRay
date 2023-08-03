@@ -81,3 +81,5 @@ SetOnlyWebTests:
   - Case: TestProviderHelpMenuOption
   - Case: TestProviderUseForgotPasswordLink
   - Case: TestProviderAccessParticipantDirectoryandViewDeviceRecordfromListing
+  # Facility Leadership Care Platform
+  - Case: TestFacilityLeadershipDirectoryAndFilter
