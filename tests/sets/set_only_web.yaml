@@ -15,12 +15,25 @@ SetOnlyWebTests:
   - Case: TestCarePartnerParticipantCallHistory
   - Case: TestCarePartnerParticipantRecordListing
   - Case: TestCarePartnerTrackTimeAndEditFollowUpTicketsParticipantComponent
-  - Case: TestCarePartnerEditEMSSettingAndAddressParticipant
+  - Case: TestCarePartnerParticipantPaneEditEMSSettingAndAddress
   - Case: TestCarePartnerParticipantInfoEditOrAddContactsInfo
   - Case: TestCarePartnerEditInfoForExistingParticipant
   - Case: TestCarePartnerParticipantInfoEditOrAddMedicationInfo
   - Case: TestCarePartnerParticipantInfoEditOrAddAllergiesInfo
+  - Case: TestCarePartnerParticipantProfileReviewEditOrAddVendorInfo
+  - Case: TestCarePartnerParticipantEditOrAddVendorParticipantInfo
+  - Case: TestCarePartnerParticipantInfoEditDNRFlag
+  - Case: TestCarePartnerParticipantInfoEditOrAddHealthOverviewInfo
   - Case: TestCarePartnerParticipantInfoEditOrAddEmergencyRoomAdmissionsInfo
+  - Case: TestCarePartnerClickAndViewParticipantsEmergencyCalls
+  - Case: TestCarePartnerParticipantProfileEditOrAddContactsInfo
+  - Case: TestCarePartnerClickAndViewParticipantsFollowUpTickets
+  - Case: TestCarePartnerParticipantProfileReviewEditOrAddBehavioralInfo
+  - Case: TestCarePartnerParticipantPaneReviewEditOrAddBehavioralInfo
+  - Case: TestCarePartnerParticipantPaneEditInsuranceOrProviderInformation
+  - Case: TestCarePartnerParticipantInfoEditInsuranceOrProviderInformation
+  - Case: TestCarePartnerParticipantProfileEditInsuranceOrProviderInformation
+  - Case: TestCarePartnerCallExternal10DigitNumberWithoutParticipant
   # Employee Health Portal
   - Case: TestEmployeeSettingNotification
   - Case: TestEmployeeInformationUpdateNumber
@@ -34,6 +47,7 @@ SetOnlyWebTests:
   - Case: TestEmployeeHealthPortalForgotPasswordOnLoginPage
   - Case: TestEmployeeHealthPortalRequestAnAppointmentForUser
   - Case: TestEmployeeHealthPortalReviewUpcomingAppointment
+  - Case: TestEmployeeHealthPortalManuallyLogoutOfPortal
   # ES Care Partner
   - Case: TestCHCarePartnerStatusDropdownNotInCall
   - Case: TestCHCarePartnerAccessAndReviewTeamMembersAvailability
@@ -49,6 +63,10 @@ SetOnlyWebTests:
   - Case: TestOnboarderClickandViewParticipantRecordfromListing
   - Case: TestOnboarderClickAndViewFacilitiesDevice
   - Case: TestOnboarderNoNegativeToastIfParticipantIsSavedWithDuplicatedEmail
+  - Case: TestOnboarderParticipantProfileReviewEditOrAddBehavioralInfo
+  - Case: TestOnboarderParticipantProfileEditInsuranceOrProviderInformation
+  - Case: TestOnboarderParticipantPaneReviewEditOrAddBehavioralInfo
+  - Case: TestOnboarderCreateNewStaffMemberWithFacilityLeadershipRole
   # Providers Care Platform
   - Case: TestProvidersUpdatePassword
   - Case: TestProviderLogOutStayOnShift

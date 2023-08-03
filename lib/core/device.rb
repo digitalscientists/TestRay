@@ -739,6 +739,53 @@ class Device
     end
   end
 
+  # Custom variation of type send_keys
+  # sets the provided value for element.
+  # Accepts:
+  #   Strategy
+  #   Id
+  #   Value
+  def send_keys_if_exist(action, main_case, main_case_id)
+    action = convert_value_pageobjects(action);
+    locator_strategy, id = action["Strategy"], action["Id"]
+    value = action["Value"]
+    el = nil
+    value = value.gsub("$AND_ROLE$", @role) if value && value.is_a?(String) && value.include?("$AND_ROLE$")
+    
+    begin
+      exist = @driver.find_element(locator_strategy, id).displayed?
+
+      if exist == true
+        el = @driver.find_element(locator_strategy, id)
+        start = Time.now
+
+        error = nil
+
+        while (Time.now - start) < @timeout
+          begin
+            if !action["Actions"] && el
+              el.send_keys(convert_value(value))
+            else
+              if el
+                @driver.action.send_keys(convert_value(value), el).perform
+              else
+                @driver.action.send_keys(convert_value(value)).perform
+              end
+            end
+            return
+          rescue => e
+            error = e
+          end
+        end
+      else
+        return
+      end
+    rescue => e
+      log_info("Element not present: #{id}")
+      return
+    end
+  end
+
   #Clears by using backspace
   # Accepts:
   #   Strategy
@@ -1365,6 +1412,13 @@ class Device
         if elprop.to_s == value.to_s
           log_info("Property: #{prop} matched Value: #{value.to_s}")
           return el
+        end
+
+        if action["CaseInsensitive"]
+          if elprop.to_s.downcase == value.to_s.downcase
+            log_info("Property: #{prop} matched Value: #{value.to_s}")
+            return el
+          end
         end
       rescue => e
         exception = e
@@ -2098,6 +2152,13 @@ def generate_unique_name(action, main_case, main_case_id)
   name = convert_value(action["Name"])
   unique_name = "#{name} #{Time.now.utc.strftime("%d%m%y%H%M%S")}"
   ENV[convert_value(action["ResultVar"])] = unique_name
+end
+
+# Returns a random email
+def generate_unique_email(action, main_case, main_case_id)
+  timestamp = Time.now.utc.strftime("%d%m%y%H%M%S")
+  unique_email = "random+" + timestamp + "@domain.com"
+  ENV[convert_value(action["ResultVar"])] = unique_email
 end
 
 # Custom method to calculate the minutes/seconds from when an event was created

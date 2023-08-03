@@ -402,10 +402,8 @@ This is not a type but can be used in different Types as a Validation for the ac
 12. [get_tomorrow_date](#get_tomorrow_date)
 13. [get_past_timestamp](#get_past_timestamp)
 14. [get_timestamp_plus_minutes](#get_timestamp_plus_minutes)
-15. [generate_unique_number](#generate_unique_number)
+15. [generate_unique_name](#generate_unique_name)
 16. [generate_unique_email](#generate_unique_email)
-17. [generate_unique_string](#generate_unique_string)
-18. [generate_unique_name](#generate_unique_name)
 
 ## Custom actions made for the project
 
@@ -417,6 +415,8 @@ This is not a type but can be used in different Types as a Validation for the ac
 6. [get_next_month](#get_next_month)
 7. [generate_random_day](#generate_random_day)
 8. [search_by_text](#search_by_text)
+9. [send_keys_if_exist](#send_keys_if_exist)
+
 ## Appium/Selenium
 
 #### <a id="click"></a>click 
@@ -778,6 +778,7 @@ Waits for the element to have a specific JS property value.
     Property: Js Property e.g. className
     Value:  Desired value
     Time: Time (int) e.g. 10
+    CaseInsensitive: true | false (false by default)
 
 ### <a id="clear_field_js"></a>clear_field_js
 
@@ -1193,6 +1194,14 @@ i.e. method receives "Hey" and then returns "Hey ~timestamp~"
     - Type: generate_unique_name
       Name: string that user needs to be unique
       ResultVar: Var that will have the unique name value
+
+### <a id="generate_unique_email"></a>generate_unique_email
+
+Returns a random email
+
+    - Type: generate_unique_email
+      ResultVar: Var that will have the unique name value
+
 ## Custom actions made for the project
 ### <a id="calculate_minutes_passed_by_from_event_creation"></a>calculate_minutes_passed_by_from_event_creation
 
@@ -1260,4 +1269,14 @@ Return the following month of the current date
 Custom action for searching in NeverAlone listings
     - Type: search_by_text
       Text: SEARCH_INPUT
-      
+
+### <a id="send_keys_if_exist"></a>send_keys_if_exist
+
+It works just like send_keys but ignoring possible exceptions.
+Note: is best to use accompanied by a previous waiter or sleep,
+to avoid that the element haven't had time enough to render
+
+    - Type: send_keys_if_exist
+      Strategy: xpath | id | etc.
+      Id: //some//path
+      Value: SOME_VALUE
