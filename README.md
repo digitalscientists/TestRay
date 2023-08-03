@@ -403,6 +403,7 @@ This is not a type but can be used in different Types as a Validation for the ac
 13. [get_past_timestamp](#get_past_timestamp)
 14. [get_timestamp_plus_minutes](#get_timestamp_plus_minutes)
 15. [generate_unique_name](#generate_unique_name)
+16. [generate_unique_email](#generate_unique_email)
 
 ## Custom actions made for the project
 
@@ -1164,6 +1165,16 @@ Returns a variable with a unique name using timestamps at the end
 i.e. method receives "Hey" and then returns "Hey ~timestamp~"
 
     - Type: generate_unique_name
+      Name: string that user needs to be unique
+      ResultVar: Var that will have the unique name value
+
+### <a id="generate_unique_email"></a>generate_unique_email
+
+Returns an email compoused by the first part of your email (What goes before the '@') 
+a timestamp and the rest of your email (@domain) i.e. method receives "tzumi" and "@gmail.com"
+and it returns "tzumi+<timestamp>@gmail.com"
+
+    - Type: generate_unique_email
       Name: string that user needs to be unique
       ResultVar: Var that will have the unique name value
 
