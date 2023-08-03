@@ -180,6 +180,9 @@ TestSeniorAppPersonalCarePartnerMessagePromptAndCallBackButton:
     - Type: case
       Role: desktopChrome
       Value: CarePartnerNavigateToParticipants
+  # Decrease listing by searching participant's name
+    - Type: search_by_text
+      Text: $AND_CLI_senior_user1_name$
   # Select the corresponding user.
     - Type: click
       Role: desktopChrome
@@ -358,6 +361,7 @@ TestSeniorAppIgnoreCarePartnerCall:
   Environment: Settings
   Precases:
     - LoginNeverAloneHelper
+    - CarePartnerCleanCallQueueAndHangedCalls
   Aftercases:
     - TerminateApp
   Roles:
@@ -726,6 +730,7 @@ TestSeniorStartingSoonNotificationWaitUntilCallSurveyIsCompleted:
     - Type: case
       Value: SeniorGreatPostSurveyCallHelper
 
+# Physical Device Only
 # CXTB-381: Verify Care Partner - "Missed Call" Prompt & Call Back Button.
 TestSeniorVerifyMissedCallPromptAndCallBackButton:
   Vars:
