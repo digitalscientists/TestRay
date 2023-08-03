@@ -169,6 +169,120 @@ TestEHPMobileReviewUpcomingAppointment:
         - Type: ne
           Var: SECOND_SCHEDULED_DAY
           Value: $AND_CLI_THIRD_SCHEDULED_DAY$
-      
+
+# #CXTB-109 Employee Health Portal - Request an Appointment for User
+TestEHPMobileRequestAnAppointmentForDependentMinor:
+  Environment: Settings 
+  Roles:
+    - Role: desktopChrome
+      Capabilities:
+        chromeOptions:
+          args:
+            - mobileEmulation
+      App: "desktop"
+  Actions:
+  # Login case as an Employee user with a dependent minor.
+    - Type: set_env_var
+      Value: $AND_CLI_employee_minor_dependent_pwd$
+      Var: employee_user1_pwd
+    - Type: set_env_var
+      Value: $AND_CLI_employee_minor_dependent_user$
+      Var: employee_user1
+    - Type: case
+      Value: EmployeeHealthPortalLogIn
+  #Going to Request an Appointment
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.employee_health_telehealth_request_form.tab_section$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.employee_health_mobile_home_page.request_appointment_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.employee_health_mobile_home_page.request_appoinment_form$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.employee_health_telehealth_request_form.create_event_button$
+  # Checking error message
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.employee_health_telehealth_request_form.alert_location$
+    - Type: get_text
+      Strategy: xpath
+      Id: $PAGE.employee_health_telehealth_request_form.alert_location$
+      Greps:
+        - var: ERROR_MESSAGE
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: eq
+          Var: ERROR_MESSAGE
+          Value: Please select a state.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.employee_health_telehealth_request_form.alert_describe_reason$
+    - Type: get_text
+      Strategy: xpath
+      Id: $PAGE.employee_health_telehealth_request_form.alert_describe_reason$
+      Greps:
+        - var: ERROR_MESSAGE
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: eq
+          Var: ERROR_MESSAGE
+          Value: Please enter a reason for this request.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.employee_health_mobile_request_appointment_page.alert_calendar$
+    - Type: get_text
+      Strategy: xpath
+      Id: $PAGE.employee_health_mobile_request_appointment_page.alert_calendar$
+      Greps:
+        - var: ERROR_MESSAGE
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: eq
+          Var: ERROR_MESSAGE
+          Value: 'Please select a date.'
+  # closing form
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.employee_health_mobile_request_appointment_page.close_button$
+  # make an appointment
+    - Type: case
+      Value: EHPMobileAppointmentsRequest
+  # Verify if the appointment is showing on the list
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.employee_health_mobile_home_page.appointment_list$
+    - Type: list_handler
+      Strategy: xpath
+      Id: $PAGE.employee_health_mobile_home_page.appointment_list$
+      Locator: $PAGE.employee_health_mobile_home_page.appointment_list_element$
+      Attribute: innerHTML
+      AttributeValue: $AND_CLI_DAY$
+      Operation: click
+  # Click on the appointment
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.employee_health_mobile_request_appointment_page.appointment_description$
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.employee_health_mobile_request_appointment_page.appointment_description$
+      Greps:
+        - var: SHOWED_DESCRIPTION
+          attr: textContent
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: SHOWED_DESCRIPTION
+          Value: $AND_CLI_PAIN_DESCRIPTION$     
 
 
