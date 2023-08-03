@@ -18,7 +18,7 @@ TestEHPMobileSettingNotification:
   #Verifying text in the notification tab
     - Type: get_text
       Strategy: xpath
-      Id: $PAGE.employee_health_mobile_view_notifications.notifications_text$
+      Id: $PAGE.employee_health_mobile_notifications_page.notifications_text$
       Greps:
         - var: TITLE_TEXT
           condition: nempty
@@ -76,14 +76,14 @@ TestEHPMobileSettingNotification:
   #Canceling changes. Modal should disappear.
     - Type: click
       Strategy: xpath
-      Id: $PAGE.employee_health_mobile_view_notifications.close_button$
+      Id: $PAGE.employee_health_mobile_notifications_page.close_button$
     - Type: wait_not_visible
       Strategy: xpath
-      Id: $PAGE.employee_health_mobile_view_notifications.save_changes_button$
+      Id: $PAGE.employee_health_mobile_notifications_page.save_changes_button$
   #Navigate to Notifications page
     - Type: click
       Strategy: xpath
-      Id: $PAGE.employee_health_mobile_view_menu.notifications_button$
+      Id: $PAGE.employee_health_mobile_menu_modal.notifications_button$
   #Checking state got undone when we canceled
     - Type: get_attribute
       Strategy: xpath
@@ -239,7 +239,7 @@ TestEHPMobileInformationUpdateNumber:
     #Navigate to My Info
     - Type: click
       Strategy: xpath
-      Id: $PAGE.employee_health_mobile_view_menu.my_info_button$
+      Id: $PAGE.employee_health_mobile_menu_modal.my_info_button$
     #Erase again the phone number
     - Type: loop
       Times: 10
