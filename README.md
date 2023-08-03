@@ -1170,12 +1170,9 @@ i.e. method receives "Hey" and then returns "Hey ~timestamp~"
 
 ### <a id="generate_unique_email"></a>generate_unique_email
 
-Returns an email compoused by the first part of your email (What goes before the '@') 
-a timestamp and the rest of your email (@domain) i.e. method receives "tzumi" and "@gmail.com"
-and it returns "tzumi+<timestamp>@gmail.com"
+Returns a random email
 
     - Type: generate_unique_email
-      Name: string that user needs to be unique
       ResultVar: Var that will have the unique name value
 
 ## Custom actions made for the project

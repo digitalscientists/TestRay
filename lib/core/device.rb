@@ -2132,9 +2132,7 @@ def generate_unique_name(action, main_case, main_case_id)
   ENV[convert_value(action["ResultVar"])] = unique_name
 end
 
-# Returns an email compoused by the first part of your email (What goes before the '@') 
-# a timestamp and the rest of your email (@domain) i.e. method receives "tzumi" and "@gmail.com"
-# and it returns "tzumi+<timestamp>@gmail.com"
+# Returns a random email
 def generate_unique_email(action, main_case, main_case_id)
   timestamp = Time.now.utc.strftime("%d%m%y%H%M%S")
   unique_email = "random+" + timestamp + "@domain.com"
