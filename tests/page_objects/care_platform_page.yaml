@@ -142,7 +142,7 @@ care_platform_participant_details:
   save_and_archive_button: //div[@id='dialogs']//button[text()='Save and Archive']
   new_ticket_notification: //div[@class='Toastify']//div[text()='Follow-up ticket created']
   new_ticket_subject: //div[@tab-title='Follow-up Tickets']//div[@class='accordion-item-toggle']//div[contains(text(),'Automated test')]
-  new_ticket_date: (//div[@class='accordion-item']//div[contains(text(),'Automated test')]/preceding-sibling::div/time[contains(text(),'$AND_CLI_TODAYS_DATE$')])[last()]
+  new_ticket_date: (//div[@class='accordion-item']//div[contains(text(),'Automated test')]/preceding-sibling::div[contains(text(),'$AND_CLI_TODAYS_DATE$')])[last()]
   records_button: //a/button[text()='Records']
   records_link: //a[contains(text(),'Records')]
 

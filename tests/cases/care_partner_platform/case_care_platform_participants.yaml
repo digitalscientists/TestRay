@@ -182,17 +182,9 @@ TestCarePartnerParticipantCallHistory:
   #Calling Login case
     - Type: case
       Value: CarePartnerLogin
-  #Go to participants
-    - Type: click
-      Strategy: xpath
-      Id: $PAGE.care_platform.navigation_participant$
-  #Select first participant in the list
-    - Type: wait_for
-      Strategy: xpath
-      Id: $PAGE.care_platform_participant.senior_1_row$
-    - Type: click
-      Strategy: xpath
-      Id: $PAGE.care_platform_participant.senior_1_row$
+  #Navigate to Participants Pane
+    - Type: case
+      Value: CarePartnerParticipantPaneNavigation
   #Check Call History tab
     - Type: click
       Strategy: xpath
@@ -4749,8 +4741,6 @@ TestCarePartnerParticipantProfileEditInsuranceOrProviderInformation:
 #CXTB-536 Call External 10-Digit Number (Without Participant)
 TestCarePartnerCallExternal10DigitNumberWithoutParticipant:
   Environment: Settings
-  Vars:
-    PHONE_NUMBER: ADD_YOUR_PHONE_NUMBER
   Precases:
     - CarePartnerCleanCallQueueAndHangedCalls
   Aftercases:
@@ -4786,7 +4776,7 @@ TestCarePartnerCallExternal10DigitNumberWithoutParticipant:
     - Type: send_keys
       Strategy: xpath
       Id: $PAGE.care_platform_call_portal.enter_a_number_input$
-      Value: $AND_CLI_PHONE_NUMBER$
+      Value: $AND_CLI_soft_call_phone_number$
   # Call button (phone visual) becomes active when number is present.
     - Type: wait_for_property
       Strategy: xpath
