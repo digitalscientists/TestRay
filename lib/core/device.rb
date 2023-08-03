@@ -2136,10 +2136,8 @@ end
 # a timestamp and the rest of your email (@domain) i.e. method receives "tzumi" and "@gmail.com"
 # and it returns "tzumi+<timestamp>@gmail.com"
 def generate_unique_email(action, main_case, main_case_id)
-  prefix = convert_value(action["Prefix"])
-  sufix = convert_value(action["Sufix"])
   timestamp = Time.now.utc.strftime("%d%m%y%H%M%S")
-  unique_email = prefix + "+" + timestamp + sufix
+  unique_email = "random+" + timestamp + "@domain.com"
   ENV[convert_value(action["ResultVar"])] = unique_email
 end
 

@@ -3,12 +3,10 @@
 TestOnboarderCreateNewStaffMemberWithFacilityLeadershipRole:
     Environment: Settings
     Vars:
-      EMAIL_PREFIX: $AND_CLI_new_user_email_prefix$
-      EMAIL_SUFIX: $AND_CLI_new_user_email_sufix$
-      STAFF_MEMBER_FIRST_NAME: $AND_CLI_new_user_firstname$
-      STAFF_MEMBER_LAST_NAME: $AND_CLI_new_user_lastname$
+      STAFF_MEMBER_FIRST_NAME: Newstaffname
+      STAFF_MEMBER_LAST_NAME: Newstafflastname
       ROLE: Facility Leadership
-      HIRE_DATE: $AND_CLI_new_user_hire_at$
+      HIRE_DATE: '2023-07-20'
     Roles:
     - Role: desktopChrome
       App: "desktop"

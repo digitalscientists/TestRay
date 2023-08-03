@@ -186,8 +186,6 @@ OnboarderCreateStaffMember:
       Value: $AND_CLI_HIRE_DATE$
     # Generate unique email for staff member
     - Type: generate_unique_email
-      Prefix: $AND_CLI_EMAIL_PREFIX$
-      Sufix: $AND_CLI_EMAIL_SUFIX$
       ResultVar: UNIQUE_EMAIL
     - Type: send_keys
       Strategy: id

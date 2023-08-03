@@ -143,13 +143,6 @@ Environments:
       employee_user2_lastname: add_your_info
       employee_user2_dob: "YYYY-MM-DD" #you need to keep the date between quotation marks
       employee_user2_phone_number: add_your_info #phone number is a combination of 10 digits, without parenthesis or dashes
-#New user
-      new_user_firstname: add_your_info
-      new_user_lastname: add_your_info
-      new_user_email_prefix: add_your_info #the first part of an email, what goes before the '@'
-      new_user_email_sufix: "@add_your_info.com" #the last part of an email, everything after the '@', including the '@'
-      new_user_hire_at: "YYYY-MM-DD" #you need to keep the date between quotation marks
-      new_user_phone_number: add_your_info #phone number is a combination of 10 digits, without parenthesis or dashes
 #Alternative credentials
       alternative_correct_password: add_your_info #this password is used to update momentarily the current password
       alternative_incorrect_password: add_your_info #this password shouldn't comply with all requirements
