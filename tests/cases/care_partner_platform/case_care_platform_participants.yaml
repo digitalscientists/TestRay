@@ -4801,6 +4801,9 @@ TestCarePartnerCallExternal10DigitNumberWithoutParticipant:
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_call_portal.end_call_button$
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.end_call_button$
   # Video window updates to show a message that the call has ended.
     - Type: get_attribute
       Strategy: xpath
