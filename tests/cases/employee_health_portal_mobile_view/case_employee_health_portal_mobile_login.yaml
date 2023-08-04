@@ -68,6 +68,10 @@ TestEHPMobileSignUpNewDependent:
       Strategy: xpath
       Id: $PAGE.employee_health_signup_page.email_confirmation_input$
       Value: $AND_CLI_employee_user1$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.employee_health_signup_page.phone_input$
+      Value: $AND_CLI_employee_user1$
     - Type: send_keys
       Strategy: xpath
       Id: $PAGE.employee_health_signup_page.phone_input$

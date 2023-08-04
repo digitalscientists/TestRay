@@ -2613,7 +2613,7 @@ def list_handler(action, main_case, main_case_id)
       end 
     end
     #Selecing a specific element by the Locator within the list element.
-    if !locator.empty? && index.empty?
+    if !locator.empty? && index.empty? && attribute.empty? && attributeValue.empty?
       els.each do |elm|
         if !elm.find_element(:xpath => ".#{locator}").nil?
           log_info("#{@role}: element: found by locator #{locator}")
@@ -2650,5 +2650,4 @@ def list_handler(action, main_case, main_case_id)
     raise "#{@role}: Exception: #{exception}, Action:#{action}\nError Screenshot: #{path}"
   end
 end
-
 # END OF DEVICE CLASS

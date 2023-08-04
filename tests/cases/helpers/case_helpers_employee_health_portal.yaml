@@ -898,6 +898,8 @@ EHPMobileUserCall:
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.employee_health_mobile_call_now_page.title$
+    - Type: sleep
+      Time: 1
     - Type: click
       Strategy: xpath
       Id: $PAGE.employee_health_mobile_call_now_page.close_button$
@@ -980,10 +982,10 @@ EHPMobileUserCall:
   #Switch back to the Employee Health Portal tab
     - Type: switch_window
       Value: 0
-  #Wait for notification that call ended
+  #Verify redirect back to home and call ended notification to disappear 
     - Type: wait_for
       Strategy: xpath
-      Id: $PAGE.employee_health_home_page.alert_call_ended$
+      Id: $PAGE.employee_health_home_page.call_now_button$
     - Type: wait_not_visible
       Strategy: xpath
       Id: $PAGE.employee_health_home_page.alert_call_ended$
@@ -1028,12 +1030,6 @@ EHPMobileCallNow:
     - Type: click
       Strategy: xpath
       Id: $PAGE.employee_health_mobile_call_now_page.call_now_button$
-    # Workaround starts here to see the on going call page.
-    # - Type: sleep
-    #   Time: 2
-    # - Type: refresh
-    #   Role: desktopChrome
-    # Workaround ends here.
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.employee_health_on_demand_call_page.connecting_label$

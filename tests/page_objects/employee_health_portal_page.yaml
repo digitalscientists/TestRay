@@ -147,6 +147,7 @@ employee_health_mobile_home_page:
   no_upcoming_appointments_label: //div[text() = 'No upcoming appointments']
   appointment_list: //div[@class = 'mobile-schedule-item-container']
   appointment_list_element: //span[1]
+  alert_appointment_cancelled: //div[@role='alert']//div[contains(text(),'Appointment canceled')]
 
 employee_health_mobile_menu_modal:
     my_info_button: //button[text()= 'My Info']
@@ -184,3 +185,11 @@ employee_health_mobile_call_now_page:
     title: //header//span[text() ='Call Now']
     call_now_button: //*[@id='mobile-modals']//button[text()= 'Call Now']
     close_button: //*[@id='mobile-modals']//header//button
+
+employee_health_mobile_call_details_page:
+    title: //header//span[text() ='Call Now']
+    options_button: //*[@id='mobile-modals']//button[text()= 'Options']
+    close_button: //*[@id='mobile-modals']//header//button
+    delete_button: //*[@id='dialogs']//button[text()= 'Delete']
+    yes_delete_button: //*[@id='dialogs']//button[text()= 'Yes, Delete']
+
