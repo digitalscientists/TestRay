@@ -81,7 +81,7 @@ SetOnlyWebTests:
   - Case: TestProviderHelpMenuOption
   - Case: TestProviderUseForgotPasswordLink
   - Case: TestProviderAccessParticipantDirectoryandViewDeviceRecordfromListing
-  # Employee Health Portal
+  # Employee Health Portal Mobile
   - Case: TestEHPMobileUserCall
   - Case: TestEHPMobileDependentUserCall
   - Case: TestEHPMobileMinorUserCall
@@ -91,7 +91,7 @@ SetOnlyWebTests:
   - Case: TestEHPMobileSettingNotification
   - Case: TestEHPMobileInformationUpdateNumber
   - Case: TestEHPMobileUpdateAccountPassword
-  - Case: TestEEHPMobileAccountHelp
+  - Case: TestEHPMobileAccountHelp
   - Case: TestEHPMobileManuallyLogoutOfPortal
   - Case: TestEHPMobileRequestAnAppointmentForUser
   - Case: TestEHPMobileReviewUpcomingAppointment

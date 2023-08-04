@@ -279,7 +279,7 @@ TestEHPMobileUpdateAccountPassword:
       Value: EHPMobileUpdateAccountPassword  
 
 #CXTB-285 Employee Health Portal - Account - Help
-TestEEHPMobileAccountHelp:
+TestEHPMobileAccountHelp:
   Environment: Settings 
   Roles:
     - Role: desktopChrome
