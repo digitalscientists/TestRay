@@ -67,6 +67,7 @@ SetOnlyWebTests:
   - Case: TestOnboarderParticipantProfileEditInsuranceOrProviderInformation
   - Case: TestOnboarderParticipantPaneReviewEditOrAddBehavioralInfo
   - Case: TestOnboarderCreateNewStaffMemberWithFacilityLeadershipRole
+  - Case: TestOnboarderParticipantInfoEditOrAddContactsInfo
   # Providers Care Platform
   - Case: TestProvidersUpdatePassword
   - Case: TestProviderLogOutStayOnShift
@@ -81,6 +82,8 @@ SetOnlyWebTests:
   - Case: TestProviderHelpMenuOption
   - Case: TestProviderUseForgotPasswordLink
   - Case: TestProviderAccessParticipantDirectoryandViewDeviceRecordfromListing
+  # Facility Leadership Care Platform
+  - Case: TestFacilityLeadershipDirectoryAndFilter 
   # Employee Health Portal Mobile
   - Case: TestEHPMobileUserCall
   - Case: TestEHPMobileDependentUserCall
