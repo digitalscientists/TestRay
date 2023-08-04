@@ -2602,7 +2602,7 @@ def list_handler(action, main_case, main_case_id)
           raise IndexError
       end
     end
-    #Selecing a specific element by the Locator that matches the given attribute value within the list element.  
+    #Selecting a specific element by the Locator that matches the given attribute value within the list element.  
     if !locator.empty? && !attribute.empty? && !attributeValue.empty?
       els.each do |elm|
         if elm.find_element(:xpath => ".#{locator}").attribute(attribute)["#{attributeValue},"]
@@ -2612,7 +2612,7 @@ def list_handler(action, main_case, main_case_id)
         end
       end 
     end
-    #Selecing a specific element by the Locator within the list element.
+    #Selecting a specific element by the Locator within the list element.
     if !locator.empty? && index.empty? && attribute.empty? && attributeValue.empty?
       els.each do |elm|
         if !elm.find_element(:xpath => ".#{locator}").nil?
