@@ -19,10 +19,10 @@ TestESCarePartnerBrowsingWhileOnCall:
     - Type: wait_for
       Strategy: class_chain
       Role: localiOS
-      Id: $PAGE.seniors_app_home.call_care_partner$
+      Id: $PAGE.idd_never_alone_app_home.call_now_button$
     - Type: click
       Strategy: class_chain
-      Id: $PAGE.seniors_app_home.call_care_partner$
+      Id: $PAGE.idd_never_alone_app_home.call_now_button$
   # Click "Non-Medical" button.
     - Type: click
       Strategy: class_chain
