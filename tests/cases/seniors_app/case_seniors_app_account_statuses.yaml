@@ -241,10 +241,11 @@ TestSeniorAppSuspendedAccountStatus:
     - Type: case
       Value: LoginNeverAloneHelper
   # Go to Participants
-    - Type: click
-      Strategy: xpath
+    - Type: case
+      Value: CarePartnerNavigateToParticipants
+    - Type: search_by_text
       Role: desktopChrome
-      Id: $PAGE.care_platform.navigation_participant$
+      Text: $AND_CLI_senior_user1_name$
   # Select first participant by name in the list
     - Type: wait_for
       Strategy: xpath
