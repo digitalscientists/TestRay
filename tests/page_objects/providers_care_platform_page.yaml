@@ -180,3 +180,4 @@ providers_notifications:
 
 providers_call_history_page:
   facility_tab: //div//a[text()='Facilities']
+  play_button: (//button[@aria-label='Play'])[1]

@@ -151,7 +151,14 @@ TestProviderCanClickAndViewFacilitiesDeviceCallHistoryAndAccessCallRecordings:
     - Type: click
       Strategy: xpath
       Id: $PAGE.providers_facilities_page.call_history_accordion$
+    # Click on Play Button
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_history_page.play_button$
+    - Type: sleep
+      Time: 5
     # Click on Telehealth request form
     - Type: click
       Strategy: xpath
       Id: $PAGE.providers_facilities_page.telehealth_request_form$
+
