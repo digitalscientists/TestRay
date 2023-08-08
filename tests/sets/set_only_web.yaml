@@ -54,6 +54,7 @@ SetOnlyWebTests:
   - Case: TestCHCarePartnerManuallyLogoutGoOffShift
   - Case: TestESCarePartnerStatusDropdownNotInCall
   - Case: TestESCarePartnerAccessAndReviewTeamMembersAvailability
+  - Case: TestESCarePartnerManuallyLogoutGoOffShift
   # On Boarders
   - Case: TestOnboarderCarePartnerUpdatePassword
   - Case: TestOnboarderManuallyLogOutOfThePortal
