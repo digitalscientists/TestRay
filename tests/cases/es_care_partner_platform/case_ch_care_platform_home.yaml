@@ -186,4 +186,12 @@ TestCHCarePartnerManuallyLogoutGoOffShift:
   # Calling Logout case.
     - Type: case
       Value: CarePlatformLogout
-  # Review the staff audit log, you’ll see the shift changed to Off when you logged out
+  # Log in as an Admin On Call to verify if the user is offline.
+    - Type: case
+      Value: ESAdminOnCallLogin
+  # Open the headset icon at the top and, you’ll see the shift changed to Off when you logged out
+    - Type: case
+      Value: VerifyCHUserIsOffline
+  # Log out of the second user too.
+    - Type: case
+      Value: CarePlatformLogout
