@@ -43,6 +43,7 @@ CarePartnerLogin:
       Id: $PAGE.care_platform_login.login_button$
       Property: disabled
       Value: "true"
+      Time: 0.25
     - Type: sleep
       Time: 2
 #    - Type: if
