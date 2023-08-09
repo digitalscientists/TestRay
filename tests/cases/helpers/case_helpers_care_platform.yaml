@@ -38,6 +38,11 @@ CarePartnerLogin:
       Strategy: xpath
       Role: desktopChrome
       Id: $PAGE.care_platform_login.login_button$
+    - Type: wait_for_property
+      Strategy: xpath
+      Id: $PAGE.care_platform_login.login_button$
+      Property: disabled
+      Value: "true"
     - Type: sleep
       Time: 2
 #    - Type: if
