@@ -58,3 +58,4 @@ SetNonPhysicalMobileTest:
     - Case: TestSNFCheckQueueandReviewDetails
   # Onboarder
     - Case: TestOnboarderChangeStatusToActiveForExistingParticipant
+    - Case: TestOnboarderChangeStatusToSuspendedForExistingParticipant

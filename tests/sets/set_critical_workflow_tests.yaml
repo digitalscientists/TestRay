@@ -33,3 +33,4 @@ SetCriticalWorkflows:
     - Case: TestESCarePartnerManuallyLogoutGoOffShift
   # Onboarders
     - Case: TestOnboarderChangeStatusToActiveForExistingParticipant
+    - Case: TestOnboarderChangeStatusToSuspendedForExistingParticipant
