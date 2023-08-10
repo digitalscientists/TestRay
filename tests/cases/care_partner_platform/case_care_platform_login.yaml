@@ -7,3 +7,13 @@ TestCarePartnerForgotPassword:
   Actions:
     - Type: case
       Value: ForgotPasswordCarePlatformLoginLink
+
+#CXTB-369: Care Partner Platform - "Log In" Button should be Limited to Single Click
+TestCarePartnerLogInButtonShouldBeLimitedToOneClick:
+  Environment: Settings 
+  Roles:
+    - Role: desktopChrome
+      App: "desktop"
+  Actions:
+    - Type: case
+      Value: CarePartnerLogin
