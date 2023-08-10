@@ -31,3 +31,5 @@ SetCriticalWorkflows:
   # EasterSeals Care Partner Platform
     - Case: TestCHCarePartnerManuallyLogoutGoOffShift
     - Case: TestESCarePartnerManuallyLogoutGoOffShift
+  # Onboarders
+    - Case: TestOnboarderChangeStatusToActiveForExistingParticipant
