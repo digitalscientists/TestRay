@@ -5,6 +5,7 @@ SetCriticalWorkflows:
     - Case: TestCarePartnerAnswerAndComplete
     - Case: TestCarePartnerBrowsingWhileOnCall
     - Case: TestCarePartnerCallParticipantsDeviceCallComplete
+    - Case: TestCarePartnerLogInButtonShouldBeLimitedToOneClick
   # Provider tests
     - Case: TestProviderAnswerCompleteSessionFromEHP
     - Case: TestProvidersAnswerSNFCallAndCompletesSession
@@ -31,4 +32,4 @@ SetCriticalWorkflows:
     - Case: TestCHCarePartnerManuallyLogoutGoOffShift
     - Case: TestESCarePartnerManuallyLogoutGoOffShift
   # Onboarders
-    - Case: TestOnboarderChangeStatusToSuspendedForExistingParticipant
+    - Case: TestOnboarderChangeStatusToActiveForExistingParticipant

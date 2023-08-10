@@ -357,13 +357,13 @@ TestOnboarderParticipantInfoEditOrAddEmergencyRoomAdmissionsInfo:
     - Type: case
       Value: EditOrAddEmergencyRoomAdmissions
 
-#CXTB-510 OnboardersCarePlatform - Change Status to “Suspended” for Existing Participant
-TestOnboarderChangeStatusToSuspendedForExistingParticipant:
+# CXTB-512 OnboarderCarePartner - Change Status to “Active” for Existing Participant
+TestOnboarderChangeStatusToActiveForExistingParticipant:
   Roles:
     - Role: localiOS
       App: NeverAlone
     - Role: desktopChrome
-      App: desktop    
+      App: desktop
   Actions:
     - Type: case
-      Value: TestSeniorAppSuspendedAccountStatus
+      Value: TestSeniorAppActiveAccountStatusAndBehavior
