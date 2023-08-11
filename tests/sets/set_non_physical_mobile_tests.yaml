@@ -56,5 +56,6 @@ SetNonPhysicalMobileTest:
     - Case: TestSNFNewRequestFormBehavior
     - Case: TestSNFRequestSuccessfulCallConnect
     - Case: TestSNFCheckQueueandReviewDetails
-  # Facility Leadership
-    - Case: TestFacilityLeadershipLogoutGoOffShift
+  # Onboarder
+    - Case: TestOnboarderChangeStatusToActiveForExistingParticipant
+    - Case: TestOnboarderChangeStatusToSuspendedForExistingParticipant

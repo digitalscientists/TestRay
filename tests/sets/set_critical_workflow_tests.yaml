@@ -5,6 +5,7 @@ SetCriticalWorkflows:
     - Case: TestCarePartnerAnswerAndComplete
     - Case: TestCarePartnerBrowsingWhileOnCall
     - Case: TestCarePartnerCallParticipantsDeviceCallComplete
+    - Case: TestCarePartnerLogInButtonShouldBeLimitedToOneClick
   # Provider tests
     - Case: TestProviderAnswerCompleteSessionFromEHP
     - Case: TestProvidersAnswerSNFCallAndCompletesSession
@@ -30,5 +31,8 @@ SetCriticalWorkflows:
   # EasterSeals Care Partner Platform
     - Case: TestCHCarePartnerManuallyLogoutGoOffShift
     - Case: TestESCarePartnerManuallyLogoutGoOffShift
+  # Onboarders
+    - Case: TestOnboarderChangeStatusToActiveForExistingParticipant
+    - Case: TestOnboarderChangeStatusToSuspendedForExistingParticipant
   # Facility Leadership
     - Case: TestFacilityLeadershipLogoutGoOffShift
