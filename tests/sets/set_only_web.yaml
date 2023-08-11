@@ -89,7 +89,8 @@ SetOnlyWebTests:
   - Case: TestProviderUseForgotPasswordLink
   - Case: TestProviderAccessParticipantDirectoryandViewDeviceRecordfromListing
   # Facility Leadership Care Platform
-  - Case: TestFacilityLeadershipDirectoryAndFilter 
+  - Case: TestFacilityLeadershipDirectoryAndFilter
+  - Case: TestFacilityLeadershipLogoutGoOffShift
   # Employee Health Portal Mobile
   - Case: TestEHPMobileUserCall
   - Case: TestEHPMobileDependentUserCall
@@ -105,4 +106,3 @@ SetOnlyWebTests:
   - Case: TestEHPMobileRequestAnAppointmentForUser
   - Case: TestEHPMobileReviewUpcomingAppointment
   - Case: TestEHPMobileRequestAnAppointmentForDependentMinor
-

@@ -35,3 +35,5 @@ SetCriticalWorkflows:
     - Case: TestOnboarderChangeStatusToActiveForExistingParticipant
     - Case: TestOnboarderChangeStatusToSuspendedForExistingParticipant
     - Case: TestOnboarderStaffMemberPaneReactivateStaffMemberAccountForCarePlatform
+  # Facility Leadership
+    - Case: TestFacilityLeadershipLogoutGoOffShift
