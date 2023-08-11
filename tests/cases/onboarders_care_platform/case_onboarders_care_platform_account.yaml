@@ -106,6 +106,7 @@ TestOnboarderNoNegativeToastIfParticipantIsSavedWithDuplicatedEmail:
       Value: CarePartnerNavigateToParticipants
   # Decrease listing by searching participant's name
     - Type: search_by_text
+      Role: desktopChrome
       Text: $AND_CLI_senior_user1_name$
   # Click on the desired participant.
     - Type: click

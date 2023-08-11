@@ -1340,6 +1340,7 @@ TestCarePartnerCallParticipantsDeviceCallComplete:
       Value: CarePartnerNavigateToParticipants
   # Decrease listing by searching participant's name
     - Type: search_by_text
+      Role: desktopChrome
       Text: $AND_CLI_senior_user1_name$
   # Click on the corresponding participant.
     - Type: click
@@ -1498,6 +1499,7 @@ TestCarePartnerCallParticipantsDeviceCallIgnored:
       Value: CarePartnerNavigateToParticipants
   # Decrease listing by searching participant's name
     - Type: search_by_text
+      Role: desktopChrome
       Text: $AND_CLI_senior_user1_name$
   # Click on the corresponding participant.
     - Type: click
@@ -1591,6 +1593,7 @@ TestCarePartnerCallParticipantsDeviceCallMissed:
       Value: CarePartnerNavigateToParticipants
   # Decrease listing by searching participant's name
     - Type: search_by_text
+      Role: desktopChrome
       Text: $AND_CLI_senior_user1_name$
   # Click on the corresponding participant.
     - Type: click
@@ -1659,7 +1662,7 @@ TestCarePartnerCallParticipantsDeviceCallMissed:
       Asserts:
         - Type: eq
           Var: PARTICIPANT_NOT_AVAILABLE_TEXT
-          Value: $AND_CLI_carepartner_user1_name$ is not available.Would you like to leave a text message?
+          Value: $AND_CLI_senior_user1_name$ is not available.Would you like to leave a text message?
   # Verify that there is an option for the care partner to leave a text message.
     - Type: wait_for
       Strategy: xpath
@@ -1805,6 +1808,7 @@ TestCarePartnerTrackTimeAndEditFollowUpTicketsParticipantComponent:
       Value: CarePartnerNavigateToParticipants
   # Decrease listing by searching participant's name
     - Type: search_by_text
+      Role: desktopChrome
       Text: $AND_CLI_senior_user1_name$
   # Click on the corresponding participant.
     - Type: click
@@ -2271,6 +2275,7 @@ TestCarePartnerParticipantInfoEditOrAddContactsInfo:
       Value: CarePartnerNavigateToParticipants
   # Decrease listing by searching participant's name
     - Type: search_by_text
+      Role: desktopChrome
       Text: $AND_CLI_senior_user1_name$
   # Select a participant in listing.
     - Type: wait_for
@@ -3656,6 +3661,7 @@ TestCarePartnerParticipantInfoEditDNRFlag:
       Id: $PAGE.care_platform.navigation_participant$
   # Decrease by filtering
     - Type: search_by_text
+      Role: desktopChrome
       Text: $AND_CLI_senior_user1_name$
   # Select the participant changed
     - Type: wait_for
@@ -3729,6 +3735,7 @@ TestCarePartnerParticipantInfoEditDNRFlag:
       Id : $PAGE.care_platform.navigation_participant$
   # Search Participant by name
     - Type: search_by_text
+      Role: desktopChrome
       Text: $AND_CLI_senior_user1_name$
   # Select the participant changed
     - Type: wait_for

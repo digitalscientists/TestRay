@@ -315,6 +315,7 @@ TestSeniorFutureAppointmentCancelOrRescheduleButton:
   Environment: Settings
   Precases:
     - LoginNeverAloneHelper
+    - SeniorCleanPrompts
   Aftercases:
     - TerminateApp
   Roles:
