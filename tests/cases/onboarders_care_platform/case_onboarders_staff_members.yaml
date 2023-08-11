@@ -135,3 +135,28 @@ TestOnboarderAccessStaffDirectoryAndFilter:
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_participant.status_dropdown_options$
+  # Select a staff member in listing.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant.senior_1_row$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant.senior_1_row$
+  # Right side of screen updates to show the selected staff member’s summary pane.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.staff_records.overview_tab$
+  # Verify that the only existing tab is "Overview".
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.staff_records.staff_member_tabs$
+      Greps:
+        - var: TABS
+          attr: innerText
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: eq
+          Var: TABS
+          Value: 'OVERVIEW' 
