@@ -36,6 +36,7 @@ onboarders_create_edit_staff_member:
 
 staff_records:
   overview_tab: //button[contains(text(),'Overview')]
+  staff_member_tabs: //nav[@class='tabs-nav']
   edit_info_button: //button[contains(text(),'Edit info')]
   admin_button: //span[@class='button-dropdown']/button[text()='Admin']
   admin_deactivate_button: //span[@class='button-dropdown']//button[text()='Deactivate']
