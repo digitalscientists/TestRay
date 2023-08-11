@@ -31,6 +31,8 @@ SetCriticalWorkflows:
   # EasterSeals Care Partner Platform
     - Case: TestCHCarePartnerManuallyLogoutGoOffShift
     - Case: TestESCarePartnerManuallyLogoutGoOffShift
+    - Case: TestCHCarePartnerParticipantPaneCreateFollowUpTicket
+    - Case: TestESCarePartnerParticipantPaneCreateFollowUpTicket
   # Onboarders
     - Case: TestOnboarderChangeStatusToActiveForExistingParticipant
     - Case: TestOnboarderChangeStatusToSuspendedForExistingParticipant
