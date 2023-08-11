@@ -21,3 +21,119 @@ TestOnboarderCreateNewStaffMemberWithFacilityLeadershipRole:
   # Call helper to create the staff member
     - Type: case
       Value: OnboarderCreateStaffMember
+
+# CXTB-509: Re-Activate Staff Member Account for Care Platform - Staff Member Pane
+TestOnboarderStaffMemberPaneReactivateStaffMemberAccountForCarePlatform:
+    Environment: Settings
+    Vars:
+      LOGOUT_OPTION: "Go Off Shift"
+    Precases:
+      - OnboarderCarePartnerLogin
+      - OnboarderSetStaffInactive
+    Roles:
+    - Role: desktopChrome
+      App: "desktop"
+    Actions:
+  # Navigate to Staff.
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.onboarders_header_navigation.staff_tab$
+  # Select an "Inactive" staff member in listing.
+    - Type: search_by_text
+      Role: desktopChrome
+      Text: $AND_CLI_carepartner_user2_name$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.onboarders_staff_listing.care_partner2_based_on_name$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.onboarders_staff_listing.care_partner2_based_on_name$
+  # Right side of screen updates to show the selected staff member’s summary pane.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.staff_records.admin_button$
+  # Click "Admin" on right side of screen.
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.staff_records.admin_button$
+  # Click "Activate" option.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.staff_records.admin_activate_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.staff_records.admin_activate_button$
+  # "Activate Account" window appears to confirm if you want to activate the related staff member account.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.staff_records.dialog_title$
+    - Type: get_text
+      Strategy: xpath
+      Id: $PAGE.staff_records.dialog_title$
+      Greps:
+        - var: MODAL_TITLE
+          match: "(.*)"
+    - Type: assert
+      Role: desktopChrome
+      Asserts:
+        - Type: eq
+          Var: MODAL_TITLE
+          Value: Activate Account
+  # Click "Cancel" button.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.staff_records.cancel_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.staff_records.cancel_button$
+  # Window disappears and staff member account remains inactive.
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id: $PAGE.staff_records.dialog_title$
+  # Click "Admin" on right side of screen.
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.staff_records.admin_button$
+  # Click "Activate" option.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.staff_records.admin_activate_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.staff_records.admin_activate_button$
+  # "Activate Account" window appears to confirm if you want to activate the related staff member account.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.staff_records.dialog_title$
+    - Type: get_text
+      Strategy: xpath
+      Id: $PAGE.staff_records.dialog_title$
+      Greps:
+        - var: MODAL_TITLE
+          match: "(.*)"
+    - Type: assert
+      Role: desktopChrome
+      Asserts:
+        - Type: eq
+          Var: MODAL_TITLE
+          Value: Activate Account
+  # Click "Yes, activate" button.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.staff_records.yes_activate_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.staff_records.yes_activate_button$
+  # Toast notification appears and account status has been updated to active for related staff member account.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.onboarders_notifications.account_status_updated_notification_button$
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id: $PAGE.onboarders_notifications.account_status_updated_notification_button$
+  # Log out of the Onboarder account. 
+    - Type: case
+      Value: CarePlatformLogout
+  # Verify that the user can log in.
+    - Type: case
+      Value: CarePartnerLoginSecondaryUser
