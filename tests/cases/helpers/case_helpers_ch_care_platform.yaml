@@ -1,5 +1,4 @@
 CHCarePartnerLogin:
-  Environment: Settings
   Roles:
     - Role: desktopChrome
       App: desktop
@@ -24,7 +23,6 @@ CHCarePartnerLogin:
       Time: 2
 
 AnswerCallAsCHCarePartner:
-  Environment: Settings
   Roles:
     - Role: desktopChrome
       App: desktop       
@@ -48,7 +46,6 @@ AnswerCallAsCHCarePartner:
 CHCarePartnerCleanCallQueueAndHangedCalls:
   Vars:
     LOGOUT_OPTION: "Go Off Shift"
-  Environment: Settings
   Roles:
     - Role: desktopChrome
       App: desktop
@@ -63,7 +60,6 @@ CHCarePartnerCleanCallQueueAndHangedCalls:
       Value: CarePlatformLogout
 
 CHCarePartnerCallSenior:
-  Environment: Settings
   Roles:
     - Role: desktopChrome
       App: desktop       
@@ -101,7 +97,6 @@ CHCarePartnerCallSenior:
       Id: $PAGE.care_platform_call_portal.call_camera_button$
 
 CHCarePartnerSendMessageToSenior:
-  Environment: Settings
   Roles:
     - Role: desktopChrome
       App: desktop       
@@ -153,7 +148,6 @@ CHCarePartnerSendMessageToSenior:
       Value: CarePlatformLogout
 
 CHCarePartnerSetScheduledCallForSeniors:
-  Environment: Settings 
   Roles:
     - Role: desktopChrome
       App: desktop       
@@ -252,7 +246,6 @@ CHCarePartnerSetScheduledCallForSeniors:
 
 # Creates an schedule to start in X amount of minutes.
 CHSetScheduledCallForSeniorsToStartInXMinutes:
-  Environment: Settings
   Vars:
     LOGOUT_OPTION: "Go Off Shift"
   Roles:
@@ -365,7 +358,6 @@ CHSetScheduledCallForSeniorsToStartInXMinutes:
       Value: CarePlatformLogout
 
 ESAdminOnCallLogin:
-  Environment: Settings
   Roles:
     - Role: desktopChrome
       App: desktop
@@ -390,7 +382,6 @@ ESAdminOnCallLogin:
       Time: 2
 
 VerifyCHUserIsOffline:
-  Environment: Settings
   Roles:
     - Role: desktopChrome
       App: desktop

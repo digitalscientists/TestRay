@@ -1575,7 +1575,6 @@ CarePartnerCleanCallQueueAndHangedCalls:
 
 # Creates a Follow-up Ticket.
 CarePartnerCreateFollowUpTicket:
-  Environment: Settings
   Roles:
     - Role: desktopChrome
       App: desktop
@@ -1584,6 +1583,9 @@ CarePartnerCreateFollowUpTicket:
     - Type: click
       Strategy: xpath
       Id : $PAGE.care_platform.navigation_participant$
+    # Decrease listing by searching participant's name
+    - Type: search_by_text
+      Text: $AND_CLI_senior_user1_name$
     # Select the participant used on the config file.
     - Type: wait_for
       Strategy: xpath
@@ -1746,7 +1748,6 @@ CarePartnerEditParticipantNavigation:
       Time: 1
 
 CarePartnerParticipantPaneNavigation:
-  Environment: Settings
   Roles:
     - Role: desktopChrome
       App: desktop
