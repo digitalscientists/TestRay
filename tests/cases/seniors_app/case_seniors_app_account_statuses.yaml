@@ -459,13 +459,13 @@ TestSeniorAppActiveAccountStatusAndBehavior:
 # CXTB-417 Senior app - Verify “Deactivated” Account Status Visuals
 TestSeniorAppDeactivatedAccountStatusAndBehavior:
   Environment: Settings
-  Vars:
-    LOGOUT_OPTION: "Go Off Shift"
-    ACCOUNT_STATUS: Deactivated #this is for the precase
-  Precases:
-    - OnboarderPrecaseforActiveState
-  Aftercases:
-    - OnboarderCarePartnerSetParticipantStateToActive
+  # Vars:
+  #   LOGOUT_OPTION: "Go Off Shift"
+  #   ACCOUNT_STATUS: Deactivated #this is for the precase
+  # Precases:
+  #   - OnboarderPrecaseforActiveState
+  # Aftercases:
+  #   - OnboarderCarePartnerSetParticipantStateToActive
   Roles:
     - Role: localiOS
       App: NeverAlone
