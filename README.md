@@ -354,6 +354,9 @@ Actions:
 10. [add_cookie](#add_cookie)
 11. [wait_for_property](#wait_for_property)
 12. [clear_field_js](#clear_field_js)
+13. [clear_field_by_backspace](#clear_field_by_backspace)
+14. [refresh](#refresh)
+15. [list_handler](#list_handler)
 
 ## Only Mobile
 
@@ -401,16 +404,20 @@ This is not a type but can be used in different Types as a Validation for the ac
 13. [get_past_timestamp](#get_past_timestamp)
 14. [get_timestamp_plus_minutes](#get_timestamp_plus_minutes)
 15. [generate_unique_name](#generate_unique_name)
+16. [generate_unique_email](#generate_unique_email)
 
 ## Custom actions made for the project
 
 1. [calculate_minutes_passed_by_from_event_creation](#calculate_minutes_passed_by_from_event_creation)
 2. [verify_event_went_to_bottom](#verify_event_went_to_bottom)
 3. [verify_all_events_match_todays_date](#verify_all_events_match_todays_date)
-4. [credentials_checkbox](#credentials_checkbox)
+4. [set_checkbox_status](#set_checkbox_status)
 5. [get_day](#get_day)
 6. [get_next_month](#get_next_month)
 7. [generate_random_day](#generate_random_day)
+8. [search_by_text](#search_by_text)
+9. [send_keys_if_exist](#send_keys_if_exist)
+
 ## Appium/Selenium
 
 #### <a id="click"></a>click 
@@ -772,6 +779,7 @@ Waits for the element to have a specific JS property value.
     Property: Js Property e.g. className
     Value:  Desired value
     Time: Time (int) e.g. 10
+    CaseInsensitive: true | false (false by default)
 
 ### <a id="clear_field_js"></a>clear_field_js
 
@@ -781,6 +789,45 @@ Sets empty value for element.
     Role: role1 (Optional)
     Strategy: xpath | id | etc.
     Id: //some//path
+
+### <a id="clear_field_by_backspace"></a>clear_field_by_backspace
+
+Sets empty value for element.
+
+  - Type: clear_field_by_backspace
+    Role: role1 (Optional)
+    Strategy: xpath | id | etc.
+    Id: //some//path
+
+### <a id="refresh"></a>refresh
+
+Refreshes the browsers tab.
+
+  - Type: refresh
+    Role: role1
+
+### <a id="list_handler"></a>list_handler
+
+Custom type to handle list actions
+Provided a list locator allows to select the list element by index or a sublocator to perform multiple operations
+click, clear, send_keys and get_text
+Index: List elements can be searched by index number or string first and last.
+Locator: It's an xpath locator that can be indicated to find the element within the list element that contains
+a specific attribute value.
+Value: It's the value to be sent by the send_keys operation
+Attribute and AttributeValue: The attribute and values to be match by the element withing the List Element corresponding to the Locator.
+ResultVar: Returned value of get_text operation
+
+  - Type: list_handler
+      Strategy: xpath
+      Id: xpath/page_object
+      Index: int, first and last
+      Locator: xpath/page_object
+      Attribute: innerHTML, textContext, class, etc
+      AttributeValue: string
+      Operation: click, clear, send_keys and get_text
+      Value: string, int
+      ResultVar: string.
 
 ## Only Mobile
 
@@ -1145,6 +1192,13 @@ i.e. method receives "Hey" and then returns "Hey ~timestamp~"
       Name: string that user needs to be unique
       ResultVar: Var that will have the unique name value
 
+### <a id="generate_unique_email"></a>generate_unique_email
+
+Returns a random email
+
+    - Type: generate_unique_email
+      ResultVar: Var that will have the unique name value
+
 ## Custom actions made for the project
 ### <a id="calculate_minutes_passed_by_from_event_creation"></a>calculate_minutes_passed_by_from_event_creation
 
@@ -1176,11 +1230,11 @@ Custom method to verify that all events are matching today's date.
       SecondStrategy: xpath | class_chain | etc.
       SecondId: Path to the date element e.g. $PAGE.seniors_app_home.date_value_appointment_modal$
 
-### <a id="credentials_checkbox"></a>credentials_checkbox
+### <a id="set_checkbox_status"></a>set_checkbox_status
 
 Guarantee that the checkbox is checked or unchecked depending on the option.
 
-    - Type: credentials_checkbox
+    - Type: set_checkbox_status
       Strategy: xpath | id | etc.
       Option: check | uncheck
       Id: //some//path
@@ -1206,3 +1260,20 @@ Recieve a timestamp and return the related day
 Return the following month of the current date
      - Type: get_next_month
       ResultVar: NEXT_MONTH
+
+### <a id="search_by_text"></a>search_by_text
+
+Custom action for searching in NeverAlone listings
+    - Type: search_by_text
+      Text: SEARCH_INPUT
+
+### <a id="send_keys_if_exist"></a>send_keys_if_exist
+
+It works just like send_keys but ignoring possible exceptions.
+Note: is best to use accompanied by a previous waiter or sleep,
+to avoid that the element haven't had time enough to render
+
+    - Type: send_keys_if_exist
+      Strategy: xpath | id | etc.
+      Id: //some//path
+      Value: SOME_VALUE

@@ -1,7 +1,7 @@
 employee_health_login_page:
   sign_up_button: //div[@class='login-screen-form']//button[text()='Sign Up']
   log_in_button: //div[@class='login-screen']//form/button[text()='Log In']
-  email_input: //*[@id='username']
+  email_input: //*[@id='email']
   password_input: //input[@id='password']
   forgot_password_button: //button[text()='Forgot Password']
   dialog_email_input: //div[contains(@class,'dialog')]//input
@@ -44,7 +44,7 @@ employee_health_home_page:
   call_now_button: //button[text()='Call Now']
   alert_call_ended: //div[@role='alert']//div[contains(text(),'Call has ended')]
   calendar_right_button: //span[@class='icon-chevron-right']
-  calendar_month_view: //div[@class = 'calendar-days fade-quick-enter-done']
+  calendar_month_days: //div[@class = 'calendar-days fade-quick-enter-done']
   calendar_day_button: //div[text()=$AND_CLI_DAY$]
   upcoming_appointment_title: //div[contains(@class,'text-lg font-bold color-green-300')]
   tabs_results: //div[container(class, 'flex-col overflow-y-scroll')]
@@ -60,7 +60,7 @@ employee_health_home_page:
   calendar_day_without_event1: //*[@class='calendar ml']//button[@class ='calendar-day'][1]
   calendar_day_without_event2: //*[@class='calendar ml']//button[@class ='calendar-day'][2]
   calendar_day_without_event3: //*[@class='calendar ml']//button[@class ='calendar-day'][3]
-
+  appointment_scheduled_notification: //div[@class='Toastify']//div[contains(text(),'Appointment scheduled')]
 
 employee_health_my_account_modal:
   modal_title: //*[@id='modals']//h4[text()='My Account']
@@ -85,7 +85,7 @@ employee_health_my_account_modal:
   update_password_current: //*[@id='currentPassword']
   update_password_new: //*[@id='password']
   update_password_confirm: //*[@id='passwordConfirmation']
-  update_password_change_button: //*[@tab-title='Update Password']//button[text()='Change My Password']
+  update_password_change_my_password_button: //button[@type='submit']
   update_password_cancel_button: //*[@tab-title='Update Password']//button[text()='Cancel']
   update_password_requirements_link: //span[text()='see requirements']
   update_password_requirements_text: //*[@id='passwordRequirements']
@@ -99,11 +99,13 @@ employee_health_telehealth_on_demand_modal:
   modal_state_select_option: //*[@id='state']/option[@value='$AND_CLI_STATE$']
   modal_patient_select: //*[@id='dependentIdentifier']
   modal_patient_select_option: //select[@id='dependentIdentifier']//option[@value='$AND_CLI_employee_user1_card_member_id$']
+  modal_dependent_minor_select_option: //select[@id='dependentIdentifier']//option[@value='$AND_CLI_employee_minor_dependent_card_member_id$']
   modal_reasons_input: //*[@id='comments']
   modal_reasons_error: //*[@id='comments']/following-sibling::div[@aria-hidden='false']//div[contains(@class,'red')] [contains(text(),'Please enter a reason for this request')]
 
 employee_health_on_demand_call_page:
   page_title: //h2[contains(text(),'On-demand call')]
+  connecting_label: //div[@class='video-queue-status' and contains(text(), 'Connecting')]
   video_feed: //div[@class='video']/div[@class='video-feed']
   video_enable_button: //div[@class='video-controls-overlay']//span[contains(text(), 'Video')]/parent::button
   video_settings_button: //div[@class='video-controls-overlay']//span[contains(text(), 'Settings')]/parent::button
@@ -130,10 +132,64 @@ employee_health_telehealth_request_form:
   first_day_available_button: //*[@id='modals']//div[contains(@class,'calendar')]//div[contains(@class,'calendar-days')]/button[not(contains(@class,'is-past'))][1]
   first_hour_available_button: //div[@id='modals']//input[@name='startTime'][not(@disabled)][1]/following-sibling::div
   calendar_18hr_button: //div[@id='modals']//input[@name='startTime' and @value='18:00']/following-sibling::div
-  calendar_day_button: //div[@class='app-modals']//div[text()=$AND_CLI_DAY$]
-  calendar_hour_button: //div[@id='modals']//div[text()= '11:30 am']
+  calendar_day_button: //div[@class='calendar-days fade-quick-enter-done']//div[text()=$AND_CLI_DAY$]
+  calendar_hour_button: //input[@name='startTime']/../div[text()= '11:30 am']
   appointment_list: //div[@class = 'accordion-item']
   appointment_list_description: //div/div[contains(text(), '$AND_CLI_PAIN_DESCRIPTION$')]
-  calendar_month_view: //div[@id='modals']//div[@class = 'calendar-days fade-quick-enter-done']
+  calendar_month_days: //div[@class='calendar']//div[@class='calendar-days fade-quick-enter-done']
   tab_section: //div[contains(@class, 'box has-scrollable-content')]
-  comments : comments
+  comments: comments
+
+employee_health_mobile_home_page:
+  header_menu_button: //*[@id='root']//header//button
+  request_appointment_button: //button[text()='Request Appt.']
+  request_appoinment_form: //*[@id='mobile-modals']//span[text()='Request Appointment']
+  no_upcoming_appointments_label: //div[text() = 'No upcoming appointments']
+  appointment_list: //div[@class = 'mobile-schedule-item-container']
+  appointment_list_element: //span[1]
+  alert_appointment_cancelled: //div[@role='alert']//div[contains(text(),'Appointment canceled')]
+
+employee_health_mobile_menu_modal:
+    my_info_button: //button[text()= 'My Info']
+    notifications_button: //button[text()= 'Notifications']
+    password_button: //button[text()= 'Password']
+    logout_button: //span[text()='Log Out']
+    help_button: //a[text()='Help']
+
+employee_health_mobile_notifications_page:
+    save_changes_button: //button[text()= 'Save Changes']
+    notifications_text: //*[@id='menus']//form
+    close_button: //*[@id='menus']//header//button
+
+employee_health_mobile_password_page:
+    save_changes_button: //button[text()= 'Save Changes']
+    close_button: //*[@id='menus']//header//button
+    password_requirements_text_section: //*[@id='menus']/div/form/div[4]/p
+
+employee_health_mobile_logout_dialog:
+    my_info_button: //button[text()= 'My Info']
+    notifications_button: //button[text()= 'Notifications']
+    cancel_button: //button[text()= 'Cancel']
+    logout_button: //button[text()='Log Out']
+
+employee_health_mobile_request_appointment_page:
+  alert_calendar: //div[@class='text-xs color-red-400'][text()='Please select a date.']
+  close_button: //*[@id='mobile-modals']//span[text()='Request Appointment']/..//button
+  select_date_input: //*[@id='mobile-modals']//label[text()='Select a Date']/../input
+  calendar_right_button: //div[@class='calendar']//div/button/span[@class='icon-chevron-right']
+  save_button: //*[@id='dialogs']//button[text()='Save']
+  select_time_input: //*[@id='mobile-modals']//label[text()='Select a Time']/../input
+  appointment_description: //div/span[text()='Description']/..
+
+employee_health_mobile_call_now_page:
+    title: //header//span[text() ='Call Now']
+    call_now_button: //*[@id='mobile-modals']//button[text()= 'Call Now']
+    close_button: //*[@id='mobile-modals']//header//button
+
+employee_health_mobile_call_details_page:
+    title: //header//span[text() ='Call Now']
+    options_button: //*[@id='mobile-modals']//button[text()= 'Options']
+    close_button: //*[@id='mobile-modals']//header//button
+    delete_button: //*[@id='dialogs']//button[text()= 'Delete']
+    yes_delete_button: //*[@id='dialogs']//button[text()= 'Yes, Delete']
+

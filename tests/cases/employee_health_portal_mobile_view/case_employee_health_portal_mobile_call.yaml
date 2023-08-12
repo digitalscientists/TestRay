@@ -1,16 +1,22 @@
 #CXTB-86 Employee Health Portal - Home - Employee User Call Now
-TestEmployeeHealthPortalUserCall:
+TestEHPMobileUserCall:
   Environment: Settings
   Roles:
     - Role: desktopChrome
+      Capabilities:
+        chromeOptions:
+          args:
+            - mobileEmulation
+      App: "desktop"
+    - Role: desktopChrome1
       App: "desktop"
   Actions:
   #Calling Login case
     - Type: case
-      Value: EmployeeHealthPortalUserCall
+      Value: EHPMobileUserCall
 
-#CXTB-88 “Call Now” as Dependent User
-TestEmployeeHealthPortalDependentUserCall:
+# #CXTB-88 “Call Now” as Dependent User
+TestEHPMobileDependentUserCall:
   Environment: Settings
   Vars:
     ENV_USER_STORE: $AND_CLI_employee_user1$
@@ -18,6 +24,12 @@ TestEmployeeHealthPortalDependentUserCall:
     ENV_MEMBER_ID_STORE: $AND_CLI_employee_user1_card_member_id$
   Roles:
     - Role: desktopChrome
+      Capabilities:
+        chromeOptions:
+          args:
+            - mobileEmulation
+      App: "desktop"
+    - Role: desktopChrome1
       App: "desktop"
   Actions:
     - Type: set_env_var
@@ -30,7 +42,7 @@ TestEmployeeHealthPortalDependentUserCall:
       Value: $AND_CLI_employee_dependent_user1_card_member_id$
       Var: employee_user1_card_member_id
     - Type: case
-      Value: EmployeeHealthPortalUserCall
+      Value: EHPMobileUserCall
   #Restore values
     - Type: set_env_var
       Value: $AND_CLI_ENV_PASS_STORE$
@@ -42,18 +54,22 @@ TestEmployeeHealthPortalDependentUserCall:
       Value: $AND_CLI_ENV_MEMBER_ID_STORE$
       Var: employee_user1_card_member_id
 
-#CXTB-89 “Call Now” for Dependent Minor User
-TestEmployeeHealthPortalMinorUserCall:
+# #CXTB-89 “Call Now” for Dependent Minor User
+TestEHPMobileMinorUserCall:
   Environment: Settings
   Vars:
     ENV_USER_STORE: $AND_CLI_employee_user1$
     ENV_PASS_STORE: $AND_CLI_employee_user1_pwd$
     ENV_MEMBER_ID_STORE: $AND_CLI_employee_user1_card_member_id$
-  Precases:
-    - ProviderNewCleaner
   Roles:
     - Role: desktopChrome
-      App: "desktop"
+      Capabilities:
+        chromeOptions:
+          args:
+            - mobileEmulation
+      App: desktop
+    - Role: desktopChrome1
+      App: desktop
   Actions:
     - Type: set_env_var
       Value: $AND_CLI_employee_minor_dependent_pwd$
@@ -65,7 +81,7 @@ TestEmployeeHealthPortalMinorUserCall:
       Value: $AND_CLI_employee_minor_dependent_card_member_id$
       Var: employee_user1_card_member_id
     - Type: case
-      Value: EmployeeHealthPortalUserCall
+      Value: EHPMobileUserCall
   #Restore values
     - Type: set_env_var
       Value: $AND_CLI_ENV_PASS_STORE$
@@ -77,13 +93,15 @@ TestEmployeeHealthPortalMinorUserCall:
       Value: $AND_CLI_ENV_MEMBER_ID_STORE$
       Var: employee_user1_card_member_id
 
-#CXTB-441: No "Call already answered" Notification if EHP Call Ended By Employee Log Out
-TestEmployeeHealthPortalCallAlreadyAnsweredNotificationWhenEmployeeLogsOut:
+# #CXTB-441: No "Call already answered" Notification if EHP Call Ended By Employee Log Out
+TestEHPMobileCallAlreadyAnsweredNotificationWhenEmployeeLogsOut:
   Environment: Settings
-  Aftercases:
-    - EmployeeHealthPortalLogOutAction
   Roles:
     - Role: desktopChrome
+      Capabilities:
+        chromeOptions:
+          args:
+            - mobileEmulation
       App: desktop
     - Role: desktopChrome1
       App: desktop
@@ -92,11 +110,11 @@ TestEmployeeHealthPortalCallAlreadyAnsweredNotificationWhenEmployeeLogsOut:
     - Type: case
       Value: EmployeeHealthPortalLogIn
   # Clean EHP hanged calls.
-    - Type: case
-      Value: EmployeeHealthPortalCleanHangedCalls
+    # - Type: case
+    #   Value: EmployeeHealthPortalCleanHangedCalls
   # Generate a call from EHP.
     - Type: case
-      Value: EmployeeHealthPortalCallNow    
+      Value: EHPMobileCallNow    
   # Calling Login case on Provider Care Platform side.
     - Type: case
       Value: ProvidersCarePlatformLogin
@@ -113,7 +131,7 @@ TestEmployeeHealthPortalCallAlreadyAnsweredNotificationWhenEmployeeLogsOut:
       Id: $PAGE.providers_call_handling_page.answer_call_button$
   # Log out of EHP.
     - Type: case
-      Value: EmployeeHealthPortalLogOut 
+      Value: EHPMobileLogOut
   # Verify that the "Call already answered".
     - Type: wait_for
       Role: desktopChrome1

@@ -1,0 +1,197 @@
+#CXTB-427 Status Drop-down Options - Not on Active Call
+TestESCarePartnerStatusDropdownNotInCall:
+  Environment: Settings 
+  Precases:
+    - ESCarePartnerCleanCallQueueAndHangedCalls
+  Roles:
+    - Role: desktopChrome
+      App: "desktop"
+  Actions:
+  #Calling Login case
+    - Type: case
+      Value: ESCarePartnerLogin
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform.page_title$
+      Condition:
+      - Value: 2
+        Operation: visible
+        Result: true
+  #Status
+    - Type: click
+      Strategy: xpath
+      Id : $PAGE.care_platform_header.user_dropdown_button$
+  #Changing status to Off Shift
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_header.user_toggle_input$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_header.user_toggle_input$
+  #Navigating to participants page
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform.navigation_participant$
+    - Type: sleep
+      Time: 1
+    - Type: get_text
+      Strategy: xpath
+      Id: $PAGE.care_platform.page_title$
+      Greps:
+        - var: HOME_TITLE
+          match: "Participants"
+      Asserts:
+        - Type: eq
+          Var: HOME_TITLE
+          Value: "Participants"
+  #Checking indicator is set to Off Shift status
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.care_platform_header.status_indicator$
+      Greps:
+        - var: STATUS_VAR
+          attr: class
+          condition: nempty
+          match: "(.*)user-dropdown-avatar (.*)"
+    - Type: assert
+      Asserts:
+        - Type: n_contain
+          Var: STATUS_VAR
+          Value: "has-status"
+  #Changing status back to available
+    - Type: click
+      Strategy: xpath
+      Id : $PAGE.care_platform_header.user_dropdown_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_header.user_toggle_input$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_header.user_toggle_input$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform.navigation_followup$
+    - Type: sleep
+      Time: 1
+    - Type: get_text
+      Strategy: xpath
+      Id: $PAGE.care_platform.page_title$
+      Greps:
+        - var: HOME_TITLE
+          match: "Follow-up(.*)"
+      Asserts:
+        - Type: eq
+          Var: HOME_TITLE
+          Value: "Follow-up Tickets"
+  #Checking the status indicator correspond to Available
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.care_platform_header.status_indicator$
+      Greps:
+        - var: STATUS_VAR
+          attr: class
+          condition: nempty
+          match: "(.*)user-dropdown-avatar (.*)"
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: STATUS_VAR
+          Value: "has-status"
+
+#CXTB-447: Verify Access and Review Team Member's Availability
+TestESCarePartnerAccessAndReviewTeamMembersAvailability:
+  Environment: Settings
+  Vars:
+    CARE_PARTNER_USER_FULLNAME: $AND_CLI_es_carepartner_user_name$ $AND_CLI_es_carepartner_user_lastname$
+  Roles:
+    - Role: desktopChrome
+      App: "desktop"
+  Actions:
+  # Calling Login case.
+    - Type: case
+      Value: ESCarePartnerLogin
+  # Click on the users dropdown.
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_header.headset_dropdown_button$
+  # Care Partner list appears from right side of screen.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_header.users_dropdown_list$
+    - Type: sleep
+      Time: 2
+  # Verify that the list shows care partner users and current statuses.
+    - Type: get_text
+      Strategy: xpath
+      Id : $PAGE.care_platform_header.users_dropdown_list$
+      Greps:
+      - var: USERS_LIST_TEXT
+        match: '[\s\S]*' # using single quotes due to YAML issues with regex and double quotes.
+    - Type: assert
+      Asserts: 
+      - Type: contain
+        Var: USERS_LIST_TEXT
+        Value: "ON SHIFT"
+    - Type: assert
+      Asserts: 
+      - Type: contain
+        Var: USERS_LIST_TEXT
+        Value: "OFF SHIFT"
+    - Type: assert
+      Role: desktopChrome
+      Asserts:
+      - Type: contain
+        Var: USERS_LIST_TEXT
+        Value: $AND_CLI_CARE_PARTNER_USER_FULLNAME$
+  # Click on the headset icon again.
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_header.headset_dropdown_button$
+  # Verify that the list disappears.
+    - Type: return_element_attribute
+      Strategy: xpath
+      Id: $PAGE.care_platform_header.users_dropdown_list$
+      Attribute: className
+      ResultVar: IS_LIST_OPEN
+    - Type: assert
+      Asserts:
+        - Type: n_contain
+          Var: IS_LIST_OPEN
+          Value: users-dropdown-open
+
+# CXTB-525 ESCarePartnerPlatform - Manually Log Out of Portal & Go Off Shift
+TestESCarePartnerManuallyLogoutGoOffShift:
+  Environment: Settings 
+  Vars:
+    LOGOUT_OPTION: "Go Off Shift"
+  Roles:
+    - Role: desktopChrome
+      App: desktop
+  Actions:
+  # Calling Login case.
+    - Type: case
+      Value: ESCarePartnerLogin
+  # Click your initials/avatar in upper right corner
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_header.user_dropdown_button$
+  # Click on the logout button.
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_header.logout_menu_button$
+  # Click on the cancel button.
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_logout_modal.cancel_logout_button$
+  # Calling Logout case.
+    - Type: case
+      Value: CarePlatformLogout
+  # Log in as an Admin On Call to verify if the user is offline.
+    - Type: case
+      Value: ESAdminOnCallLogin
+  # Open the headset icon at the top and, you’ll see the shift changed to Off when you logged out
+    - Type: case
+      Value: VerifyESUserIsOffline
+  # Log out of the second user too.
+    - Type: case
+      Value: CarePlatformLogout
