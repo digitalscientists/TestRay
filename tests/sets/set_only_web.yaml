@@ -94,6 +94,7 @@ SetOnlyWebTests:
   # Facility Leadership Care Platform
   - Case: TestFacilityLeadershipDirectoryAndFilter
   - Case: TestFacilityLeadershipLogoutGoOffShift
+  - Case: TestFacilityLeadershipClickAndViewFacilityProfile
   # Employee Health Portal Mobile
   - Case: TestEHPMobileUserCall
   - Case: TestEHPMobileDependentUserCall

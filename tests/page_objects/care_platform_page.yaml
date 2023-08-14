@@ -604,6 +604,9 @@ care_platform_facility:
   clear_search_button: //button[contains(@class,'button-circle')]
 
 care_platform_facility_Record:
+  overview_tab: //nav/button[text()='Overview']
+  call_history_tab: //nav/button[text()='Call History']
+  followup_ticket_tab: //nav/button[text()='Follow-up Tickets']
   info_title: //h4[text()='Facility Information']
   devices_button: //button[text()='Devices']
   device_status: //div[@class='account-status account-status-active']

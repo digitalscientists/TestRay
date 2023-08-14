@@ -115,10 +115,10 @@ TestFacilityLeadershipDirectoryAndFilter:
       Strategy: xpath
       Id: $PAGE.facility_leadership_facilities_listing.first_facility$
   #Check facility details
-    - Type : wait_for
+    - Type: wait_for
       Strategy: xpath
       Id: $PAGE.facility_leadership_facility_details.facility_name$
-    - Type : wait_for
+    - Type: wait_for
       Strategy: xpath
       Id: $PAGE.facility_leadership_facility_details.facility_local_time$
     - Type: click
@@ -130,3 +130,179 @@ TestFacilityLeadershipDirectoryAndFilter:
     - Type: click
       Strategy: xpath
       Id: $PAGE.facility_leadership_facility_details.devices_tab$
+
+# CXTB-541 Click and View Facility Profile from Listing
+TestFacilityLeadershipClickAndViewFacilityProfile:
+  Environment: Settings
+  Vars:
+    LOGOUT_OPTION: 'Go Off Shift'
+  Aftercases:
+    - FacilityLeadershipCarePlatformLogout
+  Roles: 
+    - Role: desktopChrome
+      App: "desktop"
+  Actions:
+  # Call to login
+    - Type: case
+      Value: FacilityLeadershipCarePartnerLogin
+  # Click on "Facilities" in header of the Care Platform
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.facility_leadership_care_platform_home.facilities_header_tab$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.facility_leadership_care_platform_home.facilities_header_tab$
+  # Click on an active facility
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.facility_leadership_facilities_listing.first_facility$
+  #Check facility details
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.facility_leadership_facility_details.facility_name$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.facility_leadership_facility_details.facility_local_time$
+  # Overview tab
+  # click on Overview button and verify if tab showing belongs to Overview
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_facility.overview_button$
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.care_platform_facility.tabs_content$
+      Greps:
+      - var: TAB_CLASS
+        attr: tab-title
+        condition: nempty
+        match: "(.*)"
+    - Type: assert
+      Asserts:
+      - Type: contain
+        Var: TAB_CLASS
+        Value: 'Overview'
+    # Local Hospital tab
+    # click on Local Hospitals button and verify if tab showing belongs to Local Hospitals
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_facility.local_hospitals_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_facility.title_subtab_local_hospital$
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.care_platform_facility.tabs_content$
+      Greps:
+      - var: TAB_CLASS
+        attr: tab-title
+        condition: nempty
+        match: "(.*)"
+    - Type: assert
+      Asserts:
+      - Type: contain
+        Var: TAB_CLASS
+        Value: 'Local Hospitals'
+    # Devices Tab
+    # click on Devices button and verify if tab showeing belogs to Devices
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_facility.devices_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_facility.title_subtab_devices$
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.care_platform_facility.tabs_content$
+      Greps:
+      - var: TAB_CLASS
+        attr: tab-title
+        condition: nempty
+        match: "(.*)"
+    - Type: assert
+      Asserts:
+      - Type: contain
+        Var: TAB_CLASS
+        Value: 'Devices'
+    # Click "Records" button at top of facility pane on right side of screen
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_details.records_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_facility_Record.info_title$
+    # Check Tabs on Records
+    # Overview Tab
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_facility_Record.overview_tab$
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.care_platform_facility_Record.overview_tab$
+      Greps:
+      - var: TAB_CLASS
+        attr: class
+        condition: nempty
+        match: "(.*)"
+    - Type: assert
+      Asserts:
+      - Type: contain
+        Var: TAB_CLASS
+        Value: 'active'
+    # Device Tab
+    # Click on Devices button to see the facility device list
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_facility_Record.devices_button$
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.care_platform_facility_Record.device_status$
+      Greps:
+      - var: STATUS_CLASS
+        attr: class
+        condition: nempty
+        match: "(.*)"
+    - Type: assert
+      Asserts:
+      - Type: contain
+        Var: STATUS_CLASS 
+        Value: 'active'
+    # Call History Tab
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_facility_Record.call_history_tab$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_facility_Record.call_history_tab$
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.care_platform_facility_Record.call_history_tab$
+      Greps:
+      - var: STATUS_CLASS
+        attr: class
+        condition: nempty
+        match: "(.*)"
+    - Type: assert
+      Asserts:
+      - Type: contain
+        Var: STATUS_CLASS 
+        Value: 'active'
+    # Follow-up Ticket Tab
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_facility_Record.followup_ticket_tab$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_facility_Record.followup_ticket_tab$
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.care_platform_facility_Record.followup_ticket_tab$
+      Greps:
+      - var: STATUS_CLASS
+        attr: class
+        condition: nempty
+        match: "(.*)"
+    - Type: assert
+      Asserts:
+      - Type: contain
+        Var: STATUS_CLASS 
+        Value: 'active'
