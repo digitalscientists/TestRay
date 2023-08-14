@@ -355,3 +355,49 @@ OnboarderChangeUserToNotTest:
       Id: $PAGE.care_platform_edit_participant_records.medical_history_navigation$
     - Type: sleep
       Time: 0.5
+
+OnboarderSetStaffInactive:
+  Roles:
+    - Role: desktopChrome
+      App: desktop
+  Actions:
+    # Navigate to Staff
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.onboarders_header_navigation.staff_tab$
+    # Decrease listing by searching staff's name
+    - Type: search_by_text
+      Role: desktopChrome
+      Text: $AND_CLI_carepartner_user2_name$
+    # Select the participant.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.onboarders_staff_listing.care_partner2_based_on_name$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.onboarders_staff_listing.care_partner2_based_on_name$
+    # Deactivate account
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.staff_records.admin_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.staff_records.admin_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.staff_records.admin_deactivate_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.staff_records.admin_deactivate_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.staff_records.yes_deactivate_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.staff_records.yes_deactivate_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.onboarders_notifications.account_status_updated_notification_button$
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id: $PAGE.onboarders_notifications.account_status_updated_notification_button$

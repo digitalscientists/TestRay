@@ -74,6 +74,7 @@ SetOnlyWebTests:
   - Case: TestOnboarderParticipantInfoEditOrAddContactsInfo
   - Case: TestOnboarderParticipantInfoEditOrAddEmergencyRoomAdmissionsInfo
   - Case: TestOnboarderAccessStaffDirectoryAndFilter
+  - Case: TestOnboarderStaffMemberPaneReactivateStaffMemberAccountForCarePlatform
   # Providers Care Platform
   - Case: TestProvidersUpdatePassword
   - Case: TestProviderLogOutStayOnShift
