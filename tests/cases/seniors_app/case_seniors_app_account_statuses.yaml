@@ -459,13 +459,15 @@ TestSeniorAppActiveAccountStatusAndBehavior:
 # CXTB-417 Senior app - Verify “Deactivated” Account Status Visuals
 TestSeniorAppDeactivatedAccountStatusAndBehavior:
   Environment: Settings
-  # Vars:
-  #   LOGOUT_OPTION: "Go Off Shift"
-  #   ACCOUNT_STATUS: Deactivated #this is for the precase
-  # Precases:
-  #   - OnboarderPrecaseforActiveState
-  # Aftercases:
-  #   - OnboarderCarePartnerSetParticipantStateToActive
+  Vars:
+    LOGOUT_OPTION: "Go Off Shift"
+    ACCOUNT_STATUS: 'active' #this is for the precase
+  Precases:
+    - OnboarderPrecaseforActiveState
+  Aftercases:
+    - CarePlatformLogout
+    - OnboarderCarePartnerSetParticipantStateToActive
+    - TerminateApp
   Roles:
     - Role: localiOS
       App: NeverAlone
@@ -478,18 +480,36 @@ TestSeniorAppDeactivatedAccountStatusAndBehavior:
   # Calling Senior Login case
     - Type: case
       Value: LoginNeverAloneHelper
-  # Change Onboarder to Active
+  # Change Onboarder to Deactivated
     - Type: set_env_var
-      Value: 'Deactivated'
+      Value: 'deactivated'
       Var: ACCOUNT_STATUS
     - Type: case
       Value: OnboarderSetsAccountStatus
-    - Type: case
-      Value: CarePlatformLogout
   # Device is automatically logged out when account status change is saved.
     - Type: wait_for
       Strategy: class_chain
       Id: $PAGE.seniors_app_login.provision_device_btn$
-      Time: 20
-    - Type: case
-      Value: LoginNeverAloneHelper
+  # Try to log in
+    - Type: click
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_login.provision_device_btn$
+  # Fill in the email and password fields with credentials.
+    - Type: send_keys
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_login.email_input$
+      Value: $AND_CLI_senior_user1$
+    - Type: send_keys
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_login.password_input$
+      Value: $AND_CLI_senior_user1_pwd$
+    - Type: hide_keyboard
+      Role: localiOS
+  # Click on the Log In button.
+    - Type: click
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_login.login_btn$
+    # Verify if device didn't log in 
+    - Type: wait_for
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_login.login_btn$
