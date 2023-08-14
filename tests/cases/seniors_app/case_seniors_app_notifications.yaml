@@ -293,8 +293,6 @@ TestSeniorAppointmentAddedNotifications:
       Strategy: class_chain
       Id: $PAGE.seniors_app_appointment_modal.cancel_or_reschedule_button$
   # Device screen updates to show screen asking what kind of need you help:
-    - Type: sleep
-      Time: 2
   # Medical, Non-Medical and Cancel
     - Type: wait_for
       Strategy: class_chain
