@@ -457,7 +457,7 @@ TestSeniorAppActiveAccountStatusAndBehavior:
           Value: "An unknown server-side error occurred while processing the command. Original error: Unable To Rotate Device"
 
 # CXTB-417 Senior app - Verify “Deactivated” Account Status Visuals
-TestSeniorAppDeactivatedAccountStatusAndBehavior:
+TestSeniorAppDeactivatedAccountStatusVisuals:
   Environment: Settings
   Vars:
     LOGOUT_OPTION: "Go Off Shift"
