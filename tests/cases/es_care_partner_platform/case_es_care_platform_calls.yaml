@@ -237,20 +237,20 @@ TestESCarePartnerCallParticipantsDeviceAndCompleteCall:
     - Role: desktopChrome
       App: desktop 
   Actions:
-  #Call senior
+  # Call senior
     - Type: case
       Value: ESCarePartnerCallSenior
-  #Answer the call
+  # Answer the call
     - Type: wait_for
       Strategy: class_chain
       Role: localiOS
       Id: $PAGE.seniors_app_incoming_call.incoming_call_header$
-    # Click on the "Answer Call" button.
+  # Click on the "Answer Call" button.
     - Type: click
       Strategy: class_chain
       Role: localiOS
       Id: $PAGE.seniors_app_incoming_call.answer_call_button$
-    # Check the changes in the call portal
+  # Check the changes in the call portal
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.care_platform_call_portal.video_btn$
@@ -276,7 +276,7 @@ TestESCarePartnerCallParticipantsDeviceAndCompleteCall:
       Strategy: xpath
       Id: $PAGE.care_platform_call_portal.call_volume_button$
       Role: desktopChrome
-    # Video should be disable from the get-go
+  # Video should be disable from the get-go
     - Type: get_attribute
       Strategy: xpath
       Role: desktopChrome
@@ -292,7 +292,7 @@ TestESCarePartnerCallParticipantsDeviceAndCompleteCall:
         - Type: contain
           Var: CLASS
           Value: 'off'
-    #Volume on and off
+  # Volume on and off
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_call_portal.call_volume_button$
@@ -312,7 +312,7 @@ TestESCarePartnerCallParticipantsDeviceAndCompleteCall:
         - Type: contain
           Var: CLASS
           Value: 'off'
-    #Goes back to ON
+  # Goes back to ON
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_call_portal.call_volume_button$
@@ -332,17 +332,17 @@ TestESCarePartnerCallParticipantsDeviceAndCompleteCall:
         - Type: n_contain
           Var: CLASS
           Value: 'off'
-    # Add caller feature
+  # Add caller feature
     - Type: wait_for
       Strategy: xpath
       Role: desktopChrome
       Id: $PAGE.care_platform_call_portal.call_add_caller_button$
-    # Check Settings
+  # Check Settings
     - Type: click
       Strategy: xpath
       Role: desktopChrome
       Id: $PAGE.care_platform_call_portal.call_settings_button$
-    # Check Settings Modal
+  # Check Settings Modal
     - Type: wait_for
       Strategy: xpath
       Role: desktopChrome
@@ -367,7 +367,7 @@ TestESCarePartnerCallParticipantsDeviceAndCompleteCall:
       Strategy: xpath
       Role: desktopChrome
       Id: $PAGE.care_platform_call_settings_modal.video_settings_modal_close_button$
-  #Check contacts
+  # Check contacts
     - Type: wait_for
       Strategy: xpath
       Role: desktopChrome
@@ -391,8 +391,8 @@ TestESCarePartnerCallParticipantsDeviceAndCompleteCall:
         - Type: contain
           Var: CLASS
           Value: 'is-open'
-  #Events and Calendar
-    #Check Events
+  # Events and Calendar
+    # Check Events
     - Type: click
       Strategy: xpath
       Role: desktopChrome
@@ -409,7 +409,7 @@ TestESCarePartnerCallParticipantsDeviceAndCompleteCall:
       Strategy: xpath
       Role: desktopChrome
       Id: $PAGE.care_platform_create_event_modal.modal_title$
-    #Check Calendar
+    # Check Calendar
     - Type: click
       Strategy: xpath
       Role: desktopChrome
@@ -418,7 +418,7 @@ TestESCarePartnerCallParticipantsDeviceAndCompleteCall:
       Strategy: xpath
       Role: desktopChrome
       Id: $PAGE.care_platform_call_portal.calendar_no_events_message$
-  #End Call
+  # End Call
     - Type: click
       Strategy: xpath
       Role: desktopChrome
