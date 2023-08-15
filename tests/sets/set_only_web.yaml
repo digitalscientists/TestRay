@@ -34,6 +34,8 @@ SetOnlyWebTests:
   - Case: TestCarePartnerParticipantInfoEditInsuranceOrProviderInformation
   - Case: TestCarePartnerParticipantProfileEditInsuranceOrProviderInformation
   - Case: TestCarePartnerCallExternal10DigitNumberWithoutParticipant
+  - Case: TestCarePartnerClickAndViewTestParticipantVisuals
+  - Case: TestCarePartnerLogInButtonShouldBeLimitedToOneClick
   # Employee Health Portal
   - Case: TestEmployeeSettingNotification
   - Case: TestEmployeeInformationUpdateNumber
@@ -51,8 +53,12 @@ SetOnlyWebTests:
   # ES Care Partner
   - Case: TestCHCarePartnerStatusDropdownNotInCall
   - Case: TestCHCarePartnerAccessAndReviewTeamMembersAvailability
+  - Case: TestCHCarePartnerManuallyLogoutGoOffShift
   - Case: TestESCarePartnerStatusDropdownNotInCall
   - Case: TestESCarePartnerAccessAndReviewTeamMembersAvailability
+  - Case: TestESCarePartnerManuallyLogoutGoOffShift
+  - Case: TestCHCarePartnerParticipantPaneCreateFollowUpTicket
+  - Case: TestESCarePartnerParticipantPaneCreateFollowUpTicket
   # On Boarders
   - Case: TestOnboarderCarePartnerUpdatePassword
   - Case: TestOnboarderManuallyLogOutOfThePortal
@@ -67,6 +73,10 @@ SetOnlyWebTests:
   - Case: TestOnboarderParticipantProfileEditInsuranceOrProviderInformation
   - Case: TestOnboarderParticipantPaneReviewEditOrAddBehavioralInfo
   - Case: TestOnboarderCreateNewStaffMemberWithFacilityLeadershipRole
+  - Case: TestOnboarderParticipantInfoEditOrAddContactsInfo
+  - Case: TestOnboarderParticipantInfoEditOrAddEmergencyRoomAdmissionsInfo
+  - Case: TestOnboarderAccessStaffDirectoryAndFilter
+  - Case: TestOnboarderStaffMemberPaneReactivateStaffMemberAccountForCarePlatform
   # Providers Care Platform
   - Case: TestProvidersUpdatePassword
   - Case: TestProviderLogOutStayOnShift
@@ -81,3 +91,22 @@ SetOnlyWebTests:
   - Case: TestProviderHelpMenuOption
   - Case: TestProviderUseForgotPasswordLink
   - Case: TestProviderAccessParticipantDirectoryandViewDeviceRecordfromListing
+  # Facility Leadership Care Platform
+  - Case: TestFacilityLeadershipDirectoryAndFilter
+  - Case: TestFacilityLeadershipLogoutGoOffShift
+  - Case: TestFacilityLeadershipClickAndViewFacilityProfile
+  # Employee Health Portal Mobile
+  - Case: TestEHPMobileUserCall
+  - Case: TestEHPMobileDependentUserCall
+  - Case: TestEHPMobileMinorUserCall
+  - Case: TestEHPMobileCallAlreadyAnsweredNotificationWhenEmployeeLogsOut
+  - Case: TestEHPMobileSignUpNewDependent
+  - Case: TestEHPMobileForgotPasswordOnLoginPage
+  - Case: TestEHPMobileSettingNotification
+  - Case: TestEHPMobileInformationUpdateNumber
+  - Case: TestEHPMobileUpdateAccountPassword
+  - Case: TestEHPMobileAccountHelp
+  - Case: TestEHPMobileManuallyLogoutOfPortal
+  - Case: TestEHPMobileRequestAnAppointmentForUser
+  - Case: TestEHPMobileReviewUpcomingAppointment
+  - Case: TestEHPMobileRequestAnAppointmentForDependentMinor

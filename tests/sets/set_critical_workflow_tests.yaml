@@ -5,6 +5,7 @@ SetCriticalWorkflows:
     - Case: TestCarePartnerAnswerAndComplete
     - Case: TestCarePartnerBrowsingWhileOnCall
     - Case: TestCarePartnerCallParticipantsDeviceCallComplete
+    - Case: TestCarePartnerLogInButtonShouldBeLimitedToOneClick
   # Provider tests
     - Case: TestProviderAnswerCompleteSessionFromEHP
     - Case: TestProvidersAnswerSNFCallAndCompletesSession
@@ -27,3 +28,14 @@ SetCriticalWorkflows:
     - Case: TestIDDESCompleteCallBackButtonCallAfterReceivingMessage #Physical
     - Case: TestIDDESVerifyOfflineMode #Physical
     - Case: TestIDDESPersonalCarePartnerMessagePromptAndCallBackButton #Physical
+  # EasterSeals Care Partner Platform
+    - Case: TestCHCarePartnerManuallyLogoutGoOffShift
+    - Case: TestESCarePartnerManuallyLogoutGoOffShift
+    - Case: TestCHCarePartnerParticipantPaneCreateFollowUpTicket
+    - Case: TestESCarePartnerParticipantPaneCreateFollowUpTicket
+  # Onboarders
+    - Case: TestOnboarderChangeStatusToActiveForExistingParticipant
+    - Case: TestOnboarderChangeStatusToSuspendedForExistingParticipant
+    - Case: TestOnboarderStaffMemberPaneReactivateStaffMemberAccountForCarePlatform
+  # Facility Leadership
+    - Case: TestFacilityLeadershipLogoutGoOffShift

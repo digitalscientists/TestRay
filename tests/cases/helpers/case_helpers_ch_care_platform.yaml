@@ -1,5 +1,4 @@
 CHCarePartnerLogin:
-  Environment: Settings
   Roles:
     - Role: desktopChrome
       App: desktop
@@ -24,7 +23,6 @@ CHCarePartnerLogin:
       Time: 2
 
 AnswerCallAsCHCarePartner:
-  Environment: Settings
   Roles:
     - Role: desktopChrome
       App: desktop       
@@ -48,7 +46,6 @@ AnswerCallAsCHCarePartner:
 CHCarePartnerCleanCallQueueAndHangedCalls:
   Vars:
     LOGOUT_OPTION: "Go Off Shift"
-  Environment: Settings
   Roles:
     - Role: desktopChrome
       App: desktop
@@ -63,7 +60,6 @@ CHCarePartnerCleanCallQueueAndHangedCalls:
       Value: CarePlatformLogout
 
 CHCarePartnerCallSenior:
-  Environment: Settings
   Roles:
     - Role: desktopChrome
       App: desktop       
@@ -101,7 +97,6 @@ CHCarePartnerCallSenior:
       Id: $PAGE.care_platform_call_portal.call_camera_button$
 
 CHCarePartnerSendMessageToSenior:
-  Environment: Settings
   Roles:
     - Role: desktopChrome
       App: desktop       
@@ -153,7 +148,6 @@ CHCarePartnerSendMessageToSenior:
       Value: CarePlatformLogout
 
 CHCarePartnerSetScheduledCallForSeniors:
-  Environment: Settings 
   Roles:
     - Role: desktopChrome
       App: desktop       
@@ -252,7 +246,6 @@ CHCarePartnerSetScheduledCallForSeniors:
 
 # Creates an schedule to start in X amount of minutes.
 CHSetScheduledCallForSeniorsToStartInXMinutes:
-  Environment: Settings
   Vars:
     LOGOUT_OPTION: "Go Off Shift"
   Roles:
@@ -363,3 +356,57 @@ CHSetScheduledCallForSeniorsToStartInXMinutes:
       Id: $PAGE.care_platform.navigation_home$
     - Type: case
       Value: CarePlatformLogout
+
+ESAdminOnCallLogin:
+  Roles:
+    - Role: desktopChrome
+      App: desktop
+  Actions:
+    - Type: navigate
+      Role: desktopChrome
+      Value: $AND_CLI_easterseals_care_platform_url$
+    - Type: maximize
+    - Type: send_keys
+      Strategy: id
+      Id: $PAGE.care_platform_login.email_input$
+      Value: $AND_CLI_es_admincall_user$
+    - Type: send_keys
+      Strategy: id
+      Id: $PAGE.care_platform_login.password_input$
+      Value: $AND_CLI_es_admincall_user_pwd$
+    - Type: click
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.care_platform_login.login_button$
+    - Type: sleep
+      Time: 2
+
+VerifyCHUserIsOffline:
+  Roles:
+    - Role: desktopChrome
+      App: desktop
+  Actions:
+    # Click on the users dropdown.
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_header.headset_dropdown_button$
+  # Verify that the first user has gone off shift.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_header.offline_ch_carepartner_element$
+    - Type: get_text
+      Strategy: xpath
+      Id : $PAGE.care_platform_header.offline_ch_carepartner_element$
+      Greps:
+        - var: CARE_PARTNER_ELEMENT
+          match: "(.*)"
+    - Type: assert
+      Asserts: 
+      - Type: n_contain
+        Var: CARE_PARTNER_ELEMENT
+        Value: "Available"
+    - Type: assert
+      Asserts: 
+      - Type: n_contain
+        Var: CARE_PARTNER_ELEMENT
+        Value: "Idle"
