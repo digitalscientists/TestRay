@@ -48,6 +48,7 @@ SetNonPhysicalMobileTest:
     - Case: TestSeniorVerifyMyDetailsSettingsPageElements
     - Case: TestSeniorSettingsPageNavigation
     - Case: TestSeniorWifiSettingsPage
+    - Case: TestSeniorAppDeactivatedAccountStatusVisuals
   # Never Alone SNF tests
     - Case: TestSNFVerifyNotificationsPage
     - Case: TestSNFMessagePromptFromProvider
