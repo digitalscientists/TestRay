@@ -26,10 +26,10 @@ onboarders_notifications:
 onboarders_participant_page:
   participants_title: //div[@class='text-lg font-bold']//h3[@class='text-lg font-bold']
   add_participant_button: //button[text()='Add']
-  first_participant_row: //div[@class='class=SearchableListTemplate_record__gc5a6']
+  first_participant_row: (//[@id='containerElement']/div[starts-with(@class, 'ListRow_listRow')]//div/strong[text() = '$AND_CLI_PARTICIPANT_FIRST_NAME$ $AND_CLI_PARTICIPANT_LAST_NAME$'])[1]
   first_darkened_letter_button: //button[@class='alphabet-letter'][not(@disabled)][1]
   selected_darkened_letter_button: //button[contains(@class,'is-selected')]
-  senior_complete_name: //div[starts-with(@class, 'SearchableListTemplate_record')]//div[contains(text(),'$AND_CLI_senior_user1_name$')][strong[contains(text(),'$AND_CLI_senior_user1_lastname$')]]
+  senior_complete_name: //*[@id='containerElement']//div[contains(text(),'$AND_CLI_PARTICIPANT_FIRST_NAME$')][strong[contains(text(),'$AND_CLI_PARTICIPANT_LAST_NAME$')]]
   esidd_senior_complete_name: //div[starts-with(@class, 'SearchableListTemplate_record')]//div[contains(text(),'$AND_CLI_idd_es_never_alone_user1_name$')][strong[contains(text(),'$AND_CLI_idd_es_never_alone_user1_lastname$')]]
   participant_1_row: //*[@id='containerElement']//div[contains(text(),'strong')]
   first_participant_lastname: //*[contains(text(),'strong')]
@@ -39,6 +39,7 @@ onboarders_participant_page:
   clear_search_button: //button[contains(@class,'button-circle')]
   status_dropdown_button: //button[contains(@class,'queue-filter-dropdown-toggle')]
   status_dropdown_options: //div[contains(@class, 'queue-filter-dropdown')]  
+  participant_info: participant-component
   records_button: //button[text()='Records']
 
 onboarders_add_participant_form:
@@ -58,7 +59,8 @@ onboarders_add_participant_form:
   preferred_gender_option: //select[@id='preferredGender']//option[contains(text(),'Other')]
   phone_input: phone
   email_input: emailAddress
-  asian_race_checkbox: //span[contains(text(),'Asian')]
+  participant_type_dropdown_button: participantType
+  participant_type_option:  //select[@id='participantType']//option[contains(text(),'Home Health/Hospice')]
   address_input: address
   address_numbers_input: address2
   city_input: city

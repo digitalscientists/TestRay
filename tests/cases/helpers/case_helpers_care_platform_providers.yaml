@@ -21,11 +21,11 @@ ProvidersCarePlatformLogin:
     - Type: send_keys
       Strategy: id
       Id: $PAGE.care_platform_login.email_input$
-      Value: $AND_CLI_provider_user1$
+      Value: $AND_CLI_provider_user2$
     - Type: send_keys
       Strategy: id
       Id: $PAGE.care_platform_login.password_input$
-      Value: $AND_CLI_provider_user1_pwd$
+      Value: $AND_CLI_provider_user2_pwd$
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_login.login_button$

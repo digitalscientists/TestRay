@@ -180,6 +180,13 @@ TestOnboarderCreateNewParticipant:
       Strategy: id
       Id: $PAGE.onboarders_add_participant_form.date_of_birth_picker$
       Value: $AND_CLI_PARTICIPANT_DATE_OF_BIRTH$ 
+  # Select a Participant Type
+    - Type: click
+      Strategy: id
+      Id: $PAGE.onboarders_add_participant_form.participant_type_dropdown_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.onboarders_add_participant_form.participant_type_option$
   # click on Create Participant Button 
     - Type: click
       Strategy: xpath
@@ -316,21 +323,17 @@ TestOnboarderCreateNewParticipant:
       Strategy: xpath
       Id: $PAGE.onboarders_participant_page.search_input$
       Value: "$AND_CLI_PARTICIPANT_LAST_NAME$"
+  # Select the participant just created
     - Type: click
       Strategy: xpath
-      Id: $PAGE.onboarders_participant_page.participant_1_row$
+      Id: $PAGE.onboarders_participant_page.senior_complete_name$
    # Click on Records Button
+    - Type: wait_for
+      Strategy: id
+      Id: $PAGE.onboarders_add_participant_form.participant_info$
     - Type: click
       Strategy: xpath
       Id: $PAGE.onboarders_participant_page.records_button$
-  # Click on Records Button
-    - Type: click
-      Strategy: xpath
-      Id: $PAGE.onboarders_participant_page.records_button$    
-
-  # Login on participant IDD
-    - Type: case
-      Value: CHCarePartnerLogin
 
 # CXTB-145: Click and View Participant Record from Listing
 TestOnboarderClickandViewParticipantRecordfromListing:
