@@ -207,7 +207,7 @@ TestCHCarePartnerManuallyLogoutStayOnShift:
   Actions:
   # Calling Login case.
     - Type: case
-      Value: ESCarePartnerLogin
+      Value: CHCarePartnerLogin
   # Click your initials/avatar in upper right corner
     - Type: click
       Strategy: xpath
