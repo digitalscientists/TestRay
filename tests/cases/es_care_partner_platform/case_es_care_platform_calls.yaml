@@ -221,3 +221,244 @@ TestESCarePartnerBrowsingWhileOnCall:
   # Fill survey
     - Type: case
       Value: PostCallSurveyCarePartner
+
+# CXTB-522 Call Participant’s Device & Complete a Call
+TestESCarePartnerCallParticipantsDeviceAndCompleteCall:
+  Environment: Settings
+  Precases:
+    - LoginESIDDNeverAloneHelper
+    - ESCarePartnerCleanCallQueueAndHangedCalls
+    - SeniorCleanPrompts
+  Aftercases:
+    - TerminateApp
+  Roles:
+    - Role: localiOS
+      App: NeverAlone
+    - Role: desktopChrome
+      App: desktop 
+  Actions:
+  #Call senior
+    - Type: case
+      Value: ESCarePartnerCallSenior
+  #Answer the call
+    - Type: wait_for
+      Strategy: class_chain
+      Role: localiOS
+      Id: $PAGE.seniors_app_incoming_call.incoming_call_header$
+    # Click on the "Answer Call" button.
+    - Type: click
+      Strategy: class_chain
+      Role: localiOS
+      Id: $PAGE.seniors_app_incoming_call.answer_call_button$
+    # Check the changes in the call portal
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.video_btn$
+      Role: desktopChrome
+  # Red indicator for 'In session'
+    - Type: get_attribute
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.care_platform_header.status_indicator$
+      Greps:
+        - var: INDICATOR
+          attr: class
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Role: desktopChrome
+      Asserts:
+        - Type: contain
+          Var: INDICATOR
+          Value: 'is-red'
+  # Video call controls are visible and function as expected when clicked
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.call_volume_button$
+      Role: desktopChrome
+    # Video should be disable from the get-go
+    - Type: get_attribute
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.care_platform_call_portal.call_camera_button$
+      Greps:
+        - var: CLASS
+          attr: innerHTML
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Role: desktopChrome
+      Asserts:
+        - Type: contain
+          Var: CLASS
+          Value: 'off'
+    #Volume on and off
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.call_volume_button$
+      Role: desktopChrome
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.call_volume_button$
+      Role: desktopChrome
+      Greps:
+        - var: CLASS
+          attr: innerHTML
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Role: desktopChrome
+      Asserts:
+        - Type: contain
+          Var: CLASS
+          Value: 'off'
+    #Goes back to ON
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.call_volume_button$
+      Role: desktopChrome
+    - Type: get_attribute
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.care_platform_call_portal.call_volume_button$
+      Greps:
+        - var: CLASS
+          attr: innerHTML
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Role: desktopChrome
+      Asserts:
+        - Type: n_contain
+          Var: CLASS
+          Value: 'off'
+    # Add caller feature
+    - Type: wait_for
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.care_platform_call_portal.call_add_caller_button$
+    # Check Settings
+    - Type: click
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.care_platform_call_portal.call_settings_button$
+    # Check Settings Modal
+    - Type: wait_for
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.care_platform_call_settings_modal.video_settings_modal_title$
+    - Type: wait_for
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.care_platform_call_settings_modal.video_settings_modal_mic_select$
+    - Type: wait_for
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.care_platform_call_settings_modal.video_settings_modal_speakers_select$
+    - Type: wait_for
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.care_platform_call_settings_modal.video_settings_modal_camera_select$
+    - Type: click
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.care_platform_call_settings_modal.video_settings_modal_close_button$
+    - Type: wait_not_visible
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.care_platform_call_settings_modal.video_settings_modal_close_button$
+  #Check contacts
+    - Type: wait_for
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.care_platform_call_portal.first_contact_button$
+    - Type: click
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.care_platform_call_portal.first_contact_button$
+    - Type: get_attribute
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.care_platform_call_portal.first_contact_button$
+      Greps:
+        - var: CLASS
+          attr: class
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Role: desktopChrome
+      Asserts:
+        - Type: contain
+          Var: CLASS
+          Value: 'is-open'
+  #Events and Calendar
+    #Check Events
+    - Type: click
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.care_platform_call_portal.create_event_btn$
+    - Type: wait_for
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.care_platform_create_event_modal.modal_title$
+    - Type: click
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.care_platform_create_event_modal.cancel_button$
+    - Type: wait_not_visible
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.care_platform_create_event_modal.modal_title$
+    #Check Calendar
+    - Type: click
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.care_platform_call_portal.calendar_any_day_without_event$
+    - Type: wait_for
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.care_platform_call_portal.calendar_no_events_message$
+  #End Call
+    - Type: click
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.care_platform_call_portal.leave_call_btn$
+    - Type: get_attribute
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.care_platform_call_portal.video_status$
+      Greps:
+        - var: CALL_MESSAGE
+          attr: textContent
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Role: desktopChrome
+      Asserts:
+        - Type: contain
+          Var: CALL_MESSAGE
+          Value: 'The call has ended'
+  # Fill survey
+    - Type: case
+      Value: PostCallSurveyCarePartner
+  # Green indicator for 'Available'
+    - Type: wait_for
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.care_platform_header.status_indicator$
+    - Type: get_attribute
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.care_platform_header.status_indicator$
+      Greps:
+        - var: INDICATOR
+          attr: class
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Role: desktopChrome
+      Asserts:
+        - Type: contain
+          Var: INDICATOR
+          Value: 'is-green'
+  
