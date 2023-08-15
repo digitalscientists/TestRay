@@ -195,3 +195,40 @@ TestCHCarePartnerManuallyLogoutGoOffShift:
   # Log out of the second user too.
     - Type: case
       Value: CarePlatformLogout
+
+# CXTB-527 ESCarePartnerPlatform - Manually Log Out of Portal & Stay On Shift
+TestCHCarePartnerManuallyLogoutStayOnShift:
+  Environment: Settings 
+  Vars:
+    LOGOUT_OPTION: "Stay On Shift"
+  Roles:
+    - Role: desktopChrome
+      App: desktop
+  Actions:
+  # Calling Login case.
+    - Type: case
+      Value: CHCarePartnerLogin
+  # Click your initials/avatar in upper right corner
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_header.user_dropdown_button$
+  # Click on the logout button.
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_header.logout_menu_button$
+  # Click on the cancel button.
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_logout_modal.cancel_logout_button$
+  # Calling Logout case.
+    - Type: case
+      Value: CarePlatformLogout
+  # Log in as an Admin On Call to verify if the user is Idle.
+    - Type: case
+      Value: ESAdminOnCallLogin
+  # Open the headset icon at the top and, you’ll see the shift changed to Idle when you logged out
+    - Type: case
+      Value: VerifyCHUserIsOnline
+  # Log out of the second user too.
+    - Type: case
+      Value: CarePlatformLogout

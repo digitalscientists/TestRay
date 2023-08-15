@@ -54,9 +54,11 @@ SetOnlyWebTests:
   - Case: TestCHCarePartnerStatusDropdownNotInCall
   - Case: TestCHCarePartnerAccessAndReviewTeamMembersAvailability
   - Case: TestCHCarePartnerManuallyLogoutGoOffShift
+  - Case: TestCHCarePartnerManuallyLogoutStayOnShift
   - Case: TestESCarePartnerStatusDropdownNotInCall
   - Case: TestESCarePartnerAccessAndReviewTeamMembersAvailability
   - Case: TestESCarePartnerManuallyLogoutGoOffShift
+  - Case: TestESCarePartnerManuallyLogoutStayOnShift
   - Case: TestCHCarePartnerParticipantPaneCreateFollowUpTicket
   - Case: TestESCarePartnerParticipantPaneCreateFollowUpTicket
   # On Boarders
