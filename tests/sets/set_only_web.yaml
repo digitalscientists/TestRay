@@ -60,7 +60,6 @@ SetOnlyWebTests:
   - Case: TestESCarePartnerAccessAndReviewTeamMembersAvailability
   - Case: TestESCarePartnerManuallyLogoutGoOffShift
   - Case: TestESCarePartnerManuallyLogoutStayOnShift
-  - Case: TestCHCarePartnerParticipantPaneCreateFollowUpTicket
   - Case: TestESCarePartnerParticipantPaneCreateFollowUpTicket
   # On Boarders
   - Case: TestOnboarderCarePartnerUpdatePassword
