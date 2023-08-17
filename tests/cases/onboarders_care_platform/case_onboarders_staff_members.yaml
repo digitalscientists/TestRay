@@ -293,6 +293,37 @@ TestOnboarderStaffMemberPaneDeactivateStaffMemberAccountForCarePlatform:
     - Type: click
       Strategy: xpath
       Id: $PAGE.onboarders_header_navigation.staff_tab$
+  # Verify an user cannot deactivate their own account.
+    - Type: search_by_text
+      Role: desktopChrome
+      Text: $AND_CLI_onboarder_user1_name$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.onboarders_staff_listing.onboarder_based_on_name$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.onboarders_staff_listing.onboarder_based_on_name$
+  # Right side of screen updates to show the selected staff member’s summary pane.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.staff_records.admin_button$
+  # Click "Admin" on right side of screen.
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.staff_records.admin_button$
+  # Verify that the "Deactivate" option is disabled.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.staff_records.admin_deactivate_button$
+    - Type: wait_for_property
+      Strategy: xpath
+      Id: $PAGE.staff_records.admin_deactivate_button$
+      Property: disabled
+      Value: "true"
+  # Navigate to Staff.
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.onboarders_header_navigation.staff_tab$
   # Select an "Active" staff member in listing.
     - Type: search_by_text
       Role: desktopChrome

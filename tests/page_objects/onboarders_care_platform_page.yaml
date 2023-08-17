@@ -22,6 +22,7 @@ onboarders_header_navigation:
 onboarders_staff_listing:
   add_button: //button[contains(.,'Add')]
   care_partner2_based_on_name: //div[contains(@class, 'ListRow')]/div[text()='Care Partner']/preceding-sibling::div[contains(text(), $AND_CLI_carepartner_user2_name$)]/strong[contains(text(),'$AND_CLI_carepartner_user2_lastname$')]
+  onboarder_based_on_name: //div[contains(@class, 'ListRow')]/div[text()='Onboarder']/preceding-sibling::div[contains(text(), $AND_CLI_onboarder_user1_name$)]/strong[contains(text(),'$AND_CLI_onboarder_user1_lastname$')]
 
 onboarders_create_edit_staff_member:
   create_title: //div[text()='Create Staff Member']
