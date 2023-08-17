@@ -288,6 +288,8 @@ TestOnboarderStaffMemberPaneDeactivateStaffMemberAccountForCarePlatform:
     Roles:
     - Role: desktopChrome
       App: "desktop"
+    - Role: desktopChrome1
+      App: "desktop"
     Actions:
   # Navigate to Staff.
     - Type: click
@@ -320,6 +322,10 @@ TestOnboarderStaffMemberPaneDeactivateStaffMemberAccountForCarePlatform:
       Id: $PAGE.staff_records.admin_deactivate_button$
       Property: disabled
       Value: "true"
+  # Log in as the Staff that will be deactivated.
+    - Type: case
+      Value: CarePartnerLoginSecondaryUser
+      Role: desktopChrome1
   # Navigate to Staff.
     - Type: click
       Strategy: xpath
@@ -420,3 +426,20 @@ TestOnboarderStaffMemberPaneDeactivateStaffMemberAccountForCarePlatform:
   # Log out of the Onboarder account. 
     - Type: case
       Value: CarePlatformLogout
+  # Verify if logged in and user is deactivated, it should kick out the user from the app.
+    - Type: click
+      Strategy: xpath
+      Id : $PAGE.care_platform.navigation_participant$
+      Role: desktopChrome1
+    - Type: wait_for
+      Strategy: id
+      Id: $PAGE.care_platform_login.email_input$
+      Role: desktopChrome1
+  # Verify if status is inactive, user cannot log in.
+    - Type: case
+      Value: CarePartnerLoginSecondaryUser
+      Role: desktopChrome1
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_login.failed_to_log_in$
+      Role: desktopChrome1
