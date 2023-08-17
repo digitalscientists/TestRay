@@ -30,9 +30,13 @@ SetCriticalWorkflows:
     - Case: TestIDDESPersonalCarePartnerMessagePromptAndCallBackButton #Physical
   # EasterSeals Care Partner Platform
     - Case: TestCHCarePartnerManuallyLogoutGoOffShift
-    - Case: TestESCarePartnerManuallyLogoutGoOffShift
+    - Case: TestCHCarePartnerManuallyLogoutStayOnShift
     - Case: TestCHCarePartnerParticipantPaneCreateFollowUpTicket
+    - Case: TestCHCarePartnerCallParticipantsDeviceAndCompleteCall
+    - Case: TestESCarePartnerManuallyLogoutGoOffShift
+    - Case: TestESCarePartnerManuallyLogoutStayOnShift
     - Case: TestESCarePartnerParticipantPaneCreateFollowUpTicket
+    - Case: TestESCarePartnerCallParticipantsDeviceAndCompleteCall
   # Onboarders
     - Case: TestOnboarderChangeStatusToActiveForExistingParticipant
     - Case: TestOnboarderChangeStatusToSuspendedForExistingParticipant
