@@ -329,11 +329,16 @@ TestOnboarderCreateNewParticipant:
       Id: $PAGE.onboarders_participant_page.senior_complete_name$
    # Click on Records Button
     - Type: wait_for
-      Strategy: id
-      Id: $PAGE.onboarders_add_participant_form.participant_info$
+      Strategy: xpath
+      Id: $PAGE.onboarders_participant_page.records_button$
+    - Type: sleep
+      Time: 2
     - Type: click
       Strategy: xpath
       Id: $PAGE.onboarders_participant_page.records_button$
+  # Navigate to Records.
+    # - Type: case
+    #   Value: CarePartnerParticipantRecordsNavigation
 
 # CXTB-145: Click and View Participant Record from Listing
 TestOnboarderClickandViewParticipantRecordfromListing:
