@@ -285,6 +285,8 @@ TestOnboarderStaffMemberPaneDeactivateStaffMemberAccountForCarePlatform:
     Precases:
       - OnboarderCarePartnerLogin
       - OnboarderSetStaffActive
+    Aftercases:
+      - OnboarderSetStaffActive
     Roles:
     - Role: desktopChrome
       App: "desktop"
@@ -423,9 +425,6 @@ TestOnboarderStaffMemberPaneDeactivateStaffMemberAccountForCarePlatform:
     - Type: wait_not_visible
       Strategy: xpath
       Id: $PAGE.onboarders_notifications.account_status_updated_notification_button$
-  # Log out of the Onboarder account. 
-    - Type: case
-      Value: CarePlatformLogout
   # Verify if logged in and user is deactivated, it should kick out the user from the app.
     - Type: click
       Strategy: xpath
