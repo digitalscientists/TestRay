@@ -80,6 +80,7 @@ SetOnlyWebTests:
   - Case: TestOnboarderAccessStaffDirectoryAndFilter
   - Case: TestOnboarderStaffMemberPaneReactivateStaffMemberAccountForCarePlatform
   - Case: TestOnboarderStaffMemberPaneDeactivateStaffMemberAccountForCarePlatform
+  - Case: TestOnboarderEditStaffMemberAccountForCarePlatform
   # Providers Care Platform
   - Case: TestProvidersUpdatePassword
   - Case: TestProviderLogOutStayOnShift
