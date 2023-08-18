@@ -8,6 +8,7 @@ care_platform_login:
   dialog_cancel_button: //button[text()='Cancel']
   dialog_thank_you_title: //h4[contains(text(),'Thank You')]
   dialog_close_icon_button: //button[span]
+  failed_to_log_in: //form/div[@id='loginErrorMessage']
 
 care_platform_verify_account:
   verify_modal_title: //*[@id='dialogs']//h4[contains(text(),'Verify Your Account')]
