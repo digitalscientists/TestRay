@@ -442,3 +442,229 @@ TestOnboarderStaffMemberPaneDeactivateStaffMemberAccountForCarePlatform:
       Strategy: xpath
       Id: $PAGE.care_platform_login.failed_to_log_in$
       Role: desktopChrome1
+
+# CXTB-505: Edit Staff Member Account for Care Platform
+TestOnboarderEditStaffMemberAccountForCarePlatform:
+    Environment: Settings
+    Vars:
+      LOGOUT_OPTION: "Go Off Shift"
+    Precases:
+      - OnboarderCarePartnerLogin
+    Roles:
+    - Role: desktopChrome
+      App: "desktop"
+    Actions:
+  # Navigate to Staff.
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.onboarders_header_navigation.staff_tab$
+  # Verify Onboarder user cannot change their own role.
+    - Type: search_by_text
+      Role: desktopChrome
+      Text: $AND_CLI_onboarder_user1_name$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.onboarders_staff_listing.onboarder_based_on_name$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.onboarders_staff_listing.onboarder_based_on_name$
+  # Click on Edit Info.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.staff_records.edit_info_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.staff_records.edit_info_button$
+  # Validate Onboarder user cannot change their own role.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.onboarder_edit_staff_information.role_input$
+    - Type: wait_for_property
+      Strategy: xpath
+      Id: $PAGE.onboarder_edit_staff_information.role_input$
+      Property: disabled
+      Value: "true"
+  # Navigate to Staff.
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.onboarders_header_navigation.staff_tab$
+  # Select a staff member in listing.
+    - Type: search_by_text
+      Role: desktopChrome
+      Text: $AND_CLI_carepartner_user2_name$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.onboarders_staff_listing.care_partner2_based_on_name$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.onboarders_staff_listing.care_partner2_based_on_name$
+  # Click "Edit Info" button on right side of screen.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.staff_records.edit_info_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.staff_records.edit_info_button$
+  # Screen updates to show full screen edit mode - "Edit [staff name]" as header on left.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.onboarder_edit_staff_information.edit_title$
+    - Type: get_text
+      Strategy: xpath
+      Id: $PAGE.onboarder_edit_staff_information.edit_title$
+      Greps:
+        - var: EDIT_TITLE
+          match: "Edit*"
+      Asserts:
+        - Type: contain
+          Var: EDIT_TITLE
+          Value: $AND_CLI_carepartner_user2_name$ $AND_CLI_carepartner_user2_lastname$
+  # Click "View Records" at top right of left page section (Edit header side).
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_records.view_records_button$
+  # Page refreshes to show the Staff member record:
+  # Name, Role, Status and address at top of left panel
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.onboarder_staff_records_details.staff_name_label$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.onboarder_staff_records_details.staff_role_label$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.onboarder_staff_records_details.staff_status_label$
+  # Right side showing full screen of collected staff profile information
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.onboarder_staff_records_details.staff_email_label$
+  # Click "Edit Info" button on left of page
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.onboarder_staff_records_details.edit_info_button$
+  # Screen updates to show full screen edit mode - "Edit [staff name]" as header on left.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.onboarder_edit_staff_information.edit_title$
+    - Type: get_text
+      Strategy: xpath
+      Id: $PAGE.onboarder_edit_staff_information.edit_title$
+      Greps:
+        - var: EDIT_TITLE
+          match: "Edit*"
+      Asserts:
+        - Type: contain
+          Var: EDIT_TITLE
+          Value: $AND_CLI_carepartner_user2_name$ $AND_CLI_carepartner_user2_lastname$
+  # Verify email address field cannot be updated.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.onboarder_edit_staff_information.email_input$
+    - Type: wait_for_property
+      Strategy: xpath
+      Id: $PAGE.onboarder_edit_staff_information.email_input$
+      Property: disabled
+      Value: "true"
+  # Verify screen provides feedback if you blank out a required field.
+    - Type: clear_field_by_backspace
+      Strategy: xpath
+      Id: $PAGE.onboarder_edit_staff_information.first_name_input$
+    - Type: clear_field_by_backspace
+      Strategy: xpath
+      Id: $PAGE.onboarder_edit_staff_information.last_name_input$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.onboarder_edit_staff_information.phone_input$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.onboarder_edit_staff_information.first_name_error_label$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.onboarder_edit_staff_information.last_name_error_label$
+  # Fields allow you to make changes as desired.
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.onboarder_edit_staff_information.first_name_input$
+      Value: $AND_CLI_carepartner_user2_name$
+    - Type: generate_unique_name
+      Name: $AND_CLI_carepartner_user2_lastname$
+      ResultVar: UPDATED_LASTNAME
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.onboarder_edit_staff_information.last_name_input$
+      Value: $AND_CLI_UPDATED_LASTNAME$
+  # When finished, click "View Records" at top right of left page section (Edit header side).
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_records.view_records_button$
+  # Confirmation toast notification appears.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.onboarders_notifications.staff_edited_notification$
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id: $PAGE.onboarders_notifications.staff_edited_notification$
+  # Page refreshes to show the Staff member record:
+  # Name, Role, Status and address at top of left panel
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.onboarder_staff_records_details.staff_name_label$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.onboarder_staff_records_details.staff_role_label$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.onboarder_staff_records_details.staff_status_label$
+  # Right side showing full screen of collected staff profile information
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.onboarder_staff_records_details.staff_email_label$
+  # Verify staff member name was updated.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.onboarder_staff_records_details.staff_member_name_value$
+    - Type: get_text
+      Strategy: xpath
+      Id: $PAGE.onboarder_staff_records_details.staff_member_name_value$
+      Greps:
+        - var: STAFF_NAME
+          match: (.*)
+    - Type: assert
+      Asserts: 
+      - Type: contain
+        Var: STAFF_NAME
+        Value: $AND_CLI_carepartner_user2_name$ $AND_CLI_UPDATED_LASTNAME$
+  # Navigate back to records and reset the staff name back as it was.
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.onboarder_staff_records_details.edit_info_button$
+    - Type: clear_field_by_backspace
+      Strategy: xpath
+      Id: $PAGE.onboarder_edit_staff_information.last_name_input$
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.onboarder_edit_staff_information.last_name_input$
+      Value: $AND_CLI_carepartner_user2_lastname$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_records.view_records_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.onboarders_notifications.staff_edited_notification$
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id: $PAGE.onboarders_notifications.staff_edited_notification$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.onboarder_staff_records_details.staff_member_name_value$
+    - Type: get_text
+      Strategy: xpath
+      Id: $PAGE.onboarder_staff_records_details.staff_member_name_value$
+      Greps:
+        - var: STAFF_NAME
+          match: (.*)
+    - Type: assert
+      Asserts: 
+      - Type: contain
+        Var: STAFF_NAME
+        Value: $AND_CLI_carepartner_user2_name$ $AND_CLI_carepartner_user2_lastname$
