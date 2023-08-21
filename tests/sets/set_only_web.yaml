@@ -56,11 +56,13 @@ SetOnlyWebTests:
   - Case: TestCHCarePartnerManuallyLogoutGoOffShift
   - Case: TestCHCarePartnerManuallyLogoutStayOnShift
   - Case: TestCHCarePartnerParticipantPaneCreateFollowUpTicket
+  - Case: TestCHCarePartnerParticipantDirectoryFilter
   - Case: TestESCarePartnerStatusDropdownNotInCall
   - Case: TestESCarePartnerAccessAndReviewTeamMembersAvailability
   - Case: TestESCarePartnerManuallyLogoutGoOffShift
   - Case: TestESCarePartnerManuallyLogoutStayOnShift
   - Case: TestESCarePartnerParticipantPaneCreateFollowUpTicket
+  - Case: TestESCarePartnerParticipantDirectoryFilter
   # On Boarders
   - Case: TestOnboarderCarePartnerUpdatePassword
   - Case: TestOnboarderManuallyLogOutOfThePortal
