@@ -1,0 +1,65 @@
+AdminOnCallLogin:
+  Roles:
+    - Role: desktopChrome
+      App: desktop
+  Actions:
+    - Type: navigate
+      Role: desktopChrome
+      Value: $AND_CLI_care_platform_url$
+    - Type: maximize
+    - Type: send_keys
+      Strategy: id
+      Id: $PAGE.care_platform_login.email_input$
+      Value: $AND_CLI_admincall_user1$
+    - Type: send_keys
+      Strategy: id
+      Id: $PAGE.care_platform_login.password_input$
+      Value: $AND_CLI_admincall_user1_pwd$
+    - Type: click
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.care_platform_login.login_button$
+    - Type: sleep
+      Time: 2
+
+AdminOnCallRefreshDevice:
+  Vars:
+    LOGOUT_OPTION: "Go Off Shift"
+  Precases:
+    - CarePlatformLogout
+  Roles:
+    - Role: desktopChrome
+      App: desktop
+  Actions:
+    # Login into Care Platform
+    - Type: case
+      Value: AdminOnCallLogin
+    # Go to Facilities
+    - Type: case
+      Value: NavigationToFacilityProfile
+    # Select Devices
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_facility_Record.devices_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_facility_Record.call_device_by_number$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_facility_Record.call_device_by_number$
+    # Check for "Refresh" button
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.refresh_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.refresh_button$
+    # Refresh confirmation
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.yes_refresh_dialog_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.yes_refresh_dialog_button$
+    - Type: sleep
+      Time: 1

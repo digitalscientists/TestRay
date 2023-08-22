@@ -543,6 +543,8 @@ care_platform_call_portal:
   place_call_tab_navigation: //nav/button[text()='Place Call']
   enter_a_number_input: //div[@tab-title='Place Call']//input
   call_button: //div[@tab-title='Place Call']//button[text()='Call']
+  refresh_button: //button[text()='Refresh']
+  yes_refresh_dialog_button: //*[@id='dialogs']//button[contains(text(),'Yes, Refresh')]
 
 care_platform_call_settings_modal:
   video_settings_modal_title: //*[@id='modals']//h4[text()='Call Settings']
@@ -589,6 +591,7 @@ care_platform_notifications:
   provider_saved_notification: //div[@class='Toastify']//div[@role='alert']//div[contains(text(),'Provider saved')]
   provider_deleted_notification: //div[@class='Toastify']//div[@role='alert']//div[contains(text(),'Provider deleted')]
   dismiss_notification_button: //div[@class='Toastify']//button[text()='Dismiss']
+  device_changes_saved_notification: //div[@class='Toastify']//div[contains(text(),'Facility device changes saved')]
 
 care_platform_facility:
   search_button: searchButton
@@ -613,6 +616,19 @@ care_platform_facility_Record:
   info_title: //h4[text()='Facility Information']
   devices_button: //button[text()='Devices']
   device_status: //div[@class='account-status account-status-active']
+  edit_device_by_number: //tr[contains(.,'Device $AND_CLI_facility_devices_user1_number$:')]//button[text()='Edit']
+  call_device_by_number: //tr[contains(.,'Device $AND_CLI_facility_devices_user1_number$:')]//a[text()='Call']
+  device_block: //tr[contains(.,'Device $AND_CLI_facility_devices_user1_number$:')]
+
+care_platform_facility_edit_device_modal:
+  modal_title: //*[@id='modals']//h4[text()='Edit Device']
+  nickname_input: nickname
+  status_toggle: //div[@class='status-filter']//button
+  status_toggle_dropdown_deactivated_option: //div[@class='status-filter-dropdown']//button[text()='Deactivated']
+  status_toggle_dropdown_active_option: //div[@class='status-filter-dropdown']//button[text()='Active']
+  status_toggle_dropdown_suspended_option: //div[@class='status-filter-dropdown']//button[text()='Suspended']
+  cancel_button: //*[@id='modals']//button[text()='Cancel']
+  save_button: //*[@id='modals']//button[text()='Save']
 
 care_platform_edit_participants_vendor:
   add_vendor_button: //button[text()='Add Vendor']
