@@ -98,12 +98,8 @@ SetScheduledCallForSeniors:
       Strategy: xpath
       Id: $PAGE.care_platform.navigation_participant$
     # Open the Call Portal
-    - Type: click
-      Strategy: xpath
-      Id: $PAGE.care_platform_participant.senior_complete_name$
-    - Type: click
-      Strategy: xpath
-      Id: $PAGE.care_platform_participant.call_portal_btn$
+    - Type: case
+      Value: CarePartnerParticipantCallPortalNavigation
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.care_platform_call_portal.create_event_btn$    
@@ -195,6 +191,7 @@ SetPastEventForSeniors:
       Value: CarePartnerNavigateToParticipants
     # Decrease listing by searching participant's name
     - Type: search_by_text
+      Role: desktopChrome
       Text: $AND_CLI_senior_user1_name$
       # Open the Call Portal
     - Type: click
@@ -302,6 +299,7 @@ SetScheduledCallForSeniorsToStartIn7Minutes:
       Value: CarePartnerNavigateToParticipants
     # Decrease listing by searching participant's name
     - Type: search_by_text
+      Role: desktopChrome
       Text: $AND_CLI_senior_user1_name$
       # Open the Call Portal
     - Type: click
@@ -400,7 +398,6 @@ SetScheduledCallForSeniorsToStartIn7Minutes:
 
 # Used 11 mins so the user is able to do all the needed task with the ones using the 7 mins one(the one above) and then be able to do the validations for this one.
 SetScheduledCallForSeniorsToStartIn11Minutes:
-  Environment: Settings
   Vars:
     LOGOUT_OPTION: "Go Off Shift"
   Roles:
@@ -415,6 +412,7 @@ SetScheduledCallForSeniorsToStartIn11Minutes:
       Value: CarePartnerNavigateToParticipants
     # Decrease listing by searching participant's name
     - Type: search_by_text
+      Role: desktopChrome
       Text: $AND_CLI_senior_user1_name$
       # Open the Call Portal
     - Type: click
@@ -523,12 +521,8 @@ SetNonTelehealthAppointmentForSenior:
       Strategy: xpath
       Id: $PAGE.care_platform.navigation_participant$
     # Open the Call Portal
-    - Type: click
-      Strategy: xpath
-      Id: $PAGE.care_platform_participant.senior_complete_name$
-    - Type: click
-      Strategy: xpath
-      Id: $PAGE.care_platform_participant.call_portal_btn$
+    - Type: case
+      Value: CarePartnerParticipantCallPortalNavigation
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.care_platform_call_portal.create_event_btn$    
@@ -936,6 +930,9 @@ DeleteFutureEventForSenior:
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform.navigation_participant$
+    - Type: search_by_text
+      Role: desktopChrome
+      Text: $AND_CLI_senior_user1_name$
     # Open the Call Portal
     - Type: click
       Strategy: xpath
@@ -1425,6 +1422,7 @@ CarePartnerSendMessageToSenior:
       Value: CarePartnerNavigateToParticipants
     # Decrease listing by searching participant's name
     - Type: search_by_text
+      Role: desktopChrome
       Text: $AND_CLI_senior_user1_name$
     # Click on the desired participant.
     - Type: click
@@ -1472,6 +1470,7 @@ CarePartnerCallSenior:
       Value: CarePartnerNavigateToParticipants
     # Decrease listing by searching participant's name
     - Type: search_by_text
+      Role: desktopChrome
       Text: $AND_CLI_senior_user1_name$
     # Click on the desired participant.
     - Type: click
@@ -1656,6 +1655,7 @@ CarePartnerSetsEMSEnabledToXOption:
       Value: CarePartnerNavigateToParticipants
     # Decrease listing by searching participant's name
     - Type: search_by_text
+      Role: desktopChrome
       Text: $AND_CLI_senior_user1_name$
     # Click on the desired participant.
     - Type: click
@@ -1720,6 +1720,7 @@ CarePartnerEditParticipantNavigation:
       Id : $PAGE.care_platform.navigation_participant$
   # Limit listing by searching name
     - Type: search_by_text
+      Role: desktopChrome
       Text: $AND_CLI_senior_user1_name$
   # Select first participant by name in the list
     - Type: wait_for
@@ -1756,6 +1757,7 @@ CarePartnerParticipantPaneNavigation:
       Id : $PAGE.care_platform.navigation_participant$
   # Limit listing by searching name.
     - Type: search_by_text
+      Role: desktopChrome
       Text: $AND_CLI_senior_user1_name$
   # Select corresponding participant by name in the list.
     - Type: wait_for
@@ -1787,6 +1789,7 @@ CarePartnerParticipantCallPortalNavigation:
       Id : $PAGE.care_platform.navigation_participant$
   # Limit listing by searching name.
     - Type: search_by_text
+      Role: desktopChrome
       Text: $AND_CLI_senior_user1_name$
   # Select corresponding participant by name in the list.
     - Type: wait_for
@@ -1849,6 +1852,7 @@ CarePartnerParticipantRecordsNavigation:
       Id : $PAGE.care_platform.navigation_participant$
   # Decrease listing by searching participant's name
     - Type: search_by_text
+      Role: desktopChrome
       Text: $AND_CLI_senior_user1_name$
   # Select first participant by name in the list
     - Type: wait_for
