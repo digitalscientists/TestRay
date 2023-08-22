@@ -613,6 +613,7 @@ care_platform_facility_Record:
   info_title: //h4[text()='Facility Information']
   devices_button: //button[text()='Devices']
   device_status: //div[@class='account-status account-status-active']
+  facility_status_label_elements: //div[@tab-title='Devices']//tbody//div[@class='account-status-label']
 
 care_platform_edit_participants_vendor:
   add_vendor_button: //button[text()='Add Vendor']
