@@ -101,6 +101,7 @@ SetOnlyWebTests:
   - Case: TestFacilityLeadershipDirectoryAndFilter
   - Case: TestFacilityLeadershipLogoutGoOffShift
   - Case: TestFacilityLeadershipClickAndViewFacilityProfile
+  - Case: TestFacilityLeadershipReviewInfoForExistingFacilityDeviceFacilityPane
   # Employee Health Portal Mobile
   - Case: TestEHPMobileUserCall
   - Case: TestEHPMobileDependentUserCall
