@@ -117,6 +117,8 @@ TestOnboarderCreateNewParticipant:
     Roles:
     - Role: desktopChrome
       App: "desktop"
+    # - Role: localiOS
+    #   App: NeverAlone
     Actions:
   # login in onboarder Care Partner
     - Type: case
@@ -299,8 +301,11 @@ TestOnboarderCreateNewParticipant:
       Strategy: xpath
       Id: $PAGE.onboarders_add_participant_form.confirm_button_from_suggestion_window$ 
   # Check on the submission status
-      Vars:
-        TOAST_MESSAGE_SHOWN: Updating EMS data...
+      # Vars:
+      #   TOAST_MESSAGE_SHOWN: Updating EMS data...
+    - Type: set_env_var
+      Value: Updating EMS data...
+      Var: TOAST_MESSAGE_SHOWN
     - Type: case
       Value: CarePartnerToastValidation  
     - Type: click
@@ -336,9 +341,20 @@ TestOnboarderCreateNewParticipant:
     - Type: click
       Strategy: xpath
       Id: $PAGE.onboarders_participant_page.records_button$
-  # Navigate to Records.
-    # - Type: case
-    #   Value: CarePartnerParticipantRecordsNavigation
+   # Look for the credentials of the participants created
+    - Type: scroll_to
+      Strategy: xpath
+      Id:  $PAGE.onboarders_participant_record.info_right_column$
+    - Type: get_text
+      Strategy: xpath
+      Id: $PAGE.onboaeders_participant_record.participant_username$
+      Greps:
+        - var: USERNAME
+    - Type: get_text
+      Strategy: xpath
+      Id: $PAGE.onboaeders_participant_record.participant_password$
+      Greps:
+        - var: PASSWORD
 
 # CXTB-145: Click and View Participant Record from Listing
 TestOnboarderClickandViewParticipantRecordfromListing:
