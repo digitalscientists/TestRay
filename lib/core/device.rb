@@ -2068,6 +2068,7 @@ def return_element_attribute(action, main_case, main_case_id)
     log_info("Element attribute is " + attr_value.to_s)
     ENV[convert_value(action["ResultVar"])] = attr_value.to_s
   end
+
 end
 
 # returns the location of the element in a variable
@@ -2123,20 +2124,10 @@ def generate_random_day(action, main_case, main_case_id)
   end
 end
 
-# Returns a variable with a unique number adding a ramdon number at the end
-# i.e. method receives "Hey" and then returns "829225<fjh>"
 def generate_unique_number(action, main_case, main_case_id)
   name = convert_value(action["Name"])
   unique_number = "#{name}#{2.times.map{(0...(rand(10))).map { ('1'..'9').to_a[rand(26)] }.join }.join("")}"
   ENV[convert_value(action["ResultVar"])] = unique_number
-end
-
-# Returns a variable with a unique email adding a ramdon string at the begining
-# i.e. method receives "@gmail.com" and then returns "<fjh>@gmail.com"
-def generate_unique_email(action, main_case, main_case_id)
-  name = convert_value(action["Name"])
-  unique_email = "#{1.times.map{(0...(rand(10))).map { ('a'..'z').to_a[rand(26)] }.join }.join("")}#{name}"
-  ENV[convert_value(action["ResultVar"])] = unique_email
 end
 
 # Returns a variable with a unique name adding a ramdon string at the end
