@@ -263,14 +263,9 @@ ProviderCallParticipant:
     # Navigate to Participants.
     - Type: case
       Value: ProviderNavigateToParticipants
-    # Click the desired participant.
-    - Type: click
-      Strategy: xpath
-      Id: $PAGE.providers_participants_page.senior_complete_name$
-    # Click on the call portal button.
-    - Type: click
-      Strategy: xpath
-      Id: $PAGE.providers_participant_modal.call_portal_button$
+    # Navigate to the Call Portal.
+    - Type: case
+      Value: CarePartnerParticipantCallPortalNavigation
     # Call the participant.
     - Type: wait_for
       Strategy: xpath
