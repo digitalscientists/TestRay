@@ -629,6 +629,7 @@ care_platform_facility_edit_device_modal:
   status_toggle_dropdown_suspended_option: //div[@class='status-filter-dropdown']//button[text()='Suspended']
   cancel_button: //*[@id='modals']//button[text()='Cancel']
   save_button: //*[@id='modals']//button[text()='Save']
+  close_modal_button: //*[@id='modals']//button[contains(.,'Close')]
 
 care_platform_edit_participants_vendor:
   add_vendor_button: //button[text()='Add Vendor']

@@ -232,14 +232,21 @@ TestOnboarderFacilityProfileChangeStatusForExistingFacilityDevice:
     - AdminOnCallRefreshDevice
   Aftercases:
     - CarePlatformLogout
-    - AdminOnCallRefreshDevice
+    - OnboarderSetNurseToActive
+    - TerminateApp
   Roles: 
     - Role: desktopChrome
       App: desktop
+    - Role: localiOS
+      App: NeverAlone 
   Actions:
-  # Call to login
+  # Call to login for Onboarder
     - Type: case
       Value: OnboarderCarePartnerLogin
+  # Call login for nurses
+    - Type: case
+      Role: localiOS
+      Value: LoginSNFHelper
   # Go to Facility Profile
     - Type: case
       Value: NavigationToFacilityProfile
@@ -274,7 +281,7 @@ TestOnboarderFacilityProfileChangeStatusForExistingFacilityDevice:
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_facility_Record.edit_device_by_number$
-  # Wait for Edit Modal
+    # Wait for Edit Modal
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.care_platform_facility_edit_device_modal.modal_title$
@@ -335,10 +342,187 @@ TestOnboarderFacilityProfileChangeStatusForExistingFacilityDevice:
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_facility_edit_device_modal.status_toggle_dropdown_deactivated_option$
-  # Wait for the notification
+    # Wait for the notification
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.care_platform_notifications.device_changes_saved_notification$
-    - Type: click
+    - Type: wait_not_visible
       Strategy: xpath
       Id: $PAGE.care_platform_notifications.device_changes_saved_notification$
+      Time: 20
+    # Device is automatically logged out when account status change is saved.
+    - Type: wait_for
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_login.provision_device_btn$
+      Role: localiOS
+      Time: 20
+  # Try to log in, it shouldn't
+    - Type: click
+      Strategy: class_chain
+      Role: localiOS
+      Id: $PAGE.seniors_app_login.provision_device_btn$
+    # Fill in the email and password fields with credentials.
+    - Type: wait_for
+      Strategy: class_chain
+      Role: localiOS
+      Id: $PAGE.seniors_app_login.email_input$
+    - Type: send_keys
+      Strategy: class_chain
+      Role: localiOS
+      Id: $PAGE.seniors_app_login.email_input$
+      Value: $AND_CLI_facility_devices_user1$
+    - Type: send_keys
+      Strategy: class_chain
+      Role: localiOS
+      Id: $PAGE.seniors_app_login.password_input$
+      Value: $AND_CLI_facility_devices_user1_pwd$
+    - Type: sleep
+      Time: 0.5
+      Role: localiOS
+    - Type: hide_keyboard
+      Role: localiOS
+    # Click on the Log In button.
+    - Type: click
+      Strategy: class_chain
+      Role: localiOS
+      Id: $PAGE.seniors_app_login.login_btn$
+  # Verify if device didn't log in 
+    - Type: wait_for
+      Strategy: class_chain
+      Role: localiOS
+      Id: $PAGE.seniors_app_login.login_btn$
+  # Change to "Suspended"
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_facility_edit_device_modal.status_toggle$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_facility_edit_device_modal.status_toggle_dropdown_suspended_option$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_facility_edit_device_modal.status_toggle_dropdown_suspended_option$
+    # Wait for the notification
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_notifications.device_changes_saved_notification$
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id: $PAGE.care_platform_notifications.device_changes_saved_notification$
+      Time: 20
+  # Verify Suspended behavior
+    # Click on the Log In button.
+    - Type: click
+      Strategy: class_chain
+      Role: localiOS
+      Id: $PAGE.seniors_app_login.login_btn$
+    # Alert banner
+    - Type: wait_for
+      Strategy: class_chain
+      Role: localiOS
+      Id: $PAGE.seniors_app_home.suspended_yellow_bar$
+      Time: 20
+    # New Request button
+    - Type: return_element_attribute
+      Strategy: xpath
+      Role: localiOS
+      Id: $PAGE.snf_home.new_request_btn$
+      Attribute: enabled
+      ResultVar: NEW_REQUEST_BUTTON_STATE
+    - Type: assert
+      Asserts:
+        - Type: eq
+          Var: NEW_REQUEST_BUTTON_STATE
+          Value: false
+    # Existing Request button
+    - Type: return_element_attribute
+      Strategy: class_chain
+      Role: localiOS
+      Id: $PAGE.snf_home.existing_request_button$
+      Attribute: enabled
+      ResultVar: EXISTING_REQUEST_BUTTON_STATE
+    - Type: assert
+      Asserts:
+        - Type: eq
+          Var: EXISTING_REQUEST_BUTTON_STATE
+          Value: false
+  # Change to "Active"
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_facility_edit_device_modal.status_toggle$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_facility_edit_device_modal.status_toggle_dropdown_active_option$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_facility_edit_device_modal.status_toggle_dropdown_active_option$
+    # Wait for the notification
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_notifications.device_changes_saved_notification$
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id: $PAGE.care_platform_notifications.device_changes_saved_notification$
+      Time: 20
+  # Verify Active behavior
+    # Device is automatically logged out when account status change is saved.
+    - Type: wait_for
+      Strategy: class_chain
+      Role: localiOS
+      Id: $PAGE.seniors_app_login.provision_device_btn$
+    - Type: click
+      Strategy: class_chain
+      Role: localiOS
+      Id: $PAGE.seniors_app_login.provision_device_btn$
+    # Fill in the email and password fields with credentials.
+    - Type: wait_for
+      Strategy: class_chain
+      Role: localiOS
+      Id: $PAGE.seniors_app_login.email_input$
+    - Type: send_keys
+      Strategy: class_chain
+      Role: localiOS
+      Id: $PAGE.seniors_app_login.email_input$
+      Value: $AND_CLI_facility_devices_user1$
+    - Type: send_keys
+      Strategy: class_chain
+      Role: localiOS
+      Id: $PAGE.seniors_app_login.password_input$
+      Value: $AND_CLI_facility_devices_user1_pwd$
+    - Type: sleep
+      Time: 0.5
+      Role: localiOS
+    - Type: hide_keyboard
+      Role: localiOS
+    # Click on the Log In button.
+    - Type: click
+      Strategy: class_chain
+      Role: localiOS
+      Id: $PAGE.seniors_app_login.login_btn$
+    # New Request button
+    - Type: return_element_attribute
+      Strategy: xpath
+      Role: localiOS
+      Id: $PAGE.snf_home.new_request_btn$
+      Attribute: enabled
+      ResultVar: NEW_REQUEST_BUTTON_STATE
+    - Type: assert
+      Asserts:
+        - Type: eq
+          Var: NEW_REQUEST_BUTTON_STATE
+          Value: true
+    # Existing Request button
+    - Type: return_element_attribute
+      Strategy: class_chain
+      Role: localiOS
+      Id: $PAGE.snf_home.existing_request_button$
+      Attribute: enabled
+      ResultVar: EXISTING_REQUEST_BUTTON_STATE
+    - Type: assert
+      Asserts:
+        - Type: eq
+          Var: EXISTING_REQUEST_BUTTON_STATE
+          Value: true
+    # Close onboarder's modal
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_facility_edit_device_modal.close_modal_button$

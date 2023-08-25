@@ -25,7 +25,7 @@ AdminOnCallLogin:
 AdminOnCallRefreshDevice:
   Vars:
     LOGOUT_OPTION: "Go Off Shift"
-  Precases:
+  Aftercases:
     - CarePlatformLogout
   Roles:
     - Role: desktopChrome
