@@ -117,8 +117,8 @@ TestOnboarderCreateNewParticipant:
     Roles:
     - Role: desktopChrome
       App: "desktop"
-    # - Role: localiOS
-    #   App: NeverAlone
+    - Role: localiOS
+      App: NeverAlone
     Actions:
   # login in onboarder Care Partner
     - Type: case
@@ -332,7 +332,7 @@ TestOnboarderCreateNewParticipant:
     - Type: click
       Strategy: xpath
       Id: $PAGE.onboarders_participant_page.senior_complete_name$
-   # Click on Records Button
+  # Click on Records Button
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.onboarders_participant_page.records_button$
@@ -341,20 +341,26 @@ TestOnboarderCreateNewParticipant:
     - Type: click
       Strategy: xpath
       Id: $PAGE.onboarders_participant_page.records_button$
-   # Look for the credentials of the participants created
-    - Type: scroll_to
-      Strategy: xpath
-      Id:  $PAGE.onboarders_participant_record.info_right_column$
+  # Take the credentials of the participants created
     - Type: get_text
       Strategy: xpath
-      Id: $PAGE.onboaeders_participant_record.participant_username$
+      Id: $PAGE.onboarders_participant_record.participant_username$
       Greps:
-        - var: USERNAME
+        - var: NEW_PARTICIPANT_USERNAME
     - Type: get_text
       Strategy: xpath
-      Id: $PAGE.onboaeders_participant_record.participant_password$
+      Id: $PAGE.onboarders_participant_record.participant_password$
       Greps:
-        - var: PASSWORD
+        - var: NEW_PARTICIPANT_PASSWORD
+  # Login using credentials on IDD
+    - Type: case
+      Value: LoginCHIDDNeverAloneHelper
+    - Type: set_env_var
+      Id: $PAGE.seniors_app_login.email_input$
+      Value: $AND_CLI_NEW_PARTICIPANT_USERNAME$
+    - Type: set_env_var
+      Id: $PAGE.seniors_app_login.password_input$
+      Value: $AND_CLI_NEW_PARTICIPANT_PASSWORD$
 
 # CXTB-145: Click and View Participant Record from Listing
 TestOnboarderClickandViewParticipantRecordfromListing:
