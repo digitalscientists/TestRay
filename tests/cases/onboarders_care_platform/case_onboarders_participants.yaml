@@ -113,13 +113,17 @@ TestOnboarderAccessParticipantDirectoryandFilter:
 
 #CXTB-144-Onboarders-Create New Participant
 TestOnboarderCreateNewParticipant:
-    Environment: Settings
-    Roles:
-    - Role: desktopChrome
-      App: "desktop"
-    - Role: localiOS
-      App: NeverAlone
-    Actions:
+  Environment: Settings
+  Aftercases: 
+    - TerminateApp
+  Roles:
+  - Role: desktopChrome
+    App: "desktop"
+  - Role: localiOS
+    Capabilities:
+      newCommandTimeout: 300
+    App: NeverAlone
+  Actions:
   # login in onboarder Care Partner
     - Type: case
       Value: OnboarderCarePartnerLogin 
@@ -348,23 +352,25 @@ TestOnboarderCreateNewParticipant:
   # Take the credentials of the participants created
     - Type: get_text
       Strategy: xpath
-      Id: $PAGE.onboarders_participant_record.participant_username$
+      Id: $PAGE.onboarders_participant_record.participants_username$
       Greps:
         - var: NEW_PARTICIPANT_USERNAME
+          match: "(.*)"
     - Type: get_text
       Strategy: xpath
-      Id: $PAGE.onboarders_participant_record.participant_password$
+      Id: $PAGE.onboarders_participant_record.participants_password$
       Greps:
         - var: NEW_PARTICIPANT_PASSWORD
+          match: "(.*)"
   # Login using credentials on IDD
-    - Type: case
-      Value: LoginCHIDDNeverAloneHelper
     - Type: set_env_var
-      Id: $PAGE.seniors_app_login.email_input$
+      Var: senior_user1
       Value: $AND_CLI_NEW_PARTICIPANT_USERNAME$
     - Type: set_env_var
-      Id: $PAGE.seniors_app_login.password_input$
+      Var: senior_user1_pwd
       Value: $AND_CLI_NEW_PARTICIPANT_PASSWORD$
+    - Type: case
+      Value: LoginNeverAloneHelper
 
 # CXTB-145: Click and View Participant Record from Listing
 TestOnboarderClickandViewParticipantRecordfromListing:
