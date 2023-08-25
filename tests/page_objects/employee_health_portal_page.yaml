@@ -176,7 +176,7 @@ employee_health_mobile_request_appointment_page:
   alert_calendar: //div[@class='text-xs color-red-400'][text()='Please select a date.']
   close_button: //*[@id='mobile-modals']//span[text()='Request Appointment']/..//button
   select_date_input: //*[@id='mobile-modals']//label[text()='Select a Date']/../input
-  calendar_right_button: //div[@class='calendar']//div/button/span[@class='icon-chevron-right']
+  calendar_right_button: //div[@class='calendar']//div/button/span[@class='icon-chevron-right']/ancestor::button
   save_button: //*[@id='dialogs']//button[text()='Save']
   select_time_input: //*[@id='mobile-modals']//label[text()='Select a Time']/../input
   appointment_description: //div/span[text()='Description']/..

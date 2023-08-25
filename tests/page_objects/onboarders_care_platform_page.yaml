@@ -112,7 +112,7 @@ onboarders_create_edit_staff_member:
 staff_records:
   overview_tab: //button[contains(text(),'Overview')]
   staff_member_tabs: //nav[@class='tabs-nav']
-  edit_info_button: //button[contains(text(),'Edit info')]
+  edit_info_button: //button[contains(text(),'Edit Info')]
   admin_button: //span[@class='button-dropdown']/button[text()='Admin']
   admin_deactivate_button: //span[@class='button-dropdown']//button[text()='Deactivate']
   admin_activate_button: //span[@class='button-dropdown']//button[text()='Activate']
@@ -124,3 +124,21 @@ staff_records:
   staff_name: //div[strong[text()='Staff Member Name:']]//following-sibling::div
   staff_status: //div[strong[text()='Status:']]//following-sibling::div
   staff_email: //div[strong[text()='Email:']]//following-sibling::div
+
+onboarder_staff_records_details:
+  edit_info_button: //button[contains(text(), 'Edit info')]
+  staff_name_label: //div[@class='participant-profile-contact']/h3
+  staff_role_label: //div[@class='participant-profile-contact']//strong[contains(text(), 'Role')]
+  staff_status_label: //div[@class='participant-profile-contact']//strong[contains(text(), 'Status')]
+  staff_email_label: //strong[contains(text(), 'Email')]
+  staff_member_name_value: //strong[contains(text(), 'Staff Member Name')]/../following-sibling::div
+
+onboarder_edit_staff_information:
+  edit_title: //span[contains(text(),'Edit')]
+  email_input: //form//input[@id='email']
+  role_input: //form//select[@id='role']
+  first_name_input: //form//input[@id='firstName']
+  first_name_error_label: //form//input[@id='firstName']/following-sibling::div[@aria-hidden='false']
+  last_name_input: //form//input[@id='lastName']
+  last_name_error_label: //form//input[@id='lastName']/following-sibling::div[@aria-hidden='false']
+  phone_input: //form//input[@id='phone']
