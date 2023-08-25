@@ -194,8 +194,9 @@ TestOnboarderCreateNewParticipant:
       Strategy: xpath
       Id: $PAGE.onboarders_add_participant_form.create_participants_button$
   # Check on the submission status
-      Vars:
-        TOAST_MESSAGE_SHOWN: New participant created
+    - Type: set_env_var
+      Value: New participant created
+      Var: TOAST_MESSAGE_SHOWN  
     - Type: case
       Value: CarePartnerToastValidation
   # Go to Address/Emergency Phone
@@ -238,8 +239,9 @@ TestOnboarderCreateNewParticipant:
       Strategy: xpath
       Id: $PAGE.onboarders_add_participant_form.save_changes_button$  
   # Check on the submission status
-      Vars:
-        TOAST_MESSAGE_SHOWN: EMS data updated
+    - Type: set_env_var
+      Value: EMS data updated
+      Var: TOAST_MESSAGE_SHOWN  
     - Type: case
       Value: CarePartnerToastValidation
   # Select “Yes” for the enable EMS question
@@ -251,8 +253,9 @@ TestOnboarderCreateNewParticipant:
       Strategy: xpath
       Id: $PAGE.onboarders_add_participant_form.save_changes_button$
   # Check on the submission status
-      Vars:
-        TOAST_MESSAGE_SHOWN: Updating EMS data... 
+    - Type: set_env_var
+      Value: Updating EMS data... 
+      Var: TOAST_MESSAGE_SHOWN 
     - Type: case
       Value: CarePartnerToastValidation
   # Updating to a valid address 
@@ -265,8 +268,9 @@ TestOnboarderCreateNewParticipant:
       Strategy: xpath
       Id: $PAGE.onboarders_add_participant_form.save_changes_button$ 
   # Check on the submission status
-      Vars:
-        TOAST_MESSAGE_SHOWN: Some adjustments needed
+    - Type: set_env_var
+      Value: Some adjustments needed
+      Var: TOAST_MESSAGE_SHOWN 
     - Type: case
       Value: CarePartnerToastValidation
   # Go back from suggestion window
@@ -289,8 +293,9 @@ TestOnboarderCreateNewParticipant:
       Strategy: xpath
       Id: $PAGE.onboarders_add_participant_form.save_changes_button$ 
   # Check on the submission status
-      Vars:
-        TOAST_MESSAGE_SHOWN: Some adjustments needed
+    - Type: set_env_var
+      Value: Some adjustments needed
+      Var: TOAST_MESSAGE_SHOWN 
     - Type: case
       Value: CarePartnerToastValidation
   # Confirm from suggestion window
@@ -301,8 +306,6 @@ TestOnboarderCreateNewParticipant:
       Strategy: xpath
       Id: $PAGE.onboarders_add_participant_form.confirm_button_from_suggestion_window$ 
   # Check on the submission status
-      # Vars:
-      #   TOAST_MESSAGE_SHOWN: Updating EMS data...
     - Type: set_env_var
       Value: Updating EMS data...
       Var: TOAST_MESSAGE_SHOWN
@@ -312,8 +315,9 @@ TestOnboarderCreateNewParticipant:
       Strategy: xpath
       Id: $PAGE.onboarders_add_participant_form.save_changes_button$
   # Confirm if the participant has been created
-      Vars:
-        TOAST_MESSAGE_SHOWN: Updating EMS data...
+    - Type: set_env_var
+      Value: Updating EMS data...
+      Var: TOAST_MESSAGE_SHOWN
     - Type: case
       Value: CarePartnerToastValidation
   # Go to Participants
