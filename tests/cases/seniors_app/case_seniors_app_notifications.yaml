@@ -293,6 +293,11 @@ TestSeniorAppointmentAddedNotifications:
       Strategy: class_chain
       Id: $PAGE.seniors_app_appointment_modal.cancel_or_reschedule_button$
   # Device screen updates to show screen asking what kind of need you help:
+    - Type: sleep
+      Time: 2
+    - Type: wait_not_visible
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_appointment_modal.cancel_or_reschedule_button$
   # Medical, Non-Medical and Cancel
     - Type: wait_for
       Strategy: class_chain
@@ -359,6 +364,9 @@ TestSeniorAppointmentAddedNotifications:
       - Value: 5
         Operation: visible
         Result: true
+    - Type: wait_not_visible
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_appointment_modal.close_btn$
   # In the Home page, click on the Bell icon and verify user is redirected to Notifications page.
     - Type: case
       Value: NotificationsPageNavigationHelper
@@ -404,6 +412,9 @@ TestSeniorAppointmentAddedNotifications:
     - Type: click
       Strategy: class_chain
       Id: $PAGE.seniors_app_appointment_modal.reschedule_button$
+    - Type: wait_not_visible
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_appointment_modal.reschedule_button$
   # Device screen updates to show screen asking what kind of need you help:
   # Medical, Non-Medical and Cancel
     - Type: wait_for
@@ -417,6 +428,9 @@ TestSeniorAppointmentAddedNotifications:
       Id: $PAGE.seniors_app_call.cancel_call_button$
   # Click on the Medical option.
     - Type: click
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_call.medical_call_button$
+    - Type: wait_not_visible
       Strategy: class_chain
       Id: $PAGE.seniors_app_call.medical_call_button$
   # Verify that screen redirects to the call waiting room.

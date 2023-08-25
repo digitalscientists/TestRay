@@ -32,6 +32,7 @@ OnboarderSetsAccountStatus:
       Value: CarePartnerNavigateToParticipants
     # Decrease listing by searching participant's name
     - Type: search_by_text
+      Role: desktopChrome
       Text: $AND_CLI_senior_user1_name$
     # Click on the desired participant.
     - Type: click
@@ -86,6 +87,7 @@ OnboarderCarePartnerSetParticipantStateToActive:
       Value: CarePartnerNavigateToParticipants
     # Decrease listing by searching participant's name
     - Type: search_by_text
+      Role: desktopChrome
       Text: $AND_CLI_senior_user1_name$
   # Select first participant by name in the list
     - Type: wait_for
@@ -395,6 +397,52 @@ OnboarderSetStaffInactive:
     - Type: click
       Strategy: xpath
       Id: $PAGE.staff_records.yes_deactivate_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.onboarders_notifications.account_status_updated_notification_button$
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id: $PAGE.onboarders_notifications.account_status_updated_notification_button$
+
+OnboarderSetStaffActive:
+  Roles:
+    - Role: desktopChrome
+      App: desktop
+  Actions:
+    # Navigate to Staff
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.onboarders_header_navigation.staff_tab$
+    # Decrease listing by searching staff's name
+    - Type: search_by_text
+      Role: desktopChrome
+      Text: $AND_CLI_carepartner_user2_name$
+    # Select the participant.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.onboarders_staff_listing.care_partner2_based_on_name$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.onboarders_staff_listing.care_partner2_based_on_name$
+    # Activate account
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.staff_records.admin_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.staff_records.admin_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.staff_records.admin_activate_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.staff_records.admin_activate_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.staff_records.yes_activate_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.staff_records.yes_activate_button$
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.onboarders_notifications.account_status_updated_notification_button$

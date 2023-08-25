@@ -54,10 +54,12 @@ SetOnlyWebTests:
   - Case: TestCHCarePartnerStatusDropdownNotInCall
   - Case: TestCHCarePartnerAccessAndReviewTeamMembersAvailability
   - Case: TestCHCarePartnerManuallyLogoutGoOffShift
+  - Case: TestCHCarePartnerManuallyLogoutStayOnShift
+  - Case: TestCHCarePartnerParticipantPaneCreateFollowUpTicket
   - Case: TestESCarePartnerStatusDropdownNotInCall
   - Case: TestESCarePartnerAccessAndReviewTeamMembersAvailability
   - Case: TestESCarePartnerManuallyLogoutGoOffShift
-  - Case: TestCHCarePartnerParticipantPaneCreateFollowUpTicket
+  - Case: TestESCarePartnerManuallyLogoutStayOnShift
   - Case: TestESCarePartnerParticipantPaneCreateFollowUpTicket
   # On Boarders
   - Case: TestOnboarderCarePartnerUpdatePassword
@@ -77,6 +79,7 @@ SetOnlyWebTests:
   - Case: TestOnboarderParticipantInfoEditOrAddEmergencyRoomAdmissionsInfo
   - Case: TestOnboarderAccessStaffDirectoryAndFilter
   - Case: TestOnboarderStaffMemberPaneReactivateStaffMemberAccountForCarePlatform
+  - Case: TestOnboarderStaffMemberPaneDeactivateStaffMemberAccountForCarePlatform
   # Providers Care Platform
   - Case: TestProvidersUpdatePassword
   - Case: TestProviderLogOutStayOnShift

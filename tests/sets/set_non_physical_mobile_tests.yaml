@@ -13,7 +13,9 @@ SetNonPhysicalMobileTest:
     - Case: TestCarePartnerCallParticipantsDeviceCallMissed
   # Care Partner ES
     - Case: TestCHCarePartnerBrowsingWhileOnCall
+    - Case: TestCHCarePartnerCallParticipantsDeviceAndCompleteCall
     - Case: TestESCarePartnerBrowsingWhileOnCall
+    - Case: TestESCarePartnerCallParticipantsDeviceAndCompleteCall
   # Never Alone IDD Senior App
     - Case: TestIDDESAnswerCallForCarePartnerCallingDeviceIgnoreCall
     - Case: TestIDDESActiveAppointmentTimeWindowWhenNotJoinedPrior
@@ -48,6 +50,7 @@ SetNonPhysicalMobileTest:
     - Case: TestSeniorVerifyMyDetailsSettingsPageElements
     - Case: TestSeniorSettingsPageNavigation
     - Case: TestSeniorWifiSettingsPage
+    - Case: TestSeniorAppDeactivatedAccountStatusVisuals
   # Never Alone SNF tests
     - Case: TestSNFVerifyNotificationsPage
     - Case: TestSNFMessagePromptFromProvider
