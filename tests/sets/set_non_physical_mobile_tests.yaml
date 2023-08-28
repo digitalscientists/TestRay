@@ -62,3 +62,4 @@ SetNonPhysicalMobileTest:
   # Onboarder
     - Case: TestOnboarderChangeStatusToActiveForExistingParticipant
     - Case: TestOnboarderChangeStatusToSuspendedForExistingParticipant
+    - Case: TestOnboarderFacilityProfileChangeStatusForExistingFacilityDevice
