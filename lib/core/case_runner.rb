@@ -86,71 +86,6 @@ class CaseRunner
       end
     end
   end
-  
-  def self.run_instance(case_name, parent_params = {})
-    @cases = load_case_files()
-    @main_steps = check_case_exists(@cases, case_name, initial = true)
-    unless @main_case
-      @main_case = case_name
-      @main_case_id = " #{Time.now.strftime("%Y-%m-%d %H:%M:%S.%L")}"
-      log_info("Starting main case #{case_name}")
-      steps = @main_steps
-    else
-      # if not main, validate case, load its environment and variables
-      steps = check_case_exists(@cases, case_name)
-      load_env_and_vars(steps)
-      load_env_and_vars(parent_params)
-    end
-
-    # first run any precases
-    if steps["Precases"]
-      steps["Precases"].each do |pre_case|
-        begin
-          run(convert_value(pre_case))
-        rescue => e
-          log_warn("Pre-Case '#{pre_case}' Error: #{e.message}")
-        end
-      end
-    end
-    begin
-      parent_role = parent_params["Role"]
-      logger_step(case_name + ' Started ' + Time.now.strftime("%Y-%m-%d %H:%M:%S.%L"), @main_case, @main_case_id)
-      steps_handler_instance(case_name, parent_role, steps)
-      logger_step(case_name + ' Completed ' + Time.now.strftime("%Y-%m-%d %H:%M:%S.%L"), @main_case, @main_case_id)
-      log_info("All cases have finished") if case_name == @main_case
-    rescue => e
-      # if encountered error, first run any aftercases
-      if steps["Aftercases"]
-        steps["Aftercases"].each do |after_case|
-          begin
-            run(convert_value(after_case))
-          rescue => e_after
-            log_warn("After Case '#{after_case}' Error: #{e_after.message}")
-          end
-        end
-      end
-
-      # fail case unless specified otherwise
-      unless steps["NoRaise"]
-        logger_step_fail(case_name, @main_case, @main_case_id, e.message) #if case_name != @main_case
-        raise "There was an error in case '#{case_name}': #{e.message}" 
-      end
-        
-      # error was not raised -> return so that aftercases are not called twice
-      return
-    end
-
-    # after successful execution, run any aftercases
-    if steps["Aftercases"]
-      steps["Aftercases"].each do |after_case|
-        begin
-          run(convert_value(after_case))
-        rescue => e
-          log_warn("After Case '#{after_case}' Error: #{e.message}")
-        end
-      end
-    end
-  end
 
   # method for iterating through the test case actions
   # and calling the respective execution handlers 
@@ -164,93 +99,6 @@ class CaseRunner
     exec_type = is_parallel_roles ? "parallel" : "sequential"
     actions = is_parallel_roles ? {} : []
     action_exec_method = "start_#{exec_type}_actions"
-
-    # identify the main role (either from case header or parent case)
-    main_role = convert_value(steps["Roles"][0]["Role"]) if steps.key?("Roles")
-    main_role = convert_value(parent_role) unless parent_role.nil?
-    ENV["MAINROLE"] = main_role
-
-    # iterate through case actions
-    steps["Actions"].each do |action|
-      # first check if gherkin step is used
-      g_case, g_prefix =  check_gherkin_step(action)
-      if g_case
-        action["Type"] = "case"
-        action["Value"] = g_case
-      end
-
-      # determine role that should execute action, and log this
-      action_role = action.key?("Role") ? convert_value(action["Role"]) : main_role
-      action_string = "Case '#{case_name}': adding "
-      action_string += SYNC_ACTIONS.include?(action["Type"]) ? "" : "#{exec_type} "
-      if action["Type"] == "case"
-        action_string += "case '#{action["Value"]}' "
-      else
-        action_string += "action: '#{action["Type"]}' "
-      end
-      action_string += "for role #{action_role}" if action.key?("Role")
-      log_debug(action_string)
-
-      # for generic actions, add to structure and proceed
-      unless SYNC_ACTIONS.include?(action["Type"])
-        action_role.split(",").each do |role|
-          if exec_type == "parallel"
-            actions[role] = [] if actions[role] == nil
-            actions[role].append(action)
-          else
-            actions.append([role, action])
-          end
-        end
-        next
-      end
-
-      # for control flow actions, first execute all gathered actions
-      actions = self.send(action_exec_method, actions)
-      # then check for the actual control flow action
-      case action["Type"]
-      when "case"
-        if steps.key?("ParallelCases")
-          max_parallel_cases = steps["ParallelCases"]
-          case_threads = parallel_case_handler(
-            action, case_threads, max_parallel_cases
-          )
-        else
-          case_handler(action, case_name)
-        end
-        if g_prefix
-          logger_step "#{g_prefix} #{g_case}", @main_case, @main_case_id
-        end
-      when "sync"
-        if action.key?("Value")
-          sync_steps_handler(action)
-        elsif !case_threads.empty?
-          sync_cases_handler(case_threads)
-          case_threads = {}
-        end
-      when "if"
-        if_handler(action, case_name)
-      when "loop"
-        loop_handler(action, case_name)
-      when "timer"
-        @start = timer_handler(action, action_role, @start)
-      else
-        log_error("Unknown action type: #{action["Type"]}")
-      end
-    end
-
-    self.send(action_exec_method, actions)
-    sync_cases_handler(case_threads) unless case_threads.empty?
-  end
-  
-  def self.steps_handler_instance(case_name, parent_role, steps)
-    case_threads = {}
-    @start ||= 0
-
-    # first determine if execution is parallel or sequential
-    is_parallel_roles = steps.key?("ParallelRoles") && steps["ParallelRoles"]
-    exec_type = is_parallel_roles ? "parallel" : "sequential"
-    actions = is_parallel_roles ? {} : []
-    action_exec_method = "start_#{exec_type}_actions_instance"
 
     # identify the main role (either from case header or parent case)
     main_role = convert_value(steps["Roles"][0]["Role"]) if steps.key?("Roles")
@@ -358,13 +206,6 @@ class CaseRunner
     end
     return []
   end
-  
-  def self.start_sequential_actions_instance(actions)
-    actions.each do |role, action|
-      single_action_exe_instance(action, role)
-    end
-    return []
-  end
 
   # executor for a single action, for a single role
   def single_action_exe(action, role)
@@ -381,37 +222,6 @@ class CaseRunner
         report_step(prepare_report_step(role, action) , @main_case, @main_case_id) #Logging action into report
       else
         @device_handler.devices[role].send(action["Type"], action, @main_case, @main_case_id)
-        report_step(prepare_report_step(role, action) , @main_case, @main_case_id) #Logging action into report
-      end
-    rescue RuntimeError => e
-      raise e unless action["FailCase"]
-      log_info("Received error '#{e.message}' while running #{action} action, " +
-            "will execute callback")
-      parent_params = {}
-      parent_params["Role"] = role if action.key?("Role")
-      parent_params["Vars"] = action["Vars"] if action.key?("Vars")
-      run(action["FailCase"]["Value"], parent_params)
-      raise e unless action["FailCase"]["ContinueOnFail"]
-    end
-  end
-  
-  def self.single_action_exe_instance(action, role)
-    # device_handler_role_instance = self.instance_variable_get("@device_handler");
-    # device_handler_role = @device_handler.devices[role]
-    device_handler_role = $case_runner_global.device_handler.devices[role]
-    unless device_handler_role
-      log_warn("Role '#{role}' was not found! Running next step...")
-      return
-    end
-
-    begin
-      load_vars(action)
-      log_step(role, action)
-      if action["Type"] == "sleep"
-        device_handler_role.pause(action["Time"])
-        report_step(prepare_report_step(role, action) , @main_case, @main_case_id) #Logging action into report
-      else
-        device_handler_role.send(action["Type"], action, @main_case, @main_case_id)
         report_step(prepare_report_step(role, action) , @main_case, @main_case_id) #Logging action into report
       end
     rescue RuntimeError => e
