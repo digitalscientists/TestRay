@@ -2650,4 +2650,22 @@ def list_handler(action, main_case, main_case_id)
     raise "#{@role}: Exception: #{exception}, Action:#{action}\nError Screenshot: #{path}"
   end
 end
+
+def onboarder_set_staff_active(action, main_case, main_case_id)
+  # case_run.run(case_name)
+  case_name = "OnboarderSetStaffActive"
+  cases = load_case_files()
+  # parent_params = {}
+  # CaseRunner.new.run(case_name, get_parent_params(action))
+  parent_setup_params = {
+    # "Environment" => set_case["Environment"],
+    # "Vars" => set_case["Vars"],
+    # "SetupCommands" => set_case["SetupCommands"],6
+    "Role" => convert_value(action["Role"])
+  }
+  # case_run = CaseRunner.new(cases, case_name, parent_setup_params)
+  # case_run.run(case_name)
+  CaseRunner.run_instance(case_name, parent_setup_params)
+  
+end
 # END OF DEVICE CLASS

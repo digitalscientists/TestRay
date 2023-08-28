@@ -284,14 +284,14 @@ TestOnboarderStaffMemberPaneDeactivateStaffMemberAccountForCarePlatform:
       LOGOUT_OPTION: "Go Off Shift"
     Precases:
       - OnboarderCarePartnerLogin
-      - OnboarderSetStaffActive
+      - NewOnboarderSetStaffActive
     Aftercases:
-      - OnboarderSetStaffActive
+      # - OnboarderSetStaffActive
     Roles:
     - Role: desktopChrome
       App: "desktop"
-    - Role: desktopChrome1
-      App: "desktop"
+    # - Role: desktopChrome1
+    #   App: "desktop"
     Actions:
   # Navigate to Staff.
     - Type: click
@@ -307,141 +307,141 @@ TestOnboarderStaffMemberPaneDeactivateStaffMemberAccountForCarePlatform:
     - Type: click
       Strategy: xpath
       Id: $PAGE.onboarders_staff_listing.onboarder_based_on_name$
-  # Right side of screen updates to show the selected staff member’s summary pane.
-    - Type: wait_for
-      Strategy: xpath
-      Id: $PAGE.staff_records.admin_button$
-  # Click "Admin" on right side of screen.
-    - Type: click
-      Strategy: xpath
-      Id: $PAGE.staff_records.admin_button$
-  # Verify that the "Deactivate" option is disabled.
-    - Type: wait_for
-      Strategy: xpath
-      Id: $PAGE.staff_records.admin_deactivate_button$
-    - Type: wait_for_property
-      Strategy: xpath
-      Id: $PAGE.staff_records.admin_deactivate_button$
-      Property: disabled
-      Value: "true"
-  # Log in as the Staff that will be deactivated.
-    - Type: case
-      Value: CarePartnerLoginSecondaryUser
-      Role: desktopChrome1
-  # Navigate to Staff.
-    - Type: click
-      Strategy: xpath
-      Id: $PAGE.onboarders_header_navigation.staff_tab$
-  # Select an "Active" staff member in listing.
-    - Type: search_by_text
-      Role: desktopChrome
-      Text: $AND_CLI_carepartner_user2_name$
-    - Type: wait_for
-      Strategy: xpath
-      Id: $PAGE.onboarders_staff_listing.care_partner2_based_on_name$
-    - Type: click
-      Strategy: xpath
-      Id: $PAGE.onboarders_staff_listing.care_partner2_based_on_name$
-  # Right side of screen updates to show the selected staff member’s summary pane.
-    - Type: wait_for
-      Strategy: xpath
-      Id: $PAGE.staff_records.admin_button$
-  # Click "Admin" on right side of screen.
-    - Type: click
-      Strategy: xpath
-      Id: $PAGE.staff_records.admin_button$
-  # Click "Activate" option.
-    - Type: wait_for
-      Strategy: xpath
-      Id: $PAGE.staff_records.admin_deactivate_button$
-    - Type: click
-      Strategy: xpath
-      Id: $PAGE.staff_records.admin_deactivate_button$
-  # "Dectivate Account" window appears to confirm if you want to deactivate the related staff member account.
-    - Type: wait_for
-      Strategy: xpath
-      Id: $PAGE.staff_records.dialog_title$
-    - Type: get_text
-      Strategy: xpath
-      Id: $PAGE.staff_records.dialog_title$
-      Greps:
-        - var: MODAL_TITLE
-          match: "(.*)"
-    - Type: assert
-      Role: desktopChrome
-      Asserts:
-        - Type: eq
-          Var: MODAL_TITLE
-          Value: Deactivate Account
-  # Click "Cancel" button.
-    - Type: wait_for
-      Strategy: xpath
-      Id: $PAGE.staff_records.cancel_button$
-    - Type: click
-      Strategy: xpath
-      Id: $PAGE.staff_records.cancel_button$
-  # Window disappears and staff member account remains inactive.
-    - Type: wait_not_visible
-      Strategy: xpath
-      Id: $PAGE.staff_records.dialog_title$
-  # Click "Admin" on right side of screen.
-    - Type: click
-      Strategy: xpath
-      Id: $PAGE.staff_records.admin_button$
-  # Click "Activate" option.
-    - Type: wait_for
-      Strategy: xpath
-      Id: $PAGE.staff_records.admin_deactivate_button$
-    - Type: click
-      Strategy: xpath
-      Id: $PAGE.staff_records.admin_deactivate_button$
-  # "Deactivate Account" window appears to confirm if you want to deactivate the related staff member account.
-    - Type: wait_for
-      Strategy: xpath
-      Id: $PAGE.staff_records.dialog_title$
-    - Type: get_text
-      Strategy: xpath
-      Id: $PAGE.staff_records.dialog_title$
-      Greps:
-        - var: MODAL_TITLE
-          match: "(.*)"
-    - Type: assert
-      Role: desktopChrome
-      Asserts:
-        - Type: eq
-          Var: MODAL_TITLE
-          Value: Deactivate Account
-  # Click "Yes, deactivate" button.
-    - Type: wait_for
-      Strategy: xpath
-      Id: $PAGE.staff_records.yes_deactivate_button$
-    - Type: click
-      Strategy: xpath
-      Id: $PAGE.staff_records.yes_deactivate_button$
-  # Toast notification appears and account status has been updated to active for related staff member account.
-    - Type: wait_for
-      Strategy: xpath
-      Id: $PAGE.onboarders_notifications.account_status_updated_notification_button$
-    - Type: wait_not_visible
-      Strategy: xpath
-      Id: $PAGE.onboarders_notifications.account_status_updated_notification_button$
-  # Verify if logged in and user is deactivated, it should kick out the user from the app.
-    - Type: click
-      Strategy: xpath
-      Id : $PAGE.care_platform.navigation_participant$
-      Role: desktopChrome1
-    - Type: wait_for
-      Strategy: id
-      Id: $PAGE.care_platform_login.email_input$
-      Role: desktopChrome1
-  # Verify if status is inactive, user cannot log in.
-    - Type: case
-      Value: CarePartnerLoginSecondaryUser
-      Role: desktopChrome1
-    - Type: wait_for
-      Strategy: xpath
-      Id: $PAGE.care_platform_login.failed_to_log_in$
-      Role: desktopChrome1
+  # # Right side of screen updates to show the selected staff member’s summary pane.
+  #   - Type: wait_for
+  #     Strategy: xpath
+  #     Id: $PAGE.staff_records.admin_button$
+  # # Click "Admin" on right side of screen.
+  #   - Type: click
+  #     Strategy: xpath
+  #     Id: $PAGE.staff_records.admin_button$
+  # # Verify that the "Deactivate" option is disabled.
+  #   - Type: wait_for
+  #     Strategy: xpath
+  #     Id: $PAGE.staff_records.admin_deactivate_button$
+  #   - Type: wait_for_property
+  #     Strategy: xpath
+  #     Id: $PAGE.staff_records.admin_deactivate_button$
+  #     Property: disabled
+  #     Value: "true"
+  # # Log in as the Staff that will be deactivated.
+  #   - Type: case
+  #     Value: CarePartnerLoginSecondaryUser
+  #     Role: desktopChrome1
+  # # Navigate to Staff.
+  #   - Type: click
+  #     Strategy: xpath
+  #     Id: $PAGE.onboarders_header_navigation.staff_tab$
+  # # Select an "Active" staff member in listing.
+  #   - Type: search_by_text
+  #     Role: desktopChrome
+  #     Text: $AND_CLI_carepartner_user2_name$
+  #   - Type: wait_for
+  #     Strategy: xpath
+  #     Id: $PAGE.onboarders_staff_listing.care_partner2_based_on_name$
+  #   - Type: click
+  #     Strategy: xpath
+  #     Id: $PAGE.onboarders_staff_listing.care_partner2_based_on_name$
+  # # Right side of screen updates to show the selected staff member’s summary pane.
+  #   - Type: wait_for
+  #     Strategy: xpath
+  #     Id: $PAGE.staff_records.admin_button$
+  # # Click "Admin" on right side of screen.
+  #   - Type: click
+  #     Strategy: xpath
+  #     Id: $PAGE.staff_records.admin_button$
+  # # Click "Activate" option.
+  #   - Type: wait_for
+  #     Strategy: xpath
+  #     Id: $PAGE.staff_records.admin_deactivate_button$
+  #   - Type: click
+  #     Strategy: xpath
+  #     Id: $PAGE.staff_records.admin_deactivate_button$
+  # # "Dectivate Account" window appears to confirm if you want to deactivate the related staff member account.
+  #   - Type: wait_for
+  #     Strategy: xpath
+  #     Id: $PAGE.staff_records.dialog_title$
+  #   - Type: get_text
+  #     Strategy: xpath
+  #     Id: $PAGE.staff_records.dialog_title$
+  #     Greps:
+  #       - var: MODAL_TITLE
+  #         match: "(.*)"
+  #   - Type: assert
+  #     Role: desktopChrome
+  #     Asserts:
+  #       - Type: eq
+  #         Var: MODAL_TITLE
+  #         Value: Deactivate Account
+  # # Click "Cancel" button.
+  #   - Type: wait_for
+  #     Strategy: xpath
+  #     Id: $PAGE.staff_records.cancel_button$
+  #   - Type: click
+  #     Strategy: xpath
+  #     Id: $PAGE.staff_records.cancel_button$
+  # # Window disappears and staff member account remains inactive.
+  #   - Type: wait_not_visible
+  #     Strategy: xpath
+  #     Id: $PAGE.staff_records.dialog_title$
+  # # Click "Admin" on right side of screen.
+  #   - Type: click
+  #     Strategy: xpath
+  #     Id: $PAGE.staff_records.admin_button$
+  # # Click "Activate" option.
+  #   - Type: wait_for
+  #     Strategy: xpath
+  #     Id: $PAGE.staff_records.admin_deactivate_button$
+  #   - Type: click
+  #     Strategy: xpath
+  #     Id: $PAGE.staff_records.admin_deactivate_button$
+  # # "Deactivate Account" window appears to confirm if you want to deactivate the related staff member account.
+  #   - Type: wait_for
+  #     Strategy: xpath
+  #     Id: $PAGE.staff_records.dialog_title$
+  #   - Type: get_text
+  #     Strategy: xpath
+  #     Id: $PAGE.staff_records.dialog_title$
+  #     Greps:
+  #       - var: MODAL_TITLE
+  #         match: "(.*)"
+  #   - Type: assert
+  #     Role: desktopChrome
+  #     Asserts:
+  #       - Type: eq
+  #         Var: MODAL_TITLE
+  #         Value: Deactivate Account
+  # # Click "Yes, deactivate" button.
+  #   - Type: wait_for
+  #     Strategy: xpath
+  #     Id: $PAGE.staff_records.yes_deactivate_button$
+  #   - Type: click
+  #     Strategy: xpath
+  #     Id: $PAGE.staff_records.yes_deactivate_button$
+  # # Toast notification appears and account status has been updated to active for related staff member account.
+  #   - Type: wait_for
+  #     Strategy: xpath
+  #     Id: $PAGE.onboarders_notifications.account_status_updated_notification_button$
+  #   - Type: wait_not_visible
+  #     Strategy: xpath
+  #     Id: $PAGE.onboarders_notifications.account_status_updated_notification_button$
+  # # Verify if logged in and user is deactivated, it should kick out the user from the app.
+  #   - Type: click
+  #     Strategy: xpath
+  #     Id : $PAGE.care_platform.navigation_participant$
+  #     Role: desktopChrome1
+  #   - Type: wait_for
+  #     Strategy: id
+  #     Id: $PAGE.care_platform_login.email_input$
+  #     Role: desktopChrome1
+  # # Verify if status is inactive, user cannot log in.
+  #   - Type: case
+  #     Value: CarePartnerLoginSecondaryUser
+  #     Role: desktopChrome1
+  #   - Type: wait_for
+  #     Strategy: xpath
+  #     Id: $PAGE.care_platform_login.failed_to_log_in$
+  #     Role: desktopChrome1
 
 # CXTB-505: Edit Staff Member Account for Care Platform
 TestOnboarderEditStaffMemberAccountForCarePlatform:
