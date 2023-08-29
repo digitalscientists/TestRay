@@ -33,12 +33,18 @@ module Reports
     @@report["CASES"][main_case+id]["passed"].append({"step" => message})
   end
 
-  def report_step_fail(_case, main_case, id, error_message)
+  def report_step_fail(_case, main_case, id, error_message, is_precase = false)
     @@report["CASES"][main_case+id] = {} unless @@report["CASES"][main_case+id]
     @@report["CASES"][main_case+id]["failed"] = [] unless @@report["CASES"][main_case+id]["fail_steps"]
     screenshot_path = error_message.match(/Screenshot: (.*)/)[1] if error_message.match(/Screenshot: (.*)/)
-    @@report["CASES"][main_case+id]["failed"].append(
-      {"step" => _case, "error_message" => error_message, "screenshot_path" => screenshot_path})
+    # if the precase fails, report will not show the step as failed avoiding main test failure.
+    if is_precase
+      @@report["CASES"][main_case+id]["passed"].append(
+        {"step" => _case, "error_message" => error_message, "screenshot_path" => screenshot_path})
+    else
+        @@report["CASES"][main_case+id]["failed"].append(
+          {"step" => _case, "error_message" => error_message, "screenshot_path" => screenshot_path})
+    end
   end
 
   def set_case_log_report(_case, path)
