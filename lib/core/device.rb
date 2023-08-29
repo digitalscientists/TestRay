@@ -2653,6 +2653,10 @@ end
 
 # This method allows you to run an existing test created on YAML to be run on this class.
 def call_helper_case(case_name)
-  $case_runner_global.run(case_name)
+  unless case_name.start_with?("Test")
+    $case_runner_global.run(case_name)
+  else
+    raise "Helper case called should not start with 'Test'"
+  end
 end
 # END OF DEVICE CLASS
