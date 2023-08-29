@@ -2651,8 +2651,8 @@ def list_handler(action, main_case, main_case_id)
   end
 end
 
-def onboarder_set_staff_active(action, main_case, main_case_id)
-  case_name = "OnboarderSetStaffActive"
+# This method allows you to run an existing test created on YAML to be run on this class.
+def run_case_from_yaml(case_name)
   $case_runner_global.run(case_name)
 end
 # END OF DEVICE CLASS

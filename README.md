@@ -417,6 +417,7 @@ This is not a type but can be used in different Types as a Validation for the ac
 7. [generate_random_day](#generate_random_day)
 8. [search_by_text](#search_by_text)
 9. [send_keys_if_exist](#send_keys_if_exist)
+10. [run_case_from_yaml](#run_case_from_yaml)
 
 ## Appium/Selenium
 
@@ -1277,3 +1278,14 @@ to avoid that the element haven't had time enough to render
       Strategy: xpath | id | etc.
       Id: //some//path
       Value: SOME_VALUE
+
+### <a id="run_case_from_yaml"></a>run_case_from_yaml
+
+**NOTE:** This method is used inside the device.rb, it takes an string with 
+the name of the case and use it inside an existing or new method. For example:
+
+
+    def onboarder_set_staff_active(action, main_case, main_case_id)
+      case_name = "OnboarderSetStaffActive"
+      run_case_from_yaml(case_name)
+    end

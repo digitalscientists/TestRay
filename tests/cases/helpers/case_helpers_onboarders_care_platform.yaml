@@ -449,11 +449,3 @@ OnboarderSetStaffActive:
     - Type: wait_not_visible
       Strategy: xpath
       Id: $PAGE.onboarders_notifications.account_status_updated_notification_button$
-
-NewOnboarderSetStaffActive:
-  Roles:
-    - Role: desktopChrome
-      App: desktop
-  Actions:
-    - Type: onboarder_set_staff_active
-      Role: desktopChrome
