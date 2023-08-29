@@ -176,9 +176,6 @@ TestProviderBrowsingWhileOnCall:
     - Type: case
       Value: JoinMedicalTransfer
       Role: desktopChrome1
- #   - Type: sleep
- #     Time: 25
- #     Role: desktopChrome1
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.care_platform_call_portal.video_btn$
@@ -188,12 +185,12 @@ TestProviderBrowsingWhileOnCall:
       Strategy: xpath
       Role: desktopChrome1
       Id: $PAGE.care_platform_call_portal.call_participant_records$
-    #Checking fixed video 
+  # Checking fixed video 
     - Type: wait_for
       Strategy: xpath
       Role: desktopChrome1
       Id: $PAGE.care_platform_floating_video_call.video_fixed_content$
-    # Red indicator for 'In session'
+  # Red indicator for 'In session'
     - Type: get_attribute
       Strategy: xpath
       Role: desktopChrome1
@@ -229,7 +226,7 @@ TestProviderBrowsingWhileOnCall:
         - Type: contain
           Var: ACTIVE_CLASS
           Value: 'active' 
-    #Checking fixed video 
+  # Checking fixed video 
     - Type: wait_for
       Strategy: xpath
       Role: desktopChrome1
@@ -250,7 +247,7 @@ TestProviderBrowsingWhileOnCall:
       Strategy: xpath
       Role: desktopChrome1
       Id: $PAGE.care_platform_participant_records.call_history_title$
-    #Checking fixed video 
+  # Checking fixed video 
     - Type: wait_for
       Strategy: xpath
       Role: desktopChrome1
@@ -325,7 +322,7 @@ TestProviderBrowsingWhileOnCall:
       Role: desktopChrome1
       Id: $PAGE.care_platform_floating_video_call.video_fixed_content$
       Time: 5
-  #End Call
+  # End Call
     - Type: click
       Strategy: xpath
       Role: desktopChrome1
