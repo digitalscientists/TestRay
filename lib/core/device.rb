@@ -2652,7 +2652,7 @@ def list_handler(action, main_case, main_case_id)
 end
 
 # This method allows you to run an existing test created on YAML to be run on this class.
-def run_case_from_yaml(case_name)
+def call_helper_case(case_name)
   $case_runner_global.run(case_name)
 end
 # END OF DEVICE CLASS
