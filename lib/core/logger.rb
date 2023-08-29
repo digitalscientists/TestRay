@@ -39,7 +39,12 @@ module PLogger
   def logger_step_fail(case_step, main_case, id, error_message)
     log_level, log_file = _load_log_env_vars
     _write_to_log_file(log_file, case_step+"\n")
-    report_step_fail(case_step, main_case, id, error_message)
+    # differentiate precases with test by asking if the step contains Test
+    is_precase = false
+    unless case_step.start_with?("Test")
+      is_precase = true
+    end
+    report_step_fail(case_step, main_case, id, error_message, is_precase)
     puts case_step.red
   end
 
