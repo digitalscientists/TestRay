@@ -43,13 +43,12 @@ onboarders_participant_page:
   records_button: //button[text()='Records']
 
 onboarders_participant_record:
-  info_right_column: //div[@class='flex-col flex-col-divider']//h4[text()='Community Support / Backup Plan']
-  participants_device_login: //*//h4[text()='Participants Device Login'] 
+  participants_device_login: //h4[text()='Participants Device Login'] 
   participants_username: //strong[contains(text(), 'Username')]/../following-sibling::div
   participants_password: //strong[contains(text(), 'Password')]/../following-sibling::div
 
 onboarders_add_participant_form:
-  create_participant_title: //div[@class='flex flex-wrap flex-half-gutters']
+  create_participant_form_title: //div[@class='flex flex-wrap flex-half-gutters']
   call_center_dropdown_button: callCenterId
   call_center_option: //select[@id='callCenterId']//option[contains(text(),'CHS')]
   account_status_dropdown_button: accountStatus
