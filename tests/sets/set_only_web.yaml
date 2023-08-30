@@ -117,3 +117,5 @@ SetOnlyWebTests:
   - Case: TestEHPMobileRequestAnAppointmentForUser
   - Case: TestEHPMobileReviewUpcomingAppointment
   - Case: TestEHPMobileRequestAnAppointmentForDependentMinor
+  # Admin On Call
+  - Case: TestAdminOnCallAccessStaffDirectoryFilterAndPane
