@@ -527,7 +527,6 @@ ProviderSendsMessageToFacility:
           Value: $AND_CLI_MESSAGE_TO_FACILITY$
 
 ProviderNewCleaner:
-  Environment: Settings
   Vars:
     LOGOUT_OPTION: "Go Off Shift"
   Aftercases:
@@ -549,7 +548,7 @@ ProviderEndCurrentCall:
   Actions:
     - Type: provider_clean_hanged_call_or_session
 
-IfSaveNotes:
+ProviderCompleteSession:
   Roles:
     - Role: desktopChrome
       App: desktop       
@@ -632,7 +631,7 @@ CreateAFollowUpForSNFCall:
       Value: 'Automation Test Notes: Test TestSNFMissedCallFromProvider'
     - Type: if
       If_Cases: 
-        - If_Case: IfSaveNotes
+        - If_Case: ProviderCompleteSession
     #Fill survey for follow-up
     - Type: wait_for
       Strategy: xpath
