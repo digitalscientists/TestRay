@@ -1,0 +1,122 @@
+# CXTB-603 Refresh User Account for Calling
+TestAdminOnCallRefreshUserAccountForCalling:
+  Environment: Settings
+  Vars:
+    LOGOUT_OPTION: "Go Off Shift"
+  Precases:
+    - LoginNeverAloneHelper
+    - CarePartnerCleanCallQueueAndHangedCalls
+    - SeniorCleanPrompts
+  Aftercases:
+    - TerminateApp
+  Roles:
+    - Role: desktopChrome
+      App: desktop
+    - Role: desktopChrome1
+      App: desktop
+    - Role: localiOS
+      App: NeverAlone
+  Actions:
+  # Generate a medical call as a senior.
+    - Type: case
+      Value: CallCarePartner
+  # Login and answer call as a care partner.
+    - Type: case
+      Value: AnswerCallAsCarePartner
+      Role: desktopChrome
+  # Login as Admin on Call
+    - Type: case
+      Value: AdminOnCallLogin
+      Role: desktopChrome1
+  # Go to Participant as Admin on Call
+    - Type: case
+      Value: CarePartnerNavigateToParticipants
+      Role: desktopChrome1
+  # Decrease listing by searching participant's name
+    - Type: search_by_text
+      Role: desktopChrome1
+      Text: $AND_CLI_senior_user1_name$
+  # Click on the corresponding participant.
+    - Type: click
+      Strategy: xpath
+      Role: desktopChrome1
+      Id: $PAGE.care_platform_participant.senior_complete_name$
+  # Click on the "Call Portal" button.
+    - Type: click
+      Strategy: xpath
+      Role: desktopChrome1
+      Id: $PAGE.care_platform_participant.call_portal_btn$
+  # Check for "Refresh" button
+    - Type: wait_for
+      Strategy: xpath
+      Role: desktopChrome1
+      Id: $PAGE.care_platform_call_portal.refresh_button$
+    - Type: click
+      Strategy: xpath
+      Role: desktopChrome1
+      Id: $PAGE.care_platform_call_portal.refresh_button$
+  # Cancel Refresh
+    - Type: wait_for
+      Strategy: xpath
+      Role: desktopChrome1
+      Id: $PAGE.care_platform_call_portal.cancel_refresh_dialog_button$
+    - Type: click
+      Strategy: xpath
+      Role: desktopChrome1
+      Id: $PAGE.care_platform_call_portal.cancel_refresh_dialog_button$
+    - Type: wait_not_visible
+      Strategy: xpath
+      Role: desktopChrome1
+      Id: $PAGE.care_platform_call_portal.cancel_refresh_dialog_button$
+  # Select "Refresh" again
+    - Type: wait_for
+      Strategy: xpath
+      Role: desktopChrome1
+      Id: $PAGE.care_platform_call_portal.refresh_button$
+    - Type: click
+      Strategy: xpath
+      Role: desktopChrome1
+      Id: $PAGE.care_platform_call_portal.refresh_button$
+  # Refresh confirmation
+    - Type: wait_for
+      Strategy: xpath
+      Role: desktopChrome1
+      Id: $PAGE.care_platform_call_portal.yes_refresh_dialog_button$
+    - Type: click
+      Strategy: xpath
+      Role: desktopChrome1
+      Id: $PAGE.care_platform_call_portal.yes_refresh_dialog_button$
+    - Type: sleep
+      Time: 25
+      Role: desktopChrome
+  # Care Partner check for notification and redirection home
+  # Check on Senior that takes you to survey
+  # Go to Records
+    - Type: click
+      Strategy: xpath
+      Role: desktopChrome1
+      Id: $PAGE.care_platform_call_portal.call_participant_records$
+  # Check on Call History
+    - Type: wait_for
+      Strategy: xpath
+      Role: desktopChrome1
+      Id: $PAGE.care_platform_participant_records.call_history_tab$
+    - Type: click
+      Strategy: xpath
+      Role: desktopChrome1
+      Id: $PAGE.care_platform_participant_records.call_history_tab$
+  # Take the first row and check it says "Completed automatically."
+    - Type: get_attribute
+      Strategy: xpath
+      Role: desktopChrome1
+      Id: $PAGE.care_platform_participant_records_call_history.first_call_on_record$
+      Greps:
+        - var: CALL_RECORD_CONTENT
+          attr: innerHTML
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: CALL_RECORD_CONTENT
+          Value: 'Completed automatically'
