@@ -9,6 +9,7 @@ SetCriticalWorkflows:
   # Provider tests
     - Case: TestProviderAnswerCompleteSessionFromEHP
     - Case: TestProvidersAnswerSNFCallAndCompletesSession
+    - Case: TestProviderBrowsingWhileOnCall
   # Never Alone SNF tests
     - Case: TestSNFRequestSuccessfulCallConnect
     - Case: TestSNFCheckQueueandReviewDetails
@@ -45,3 +46,6 @@ SetCriticalWorkflows:
     - Case: TestOnboarderEditStaffMemberAccountForCarePlatform
   # Facility Leadership
     - Case: TestFacilityLeadershipLogoutGoOffShift
+  # Admin on call
+    - Case: TestAdminOnCallLogoutGoOffShift
+    - Case: TestAdminOnCallLogoutStayOnShift

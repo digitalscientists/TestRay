@@ -126,7 +126,7 @@ TestOnboarderCreateNewParticipant:
   Actions:
   # login in onboarder Care Partner
     - Type: case
-      Value: OnboarderCarePartnerLoginSecondaryUser 
+      Value: OnboarderCarePartnerLogin 
   # Go to Participants
     - Type: click
       Strategy: xpath

@@ -28,7 +28,7 @@ care_platform:
 care_platform_home:
   first_call_of_queue: //div[@id='containerElement']/div[starts-with(@class, 'ListRow_listRow')][1]
   answer_call: //button[text()='Answer Call']
-  call_based_on_participant_name: //div[contains(@class, 'ListRow_listRow')]//strong[text() = '$AND_CLI_senior_user1_name$ $AND_CLI_senior_user1_lastname$']
+  call_based_on_participant_name: (//div[contains(@class, 'ListRow_listRow')]//strong[text() = '$AND_CLI_senior_user1_name$ $AND_CLI_senior_user1_lastname$'])[last()]
   call_based_on_es_idd_participant_name: //div[contains(@class, 'ListRow_listRow')]//strong[text() = '$AND_CLI_idd_es_never_alone_user1_name$ $AND_CLI_idd_es_never_alone_user1_lastname$']
   call_based_on_ch_idd_participant_name: //div[contains(@class, 'ListRow_listRow')]//strong[text() = '$AND_CLI_idd_ch_never_alone_user2_name$ $AND_CLI_idd_ch_never_alone_user2_lastname$']
   active_call_section: //div[contains(@class,'app-video app-video-fixed')] # doesn't matter if its expanded/collapsed
@@ -46,6 +46,8 @@ care_platform_header:
   status_indicator: //header//button[contains(@class,'user-dropdown-toggle')]/div[contains(@class,'user-dropdown-avatar')]
   account_menu_header: //header//nav//div[contains(text(),'Account')]
   help_menu_button: //header//nav//button[contains(.,'Help')]
+  help_care_partner_option_button: //header//nav//button[contains(.,'Help') and contains(.,'(Care Partner)')]
+  help_provider_option_button: //header//nav//button[contains(.,'Help') and contains(.,'(Provider)')]
   myaccount_menu_button: //header//nav//button[contains(.,'My Account')]
   logout_menu_button: //header//nav//button[contains(.,'Log Out')]
   offline_carepartner1_element: //div[@class='users-dropdown-list-item is-offline']//div[@class='users-dropdown-name' and contains(., '$AND_CLI_CARE_PARTNER_USER1_FULLNAME$')]
@@ -584,6 +586,8 @@ care_platform_call_portal:
   place_call_tab_navigation: //nav/button[text()='Place Call']
   enter_a_number_input: //div[@tab-title='Place Call']//input
   call_button: //div[@tab-title='Place Call']//button[text()='Call']
+  refresh_button: //button[text()='Refresh']
+  yes_refresh_dialog_button: //*[@id='dialogs']//button[contains(text(),'Yes, Refresh')]
 
 care_platform_call_settings_modal:
   video_settings_modal_title: //*[@id='modals']//h4[text()='Call Settings']
@@ -630,6 +634,7 @@ care_platform_notifications:
   provider_saved_notification: //div[@class='Toastify']//div[@role='alert']//div[contains(text(),'Provider saved')]
   provider_deleted_notification: //div[@class='Toastify']//div[@role='alert']//div[contains(text(),'Provider deleted')]
   dismiss_notification_button: //div[@class='Toastify']//button[text()='Dismiss']
+  device_changes_saved_notification: //div[@class='Toastify']//div[contains(text(),'Facility device changes saved')]
 
 care_platform_facility:
   search_button: searchButton
@@ -655,6 +660,20 @@ care_platform_facility_Record:
   devices_button: //button[text()='Devices']
   device_status: //div[@class='account-status account-status-active']
   facility_status_label_elements: //div[@tab-title='Devices']//tbody//div[@class='account-status-label']
+  edit_device_by_number: //tr[contains(.,'Device $AND_CLI_facility_devices_user1_number$:')]//button[text()='Edit']
+  call_device_by_number: //tr[contains(.,'Device $AND_CLI_facility_devices_user1_number$:')]//a[text()='Call']
+  device_block: //tr[contains(.,'Device $AND_CLI_facility_devices_user1_number$:')]
+
+care_platform_facility_edit_device_modal:
+  modal_title: //*[@id='modals']//h4[text()='Edit Device']
+  nickname_input: nickname
+  status_toggle: //div[@class='status-filter']//button
+  status_toggle_dropdown_deactivated_option: //div[@class='status-filter-dropdown']//button[text()='Deactivated']
+  status_toggle_dropdown_active_option: //div[@class='status-filter-dropdown']//button[text()='Active']
+  status_toggle_dropdown_suspended_option: //div[@class='status-filter-dropdown']//button[text()='Suspended']
+  cancel_button: //*[@id='modals']//button[text()='Cancel']
+  save_button: //*[@id='modals']//button[text()='Save']
+  close_modal_button: //*[@id='modals']//button[contains(.,'Close')]
 
 care_platform_edit_participants_vendor:
   add_vendor_button: //button[text()='Add Vendor']

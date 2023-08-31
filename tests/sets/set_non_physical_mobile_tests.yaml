@@ -21,6 +21,7 @@ SetNonPhysicalMobileTest:
     - Case: TestIDDESActiveAppointmentTimeWindowWhenNotJoinedPrior
   # Provider Care Platform
     - Case: TestProviderHomePageListingView
+    - Case: TestProviderBrowsingWhileOnCall
   # Never Alone Senior App
     - Case: TestSeniorAppSuspendedAccountStatus
     - Case: TestSeniorAppActiveAccountStatusAndBehavior
@@ -62,3 +63,4 @@ SetNonPhysicalMobileTest:
   # Onboarder
     - Case: TestOnboarderChangeStatusToActiveForExistingParticipant
     - Case: TestOnboarderChangeStatusToSuspendedForExistingParticipant
+    - Case: TestOnboarderFacilityProfileChangeStatusForExistingFacilityDevice
