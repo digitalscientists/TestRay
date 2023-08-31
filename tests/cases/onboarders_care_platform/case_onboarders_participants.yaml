@@ -137,7 +137,7 @@ TestOnboarderCreateNewParticipant:
       Id: $PAGE.onboarders_participant_page.add_participant_button$
     - Type: wait_for
       Strategy: xpath
-      Id: $PAGE.onboarders_add_participant_form.create_participant_title$
+      Id: $PAGE.onboarders_add_participant_form.create_participant_form_title$
   # Check Validation fields
     - Type: click
       Strategy: xpath
