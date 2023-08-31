@@ -84,6 +84,7 @@ onboarders_add_participant_form:
   disable_ems_calls: //input[@name='deviceEmsOverride']/following-sibling::span[text()='No']
   default_ems_calls: //input[@name='deviceEmsOverride']/following-sibling::span[text()='Use default setting (Yes)']
   confirmation_window: dialogs
+  toaster_dissmiss_button: //div//button[text()= 'Dissmiss']
   go_back_button_from_suggestion_window: //button[text()= 'Go Back']
   confirm_button_from_suggestion_window: //button[text()= 'Confirm']
   create_participants_button: //button[text()='Create Participant']

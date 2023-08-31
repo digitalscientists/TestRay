@@ -260,8 +260,9 @@ TestOnboarderCreateNewParticipant:
     - Type: set_env_var
       Value: Updating EMS data... 
       Var: TOAST_MESSAGE_SHOWN 
-    - Type: case
-      Value: CarePartnerToastValidation
+    - Test: click
+      Strategy: xpath
+      Id: $PAGE.onboarders_add_participant_form.toaster_dissmiss_button$
   # Updating to a valid address 
     - Type: send_keys
       Strategy: id
@@ -313,8 +314,9 @@ TestOnboarderCreateNewParticipant:
     - Type: set_env_var
       Value: Updating EMS data...
       Var: TOAST_MESSAGE_SHOWN
-    - Type: case
-      Value: CarePartnerToastValidation  
+    - Test: click
+      Strategy: xpath
+      Id: $PAGE.onboarders_add_participant_form.toaster_dissmiss_button$
     - Type: click
       Strategy: xpath
       Id: $PAGE.onboarders_add_participant_form.save_changes_button$
@@ -322,8 +324,9 @@ TestOnboarderCreateNewParticipant:
     - Type: set_env_var
       Value: Updating EMS data...
       Var: TOAST_MESSAGE_SHOWN
-    - Type: case
-      Value: CarePartnerToastValidation
+    - Test: click
+      Strategy: xpath
+      Id: $PAGE.onboarders_add_participant_form.toaster_dissmiss_button$
   # Go to Participants
     - Type: click
       Strategy: xpath
