@@ -260,7 +260,7 @@ TestOnboarderCreateNewParticipant:
     - Type: set_env_var
       Value: Updating EMS data... 
       Var: TOAST_MESSAGE_SHOWN 
-    - Test: click
+    - Type: click
       Strategy: xpath
       Id: $PAGE.onboarders_add_participant_form.toaster_dissmiss_button$
   # Updating to a valid address 
@@ -314,7 +314,7 @@ TestOnboarderCreateNewParticipant:
     - Type: set_env_var
       Value: Updating EMS data...
       Var: TOAST_MESSAGE_SHOWN
-    - Test: click
+    - Type: click
       Strategy: xpath
       Id: $PAGE.onboarders_add_participant_form.toaster_dissmiss_button$
     - Type: click
@@ -324,7 +324,7 @@ TestOnboarderCreateNewParticipant:
     - Type: set_env_var
       Value: Updating EMS data...
       Var: TOAST_MESSAGE_SHOWN
-    - Test: click
+    - Type: click
       Strategy: xpath
       Id: $PAGE.onboarders_add_participant_form.toaster_dissmiss_button$
   # Go to Participants
