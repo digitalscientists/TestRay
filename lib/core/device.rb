@@ -2133,6 +2133,13 @@ def generate_unique_string(action, main_case, main_case_id)
   ENV[convert_value(action["ResultVar"])] = unique_string
 end
 
+# Returns a random email
+def generate_unique_email(action, main_case, main_case_id)
+  timestamp = Time.now.utc.strftime("%d%m%y%H%M%S")
+  unique_email = "random+" + timestamp + "@domain.com"
+  ENV[convert_value(action["ResultVar"])] = unique_email
+end
+
 # Returns a variable with a unique name using timestamps at the end
 # i.e. method receives "Hey" and then returns "Hey <timestamp>"
 def generate_unique_name(action, main_case, main_case_id)
