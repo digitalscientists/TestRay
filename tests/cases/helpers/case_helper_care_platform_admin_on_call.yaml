@@ -4,7 +4,6 @@ AdminOnCallLogin:
       App: desktop
   Actions:
     - Type: navigate
-      Role: desktopChrome
       Value: $AND_CLI_care_platform_url$
     - Type: maximize
     - Type: send_keys
@@ -17,7 +16,6 @@ AdminOnCallLogin:
       Value: $AND_CLI_admincall_user1_pwd$
     - Type: click
       Strategy: xpath
-      Role: desktopChrome
       Id: $PAGE.care_platform_login.login_button$
     - Type: sleep
       Time: 2
