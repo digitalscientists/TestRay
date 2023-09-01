@@ -146,3 +146,16 @@ TestAdminOnCallLogoutStayOnShift:
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.care_platform_header.onshift_carepartner1_element$
+
+#CXTB-605: Admin On Call - Use “Forgot password” Link on Login Page  
+TestAdminOnCallForgotPasswordLoginLink:
+  Environment: Settings
+  Roles:
+    - Role: desktopChrome
+      App: "desktop"
+  Actions:
+    - Type: set_env_var
+      Value: $AND_CLI_admincall_user1$
+      Var: carepartner_user1
+    - Type: case
+      Value: ForgotPasswordCarePlatformLoginLink
