@@ -86,11 +86,25 @@ TestAdminOnCallRefreshUserAccountForCalling:
       Strategy: xpath
       Role: desktopChrome1
       Id: $PAGE.care_platform_call_portal.yes_refresh_dialog_button$
-    - Type: sleep
-      Time: 25
-      Role: desktopChrome
+    - Type: wait_not_visible
+      Strategy: xpath
+      Role: desktopChrome1
+      Id: $PAGE.care_platform_call_portal.yes_refresh_dialog_button$
   # Care Partner check for notification and redirection home
+  #   Note: This part is not happening, waiting for further instructions.
+    - Type: wait_not_visible
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.care_platform_call_portal.end_call_button$
   # Check on Senior that takes you to survey
+    - Type: wait_for
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_post_call_survey.post_call_survey_title$
+      Role: localiOS
+    - Type: wait_for
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_post_call_survey.great_answer_button$
+      Role: localiOS
   # Go to Records
     - Type: click
       Strategy: xpath
