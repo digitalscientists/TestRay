@@ -120,8 +120,6 @@ TestOnboarderCreateNewParticipant:
   - Role: desktopChrome
     App: "desktop"
   - Role: localiOS
-    Capabilities:
-      newCommandTimeout: 300
     App: NeverAlone
   Actions:
   # login in onboarder Care Partner
