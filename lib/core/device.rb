@@ -714,12 +714,12 @@ class Device
           el.send_keys(:backspace)
         elsif convert_value(value) == "enter"
           el.send_keys(:enter)
+        elsif convert_value(value) == "arrow_down"
+          @driver.action.send_keys(:arrow_down).send_keys(:arrow_down).perform
         elsif !action["Actions"] && el
           el.send_keys(convert_value(value))
         else
-          if convert_value(value) == "arrow_down"
-            @driver.action.send_keys(:arrow_down).perform
-          elsif convert_value(value) == "tab"
+          if convert_value(value) == "tab"
             @driver.action.send_keys(:tab).perform
           elsif el
             @driver.action.send_keys(convert_value(value), el).perform
