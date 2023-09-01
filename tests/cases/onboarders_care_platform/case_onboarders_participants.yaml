@@ -330,11 +330,13 @@ TestOnboarderCreateNewParticipant:
       Strategy: xpath
       Id: $PAGE.onboarders_add_participant_form.save_changes_button$
   # Confirm if the participant has been created
-  # Toaster not requires to be dismiss due to next step continuity
     - Type: set_env_var
       Value: Updating EMS data...
       Var: TOAST_MESSAGE_SHOWN
     - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.onboarders_add_participant_form.toaster_dismiss_button$
+    - Type: click_js
       Strategy: xpath
       Id: $PAGE.onboarders_add_participant_form.toaster_dismiss_button$
   # Go to Participants
