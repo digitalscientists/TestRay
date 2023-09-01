@@ -212,6 +212,9 @@ TestOnboarderCreateNewParticipant:
       Strategy: xpath
       Id: $PAGE.onboarders_add_participant_form.disable_ems_calls$
   # Add address info
+    - Type: wait_for
+      Strategy: id
+      Id: $PAGE.onboarders_add_participant_form.address_input$
     - Type: send_keys
       Strategy: id
       Id: $PAGE.onboarders_add_participant_form.address_input$
@@ -260,9 +263,12 @@ TestOnboarderCreateNewParticipant:
     - Type: set_env_var
       Value: Updating EMS data... 
       Var: TOAST_MESSAGE_SHOWN 
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.onboarders_add_participant_form.toaster_dismiss_button$
     - Type: click
       Strategy: xpath
-      Id: $PAGE.onboarders_add_participant_form.toaster_dissmiss_button$
+      Id: $PAGE.onboarders_add_participant_form.toaster_dismiss_button$
   # Updating to a valid address 
     - Type: send_keys
       Strategy: id
@@ -314,19 +320,23 @@ TestOnboarderCreateNewParticipant:
     - Type: set_env_var
       Value: Updating EMS data...
       Var: TOAST_MESSAGE_SHOWN
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.onboarders_add_participant_form.toaster_dismiss_button$
     - Type: click
       Strategy: xpath
-      Id: $PAGE.onboarders_add_participant_form.toaster_dissmiss_button$
+      Id: $PAGE.onboarders_add_participant_form.toaster_dismiss_button$
     - Type: click
       Strategy: xpath
       Id: $PAGE.onboarders_add_participant_form.save_changes_button$
   # Confirm if the participant has been created
+  # Toaster not requires to be dismiss due to next step continuity
     - Type: set_env_var
       Value: Updating EMS data...
       Var: TOAST_MESSAGE_SHOWN
-    - Type: click
+    - Type: wait_for
       Strategy: xpath
-      Id: $PAGE.onboarders_add_participant_form.toaster_dissmiss_button$
+      Id: $PAGE.onboarders_add_participant_form.toaster_dismiss_button$
   # Go to Participants
     - Type: click
       Strategy: xpath
