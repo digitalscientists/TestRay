@@ -179,6 +179,9 @@ care_platform_participant_records:
   demographics_vendor_subtab: //nav[@class='tabs-nav']/button[text()='Vendors']
   demographics_contacts_subtab: //nav[@class='tabs-nav']/button[text()='Contacts']
 
+care_platform_participant_records_call_history:
+  first_call_on_record: (//*[@id='callHistory']//div[contains(@class,'accordion-item')])[1]
+
 care_platform_participant_records_emergency_calls:
   date_header_label: //div[@class='accordion-header']//div[text()='Date']
   time_header_label: //div[@class='accordion-header']//div[text()='Time']
@@ -547,6 +550,7 @@ care_platform_call_portal:
   call_button: //div[@tab-title='Place Call']//button[text()='Call']
   refresh_button: //button[text()='Refresh']
   yes_refresh_dialog_button: //*[@id='dialogs']//button[contains(text(),'Yes, Refresh')]
+  cancel_refresh_dialog_button: //*[@id='dialogs']//button[contains(text(),'Cancel')]
 
 care_platform_call_settings_modal:
   video_settings_modal_title: //*[@id='modals']//h4[text()='Call Settings']

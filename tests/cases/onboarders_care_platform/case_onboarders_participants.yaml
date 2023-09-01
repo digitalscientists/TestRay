@@ -378,3 +378,14 @@ TestOnboarderChangeStatusToSuspendedForExistingParticipant:
   Actions:
     - Type: case
       Value: TestSeniorAppSuspendedAccountStatus
+
+# CXTB-511 Onboarder - Change Status to “Deactivated” for Existing Participant
+TestOnboarderChangeStatusToDeactivatedForExistingParticipant:
+  Roles:
+    - Role: localiOS
+      App: NeverAlone
+    - Role: desktopChrome
+      App: desktop    
+  Actions:
+    - Type: case
+      Value: TestSeniorAppDeactivatedAccountStatusVisuals
