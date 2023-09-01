@@ -49,3 +49,4 @@ SetCriticalWorkflows:
   # Admin on call
     - Case: TestAdminOnCallLogoutGoOffShift
     - Case: TestAdminOnCallLogoutStayOnShift
+    - Case: TestAdminOnCallRefreshUserAccountForCalling
