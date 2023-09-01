@@ -46,6 +46,7 @@ SetCriticalWorkflows:
     - Case: TestOnboarderEditStaffMemberAccountForCarePlatform
   # Facility Leadership
     - Case: TestFacilityLeadershipLogoutGoOffShift
-  # Admin on call
+  # Admin on Call
     - Case: TestAdminOnCallLogoutGoOffShift
     - Case: TestAdminOnCallLogoutStayOnShift
+    - Case: TestAdminOnCallAccessStaffDirectoryFilterAndPane

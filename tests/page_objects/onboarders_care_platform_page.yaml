@@ -111,6 +111,9 @@ onboarders_create_edit_staff_member:
 
 staff_records:
   overview_tab: //button[contains(text(),'Overview')]
+  staff_name_title: //div[not(contains(@class, 'app-content-left'))]//h3[not(text()='Staff Members')]
+  staff_role_label: //div[not(contains(@class, 'app-content-left'))]//strong[text()='Role']
+  staff_status_label: //div[not(contains(@class, 'app-content-left'))]//strong[text()='Status']
   staff_member_tabs: //nav[@class='tabs-nav']
   edit_info_button: //button[contains(text(),'Edit Info')]
   admin_button: //span[@class='button-dropdown']/button[text()='Admin']
