@@ -24,7 +24,7 @@ onboarders_notifications:
   account_status_updated_notification_button: //div[@class='Toastify']//div[text()='Account status updated']
 
 onboarders_participant_page:
-  participants_title: //div[@class='text-lg font-bold']//h3[@class='text-lg font-bold']
+  participants_title: //h3[text()='Participants']
   add_participant_button: //button[text()='Add']
   first_participant_row: (//[@id='containerElement']/div[starts-with(@class, 'ListRow_listRow')]//div/strong[text() = '$AND_CLI_PARTICIPANT_FIRST_NAME$ $AND_CLI_PARTICIPANT_LAST_NAME$'])[1]
   first_darkened_letter_button: //button[@class='alphabet-letter'][not(@disabled)][1]
@@ -34,8 +34,8 @@ onboarders_participant_page:
   participant_1_row: //*[@id='containerElement']//div[contains(text(),'strong')]
   first_participant_lastname: //*[contains(text(),'strong')]
   call_portal_btn: //button[text()='Call Portal']
-  search_button: //span[@class='icon-search']
-  search_input: //input[@id='searchText']
+  search_button: searchButton
+  search_input: searchText
   clear_search_button: //button[contains(@class,'button-circle')]
   status_dropdown_button: //button[contains(@class,'queue-filter-dropdown-toggle')]
   status_dropdown_options: //div[contains(@class, 'queue-filter-dropdown')]  
