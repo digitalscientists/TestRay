@@ -119,8 +119,11 @@ staff_records:
   admin_button: //span[@class='button-dropdown']/button[text()='Admin']
   admin_deactivate_button: //span[@class='button-dropdown']//button[text()='Deactivate']
   admin_activate_button: //span[@class='button-dropdown']//button[text()='Activate']
+  admin_refresh_button: //div[@class='button-dropdown-menu']/button[text()='Refresh']
+  admin_export_audit_log_button: //div[@class='button-dropdown-menu']/button[text()='Export Audit Log']
   yes_deactivate_button: //div[@id='dialogs']//button[text()='Yes, deactivate']
   yes_activate_button: //div[@id='dialogs']//button[text()='Yes, activate']
+  yes_refresh_dialog_button: //*[@id='dialogs']//button[contains(text(),'Yes, Refresh')]
   cancel_button: //button[text()='Cancel']
   staff_role: //div[@class='participant-profile-contact']//div[strong[contains(.,'Role')]]
   dialog_title: //div[@id='dialogs']//h4

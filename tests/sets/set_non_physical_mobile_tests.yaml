@@ -68,3 +68,4 @@ SetNonPhysicalMobileTest:
     - Case: TestOnboarderChangeStatusToDeactivatedForExistingParticipant
   # Admin on call
     - Case: TestAdminOnCallRefreshUserAccountForCalling
+    - Case: TestAdminOnCallRefreshSessionForStaffMemberFromPane

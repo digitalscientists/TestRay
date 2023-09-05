@@ -54,3 +54,4 @@ SetCriticalWorkflows:
     - Case: TestAdminOnCallAccessStaffDirectoryFilterAndPane
     - Case: TestAdminOnCallForgotPasswordLoginLink
     - Case: TestAdminOnCallRefreshUserAccountForCalling
+    - Case: TestAdminOnCallRefreshSessionForStaffMemberFromPane

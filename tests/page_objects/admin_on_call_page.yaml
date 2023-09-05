@@ -1,0 +1,7 @@
+admin_on_call_staff_tab:
+  role_dropdown: //button[@class='queue-filter-dropdown-toggle']
+  role_dropdown_by_role_option: //div[contains(@class,'filterDropdown')]/button[@class='queue-filter-dropdown-button' and text()='$AND_CLI_STAFF_ROLE$']
+  role_dropdown_care_partner_option: //div[contains(@class,'filterDropdown')]/button[@class='queue-filter-dropdown-button' and text()='Care Partner']
+
+care_platform_staff_records_call_history:
+  first_call_on_record: (//div[contains(@class,'accordion-item')])[1]

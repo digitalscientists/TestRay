@@ -61,3 +61,46 @@ AdminOnCallRefreshDevice:
       Id: $PAGE.care_platform_call_portal.yes_refresh_dialog_button$
     - Type: sleep
       Time: 1
+
+# This uses the name of the staff member to search
+# The variable is $AND_CLI_CARE_PARTNER_USER1_FULLNAME$
+# And their role as appears on the dropdown options in the listing
+# The variable for this is $AND_CLI_STAFF_ROLE$
+SearchStaffByNameAndRole:
+  Roles:
+    - Role: desktopChrome
+      App: desktop
+  Actions:
+    # Navigate to Staff
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.onboarders_header_navigation.staff_tab$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.onboarders_header_navigation.staff_tab$
+    # Filter by Role
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.admin_on_call_staff_tab.role_dropdown$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.admin_on_call_staff_tab.role_dropdown$
+    # Select Role
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.admin_on_call_staff_tab.role_dropdown_by_role_option$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.admin_on_call_staff_tab.role_dropdown_by_role_option$
+    # Search Name
+    - Type: search_by_text
+      Text: $AND_CLI_CARE_PARTNER_USER1_FULLNAME$
+    # Select first
+    - Type: sleep
+      Time: 0.5
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant.senior_1_row$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant.senior_1_row$
