@@ -56,6 +56,7 @@ care_platform_header:
   offline_es_carepartner_element: //div[@class='users-dropdown-list-item is-offline']//div[@class='users-dropdown-name' and contains(., '$AND_CLI_es_carepartner_user_name$ $AND_CLI_es_carepartner_user_lastname$')]//small[text()='Care Partner (ES)']
   online_es_carepartner_element: //div[@class='users-dropdown-list-item']//div[@class='users-dropdown-name' and contains(., '$AND_CLI_es_carepartner_user_name$ $AND_CLI_es_carepartner_user_lastname$')]//small[text()='Care Partner (ES)']
   onshift_carepartner1_element: //div[contains(text(),'On Shift')]//following-sibling::div[not(contains(@class,'is-offline'))]/div[@class='users-dropdown-name' and contains(., '$AND_CLI_CARE_PARTNER_USER1_FULLNAME$')]
+  onshift_by_name_and_role_element: //div[contains(text(),'On Shift')]//following-sibling::div[not(contains(@class,'is-offline'))]/div[@class='users-dropdown-name' and contains(., '$AND_CLI_CARE_PARTNER_USER1_FULLNAME$') and contains(.,'$AND_CLI_STAFF_ROLE$')]
 
 care_platform_myaccount_info:
   modal_title: //*[@id='modals']//h4[contains(text(),'My Account')]
@@ -551,6 +552,7 @@ care_platform_call_portal:
   refresh_button: //button[text()='Refresh']
   yes_refresh_dialog_button: //*[@id='dialogs']//button[contains(text(),'Yes, Refresh')]
   cancel_refresh_dialog_button: //*[@id='dialogs']//button[contains(text(),'Cancel')]
+  alert_call_ended: //div[@role='alert']//div[contains(text(),'Call has ended')]
 
 care_platform_call_settings_modal:
   video_settings_modal_title: //*[@id='modals']//h4[text()='Call Settings']
@@ -598,6 +600,7 @@ care_platform_notifications:
   provider_deleted_notification: //div[@class='Toastify']//div[@role='alert']//div[contains(text(),'Provider deleted')]
   dismiss_notification_button: //div[@class='Toastify']//button[text()='Dismiss']
   device_changes_saved_notification: //div[@class='Toastify']//div[contains(text(),'Facility device changes saved')]
+  refresh_staff_notification: //div[@class='Toastify']//div[contains(text(),'Account status refreshed')]
 
 care_platform_facility:
   search_button: searchButton
