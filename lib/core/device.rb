@@ -2124,6 +2124,22 @@ def generate_random_day(action, main_case, main_case_id)
   end
 end
 
+# Returns a variable with a unique name adding a ramdon string at the end
+# i.e. method receives "Hey" and then returns "Hey<fjh>"
+
+def generate_unique_string(action, main_case, main_case_id)
+  name = convert_value(action["Name"])
+  unique_string = "#{name}#{2.times.map{(0...(rand(10))).map { ('a'..'z').to_a[rand(26)] }.join }.join("")}"
+  ENV[convert_value(action["ResultVar"])] = unique_string
+end
+
+# Returns a random email
+def generate_unique_email(action, main_case, main_case_id)
+  timestamp = Time.now.utc.strftime("%d%m%y%H%M%S")
+  unique_email = "random+" + timestamp + "@domain.com"
+  ENV[convert_value(action["ResultVar"])] = unique_email
+end
+
 # Returns a variable with a unique name using timestamps at the end
 # i.e. method receives "Hey" and then returns "Hey <timestamp>"
 def generate_unique_name(action, main_case, main_case_id)
@@ -2132,11 +2148,12 @@ def generate_unique_name(action, main_case, main_case_id)
   ENV[convert_value(action["ResultVar"])] = unique_name
 end
 
-# Returns a random email
-def generate_unique_email(action, main_case, main_case_id)
-  timestamp = Time.now.utc.strftime("%d%m%y%H%M%S")
-  unique_email = "random+" + timestamp + "@domain.com"
-  ENV[convert_value(action["ResultVar"])] = unique_email
+ # Returns a variable with a unique number adding a ramdon number at the end
+# i.e. method receives "Hey" and then returns "829225<fjh>"
+def generate_unique_number(action, main_case, main_case_id)
+  name = convert_value(action["Name"])
+  unique_number = "#{name}#{2.times.map{(0...(rand(10))).map { ('1'..'9').to_a[rand(26)] }.join }.join("")}"
+  ENV[convert_value(action["ResultVar"])] = unique_number
 end
 
 # Custom method to calculate the minutes/seconds from when an event was created
