@@ -204,7 +204,7 @@ TestAdminOnCallRefreshSessionForStaffMemberFromPane:
       Value: AdminOnCallLogin
   # Go to selected staff
     - Type: case
-      Value: LookForStaff
+      Value: SearchStaffByNameAndRole
   # Click "Admin" above information display
     - Type: wait_for
       Strategy: xpath

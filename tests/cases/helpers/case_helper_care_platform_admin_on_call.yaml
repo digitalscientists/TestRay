@@ -64,7 +64,9 @@ AdminOnCallRefreshDevice:
 
 # This uses the name of the staff member to search
 # The variable is $AND_CLI_CARE_PARTNER_USER1_FULLNAME$
-LookForStaff:
+# And their role as appears on the dropdown options in the listing
+# The variable for this is $AND_CLI_STAFF_ROLE$
+SearchStaffByNameAndRole:
   Roles:
     - Role: desktopChrome
       App: desktop
