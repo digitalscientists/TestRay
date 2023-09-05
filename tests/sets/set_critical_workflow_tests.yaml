@@ -52,3 +52,4 @@ SetCriticalWorkflows:
     - Case: TestAdminOnCallLogoutStayOnShift
     - Case: TestAdminOnCallAccessStaffDirectoryFilterAndPane
     - Case: TestAdminOnCallRefreshUserAccountForCalling
+    - Case: TestAdminOnCallRefreshSessionForStaffMemberFromPane
