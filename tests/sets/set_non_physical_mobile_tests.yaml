@@ -22,6 +22,7 @@ SetNonPhysicalMobileTest:
   # Provider Care Platform
     - Case: TestProviderHomePageListingView
     - Case: TestProviderBrowsingWhileOnCall
+    - Case: TestProvidersReturnToCallPortalAndAndCompletesSession
   # Never Alone Senior App
     - Case: TestSeniorAppSuspendedAccountStatus
     - Case: TestSeniorAppActiveAccountStatusAndBehavior
