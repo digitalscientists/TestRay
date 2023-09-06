@@ -25,7 +25,6 @@ EmployeeHealthPortalLogIn:
   Actions:      
     - Type: maximize
     - Type: navigate
-      Role: desktopChrome
       Value: $AND_CLI_employee_health_url$
     - Type: wait_for
       Strategy: xpath
