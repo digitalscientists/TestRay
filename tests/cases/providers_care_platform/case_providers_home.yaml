@@ -870,3 +870,156 @@ TestProvidersReturnToCallPortalAndAndCompletesSession:
   # Senior fills up Post call Survey.
     - Type: case
       Value: SeniorGreatPostSurveyCallHelper
+
+# CXTB-147 Return Missed SNF Call from Home (Answered)
+TestProviderReturnMissedSNFCall:
+  Environment: Settings
+  Vars:
+    LOGOUT_OPTION: "Go Off Shift"
+  Aftercases:
+    - TerminateApp
+    - CarePlatformLogout
+  Roles:
+    - Role: desktopChrome
+      App: desktop
+    - Role: localiOS
+      Capabilities:
+        newCommandTimeout: 120
+      App: NeverAlone
+  Actions:
+    # Setup for the test data
+      #Call login for nurses
+    - Type: case
+      Role: localiOS
+      Value: LoginSNFHelper
+      #Calling Prompt cleaner
+    - Type: case
+      Role: localiOS
+      Value: SeniorCleanPrompts
+      #Login as Provider
+    - Type: case
+      Value: ProvidersCarePlatformLogin
+      #Clean-up of current calls
+    - Type: case
+      Value: ProviderEndCurrentCall
+      #Missed call 
+    - Type: case
+      Value: SetMissedCallFromSNF
+    # Select Missed call from Home
+    - Type: wait_for  
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.missed_call$
+    - Type: click  
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.missed_call$
+    # Check it contains the correct data
+    # Assign to "Me"
+    - Type: wait_for  
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.call_update_dropdown_button$
+    - Type: click  
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.call_update_dropdown_button$
+    - Type: click  
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.assign_to_me_button$
+    - Type: sleep
+      Time: 0.8
+    # Check Assigment
+    - Type: get_attribute  
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.selected_missed_call$
+      Greps:
+      - var: SELECTED_MISSED_CALL
+        attr: innerHTML
+        condition: nempty
+        match: "(.*)"
+    - Type: assert
+      Asserts: 
+        - Type: contain
+          Var: SELECTED_MISSED_CALL
+          Value: 'Me'
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: SELECTED_MISSED_CALL
+          Value: 'Nursing (PHP)'
+    # Unassign call
+    - Type: click  
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.call_update_dropdown_button$
+    - Type: click  
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.unnasign_button$
+    # Call Device
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.call_device_btn$
+    # Incoming call on SNF
+    - Type: case
+      Value: SNFAnswerIncomingCall
+    # Check Provider's In Session dot
+    - Type: get_attribute
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.care_platform_header.status_indicator$
+      Greps:
+        - var: INDICATOR
+          attr: class
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Role: desktopChrome
+      Asserts:
+        - Type: contain
+          Var: INDICATOR
+          Value: 'is-red'
+    # Complete Call, Session and Survey
+      #Provider ends call.
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.end_call_btn$
+      #Provider fills up Post call Survey.
+    - Type: case
+      Value: PostCallSurveyProvider
+    # Check you are redirected to Home
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.home_title$
+      #Set Time to all so the follow-up appears.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.time_dropdown$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.time_dropdown$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.time_all_option$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.time_all_option$
+      Condition:
+        - Value: 5
+          Operation: visible
+          Result: true
+    # Green indicator dot for Available
+    - Type: wait_for
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.care_platform_header.status_indicator$
+    - Type: get_attribute
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.care_platform_header.status_indicator$
+      Greps:
+        - var: INDICATOR
+          attr: class
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Role: desktopChrome
+      Asserts:
+        - Type: contain
+          Var: INDICATOR
+          Value: 'is-green'

@@ -8,6 +8,7 @@ providers_home_page:
   on_demand_call_state: //*[@role='button'][contains(.,'On Demand Call')][last()]/div[5]
   on_demand_by_state: (//*[@role='button'][contains(.,'On Demand Call')]/div[5][contains(text(),'$AND_CLI_STATE$')])[last()]
   missed_call: //*[@role='button'][contains(.,'Missed Call')][last()]
+  selected_missed_call: //*[@role='button'][contains(.,'Missed Call') and contains(@class,'is-selected')]
   time_dropdown: //div[div[contains(text(),'Time')]]//button
   time_all_option: //div[div[contains(text(),'Time')]]//button[contains(text(),'All')]
   last_medical_transfer_row: (//div[text()='Medical Transfer'])[last()]
@@ -116,6 +117,7 @@ providers_call_handling_page:
   unnasign_button: //button[contains(text(),'Unassign')]
   video_status: //div[contains(@class,'video')]//div[@class='video-status']
   no_message_button: //button[contains(.,'No Message')]
+  call_update_dropdown_button: //button[text()='Update' and @class='status-filter-dropdown-toggle']
 
 providers_follow_up_call_details_page:
   call_device_button: //button[contains(.,'Call Device')]
