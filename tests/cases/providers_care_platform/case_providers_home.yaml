@@ -1128,3 +1128,96 @@ TestProvidersSelectCallInQueueAndGetCallAnsweredAlreadyNotification:
     - Type: case
       Role: desktopChrome1
       Value: PostCallSurveyProvider
+
+#CXTB-139: Providers - EHP - See Call Appear in Queue, Assign and Review Details.
+TestProvidersEHPSeeCallAppearInQueueAssignAndReviewDetails:
+  Environment: Settings
+  Precases:
+    - ProviderNewCleaner
+  Roles:
+    - Role: desktopChrome
+      App: desktop
+    - Role: desktopChrome1
+      App: desktop
+  Actions:
+  # Calling EHP Login case.
+    - Type: case
+      Value: EmployeeHealthPortalLogIn
+      Role: desktopChrome1
+  # Clean EHP hanged calls.
+    - Type: case
+      Value: EmployeeHealthPortalCleanHangedCalls
+      Role: desktopChrome1
+  # Generate a call from EHP.
+    - Type: case
+      Value: EmployeeHealthPortalCallNow
+      Role: desktopChrome1
+  # Calling Login case on Provider Care Platform side.
+    - Type: case
+      Value: ProvidersCarePlatformLogin
+  # Select the call on Providers Care Platform.
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.on_demand_calls$
+  # Verify that the call information appears on the right side.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.assign_to_me_button$
+  # Click "Assign to me" button on right to  review the Assessment describing the situation as populated by the employee portal user.
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.assign_to_me_button$
+  # Verify assigned column in the listing is updated to show that the call has been assigned to you.
+    - Type: wait_for_property
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.on_demand_call_assigned_value$
+      Property: textContent
+      Value: Me
+  # Click "Unassign" button in upper right side if something is going to prevent you from answering the call.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.unnasign_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.unnasign_button$
+  # Assigned column is updated to return to "Unassigned".
+    - Type: wait_for_property
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.on_demand_call_assigned_value$
+      Property: textContent
+      Value: "—"
+    - Type: get_text
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.on_demand_call_assigned_value$
+      Greps:
+        - var: CALL_ASSIGNED_VALUE
+          match: (.*)
+    - Type: assert
+      Asserts:
+        - Type: n_contain_encode_utf8
+          Var: CALL_ASSIGNED_VALUE
+          Value: Me
+  # Click "Assign to me" button on right to  review the Assessment describing the situation as populated by the employee portal user.
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.assign_to_me_button$
+  # Verify assigned column in the listing is updated to show that the call has been assigned to you.
+    - Type: wait_for_property
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.on_demand_call_assigned_value$
+      Property: textContent
+      Value: Me
+  # Verify you can expand then view employee’s Call history in lower portion.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.call_history_title_tab$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.call_history_title_tab$
+  # Verify that user can expand then view employee’s Call history in lower portion.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.call_history_tabs_content$
+    - Type: case
+      Value: EmployeeHealthPortalLogOut 
+      Role: desktopChrome1
