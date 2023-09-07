@@ -1039,11 +1039,11 @@ TestProvidersEHPSeeCallAppearInQueueAssignAndReviewDetails:
       Greps:
         - var: CALL_ASSIGNED_VALUE
           match: (.*)
-    # - Type: assert
-    #   Asserts:
-    #     - Type: contain_encode_utf8
-    #       Var: CALL_ASSIGNED_VALUE
-    #       Value: "—"
+    - Type: assert
+      Asserts:
+        - Type: n_contain_encode_utf8
+          Var: CALL_ASSIGNED_VALUE
+          Value: Me
   # Click "Assign to me" button on right to  review the Assessment describing the situation as populated by the employee portal user.
     - Type: click
       Strategy: xpath
