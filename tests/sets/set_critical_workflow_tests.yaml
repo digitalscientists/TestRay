@@ -11,6 +11,7 @@ SetCriticalWorkflows:
     - Case: TestProvidersAnswerSNFCallAndCompletesSession
     - Case: TestProviderBrowsingWhileOnCall
     - Case: TestProvidersReturnToCallPortalAndAndCompletesSession
+    - Case: TestProviderReturnMissedSNFCall
     - Case: TestProvidersSelectCallInQueueAndGetCallAnsweredAlreadyNotification
   # Never Alone SNF tests
     - Case: TestSNFRequestSuccessfulCallConnect
