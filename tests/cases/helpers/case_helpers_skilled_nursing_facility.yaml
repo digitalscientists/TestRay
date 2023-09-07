@@ -188,6 +188,8 @@ SNFGreatPostCallSurvey:
       App: NeverAlone      
   Actions:
     # Select the Great option.
+    - Type: sleep
+      Time: 2
     - Type: wait_for
       Strategy: class_chain
       Id: $PAGE.snf_post_call_survey.great_answer_button$

@@ -1023,3 +1023,108 @@ TestProviderReturnMissedSNFCall:
         - Type: contain
           Var: INDICATOR
           Value: 'is-green'
+
+# CXTB-610: Providers - SNF - Select Call in Queue and Get Call Answered Notification.
+TestProvidersSelectCallInQueueAndGetCallAnsweredAlreadyNotification:
+  Environment: Settings
+  Precases:
+    - ProviderNewCleaner
+    - LoginSNFHelper
+  Aftercases:
+    - TerminateApp
+    - ProviderEndCurrentCall
+  Roles:
+    - Role: desktopChrome
+      App: desktop
+    - Role: desktopChrome1
+      App: desktop
+    - Role: localiOS
+      App: NeverAlone
+  Actions:
+    # Login to the Care Platform app with Providers account.
+    - Type: case
+      Value: ProvidersCarePlatformLogin
+    # Calling Prompt cleaner
+    - Type: case
+      Value: SeniorCleanPrompts
+    # Starting scenario where SNF ends call before Provider answers it. 
+    # Call Provider from SNF.
+    - Type: case
+      Value: SNFNewRequestHelper
+    # Click on the corresponding call on the Home page.
+    - Type: wait_for
+      Strategy: xpath
+      Id : $PAGE.providers_home_page.on_demand_based_on_participant_name$
+    - Type: click
+      Strategy: xpath
+      Id : $PAGE.providers_home_page.on_demand_based_on_participant_name$
+    # Right side of screen refreshes to show the associated call pane with proper name and primary information as header.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.answer_call_button$
+    # Remove the call from call queue.
+    - Type: wait_for
+      Role: localiOS
+      Strategy: class_chain
+      Id: $PAGE.snf_call_portal.end_call_button$
+    - Type: click
+      Role: localiOS
+      Strategy: class_chain
+      Id: $PAGE.snf_call_portal.end_call_button$
+    # Verify that the "Call already answered" toast notification appears indicating that call has been already answered.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_notifications.call_already_answered_notification$
+    # Verify that screen resets without a refresh being required - with the call and related pane disappearing.
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.answer_call_button$
+    # Fill up SNF Post Call Survey.
+    - Type: case
+      Value: SNFGreatPostCallSurvey
+    # Calling Prompt cleaner
+    - Type: case
+      Value: SeniorCleanPrompts
+    # Starting second scenario where another Care Platform user takes the call before the provider does.
+    - Type: case
+      Role: desktopChrome1
+      Value: ProviderLoginSecondaryUser
+    - Type: case
+      Role: desktopChrome1
+      Value: ProviderEndCurrentCall
+    # Call Provider from SNF.
+    - Type: case
+      Value: SNFNewRequestHelper
+    # Click on the corresponding call on the Home page.
+    - Type: wait_for
+      Strategy: xpath
+      Id : $PAGE.providers_home_page.on_demand_based_on_participant_name$
+    - Type: click
+      Strategy: xpath
+      Id : $PAGE.providers_home_page.on_demand_based_on_participant_name$
+    # Right side of screen refreshes to show the associated call pane with proper name and primary information as header.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.answer_call_button$
+    # Answer the call as another care platform user.
+    - Type: case
+      Role: desktopChrome1
+      Value: AnswerCallAsProvider
+    # Verify that the "Call already answered" toast notification appears indicating that call has been already answered.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_notifications.call_already_answered_notification$
+    # Verify that screen resets without a refresh being required - with the call and related pane disappearing.
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.answer_call_button$
+    # Complete call.
+    # Click the end call button.
+    - Type: click
+      Role: localiOS
+      Strategy: class_chain
+      Id: $PAGE.snf_call_portal.end_call_button$
+    # Provider fills up the Post Call Survey.
+    - Type: case
+      Role: desktopChrome1
+      Value: PostCallSurveyProvider

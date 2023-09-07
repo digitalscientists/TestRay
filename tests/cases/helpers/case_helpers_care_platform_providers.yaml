@@ -112,7 +112,6 @@ ProviderLoginSecondaryUser:
       App: desktop
   Actions:
     - Type: navigate
-      Role: desktopChrome
       Value: $AND_CLI_care_platform_url$
     - Type: maximize
     - Type: send_keys
@@ -125,7 +124,6 @@ ProviderLoginSecondaryUser:
       Value: $AND_CLI_provider_user2_pwd$
     - Type: click
       Strategy: xpath
-      Role: desktopChrome
       Id: $PAGE.care_platform_login.login_button$
     - Type: sleep
       Time: 2
@@ -730,3 +728,6 @@ AnswerCallAsProvider:
     - Type: click
       Strategy: xpath
       Id: $PAGE.providers_call_handling_page.answer_call_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.end_call_btn$
