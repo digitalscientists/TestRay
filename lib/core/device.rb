@@ -2177,6 +2177,14 @@ def calculate_minutes_passed_by_from_event_creation(action, main_case, main_case
   
 end
 
+def count_elements(action, main_case, main_case_id)
+  action = convert_value_pageobjects(action);
+  elements = @driver.find_elements(convert_value(action["Strategy"]), convert_value(action["Id"]))
+  elements_count = elements.count;
+  log_info("Element count: #{elements_count}")
+  ENV[convert_value(action["ResultVar"])] = elements_count.to_s
+end
+
 # Custom method to verify that an event on Never Alone went to the bottom after its time has passed.
 def verify_event_went_to_bottom(action, main_case, main_case_id)
   action = convert_value_pageobjects(action);

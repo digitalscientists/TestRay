@@ -39,6 +39,9 @@ ProvidersCarePlatformEndCall:
       Strategy: xpath
       Id: $PAGE.providers_home_page.home_title$
   #Selects on demand call
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.on_demand_calls$
     - Type: click
       Strategy: xpath
       Id: $PAGE.providers_home_page.on_demand_calls$
@@ -46,6 +49,11 @@ ProvidersCarePlatformEndCall:
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.providers_call_handling_page.answer_call_button$
+    - Type: wait_for_property
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.answer_call_button$
+      Property: disabled
+      Value: "false"
     - Type: click
       Strategy: xpath
       Id: $PAGE.providers_call_handling_page.answer_call_button$
@@ -104,7 +112,13 @@ ProvidersCarePlatformEndCall:
       Id: $PAGE.providers_call_handling_page.submit_exit_session_button$
     - Type: wait_for
       Strategy: xpath
+      Id: $PAGE.providers_notifications.call_completed_notification$
+    - Type: wait_for
+      Strategy: xpath
       Id: $PAGE.providers_home_page.home_title$
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id: $PAGE.providers_notifications.call_completed_notification$
 
 ProviderLoginSecondaryUser:
   Roles:
