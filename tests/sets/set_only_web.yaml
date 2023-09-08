@@ -50,6 +50,7 @@ SetOnlyWebTests:
   - Case: TestEmployeeHealthPortalRequestAnAppointmentForUser
   - Case: TestEmployeeHealthPortalReviewUpcomingAppointment
   - Case: TestEmployeeHealthPortalManuallyLogoutOfPortal
+  - Case: TestEmployeeHealthPortalCallsFromCurrentSessionDuplicatedInCallHistoryUntilAccessPage
   # ES Care Partner
   - Case: TestCHCarePartnerStatusDropdownNotInCall
   - Case: TestCHCarePartnerAccessAndReviewTeamMembersAvailability
