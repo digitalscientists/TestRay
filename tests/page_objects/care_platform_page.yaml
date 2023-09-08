@@ -473,10 +473,14 @@ care_platform_edit_participant_providers:
   preferred_lab_button: //button[text()='Preferred Lab']
   specialists_block: //*[@id='providers']//*[contains(text(),'Specialists')][@class='is-block']
   name_input: name
+  required_name_message: //*[@id='modals']//input[@id='name']/following-sibling::div[@aria-hidden='false' and contains(.,'Please enter a name')]
   address_input: address
   phone_input: phone
+  required_phone_message: //*[@id='modals']//input[@id='phone']/following-sibling::div[@aria-hidden='false' and contains(.,'Please enter a valid phone number')]
   member_id_input: memberIdentification
+  required_member_id_message: //*[@id='modals']//input[@id='memberIdentification']/following-sibling::div[@aria-hidden='false' and contains(.,'Enter a Member ID')]
   group_id_input: groupIdentification
+  group_id_input_message: //*[@id='modals']//input[@id='groupIdentification']/following-sibling::div[@aria-hidden='true' and contains(.,'Enter a Group ID')]
   speciality_input: specialty
   save_and_close_button: //button[contains(text(),'Save and Close')]
   cancel_button: //button[text()='Cancel']

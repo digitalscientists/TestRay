@@ -2443,10 +2443,6 @@ ManageParticipantProviderInformation:
       Value: 64
     - Type: send_keys_if_exist
       Strategy: id
-      Id: $PAGE.care_platform_edit_participant_providers.group_id_input$
-      Value: 34
-    - Type: send_keys_if_exist
-      Strategy: id
       Id: $PAGE.care_platform_edit_participant_providers.speciality_input$
       Value: cardio
     - Type: click
@@ -2579,6 +2575,58 @@ ManageParticipantProviderInformation:
       Strategy: xpath
       Id: $PAGE.care_platform_notifications.dismiss_notification_button$
 
+CheckHealthInsuranceRequiredDataMessages:
+  Roles:
+    - Role: desktopChrome
+      App: desktop
+  Actions:
+  # Add Provider By Type
+  # E.g. 'Health Insurance'
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_providers.add_provider_by_type$
+  # Click on Save and Close to prompt the required data message
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_providers.save_and_close_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_providers.save_and_close_button$
+  # Check we have a message for Name, Phone and Member ID
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_providers.required_name_message$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_providers.required_phone_message$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_providers.required_member_id_message$
+  # Check that the Group ID is hidden
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_providers.group_id_input_message$
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_providers.group_id_input_message$
+      Greps:
+        - var: IS_HIDDEN
+          attr: aria-hidden
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: eq
+          Var: IS_HIDDEN
+          Value: 'true'
+  # Click on Cancel button
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_providers.cancel_button$
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_providers.cancel_button$
+
 EditInsuranceOrProviderInformationHelper:
   Vars:
     LOGOUT_OPTION: 'Go Off Shift'
@@ -2604,6 +2652,9 @@ EditInsuranceOrProviderInformationHelper:
     # Call helper to test add, edit and delete
     - Type: case
       Value: ManageParticipantProviderInformation
+    # Check required Data
+    - Type: case
+      Value: CheckHealthInsuranceRequiredDataMessages
   # Pharmacy
     # Set values to provider “Pharmacy”
     - Type: set_env_var
