@@ -70,3 +70,4 @@ SetNonPhysicalMobileTest:
   # Admin on call
     - Case: TestAdminOnCallRefreshUserAccountForCalling
     - Case: TestAdminOnCallRefreshSessionForStaffMemberFromPane
+    - Case: TestAdminOnCallShouldNotShowDuplicatesEntriesForNewCallsOnCallHistory
