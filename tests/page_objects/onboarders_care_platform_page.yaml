@@ -22,6 +22,7 @@ onboarders_notifications:
   staff_edited_notification: //div[@class='Toastify']//div[text()='Staff member changes saved']
   dismiss_notification_button: //div[@class='Toastify']//button[text()='Dismiss']
   account_status_updated_notification_button: //div[@class='Toastify']//div[text()='Account status updated']
+  new_device_notification: //div[@class='Toastify']//div[contains(text(),'New facility device(s) created')]
 
 onboarders_participant_page:
   participants_title: //h3[text()='Participants']
@@ -150,3 +151,17 @@ onboarder_edit_staff_information:
   last_name_input: //form//input[@id='lastName']
   last_name_error_label: //form//input[@id='lastName']/following-sibling::div[@aria-hidden='false']
   phone_input: //form//input[@id='phone']
+
+onboarder_facility_profile:
+  add_device_button: //button[contains(.,'Add Device')]
+  newest_device: //table/tbody/tr[last()]
+  newest_device_status: //table/tbody/tr[last()]//div[@class='account-status-label']
+  newest_device_username: //table/tbody/tr[last()]//div[*[contains(text(),'Username')]]//following-sibling::div
+  newest_device_password: //table/tbody/tr[last()]//div[*[contains(text(),'Password')]]//following-sibling::div
+
+onboarder_add_device_modal:
+  modal_title: //*[@id='modals']//h4[contains(text(),'Add Device')]
+  select_number_of_devices_dropdown: numberOfDevices
+  select_number_of_devices_option_4: //*[@id='numberOfDevices']/option[@value=4]
+  create_button: //button[text()='Create']
+  cancel_button: //button[text()='Cancel']

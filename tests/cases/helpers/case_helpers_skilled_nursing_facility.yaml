@@ -1,5 +1,4 @@
 LoginSNFHelper:
-  Environment: Settings
   Roles:
     - Role: localiOS
       App: NeverAlone      
