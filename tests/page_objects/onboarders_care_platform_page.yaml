@@ -108,6 +108,8 @@ onboarders_create_edit_staff_member:
   email_input: email
   role_facility_leadership_option: //*[@id='role']/option[text()='Facility Leadership']
   create_staff_member_button: //button[text()='Create Staff Member']
+  enter_valid_email_message: //input[@id='email']/following-sibling::div[@aria-hidden='false' and contains(.,'Please enter a valid email')]
+  email_not_available_message: //input[@id='email']/following-sibling::div[@aria-hidden='false' and contains(.,'This email address is not available')]
 
 staff_records:
   overview_tab: //button[contains(text(),'Overview')]

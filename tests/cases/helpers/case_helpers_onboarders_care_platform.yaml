@@ -211,6 +211,30 @@ OnboarderCreateStaffMember:
       Strategy: id
       Id: $PAGE.onboarders_create_edit_staff_member.hire_at_input$
       Value: $AND_CLI_HIRE_DATE$
+  # Bug CHS-2420
+  # Click Save without email
+    # Click Create Staff Member
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.onboarders_create_edit_staff_member.create_staff_member_button$
+    # Check message
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.onboarders_create_edit_staff_member.enter_valid_email_message$
+  # Try to use an existing email for staff member
+    - Type: send_keys
+      Strategy: id
+      Id: $PAGE.onboarders_create_edit_staff_member.email_input$
+      Value: $AND_CLI_carepartner_user1$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.onboarders_create_edit_staff_member.create_staff_member_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.onboarders_create_edit_staff_member.email_not_available_message$
+    - Type: clear_field_by_backspace
+      Strategy: id
+      Id: $PAGE.onboarders_create_edit_staff_member.email_input$
     # Generate unique email for staff member
     - Type: generate_unique_email
       ResultVar: UNIQUE_EMAIL
