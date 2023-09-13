@@ -2179,6 +2179,7 @@ def calculate_minutes_passed_by_from_event_creation(action, main_case, main_case
   
 end
 
+# This action will return the elements count in a variable.
 def count_elements(action, main_case, main_case_id)
   action = convert_value_pageobjects(action);
   elements = @driver.find_elements(convert_value(action["Strategy"]), convert_value(action["Id"]))

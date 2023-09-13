@@ -189,14 +189,17 @@ PostCallSurveyProvider:
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.providers_call_handling_page.subject_input$
+    - Type: generate_unique_name
+      Name: "Automation Call"
+      ResultVar: UNIQUE_SUBJECT
     - Type: send_keys
       Strategy: xpath
       Id: $PAGE.providers_call_handling_page.subject_input$
-      Value: Automation Call
+      Value: $AND_CLI_UNIQUE_SUBJECT$
     - Type: send_keys
       Strategy: xpath
       Id: $PAGE.providers_call_handling_page.details_textarea$
-      Value: Automation call            
+      Value: $AND_CLI_UNIQUE_SUBJECT$
     # Fill the Post-call Survey
     - Type: wait_for
       Strategy: xpath

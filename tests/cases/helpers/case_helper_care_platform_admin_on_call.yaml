@@ -104,3 +104,25 @@ SearchStaffByNameAndRole:
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_participant.senior_1_row$
+
+AdminOnCallNavigateToProvidersCallHistory:
+  Roles:
+    - Role: desktopChrome
+      App: desktop
+  Actions:
+    # Navigate to Providers > Call History.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.admin_on_call_home.providers_navigation_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.admin_on_call_home.providers_navigation_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.admin_on_call_home.providers_call_history_navigation_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.admin_on_call_home.providers_call_history_navigation_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.admin_on_call_providers_call_history_tab.call_history_tab$
