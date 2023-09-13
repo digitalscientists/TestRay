@@ -19,7 +19,7 @@ care_platform_verify_account:
 
 care_platform:
   page_title: //h3
-  call_queue_title: //h3[text()='Call Queue']
+  call_queue_title: //h3[text()='Queue']
   navigation_participant: //nav//a[contains(text(),'Participants')]
   navigation_followup: //nav//a[contains(text(),'Follow-up')]
   navigation_home: //nav//a[contains(text(),'Home')]
