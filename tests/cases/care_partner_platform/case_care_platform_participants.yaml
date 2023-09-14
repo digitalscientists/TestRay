@@ -4404,12 +4404,12 @@ TestCarePartnerClickAndViewTestParticipantVisuals:
 # CHS-1789: "Status updated to in-session." Not Logged For Answered Outbound Calls
 TestCarePartnerStatusUpdatedToInSessionNotLoggedForAnsweredOutboundCalls:
   Vars:
-    CARE_PARTNER_USER1_FULLNAME: $AND_CLI_carepartner_user1_name$ $AND_CLI_carepartner_user1_lastname$
+    CARE_PARTNER_USER1_FULLNAME: $AND_CLI_carepartner_user2_name$ $AND_CLI_carepartner_user2_lastname$
     STAFF_ROLE: "Care Partner"
   Environment: Settings
   Precases:
     - LoginNeverAloneHelper
-    - CarePartnerCleanCallQueueAndHangedCalls
+    - CarePartnerUser2CleanCallQueueAndHangedCalls
     - SeniorCleanPrompts
   Aftercases:
     - TerminateApp
@@ -4421,7 +4421,7 @@ TestCarePartnerStatusUpdatedToInSessionNotLoggedForAnsweredOutboundCalls:
   Actions:
   # Calling Login case.
     - Type: case
-      Value: CarePartnerLogin
+      Value: CarePartnerLoginSecondaryUser
   # Navigate to Participants.
     - Type: case
       Value: CarePartnerNavigateToParticipants
