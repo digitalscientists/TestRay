@@ -748,6 +748,9 @@ EHPMobileUpdateAccountPassword:
     - Type: click
       Strategy: xpath
       Id: $PAGE.employee_health_mobile_menu_modal.logout_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.employee_health_mobile_logout_dialog.logout_button$
     - Type: click
       Strategy: xpath
       Id: $PAGE.employee_health_mobile_logout_dialog.logout_button$
@@ -796,6 +799,9 @@ EHPMobileUpdateAccountPassword:
     - Type: click
       Strategy: xpath
       Id: $PAGE.employee_health_mobile_menu_modal.logout_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.employee_health_mobile_logout_dialog.logout_button$
     - Type: click
       Strategy: xpath
       Id: $PAGE.employee_health_mobile_logout_dialog.logout_button$
