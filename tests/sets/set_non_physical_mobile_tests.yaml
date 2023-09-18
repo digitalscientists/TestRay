@@ -11,6 +11,7 @@ SetNonPhysicalMobileTest:
     - Case: TestCarePartnerCallParticipantsDeviceCallComplete
     - Case: TestCarePartnerCallParticipantsDeviceCallIgnored
     - Case: TestCarePartnerCallParticipantsDeviceCallMissed
+    - Case: TestCarePartnerStatusUpdatedToInSessionNotLoggedForAnsweredOutboundCalls
   # Care Partner ES
     - Case: TestCHCarePartnerBrowsingWhileOnCall
     - Case: TestCHCarePartnerCallParticipantsDeviceAndCompleteCall

@@ -1567,6 +1567,22 @@ CarePartnerCleanCallQueueAndHangedCalls:
     - Type: case
       Value: CarePlatformLogout
 
+CarePartnerUser2CleanCallQueueAndHangedCalls:
+  Vars:
+    LOGOUT_OPTION: "Go Off Shift"
+  Roles:
+    - Role: desktopChrome
+      App: desktop
+  Actions:
+    # Log in.
+    - Type: case
+      Value: CarePartnerLoginSecondaryUser
+    # Clean Care Partner Call Queue and Hanged Calls.
+    - Type: care_partner_clean_call_queue_and_hanged_calls
+    # Log out.
+    - Type: case
+      Value: CarePlatformLogout
+
 # Creates a Follow-up Ticket.
 CarePartnerCreateFollowUpTicket:
   Roles:

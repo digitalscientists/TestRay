@@ -13,3 +13,7 @@ admin_on_call_staff_tab:
 
 care_platform_staff_records_call_history:
   first_call_on_record: (//div[contains(@class,'accordion-item')])[1]
+
+admin_on_call_staff_pane:
+  audit_log_tab: //button[text()='Audit Log']
+  in_session_row_entry: //time[text()='$AND_CLI_TODAYS_DATE$']/ancestor::tr//time[text()='$AND_CLI_START_CALL_TIME$']/ancestor::tr//td[text()='In Session']
