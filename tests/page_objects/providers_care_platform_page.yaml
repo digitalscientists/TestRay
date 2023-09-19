@@ -12,7 +12,7 @@ providers_home_page:
   selected_missed_call: //*[@role='button'][contains(.,'Missed Call') and contains(@class,'is-selected')]
   time_dropdown: //div[div[contains(text(),'Time')]]//button
   time_all_option: //div[div[contains(text(),'Time')]]//button[contains(text(),'All')]
-  last_medical_transfer_row: (//div[text()='Medical Transfer'])[last()]
+  last_medical_transfer_row: (//div[contains(text(),'Medical Transfer')])[last()]
   participants_navigation: //header//nav//a[contains(text(),'Participants')]
   facilities_navigation: //header//nav//a[contains(text(),'Facilities')]
   employees_navigation: //header//nav//a[contains(text(),'Employees')]
