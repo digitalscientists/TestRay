@@ -21,16 +21,19 @@ TestCarePartnerHomePage:
       Id : $PAGE.care_platform.page_title$
       Greps:
         - var: HOME_TITLE
-          match: "Call Queue"
+          match: "Care Partners"
     - Type: assert
       Role: desktopChrome
       Asserts:
         - Type: eq
           Var: HOME_TITLE
-          Value: "Call Queue"
+          Value: "Care Partners"
     - Type: click
       Strategy: xpath
       Id : $PAGE.care_platform.navigation_participant$
+    - Type: wait_for
+      Strategy: xpath
+      Id : $PAGE.care_platform.page_title$
     - Type: get_text
       Strategy: xpath
       Id : $PAGE.care_platform.page_title$
@@ -41,19 +44,21 @@ TestCarePartnerHomePage:
         - Type: eq
           Var: HOME_TITLE
           Value: "Participants"
-    - Type: click
-      Strategy: xpath
-      Id : $PAGE.care_platform.navigation_followup$
-    - Type: get_text
-      Strategy: xpath
-      Id : $PAGE.care_platform.page_title$
-      Greps:
-        - var: HOME_TITLE
-          match: "Follow-up*"
-      Asserts:
-        - Type: eq
-          Var: HOME_TITLE
-          Value: "Follow-up Tickets"
+#   Note: There's no Follow Up Main Navigation option in Care Partners
+#
+#    - Type: click
+#      Strategy: xpath
+#      Id : $PAGE.care_platform.navigation_followup$
+#    - Type: get_text
+#      Strategy: xpath
+#      Id : $PAGE.care_platform.page_title$
+#      Greps:
+#        - var: HOME_TITLE
+#          match: "Follow-up*"
+#      Asserts:
+#        - Type: eq
+#          Var: HOME_TITLE
+#          Value: "Follow-up Tickets"
   #Checking Header elements
     - Type: wait_for
       Strategy: xpath
@@ -149,19 +154,21 @@ TestCarePartnerStatusDropdown_NotInCall:
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_header.user_toggle_input$
-    - Type: click
-      Strategy: xpath
-      Id : $PAGE.care_platform.navigation_followup$
-    - Type: get_text
-      Strategy: xpath
-      Id : $PAGE.care_platform.page_title$
-      Greps:
-        - var: HOME_TITLE
-          match: "Follow-up*"
-      Asserts:
-        - Type: eq
-          Var: HOME_TITLE
-          Value: "Follow-up Tickets"
+# Note: there's no follow up Main Navigation      
+#
+#    - Type: click
+#      Strategy: xpath
+#      Id : $PAGE.care_platform.navigation_followup$
+#    - Type: get_text
+#      Strategy: xpath
+#      Id : $PAGE.care_platform.page_title$
+#      Greps:
+#        - var: HOME_TITLE
+#          match: "Follow-up*"
+#      Asserts:
+#        - Type: eq
+#          Var: HOME_TITLE
+#          Value: "Follow-up Tickets"
   #Checking the status indicator correspond to Available
     - Type: get_attribute
       Strategy: xpath

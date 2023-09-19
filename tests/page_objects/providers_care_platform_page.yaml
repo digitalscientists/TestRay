@@ -1,6 +1,6 @@
 providers_home_page:
-  home_button: //nav//a[contains(.,'Home')]
-  home_title: //h3[text()='Home']
+  home_button: //nav//a[contains(.,'Queue')]
+  home_title: //h3[text()='PHP Providers']
   follow_up_calls: //*[@role='button'][contains(.,'Follow-up')][last()]
   scheduled_call: //*[@role='button'][contains(.,'Scheduled Call')][last()]
   scheduled_call_enabled: //*[@role='button'][contains(.,'Scheduled Call') and not(contains(@class,'disabled'))][last()]
