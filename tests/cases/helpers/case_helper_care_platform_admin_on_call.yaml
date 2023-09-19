@@ -126,3 +126,22 @@ AdminOnCallNavigateToProvidersCallHistory:
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.admin_on_call_providers_call_history_tab.call_history_tab$
+
+AdminOnCallNavigateToProvidersCallQueue:
+  Actions:
+    # Navigate to Providers > Call History.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.admin_on_call_home.queue_navigation_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.admin_on_call_home.queue_navigation_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.admin_on_call_home.php_providers_navigation_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.admin_on_call_home.php_providers_navigation_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.admin_on_call_providers_call_queue_tab.call_queue_title$
