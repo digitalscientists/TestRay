@@ -1538,6 +1538,8 @@ TestCarePartnerCallParticipantsDeviceCallIgnored:
     - Type: case
       Value: IgnoreCallAsSenior
   # Click "No message" to end the process without sending the participant a message.
+    - Type: sleep
+      Time: 2
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.care_platform_call_portal.no_message_button$
@@ -1888,6 +1890,9 @@ TestCarePartnerTrackTimeAndEditFollowUpTicketsParticipantComponent:
       Strategy: xpath
       Id: $PAGE.care_platform_participant_details.ticket_subject_input$
       Options: false
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_details.delayed_label$
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_participant_details.delayed_label$
@@ -1900,14 +1905,18 @@ TestCarePartnerTrackTimeAndEditFollowUpTicketsParticipantComponent:
       Strategy: xpath
       Id: $PAGE.care_platform_participant_details.ticket_subject_input$
       Options: false
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_details.delayed_label$
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_participant_details.delayed_label$
-    - Type: wait_for_property
-      Strategy: xpath
-      Id: $PAGE.care_platform_participant_details.delayed_checkbox$
-      Property: value
-      Value: "false"
+    # not needed, will delete.
+    # - Type: wait_for_property
+    #   Strategy: xpath
+    #   Id: $PAGE.care_platform_participant_details.delayed_checkbox$
+    #   Property: value
+    #   Value: "false"
     - Type: wait_for_attribute
       Strategy: xpath
       Id: $PAGE.care_platform_participant_details.details_of_delay_element$
@@ -1921,6 +1930,9 @@ TestCarePartnerTrackTimeAndEditFollowUpTicketsParticipantComponent:
       Strategy: xpath
       Id: $PAGE.care_platform_participant_details.ticket_subject_input$
       Options: false
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_details.delayed_label$
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_participant_details.delayed_label$
@@ -4201,6 +4213,8 @@ TestCarePartnerCallExternal10DigitNumberWithoutParticipant:
       Strategy: xpath
       Id: $PAGE.care_platform_call_portal.end_call_button$
   # Video window updates to show a message that the call has ended.
+    - Type: sleep
+      Time: 2
     - Type: get_attribute
       Strategy: xpath
       Id: $PAGE.care_platform_call_portal.video_status$
@@ -4483,6 +4497,7 @@ TestCarePartnerStatusUpdatedToInSessionNotLoggedForAnsweredOutboundCalls:
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.providers_call_handling_page.subject_input$
+      CheckTime: 25
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.providers_call_handling_page.details_textarea$
