@@ -1483,6 +1483,7 @@ TestCarePartnerCallParticipantsDeviceCallIgnored:
     - LoginNeverAloneHelper
     - CarePartnerCleanCallQueueAndHangedCalls
     - SeniorCleanPrompts
+    - AdminOnCallRefreshParticipant
   Aftercases:
     - TerminateApp
   Roles:
