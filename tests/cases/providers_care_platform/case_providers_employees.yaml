@@ -124,6 +124,8 @@ TestProviderAnswerCompleteSessionFromEHP:
     STAFF_ROLE: "Provider"
   Precases:
     - AdminOnCallRefreshStaff
+  Aftercases:
+    - EmployeeHealthPortalLogOutAction
   Roles:
     - Role: desktopChrome
       App: "desktop"

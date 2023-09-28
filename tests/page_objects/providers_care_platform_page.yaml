@@ -61,8 +61,8 @@ providers_facilities_page:
   devices_button: //button[text()='Devices']
   tabs_content: //div[@class='tabs-content']
   title_subtab_devices: //h4[text()='Facility Devices']
-  call_based_on_device_button: //strong[text()='Device $AND_CLI_facility_devices_user1_number$:']/ancestor::tr//a[@class='button button-basic text-xs']
-  message_based_on_device_button: //strong[text()='Device $AND_CLI_facility_devices_user1_number$:']/ancestor::tr//button[@class='button button-basic text-xs']
+  call_based_on_device_button: //strong[text()='Device $AND_CLI_facility_devices_user1_number$:']/ancestor::tr//a[contains(.,'Call')]
+  message_based_on_device_button: //strong[text()='Device $AND_CLI_facility_devices_user1_number$:']/ancestor::tr//a[contains(.,'Message')]/button
   message_input: //input[@id='message']
   send_message_button: //span[@class='icon-send text-md']/ancestor::button
   last_message_sent: (//div[@class='message message-to message-to-inverted'])[last()]
@@ -123,7 +123,7 @@ providers_call_handling_page:
 
 providers_follow_up_call_details_page:
   call_device_button: //button[contains(.,'Call Device')]
-  update_status_dropdown: //button[@class='status-filter-dropdown-toggle']
+  update_status_dropdown: //button[@class='status-filter-dropdown-toggle' and contains(.,'Update')]
   status_option_close_ticket: //button[@class='status-filter-dropdown-button' and contains(.,'Close Ticket')]
   close_ticket_modal_title: //*[@id='dialogs']//h4[text()='Close Ticket']
   close_ticket_reason_input: //*[@id='dialogs']//input[@name='reasonForClosing']
