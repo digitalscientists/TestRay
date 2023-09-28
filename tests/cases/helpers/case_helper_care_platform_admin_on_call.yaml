@@ -62,6 +62,39 @@ AdminOnCallRefreshDevice:
     - Type: sleep
       Time: 1
 
+AdminOnCallRefreshParticipant:
+  Vars:
+    LOGOUT_OPTION: "Go Off Shift"
+  Aftercases:
+    - CarePlatformLogout
+  Roles:
+    - Role: desktopChrome
+      App: desktop
+  Actions:
+    # Login into Care Platform
+    - Type: case
+      Value: AdminOnCallLogin
+    # Go to Participant Records
+    - Type: case
+      Value: CarePartnerParticipantRecordsNavigation
+    # Check for "Refresh" button
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.refresh_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.refresh_button$
+    # Refresh confirmation
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.yes_refresh_dialog_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.yes_refresh_dialog_button$
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.yes_refresh_dialog_button$
+
 # This uses the name of the staff member to search
 # The variable is $AND_CLI_USER_FULLNAME$
 # And their role as appears on the dropdown options in the listing

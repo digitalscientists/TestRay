@@ -170,6 +170,8 @@ TestCarePartnerStatusDropdown_NotInCall:
 #          Var: HOME_TITLE
 #          Value: "Follow-up Tickets"
   #Checking the status indicator correspond to Available
+    - Type: sleep
+      Time: 2
     - Type: get_attribute
       Strategy: xpath
       Id: $PAGE.care_platform_header.status_indicator$
