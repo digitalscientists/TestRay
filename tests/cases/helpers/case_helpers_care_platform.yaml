@@ -1360,6 +1360,7 @@ PostCallSurveyCarePartner:
       Role: desktopChrome
       Strategy: xpath
       Id: $PAGE.care_platform.call_queue_title$
+      CheckTime: 25
 
 # Custom helper to send backspace keys to the subject input on the call portal.
 CarePartnerClearSubjectInputField:
@@ -2419,7 +2420,13 @@ ManageParticipantProviderInformation:
   Actions:
   # Add Provider By Type
   # E.g. 'Preferred Lab'
-    - Type: click
+    - Type: scroll_to
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_providers.add_provider_by_type$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_providers.add_provider_by_type$
+    - Type: click_js
       Strategy: xpath
       Id: $PAGE.care_platform_edit_participant_providers.add_provider_by_type$
     - Type: send_keys
@@ -2440,7 +2447,7 @@ ManageParticipantProviderInformation:
       Strategy: xpath
       Id: $PAGE.care_platform_edit_participant_providers.add_provider_by_type$
   # Enter necessary information, then click “Save and Close”
-    - Type: click
+    - Type: click_js
       Strategy: xpath
       Id: $PAGE.care_platform_edit_participant_providers.add_provider_by_type$
     - Type: send_keys
@@ -2484,7 +2491,7 @@ ManageParticipantProviderInformation:
       Strategy: xpath
       Id: $PAGE.care_platform_edit_participant_providers.delete_provider_by_name_button$
   # Try to Edit and cancel, changes shouldn't stick
-    - Type: click
+    - Type: click_js
       Strategy: xpath
       Id: $PAGE.care_platform_edit_participant_providers.edit_provider_by_name_button$
     - Type: wait_for
@@ -2519,7 +2526,13 @@ ManageParticipantProviderInformation:
       Strategy: xpath
       Id: $PAGE.care_platform_edit_participant_providers.provider_by_name_block$
   # Try Edit and Save changes
-    - Type: click
+    - Type: scroll_to
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_providers.edit_provider_by_name_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_providers.edit_provider_by_name_button$
+    - Type: click_js
       Strategy: xpath
       Id: $PAGE.care_platform_edit_participant_providers.edit_provider_by_name_button$
     - Type: send_keys
@@ -2553,7 +2566,7 @@ ManageParticipantProviderInformation:
       Strategy: xpath
       Id: $PAGE.care_platform_edit_participant_providers.delete_provider_by_name_button$
   # Try Delete and Cancel
-    - Type: click
+    - Type: click_js
       Strategy: xpath
       Id: $PAGE.care_platform_edit_participant_providers.delete_provider_by_name_button$
     - Type: wait_for
@@ -2569,7 +2582,7 @@ ManageParticipantProviderInformation:
       Strategy: xpath
       Id: $PAGE.care_platform_edit_participant_providers.cancel_button$
   # Try Delete and Confirm
-    - Type: click
+    - Type: click_js
       Strategy: xpath
       Id: $PAGE.care_platform_edit_participant_providers.delete_provider_by_name_button$
     - Type: wait_for

@@ -26,13 +26,13 @@ care_platform:
   carepartner_toast_notification: //div[@class='Toastify']//div[contains(text(), '$AND_CLI_TOAST_MESSAGE_SHOWN$')]
 
 care_platform_home:
-  first_call_of_queue: //div[@id='containerElement']/div[starts-with(@class, 'ListRow_listRow')][1]
+  first_call_of_queue: //div[@id='containerElement']/div[starts-with(@class, 'ListRow_listRow') and not(contains(., 'Follow-up'))][1]
   answer_call: //button[text()='Answer Call']
-  call_based_on_participant_name: (//div[contains(@class, 'ListRow_listRow')]//strong[text() = '$AND_CLI_senior_user1_name$ $AND_CLI_senior_user1_lastname$'])[last()]
+  call_based_on_participant_name: (//div[contains(@class, 'ListRow_listRow') and not(contains(., 'Follow-up'))]//strong[text() = '$AND_CLI_senior_user1_name$ $AND_CLI_senior_user1_lastname$'])[last()]
   call_based_on_es_idd_participant_name: //div[contains(@class, 'ListRow_listRow')]//strong[text() = '$AND_CLI_idd_es_never_alone_user1_name$ $AND_CLI_idd_es_never_alone_user1_lastname$']
   call_based_on_ch_idd_participant_name: //div[contains(@class, 'ListRow_listRow')]//strong[text() = '$AND_CLI_idd_ch_never_alone_user2_name$ $AND_CLI_idd_ch_never_alone_user2_lastname$']
   active_call_section: //div[contains(@class,'app-video app-video-fixed')] # doesn't matter if its expanded/collapsed
-  call_queue_calls: //div[@id='containerElement']/div[starts-with(@class, 'ListRow_listRow')]
+  call_queue_calls: //div[@id='containerElement']/div[starts-with(@class, 'ListRow_listRow') and not(contains(., 'Follow-up'))]
 
 care_platform_header:
   app_logo: //header//div[@class='app-header-small-logo']/img
