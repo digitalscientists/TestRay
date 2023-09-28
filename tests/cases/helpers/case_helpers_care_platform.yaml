@@ -1360,6 +1360,7 @@ PostCallSurveyCarePartner:
       Role: desktopChrome
       Strategy: xpath
       Id: $PAGE.care_platform.call_queue_title$
+      CheckTime: 25
 
 # Custom helper to send backspace keys to the subject input on the call portal.
 CarePartnerClearSubjectInputField:

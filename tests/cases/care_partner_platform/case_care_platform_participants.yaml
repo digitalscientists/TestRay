@@ -628,6 +628,7 @@ TestCarePartnerAnswerAndComplete:
     - SetNonTelehealthAppointmentForSenior
     - LoginNeverAloneHelper
     - CarePartnerCleanCallQueueAndHangedCalls
+    - SeniorCleanPrompts
   Aftercases:
     - TerminateApp
   Roles:
