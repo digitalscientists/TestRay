@@ -91,8 +91,9 @@ AdminOnCallRefreshParticipant:
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_call_portal.yes_refresh_dialog_button$
-    - Type: sleep
-      Time: 1
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.yes_refresh_dialog_button$
 
 # This uses the name of the staff member to search
 # The variable is $AND_CLI_CARE_PARTNER_USER1_FULLNAME$
