@@ -1913,12 +1913,6 @@ TestCarePartnerTrackTimeAndEditFollowUpTicketsParticipantComponent:
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_participant_details.delayed_label$
-    # not needed, will delete.
-    # - Type: wait_for_property
-    #   Strategy: xpath
-    #   Id: $PAGE.care_platform_participant_details.delayed_checkbox$
-    #   Property: value
-    #   Value: "false"
     - Type: wait_for_attribute
       Strategy: xpath
       Id: $PAGE.care_platform_participant_details.details_of_delay_element$

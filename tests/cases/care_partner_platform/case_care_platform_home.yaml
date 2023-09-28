@@ -170,7 +170,6 @@ TestCarePartnerStatusDropdown_NotInCall:
 #          Var: HOME_TITLE
 #          Value: "Follow-up Tickets"
   #Checking the status indicator correspond to Available
-  #TODO: Do we need to check this on Call History page? =
     - Type: sleep
       Time: 2
     - Type: get_attribute
