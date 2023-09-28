@@ -1114,8 +1114,6 @@ TestProvidersSelectCallInQueueAndGetCallAnsweredAlreadyNotification:
       Strategy: xpath
       Id: $PAGE.providers_call_handling_page.answer_call_button$
     # Answer the call as another care platform user.
-    - Type: refresh
-      Role: desktopChrome1
     - Type: case
       Role: desktopChrome1
       Value: AnswerCallAsProvider
