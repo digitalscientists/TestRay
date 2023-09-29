@@ -545,8 +545,20 @@ TestOnboarderCreateNewFacilityDeviceAndVerifyPreDelivery:
     - Type: case
       Value: OnboarderCarePartnerLogin
   # Go to Facility Profile
-    - Type: case
-      Value: NavigationToFacilityProfile
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.facility_leadership_care_platform_home.facilities_header_tab$
+  # Click on an active facility
+    - Type: set_env_var
+      Value: 'Beta Healthcare Center'
+      Var: facility_name1
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.facility_leadership_facilities_listing.facility_based_on_name$
+  #Check facility details
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.facility_leadership_facility_details.facility_name$
   # Click on Records
     - Type: click
       Strategy: xpath
@@ -621,11 +633,11 @@ TestOnboarderCreateNewFacilityDeviceAndVerifyPreDelivery:
       Time: 1
     - Type: scroll_to
       Strategy: xpath
-      Id: $PAGE.onboarders_notifications.new_device_notification$
+      Id: $PAGE.onboarder_facility_profile.newest_device$
       Options: false
     - Type: send_keys
       Strategy: xpath
-      Id: $PAGE.onboarders_notifications.new_device_notification$
+      Id: $PAGE.onboarder_facility_profile.newest_device$
       Value: "arrow_down"
   # Check values of new device
     - Type: get_attribute
@@ -698,12 +710,12 @@ TestOnboarderCreateNewFacilityDeviceAndVerifyPreDelivery:
       Id: $PAGE.seniors_app_login.login_btn$
   # Check status on device
     - Type: wait_for
-      Strategy: class_chain
+      Strategy: xpath
       Role: localiOS
       Id: $PAGE.seniors_app_home.status_yellow_banner$
       Time: 30
     - Type: return_element_attribute
-      Strategy: class_chain
+      Strategy: xpath
       Role: localiOS
       Id: $PAGE.seniors_app_home.status_yellow_banner$
       Attribute: label
