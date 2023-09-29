@@ -170,7 +170,7 @@ TestEHPMobileReviewUpcomingAppointment:
           Var: SECOND_SCHEDULED_DAY
           Value: $AND_CLI_THIRD_SCHEDULED_DAY$
 
-# #CXTB-109 Employee Health Portal - Request an Appointment for User
+#CXTB-110 Employee Health Portal - Request an Appointment for Dependent Minor.
 TestEHPMobileRequestAnAppointmentForDependentMinor:
   Environment: Settings 
   Roles:

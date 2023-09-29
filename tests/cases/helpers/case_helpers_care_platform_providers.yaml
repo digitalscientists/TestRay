@@ -39,6 +39,9 @@ ProvidersCarePlatformEndCall:
       Strategy: xpath
       Id: $PAGE.providers_home_page.home_title$
   #Selects on demand call
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.on_demand_calls$
     - Type: click
       Strategy: xpath
       Id: $PAGE.providers_home_page.on_demand_calls$
@@ -46,6 +49,11 @@ ProvidersCarePlatformEndCall:
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.providers_call_handling_page.answer_call_button$
+    - Type: wait_for_property
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.answer_call_button$
+      Property: disabled
+      Value: "false"
     - Type: click
       Strategy: xpath
       Id: $PAGE.providers_call_handling_page.answer_call_button$
@@ -104,7 +112,13 @@ ProvidersCarePlatformEndCall:
       Id: $PAGE.providers_call_handling_page.submit_exit_session_button$
     - Type: wait_for
       Strategy: xpath
+      Id: $PAGE.providers_notifications.call_completed_notification$
+    - Type: wait_for
+      Strategy: xpath
       Id: $PAGE.providers_home_page.home_title$
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id: $PAGE.providers_notifications.call_completed_notification$
 
 ProviderLoginSecondaryUser:
   Roles:
@@ -175,14 +189,17 @@ PostCallSurveyProvider:
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.providers_call_handling_page.subject_input$
+    - Type: generate_unique_name
+      Name: "Automation Call"
+      ResultVar: UNIQUE_SUBJECT
     - Type: send_keys
       Strategy: xpath
       Id: $PAGE.providers_call_handling_page.subject_input$
-      Value: Automation Call
+      Value: $AND_CLI_UNIQUE_SUBJECT$
     - Type: send_keys
       Strategy: xpath
       Id: $PAGE.providers_call_handling_page.details_textarea$
-      Value: Automation call            
+      Value: $AND_CLI_UNIQUE_SUBJECT$
     # Fill the Post-call Survey
     - Type: wait_for
       Strategy: xpath
@@ -673,42 +690,19 @@ CleanUsedFollowUp:
     - Role: desktopChrome
       App: desktop  
   Actions:
+    - Type: refresh
+      Role: desktopChrome
     - Type: click
       Strategy: xpath
-      Role: desktopChrome
+      Id: $PAGE.providers_home_page.home_button$
+    - Type: wait_for
+      Strategy: xpath
       Id: $PAGE.providers_home_page.follow_up_calls$
-    - Type: wait_for
-      Strategy: xpath
-      Role: desktopChrome
-      Id: $PAGE.providers_follow_up_call_details_page.update_status_dropdown$
     - Type: click
       Strategy: xpath
-      Role: desktopChrome
-      Id: $PAGE.providers_follow_up_call_details_page.update_status_dropdown$
-    - Type: wait_for
-      Strategy: xpath
-      Role: desktopChrome
-      Id: $PAGE.providers_follow_up_call_details_page.status_option_close_ticket$
-    - Type: click
-      Strategy: xpath
-      Role: desktopChrome
-      Id: $PAGE.providers_follow_up_call_details_page.status_option_close_ticket$
-    - Type: wait_for
-      Strategy: xpath
-      Role: desktopChrome
-      Id: $PAGE.providers_follow_up_call_details_page.close_ticket_modal_title$
-    - Type: send_keys
-      Strategy: xpath
-      Id: $PAGE.providers_follow_up_call_details_page.close_ticket_reason_input$
-      Value: 'Automation Test Cleaning'
-    - Type: click
-      Strategy: xpath
-      Role: desktopChrome
-      Id: $PAGE.providers_follow_up_call_details_page.close_ticket_save_button$
-    - Type: wait_for
-      Strategy: xpath
-      Role: desktopChrome
-      Id: $PAGE.providers_home_page.toast_closed_ticket$  
+      Id: $PAGE.providers_home_page.follow_up_calls$
+    - Type: case
+      Value: ProviderCloseCallHelper
 
 AnswerCallAsProvider:
   Roles:
@@ -718,10 +712,10 @@ AnswerCallAsProvider:
   # Click on the corresponding call on the Home page to and click on the "Answer" button.
     - Type: wait_for
       Strategy: xpath
-      Id : $PAGE.providers_home_page.call_based_on_participant_name$
+      Id: $PAGE.providers_home_page.call_based_on_participant_name$
     - Type: click
       Strategy: xpath
-      Id : $PAGE.providers_home_page.call_based_on_participant_name$
+      Id: $PAGE.providers_home_page.call_based_on_participant_name$
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.providers_call_handling_page.answer_call_button$
@@ -731,3 +725,48 @@ AnswerCallAsProvider:
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.providers_call_handling_page.end_call_btn$
+
+ProviderCloseCallHelper:
+  Roles:
+    - Role: desktopChrome
+      App: desktop
+  Actions:
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_follow_up_call_details_page.update_status_dropdown$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_follow_up_call_details_page.update_status_dropdown$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_follow_up_call_details_page.status_option_close_ticket$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_follow_up_call_details_page.status_option_close_ticket$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_follow_up_call_details_page.close_ticket_modal_title$
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.providers_follow_up_call_details_page.close_ticket_reason_input$
+      Value: 'Automation Test Cleaning'
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_follow_up_call_details_page.close_ticket_save_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.toast_closed_ticket$
+
+CleanUsedMissedCall:
+  Roles:
+    - Role: desktopChrome
+      App: desktop  
+  Actions:
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.home_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.missed_call$
+    - Type: case
+      Value: ProviderCloseCallHelper

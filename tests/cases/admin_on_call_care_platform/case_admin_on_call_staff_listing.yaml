@@ -162,7 +162,7 @@ TestAdminOnCallRefreshSessionForStaffMemberFromPane:
     Environment: Settings
     Vars:
       LOGOUT_OPTION: "Stay On Shift"
-      CARE_PARTNER_USER1_FULLNAME: $AND_CLI_carepartner_user1_name$ $AND_CLI_carepartner_user1_lastname$
+      USER_FULLNAME: $AND_CLI_carepartner_user1_name$ $AND_CLI_carepartner_user1_lastname$
       STAFF_ROLE: "Care Partner"
     Precases:
       - LoginNeverAloneHelper
@@ -272,3 +272,146 @@ TestAdminOnCallRefreshSessionForStaffMemberFromPane:
         - Type: contain
           Var: CALL_RECORD_CONTENT
           Value: 'Completed automatically'
+
+#CHS-2525: Admin on Call Call History View Showing Duplicate Entries for New Calls
+TestAdminOnCallShouldNotShowDuplicatesEntriesForNewCallsOnCallHistory:
+  Environment: Settings
+  Vars:
+    LOGOUT_OPTION: "Go Off Shift"
+  Precases:
+    - LoginNeverAloneHelper
+    - CarePartnerCleanCallQueueAndHangedCalls
+    - SeniorCleanPrompts
+  Aftercases:
+    - TerminateApp
+  Roles:
+    - Role: desktopChrome
+      App: desktop
+    - Role: localiOS
+      App: NeverAlone
+    - Role: desktopChrome1
+      App: desktop
+  Actions:
+    # Generate a medical call as a senior.
+    - Type: case
+      Value: CallCarePartner
+    # Login and answer call as a care partner.
+    - Type: case
+      Value: AnswerCallAsCarePartner
+    # Video Call appears.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.end_call_button$
+    # Click "Medical" button in video call window so the participant speaks to a doctor while on the call.
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.medical_transfer_btn$
+    # "Telehealth request form" appears to the left of video call window.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.telehealth_request_form_header$
+    # Fill in the required fields:
+    # Priority level, Reason for request and When did symptoms start?
+    # Urgent patient matter
+    - Type: click
+      Strategy: id
+      Id: $PAGE.care_platform_call_portal.urgent_patient_matter_select$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.urgent_patient_matter_yes_option$
+    # Reason for request
+    - Type: click
+      Strategy: id
+      Id: $PAGE.care_platform_call_portal.reason_for_request_select$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.first_reason_for_request_available_option$
+    # When did symptoms start
+    - Type: click
+      Strategy: class
+      Id: $PAGE.care_platform_call_portal.symptoms_start_input_container$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.today_date_date_picker$
+    # Click on "Submit".
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.submit_btn$
+    # Telehealth request form window disappears.
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.telehealth_request_form_header$
+    # Verify "End Call" button has been replaced with "Leave Call" button.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.leave_call_btn$
+    # Log in as a provider and join the call
+    - Type: case
+      Value: ProvidersCarePlatformLogin
+      Role: desktopChrome1
+    - Type: case
+      Value: ProviderEndCurrentCall
+      Role: desktopChrome1
+    - Type: case
+      Value: JoinMedicalTransfer
+      Role: desktopChrome1
+    # Care partner leaves the call after provider has joined.
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.leave_call_btn$
+    # Verify that the video updates to show the "The call has ended" text.
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.video_status$
+      Greps:
+        - var: CALL_MESSAGE
+          attr: textContent
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: CALL_MESSAGE
+          Value: "The call has ended."
+    # Fill up the post call survey to complete the session.
+    - Type: case
+      Value: PostCallSurveyCarePartner
+    # Verify that care partner was returned to the "Call queue" page.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform.call_queue_title$
+    # Provider and senior tear down.
+    # Provider ends call.
+    - Type: click
+      Role: desktopChrome1
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.end_call_btn$
+    # Provider fills up Post call Survey.
+    - Type: case
+      Value: PostCallSurveyProvider
+      Role: desktopChrome1
+    # Senior fills up Post call Survey.
+    - Type: case
+      Value: SeniorGreatPostSurveyCallHelper
+    # Log Out from the care Partner account.
+    - Type: case
+      Value: CarePlatformLogout
+    # Log in Care Platform as an Admin on Call
+    - Type: case
+      Value: AdminOnCallLogin
+    # Navigate to Providers > Call History.
+    - Type: case
+      Value: AdminOnCallNavigateToProvidersCallHistory
+    # Verify that the recent call entry is not duplicated.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.admin_on_call_providers_call_history_tab.call_history_row_entry_based_on_provider_subject$
+    - Type: count_elements
+      Strategy: xpath
+      Id: $PAGE.admin_on_call_providers_call_history_tab.call_history_row_entry_based_on_provider_subject$
+      ResultVar: ROW_COUNT
+    - Type: assert
+      Asserts:
+        - Type: eq
+          Var: ROW_COUNT
+          Value: "1"

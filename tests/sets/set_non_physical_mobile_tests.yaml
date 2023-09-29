@@ -11,6 +11,8 @@ SetNonPhysicalMobileTest:
     - Case: TestCarePartnerCallParticipantsDeviceCallComplete
     - Case: TestCarePartnerCallParticipantsDeviceCallIgnored
     - Case: TestCarePartnerCallParticipantsDeviceCallMissed
+    - Case: TestCarePartnerStatusUpdatedToInSessionNotLoggedForAnsweredOutboundCalls
+    - Case: TestCarePartnerCreateManualEventForParticipant
   # Care Partner ES
     - Case: TestCHCarePartnerBrowsingWhileOnCall
     - Case: TestCHCarePartnerCallParticipantsDeviceAndCompleteCall
@@ -71,3 +73,5 @@ SetNonPhysicalMobileTest:
   # Admin on call
     - Case: TestAdminOnCallRefreshUserAccountForCalling
     - Case: TestAdminOnCallRefreshSessionForStaffMemberFromPane
+    - Case: TestAdminOnCallShouldNotShowDuplicatesEntriesForNewCallsOnCallHistory
+    - Case: TestAdminOnCallShouldNotAnswerProviderCallAfterMedicalTransfer

@@ -7,7 +7,7 @@ Timeout: 15
 
 Devices:
   - role: command1,command2,command3
-  - role: desktopChrome,desktopChrome1   
+  - role: desktopChrome,desktopChrome1,desktopChrome2 
     capabilities:
       chromeOptions:
         args:

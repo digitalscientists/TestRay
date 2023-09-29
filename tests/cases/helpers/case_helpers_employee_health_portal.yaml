@@ -309,10 +309,13 @@ EmployeeHealthPortalUserCall:
     - Type: click
       Strategy: xpath
       Id: $PAGE.employee_health_telehealth_on_demand_modal.modal_patient_select_option$
+    - Type: generate_unique_name
+      Name: "Test reason: automation"
+      ResultVar: UNIQUE_SUBJECT
     - Type: send_keys
       Strategy: xpath
       Id: $PAGE.employee_health_telehealth_on_demand_modal.modal_reasons_input$
-      Value: 'Test reason: automation'
+      Value: $AND_CLI_UNIQUE_SUBJECT$
     - Type: click
       Strategy: xpath
       Id: $PAGE.employee_health_telehealth_on_demand_modal.modal_call_provider_button$
@@ -454,10 +457,13 @@ EmployeeHealthPortalCallNow:
     - Type: click
       Strategy: xpath
       Id: $PAGE.employee_health_telehealth_on_demand_modal.modal_patient_select_option$
+    - Type: generate_unique_name
+      Name: "Test reason: automation"
+      ResultVar: UNIQUE_SUBJECT
     - Type: send_keys
       Strategy: xpath
       Id: $PAGE.employee_health_telehealth_on_demand_modal.modal_reasons_input$
-      Value: 'Test reason: automation'
+      Value: $AND_CLI_UNIQUE_SUBJECT$
     - Type: click
       Strategy: xpath
       Id: $PAGE.employee_health_telehealth_on_demand_modal.modal_call_provider_button$
@@ -742,6 +748,9 @@ EHPMobileUpdateAccountPassword:
     - Type: click
       Strategy: xpath
       Id: $PAGE.employee_health_mobile_menu_modal.logout_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.employee_health_mobile_logout_dialog.logout_button$
     - Type: click
       Strategy: xpath
       Id: $PAGE.employee_health_mobile_logout_dialog.logout_button$
@@ -790,6 +799,9 @@ EHPMobileUpdateAccountPassword:
     - Type: click
       Strategy: xpath
       Id: $PAGE.employee_health_mobile_menu_modal.logout_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.employee_health_mobile_logout_dialog.logout_button$
     - Type: click
       Strategy: xpath
       Id: $PAGE.employee_health_mobile_logout_dialog.logout_button$

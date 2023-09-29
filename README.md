@@ -339,6 +339,7 @@ Actions:
 22. [hover](#hover)
 23. [clear_field](#clear_field)
 24. [return_element_location](#return_element_location)
+25. [count_elements](#count_elements)
 
 ## Only Browser
 
@@ -666,6 +667,14 @@ Hovers over an element.
 ### <a id="return_element_location"></a>return_element_location
 
 	- Type: return_element_location
+	  Role: role1 (Optional. if not specified will use the first one defined in the case Roles)
+	  Strategy: id/css/xpath/uiautomator/class_chain/...
+	  Id: //some/path
+	  ResultVar: var1
+### <a id="count_elements"></a>count_elements
+Will return the elements count in a variable.
+
+	- Type: count_elements
 	  Role: role1 (Optional. if not specified will use the first one defined in the case Roles)
 	  Strategy: id/css/xpath/uiautomator/class_chain/...
 	  Id: //some/path

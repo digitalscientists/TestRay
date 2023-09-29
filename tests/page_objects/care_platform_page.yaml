@@ -19,20 +19,20 @@ care_platform_verify_account:
 
 care_platform:
   page_title: //h3
-  call_queue_title: //h3[text()='Call Queue']
+  call_queue_title: //h3[text()='Care Partners']
   navigation_participant: //nav//a[contains(text(),'Participants')]
   navigation_followup: //nav//a[contains(text(),'Follow-up')]
-  navigation_home: //nav//a[contains(text(),'Home')]
+  navigation_home: //nav//a[contains(text(),'Queue')]
   carepartner_toast_notification: //div[@class='Toastify']//div[contains(text(), '$AND_CLI_TOAST_MESSAGE_SHOWN$')]
 
 care_platform_home:
-  first_call_of_queue: //div[@id='containerElement']/div[starts-with(@class, 'ListRow_listRow')][1]
+  first_call_of_queue: //div[@id='containerElement']/div[starts-with(@class, 'ListRow_listRow') and not(contains(., 'Follow-up'))][1]
   answer_call: //button[text()='Answer Call']
-  call_based_on_participant_name: (//div[contains(@class, 'ListRow_listRow')]//strong[text() = '$AND_CLI_senior_user1_name$ $AND_CLI_senior_user1_lastname$'])[last()]
+  call_based_on_participant_name: (//div[contains(@class, 'ListRow_listRow') and not(contains(., 'Follow-up'))]//strong[text() = '$AND_CLI_senior_user1_name$ $AND_CLI_senior_user1_lastname$'])[last()]
   call_based_on_es_idd_participant_name: //div[contains(@class, 'ListRow_listRow')]//strong[text() = '$AND_CLI_idd_es_never_alone_user1_name$ $AND_CLI_idd_es_never_alone_user1_lastname$']
   call_based_on_ch_idd_participant_name: //div[contains(@class, 'ListRow_listRow')]//strong[text() = '$AND_CLI_idd_ch_never_alone_user2_name$ $AND_CLI_idd_ch_never_alone_user2_lastname$']
   active_call_section: //div[contains(@class,'app-video app-video-fixed')] # doesn't matter if its expanded/collapsed
-  call_queue_calls: //div[@id='containerElement']/div[starts-with(@class, 'ListRow_listRow')]
+  call_queue_calls: //div[@id='containerElement']/div[starts-with(@class, 'ListRow_listRow') and not(contains(., 'Follow-up'))]
 
 care_platform_header:
   app_logo: //header//div[@class='app-header-small-logo']/img
@@ -50,13 +50,13 @@ care_platform_header:
   help_provider_option_button: //header//nav//button[contains(.,'Help') and contains(.,'(Provider)')]
   myaccount_menu_button: //header//nav//button[contains(.,'My Account')]
   logout_menu_button: //header//nav//button[contains(.,'Log Out')]
-  offline_carepartner1_element: //div[@class='users-dropdown-list-item is-offline']//div[@class='users-dropdown-name' and contains(., '$AND_CLI_CARE_PARTNER_USER1_FULLNAME$')]
+  offline_carepartner1_element: //div[@class='users-dropdown-list-item is-offline']//div[@class='users-dropdown-name' and contains(., '$AND_CLI_USER_FULLNAME$')]
   offline_ch_carepartner_element: //div[@class='users-dropdown-list-item is-offline']//div[@class='users-dropdown-name' and contains(., '$AND_CLI_ch_carepartner_user_name$ $AND_CLI_ch_carepartner_user_lastname$')]//small[text()='Care Partner (CH)']
   online_ch_carepartner_element: //div[@class='users-dropdown-list-item']//div[@class='users-dropdown-name' and contains(., '$AND_CLI_ch_carepartner_user_name$ $AND_CLI_ch_carepartner_user_lastname$')]//small[text()='Care Partner (CH)']
   offline_es_carepartner_element: //div[@class='users-dropdown-list-item is-offline']//div[@class='users-dropdown-name' and contains(., '$AND_CLI_es_carepartner_user_name$ $AND_CLI_es_carepartner_user_lastname$')]//small[text()='Care Partner (ES)']
   online_es_carepartner_element: //div[@class='users-dropdown-list-item']//div[@class='users-dropdown-name' and contains(., '$AND_CLI_es_carepartner_user_name$ $AND_CLI_es_carepartner_user_lastname$')]//small[text()='Care Partner (ES)']
-  onshift_carepartner1_element: //div[contains(text(),'On Shift')]//following-sibling::div[not(contains(@class,'is-offline'))]/div[@class='users-dropdown-name' and contains(., '$AND_CLI_CARE_PARTNER_USER1_FULLNAME$')]
-  onshift_by_name_and_role_element: //div[contains(text(),'On Shift')]//following-sibling::div[not(contains(@class,'is-offline'))]/div[@class='users-dropdown-name' and contains(., '$AND_CLI_CARE_PARTNER_USER1_FULLNAME$') and contains(.,'$AND_CLI_STAFF_ROLE$')]
+  onshift_carepartner1_element: //div[contains(text(),'On Shift')]//following-sibling::div[not(contains(@class,'is-offline'))]/div[@class='users-dropdown-name' and contains(., '$AND_CLI_USER_FULLNAME$')]
+  onshift_by_name_and_role_element: //div[contains(text(),'On Shift')]//following-sibling::div[not(contains(@class,'is-offline'))]/div[@class='users-dropdown-name' and contains(., '$AND_CLI_USER_FULLNAME$') and contains(.,'$AND_CLI_STAFF_ROLE$')]
 
 care_platform_myaccount_info:
   modal_title: //*[@id='modals']//h4[contains(text(),'My Account')]
