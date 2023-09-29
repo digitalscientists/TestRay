@@ -120,6 +120,12 @@ TestProviderAnswerCompleteSessionFromEHP:
   Environment: Settings 
   Vars:
     STATE: IN
+    USER_FULLNAME: $AND_CLI_provider_user1_name$ $AND_CLI_provider_user1_lastname$
+    STAFF_ROLE: "Provider"
+  Precases:
+    - AdminOnCallRefreshStaff
+  Aftercases:
+    - EmployeeHealthPortalLogOutAction
   Roles:
     - Role: desktopChrome
       App: "desktop"

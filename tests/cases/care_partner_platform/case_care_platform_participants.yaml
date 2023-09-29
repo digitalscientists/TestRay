@@ -4414,7 +4414,7 @@ TestCarePartnerClickAndViewTestParticipantVisuals:
 # CHS-1789: "Status updated to in-session." Not Logged For Answered Outbound Calls
 TestCarePartnerStatusUpdatedToInSessionNotLoggedForAnsweredOutboundCalls:
   Vars:
-    CARE_PARTNER_USER1_FULLNAME: $AND_CLI_carepartner_user2_name$ $AND_CLI_carepartner_user2_lastname$
+    USER_FULLNAME: $AND_CLI_carepartner_user2_name$ $AND_CLI_carepartner_user2_lastname$
     STAFF_ROLE: "Care Partner"
   Environment: Settings
   Precases:

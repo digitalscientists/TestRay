@@ -257,7 +257,7 @@ TestCarePartnerLogoutGoOffShift:
   Environment: Settings 
   Vars:
     LOGOUT_OPTION: "Go Off Shift"
-    CARE_PARTNER_USER1_FULLNAME: $AND_CLI_carepartner_user1_name$ $AND_CLI_carepartner_user1_lastname$
+    USER_FULLNAME: $AND_CLI_carepartner_user1_name$ $AND_CLI_carepartner_user1_lastname$
   Roles:
     - Role: desktopChrome
       App: "desktop"
@@ -319,7 +319,7 @@ TestCarePartnerLogoutStayOnShift:
   Environment: Settings 
   Vars:
     LOGOUT_OPTION: "Stay On Shift"
-    CARE_PARTNER_USER1_FULLNAME: $AND_CLI_carepartner_user1_name$ $AND_CLI_carepartner_user1_lastname$
+    USER_FULLNAME: $AND_CLI_carepartner_user1_name$ $AND_CLI_carepartner_user1_lastname$
   Roles:
     - Role: desktopChrome
       App: "desktop"
@@ -349,7 +349,7 @@ TestCarePartnerLogoutStayOnShift:
 TestCarePartnerAccessAndReviewTeamMembersAvailability:
   Environment: Settings
   Vars:
-    CARE_PARTNER_USER1_FULLNAME: $AND_CLI_carepartner_user1_name$ $AND_CLI_carepartner_user1_lastname$
+    USER_FULLNAME: $AND_CLI_carepartner_user1_name$ $AND_CLI_carepartner_user1_lastname$
   Roles:
     - Role: desktopChrome
       App: "desktop"
@@ -389,7 +389,7 @@ TestCarePartnerAccessAndReviewTeamMembersAvailability:
       Asserts:
       - Type: contain
         Var: USERS_LIST_TEXT
-        Value: $AND_CLI_CARE_PARTNER_USER1_FULLNAME$
+        Value: $AND_CLI_USER_FULLNAME$
   # Click on the headset icon again.
     - Type: click
       Strategy: xpath

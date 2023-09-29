@@ -9,7 +9,7 @@ SetCriticalWorkflows:
     - Case: TestCarePartnerCreateManualEventForParticipant
   # Provider tests
     - Case: TestProviderAnswerCompleteSessionFromEHP
-    - Case: TestProvidersAnswerSNFCallAndCompletesSession
+    - Case: TestProvidersAnswerSNFCallAndCompletesSession #Physical
     - Case: TestProviderBrowsingWhileOnCall
     - Case: TestProvidersReturnToCallPortalAndAndCompletesSession
     - Case: TestProviderReturnMissedSNFCall

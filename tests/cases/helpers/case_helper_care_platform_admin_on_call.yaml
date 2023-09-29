@@ -96,7 +96,7 @@ AdminOnCallRefreshParticipant:
       Id: $PAGE.care_platform_call_portal.yes_refresh_dialog_button$
 
 # This uses the name of the staff member to search
-# The variable is $AND_CLI_CARE_PARTNER_USER1_FULLNAME$
+# The variable is $AND_CLI_USER_FULLNAME$
 # And their role as appears on the dropdown options in the listing
 # The variable for this is $AND_CLI_STAFF_ROLE$
 SearchStaffByNameAndRole:
@@ -127,7 +127,7 @@ SearchStaffByNameAndRole:
       Id: $PAGE.admin_on_call_staff_tab.role_dropdown_by_role_option$
     # Search Name
     - Type: search_by_text
-      Text: $AND_CLI_CARE_PARTNER_USER1_FULLNAME$
+      Text: $AND_CLI_USER_FULLNAME$
     # Select first
     - Type: sleep
       Time: 0.5
@@ -178,3 +178,46 @@ AdminOnCallNavigateToProvidersCallQueue:
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.admin_on_call_providers_call_queue_tab.call_queue_title$
+
+AdminOnCallRefreshStaff:
+  Vars:
+    LOGOUT_OPTION: "Go Off Shift"
+  Aftercases:
+    - CarePlatformLogout
+  Roles:
+    - Role: desktopChrome
+      App: desktop
+  Actions:
+    # Login into Care Platform
+    - Type: case
+      Value: AdminOnCallLogin
+    # Go to Staff and search by name and role
+    - Type: case
+      Value: SearchStaffByNameAndRole
+    # Click on Admin button
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.staff_records.admin_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.staff_records.admin_button$
+    # Check for "Refresh" button
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.staff_records.admin_refresh_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.staff_records.admin_refresh_button$
+    # Refresh confirmation
+    # Click "Yes, Refresh"
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.staff_records.yes_refresh_dialog_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.staff_records.yes_refresh_dialog_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_notifications.refresh_staff_notification$
+    - Type: sleep
+      Time: 1

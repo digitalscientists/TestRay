@@ -25,7 +25,7 @@ TestProviderLogOutStayOnShift:
   Environment: Settings
   Vars:
     LOGOUT_OPTION: "Stay On Shift"
-    CARE_PARTNER_USER1_FULLNAME: $AND_CLI_provider_user1_name$ $AND_CLI_provider_user1_lastname$
+    USER_FULLNAME: $AND_CLI_provider_user1_name$ $AND_CLI_provider_user1_lastname$
   Roles:
     - Role: desktopChrome
       App: "desktop"
@@ -298,7 +298,7 @@ TestProviderLogOutPortalGoOffShift:
   Environment: Settings
   Vars:
     LOGOUT_OPTION: "Go Off Shift"
-    CARE_PARTNER_USER1_FULLNAME: $AND_CLI_provider_user1_name$ $AND_CLI_provider_user1_lastname$
+    USER_FULLNAME: $AND_CLI_provider_user1_name$ $AND_CLI_provider_user1_lastname$
   Roles:
     - Role: desktopChrome
       App: "desktop"
