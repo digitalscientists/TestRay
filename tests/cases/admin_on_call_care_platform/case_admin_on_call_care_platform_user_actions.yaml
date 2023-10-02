@@ -45,7 +45,7 @@ TestAdminOnCallRefreshUserAccountForCalling:
     - Type: click
       Strategy: xpath
       Role: desktopChrome1
-      Id: $PAGE.care_platform_participant.call_portal_btn$
+      Id: $PAGE.care_platform_participant_details.records_button$
   # Check for "Refresh" button
     - Type: wait_for
       Strategy: xpath
@@ -105,11 +105,6 @@ TestAdminOnCallRefreshUserAccountForCalling:
       Strategy: class_chain
       Id: $PAGE.seniors_app_post_call_survey.great_answer_button$
       Role: localiOS
-  # Go to Records
-    - Type: click
-      Strategy: xpath
-      Role: desktopChrome1
-      Id: $PAGE.care_platform_call_portal.call_participant_records$
   # Check on Call History
     - Type: wait_for
       Strategy: xpath
