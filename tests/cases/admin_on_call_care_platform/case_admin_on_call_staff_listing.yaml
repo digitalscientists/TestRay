@@ -399,7 +399,7 @@ TestAdminOnCallShouldNotShowDuplicatesEntriesForNewCallsOnCallHistory:
     # Log in Care Platform as an Admin on Call
     - Type: case
       Value: AdminOnCallLogin
-    # Navigate to Providers > Call History.
+    # Navigate to Call History > Provider
     - Type: case
       Value: AdminOnCallNavigateToProvidersCallHistory
     # Verify that the recent call entry is not duplicated.
