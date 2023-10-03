@@ -82,8 +82,9 @@ care_platform_myaccount_info:
 care_platform_logout_modal:
   stay_on_shift_button: //button[contains(text(),'Stay On Shift')]
   go_off_shift_button: //button[contains(text(),'Go Off Shift')]
-  cancel_logout_button: //button[contains(@class,'button-ghost')] 
+  cancel_logout_button: //button[contains(.,'Cancel')]
   log_out_button: //button[contains(text(),'$AND_CLI_LOGOUT_OPTION$')]
+  yes_logout_button: //button[contains(., 'Yes') and contains(.,'Logout')]
 
 care_platform_participant:
   participants_title: //h3[text()='Participants']

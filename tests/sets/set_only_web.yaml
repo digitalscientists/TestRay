@@ -65,7 +65,6 @@ SetOnlyWebTests:
   - Case: TestESCarePartnerParticipantPaneCreateFollowUpTicket
   - Case: TestESCarePartnerParticipantDirectoryFilter
   # On Boarders
-  - Case: TestOnboarderCarePartnerUpdatePassword
   - Case: TestOnboarderManuallyLogOutOfThePortal
   - Case: TestOnboardersAccessFacilitiesDirectoryFilter
   - Case: TestOnboardersForgotPasswordLoginLink
@@ -84,6 +83,7 @@ SetOnlyWebTests:
   - Case: TestOnboarderStaffMemberPaneReactivateStaffMemberAccountForCarePlatform
   - Case: TestOnboarderStaffMemberPaneDeactivateStaffMemberAccountForCarePlatform
   - Case: TestOnboarderEditStaffMemberAccountForCarePlatform
+  - Case: TestOnboarderCarePartnerUpdatePassword
   # Providers Care Platform
   - Case: TestProvidersUpdatePassword
   - Case: TestProviderLogOutStayOnShift
