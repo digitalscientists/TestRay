@@ -1555,6 +1555,8 @@ ForgotPasswordCarePlatformLoginLink:
 CarePartnerCleanCallQueueAndHangedCalls:
   Vars:
     LOGOUT_OPTION: "Go Off Shift"
+  Aftercases:
+    - CarePlatformLogout
   Roles:
     - Role: desktopChrome
       App: desktop
@@ -1564,9 +1566,6 @@ CarePartnerCleanCallQueueAndHangedCalls:
       Value: CarePartnerLogin
     # Clean Care Partner Call Queue and Hanged Calls.
     - Type: care_partner_clean_call_queue_and_hanged_calls
-    # Log out.
-    - Type: case
-      Value: CarePlatformLogout
 
 CarePartnerUser2CleanCallQueueAndHangedCalls:
   Vars:
@@ -3214,3 +3213,25 @@ MakeMedicalTransferWhileOnCall:
     - Type: wait_for
       Strategy: xpath
       Id : $PAGE.care_platform_call_portal.leave_call_btn$
+
+AlternativeCarePartnerLogout:
+  Roles:
+    - Role: desktopChrome
+      App: desktop
+  Actions:     
+      # Log out to the Care Platform app with Care Partners account
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_header.user_dropdown_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_header.logout_menu_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_logout_modal.yes_logout_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_logout_modal.yes_logout_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_login.login_button$
