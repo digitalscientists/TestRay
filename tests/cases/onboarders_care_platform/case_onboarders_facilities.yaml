@@ -231,7 +231,7 @@ TestOnboarderFacilityProfileChangeStatusForExistingFacilityDevice:
     - OnboarderSetNurseToActive
     - AdminOnCallRefreshDevice
   Aftercases:
-    - CarePlatformLogout
+    - AlternativeCarePartnerLogout
     - OnboarderSetNurseToActive
     - TerminateApp
   Roles: 
