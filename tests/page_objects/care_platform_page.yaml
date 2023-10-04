@@ -32,7 +32,7 @@ care_platform_home:
   call_based_on_es_idd_participant_name: //div[contains(@class, 'ListRow_listRow')]//strong[text() = '$AND_CLI_idd_es_never_alone_user1_name$ $AND_CLI_idd_es_never_alone_user1_lastname$']
   call_based_on_ch_idd_participant_name: //div[contains(@class, 'ListRow_listRow')]//strong[text() = '$AND_CLI_idd_ch_never_alone_user2_name$ $AND_CLI_idd_ch_never_alone_user2_lastname$']
   active_call_section: //div[contains(@class,'app-video app-video-fixed')] # doesn't matter if its expanded/collapsed
-  call_queue_calls: //div[@id='containerElement']/div[starts-with(@class, 'ListRow_listRow') and not(contains(., 'Follow-up'))]
+  call_queue_calls: //div[@id='containerElement']/div[starts-with(@class, 'ListRow_listRow') and not(contains(., 'Follow-up')) and not(contains(., 'Missed Call'))]
 
 care_platform_header:
   app_logo: //header//div[@class='app-header-small-logo']/img
@@ -262,7 +262,7 @@ care_platform_edit_participant_records:
   special_treatment_navigation: //button[contains(@class,'form-navigation-link') and contains(text(),'Special Treatments')]
   dme_navigation: //button[contains(@class,'form-navigation-link') and contains(text(),'DME')]
   hospitalization_navigation: //button[contains(@class,'form-navigation-link') and contains(text(),'Hospitalizations')]
-  social_history_navigation: //button[contains(@class,'form-navigation-link') and contains(text(),'Social History')]
+  social_history_navigation: //button[contains(@class,'form-navigation-link'care_platform_call_portal) and contains(text(),'Social History')]
   housing_navigation: //button[contains(@class,'form-navigation-link') and contains(text(),'Housing')]
   member_safety_navigation: //button[contains(@class,'form-navigation-link') and contains(text(),'Member Safety')]
   community_support_backup_plan_navigation: //button[contains(@class,'form-navigation-link') and contains(text(),'Community Support') and contains(text(),'Backup Plan')]
@@ -574,6 +574,7 @@ care_platform_call_portal:
   located_provider_option: //option[@value='locatedProvider']
   accidental_call_option: //option[@value='accidentalCall']
   submit_and_exit_session_button: //button[contains(text(),'Submit and Exit Session')]
+  cancel_post_call_survey_button: //button[contains(text(),'Cancel')]
   participant_schedule_based_on_element: //strong[text()='$AND_CLI_UNIQUE_EVENT_NAME$']
   edit_event_button: //div[@class='accordion-item is-open']//button[text()='Edit']
   edit_event_modal_header: //div[@class='box has-scrollable-content box-tight has-shadow has-border max-h-full']//h4[@class='font-bold text-md']

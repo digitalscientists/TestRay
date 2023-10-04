@@ -926,6 +926,7 @@ TestCarePartnerAnswerCallFromQueueAndCompleteMedicalTransfer:
   Environment: Settings
   Precases:
     - LoginNeverAloneHelper
+    - ProviderNewCleaner
     - CarePartnerCleanCallQueueAndHangedCalls
     - SeniorCleanPrompts
   Aftercases:
@@ -1037,10 +1038,11 @@ TestCarePartnerAnswerCallFromQueueAndCompleteMedicalTransfer:
     - Type: wait_for
       Strategy: xpath
       Id : $PAGE.care_platform_call_portal.leave_call_btn$
-  # Log in as a provider and join the call
+  # Log in as a provider
     - Type: case
       Value: ProvidersCarePlatformLogin
       Role: desktopChrome1
+  # Join the call as a Provider
     - Type: case
       Value: JoinMedicalTransfer
       Role: desktopChrome1

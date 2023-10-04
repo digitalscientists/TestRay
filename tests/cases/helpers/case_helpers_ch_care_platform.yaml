@@ -46,6 +46,8 @@ AnswerCallAsCHCarePartner:
 CHCarePartnerCleanCallQueueAndHangedCalls:
   Vars:
     LOGOUT_OPTION: "Go Off Shift"
+  Aftercases:
+    - CarePlatformLogout
   Roles:
     - Role: desktopChrome
       App: desktop
@@ -55,9 +57,6 @@ CHCarePartnerCleanCallQueueAndHangedCalls:
       Value: CHCarePartnerLogin
     # Clean Care Partner Call Queue and Hanged Calls.
     - Type: care_partner_clean_call_queue_and_hanged_calls
-    # Log out.
-    - Type: case
-      Value: CarePlatformLogout
 
 CHCarePartnerCallSenior:
   Roles:

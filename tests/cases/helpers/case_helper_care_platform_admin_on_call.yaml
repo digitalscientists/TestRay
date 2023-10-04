@@ -146,10 +146,10 @@ AdminOnCallNavigateToProvidersCallHistory:
     # Navigate to Providers > Call History.
     - Type: wait_for
       Strategy: xpath
-      Id: $PAGE.admin_on_call_home.providers_navigation_button$
+      Id: $PAGE.admin_on_call_home.call_history_navigation_button$
     - Type: click
       Strategy: xpath
-      Id: $PAGE.admin_on_call_home.providers_navigation_button$
+      Id: $PAGE.admin_on_call_home.call_history_navigation_button$
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.admin_on_call_home.providers_call_history_navigation_button$
