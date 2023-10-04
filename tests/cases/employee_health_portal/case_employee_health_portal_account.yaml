@@ -129,28 +129,6 @@ TestEmployeeSettingNotification:
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.employee_health_home_page.alert_updated_notification$
-        
-#CXTB-576 Update Email from My Account Portal
-TestEmployeeUpdateEmail:
-  Environment: Settings 
-  Roles:
-    - Role: desktopChrome
-      App: "desktop"
-  Actions:
-  #Calling Login case
-    - Type: case
-      Value: EmployeeHealthPortalLogIn
-  #Navigate into My Account
-    - Type: case
-      Value: NavigateToMyAccount
-    - Type: wait_for
-      Strategy: xpath
-      Id: $PAGE.employee_health_my_account_modal.my_info_tab$
-  #Click Update Email in left panel
-    - Type: click
-      Strategy: xpath
-      Id: $PAGE.employee_health_my_account_modal.my_info_email_input$
-
 
 #CXTB-252 Information & Update Contact Number
 TestEmployeeInformationUpdateNumber:
@@ -280,6 +258,38 @@ TestEmployeeInformationUpdateNumber:
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.employee_health_home_page.alert_updated_info$
+
+#CXTB-576 Update Email from My Account Portal
+TestEmployeeUpdateEmail:
+  Environment: Settings 
+  Roles:
+    - Role: desktopChrome
+      App: "desktop"
+  Actions:
+  #Calling Login case
+    - Type: case
+      Value: EmployeeHealthPortalLogIn
+  #Navigate into My Account
+    - Type: case
+      Value: NavigateToMyAccount
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.employee_health_my_account_modal.my_info_tab$
+  #Click Update Email in left panel
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.employee_health_my_account_modal.update_email_tab$
+  #Add value for new email field
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.employee_health_signup_page.first_name_input$
+      Value: $AND_CLI_employee_user1_name$  
+  #Cancel and no emails sent
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.employee_health_my_account_modal.update_email_cancel_button$
+
+
 
 #CXTB-241 “Update password” Workflow in My account Modal
 TestEmployeeUpdateAccountPassword:
