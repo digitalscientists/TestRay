@@ -61,8 +61,8 @@ providers_facilities_page:
   devices_button: //button[text()='Devices']
   tabs_content: //div[@class='tabs-content']
   title_subtab_devices: //h4[text()='Facility Devices']
-  call_based_on_device_button: //strong[text()='Device $AND_CLI_facility_devices_user1_number$:']/ancestor::tr//a[@class='button button-basic text-xs']
-  message_based_on_device_button: //strong[text()='Device $AND_CLI_facility_devices_user1_number$:']/ancestor::tr//button[@class='button button-basic text-xs']
+  call_based_on_device_button: //strong[text()='Device $AND_CLI_facility_devices_user1_number$:']/ancestor::tr//a[contains(@class,'button button-basic text-xs')]
+  message_based_on_device_button: //strong[text()='Device $AND_CLI_facility_devices_user1_number$:']/ancestor::tr//button[contains(@class,'button button-basic text-xs')]
   message_input: //input[@id='message']
   send_message_button: //span[@class='icon-send text-md']/ancestor::button
   last_message_sent: (//div[@class='message message-to message-to-inverted'])[last()]
