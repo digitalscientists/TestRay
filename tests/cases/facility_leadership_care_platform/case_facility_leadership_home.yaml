@@ -1,8 +1,6 @@
 # CXTB-543 Facility Leadership - Manually Log Out of Portal & Go Off Shift
 TestFacilityLeadershipLogoutGoOffShift:
   Environment: Settings 
-  Vars:
-    LOGOUT_OPTION: "Go Off Shift"
   Roles:
     - Role: desktopChrome
       App: desktop
@@ -24,4 +22,4 @@ TestFacilityLeadershipLogoutGoOffShift:
       Id: $PAGE.care_platform_logout_modal.cancel_logout_button$
   # Calling Logout case.
     - Type: case
-      Value: FacilityLeadershipCarePlatformLogout
+      Value: AlternativeCarePartnerLogout

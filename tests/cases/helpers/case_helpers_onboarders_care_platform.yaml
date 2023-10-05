@@ -361,12 +361,12 @@ OnboarderChangeUserToTest:
     - Type: sleep
       Time: 0.5
     - Type: case
-      Value: CarePlatformLogout
+      Value: AlternativeCarePartnerLogout
 
 # Making an user to be not "Test"
 OnboarderChangeUserToNotTest:
   Aftercase:
-    - CarePlatformLogout
+    - AlternativeCarePartnerLogout
   Roles:
     - Role: desktopChrome
       App: desktop
