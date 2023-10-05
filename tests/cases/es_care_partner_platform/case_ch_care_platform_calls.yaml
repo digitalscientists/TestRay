@@ -220,7 +220,7 @@ TestCHCarePartnerBrowsingWhileOnCall:
           Value: 'The call has ended'
   # Fill survey
     - Type: case
-      Value: PostCallSurveyCarePartner
+      Value: CHPostCallSurveyCarePartner
 
 # CXTB-522 Call Participant’s Device & Complete a Call
 TestCHCarePartnerCallParticipantsDeviceAndCompleteCall:
@@ -440,7 +440,7 @@ TestCHCarePartnerCallParticipantsDeviceAndCompleteCall:
           Value: 'The call has ended'
   # Fill survey
     - Type: case
-      Value: PostCallSurveyCarePartner
+      Value: CHPostCallSurveyCarePartner
   # Green indicator for 'Available'
     - Type: wait_for
       Strategy: xpath
