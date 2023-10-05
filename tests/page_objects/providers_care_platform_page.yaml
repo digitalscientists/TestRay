@@ -16,7 +16,7 @@ providers_home_page:
   participants_navigation: //header//nav//a[contains(text(),'Participants')]
   facilities_navigation: //header//nav//a[contains(text(),'Facilities')]
   employees_navigation: //header//nav//a[contains(text(),'Employees')]
-  call_based_on_participant_name: (//div[contains(@class, 'ListRow_listRow') and not(contains(., 'Follow-up'))]//strong[text() = '$AND_CLI_senior_user1_name$ $AND_CLI_senior_user1_lastname$']/ancestor::div[@role='button' and not(contains(@class,'disabled'))])[last()]
+  call_based_on_participant_name: (//div[contains(@class, 'ListRow_listRow') and not(contains(., 'Follow-up')) and not(contains(., 'Missed Call')) ]//strong[text() = '$AND_CLI_senior_user1_name$ $AND_CLI_senior_user1_lastname$']/ancestor::div[@role='button' and not(contains(@class,'disabled'))])[last()]
   on_demand_based_on_participant_name: (//*[@id='containerElement']/div[contains(@class,'ListRow_listRow') and contains(.,'On Demand Call')]/div[4]/strong[text()='$AND_CLI_senior_user1_name$ $AND_CLI_senior_user1_lastname$'])[last()]
   follow_up_ticket_based_on_participant_name: //div[contains(@class,'ListRow_listRow')][contains(.,'Follow-up')]//strong[text()='$AND_CLI_senior_user1_name$ $AND_CLI_senior_user1_lastname$'][last()]
   close_ticket_button: //button[text()='Close Ticket']
@@ -61,8 +61,8 @@ providers_facilities_page:
   devices_button: //button[text()='Devices']
   tabs_content: //div[@class='tabs-content']
   title_subtab_devices: //h4[text()='Facility Devices']
-  call_based_on_device_button: //strong[text()='Device $AND_CLI_facility_devices_user1_number$:']/ancestor::tr//a[contains(.,'Call')]
-  message_based_on_device_button: //strong[text()='Device $AND_CLI_facility_devices_user1_number$:']/ancestor::tr//a[contains(.,'Message')]/button
+  call_based_on_device_button: //strong[text()='Device $AND_CLI_facility_devices_user1_number$:']/ancestor::tr//a[contains(@class,'button button-basic text-xs')]
+  message_based_on_device_button: //strong[text()='Device $AND_CLI_facility_devices_user1_number$:']/ancestor::tr//button[contains(@class,'button button-basic text-xs')]
   message_input: //input[@id='message']
   send_message_button: //span[@class='icon-send text-md']/ancestor::button
   last_message_sent: (//div[@class='message message-to message-to-inverted'])[last()]
