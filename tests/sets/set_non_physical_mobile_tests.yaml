@@ -70,6 +70,7 @@ SetNonPhysicalMobileTest:
     - Case: TestOnboarderChangeStatusToSuspendedForExistingParticipant
     - Case: TestOnboarderFacilityProfileChangeStatusForExistingFacilityDevice
     - Case: TestOnboarderChangeStatusToDeactivatedForExistingParticipant
+    - Case: TestOnboarderCreateNewParticipant
   # Admin on call
     - Case: TestAdminOnCallRefreshUserAccountForCalling
     - Case: TestAdminOnCallRefreshSessionForStaffMemberFromPane
