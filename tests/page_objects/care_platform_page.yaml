@@ -264,7 +264,7 @@ care_platform_edit_participant_records:
   special_treatment_navigation: //button[contains(@class,'form-navigation-link') and contains(text(),'Special Treatments')]
   dme_navigation: //button[contains(@class,'form-navigation-link') and contains(text(),'DME')]
   hospitalization_navigation: //button[contains(@class,'form-navigation-link') and contains(text(),'Hospitalizations')]
-  social_history_navigation: //button[contains(@class,'form-navigation-link'care_platform_call_portal) and contains(text(),'Social History')]
+  social_history_navigation: //button[contains(@class,'form-navigation-link') and contains(text(),'Social History')]
   housing_navigation: //button[contains(@class,'form-navigation-link') and contains(text(),'Housing')]
   member_safety_navigation: //button[contains(@class,'form-navigation-link') and contains(text(),'Member Safety')]
   community_support_backup_plan_navigation: //button[contains(@class,'form-navigation-link') and contains(text(),'Community Support') and contains(text(),'Backup Plan')]
