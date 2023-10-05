@@ -179,3 +179,14 @@ providers_notifications:
   call_completed_notification:  //div[text()='Call completed']
   follow_up_ticket_closed_notification:  //div[text()='Follow-up ticket closed']
   call_already_answered_notification:  //div[text()='Call already answered']
+
+providers_call_history_page:
+  call_history_tab: //nav/button[text()='Call History']
+  source_filter_all: //*[@id='all-sources']
+  source_filter_outbound: //*[@id='outbound']
+  source_filter_inbound: //*[@id='inbound']
+  status_filter_all: //*[@id='all-statuses']
+  status_filter_completed: //*[@id='completed']
+  status_filter_missed: //*[@id='missed']
+  status_filter_canceled: //*[@id='canceled']
+  status_filter_ignored: //*[@id='ignored']
