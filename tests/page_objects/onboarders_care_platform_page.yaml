@@ -51,7 +51,7 @@ onboarders_participant_record:
 onboarders_add_participant_form:
   create_participant_form_title: //div[@class='flex flex-wrap flex-half-gutters']
   call_center_dropdown_button: callCenterId
-  call_center_option: //select[@id='callCenterId']//option[contains(text(),'Care Partner')]
+  call_center_option: //select[@id='callCenterId']//option[not(@hidden)][1]
   account_status_dropdown_button: accountStatus
   account_status_pre_delivery_option: //select[@id='accountStatus']//option[contains(text(),'Pre-delivery')]
   is_test: isTest
