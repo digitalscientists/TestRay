@@ -51,7 +51,7 @@ onboarders_participant_record:
 onboarders_add_participant_form:
   create_participant_form_title: //div[@class='flex flex-wrap flex-half-gutters']
   call_center_dropdown_button: callCenterId
-  call_center_option: //select[@id='callCenterId']//option[contains(text(),'CHS')]
+  call_center_option: //select[@id='callCenterId']//option[contains(text(),'Care Partner')]
   account_status_dropdown_button: accountStatus
   account_status_pre_delivery_option: //select[@id='accountStatus']//option[contains(text(),'Pre-delivery')]
   is_test: isTest
@@ -66,7 +66,7 @@ onboarders_add_participant_form:
   phone_input: phone
   email_input: emailAddress
   participant_type_dropdown_button: participantType
-  participant_type_option:  //select[@id='participantType']//option[contains(text(),'Home Health/Hospice')]
+  participant_type_option: //select[@id='participantType']//option[contains(text(),'Home Health/Hospice')]
   address_input: address
   address_numbers_input: address2
   city_input: city
