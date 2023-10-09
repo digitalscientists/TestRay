@@ -78,6 +78,16 @@ TestAdminOnCallLogoutGoOffShift:
       - Type: n_contain
         Var: CARE_PARTNER_ELEMENT
         Value: "Idle"
+  # Check there's no Admin on Rails role in the dropdown (CHS-2558)
+    - Type: count_elements
+      Strategy: xpath
+      Id: $PAGE.care_platform_header.admin_on_rails_element$
+      ResultVar: RAILS_COUNT
+    - Type: assert
+      Asserts:
+        - Type: eq
+          Var: RAILS_COUNT
+          Value: "0"
   # Log out of the second user too.
     - Type: case
       Value: CarePlatformLogout
@@ -146,6 +156,16 @@ TestAdminOnCallLogoutStayOnShift:
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.care_platform_header.onshift_carepartner1_element$
+  # Check there's no Admin on Rails role in the dropdown (CHS-2558)
+    - Type: count_elements
+      Strategy: xpath
+      Id: $PAGE.care_platform_header.admin_on_rails_element$
+      ResultVar: RAILS_COUNT
+    - Type: assert
+      Asserts:
+        - Type: eq
+          Var: RAILS_COUNT
+          Value: "0"
 
 #CXTB-605: Admin On Call - Use “Forgot password” Link on Login Page  
 TestAdminOnCallForgotPasswordLoginLink:

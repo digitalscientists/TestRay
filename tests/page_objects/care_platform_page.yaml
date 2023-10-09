@@ -58,6 +58,7 @@ care_platform_header:
   online_es_carepartner_element: //div[@class='users-dropdown-list-item']//div[@class='users-dropdown-name' and contains(., '$AND_CLI_es_carepartner_user_name$ $AND_CLI_es_carepartner_user_lastname$')]//small[text()='Care Partner (ES)']
   onshift_carepartner1_element: //div[contains(text(),'On Shift')]//following-sibling::div[not(contains(@class,'is-offline'))]/div[@class='users-dropdown-name' and contains(., '$AND_CLI_USER_FULLNAME$')]
   onshift_by_name_and_role_element: //div[contains(text(),'On Shift')]//following-sibling::div[not(contains(@class,'is-offline'))]/div[@class='users-dropdown-name' and contains(., '$AND_CLI_USER_FULLNAME$') and contains(.,'$AND_CLI_STAFF_ROLE$')]
+  admin_on_rails_element: //div[@class='users-dropdown-list']//*[contains(.,'Rail')]
 
 care_platform_myaccount_info:
   modal_title: //*[@id='modals']//h4[contains(text(),'My Account')]
