@@ -61,9 +61,6 @@ TestESCarePartnerParticipantPaneCreateFollowUpTicket:
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_participant_details.ticket_assigned_input$
-    - Type: wait_for
-      Strategy: xpath
-      Id: $PAGE.care_platform_participant_details.assigned_option_unassigned$
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_participant_details.assigned_option_2$
