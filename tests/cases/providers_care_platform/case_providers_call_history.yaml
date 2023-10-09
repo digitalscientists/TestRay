@@ -1,6 +1,10 @@
 # CXTB-141 Can Click and View Provider Call History & Access Call Recordings
 TestProviderReviewCallHistoryAndAccessCallRecordings:
   Environment: Settings
+  Vars:
+    LOGOUT_OPTION: "Go Off Shift"
+  Aftercases:
+    - CarePlatformLogout
   Roles:
     - Role: desktopChrome
       App: desktop
@@ -163,6 +167,24 @@ TestProviderReviewCallHistoryAndAccessCallRecordings:
         - Type: contain
           Var: STATUS_MISSED_URL
           Value: 'missed'
+    # All Missed calls have "Missed Call." as subject
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_call_history_page.first_call_row$
+      Time: 10
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.providers_call_history_page.first_call_row$
+      Greps:
+        - var: MISSED_CALL_SUBJECT
+          attr: innerHTML
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: MISSED_CALL_SUBJECT
+          Value: 'Missed'
     # Check Canceled Calls filter
     - Type: click
       Strategy: xpath
@@ -192,6 +214,24 @@ TestProviderReviewCallHistoryAndAccessCallRecordings:
         - Type: contain
           Var: STATUS_CANCELED_URL
           Value: 'canceled'
+    # All Cancelled calls have "Cacelled Call." as subject
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_call_history_page.first_call_row$
+      Time: 10
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.providers_call_history_page.first_call_row$
+      Greps:
+        - var: CANCELED_CALL_SUBJECT
+          attr: innerHTML
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: CANCELED_CALL_SUBJECT
+          Value: 'Canceled'
     # Check Ignored call status filter
     - Type: click
       Strategy: xpath
@@ -221,9 +261,90 @@ TestProviderReviewCallHistoryAndAccessCallRecordings:
         - Type: contain
           Var: STATUS_IGNORED_URL
           Value: 'ignored'
+    # All Ignored calls have "Ignored Call." as subject
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_call_history_page.first_call_row$
+      Time: 10
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.providers_call_history_page.first_call_row$
+      Greps:
+        - var: IGNORED_CALL_SUBJECT
+          attr: innerHTML
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: IGNORED_CALL_SUBJECT
+          Value: 'Ignored'
   # Expand row entry, check details
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_history_page.status_filter_completed$
+    - Type: refresh
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_call_history_page.first_call_row$
+      Time: 10
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_history_page.first_call_row$
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.providers_call_history_page.first_call_row$
+      Greps:
+        - var: CALL_IS_OPEN
+          attr: class
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: CALL_IS_OPEN
+          Value: 'is-open'
   # Check telehealth request form
-  # Verify for Senior telehealh request
-  # Verify for SNF telehealth request
-  # Verify for Employee telehealth request
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_call_history_page.telehealth_form_button$
+    # Open Telehealth request Modal
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_history_page.telehealth_form_button$
+      # Telehealth modal form
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_call_history_page.telehealth_form_modal_title$
+      # Situation subtitle
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_call_history_page.telehealth_form_situation_subtitle$
+      # Close telehealth modal
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_history_page.telehealth_form_close_button$
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id: $PAGE.providers_call_history_page.telehealth_form_modal_title$
   # Click play button on call recording, check you can pause it
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_call_history_page.play_pause_recording_button$
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.providers_call_history_page.play_pause_recording_button_status$
+      Greps:
+        - var: PLAY_RECORDING_STATUS
+          attr: class
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: PLAY_RECORDING_STATUS
+          Value: '-paused'
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_history_page.play_pause_recording_button$
+  

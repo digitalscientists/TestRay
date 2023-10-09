@@ -190,3 +190,11 @@ providers_call_history_page:
   status_filter_missed: //*[@id='missed']
   status_filter_canceled: //*[@id='canceled']
   status_filter_ignored: //*[@id='ignored']
+  first_call_row: (//div[contains(@class,'accordion-item')])[1]
+  telehealth_form_button: //*[@id='telehealth-request-form']
+  telehealth_form_modal_title: //*[@id='modals']//h4[contains(text(),'Telehealth request')]
+  telehealth_form_patient_information_subtitle: //*[@id='telehealth-request']/h4[text()='Patient Information']
+  telehealth_form_situation_subtitle: //*[@id='telehealth-request']/h4[text()='Situation']
+  telehealth_form_close_button: //*[@id='modals']//button[contains(.,'Close')]
+  play_pause_recording_button: (//div[contains(@class,'accordion-item')])[1]//div[contains(@class, 'call-recording')]/button
+  play_pause_recording_button_status: (//div[contains(@class,'accordion-item')])[1]//div[contains(@class, 'call-recording')]/div[@aria-label='Audio player']
