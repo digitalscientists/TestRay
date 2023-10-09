@@ -99,6 +99,7 @@ SetOnlyWebTests:
   - Case: TestProviderUseForgotPasswordLink
   - Case: TestProviderAccessParticipantDirectoryandViewDeviceRecordfromListing
   - Case: TestProvidersEHPSeeCallAppearInQueueAssignAndReviewDetails
+  - Case: TestProviderReviewCallHistoryAndAccessCallRecordings
   # Facility Leadership Care Platform
   - Case: TestFacilityLeadershipDirectoryAndFilter
   - Case: TestFacilityLeadershipLogoutGoOffShift

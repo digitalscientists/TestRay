@@ -15,6 +15,7 @@ SetCriticalWorkflows:
     - Case: TestProviderReturnMissedSNFCall
     - Case: TestProvidersSelectCallInQueueAndGetCallAnsweredAlreadyNotification
     - Case: TestProvidersEHPSeeCallAppearInQueueAssignAndReviewDetails
+    - Case: TestProviderReviewCallHistoryAndAccessCallRecordings
   # Never Alone SNF tests
     - Case: TestSNFRequestSuccessfulCallConnect
     - Case: TestSNFCheckQueueandReviewDetails
