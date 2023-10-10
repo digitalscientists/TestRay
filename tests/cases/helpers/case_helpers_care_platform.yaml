@@ -2000,6 +2000,15 @@ CarePartnerToastValidation:
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.care_platform.carepartner_toast_notification$
+    - Type: count_elements
+      Strategy: xpath
+      Id: $PAGE.care_platform.carepartner_toast_notification$
+      ResultVar: TOAST_COUNT
+    - Type: assert
+      Asserts:
+        - Type: eq
+          Var: TOAST_COUNT
+          Value: "1"
     - Type: get_text
       Strategy: xpath
       Id : $PAGE.care_platform.carepartner_toast_notification$
