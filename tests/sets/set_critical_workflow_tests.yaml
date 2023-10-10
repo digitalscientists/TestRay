@@ -50,6 +50,7 @@ SetCriticalWorkflows:
     - Case: TestOnboarderStaffMemberPaneDeactivateStaffMemberAccountForCarePlatform
     - Case: TestOnboarderEditStaffMemberAccountForCarePlatform
     - Case: TestOnboarderChangeStatusToDeactivatedForExistingParticipant
+    - Case: TestOnboarderCreateNewParticipant
   # Facility Leadership
     - Case: TestFacilityLeadershipLogoutGoOffShift
   # Admin on Call

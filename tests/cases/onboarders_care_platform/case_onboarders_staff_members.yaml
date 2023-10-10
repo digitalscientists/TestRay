@@ -164,8 +164,6 @@ TestOnboarderAccessStaffDirectoryAndFilter:
 # CXTB-509: Re-Activate Staff Member Account for Care Platform - Staff Member Pane
 TestOnboarderStaffMemberPaneReactivateStaffMemberAccountForCarePlatform:
     Environment: Settings
-    Vars:
-      LOGOUT_OPTION: "Go Off Shift"
     Precases:
       - OnboarderCarePartnerLogin
       - OnboarderSetStaffInactive
@@ -272,7 +270,7 @@ TestOnboarderStaffMemberPaneReactivateStaffMemberAccountForCarePlatform:
       Id: $PAGE.onboarders_notifications.account_status_updated_notification_button$
   # Log out of the Onboarder account. 
     - Type: case
-      Value: CarePlatformLogout
+      Value: AlternativeCarePartnerLogout
   # Verify that the user can log in.
     - Type: case
       Value: CarePartnerLoginSecondaryUser

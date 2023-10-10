@@ -20,6 +20,8 @@ care_platform_verify_account:
 care_platform:
   page_title: //h3
   call_queue_title: //h3[text()='Care Partners']
+  es_call_queue_title: //h3[text()='Easterseals Support']
+  ch_call_queue_title: //h3[text()='Cardinal Support']
   navigation_participant: //nav//a[contains(text(),'Participants')]
   navigation_followup: //nav//a[contains(text(),'Follow-up')]
   navigation_home: //nav//a[contains(text(),'Queue')]
@@ -32,7 +34,7 @@ care_platform_home:
   call_based_on_es_idd_participant_name: //div[contains(@class, 'ListRow_listRow')]//strong[text() = '$AND_CLI_idd_es_never_alone_user1_name$ $AND_CLI_idd_es_never_alone_user1_lastname$']
   call_based_on_ch_idd_participant_name: //div[contains(@class, 'ListRow_listRow')]//strong[text() = '$AND_CLI_idd_ch_never_alone_user2_name$ $AND_CLI_idd_ch_never_alone_user2_lastname$']
   active_call_section: //div[contains(@class,'app-video app-video-fixed')] # doesn't matter if its expanded/collapsed
-  call_queue_calls: //div[@id='containerElement']/div[starts-with(@class, 'ListRow_listRow') and not(contains(., 'Follow-up'))]
+  call_queue_calls: //div[@id='containerElement']/div[starts-with(@class, 'ListRow_listRow') and not(contains(., 'Follow-up')) and not(contains(., 'Missed Call'))]
   queue_header_columns: //div[contains(text(),'Type')]/following-sibling::div[contains(text(),'Participant')]/following-sibling::div[contains(text(),'Assigned')]
 
 care_platform_header:
@@ -576,6 +578,7 @@ care_platform_call_portal:
   located_provider_option: //option[@value='locatedProvider']
   accidental_call_option: //option[@value='accidentalCall']
   submit_and_exit_session_button: //button[contains(text(),'Submit and Exit Session')]
+  cancel_post_call_survey_button: //button[contains(text(),'Cancel')]
   participant_schedule_based_on_element: //strong[text()='$AND_CLI_UNIQUE_EVENT_NAME$']
   edit_event_button: //div[@class='accordion-item is-open']//button[text()='Edit']
   edit_event_modal_header: //div[@class='box has-scrollable-content box-tight has-shadow has-border max-h-full']//h4[@class='font-bold text-md']

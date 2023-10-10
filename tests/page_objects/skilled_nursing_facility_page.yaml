@@ -58,6 +58,7 @@ snf_call_portal:
 snf_notifications:
   missed_call_modal_title: Missed Outgoing Call
   modal_close_button: "**/XCUIElementTypeButton[`label ENDSWITH 'Close'`]"
+  provider_message_modal_close_button: "**/XCUIElementTypeOther[`name CONTAINS 'Provider Message'`]/**/XCUIElementTypeButton[`label ENDSWITH 'Close'`]"
   notification_details_from: "**/XCUIElementTypeOther[`label BEGINSWITH 'From:'`][-1]"
   notification_details_sent: "**/XCUIElementTypeOther[`label BEGINSWITH 'Sent:'`]"
   notification_details_when: "**/XCUIElementTypeOther[`label BEGINSWITH 'When:'`][-1]"
