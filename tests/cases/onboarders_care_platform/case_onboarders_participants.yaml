@@ -201,6 +201,13 @@ TestOnboarderCreateNewParticipant:
       Var: TOAST_MESSAGE_SHOWN  
     - Type: case
       Value: CarePartnerToastValidation
+  # Go to Edit Info
+    - Type: wait_for
+      Strategy: xpath 
+      Id: $PAGE.onboarders_participant_details_pane.edit_info$
+    - Type: click
+      Strategy: xpath 
+      Id: $PAGE.onboarders_participant_details_pane.edit_info$
   # Go to Address/Emergency Phone
     - Type: click
       Strategy: xpath
@@ -350,6 +357,18 @@ TestOnboarderCreateNewParticipant:
       Id: $PAGE.onboarders_participant_page.search_input$
       Value: "$AND_CLI_PARTICIPANT_LAST_NAME$"
   # Select the participant just created
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.onboarders_participant_page.senior_complete_name$
+    - Type: count_elements
+      Strategy: xpath
+      Id: $PAGE.onboarders_participant_page.senior_complete_name$
+      ResultVar: ROW_COUNT
+    - Type: assert
+      Asserts:
+        - Type: eq
+          Var: ROW_COUNT
+          Value: "1"
     - Type: click
       Strategy: xpath
       Id: $PAGE.onboarders_participant_page.senior_complete_name$
