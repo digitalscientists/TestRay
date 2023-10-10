@@ -3,13 +3,17 @@ TestProviderReviewCallHistoryAndAccessCallRecordings:
   Environment: Settings
   Vars:
     LOGOUT_OPTION: "Go Off Shift"
+  Precases:
+    - MakeCallBetweenProviderAndSNF
   Aftercases:
     - CarePlatformLogout
   Roles:
     - Role: desktopChrome
       App: desktop
+    - Role: localiOS
+      App: NeverAlone
   Actions:
-  # Log in with the second user.
+  # Log in with provider
     - Type: case
       Value: ProvidersCarePlatformLogin
   # Go to Call History
@@ -168,6 +172,7 @@ TestProviderReviewCallHistoryAndAccessCallRecordings:
           Var: STATUS_MISSED_URL
           Value: 'missed'
     # All Missed calls have "Missed Call." as subject
+    - Type: refresh
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.providers_call_history_page.first_call_row$
@@ -215,6 +220,7 @@ TestProviderReviewCallHistoryAndAccessCallRecordings:
           Var: STATUS_CANCELED_URL
           Value: 'canceled'
     # All Cancelled calls have "Cacelled Call." as subject
+    - Type: refresh
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.providers_call_history_page.first_call_row$
@@ -262,6 +268,7 @@ TestProviderReviewCallHistoryAndAccessCallRecordings:
           Var: STATUS_IGNORED_URL
           Value: 'ignored'
     # All Ignored calls have "Ignored Call." as subject
+    - Type: refresh
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.providers_call_history_page.first_call_row$
