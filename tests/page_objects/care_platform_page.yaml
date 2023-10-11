@@ -106,7 +106,8 @@ care_platform_participant:
   search_input: //input[@id='searchText']
   clear_search_button: //button[contains(@class,'button-circle')]
   status_dropdown_button: //button[contains(@class,'queue-filter-dropdown-toggle')]
-  status_dropdown_options: //div[contains(@class, 'queue-filter-dropdown')]  
+  status_dropdown_options: //div[contains(@class, 'queue-filter-dropdown')]
+  active_dropdown_option: //div[contains(@class, 'queue-filter-dropdown')]//button[text()='Active']
 
 care_platform_add_participant_form:
   create_participant_title: //div[@class='flex flex-wrap flex-half-gutters']
@@ -254,6 +255,13 @@ care_platform_participant_records_follow_up_tickets:
   follow_up_ticket_created_label: //div[@aria-hidden='false']//p
   track_time_input_dialog: //div[@id='dialogs']//input[@name='timeToComplete']
   save_and_archive_button: //div[@id='dialogs']//button[text()='Save and Archive']
+  create_ticket_button: //button[@id='createTicket']
+  create_or_edit_ticket_modal_title: //div[@id='modals']//h4
+  subject_input: //input[@data-test-id='input-subject']
+  category_select: //select[@id='kind']
+  estimated_date_input: //input[@id='estimatedDate']
+  save_ticket_button: //button[@data-test-id='testFormFollowUpTicketSave']
+  medical_appointment_opt: //option[@id='med_appointment']
 
 care_platform_edit_participant_records:
   edit_title: //span[contains(text(),'Edit')]
@@ -631,6 +639,7 @@ care_platform_notifications:
   event_deleted_notification: //div[@class='Toastify']//div[text()='Event deleted']
   failed_to_join_call_notification: //div[@class='Toastify']//div[text()='Failed to join call']
   call_already_answered_notification: //div[@class='Toastify']//div[text()='Call already answered']
+  follow_up_ticket_created_notification: //div[@class='Toastify']//div[text()='Follow-up ticket created']
   follow_up_ticket_saved_notification: //div[@class='Toastify']//div[text()='Follow-up ticket saved']
   follow_up_ticket_completed_notification: //div[@class='Toastify']//div[text()='Follow-up ticket completed']
   ems_data_updating_notification: //div[@class='Toastify']//div[text()='Updating EMS data...']

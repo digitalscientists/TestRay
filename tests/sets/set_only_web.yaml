@@ -36,6 +36,7 @@ SetOnlyWebTests:
   - Case: TestCarePartnerCallExternal10DigitNumberWithoutParticipant
   - Case: TestCarePartnerClickAndViewTestParticipantVisuals
   - Case: TestCarePartnerLogInButtonShouldBeLimitedToOneClick
+  - Case: TestCarePartnerCreateFollowUpTicketParticipantProfile
   # Employee Health Portal
   - Case: TestEmployeeSettingNotification
   - Case: TestEmployeeInformationUpdateNumber
