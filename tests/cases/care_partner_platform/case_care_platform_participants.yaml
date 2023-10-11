@@ -4685,4 +4685,88 @@ TestCarePartnerTrackTimeAndEditFollowUpTicketsForParticipant:
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_participant_records_follow_up_tickets.active_follow_up_ticket_based_on_name$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_records_follow_up_tickets.edit_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_records_follow_up_tickets.edit_button$
     # "Edit" window appears, showing all information as currently entered.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_records_follow_up_tickets.create_or_edit_ticket_modal_title$
+    - Type: wait_for_property
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_records_follow_up_tickets.create_or_edit_ticket_modal_title$
+      Property: textContent
+      Value:  Edit Ticket
+    # Update the follow up ticket.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_records_follow_up_tickets.details_input$
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_records_follow_up_tickets.details_input$
+      Value: Automation Details
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_records_follow_up_tickets.save_ticket_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_notifications.follow_up_ticket_saved_notification$
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id: $PAGE.care_platform_notifications.follow_up_ticket_saved_notification$
+    # Window closes, with any updates you made now visible in the Active tickets listing.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_records_follow_up_tickets.expanded_ticket_content$
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_records_follow_up_tickets.expanded_ticket_content$
+      Greps:
+        - var: FOLLOW_UP_TICKET_CONTENT
+          attr: textContent
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: FOLLOW_UP_TICKET_CONTENT
+          Value: Automation Details
+    # Update existing, or put some time in the "Track time to complete" box.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_records_follow_up_tickets.track_time_input$
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_records_follow_up_tickets.track_time_input$
+      Value: "1"
+    # Page allows you to update or enter the information then click away without issue
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_records_follow_up_tickets.active_tickets_title$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_notifications.follow_up_ticket_saved_notification$
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id: $PAGE.care_platform_notifications.follow_up_ticket_saved_notification$
+    # Close follow up ticket to keep the active tickets cleaner.
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_records_follow_up_tickets.completed_button$
+    - Type: wait_for_property
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_records_follow_up_tickets.save_and_archive_button$
+      Property: disabled
+      Value: "false"
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_records_follow_up_tickets.save_and_archive_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_notifications.follow_up_ticket_completed_notification$
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id: $PAGE.care_platform_notifications.follow_up_ticket_completed_notification$
