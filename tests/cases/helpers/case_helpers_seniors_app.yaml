@@ -174,7 +174,6 @@ AnswerCallAsSenior:
 
 # Senior Helper to clean prompts on Never Alone.
 SeniorCleanPrompts:
-  Environment: Settings
   Roles:
     - Role: localiOS
       App: NeverAlone
