@@ -1898,7 +1898,20 @@ CarePartnerEditParticipantNavigation:
     - Type: search_by_text
       Role: desktopChrome
       Text: $AND_CLI_senior_user1_name$
-  # Select first participant by name in the list
+  # Apply the Active filter
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant.status_dropdown_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant.status_dropdown_options$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant.active_dropdown_option$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant.active_dropdown_option$
+  # Select first active participant by name in the list
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.care_platform_participant.senior_complete_name$
@@ -1935,7 +1948,20 @@ CarePartnerParticipantPaneNavigation:
     - Type: search_by_text
       Role: desktopChrome
       Text: $AND_CLI_senior_user1_name$
-  # Select corresponding participant by name in the list.
+  # Apply the Active filter
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant.status_dropdown_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant.status_dropdown_options$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant.active_dropdown_option$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant.active_dropdown_option$
+  # Select corresponding active participant by name in the list.
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.care_platform_participant.senior_complete_name$
@@ -2039,7 +2065,20 @@ CarePartnerParticipantRecordsNavigation:
     - Type: search_by_text
       Role: desktopChrome
       Text: $AND_CLI_senior_user1_name$
-  # Select first participant by name in the list
+  # Apply the Active filter
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant.status_dropdown_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant.status_dropdown_options$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant.active_dropdown_option$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant.active_dropdown_option$
+  # Select first active participant by name in the list
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.care_platform_participant.senior_complete_name$
