@@ -262,6 +262,7 @@ care_platform_participant_records_follow_up_tickets:
   estimated_date_input: //input[@id='estimatedDate']
   save_ticket_button: //button[@data-test-id='testFormFollowUpTicketSave']
   medical_appointment_opt: //option[@id='med_appointment']
+  details_input: //textarea[@id='details']
 
 care_platform_edit_participant_records:
   edit_title: //span[contains(text(),'Edit')]
