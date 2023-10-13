@@ -57,6 +57,7 @@ SetNonPhysicalMobileTest:
     - Case: TestSeniorSettingsPageNavigation
     - Case: TestSeniorWifiSettingsPage
     - Case: TestSeniorAppDeactivatedAccountStatusVisuals
+    - Case: TestSeniorIpadShouldNotResetIfCarePartnerUpdatesParticipantProfile
   # Never Alone SNF tests
     - Case: TestSNFVerifyNotificationsPage
     - Case: TestSNFMessagePromptFromProvider
