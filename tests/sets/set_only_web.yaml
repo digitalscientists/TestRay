@@ -38,6 +38,7 @@ SetOnlyWebTests:
   - Case: TestCarePartnerLogInButtonShouldBeLimitedToOneClick
   - Case: TestCarePartnerCreateFollowUpTicketParticipantProfile
   - Case: TestCarePartnerTrackTimeAndEditFollowUpTicketsForParticipant
+  - Case: TestCarePartnerCompleteFollowUpTicketParticipantProfile
   # Employee Health Portal
   - Case: TestEmployeeSettingNotification
   - Case: TestEmployeeInformationUpdateNumber
