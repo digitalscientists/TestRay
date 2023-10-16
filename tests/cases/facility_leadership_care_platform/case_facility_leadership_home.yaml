@@ -23,3 +23,47 @@ TestFacilityLeadershipLogoutGoOffShift:
   # Calling Logout case.
     - Type: case
       Value: AlternativeCarePartnerLogout
+
+# CXTB-647 Facility Leadership - See Call Appear on Queue, then Select Call
+TestFacilityLeadershipSeeCallAppearOnQueueThenSelectCall:
+  Environment: Settings 
+  Precases:
+    - LoginSNFHelper
+    - ProviderNewCleaner
+  Aftercases:
+    - TerminateApp
+  Roles:
+    - Role: desktopChrome
+      App: desktop
+    - Role: localiOS
+      App: NeverAlone
+  Actions:
+  # Calling Login case.
+    - Type: case
+      Value: FacilityLeadershipCarePartnerLogin
+  # Generate a New Request.
+    - Type: case
+      Value: SNFNewRequestHelper
+  # Selects first on demand call.
+  # Using page objects from other Care Platform pages to avoid duplication.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.on_demand_calls$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.on_demand_calls$
+  # All pane information for inbound call is displayed (Assessment, Call History, Hospitals) with no buttons or actions available to user.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.facility_leadership_call_details_pane.assessment_tab$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.facility_leadership_call_details_pane.call_history_tab$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.facility_leadership_call_details_pane.local_hospitals_tab$
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id: $PAGE.care_platform_home.answer_call$
+    # Clean request
+    # add cleaner
