@@ -139,6 +139,7 @@ staff_records:
 
 onboarder_staff_records_details:
   edit_info_button: //button[contains(text(), 'Edit info')]
+  records_hyper_link: //a[contains(.,'Records')]
   staff_name_label: //div[@class='participant-profile-contact']/h3
   staff_role_label: //div[@class='participant-profile-contact']//strong[contains(text(), 'Role')]
   staff_status_label: //div[@class='participant-profile-contact']//strong[contains(text(), 'Status')]
