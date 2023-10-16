@@ -179,6 +179,21 @@ TestOnboarderStaffMemberPaneReactivateStaffMemberAccountForCarePlatform:
     - Type: search_by_text
       Role: desktopChrome
       Text: $AND_CLI_carepartner_user2_name$
+    # Filter by Role
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.admin_on_call_staff_tab.role_dropdown$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.admin_on_call_staff_tab.role_dropdown$
+    # Select Role: Care Partner
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.admin_on_call_staff_tab.role_dropdown_care_partner_option$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.admin_on_call_staff_tab.role_dropdown_care_partner_option$
+    # Select Care Partner 2 based on name  
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.onboarders_staff_listing.care_partner2_based_on_name$
@@ -268,6 +283,36 @@ TestOnboarderStaffMemberPaneReactivateStaffMemberAccountForCarePlatform:
     - Type: wait_not_visible
       Strategy: xpath
       Id: $PAGE.onboarders_notifications.account_status_updated_notification_button$
+  # CHS-2584 Checking for bug: Blank Screen When Access Staff List After Change Staff Account Status
+    # Check listing title
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.onboarders_staff_listing.staff_listing_title$
+    # Check we still have the add button
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.onboarders_staff_listing.add_button$
+    # Check we still have the search button
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.onboarders_staff_listing.staff_listing_search_button$
+     # Check that the care partner is still visible
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.onboarders_staff_listing.care_partner2_based_on_name$
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.onboarders_staff_listing.care_partner2_based_on_name_row$
+      Greps:
+        - var: STAFF_ROW_CONTENT
+          attr: innerHTML
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: STAFF_ROW_CONTENT
+          Value: Active
   # Log out of the Onboarder account. 
     - Type: case
       Value: AlternativeCarePartnerLogout
@@ -280,6 +325,7 @@ TestOnboarderStaffMemberPaneDeactivateStaffMemberAccountForCarePlatform:
     Environment: Settings
     Vars:
       LOGOUT_OPTION: "Go Off Shift"
+      STAFF_ROLE: "Onboarder"
     Precases:
       - OnboarderCarePartnerLogin
       - OnboarderSetStaffActive
@@ -299,6 +345,20 @@ TestOnboarderStaffMemberPaneDeactivateStaffMemberAccountForCarePlatform:
     - Type: search_by_text
       Role: desktopChrome
       Text: $AND_CLI_onboarder_user1_name$
+    # Filter by Role
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.admin_on_call_staff_tab.role_dropdown$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.admin_on_call_staff_tab.role_dropdown$
+    # Select Role: Onboarder
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.admin_on_call_staff_tab.role_dropdown_by_role_option$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.admin_on_call_staff_tab.role_dropdown_by_role_option$
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.onboarders_staff_listing.onboarder_based_on_name$
@@ -334,6 +394,21 @@ TestOnboarderStaffMemberPaneDeactivateStaffMemberAccountForCarePlatform:
     - Type: search_by_text
       Role: desktopChrome
       Text: $AND_CLI_carepartner_user2_name$
+    # Filter by Role
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.admin_on_call_staff_tab.role_dropdown$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.admin_on_call_staff_tab.role_dropdown$
+    # Select Role: Care Partner
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.admin_on_call_staff_tab.role_dropdown_care_partner_option$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.admin_on_call_staff_tab.role_dropdown_care_partner_option$
+    # Select Care Partner 2 based on name
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.onboarders_staff_listing.care_partner2_based_on_name$
@@ -423,6 +498,36 @@ TestOnboarderStaffMemberPaneDeactivateStaffMemberAccountForCarePlatform:
     - Type: wait_not_visible
       Strategy: xpath
       Id: $PAGE.onboarders_notifications.account_status_updated_notification_button$
+  # CHS-2584 Checking for bug: Blank Screen When Access Staff List After Change Staff Account Status
+    # Check listing title
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.onboarders_staff_listing.staff_listing_title$
+    # Check we still have the add button
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.onboarders_staff_listing.add_button$
+    # Check we still have the search button
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.onboarders_staff_listing.staff_listing_search_button$
+     # Check that the care partner is still visible
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.onboarders_staff_listing.care_partner2_based_on_name$
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.onboarders_staff_listing.care_partner2_based_on_name_row$
+      Greps:
+        - var: STAFF_ROW_CONTENT
+          attr: innerHTML
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: STAFF_ROW_CONTENT
+          Value: Inactive
   # Verify if logged in and user is deactivated, it should kick out the user from the app.
     - Type: click
       Strategy: xpath
