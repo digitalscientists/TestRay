@@ -36,6 +36,8 @@ SetOnlyWebTests:
   - Case: TestCarePartnerCallExternal10DigitNumberWithoutParticipant
   - Case: TestCarePartnerClickAndViewTestParticipantVisuals
   - Case: TestCarePartnerLogInButtonShouldBeLimitedToOneClick
+  - Case: TestCarePartnerCreateFollowUpTicketParticipantProfile
+  - Case: TestCarePartnerTrackTimeAndEditFollowUpTicketsForParticipant
   # Employee Health Portal
   - Case: TestEmployeeSettingNotification
   - Case: TestEmployeeInformationUpdateNumber
@@ -65,7 +67,6 @@ SetOnlyWebTests:
   - Case: TestESCarePartnerParticipantPaneCreateFollowUpTicket
   - Case: TestESCarePartnerParticipantDirectoryFilter
   # On Boarders
-  - Case: TestOnboarderCarePartnerUpdatePassword
   - Case: TestOnboarderManuallyLogOutOfThePortal
   - Case: TestOnboardersAccessFacilitiesDirectoryFilter
   - Case: TestOnboardersForgotPasswordLoginLink
@@ -84,6 +85,7 @@ SetOnlyWebTests:
   - Case: TestOnboarderStaffMemberPaneReactivateStaffMemberAccountForCarePlatform
   - Case: TestOnboarderStaffMemberPaneDeactivateStaffMemberAccountForCarePlatform
   - Case: TestOnboarderEditStaffMemberAccountForCarePlatform
+  - Case: TestOnboarderCarePartnerUpdatePassword
   # Providers Care Platform
   - Case: TestProvidersUpdatePassword
   - Case: TestProviderLogOutStayOnShift
@@ -99,6 +101,7 @@ SetOnlyWebTests:
   - Case: TestProviderUseForgotPasswordLink
   - Case: TestProviderAccessParticipantDirectoryandViewDeviceRecordfromListing
   - Case: TestProvidersEHPSeeCallAppearInQueueAssignAndReviewDetails
+  - Case: TestProviderReviewCallHistoryAndAccessCallRecordings
   # Facility Leadership Care Platform
   - Case: TestFacilityLeadershipDirectoryAndFilter
   - Case: TestFacilityLeadershipLogoutGoOffShift

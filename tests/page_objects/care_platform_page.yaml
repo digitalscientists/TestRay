@@ -20,6 +20,8 @@ care_platform_verify_account:
 care_platform:
   page_title: //h3
   call_queue_title: //h3[text()='Care Partners']
+  es_call_queue_title: //h3[text()='Easterseals Support']
+  ch_call_queue_title: //h3[text()='Cardinal Support']
   navigation_participant: //nav//a[contains(text(),'Participants')]
   navigation_followup: //nav//a[contains(text(),'Follow-up')]
   navigation_home: //nav//a[contains(text(),'Queue')]
@@ -32,7 +34,8 @@ care_platform_home:
   call_based_on_es_idd_participant_name: //div[contains(@class, 'ListRow_listRow')]//strong[text() = '$AND_CLI_idd_es_never_alone_user1_name$ $AND_CLI_idd_es_never_alone_user1_lastname$']
   call_based_on_ch_idd_participant_name: //div[contains(@class, 'ListRow_listRow')]//strong[text() = '$AND_CLI_idd_ch_never_alone_user2_name$ $AND_CLI_idd_ch_never_alone_user2_lastname$']
   active_call_section: //div[contains(@class,'app-video app-video-fixed')] # doesn't matter if its expanded/collapsed
-  call_queue_calls: //div[@id='containerElement']/div[starts-with(@class, 'ListRow_listRow') and not(contains(., 'Follow-up'))]
+  call_queue_calls: //div[@id='containerElement']/div[starts-with(@class, 'ListRow_listRow') and not(contains(., 'Follow-up')) and not(contains(., 'Missed Call'))]
+  queue_header_columns: //div[contains(text(),'Type')]/following-sibling::div[contains(text(),'Participant')]/following-sibling::div[contains(text(),'Assigned')]
 
 care_platform_header:
   app_logo: //header//div[@class='app-header-small-logo']/img
@@ -57,6 +60,7 @@ care_platform_header:
   online_es_carepartner_element: //div[@class='users-dropdown-list-item']//div[@class='users-dropdown-name' and contains(., '$AND_CLI_es_carepartner_user_name$ $AND_CLI_es_carepartner_user_lastname$')]//small[text()='Care Partner (ES)']
   onshift_carepartner1_element: //div[contains(text(),'On Shift')]//following-sibling::div[not(contains(@class,'is-offline'))]/div[@class='users-dropdown-name' and contains(., '$AND_CLI_USER_FULLNAME$')]
   onshift_by_name_and_role_element: //div[contains(text(),'On Shift')]//following-sibling::div[not(contains(@class,'is-offline'))]/div[@class='users-dropdown-name' and contains(., '$AND_CLI_USER_FULLNAME$') and contains(.,'$AND_CLI_STAFF_ROLE$')]
+  admin_on_rails_element: //div[@class='users-dropdown-list']//*[contains(.,'Rail')]
 
 care_platform_myaccount_info:
   modal_title: //*[@id='modals']//h4[contains(text(),'My Account')]
@@ -82,8 +86,9 @@ care_platform_myaccount_info:
 care_platform_logout_modal:
   stay_on_shift_button: //button[contains(text(),'Stay On Shift')]
   go_off_shift_button: //button[contains(text(),'Go Off Shift')]
-  cancel_logout_button: //button[contains(@class,'button-ghost')] 
+  cancel_logout_button: //button[contains(.,'Cancel')]
   log_out_button: //button[contains(text(),'$AND_CLI_LOGOUT_OPTION$')]
+  yes_logout_button: //button[contains(., 'Yes') and contains(.,'Logout')]
 
 care_platform_participant:
   participants_title: //h3[text()='Participants']
@@ -101,7 +106,8 @@ care_platform_participant:
   search_input: //input[@id='searchText']
   clear_search_button: //button[contains(@class,'button-circle')]
   status_dropdown_button: //button[contains(@class,'queue-filter-dropdown-toggle')]
-  status_dropdown_options: //div[contains(@class, 'queue-filter-dropdown')]  
+  status_dropdown_options: //div[contains(@class, 'queue-filter-dropdown')]
+  active_dropdown_option: //div[contains(@class, 'queue-filter-dropdown')]//button[text()='Active']
 
 care_platform_add_participant_form:
   create_participant_title: //div[@class='flex flex-wrap flex-half-gutters']
@@ -174,12 +180,14 @@ care_platform_participant_details:
   edit_follow_up_ticket_button: //div[@id='follow-up-tickets-tab']//div[contains(@class, 'is-open')]//button[text()='Edit']
   last_follow_up_ticket: //*[@id='follow-up-tickets']//div[@class='accordion-item'][last()]
   time_to_complete_input: //div[contains(@class, 'is-open')]//input[@name='timeToComplete']
+  follow_up_ticket_modal_time_to_complete: //*[@id='dialogs']//input[@name='timeToComplete']
   ticket_subject_input: //*[@id='subject']
   ticket_kind_label: //label[@for='kind']
   ticket_kind_input: //*[@id='kind']
   kind_medical_appointment_option: //*[@id='kind']/optgroup[@label='Medical']/option[@value='med_appointment']
   ticket_assigned_input: //*[@id='assignedAdminId']
   assigned_option_2: //*[@id='assignedAdminId']/option[2]
+  assigned_option_unassigned: //*[@id='assignedAdminId']/option[contains(text(),'Unassigned')]
   assigned_option_based_on_name: //*[@id='assignedAdminId']/option[contains(., '$AND_CLI_carepartner_user1_name$') and contains(., '$AND_CLI_carepartner_user1_lastname$')]
   ticket_date_input: //*[@id='estimatedDate']
   current_date_option: //*[@id='datepickers']//div[@aria-current='date']
@@ -241,6 +249,8 @@ care_platform_participant_records_follow_up_tickets:
   active_tickets_title: //h4[text()='Active Tickets']
   archived_follow_up_ticket_based_on_name: //div[text()='$AND_CLI_FOLLOW_UP_TICKET$']/ancestor::div[@class='accordion-item-toggle']
   active_follow_up_ticket_based_on_name: //div[contains(text(), '$AND_CLI_FOLLOW_UP_TICKET$')]/preceding-sibling::div[@class='accordion-item-toggle']
+  archived_tickets_button: //*[@id='follow-up-tickets']//button[contains(.,'Archived')]
+  follow_up_ticket_name: //div[text()='$AND_CLI_FOLLOW_UP_TICKET$']
   expanded_ticket_content: //div[@aria-hidden='false']//div[contains(@class, 'accordion-item-content')]
   completed_button: //div[@aria-hidden='false']//button[text()='Completed']
   edit_button: //div[@aria-hidden='false']//button[text()='Edit']
@@ -248,6 +258,14 @@ care_platform_participant_records_follow_up_tickets:
   follow_up_ticket_created_label: //div[@aria-hidden='false']//p
   track_time_input_dialog: //div[@id='dialogs']//input[@name='timeToComplete']
   save_and_archive_button: //div[@id='dialogs']//button[text()='Save and Archive']
+  create_ticket_button: //button[@id='createTicket']
+  create_or_edit_ticket_modal_title: //div[@id='modals']//h4
+  subject_input: //input[@data-test-id='input-subject']
+  category_select: //select[@id='kind']
+  estimated_date_input: //input[@id='estimatedDate']
+  save_ticket_button: //button[@data-test-id='testFormFollowUpTicketSave']
+  medical_appointment_opt: //option[@id='med_appointment']
+  details_input: //textarea[@id='details']
 
 care_platform_edit_participant_records:
   edit_title: //span[contains(text(),'Edit')]
@@ -574,6 +592,7 @@ care_platform_call_portal:
   located_provider_option: //option[@value='locatedProvider']
   accidental_call_option: //option[@value='accidentalCall']
   submit_and_exit_session_button: //button[contains(text(),'Submit and Exit Session')]
+  cancel_post_call_survey_button: //button[contains(text(),'Cancel')]
   participant_schedule_based_on_element: //strong[text()='$AND_CLI_UNIQUE_EVENT_NAME$']
   edit_event_button: //div[@class='accordion-item is-open']//button[text()='Edit']
   edit_event_modal_header: //div[@class='box has-scrollable-content box-tight has-shadow has-border max-h-full']//h4[@class='font-bold text-md']
@@ -624,6 +643,7 @@ care_platform_notifications:
   event_deleted_notification: //div[@class='Toastify']//div[text()='Event deleted']
   failed_to_join_call_notification: //div[@class='Toastify']//div[text()='Failed to join call']
   call_already_answered_notification: //div[@class='Toastify']//div[text()='Call already answered']
+  follow_up_ticket_created_notification: //div[@class='Toastify']//div[text()='Follow-up ticket created']
   follow_up_ticket_saved_notification: //div[@class='Toastify']//div[text()='Follow-up ticket saved']
   follow_up_ticket_completed_notification: //div[@class='Toastify']//div[text()='Follow-up ticket completed']
   ems_data_updating_notification: //div[@class='Toastify']//div[text()='Updating EMS data...']

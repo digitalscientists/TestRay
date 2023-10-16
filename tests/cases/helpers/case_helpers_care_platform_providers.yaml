@@ -770,3 +770,64 @@ CleanUsedMissedCall:
       Id: $PAGE.providers_home_page.missed_call$
     - Type: case
       Value: ProviderCloseCallHelper
+
+MakeCallBetweenProviderAndSNF:
+  Precases:
+    - ProviderNewCleaner
+  Aftercases:
+    - TerminateApp
+    - CarePlatformLogout
+  Roles:
+    - Role: desktopChrome
+      App: desktop
+    - Role: localiOS
+      App: NeverAlone
+  Actions:
+    #Generate a call from Provider to Facility Device.
+    - Type: case
+      Value: LoginSNFHelper
+      Role: localiOS
+    - Type: case
+      Value: SeniorCleanPrompts
+      Role: localiOS
+    # Call Provider from SNF.
+    - Type: case
+      Value: SNFNewRequestHelper
+      Role: localiOS
+    - Type: case
+      Value: ProvidersCarePlatformLogin
+      Role: desktopChrome
+    # Answer Call
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.on_demand_calls$
+      Role: desktopChrome
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.on_demand_calls$
+      Role: desktopChrome
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.answer_call_button$
+      Role: desktopChrome
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.answer_call_button$
+      Role: desktopChrome
+    # Waiting time
+    - Type: sleep
+      Time: 5
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.video_btn$
+      Role: desktopChrome
+    #End call
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.end_call_btn$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.end_call_btn$
+    - Type: case
+      Value: PostCallSurveyProvider
+      Role: desktopChrome

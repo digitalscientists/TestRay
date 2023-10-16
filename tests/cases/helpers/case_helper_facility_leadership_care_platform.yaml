@@ -4,18 +4,8 @@ FacilityLeadershipCarePlatformLogout:
       App: desktop       
   Actions:     
       # Log out to the Care Platform app with Care Partners account
-    - Type: click
-      Strategy: xpath
-      Id: $PAGE.care_platform_header.user_dropdown_button$
-    - Type: click
-      Strategy: xpath
-      Id: $PAGE.care_platform_header.logout_menu_button$
-    - Type: click
-      Strategy: xpath
-      Id: $PAGE.care_platform_logout_modal.log_out_button$
-    - Type: wait_for
-      Strategy: xpath
-      Id: $PAGE.care_platform_login.login_button$
+    - Type: case
+      Value: AlternativeCarePartnerLogout
 
 FacilityLeadershipCarePartnerLogin:
   Roles:

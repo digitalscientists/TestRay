@@ -223,7 +223,7 @@ TestSeniorPreDeliveryAccountStatusVisualsAndBehavior:
 TestSeniorAppSuspendedAccountStatus:
   Environment: Settings
   Vars:
-    LOGOUT_OPTION: "Go Off Shift"
+    LOGOUT_OPTION: "Yes Logout"
   Aftercases:
     - TerminateApp
     - CarePlatformLogout
@@ -363,7 +363,7 @@ TestSeniorAppSuspendedAccountStatus:
 TestSeniorAppActiveAccountStatusAndBehavior:
   Environment: Settings
   Vars:
-    LOGOUT_OPTION: "Go Off Shift"
+    LOGOUT_OPTION: "Yes Logout"
     ACCOUNT_STATUS: 'predelivery' #this is for the precase
   Precases:
     - OnboarderPrecaseforActiveState
@@ -460,7 +460,7 @@ TestSeniorAppActiveAccountStatusAndBehavior:
 TestSeniorAppDeactivatedAccountStatusVisuals:
   Environment: Settings
   Vars:
-    LOGOUT_OPTION: "Go Off Shift"
+    LOGOUT_OPTION: "Yes Logout"
     ACCOUNT_STATUS: 'active' #this is for the precase
   Precases:
     - OnboarderPrecaseforActiveState

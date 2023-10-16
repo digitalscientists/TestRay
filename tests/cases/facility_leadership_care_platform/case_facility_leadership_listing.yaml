@@ -1,8 +1,6 @@
 #CXTB-539 Access Facilities Directory & Filter
 TestFacilityLeadershipDirectoryAndFilter:
   Environment: Settings
-  Vars:
-    LOGOUT_OPTION: 'Go Off Shift'
   Aftercases:
     - FacilityLeadershipCarePlatformLogout
   Roles: 
@@ -134,8 +132,6 @@ TestFacilityLeadershipDirectoryAndFilter:
 # CXTB-541 Click and View Facility Profile from Listing
 TestFacilityLeadershipClickAndViewFacilityProfile:
   Environment: Settings
-  Vars:
-    LOGOUT_OPTION: 'Go Off Shift'
   Aftercases:
     - FacilityLeadershipCarePlatformLogout
   Roles: 
@@ -310,8 +306,6 @@ TestFacilityLeadershipClickAndViewFacilityProfile:
 #CXTB-540 Review Info for Existing Facility Device - Facility Pane
 TestFacilityLeadershipReviewInfoForExistingFacilityDeviceFacilityPane:
   Environment: Settings
-  Vars:
-    LOGOUT_OPTION: 'Go Off Shift'
   Aftercases:
     - FacilityLeadershipCarePlatformLogout
   Roles: 

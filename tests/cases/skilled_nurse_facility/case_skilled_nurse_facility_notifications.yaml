@@ -14,6 +14,8 @@ TestSNFVerifyNotificationsPage:
   #Call login for nurses
     - Type: case
       Value: LoginSNFHelper
+    - Type: case
+      Value: SeniorCleanPrompts
   #Check Bell Icon
     - Type: wait_for
       Strategy: class_chain
@@ -53,11 +55,14 @@ TestSNFVerifyNotificationsPage:
   #Close notification Prompt
     - Type: click
       Strategy: class_chain
-      Id: $PAGE.snf_notifications.modal_close_button$
+      Id: $PAGE.snf_notifications.provider_message_modal_close_button$
       Condition:
       - Value: 5
         Operation: visible
         Result: true
+    - Type: wait_not_visible
+      Strategy: class_chain
+      Id: $PAGE.snf_notifications.provider_message_modal_close_button$
   #Change toggle to "All"
     - Type: click
       Strategy: class_chain

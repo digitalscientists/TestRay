@@ -226,12 +226,12 @@ TestOnboarderClickAndViewFacilitiesDevice:
 TestOnboarderFacilityProfileChangeStatusForExistingFacilityDevice:
   Environment: Settings
   Vars:
-    LOGOUT_OPTION: 'Go Off Shift'
+    LOGOUT_OPTION: 'Yes Logout'
   Precases:
     - OnboarderSetNurseToActive
     - AdminOnCallRefreshDevice
   Aftercases:
-    - CarePlatformLogout
+    - AlternativeCarePartnerLogout
     - OnboarderSetNurseToActive
     - TerminateApp
   Roles: 
