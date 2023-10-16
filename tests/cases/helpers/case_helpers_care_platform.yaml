@@ -1752,20 +1752,9 @@ CarePartnerCreateFollowUpTicket:
     - Role: desktopChrome
       App: desktop
   Actions:
-    # Go to participants
-    - Type: click
-      Strategy: xpath
-      Id : $PAGE.care_platform.navigation_participant$
-    # Decrease listing by searching participant's name
-    - Type: search_by_text
-      Text: $AND_CLI_senior_user1_name$
-    # Select the participant used on the config file.
-    - Type: wait_for
-      Strategy: xpath
-      Id: $PAGE.care_platform_participant.senior_complete_name$
-    - Type: click
-      Strategy: xpath
-      Id: $PAGE.care_platform_participant.senior_complete_name$
+    # Navigate to the Participant Pane.
+    - Type: case
+      Value: CarePartnerParticipantPaneNavigation
     # Go to follow-up tickets tab.
     - Type: click
       Strategy: xpath
