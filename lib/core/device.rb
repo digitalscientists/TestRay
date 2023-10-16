@@ -2320,6 +2320,9 @@ def provider_clean_hanged_call_or_session(action, main_case, main_case_id)
   end
   if have_call
     @driver.find_element(:xpath, convert_value_pageobjects("$PAGE.providers_call_handling_page.resolved_true_option$")).click
+    if wait_for_enabled_element("$PAGE.providers_call_handling_page.video_visit_true_option$")
+      @driver.find_element(:xpath, convert_value_pageobjects("$PAGE.providers_call_handling_page.video_visit_true_option$")).click
+    end
     wait_for_enabled_element("$PAGE.providers_call_handling_page.recommend_discharge_yes_by_SNF$")
     @driver.find_element(:xpath, convert_value_pageobjects("$PAGE.providers_call_handling_page.recommend_discharge_yes_by_SNF$")).click
     wait_for_enabled_element("$PAGE.providers_call_handling_page.call_notes_subject_input$")
@@ -2390,6 +2393,9 @@ def provider_clean_hanged_call_or_session(action, main_case, main_case_id)
 
         if have_call
           @driver.find_element(:xpath, convert_value_pageobjects("$PAGE.providers_call_handling_page.resolved_true_option$")).click
+          if wait_for_enabled_element("$PAGE.providers_call_handling_page.video_visit_true_option$")
+            @driver.find_element(:xpath, convert_value_pageobjects("$PAGE.providers_call_handling_page.video_visit_true_option$")).click
+          end
           wait_for_enabled_element("$PAGE.providers_call_handling_page.recommend_discharge_yes_by_SNF$")
           @driver.find_element(:xpath, convert_value_pageobjects("$PAGE.providers_call_handling_page.recommend_discharge_yes_by_SNF$")).click
           wait_for_enabled_element("$PAGE.providers_call_handling_page.call_notes_subject_input$")
