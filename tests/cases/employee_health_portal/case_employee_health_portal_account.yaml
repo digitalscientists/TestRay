@@ -282,8 +282,8 @@ TestEmployeeUpdateEmail:
   #Add value for new email field
     - Type: send_keys
       Strategy: xpath
-      Id: $PAGE.employee_health_signup_page.first_name_input$
-      Value: $AND_CLI_employee_user1_name$  
+      Id: $PAGE.employee_health_my_account_modal.update_email_new$
+      Value: $AND_CLI_employee_user1$  
   #Cancel and no emails sent
     - Type: click
       Strategy: xpath
@@ -301,8 +301,8 @@ TestEmployeeUpdateEmail:
   #Add value for new email field
     - Type: send_keys
       Strategy: xpath
-      Id: $PAGE.employee_health_signup_page.first_name_input$
-      Value: $AND_CLI_employee_user1_name$  
+      Id: $PAGE.employee_health_my_account_modal.update_email_new$
+      Value: $AND_CLI_employee_user1$
     
 
 
