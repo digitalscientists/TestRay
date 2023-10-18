@@ -611,7 +611,7 @@ TestProvidersReturnToCallPortalAndAndCompletesSession:
       Id: $PAGE.care_platform_call_portal.urgent_patient_matter_select$
     - Type: click
       Strategy: xpath
-      Id: $PAGE.care_platform_call_portal.urgent_patient_matter_yes_option$
+      Id: $PAGE.care_platform_call_portal.urgent_patient_matter_yes_option$  
   # Reason for request
     - Type: click
       Strategy: id
@@ -749,6 +749,15 @@ TestProvidersReturnToCallPortalAndAndCompletesSession:
       Role: desktopChrome1
       Strategy: xpath
       Id: $PAGE.providers_call_handling_page.resolved_no_option$
+     # Was this Video Visit with a patient?
+    - Type: wait_for
+      Strategy: xpath
+      Role: desktopChrome1
+      Id: $PAGE.providers_call_handling_page.video_visit_true_option$          
+    - Type: click
+      Strategy: xpath
+      Role: desktopChrome1
+      Id: $PAGE.providers_call_handling_page.video_visit_true_option$  
     # Survey updates based on this response:
     # New "Reason" field appears.
     - Type: wait_for

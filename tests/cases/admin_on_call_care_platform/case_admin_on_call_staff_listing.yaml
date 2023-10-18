@@ -292,6 +292,13 @@ TestAdminOnCallShouldNotShowDuplicatesEntriesForNewCallsOnCallHistory:
     - Role: desktopChrome1
       App: desktop
   Actions:
+    # Log in as a provider and clean the queue
+    - Type: case
+      Value: ProvidersCarePlatformLogin
+      Role: desktopChrome1
+    - Type: case
+      Value: ProviderEndCurrentCall
+      Role: desktopChrome1
     # Generate a medical call as a senior.
     - Type: case
       Value: CallCarePartner
@@ -345,13 +352,7 @@ TestAdminOnCallShouldNotShowDuplicatesEntriesForNewCallsOnCallHistory:
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.care_platform_call_portal.leave_call_btn$
-    # Log in as a provider and join the call
-    - Type: case
-      Value: ProvidersCarePlatformLogin
-      Role: desktopChrome1
-    - Type: case
-      Value: ProviderEndCurrentCall
-      Role: desktopChrome1
+    # Join the call as provider
     - Type: case
       Value: JoinMedicalTransfer
       Role: desktopChrome1
