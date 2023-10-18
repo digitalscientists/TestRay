@@ -66,4 +66,7 @@ TestFacilityLeadershipSeeCallAppearOnQueueThenSelectCall:
       Strategy: xpath
       Id: $PAGE.care_platform_home.answer_call$
     # Clean request
-    # add cleaner
+    - Type: case
+      Value: AlternativeCarePartnerLogout
+    - Type: case
+      Value: ProviderNewCleaner
