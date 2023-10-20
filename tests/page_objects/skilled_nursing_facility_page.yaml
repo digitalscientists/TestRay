@@ -80,3 +80,7 @@ snf_post_call_survey:
   bad_answer_button: "Bad"
   thank_you_label: "**/XCUIElementTypeStaticText[`label == 'Thank you for your feedback'`]"
   to_home_button: "**/XCUIElementTypeOther[`label == 'To Home'`]"
+
+snf_settings_page:
+  settings_page_title: "**/XCUIElementTypeStaticText[`label CONTAINS 'Settings'`]"
+  close_button: "**/XCUIElementTypeButton[`label CONTAINS 'Close'`]"
