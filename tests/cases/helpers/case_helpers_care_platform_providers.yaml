@@ -781,8 +781,6 @@ CleanUsedMissedCall:
       Value: ProviderCloseCallHelper
 
 MakeCallBetweenProviderAndSNF:
-  Vars:
-    LOGOUT_OPTION: 'Go Off Shift'
   Precases:
     - ProviderNewCleaner
   Aftercases:
