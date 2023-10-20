@@ -79,3 +79,4 @@ SetNonPhysicalMobileTest:
     - Case: TestAdminOnCallShouldNotAnswerProviderCallAfterMedicalTransfer
   # Facility Leadership
     - Case: TestFacilityLeadershipSeeCallAppearOnQueueThenSelectCall
+    - Case: TestFacilityLeadershipReviewCallHistoryAndAccessCallRecordings

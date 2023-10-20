@@ -1,21 +1,18 @@
-# CXTB-141 Can Click and View Provider Call History & Access Call Recordings
-TestProviderReviewCallHistoryAndAccessCallRecordings:
+# CXTB-650 Can Click and View Facility Call History & Access Call Recordings
+# Bug: CHS-2586 Facility Leadership Cannot Load Call History Views
+TestFacilityLeadershipReviewCallHistoryAndAccessCallRecordings:
   Environment: Settings
-  Vars:
-    LOGOUT_OPTION: "Go Off Shift"
   Precases:
     - MakeCallBetweenProviderAndSNF
-  Aftercases:
-    - CarePlatformLogout
   Roles:
     - Role: desktopChrome
       App: desktop
     - Role: localiOS
       App: NeverAlone
   Actions:
-  # Log in with provider
+  # Log in with Facility Leadership credentials
     - Type: case
-      Value: ProvidersCarePlatformLogin
+      Value: FacilityLeadershipCarePartnerLogin
   # Go to Call History
     - Type: click
       Strategy: xpath
@@ -176,7 +173,6 @@ TestProviderReviewCallHistoryAndAccessCallRecordings:
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.providers_call_history_page.first_call_row$
-      Time: 10
     - Type: get_attribute
       Strategy: xpath
       Id: $PAGE.providers_call_history_page.first_call_row$
@@ -224,7 +220,6 @@ TestProviderReviewCallHistoryAndAccessCallRecordings:
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.providers_call_history_page.first_call_row$
-      Time: 10
     - Type: get_attribute
       Strategy: xpath
       Id: $PAGE.providers_call_history_page.first_call_row$
@@ -272,7 +267,6 @@ TestProviderReviewCallHistoryAndAccessCallRecordings:
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.providers_call_history_page.first_call_row$
-      Time: 10
     - Type: get_attribute
       Strategy: xpath
       Id: $PAGE.providers_call_history_page.first_call_row$
@@ -294,7 +288,6 @@ TestProviderReviewCallHistoryAndAccessCallRecordings:
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.providers_call_history_page.first_call_row$
-      Time: 10
     - Type: click
       Strategy: xpath
       Id: $PAGE.providers_call_history_page.first_call_row$
@@ -323,6 +316,18 @@ TestProviderReviewCallHistoryAndAccessCallRecordings:
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.providers_call_history_page.telehealth_form_modal_title$
+      # Patient Information Subtitle
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_call_history_page.telehealth_form_patient_information_subtitle$
+      # Patient Information: Name
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_call_history_page.telehealth_form_patient_name$
+      # Requester Name
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_call_history_page.telehealth_form_requester_name$
       # Situation subtitle
     - Type: wait_for
       Strategy: xpath
@@ -354,3 +359,6 @@ TestProviderReviewCallHistoryAndAccessCallRecordings:
     - Type: click
       Strategy: xpath
       Id: $PAGE.providers_call_history_page.play_pause_recording_button$
+    # Calling Logout case.
+    - Type: case
+      Value: AlternativeCarePartnerLogout
