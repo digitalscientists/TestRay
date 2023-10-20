@@ -88,6 +88,7 @@ SetOnlyWebTests:
   - Case: TestOnboarderEditStaffMemberAccountForCarePlatform
   - Case: TestOnboarderCarePartnerUpdatePassword
   - Case: TestOnboarderDeactivateStaffMemberAccountForCarePlatformStaffMemberProfile
+  - Case: TestOnboarderReactivateStaffMemberAccountForCarePlatformStaffMemberProfile
   # Providers Care Platform
   - Case: TestProvidersUpdatePassword
   - Case: TestProviderLogOutStayOnShift

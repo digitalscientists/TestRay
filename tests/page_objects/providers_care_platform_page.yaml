@@ -197,6 +197,8 @@ providers_call_history_page:
   telehealth_form_facility_call_button: //div[contains(@class,'accordion-item') and contains(@class,'is-open')]//button[contains(text(),'Telehealth Request Form')][1]
   telehealth_form_modal_title: //*[@id='modals']//h4[contains(text(),'Telehealth')]
   telehealth_form_patient_information_subtitle: //*[@id='telehealth-request']/h4[text()='Patient Information']
+  telehealth_form_patient_name: //*[@id='telehealth-request']/div[contains(.,'Patient Name')]/div[contains(text(),'$AND_CLI_senior_user1_name$ $AND_CLI_senior_user1_lastname$')]
+  telehealth_form_requester_name: //*[@id='telehealth-request']/div[contains(.,'Requester Name')]/div[contains(text(),'$AND_CLI_facility_devices_requester_name$ $AND_CLI_facility_devices_requester_lastname$')]
   telehealth_form_assessment_subtitle: //*[@id='telehealth-request']/h4[text()='Assessment']
   telehealth_form_situation_subtitle: //*[@id='telehealth-request']/h4[text()='Situation']
   telehealth_form_close_button: //*[@id='modals']//button[contains(.,'Close')]
