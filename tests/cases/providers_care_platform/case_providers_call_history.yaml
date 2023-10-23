@@ -584,6 +584,7 @@ TestProviderCallHistoryShowsRecordingsForAllPlatformsAndDevices:
     LOGOUT_OPTION: "Go Off Shift"
   Precases:
     - LoginNeverAloneHelper
+    - CarePartnerCleanCallQueueAndHangedCalls
     - ProviderNewCleaner
     - SeniorCleanPrompts
   Aftercases:
