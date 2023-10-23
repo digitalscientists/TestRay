@@ -191,15 +191,24 @@ SNFGreatPostCallSurvey:
       Time: 2
     - Type: wait_for
       Strategy: class_chain
+      Id: $PAGE.seniors_app_post_call_survey.post_call_survey_title$
+    - Type: wait_for
+      Strategy: class_chain
       Id: $PAGE.snf_post_call_survey.great_answer_button$
     - Type: click
       Strategy: class_chain
       Id: $PAGE.snf_post_call_survey.great_answer_button$
     # Verify page updates and shows Thank You for you feedback page.
+    - Type: wait_for
+      Strategy: class_chain
+      Id: $PAGE.snf_post_call_survey.thank_you_label$
     - Type: click
       Strategy: class_chain
       Id: $PAGE.snf_post_call_survey.thank_you_label$
     # Click the "To Home" button on Thank you for your feedback screen.
+    - Type: wait_for
+      Strategy: class_chain
+      Id: $PAGE.snf_post_call_survey.to_home_button$
     - Type: click
       Strategy: class_chain
       Id: $PAGE.snf_post_call_survey.to_home_button$
