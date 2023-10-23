@@ -62,6 +62,7 @@ providers_facilities_page:
   tabs_content: //div[@class='tabs-content']
   title_subtab_devices: //h4[text()='Facility Devices']
   call_based_on_device_button: //strong[text()='Device $AND_CLI_facility_devices_user1_number$:']/ancestor::tr//a[contains(.,'Call')]
+  refresh_based_on_device_button: //strong[text()='Device $AND_CLI_facility_devices_user1_number$:']/ancestor::tr//button[contains(.,'Refresh')]
   message_based_on_device_button: //strong[text()='Device $AND_CLI_facility_devices_user1_number$:']/ancestor::tr//a[contains(.,'Message')]/button
   message_input: //input[@id='message']
   send_message_button: //span[@class='icon-send text-md']/ancestor::button
