@@ -27,6 +27,8 @@ SetNonPhysicalMobileTest:
     - Case: TestProvidersReturnToCallPortalAndAndCompletesSession
     - Case: TestProviderReturnMissedSNFCall
     - Case: TestProvidersSelectCallInQueueAndGetCallAnsweredAlreadyNotification
+    - Case: TestProviderReviewParticipantsCallHistoryAndAccessCallRecordings
+    - Case: TestProviderReviewCallHistoryAndAccessCallRecordings
   # Never Alone Senior App
     - Case: TestSeniorAppSuspendedAccountStatus
     - Case: TestSeniorAppActiveAccountStatusAndBehavior
