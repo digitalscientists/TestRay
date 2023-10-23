@@ -111,6 +111,299 @@ TestOnboarderAccessParticipantDirectoryandFilter:
       Strategy: xpath
       Id: $PAGE.care_platform_participant.status_dropdown_options$
 
+#CXTB-144-Onboarders-Create New Participant
+TestOnboarderCreateNewParticipant:
+  Environment: Settings
+  Aftercases: 
+    - TerminateApp
+  Roles:
+  - Role: desktopChrome
+    App: "desktop"
+  - Role: localiOS
+    App: NeverAlone
+  Actions:
+  # login in onboarder Care Partner
+    - Type: case
+      Value: OnboarderCarePartnerLogin 
+  # Go to Participants
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.onboarders_platform_home.navigation_participant$
+  # click in Add button 
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.onboarders_participant_page.add_participant_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.onboarders_add_participant_form.create_participant_form_title$
+  # Check Validation fields
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.onboarders_add_participant_form.create_participants_button$
+  # Select a Call Center
+    - Type: click
+      Strategy: id
+      Id: $PAGE.onboarders_add_participant_form.call_center_dropdown_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.onboarders_add_participant_form.call_center_option$
+  # Select Account Status
+    - Type: click
+      Strategy: id
+      Id: $PAGE.onboarders_add_participant_form.account_status_dropdown_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.onboarders_add_participant_form.account_status_pre_delivery_option$
+    - Type: wait_for
+      Strategy: id 
+      Id: $PAGE.onboarders_add_participant_form.account_status_dropdown_button$
+  # Add First Name
+    - Type: generate_unique_string
+      Name: "Bryan"
+      ResultVar: PARTICIPANT_FIRST_NAME
+    - Type: send_keys
+      Strategy: id
+      Id: $PAGE.onboarders_add_participant_form.firstname_input$
+      Value: $AND_CLI_PARTICIPANT_FIRST_NAME$
+  # Add Last name
+    - Type: generate_unique_string
+      Name: "Mencio"
+      ResultVar: PARTICIPANT_LAST_NAME
+    - Type: send_keys
+      Strategy: id
+      Id: $PAGE.onboarders_add_participant_form.lastname_input$
+      Value: $AND_CLI_PARTICIPANT_LAST_NAME$
+  # Choose a Date of Birth
+    - Type: click
+      Strategy: id
+      Id: $PAGE.onboarders_add_participant_form.date_of_birth_picker$
+    - Type: generate_unique_number
+      Name: "1992"
+      ResultVar: PARTICIPANT_DATE_OF_BIRTH
+    - Type: send_keys
+      Strategy: id
+      Id: $PAGE.onboarders_add_participant_form.date_of_birth_picker$
+      Value: $AND_CLI_PARTICIPANT_DATE_OF_BIRTH$ 
+  # Select a Participant Type
+    - Type: click
+      Strategy: id
+      Id: $PAGE.onboarders_add_participant_form.participant_type_dropdown_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.onboarders_add_participant_form.participant_type_option$
+  # click on Create Participant Button 
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.onboarders_add_participant_form.create_participants_button$
+  # Check on the submission status
+    - Type: set_env_var
+      Value: New participant created
+      Var: TOAST_MESSAGE_SHOWN  
+    - Type: case
+      Value: CarePartnerToastValidation
+  # Go to Edit Info
+    - Type: wait_for
+      Strategy: xpath 
+      Id: $PAGE.onboarders_participant_details_pane.edit_info$
+    - Type: click
+      Strategy: xpath 
+      Id: $PAGE.onboarders_participant_details_pane.edit_info$
+  # Go to Address/Emergency Phone
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.onboarders_add_participant_form.address_emergency_phone$
+  # Select EMS option
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.onboarders_add_participant_form.disable_ems_calls$
+  # Add address info
+    - Type: wait_for
+      Strategy: id
+      Id: $PAGE.onboarders_add_participant_form.address_input$
+    - Type: send_keys
+      Strategy: id
+      Id: $PAGE.onboarders_add_participant_form.address_input$
+      Value: "21 S Main St"
+    - Type: send_keys
+      Strategy: id
+      Id: $PAGE.onboarders_add_participant_form.city_input$
+      Value: "Alpharetta"
+    - Type: click
+      Strategy: id
+      Id: $PAGE.onboarders_add_participant_form.state_dropdown_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.onboarders_add_participant_form.state_option$
+    - Type: send_keys
+      Strategy: id
+      Id: $PAGE.onboarders_add_participant_form.zip_input$
+      Value: "30009"
+  # Add Emergency Call Back Phone back
+    - Type: generate_unique_number
+      Name: "95865655656"
+      ResultVar: PARTICIPANT_EMERGENCY_PHONE_NUMBER
+    - Type: send_keys
+      Strategy: id
+      Id: $PAGE.onboarders_add_participant_form.emergency_phone$
+      Value: $AND_CLI_PARTICIPANT_EMERGENCY_PHONE_NUMBER$   
+  # Save changes
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.onboarders_add_participant_form.save_changes_button$  
+  # Check on the submission status
+    - Type: set_env_var
+      Value: EMS data updated
+      Var: TOAST_MESSAGE_SHOWN  
+    - Type: case
+      Value: CarePartnerToastValidation
+  # Select “Yes” for the enable EMS question
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.onboarders_add_participant_form.enable_ems_calls$
+  # Save changes
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.onboarders_add_participant_form.save_changes_button$
+  # Check on the submission status
+    - Type: set_env_var
+      Value: Updating EMS data... 
+      Var: TOAST_MESSAGE_SHOWN 
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.onboarders_add_participant_form.toaster_dismiss_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.onboarders_add_participant_form.toaster_dismiss_button$
+  # Updating to a valid address 
+    - Type: send_keys
+      Strategy: id
+      Id: $PAGE.onboarders_add_participant_form.address_input$
+      Value: "reet"
+  # Save changes
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.onboarders_add_participant_form.save_changes_button$ 
+  # Check on the submission status
+    - Type: set_env_var
+      Value: Some adjustments needed
+      Var: TOAST_MESSAGE_SHOWN 
+    - Type: case
+      Value: CarePartnerToastValidation
+  # Go back from suggestion window
+    - Type: wait_for
+      Strategy: id
+      Id: $PAGE.onboarders_add_participant_form.confirmation_window$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.onboarders_add_participant_form.go_back_button_from_suggestion_window$ 
+  # Adding a valid address 
+    - Type: generate_unique_number
+      Name: "00"
+      ResultVar: PARTICIPANT_APT_NUMBER
+    - Type: send_keys
+      Strategy: id
+      Id: $PAGE.onboarders_add_participant_form.address_numbers_input$
+      Value: $AND_CLI_PARTICIPANT_APT_NUMBER$
+  # Save changes
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.onboarders_add_participant_form.save_changes_button$ 
+  # Check on the submission status
+    - Type: set_env_var
+      Value: Some adjustments needed
+      Var: TOAST_MESSAGE_SHOWN 
+    - Type: case
+      Value: CarePartnerToastValidation
+  # Confirm from suggestion window
+    - Type: wait_for
+      Strategy: id
+      Id: $PAGE.onboarders_add_participant_form.confirmation_window$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.onboarders_add_participant_form.confirm_button_from_suggestion_window$ 
+  # Check on the submission status
+    - Type: set_env_var
+      Value: Updating EMS data...
+      Var: TOAST_MESSAGE_SHOWN
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.onboarders_add_participant_form.toaster_dismiss_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.onboarders_add_participant_form.toaster_dismiss_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.onboarders_add_participant_form.save_changes_button$
+  # Confirm if the participant has been created
+    - Type: set_env_var
+      Value: Updating EMS data...
+      Var: TOAST_MESSAGE_SHOWN
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.onboarders_add_participant_form.toaster_dismiss_button$
+    - Type: click_js
+      Strategy: xpath
+      Id: $PAGE.onboarders_add_participant_form.toaster_dismiss_button$
+  # Go to Participants
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.onboarders_platform_home.navigation_participant$      
+  # Add the search filter.
+    - Type: click
+      Strategy: id
+      Id: $PAGE.onboarders_participant_page.search_button$
+    - Type: send_keys
+      Strategy: id
+      Id: $PAGE.onboarders_participant_page.search_input$
+      Value: "$AND_CLI_PARTICIPANT_LAST_NAME$"
+  # Select the participant just created
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.onboarders_participant_page.senior_complete_name$
+    - Type: count_elements
+      Strategy: xpath
+      Id: $PAGE.onboarders_participant_page.senior_complete_name$
+      ResultVar: ROW_COUNT
+    - Type: assert
+      Asserts:
+        - Type: eq
+          Var: ROW_COUNT
+          Value: "1"
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.onboarders_participant_page.senior_complete_name$
+  # Click on Records Button
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.onboarders_participant_page.records_button$
+    - Type: sleep
+      Time: 2
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.onboarders_participant_page.records_button$
+  # Take the credentials of the participants created
+    - Type: get_text
+      Strategy: xpath
+      Id: $PAGE.onboarders_participant_record.participants_username$
+      Greps:
+        - var: NEW_PARTICIPANT_USERNAME
+          match: "(.*)"
+    - Type: get_text
+      Strategy: xpath
+      Id: $PAGE.onboarders_participant_record.participants_password$
+      Greps:
+        - var: NEW_PARTICIPANT_PASSWORD
+          match: "(.*)"
+  # Login using credentials on IDD
+    - Type: set_env_var
+      Var: senior_user1
+      Value: $AND_CLI_NEW_PARTICIPANT_USERNAME$
+    - Type: set_env_var
+      Var: senior_user1_pwd
+      Value: $AND_CLI_NEW_PARTICIPANT_PASSWORD$
+    - Type: case
+      Value: LoginNeverAloneHelper
+
 # CXTB-145: Click and View Participant Record from Listing
 TestOnboarderClickandViewParticipantRecordfromListing:
     Environment: Settings 
@@ -378,3 +671,14 @@ TestOnboarderChangeStatusToSuspendedForExistingParticipant:
   Actions:
     - Type: case
       Value: TestSeniorAppSuspendedAccountStatus
+
+# CXTB-511 Onboarder - Change Status to “Deactivated” for Existing Participant
+TestOnboarderChangeStatusToDeactivatedForExistingParticipant:
+  Roles:
+    - Role: localiOS
+      App: NeverAlone
+    - Role: desktopChrome
+      App: desktop    
+  Actions:
+    - Type: case
+      Value: TestSeniorAppDeactivatedAccountStatusVisuals

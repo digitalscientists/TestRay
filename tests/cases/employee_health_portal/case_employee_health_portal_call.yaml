@@ -128,3 +128,60 @@ TestEmployeeHealthPortalCallAlreadyAnsweredNotificationWhenEmployeeLogsOut:
       Role: desktopChrome1
       Strategy: xpath
       Id: $PAGE.providers_home_page.home_title$
+
+#CHS-2284 Employee Health Portal - EHP - Calls From Current Session Duplicated in Call History Until Access Page
+TestEmployeeHealthPortalCallsFromCurrentSessionDuplicatedInCallHistoryUntilAccessPage:
+  Environment: Settings
+  Roles:
+    - Role: desktopChrome
+      App: "desktop"
+  Actions:
+  # Generate two calls between EHP and Providers.
+    - Type: case
+      Value: EmployeeHealthPortalUserCall
+    - Type: set_env_var
+      Value: $AND_CLI_UNIQUE_SUBJECT$
+      Var: FIRST_ELEMENT_COUNT
+    - Type: case
+      Value: EmployeeHealthPortalCallNow
+    - Type: switch_window
+      Value: 1
+    - Type: case
+      Value: ProvidersCarePlatformEndCall
+    # After session has been completed, navigate to the EHP Call History.
+    - Type: switch_window
+      Value: 0
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.employee_health_call_history_tab.call_history_navigation$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.employee_health_call_history_tab.call_history_navigation$
+    # Verify that there is only row entry for each call.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.employee_health_call_history_tab.call_row_entry$
+    - Type: count_elements
+      Strategy: xpath
+      Id: $PAGE.employee_health_call_history_tab.call_row_entry$
+      ResultVar: SECOND_ROW_COUNT
+    - Type: set_env_var
+      Value: $AND_CLI_FIRST_ELEMENT_COUNT$
+      Var: UNIQUE_SUBJECT
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.employee_health_call_history_tab.call_row_entry$
+    - Type: count_elements
+      Strategy: xpath
+      Id: $PAGE.employee_health_call_history_tab.call_row_entry$
+      ResultVar: FIRST_ROW_COUNT
+    - Type: assert
+      Asserts:
+        - Type: eq
+          Var: FIRST_ROW_COUNT
+          Value: "1"
+    - Type: assert
+      Asserts:
+        - Type: eq
+          Var: SECOND_ROW_COUNT
+          Value: "1"

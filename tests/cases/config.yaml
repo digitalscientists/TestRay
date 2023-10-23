@@ -7,7 +7,7 @@ Timeout: 15
 
 Devices:
   - role: command1,command2,command3
-  - role: desktopChrome,desktopChrome1   
+  - role: desktopChrome,desktopChrome1,desktopChrome2 
     capabilities:
       chromeOptions:
         args:
@@ -31,7 +31,7 @@ Devices:
     capabilities:
       deviceName:  "Apple’s iPad (15.5)" #"iPad Pro (12.9-inch) (5th generation) Simulator (15.5)" #THIS DEVICE CAN BE UPDATED BY YOUR DEVICE
       udid: "00008101-001510200E04001E" #"D017D231-AAF1-4050-946B-B9FC0838D146" #THIS UDID CAN BE UPDATEDED WITH YOUR DEVICE UDID 
-      newCommandTimeout: 60
+      newCommandTimeout: 90
 
 #VARS
 Environments:
@@ -88,8 +88,12 @@ Environments:
 #Admin on call users      
       admincall_user1: add_your_info
       admincall_user1_pwd: add_your_info
+      admincall_user1_name: add_your_info
+      admincall_user1_lastname: add_your_info
       admincall_user2: add_your_info
       admincall_user2_pwd: add_your_info
+      admincall_user2_name: add_your_info
+      admincall_user2_lastname: add_your_info
 #EasterSeals Admin on call users      
       es_admincall_user: add_your_info
       es_admincall_user_pwd: add_your_info

@@ -11,6 +11,8 @@ SetNonPhysicalMobileTest:
     - Case: TestCarePartnerCallParticipantsDeviceCallComplete
     - Case: TestCarePartnerCallParticipantsDeviceCallIgnored
     - Case: TestCarePartnerCallParticipantsDeviceCallMissed
+    - Case: TestCarePartnerStatusUpdatedToInSessionNotLoggedForAnsweredOutboundCalls
+    - Case: TestCarePartnerCreateManualEventForParticipant
   # Care Partner ES
     - Case: TestCHCarePartnerBrowsingWhileOnCall
     - Case: TestCHCarePartnerCallParticipantsDeviceAndCompleteCall
@@ -21,6 +23,12 @@ SetNonPhysicalMobileTest:
     - Case: TestIDDESActiveAppointmentTimeWindowWhenNotJoinedPrior
   # Provider Care Platform
     - Case: TestProviderHomePageListingView
+    - Case: TestProviderBrowsingWhileOnCall
+    - Case: TestProvidersReturnToCallPortalAndAndCompletesSession
+    - Case: TestProviderReturnMissedSNFCall
+    - Case: TestProvidersSelectCallInQueueAndGetCallAnsweredAlreadyNotification
+    - Case: TestProviderReviewParticipantsCallHistoryAndAccessCallRecordings
+    - Case: TestProviderReviewCallHistoryAndAccessCallRecordings
   # Never Alone Senior App
     - Case: TestSeniorAppSuspendedAccountStatus
     - Case: TestSeniorAppActiveAccountStatusAndBehavior
@@ -51,6 +59,7 @@ SetNonPhysicalMobileTest:
     - Case: TestSeniorSettingsPageNavigation
     - Case: TestSeniorWifiSettingsPage
     - Case: TestSeniorAppDeactivatedAccountStatusVisuals
+    - Case: TestSeniorIpadShouldNotResetIfCarePartnerUpdatesParticipantProfile
   # Never Alone SNF tests
     - Case: TestSNFVerifyNotificationsPage
     - Case: TestSNFMessagePromptFromProvider
@@ -62,3 +71,14 @@ SetNonPhysicalMobileTest:
   # Onboarder
     - Case: TestOnboarderChangeStatusToActiveForExistingParticipant
     - Case: TestOnboarderChangeStatusToSuspendedForExistingParticipant
+    - Case: TestOnboarderFacilityProfileChangeStatusForExistingFacilityDevice
+    - Case: TestOnboarderChangeStatusToDeactivatedForExistingParticipant
+    - Case: TestOnboarderCreateNewParticipant
+  # Admin on call
+    - Case: TestAdminOnCallRefreshUserAccountForCalling
+    - Case: TestAdminOnCallRefreshSessionForStaffMemberFromPane
+    - Case: TestAdminOnCallShouldNotShowDuplicatesEntriesForNewCallsOnCallHistory
+    - Case: TestAdminOnCallShouldNotAnswerProviderCallAfterMedicalTransfer
+  # Facility Leadership
+    - Case: TestFacilityLeadershipSeeCallAppearOnQueueThenSelectCall
+    - Case: TestFacilityLeadershipReviewCallHistoryAndAccessCallRecordings

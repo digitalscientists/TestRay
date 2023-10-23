@@ -36,6 +36,9 @@ SetOnlyWebTests:
   - Case: TestCarePartnerCallExternal10DigitNumberWithoutParticipant
   - Case: TestCarePartnerClickAndViewTestParticipantVisuals
   - Case: TestCarePartnerLogInButtonShouldBeLimitedToOneClick
+  - Case: TestCarePartnerCreateFollowUpTicketParticipantProfile
+  - Case: TestCarePartnerTrackTimeAndEditFollowUpTicketsForParticipant
+  - Case: TestCarePartnerCompleteFollowUpTicketParticipantProfile
   # Employee Health Portal
   - Case: TestEmployeeSettingNotification
   - Case: TestEmployeeInformationUpdateNumber
@@ -50,6 +53,7 @@ SetOnlyWebTests:
   - Case: TestEmployeeHealthPortalRequestAnAppointmentForUser
   - Case: TestEmployeeHealthPortalReviewUpcomingAppointment
   - Case: TestEmployeeHealthPortalManuallyLogoutOfPortal
+  - Case: TestEmployeeHealthPortalCallsFromCurrentSessionDuplicatedInCallHistoryUntilAccessPage
   # ES Care Partner
   - Case: TestCHCarePartnerStatusDropdownNotInCall
   - Case: TestCHCarePartnerAccessAndReviewTeamMembersAvailability
@@ -64,7 +68,6 @@ SetOnlyWebTests:
   - Case: TestESCarePartnerParticipantPaneCreateFollowUpTicket
   - Case: TestESCarePartnerParticipantDirectoryFilter
   # On Boarders
-  - Case: TestOnboarderCarePartnerUpdatePassword
   - Case: TestOnboarderManuallyLogOutOfThePortal
   - Case: TestOnboardersAccessFacilitiesDirectoryFilter
   - Case: TestOnboardersForgotPasswordLoginLink
@@ -83,6 +86,9 @@ SetOnlyWebTests:
   - Case: TestOnboarderStaffMemberPaneReactivateStaffMemberAccountForCarePlatform
   - Case: TestOnboarderStaffMemberPaneDeactivateStaffMemberAccountForCarePlatform
   - Case: TestOnboarderEditStaffMemberAccountForCarePlatform
+  - Case: TestOnboarderCarePartnerUpdatePassword
+  - Case: TestOnboarderDeactivateStaffMemberAccountForCarePlatformStaffMemberProfile
+  - Case: TestOnboarderReactivateStaffMemberAccountForCarePlatformStaffMemberProfile
   # Providers Care Platform
   - Case: TestProvidersUpdatePassword
   - Case: TestProviderLogOutStayOnShift
@@ -97,6 +103,8 @@ SetOnlyWebTests:
   - Case: TestProviderHelpMenuOption
   - Case: TestProviderUseForgotPasswordLink
   - Case: TestProviderAccessParticipantDirectoryandViewDeviceRecordfromListing
+  - Case: TestProvidersEHPSeeCallAppearInQueueAssignAndReviewDetails
+  - Case: TestProviderReviewFacilityDeviceCallHistoryAndAccessCallRecordings
   # Facility Leadership Care Platform
   - Case: TestFacilityLeadershipDirectoryAndFilter
   - Case: TestFacilityLeadershipLogoutGoOffShift
@@ -117,3 +125,8 @@ SetOnlyWebTests:
   - Case: TestEHPMobileRequestAnAppointmentForUser
   - Case: TestEHPMobileReviewUpcomingAppointment
   - Case: TestEHPMobileRequestAnAppointmentForDependentMinor
+  # Admin on Call
+  - Case: TestAdminOnCallLogoutGoOffShift
+  - Case: TestAdminOnCallLogoutStayOnShift
+  - Case: TestAdminOnCallAccessStaffDirectoryFilterAndPane
+  - Case: TestAdminOnCallForgotPasswordLoginLink

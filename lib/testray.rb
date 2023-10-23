@@ -18,7 +18,7 @@ module TestRay
     def self.exit_on_failure?
       true
     end
-
+    $case_runner_global
     $pageobjects = load_pageobject_files()
 
     desc "execute_help", "help for creating an testray project"
@@ -323,6 +323,7 @@ def run_single_case(cases, case_name, parent_setup_params, options, no_abort=fal
   begin
     retries ||= 0
     case_run = CaseRunner.new(cases, case_name, parent_setup_params)
+    $case_runner_global = case_run
     case_run.device_handler.start_drivers
     case_run.run(case_name)
     generate_report(options[:report], case_name) unless no_abort

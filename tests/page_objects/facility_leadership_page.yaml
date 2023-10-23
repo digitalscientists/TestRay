@@ -15,3 +15,8 @@ facility_leadership_facility_details:
   overview_tab: //button[contains(text(),'Overview')]
   local_hospitals_tab: //button[text()='Local Hospitals']
   devices_tab: //button[text()='Devices']
+
+facility_leadership_call_details_pane:
+  assessment_tab: //button[text()='Assessment']
+  call_history_tab: //button[text()='Call History']
+  local_hospitals_tab: //button[text()='Local Hospitals']

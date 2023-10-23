@@ -1955,13 +1955,13 @@ class Device
       cmp_var = assert["Value"].is_a?(Numeric) ? assert["Value"] : convert_value(assert["Value"])
       op = assert["Type"].downcase
       
-      if ["contain_encode_utf8"].include?(op)
+      if ["contain_encode_utf8", "n_contain_encode_utf8"].include?(op)
         src_not_frozen_var = src_var.dup.force_encoding("ASCII-8BIT")
         utf8_string = src_not_frozen_var.encode("UTF-8", "ASCII-8BIT", invalid: :replace, undef: :replace, replace: "")
       end
 
       # check for class mismatches
-      if ["contain", "n_contain", "contain_encode_utf8"].include?(op)
+      if ["contain", "n_contain", "contain_encode_utf8", "n_contain_encode_utf8"].include?(op)
         raise "#{@role}: Value '#{cmp_var}' should be a String!" unless cmp_var.is_a?(String)
       elsif ["eq", "ne"].include?(op)
         if cmp_var.is_a?(Numeric)
@@ -1989,6 +1989,8 @@ class Device
       # Custom option made to handle those non UTF-8 characters that Never Alone returns.
       when "contain_encode_utf8"
         on_fail_text = "contain" unless utf8_string.include?(cmp_var)
+      when "n_contain_encode_utf8"
+        on_fail_text = "NOT contain" unless !utf8_string.include?(cmp_var)
       when "n_contain"
         on_fail_text = "NOT contain" unless !src_var.include?(cmp_var)
       when "eq"
@@ -2011,7 +2013,7 @@ class Device
         raise "#{@role}: The Var was '#{src_var}', but it was expected " + 
               "to #{on_fail_text} '#{cmp_var}'#{screenshot_error}"
       end 
-      if ["contain_encode_utf8"].include?(op)
+      if ["contain_encode_utf8", "n_contain_encode_utf8"].include?(op)
         log_info "#{@role}: Succesful Assert -> '#{utf8_string}' - #{assert["Type"]} - '#{cmp_var}'"
       else
         log_info "#{@role}: Succesful Assert -> '#{src_var}' - #{assert["Type"]} - '#{cmp_var}'"
@@ -2124,6 +2126,22 @@ def generate_random_day(action, main_case, main_case_id)
   end
 end
 
+# Returns a variable with a unique name adding a ramdon string at the end
+# i.e. method receives "Hey" and then returns "Hey<fjh>"
+
+def generate_unique_string(action, main_case, main_case_id)
+  name = convert_value(action["Name"])
+  unique_string = "#{name}#{2.times.map{(0...(rand(10))).map { ('a'..'z').to_a[rand(26)] }.join }.join("")}"
+  ENV[convert_value(action["ResultVar"])] = unique_string
+end
+
+# Returns a random email
+def generate_unique_email(action, main_case, main_case_id)
+  timestamp = Time.now.utc.strftime("%d%m%y%H%M%S")
+  unique_email = "random+" + timestamp + "@domain.com"
+  ENV[convert_value(action["ResultVar"])] = unique_email
+end
+
 # Returns a variable with a unique name using timestamps at the end
 # i.e. method receives "Hey" and then returns "Hey <timestamp>"
 def generate_unique_name(action, main_case, main_case_id)
@@ -2132,11 +2150,12 @@ def generate_unique_name(action, main_case, main_case_id)
   ENV[convert_value(action["ResultVar"])] = unique_name
 end
 
-# Returns a random email
-def generate_unique_email(action, main_case, main_case_id)
-  timestamp = Time.now.utc.strftime("%d%m%y%H%M%S")
-  unique_email = "random+" + timestamp + "@domain.com"
-  ENV[convert_value(action["ResultVar"])] = unique_email
+ # Returns a variable with a unique number adding a ramdon number at the end
+# i.e. method receives "Hey" and then returns "829225<fjh>"
+def generate_unique_number(action, main_case, main_case_id)
+  name = convert_value(action["Name"])
+  unique_number = "#{name}#{2.times.map{(0...(rand(10))).map { ('1'..'9').to_a[rand(26)] }.join }.join("")}"
+  ENV[convert_value(action["ResultVar"])] = unique_number
 end
 
 # Custom method to calculate the minutes/seconds from when an event was created
@@ -2158,6 +2177,15 @@ def calculate_minutes_passed_by_from_event_creation(action, main_case, main_case
     end
   end
   
+end
+
+# This action will return the elements count in a variable.
+def count_elements(action, main_case, main_case_id)
+  action = convert_value_pageobjects(action);
+  elements = @driver.find_elements(convert_value(action["Strategy"]), convert_value(action["Id"]))
+  elements_count = elements.count;
+  log_info("Element count: #{elements_count}")
+  ENV[convert_value(action["ResultVar"])] = elements_count.to_s
 end
 
 # Custom method to verify that an event on Never Alone went to the bottom after its time has passed.
@@ -2292,6 +2320,9 @@ def provider_clean_hanged_call_or_session(action, main_case, main_case_id)
   end
   if have_call
     @driver.find_element(:xpath, convert_value_pageobjects("$PAGE.providers_call_handling_page.resolved_true_option$")).click
+    if wait_for_enabled_element("$PAGE.providers_call_handling_page.video_visit_true_option$")
+      @driver.find_element(:xpath, convert_value_pageobjects("$PAGE.providers_call_handling_page.video_visit_true_option$")).click
+    end
     wait_for_enabled_element("$PAGE.providers_call_handling_page.recommend_discharge_yes_by_SNF$")
     @driver.find_element(:xpath, convert_value_pageobjects("$PAGE.providers_call_handling_page.recommend_discharge_yes_by_SNF$")).click
     wait_for_enabled_element("$PAGE.providers_call_handling_page.call_notes_subject_input$")
@@ -2304,6 +2335,82 @@ def provider_clean_hanged_call_or_session(action, main_case, main_case_id)
     wait_for_element_not_visible("$PAGE.providers_call_handling_page.submit_exit_session_button$")
     @driver.find_element(:xpath, convert_value_pageobjects("$PAGE.providers_home_page.home_button$")).click
     wait_for_enabled_element("$PAGE.providers_home_page.home_title$")
+  end
+
+  # is call queue clean?
+  log_info("checking if there is any pending call on the call queue page")
+  call_queue_call_elements = wait_for_element_collection_to_exist("$PAGE.care_platform_home.call_queue_calls$")
+  if call_queue_call_elements.nil? || call_queue_call_elements.empty?
+    puts "Call queue call elements collection is null/empty."
+  end
+
+  if call_queue_call_elements.length() > 0
+    call_queue_call_elements.each do |call_element|
+      
+      log_info("wait for call queue element")
+      wait_for_enabled_element("$PAGE.care_platform_home.first_call_of_queue$")
+      @driver.find_element(:xpath, convert_value_pageobjects("$PAGE.care_platform_home.first_call_of_queue$")).click
+      log_info("answer call")
+      wait_for_element_to_exist("$PAGE.care_platform_home.answer_call$")
+      @driver.find_element(:xpath, convert_value_pageobjects("$PAGE.care_platform_home.answer_call$")).click
+      
+      if wait_for_element_to_exist("$PAGE.care_platform_notifications.failed_to_join_call_notification$") || wait_for_element_to_exist("$PAGE.care_platform_notifications.call_already_answered_notification$")
+        log_info("Failed to join call/Call already answered notification appeared")
+        @driver.find_element(:xpath, convert_value_pageobjects("$PAGE.care_platform.navigation_home$")).click
+        @driver.navigate.refresh
+        wait_for_enabled_element("$PAGE.care_platform.call_queue_title$")
+      else
+        log_info("wait for the end call button")
+        wait_for_element_to_exist("$PAGE.care_platform_call_portal.end_call_button$")
+        
+        log_info("click on the end call")
+        @driver.find_element(:xpath, convert_value_pageobjects("$PAGE.care_platform_call_portal.end_call_button$")).click
+
+        log_info("Click on the No Message button if it appears")
+        if wait_for_element_to_exist("$PAGE.care_platform_call_portal.no_message_button$")
+          @driver.find_element(:xpath, convert_value_pageobjects("$PAGE.care_platform_call_portal.no_message_button$")).click
+          @driver.find_element(:xpath, convert_value_pageobjects("$PAGE.care_platform.navigation_home$")).click
+          wait_for_enabled_element("$PAGE.care_platform.call_queue_title$")
+          next
+        end
+
+        log_info("fill in the details to complete the session, complete the session")
+        wait_for_element_to_exist("$PAGE.care_platform_call_portal.video_status$")
+        
+        log_info("fill in Subject and Details field")
+        wait_for_enabled_element("$PAGE.providers_call_handling_page.subject_input$")
+        @driver.find_element(:xpath, convert_value_pageobjects("$PAGE.providers_call_handling_page.subject_input$")).send_keys("Automation Tear Down")
+        @driver.find_element(:xpath, convert_value_pageobjects("$PAGE.providers_call_handling_page.details_textarea$")).send_keys("Automation Tear Down Details")
+        
+        log_info("wait for the Complete Sesion button to be enabled and click on it")
+        wait_for_enabled_element("$PAGE.care_platform_call_portal.complete_session_btn$")
+        @driver.find_element(:xpath, convert_value_pageobjects("$PAGE.care_platform_call_portal.complete_session_btn$")).click
+  
+        if wait_for_element_to_exist("$PAGE.providers_call_handling_page.post_call_survey_title$")
+          log_info("We are at the provider's survey")
+          have_call = true
+        end
+
+        if have_call
+          @driver.find_element(:xpath, convert_value_pageobjects("$PAGE.providers_call_handling_page.resolved_true_option$")).click
+          if wait_for_enabled_element("$PAGE.providers_call_handling_page.video_visit_true_option$")
+            @driver.find_element(:xpath, convert_value_pageobjects("$PAGE.providers_call_handling_page.video_visit_true_option$")).click
+          end
+          wait_for_enabled_element("$PAGE.providers_call_handling_page.recommend_discharge_yes_by_SNF$")
+          @driver.find_element(:xpath, convert_value_pageobjects("$PAGE.providers_call_handling_page.recommend_discharge_yes_by_SNF$")).click
+          wait_for_enabled_element("$PAGE.providers_call_handling_page.call_notes_subject_input$")
+          @driver.find_element(:xpath, convert_value_pageobjects("$PAGE.providers_call_handling_page.call_notes_subject_input$")).send_keys("Automation Test subject")
+          wait_for_enabled_element("$PAGE.providers_call_handling_page.call_notes_provider_input$")
+          @driver.find_element(:xpath, convert_value_pageobjects("$PAGE.providers_call_handling_page.call_notes_provider_input$")).send_keys("Automation Test Notes: Ended by provider's cleaner")
+          wait_for_enabled_element("$PAGE.providers_call_handling_page.submit_exit_session_button$")
+          @driver.find_element(:xpath, convert_value_pageobjects("$PAGE.providers_call_handling_page.submit_exit_session_button$")).click
+          
+          wait_for_element_not_visible("$PAGE.providers_call_handling_page.submit_exit_session_button$")
+          @driver.find_element(:xpath, convert_value_pageobjects("$PAGE.providers_home_page.home_button$")).click
+          wait_for_enabled_element("$PAGE.providers_home_page.home_title$")
+        end
+      end
+    end
   end
 end
 
@@ -2339,9 +2446,14 @@ def care_partner_clean_call_queue_and_hanged_calls(action, main_case, main_case_
       wait_for_enabled_element("$PAGE.care_platform.call_queue_title$")
       return
     end
-
+    
     log_info("complete the session")
     wait_for_enabled_element("$PAGE.care_platform_call_portal.video_status$")
+    
+    log_info("Cancel existing Post-Call Survey if there is one incomplete")
+    if wait_for_enabled_element("$PAGE.care_platform_call_portal.submit_and_exit_session_button$")
+      @driver.find_element(:xpath, convert_value_pageobjects("$PAGE.care_platform_call_portal.cancel_post_call_survey_button$")).click
+    end
     
     log_info("fill in Subject and Details field")
     wait_for_enabled_element("$PAGE.providers_call_handling_page.subject_input$")
@@ -2648,6 +2760,15 @@ def list_handler(action, main_case, main_case_id)
   if !action["NoRaise"]
     path = take_error_screenshot(main_case, main_case_id)
     raise "#{@role}: Exception: #{exception}, Action:#{action}\nError Screenshot: #{path}"
+  end
+end
+
+# This method allows you to run an existing test created on YAML to be run on this class.
+def call_helper_case(case_name)
+  unless case_name.start_with?("Test")
+    $case_runner_global.run(case_name)
+  else
+    raise "Helper case called should not start with 'Test'"
   end
 end
 # END OF DEVICE CLASS

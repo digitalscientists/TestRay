@@ -193,6 +193,10 @@ TestSNFIgnoreCallFromProvider:
       Role: localiOS
       Id: $PAGE.snf_home.new_request_btn$
   #Close Message in Provider
+    - Type: wait_for
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_call_handling_page.no_message_button$
     - Type: click
       Strategy: xpath
       Role: desktopChrome

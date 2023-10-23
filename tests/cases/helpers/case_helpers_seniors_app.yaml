@@ -1,5 +1,4 @@
 TerminateApp:
-  Environment: Settings 
   Roles:
     - Role: localiOS
       App: NeverAlone      
@@ -19,7 +18,6 @@ LaunchApp:
       Value: com.eastwaterleasing.neveraloneb2b
 
 LoginNeverAloneHelper:
-  Environment: Settings
   Roles:
     - Role: localiOS
       App: NeverAlone      
@@ -176,7 +174,6 @@ AnswerCallAsSenior:
 
 # Senior Helper to clean prompts on Never Alone.
 SeniorCleanPrompts:
-  Environment: Settings
   Roles:
     - Role: localiOS
       App: NeverAlone

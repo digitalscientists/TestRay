@@ -1,0 +1,181 @@
+# CXTB-601 Log Out - Manually of Portal and Go Off Shift
+TestAdminOnCallLogoutGoOffShift:
+  Environment: Settings 
+  Vars:
+    LOGOUT_OPTION: "Go Off Shift"
+    USER_FULLNAME: $AND_CLI_admincall_user1_name$ $AND_CLI_admincall_user1_lastname$
+  Roles:
+    - Role: desktopChrome
+      App: desktop
+  Actions:
+  # Calling Login case.
+    - Type: case
+      Value: AdminOnCallLogin
+  # Clicking the name.
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_header.user_dropdown_button$
+  # Checking options under the menu
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_header.user_toggle_input$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_header.help_care_partner_option_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_header.help_provider_option_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_header.myaccount_menu_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_header.logout_menu_button$
+  # Click on the logout button.
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_header.logout_menu_button$
+  # Click on the cancel button.
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_logout_modal.cancel_logout_button$
+  # Calling Logout case.
+    - Type: case
+      Value: CarePlatformLogout
+  # NOTE: The step involve Admin on Rails, but we will use
+  # another Admin on Call instead.
+  # Change values for admin on call 1
+    - Type: set_env_var
+      Value: $AND_CLI_admincall_user2$
+      Var: admincall_user1
+    - Type: set_env_var
+      Value: $AND_CLI_admincall_user2_pwd$
+      Var: admincall_user1_pwd
+  # Log in with the second user.
+    - Type: case
+      Value: AdminOnCallLogin
+  # Click on the users dropdown.
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_header.headset_dropdown_button$
+  # Verify that the first user has gone off shift.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_header.offline_carepartner1_element$
+    - Type: get_text
+      Strategy: xpath
+      Id : $PAGE.care_platform_header.offline_carepartner1_element$
+      Greps:
+        - var: CARE_PARTNER_ELEMENT
+          match: "(.*)"
+    - Type: assert
+      Asserts: 
+      - Type: n_contain
+        Var: CARE_PARTNER_ELEMENT
+        Value: "Available"
+    - Type: assert
+      Asserts: 
+      - Type: n_contain
+        Var: CARE_PARTNER_ELEMENT
+        Value: "Idle"
+  # Check there's no Admin on Rails role in the dropdown (CHS-2558)
+    - Type: count_elements
+      Strategy: xpath
+      Id: $PAGE.care_platform_header.admin_on_rails_element$
+      ResultVar: RAILS_COUNT
+    - Type: assert
+      Asserts:
+        - Type: eq
+          Var: RAILS_COUNT
+          Value: "0"
+  # Log out of the second user too.
+    - Type: case
+      Value: CarePlatformLogout
+
+#CXTB-602 Log Out - Manually of Portal and Stay On Shift
+TestAdminOnCallLogoutStayOnShift:
+  Environment: Settings 
+  Vars:
+    LOGOUT_OPTION: "Stay On Shift"
+    USER_FULLNAME: $AND_CLI_admincall_user1_name$ $AND_CLI_admincall_user1_lastname$
+  Roles:
+    - Role: desktopChrome
+      App: desktop
+  Actions:
+  # Calling Login case.
+    - Type: case
+      Value: AdminOnCallLogin
+  # Clicking the name.
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_header.user_dropdown_button$
+  # Checking options under the menu
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_header.user_toggle_input$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_header.help_care_partner_option_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_header.help_provider_option_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_header.myaccount_menu_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_header.logout_menu_button$
+  # Click on the logout button.
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_header.logout_menu_button$
+  # Click on the cancel button.
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_logout_modal.cancel_logout_button$
+  # Calling Logout case.
+    - Type: case
+      Value: CarePlatformLogout
+  # NOTE: The step involve Admin on Rails, but we will use
+  # another Admin on Call instead.
+  # Change values for admin on call 1
+    - Type: set_env_var
+      Value: $AND_CLI_admincall_user2$
+      Var: admincall_user1
+    - Type: set_env_var
+      Value: $AND_CLI_admincall_user2_pwd$
+      Var: admincall_user1_pwd
+  # Log in with the second user.
+    - Type: case
+      Value: AdminOnCallLogin
+  # Click on the users dropdown.
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_header.headset_dropdown_button$
+  # Verify that the first user has stayed on shift.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_header.onshift_carepartner1_element$
+  # Check there's no Admin on Rails role in the dropdown (CHS-2558)
+    - Type: count_elements
+      Strategy: xpath
+      Id: $PAGE.care_platform_header.admin_on_rails_element$
+      ResultVar: RAILS_COUNT
+    - Type: assert
+      Asserts:
+        - Type: eq
+          Var: RAILS_COUNT
+          Value: "0"
+
+#CXTB-605: Admin On Call - Use “Forgot password” Link on Login Page  
+TestAdminOnCallForgotPasswordLoginLink:
+  Environment: Settings
+  Roles:
+    - Role: desktopChrome
+      App: "desktop"
+  Actions:
+    - Type: set_env_var
+      Value: $AND_CLI_admincall_user1$
+      Var: carepartner_user1
+    - Type: case
+      Value: ForgotPasswordCarePlatformLoginLink

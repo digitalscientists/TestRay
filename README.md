@@ -339,6 +339,7 @@ Actions:
 22. [hover](#hover)
 23. [clear_field](#clear_field)
 24. [return_element_location](#return_element_location)
+25. [count_elements](#count_elements)
 
 ## Only Browser
 
@@ -417,6 +418,7 @@ This is not a type but can be used in different Types as a Validation for the ac
 7. [generate_random_day](#generate_random_day)
 8. [search_by_text](#search_by_text)
 9. [send_keys_if_exist](#send_keys_if_exist)
+10. [call_helper_case](#call_helper_case)
 
 ## Appium/Selenium
 
@@ -665,6 +667,14 @@ Hovers over an element.
 ### <a id="return_element_location"></a>return_element_location
 
 	- Type: return_element_location
+	  Role: role1 (Optional. if not specified will use the first one defined in the case Roles)
+	  Strategy: id/css/xpath/uiautomator/class_chain/...
+	  Id: //some/path
+	  ResultVar: var1
+### <a id="count_elements"></a>count_elements
+Will return the elements count in a variable.
+
+	- Type: count_elements
 	  Role: role1 (Optional. if not specified will use the first one defined in the case Roles)
 	  Strategy: id/css/xpath/uiautomator/class_chain/...
 	  Id: //some/path
@@ -1277,3 +1287,15 @@ to avoid that the element haven't had time enough to render
       Strategy: xpath | id | etc.
       Id: //some//path
       Value: SOME_VALUE
+
+### <a id="call_helper_case"></a>call_helper_case
+
+**NOTE:** This method is used inside the device.rb, it takes an string with 
+the name of the case and use it inside an existing or new method. 
+This method can be used to run the cases built on the YAMLS inside the device.rb class.
+For example:
+
+    def onboarder_set_staff_active(action, main_case, main_case_id)
+      case_name = "OnboarderSetStaffActive"
+      call_helper_case(case_name)
+    end

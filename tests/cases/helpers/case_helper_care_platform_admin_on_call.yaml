@@ -1,0 +1,223 @@
+AdminOnCallLogin:
+  Roles:
+    - Role: desktopChrome
+      App: desktop
+  Actions:
+    - Type: navigate
+      Value: $AND_CLI_care_platform_url$
+    - Type: maximize
+    - Type: send_keys
+      Strategy: id
+      Id: $PAGE.care_platform_login.email_input$
+      Value: $AND_CLI_admincall_user1$
+    - Type: send_keys
+      Strategy: id
+      Id: $PAGE.care_platform_login.password_input$
+      Value: $AND_CLI_admincall_user1_pwd$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_login.login_button$
+    - Type: sleep
+      Time: 2
+
+AdminOnCallRefreshDevice:
+  Vars:
+    LOGOUT_OPTION: "Go Off Shift"
+  Aftercases:
+    - CarePlatformLogout
+  Roles:
+    - Role: desktopChrome
+      App: desktop
+  Actions:
+    # Login into Care Platform
+    - Type: case
+      Value: AdminOnCallLogin
+    # Go to Facilities
+    - Type: case
+      Value: NavigationToFacilityProfile
+    # Select Devices
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_facility_Record.devices_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_facility_Record.call_device_by_number$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_facility_Record.call_device_by_number$
+    # Check for "Refresh" button
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.refresh_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.refresh_button$
+    # Refresh confirmation
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.yes_refresh_dialog_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.yes_refresh_dialog_button$
+    - Type: sleep
+      Time: 1
+
+AdminOnCallRefreshParticipant:
+  Vars:
+    LOGOUT_OPTION: "Go Off Shift"
+  Aftercases:
+    - CarePlatformLogout
+  Roles:
+    - Role: desktopChrome
+      App: desktop
+  Actions:
+    # Login into Care Platform
+    - Type: case
+      Value: AdminOnCallLogin
+    # Go to Participant Records
+    - Type: case
+      Value: CarePartnerParticipantRecordsNavigation
+    # Check for "Refresh" button
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.refresh_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.refresh_button$
+    # Refresh confirmation
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.yes_refresh_dialog_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.yes_refresh_dialog_button$
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.yes_refresh_dialog_button$
+
+# This uses the name of the staff member to search
+# The variable is $AND_CLI_USER_FULLNAME$
+# And their role as appears on the dropdown options in the listing
+# The variable for this is $AND_CLI_STAFF_ROLE$
+SearchStaffByNameAndRole:
+  Roles:
+    - Role: desktopChrome
+      App: desktop
+  Actions:
+    # Navigate to Staff
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.onboarders_header_navigation.staff_tab$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.onboarders_header_navigation.staff_tab$
+    # Filter by Role
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.admin_on_call_staff_tab.role_dropdown$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.admin_on_call_staff_tab.role_dropdown$
+    # Select Role
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.admin_on_call_staff_tab.role_dropdown_by_role_option$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.admin_on_call_staff_tab.role_dropdown_by_role_option$
+    # Search Name
+    - Type: search_by_text
+      Text: $AND_CLI_USER_FULLNAME$
+    # Select first
+    - Type: sleep
+      Time: 0.5
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant.senior_1_row$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant.senior_1_row$
+
+AdminOnCallNavigateToProvidersCallHistory:
+  Roles:
+    - Role: desktopChrome
+      App: desktop
+  Actions:
+    # Navigate to Call History > Providers
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.admin_on_call_home.call_history_navigation_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.admin_on_call_home.call_history_navigation_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.admin_on_call_home.php_providers_navigation_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.admin_on_call_home.php_providers_navigation_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.admin_on_call_providers_call_history_tab.call_history_tab$
+
+AdminOnCallNavigateToProvidersCallQueue:
+  Actions:
+    # Navigate to Providers > Call History.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.admin_on_call_home.queue_navigation_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.admin_on_call_home.queue_navigation_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.admin_on_call_home.php_providers_navigation_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.admin_on_call_home.php_providers_navigation_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.admin_on_call_providers_call_queue_tab.call_queue_title$
+
+AdminOnCallRefreshStaff:
+  Vars:
+    LOGOUT_OPTION: "Go Off Shift"
+  Aftercases:
+    - CarePlatformLogout
+  Roles:
+    - Role: desktopChrome
+      App: desktop
+  Actions:
+    # Login into Care Platform
+    - Type: case
+      Value: AdminOnCallLogin
+    # Go to Staff and search by name and role
+    - Type: case
+      Value: SearchStaffByNameAndRole
+    # Click on Admin button
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.staff_records.admin_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.staff_records.admin_button$
+    # Check for "Refresh" button
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.staff_records.admin_refresh_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.staff_records.admin_refresh_button$
+    # Refresh confirmation
+    # Click "Yes, Refresh"
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.staff_records.yes_refresh_dialog_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.staff_records.yes_refresh_dialog_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_notifications.refresh_staff_notification$
+    - Type: sleep
+      Time: 1

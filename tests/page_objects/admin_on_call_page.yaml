@@ -1,0 +1,25 @@
+admin_on_call_home:
+  call_history_navigation_button: //button[@data-test-id='navCallHistory']
+  queue_navigation_button: //button[@data-test-id='navQueue']
+  providers_call_history_navigation_button: //ul[@class='header-nav-dropdown-menu']//a[text()='PHP Providers']
+  php_providers_navigation_button: //nav[contains(@class,'header-nav')]//a[text()='PHP Providers']
+  call_history_tab: //header//nav//button[contains(.,'Call History')]
+
+admin_on_call_providers_call_history_tab:
+  call_history_tab: //nav/button[text()='Call History']
+  call_history_row_entry_based_on_provider_subject: //div[@data-test-id='accordionContent']//div[text()='$AND_CLI_UNIQUE_SUBJECT$']
+
+admin_on_call_providers_call_queue_tab:
+  call_queue_title: //h3[text()='PHP Providers']
+
+admin_on_call_staff_tab:
+  role_dropdown: //button[@class='queue-filter-dropdown-toggle']
+  role_dropdown_by_role_option: //div[contains(@class,'filterDropdown')]/button[@class='queue-filter-dropdown-button' and text()='$AND_CLI_STAFF_ROLE$']
+  role_dropdown_care_partner_option: //div[contains(@class,'filterDropdown')]/button[@class='queue-filter-dropdown-button' and text()='Care Partner']
+
+care_platform_staff_records_call_history:
+  first_call_on_record: (//div[contains(@class,'accordion-item')])[1]
+
+admin_on_call_staff_pane:
+  audit_log_tab: //button[text()='Audit Log']
+  in_session_row_entry: //time[text()='$AND_CLI_TODAYS_DATE$']/ancestor::tr//time[text()='$AND_CLI_START_CALL_TIME$']/ancestor::tr//td[text()='In Session']

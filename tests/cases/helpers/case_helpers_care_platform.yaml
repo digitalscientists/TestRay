@@ -4,12 +4,21 @@ CarePlatformLogout:
       App: desktop       
   Actions:     
       # Log out to the Care Platform app with Care Partners account
-    - Type: click
+    - Type: wait_for
       Strategy: xpath
       Id: $PAGE.care_platform_header.user_dropdown_button$
     - Type: click
       Strategy: xpath
+      Id: $PAGE.care_platform_header.user_dropdown_button$
+    - Type: wait_for
+      Strategy: xpath
       Id: $PAGE.care_platform_header.logout_menu_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_header.logout_menu_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_logout_modal.log_out_button$
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_logout_modal.log_out_button$
@@ -1129,6 +1138,160 @@ CarePlatformUpdatePassword:
       Strategy: xpath
       Id: $PAGE.care_platform_myaccount_info.change_my_password_button$
 
+#Alternative Update Password on the CarePlatform
+AlternativeCarePlatformUpdatePassword:
+  Roles:
+    - Role: desktopChrome
+      App: desktop       
+  Actions:
+    #Going to My Account
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_header.user_dropdown_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_header.user_dropdown_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_header.myaccount_menu_button$
+  #Click in Update Password
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_myaccount_info.update_password_button$
+  #Verify the elements
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_myaccount_info.confirm_new_password_input$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_myaccount_info.confirm_new_password_label$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_myaccount_info.new_password_input$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_myaccount_info.new_password_label$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_myaccount_info.current_password_input$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_myaccount_info.current_password_label$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_login.dialog_cancel_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_myaccount_info.change_my_password_button$
+  #Fill the fields with invalid values
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.care_platform_myaccount_info.current_password_input$
+      Value: $AND_CLI_carepartner_user1_pwd$
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.care_platform_myaccount_info.new_password_input$
+      Value: $AND_CLI_alternative_incorrect_password$
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.care_platform_myaccount_info.confirm_new_password_input$
+      Value: $AND_CLI_alternative_incorrect_password$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_myaccount_info.change_my_password_button$
+  #Verify a red alert text showed up
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_myaccount_info.password_requirements_alert_text$
+  #Click in Cancel
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_login.dialog_cancel_button$
+  #Verify the dialog is closed
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id: $PAGE.care_platform_login.dialog_cancel_button$
+      Time: 10
+  #Going to My Account
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_header.user_dropdown_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_header.myaccount_menu_button$
+  #Click in Update Password
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_myaccount_info.update_password_button$
+  #Fill the fields
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.care_platform_myaccount_info.current_password_input$
+      Value: $AND_CLI_carepartner_user1_pwd$
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.care_platform_myaccount_info.new_password_input$
+      Value: $AND_CLI_alternative_correct_password$
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.care_platform_myaccount_info.confirm_new_password_input$
+      Value: $AND_CLI_alternative_correct_password$
+  #Click the Change My Password button
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_myaccount_info.change_my_password_button$
+  #Verify the alert for "Password updated successfully" is displayed
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_myaccount_info.password_updated_successfully_alert_msg$
+  #Calling Logout case
+    - Type: case
+      Value: AlternativeCarePartnerLogout
+  #Setting the password var to the new value
+    - Type: set_env_var
+      Value: $AND_CLI_alternative_correct_password$
+      Var: carepartner_user1_pwd
+  #Calling Login case
+    - Type: case
+      Value: CarePartnerLogin
+  #Verify the login with the new password was successful
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_header.user_dropdown_button$
+  #Restore the password
+  #Going to My Account
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_header.user_dropdown_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_header.myaccount_menu_button$
+  #Click in Update Password
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_myaccount_info.update_password_button$
+  #Set the password var to the new value
+    - Type: set_env_var
+      Value: $AND_CLI_ENV_PASS_STORE$
+      Var: carepartner_user1_pwd
+  #Fill the fields
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.care_platform_myaccount_info.current_password_input$
+      Value: $AND_CLI_alternative_correct_password$
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.care_platform_myaccount_info.new_password_input$
+      Value: $AND_CLI_carepartner_user1_pwd$
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.care_platform_myaccount_info.confirm_new_password_input$
+      Value: $AND_CLI_carepartner_user1_pwd$
+  #Click the Change My Password button
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_myaccount_info.change_my_password_button$
+
 CarePlatformUpdateInfo:
   Roles:
     - Role: desktopChrome
@@ -1266,7 +1429,6 @@ CarePlatformUpdateInfo:
       Time: 2
 
 AnswerCallAsCarePartner:
-  Environment: Settings
   Roles:
     - Role: desktopChrome
       App: desktop       
@@ -1291,7 +1453,6 @@ AnswerCallAsCarePartner:
       Id: $PAGE.care_platform_call_portal.end_call_button$
 
 PostCallSurveyCarePartner:
-  Environment: Settings
   Roles:
     - Role: desktopChrome
       App: desktop       
@@ -1362,6 +1523,7 @@ PostCallSurveyCarePartner:
       Role: desktopChrome
       Strategy: xpath
       Id: $PAGE.care_platform.call_queue_title$
+      CheckTime: 25
 
 # Custom helper to send backspace keys to the subject input on the call portal.
 CarePartnerClearSubjectInputField:
@@ -1556,7 +1718,8 @@ ForgotPasswordCarePlatformLoginLink:
 CarePartnerCleanCallQueueAndHangedCalls:
   Vars:
     LOGOUT_OPTION: "Go Off Shift"
-  Environment: Settings
+  Aftercases:
+    - CarePlatformLogout
   Roles:
     - Role: desktopChrome
       App: desktop
@@ -1564,6 +1727,19 @@ CarePartnerCleanCallQueueAndHangedCalls:
     # Log in.
     - Type: case
       Value: CarePartnerLogin
+    # Clean Care Partner Call Queue and Hanged Calls.
+    - Type: care_partner_clean_call_queue_and_hanged_calls
+
+CarePartnerUser2CleanCallQueueAndHangedCalls:
+  Vars:
+    LOGOUT_OPTION: "Go Off Shift"
+  Roles:
+    - Role: desktopChrome
+      App: desktop
+  Actions:
+    # Log in.
+    - Type: case
+      Value: CarePartnerLoginSecondaryUser
     # Clean Care Partner Call Queue and Hanged Calls.
     - Type: care_partner_clean_call_queue_and_hanged_calls
     # Log out.
@@ -1576,20 +1752,9 @@ CarePartnerCreateFollowUpTicket:
     - Role: desktopChrome
       App: desktop
   Actions:
-    # Go to participants
-    - Type: click
-      Strategy: xpath
-      Id : $PAGE.care_platform.navigation_participant$
-    # Decrease listing by searching participant's name
-    - Type: search_by_text
-      Text: $AND_CLI_senior_user1_name$
-    # Select the participant used on the config file.
-    - Type: wait_for
-      Strategy: xpath
-      Id: $PAGE.care_platform_participant.senior_complete_name$
-    - Type: click
-      Strategy: xpath
-      Id: $PAGE.care_platform_participant.senior_complete_name$
+    # Navigate to the Participant Pane.
+    - Type: case
+      Value: CarePartnerParticipantPaneNavigation
     # Go to follow-up tickets tab.
     - Type: click
       Strategy: xpath
@@ -1619,6 +1784,9 @@ CarePartnerCreateFollowUpTicket:
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_participant_details.ticket_assigned_input$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_details.assigned_option_unassigned$
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_participant_details.assigned_option_based_on_name$
@@ -1722,7 +1890,20 @@ CarePartnerEditParticipantNavigation:
     - Type: search_by_text
       Role: desktopChrome
       Text: $AND_CLI_senior_user1_name$
-  # Select first participant by name in the list
+  # Apply the Active filter
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant.status_dropdown_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant.status_dropdown_options$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant.active_dropdown_option$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant.active_dropdown_option$
+  # Select first active participant by name in the list
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.care_platform_participant.senior_complete_name$
@@ -1759,7 +1940,20 @@ CarePartnerParticipantPaneNavigation:
     - Type: search_by_text
       Role: desktopChrome
       Text: $AND_CLI_senior_user1_name$
-  # Select corresponding participant by name in the list.
+  # Apply the Active filter
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant.status_dropdown_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant.status_dropdown_options$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant.active_dropdown_option$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant.active_dropdown_option$
+  # Select corresponding active participant by name in the list.
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.care_platform_participant.senior_complete_name$
@@ -1824,6 +2018,15 @@ CarePartnerToastValidation:
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.care_platform.carepartner_toast_notification$
+    - Type: count_elements
+      Strategy: xpath
+      Id: $PAGE.care_platform.carepartner_toast_notification$
+      ResultVar: TOAST_COUNT
+    - Type: assert
+      Asserts:
+        - Type: eq
+          Var: TOAST_COUNT
+          Value: "1"
     - Type: get_text
       Strategy: xpath
       Id : $PAGE.care_platform.carepartner_toast_notification$
@@ -1854,7 +2057,20 @@ CarePartnerParticipantRecordsNavigation:
     - Type: search_by_text
       Role: desktopChrome
       Text: $AND_CLI_senior_user1_name$
-  # Select first participant by name in the list
+  # Apply the Active filter
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant.status_dropdown_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant.status_dropdown_options$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant.active_dropdown_option$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant.active_dropdown_option$
+  # Select first active participant by name in the list
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.care_platform_participant.senior_complete_name$
@@ -2406,7 +2622,13 @@ ManageParticipantProviderInformation:
   Actions:
   # Add Provider By Type
   # E.g. 'Preferred Lab'
-    - Type: click
+    - Type: scroll_to
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_providers.add_provider_by_type$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_providers.add_provider_by_type$
+    - Type: click_js
       Strategy: xpath
       Id: $PAGE.care_platform_edit_participant_providers.add_provider_by_type$
     - Type: send_keys
@@ -2427,7 +2649,7 @@ ManageParticipantProviderInformation:
       Strategy: xpath
       Id: $PAGE.care_platform_edit_participant_providers.add_provider_by_type$
   # Enter necessary information, then click “Save and Close”
-    - Type: click
+    - Type: click_js
       Strategy: xpath
       Id: $PAGE.care_platform_edit_participant_providers.add_provider_by_type$
     - Type: send_keys
@@ -2444,10 +2666,6 @@ ManageParticipantProviderInformation:
       Strategy: id
       Id: $PAGE.care_platform_edit_participant_providers.member_id_input$
       Value: 64
-    - Type: send_keys_if_exist
-      Strategy: id
-      Id: $PAGE.care_platform_edit_participant_providers.group_id_input$
-      Value: 34
     - Type: send_keys_if_exist
       Strategy: id
       Id: $PAGE.care_platform_edit_participant_providers.speciality_input$
@@ -2475,7 +2693,7 @@ ManageParticipantProviderInformation:
       Strategy: xpath
       Id: $PAGE.care_platform_edit_participant_providers.delete_provider_by_name_button$
   # Try to Edit and cancel, changes shouldn't stick
-    - Type: click
+    - Type: click_js
       Strategy: xpath
       Id: $PAGE.care_platform_edit_participant_providers.edit_provider_by_name_button$
     - Type: wait_for
@@ -2510,7 +2728,13 @@ ManageParticipantProviderInformation:
       Strategy: xpath
       Id: $PAGE.care_platform_edit_participant_providers.provider_by_name_block$
   # Try Edit and Save changes
-    - Type: click
+    - Type: scroll_to
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_providers.edit_provider_by_name_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_providers.edit_provider_by_name_button$
+    - Type: click_js
       Strategy: xpath
       Id: $PAGE.care_platform_edit_participant_providers.edit_provider_by_name_button$
     - Type: send_keys
@@ -2544,7 +2768,7 @@ ManageParticipantProviderInformation:
       Strategy: xpath
       Id: $PAGE.care_platform_edit_participant_providers.delete_provider_by_name_button$
   # Try Delete and Cancel
-    - Type: click
+    - Type: click_js
       Strategy: xpath
       Id: $PAGE.care_platform_edit_participant_providers.delete_provider_by_name_button$
     - Type: wait_for
@@ -2560,7 +2784,7 @@ ManageParticipantProviderInformation:
       Strategy: xpath
       Id: $PAGE.care_platform_edit_participant_providers.cancel_button$
   # Try Delete and Confirm
-    - Type: click
+    - Type: click_js
       Strategy: xpath
       Id: $PAGE.care_platform_edit_participant_providers.delete_provider_by_name_button$
     - Type: wait_for
@@ -2581,6 +2805,58 @@ ManageParticipantProviderInformation:
     - Type: wait_not_visible
       Strategy: xpath
       Id: $PAGE.care_platform_notifications.dismiss_notification_button$
+
+CheckHealthInsuranceRequiredDataMessages:
+  Roles:
+    - Role: desktopChrome
+      App: desktop
+  Actions:
+  # Add Provider By Type
+  # E.g. 'Health Insurance'
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_providers.add_provider_by_type$
+  # Click on Save and Close to prompt the required data message
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_providers.save_and_close_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_providers.save_and_close_button$
+  # Check we have a message for Name, Phone and Member ID
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_providers.required_name_message$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_providers.required_phone_message$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_providers.required_member_id_message$
+  # Check that the Group ID is hidden
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_providers.group_id_input_message$
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_providers.group_id_input_message$
+      Greps:
+        - var: IS_HIDDEN
+          attr: aria-hidden
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: eq
+          Var: IS_HIDDEN
+          Value: 'true'
+  # Click on Cancel button
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_providers.cancel_button$
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_providers.cancel_button$
 
 EditInsuranceOrProviderInformationHelper:
   Vars:
@@ -2607,6 +2883,9 @@ EditInsuranceOrProviderInformationHelper:
     # Call helper to test add, edit and delete
     - Type: case
       Value: ManageParticipantProviderInformation
+    # Check required Data
+    - Type: case
+      Value: CheckHealthInsuranceRequiredDataMessages
   # Pharmacy
     # Set values to provider “Pharmacy”
     - Type: set_env_var
@@ -3072,3 +3351,90 @@ EditOrAddEmergencyRoomAdmissions:
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.care_platform_notifications.emergency_room_admission_deleted_notification$
+
+MakeMedicalTransferWhileOnCall:
+  Roles:
+    - Role: desktopChrome
+      App: desktop
+  Actions:
+  # Click "Medical" button in video call window so the participant speaks to a doctor while on the call.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.medical_transfer_btn$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.medical_transfer_btn$
+      # "Telehealth request form" appears to the left of video call window.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.telehealth_request_form_header$
+  # Click on "Submit" and verify that the form can't be submitted.
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.submit_btn$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.urgent_patient_matter_error_label$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.reason_for_request_error_label$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.symptoms_start_input_error_label$
+  # Fill in the required fields:
+  # Priority level, Reason for request and When did symptoms start?
+  # Urgent patient matter
+    - Type: click
+      Strategy: id
+      Id: $PAGE.care_platform_call_portal.urgent_patient_matter_select$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.urgent_patient_matter_yes_option$
+  # Reason for request
+    - Type: click
+      Strategy: id
+      Id: $PAGE.care_platform_call_portal.reason_for_request_select$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.first_reason_for_request_available_option$
+  # When did symptoms start      
+    - Type: click
+      Strategy: class
+      Id: $PAGE.care_platform_call_portal.symptoms_start_input_container$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.today_date_date_picker$
+  # Click on "Submit".
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.submit_btn$
+  # Telehealth request form window disappears.
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id : $PAGE.care_platform_call_portal.telehealth_request_form_header$
+  # Verify "End Call" button has been replaced with "Leave Call" button.
+    - Type: wait_for
+      Strategy: xpath
+      Id : $PAGE.care_platform_call_portal.leave_call_btn$
+
+AlternativeCarePartnerLogout:
+  Roles:
+    - Role: desktopChrome
+      App: desktop
+  Actions:     
+      # Log out to the Care Platform app with Care Partners account
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_header.user_dropdown_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_header.logout_menu_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_logout_modal.yes_logout_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_logout_modal.yes_logout_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_login.login_button$

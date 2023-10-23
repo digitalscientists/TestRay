@@ -2,30 +2,27 @@
 TestOnboarderCarePartnerUpdatePassword:
   Environment: Settings 
   Vars:
-    LOGOUT_OPTION: "Stay On Shift"
-    ENV_PASS_STORE: $AND_CLI_onboarder_user1_pwd$
+    ENV_PASS_STORE: $AND_CLI_onboarder_user2_pwd$
   Roles:
     - Role: desktopChrome
       App: "desktop"
   Actions:
   #Calling Login case
     - Type: case
-      Value: OnboarderCarePartnerLogin
+      Value: OnboarderCarePartnerLoginSecondaryUser
   #Calling helper to update password
     - Type: set_env_var
-      Value: $AND_CLI_onboarder_user1$
+      Value: $AND_CLI_onboarder_user2$
       Var: carepartner_user1
     - Type: set_env_var
-      Value: $AND_CLI_onboarder_user1_pwd$
+      Value: $AND_CLI_onboarder_user2_pwd$
       Var: carepartner_user1_pwd
     - Type: case
-      Value: CarePlatformUpdatePassword
+      Value: AlternativeCarePlatformUpdatePassword
 
 #CXTB-164: Manually Log out of the Portal 
 TestOnboarderManuallyLogOutOfThePortal:
-  Environment: Settings 
-  Vars:
-    LOGOUT_OPTION: "Go Off Shift"
+  Environment: Settings
   Roles: 
     - Role: desktopChrome
       App: "desktop"
@@ -52,17 +49,17 @@ TestOnboarderManuallyLogOutOfThePortal:
   # Validate that the logout modal appears offering options relating to your status after logging out.
     - Type: wait_for
       Strategy: xpath
-      Id: $PAGE.care_platform_logout_modal.stay_on_shift_button$
+      Id: $PAGE.care_platform_logout_modal.yes_logout_button$
     - Type: wait_for
       Strategy: xpath
-      Id: $PAGE.care_platform_logout_modal.go_off_shift_button$
+      Id: $PAGE.care_platform_logout_modal.cancel_logout_button$
   # Click on the cancel button.
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_logout_modal.cancel_logout_button$
   # Repeat the steps from above and log out.
     - Type: case
-      Value: CarePlatformLogout
+      Value: AlternativeCarePartnerLogout
   
 #CXTB-174 - Onboarders - Use “Forgot password” Link on Login Page  
 TestOnboardersForgotPasswordLoginLink:
