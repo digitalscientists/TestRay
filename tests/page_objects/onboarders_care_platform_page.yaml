@@ -96,7 +96,10 @@ onboarders_header_navigation:
 
 onboarders_staff_listing:
   add_button: //button[contains(.,'Add')]
+  staff_listing_title: //h3[contains(text(),'Staff Members')]
+  staff_listing_search_button: //*[@id='searchButton']
   care_partner2_based_on_name: //div[contains(@class, 'ListRow')]/div[text()='Care Partner']/preceding-sibling::div[contains(text(), $AND_CLI_carepartner_user2_name$)]/strong[contains(text(),'$AND_CLI_carepartner_user2_lastname$')]
+  care_partner2_based_on_name_row: //div[contains(@class, 'ListRow')]/div[text()='Care Partner']/preceding-sibling::div[contains(text(), $AND_CLI_carepartner_user2_name$)]/strong[contains(text(),'$AND_CLI_carepartner_user2_lastname$')]/ancestor::div[@role='button']
   onboarder_based_on_name: //div[contains(@class, 'ListRow')]/div[text()='Onboarder']/preceding-sibling::div[contains(text(), $AND_CLI_onboarder_user1_name$)]/strong[contains(text(),'$AND_CLI_onboarder_user1_lastname$')]
 
 onboarders_create_edit_staff_member:
@@ -136,6 +139,7 @@ staff_records:
 
 onboarder_staff_records_details:
   edit_info_button: //button[contains(text(), 'Edit info')]
+  records_hyper_link: //a[contains(.,'Records')]
   staff_name_label: //div[@class='participant-profile-contact']/h3
   staff_role_label: //div[@class='participant-profile-contact']//strong[contains(text(), 'Role')]
   staff_status_label: //div[@class='participant-profile-contact']//strong[contains(text(), 'Status')]

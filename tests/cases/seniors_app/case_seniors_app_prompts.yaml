@@ -156,6 +156,10 @@ TestSeniorAppPersonalCarePartnerMessagePromptAndCallBackButton:
     # Make video quality assertions
     - Type: case
       Value: VideoQualityAssertions
+    - Type: wait_for
+      Role: desktopChrome
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.full_screen_call_btn$
     - Type: click
       Role: desktopChrome
       Strategy: xpath
@@ -317,6 +321,12 @@ TestSeniorAppAnswerCallForProviderCalling:
       Strategy: class_chain
       Id: $PAGE.seniors_app_call.video_window$
   # Video Quality Step
+    - Type: sleep
+      Time: 5
+    - Type: wait_for
+      Role: desktopChrome
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.video_btn$
     - Type: click
       Role: desktopChrome
       Strategy: xpath
@@ -862,6 +872,12 @@ TestSeniorVerifyMissedCallPromptAndCallBackButton:
       Strategy: class_chain
       Id: $PAGE.seniors_app_call.video_window$
     # Video Quality Step
+    - Type: sleep
+      Time: 5
+    - Type: wait_for
+      Role: desktopChrome
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.video_btn$
     - Type: click
       Role: desktopChrome
       Strategy: xpath

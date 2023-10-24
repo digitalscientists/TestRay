@@ -244,6 +244,9 @@ TestProviderAnswerCompleteSessionFromEHP:
       Id: $PAGE.providers_call_handling_page.resolved_no_option$
     - Type: click
       Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.video_visit_true_option$
+    - Type: click
+      Strategy: xpath
       Id: $PAGE.providers_call_handling_page.recommend_discharge_yes_by_SNF$
     - Type: scroll_to
       Strategy: xpath
