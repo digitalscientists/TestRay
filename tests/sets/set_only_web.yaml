@@ -42,6 +42,7 @@ SetOnlyWebTests:
   # Employee Health Portal
   - Case: TestEmployeeSettingNotification
   - Case: TestEmployeeInformationUpdateNumber
+  - Case: TestEmployeeUpdateAccountEmail
   - Case: TestEmployeeUpdateAccountPassword
   - Case: TestEmployeeHealthPortalAccountHelp
   - Case: TestEmployeeHealthPortalUserCall

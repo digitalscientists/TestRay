@@ -260,7 +260,7 @@ TestEmployeeInformationUpdateNumber:
       Id: $PAGE.employee_health_home_page.alert_updated_info$
 
 # CXTB-576 Update Email from My Account Portal
-TestEmployeeUpdateEmail:
+TestEmployeeUpdateAccountEmail:
   Environment: Settings 
   Roles:
     - Role: desktopChrome
@@ -375,9 +375,6 @@ TestEmployeeUpdateEmail:
   # Log out and go to the login page
     - Type: case
       Value: EmployeeHealthPortalLogOut
-
-    
-
 
 #CXTB-241 “Update password” Workflow in My account Modal
 TestEmployeeUpdateAccountPassword:
