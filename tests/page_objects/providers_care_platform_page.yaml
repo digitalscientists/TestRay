@@ -84,7 +84,7 @@ providers_facilities_records_page:
   device_status: //div[@class='account-status-label']
 
 providers_call_handling_page:
-  end_call_btn: //button[span[text()='End Call']]
+  end_call_btn: //button[contains(.,'End Call')]
   call_device_btn: //button[text()='Call Device' or text()='Answer Call']
   subject_input: //div[label[text()='Subject']]//input
   details_textarea: //div[label[text()='Details']]//textarea
