@@ -279,6 +279,9 @@ TestEmployeeUpdateEmail:
     - Type: click
       Strategy: xpath
       Id: $PAGE.employee_health_my_account_modal.update_email_tab$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.employee_health_my_account_modal.update_email_requirements_text$
   # Add value for new email field
     - Type: send_keys
       Strategy: xpath
@@ -298,6 +301,9 @@ TestEmployeeUpdateEmail:
     - Type: click
       Strategy: xpath
       Id: $PAGE.employee_health_my_account_modal.update_email_tab$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.employee_health_my_account_modal.update_email_requirements_text$
   # Add value for new email field
     - Type: send_keys
       Strategy: xpath
@@ -325,11 +331,14 @@ TestEmployeeUpdateEmail:
     - Type: click
       Strategy: xpath
       Id: $PAGE.employee_health_my_account_modal.update_email_tab$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.employee_health_my_account_modal.update_email_requirements_text$
   # Add value for new email field
     - Type: send_keys
       Strategy: xpath
       Id: $PAGE.employee_health_my_account_modal.update_email_new$
-      Value: cmoreno+employee1@neural.com.do
+      Value: $AND_CLI_employee_user2$
   # Click on Send confirmation button
     - Type: click
       Strategy: xpath
@@ -339,6 +348,30 @@ TestEmployeeUpdateEmail:
       Var: TOAST_MESSAGE_SHOWN  
     - Type: case
       Value: CarePartnerToastValidation
+  # Log out and go to the login page
+    - Type: case
+      Value: EmployeeHealthPortalLogOut
+  # Log back in with the New email address
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.employee_health_login_page.log_in_button$
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.employee_health_login_page.email_input$
+      Value: $AND_CLI_employee_user2$
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.employee_health_login_page.password_input$
+      Value: $AND_CLI_employee_user2_pwd$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.employee_health_login_page.log_in_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.employee_health_login_page.failed_to_log_in$
+  # Log back in with current email.
+    - Type: case
+      Value: EmployeeHealthPortalLogIn
   # Log out and go to the login page
     - Type: case
       Value: EmployeeHealthPortalLogOut
