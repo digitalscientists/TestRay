@@ -884,9 +884,9 @@ MakeCallBetweenProviderAndParticipant:
       Strategy: class_chain
       Id: $PAGE.seniors_app_call.video_button$
       Role: localiOS
-  # Sleep the test for 10 seconds to get a recording with something on it.
+  # Sleep the test for 5 seconds to get a recording with something on it.
     - Type: sleep
-      Time: 10
+      Time: 5
   # Then click "End Call".
     - Type: click
       Strategy: class_chain
@@ -933,9 +933,9 @@ MakeCallFromProviderToFacilityDevice:
     - Type: case
       Value: SNFAnswerIncomingCall
       Role: localiOS
-  # Sleep the test for 10 seconds to get a recording with something on it.
+  # Sleep the test for 5 seconds to get a recording with something on it.
     - Type: sleep
-      Time: 10
+      Time: 5
   # Click the end call button.
     - Type: click
       Strategy: class_chain
@@ -983,9 +983,9 @@ MakeCallBetweenProviderAndEHP:
       Strategy: xpath
       Role: desktopChrome
       Id: $PAGE.providers_call_handling_page.answer_call_button$
-  # Sleep the test for 10 seconds to get a recording with something on it.
+  # Sleep the test for 5 seconds to get a recording with something on it.
     - Type: sleep
-      Time: 10
+      Time: 5
   #End call
     - Type: wait_for
       Strategy: xpath
