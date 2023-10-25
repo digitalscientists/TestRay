@@ -259,7 +259,7 @@ TestEmployeeInformationUpdateNumber:
       Strategy: xpath
       Id: $PAGE.employee_health_home_page.alert_updated_info$
 
-# CXTB-576 Update Email from My Account Portal
+# CXTB-657 Update Email from My Account Portal
 TestEmployeeUpdateAccountEmail:
   Environment: Settings 
   Roles:
