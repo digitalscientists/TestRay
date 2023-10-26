@@ -21,6 +21,7 @@ TestAdminOnCallCallHistoryShowsRecordingsForAllPlatformsAndDevices:
       App: desktop
   Actions:
   # Data setup starts here.
+  # Generate call between Never Alone Participants and Provider.
     - Type: case
       Value: MakeCallBetweenProviderAndParticipant
     - Type: case
@@ -30,7 +31,7 @@ TestAdminOnCallCallHistoryShowsRecordingsForAllPlatformsAndDevices:
       Var: SENIOR_CALL_SUBJECT
     - Type: case
       Value: CarePlatformLogout
-  # Generate call between SNF and Provider.
+  # Generate a call from Provider to Facility Device.
     - Type: case
       Value: LaunchApp
     - Type: case
@@ -38,7 +39,6 @@ TestAdminOnCallCallHistoryShowsRecordingsForAllPlatformsAndDevices:
     - Type: case
       Value: SeniorCleanPrompts
       Role: localiOS
-  # Generate a call from Provider to Facility Device.
     - Type: case
       Value: MakeCallFromProviderToFacilityDevice
     - Type: set_env_var
@@ -54,7 +54,7 @@ TestAdminOnCallCallHistoryShowsRecordingsForAllPlatformsAndDevices:
       Value: CarePlatformLogout
       Role: desktopChrome
   # Data setup ends here.
-  # Navigate to the Call History tab.
+  # Navigate to the Admin On Call Call History tab.
     - Type: case
       Value: AdminOnCallLogin
       Role: desktopChrome
