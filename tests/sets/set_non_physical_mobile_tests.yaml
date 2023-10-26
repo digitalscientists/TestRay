@@ -81,6 +81,7 @@ SetNonPhysicalMobileTest:
     - Case: TestAdminOnCallShouldNotShowDuplicatesEntriesForNewCallsOnCallHistory
     - Case: TestAdminOnCallShouldNotAnswerProviderCallAfterMedicalTransfer
     - Case: TestAdminOnCallRefreshNurseFacilityDeviceForCalling
+    - Case: TestAdminOnCallCallHistoryShowsRecordingsForAllPlatformsAndDevices
   # Facility Leadership
     - Case: TestFacilityLeadershipSeeCallAppearOnQueueThenSelectCall
     - Case: TestFacilityLeadershipReviewCallHistoryAndAccessCallRecordings
