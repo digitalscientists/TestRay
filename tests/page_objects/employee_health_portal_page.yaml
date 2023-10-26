@@ -126,6 +126,7 @@ employee_health_on_demand_call_page:
   video_settings_modal_speakers_select: //div[text()='Speakers']/following-sibling::div//select
   video_settings_modal_camera_select: //div[text()='Camera']/following-sibling::div//select
   video_settings_modal_close_button: //*[@id='modals']//button[text()='Close']
+  video_waiting_room_label: //div[contains(text(),'Waiting room')]
 
 employee_health_telehealth_request_form:
   request_appointment_button: //button[text()='Request Appointment']

@@ -29,6 +29,7 @@ SetNonPhysicalMobileTest:
     - Case: TestProvidersSelectCallInQueueAndGetCallAnsweredAlreadyNotification
     - Case: TestProviderReviewParticipantsCallHistoryAndAccessCallRecordings
     - Case: TestProviderReviewCallHistoryAndAccessCallRecordings
+    - Case: TestProviderCallHistoryShowsRecordingsForAllPlatformsAndDevices
   # Never Alone Senior App
     - Case: TestSeniorAppSuspendedAccountStatus
     - Case: TestSeniorAppActiveAccountStatusAndBehavior
@@ -79,6 +80,7 @@ SetNonPhysicalMobileTest:
     - Case: TestAdminOnCallRefreshSessionForStaffMemberFromPane
     - Case: TestAdminOnCallShouldNotShowDuplicatesEntriesForNewCallsOnCallHistory
     - Case: TestAdminOnCallShouldNotAnswerProviderCallAfterMedicalTransfer
+    - Case: TestAdminOnCallRefreshNurseFacilityDeviceForCalling
   # Facility Leadership
     - Case: TestFacilityLeadershipSeeCallAppearOnQueueThenSelectCall
     - Case: TestFacilityLeadershipReviewCallHistoryAndAccessCallRecordings
