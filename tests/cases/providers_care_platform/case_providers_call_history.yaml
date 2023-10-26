@@ -576,3 +576,136 @@ TestProviderReviewParticipantsCallHistoryAndAccessCallRecordings:
       Role: desktopChrome1
       Strategy: xpath
       Id: $PAGE.providers_call_history_page.play_pause_recording_button$
+
+# CXTB-652: Verify Calls History shows recordings from all available platforms and devices
+TestProviderCallHistoryShowsRecordingsForAllPlatformsAndDevices:
+  Environment: Settings
+  Vars:
+    LOGOUT_OPTION: "Go Off Shift"
+  Precases:
+    - LoginNeverAloneHelper
+    - CarePartnerCleanCallQueueAndHangedCalls
+    - ProviderNewCleaner
+    - SeniorCleanPrompts
+  Aftercases:
+    - TerminateApp
+  Roles:
+    - Role: localiOS
+      Capabilities:
+        newCommandTimeout: 100
+      App: NeverAlone
+    - Role: desktopChrome
+      App: desktop
+    - Role: desktopChrome1
+      App: desktop
+  Actions:
+  # Data setup starts here.
+    - Type: case
+      Value: MakeCallBetweenProviderAndParticipant
+    - Type: case
+      Value: TerminateApp
+    - Type: set_env_var
+      Value: $AND_CLI_UNIQUE_SUBJECT$
+      Var: SENIOR_CALL_SUBJECT
+    - Type: case
+      Value: CarePlatformLogout
+  # Generate call between SNF and Provider.
+    - Type: case
+      Value: LaunchApp
+    - Type: case
+      Value: LoginSNFHelper
+    - Type: case
+      Value: SeniorCleanPrompts
+      Role: localiOS
+  # Generate a call from Provider to Facility Device.
+    - Type: case
+      Value: MakeCallFromProviderToFacilityDevice
+    - Type: set_env_var
+      Value: $AND_CLI_UNIQUE_SUBJECT$
+      Var: SNF_CALL_SUBJECT
+  # Generate call between Employee and Provider.
+    - Type: case
+      Value: MakeCallBetweenProviderAndEHP
+    - Type: set_env_var
+      Value: $AND_CLI_UNIQUE_SUBJECT$
+      Var: EMPLOYEE_CALL_SUBJECT
+  # Data setup ends here.
+  # Navigate to the Call History tab.
+    - Type: click
+      Role: desktopChrome
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.call_history_navigation$
+    - Type: wait_for
+      Role: desktopChrome
+      Strategy: xpath
+      Id: $PAGE.providers_call_history_page.call_history_tab$
+  # Verify that the 3 recordings appear (Participants, SNF and Employees)
+  # Click play button on call recording for senior recording, check you can pause it
+    - Type: wait_for
+      Role: desktopChrome
+      Strategy: xpath
+      Id: $PAGE.providers_call_history_page.senior_play_pause_recording_button$
+    - Type: get_attribute
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_call_history_page.senior_play_pause_recording_button_status$
+      Greps:
+        - var: PLAY_RECORDING_STATUS
+          attr: class
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: PLAY_RECORDING_STATUS
+          Value: '-paused'
+    - Type: click
+      Role: desktopChrome
+      Strategy: xpath
+      Id: $PAGE.providers_call_history_page.senior_play_pause_recording_button$
+  # Click play button on call recording for SNF recording, check you can pause it
+    - Type: wait_for
+      Role: desktopChrome
+      Strategy: xpath
+      Id: $PAGE.providers_call_history_page.snf_play_pause_recording_button$
+    - Type: get_attribute
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_call_history_page.snf_play_pause_recording_button_status$
+      Greps:
+        - var: PLAY_RECORDING_STATUS
+          attr: class
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: PLAY_RECORDING_STATUS
+          Value: '-paused'
+    - Type: click
+      Role: desktopChrome
+      Strategy: xpath
+      Id: $PAGE.providers_call_history_page.snf_play_pause_recording_button$
+  # Click play button on call recording for Employee recording, check you can pause it
+    - Type: wait_for
+      Role: desktopChrome
+      Strategy: xpath
+      Id: $PAGE.providers_call_history_page.employee_play_pause_recording_button$
+    - Type: get_attribute
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_call_history_page.employee_play_pause_recording_button_status$
+      Greps:
+        - var: PLAY_RECORDING_STATUS
+          attr: class
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: PLAY_RECORDING_STATUS
+          Value: '-paused'
+    - Type: click
+      Role: desktopChrome
+      Strategy: xpath
+      Id: $PAGE.providers_call_history_page.employee_play_pause_recording_button$
