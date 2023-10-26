@@ -297,6 +297,9 @@ TestEmployeeUpdateAccountEmail:
     - Type: click
       Strategy: xpath
       Id: $PAGE.employee_health_my_account_modal.update_email_cancel_button$
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id: $PAGE.care_platform.carepartner_toast_notification$
   # Navigate into My Account
     - Type: case
       Value: NavigateToMyAccount
@@ -316,9 +319,9 @@ TestEmployeeUpdateAccountEmail:
           match: "(.*)" 
     - Type: assert
       Asserts: 
-      - Type: contain
+      - Type: eq
         Var: UPDATE_INFO_HELP
-        Value: This is the email that will be associated
+        Value: This is the email that will be associated with your account for login and communication. Please use either your work or a personal email address, whichever best suits your needs.
   # Add value for new email field
     - Type: send_keys
       Strategy: xpath
@@ -353,7 +356,7 @@ TestEmployeeUpdateAccountEmail:
     - Type: send_keys
       Strategy: xpath
       Id: $PAGE.employee_health_my_account_modal.update_email_new$
-      Value: $AND_CLI_alternative_user_user$
+      Value: $AND_CLI_alternative_user$
   # Click on Send confirmation button
     - Type: click
       Strategy: xpath
@@ -373,7 +376,7 @@ TestEmployeeUpdateAccountEmail:
     - Type: send_keys
       Strategy: xpath
       Id: $PAGE.employee_health_login_page.email_input$
-      Value: $AND_CLI_alternative_user_user$
+      Value: $AND_CLI_alternative_user$
     - Type: send_keys
       Strategy: xpath
       Id: $PAGE.employee_health_login_page.password_input$
