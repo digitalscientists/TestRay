@@ -282,6 +282,12 @@ TestEmployeeUpdateAccountEmail:
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.employee_health_my_account_modal.update_email_requirements_text$
+  # Confirm current email field
+    - Type: wait_for_property
+      Strategy: xpath
+      Id: $PAGE.employee_health_my_account_modal.update_email_current$ 
+      Property: disabled
+      Value: "true"
   # Add value for new email field
     - Type: send_keys
       Strategy: xpath
@@ -301,9 +307,18 @@ TestEmployeeUpdateAccountEmail:
     - Type: click
       Strategy: xpath
       Id: $PAGE.employee_health_my_account_modal.update_email_tab$
-    - Type: wait_for
+    - Type: get_text
       Strategy: xpath
       Id: $PAGE.employee_health_my_account_modal.update_email_requirements_text$
+      Greps:
+        - var: UPDATE_INFO_HELP
+          condition: nempty
+          match: "(.*)" 
+    - Type: assert
+      Asserts: 
+      - Type: contain
+        Var: UPDATE_INFO_HELP
+        Value: This is the email that will be associated
   # Add value for new email field
     - Type: send_keys
       Strategy: xpath
@@ -338,7 +353,7 @@ TestEmployeeUpdateAccountEmail:
     - Type: send_keys
       Strategy: xpath
       Id: $PAGE.employee_health_my_account_modal.update_email_new$
-      Value: $AND_CLI_employee_user2$
+      Value: $AND_CLI_alternative_user_user$
   # Click on Send confirmation button
     - Type: click
       Strategy: xpath
@@ -358,11 +373,11 @@ TestEmployeeUpdateAccountEmail:
     - Type: send_keys
       Strategy: xpath
       Id: $PAGE.employee_health_login_page.email_input$
-      Value: $AND_CLI_employee_user2$
+      Value: $AND_CLI_alternative_user_user$
     - Type: send_keys
       Strategy: xpath
       Id: $PAGE.employee_health_login_page.password_input$
-      Value: $AND_CLI_employee_user2_pwd$
+      Value: $AND_CLI_alternative_correct_password$
     - Type: click
       Strategy: xpath
       Id: $PAGE.employee_health_login_page.log_in_button$
