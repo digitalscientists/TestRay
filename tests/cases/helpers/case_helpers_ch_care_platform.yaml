@@ -55,6 +55,8 @@ CHCarePartnerCleanCallQueueAndHangedCalls:
     # Log in.
     - Type: case
       Value: CHCarePartnerLogin
+    - Type: sleep
+      Time: 1
     # Clean Care Partner Call Queue and Hanged Calls.
     - Type: care_partner_clean_call_queue_and_hanged_calls
 
