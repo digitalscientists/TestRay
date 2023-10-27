@@ -2044,7 +2044,6 @@ CarePartnerToastValidation:
       Id: $PAGE.care_platform.carepartner_toast_notification$
 
 CarePartnerParticipantRecordsNavigation:
-  Environment: Settings
   Roles:
     - Role: desktopChrome
       App: desktop

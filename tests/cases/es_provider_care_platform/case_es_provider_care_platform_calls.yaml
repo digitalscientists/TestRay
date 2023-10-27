@@ -5,6 +5,7 @@ TestESProviderCarePlatformAnswerAndCompleteSession:
     PROVIDERS_SUBJECT:  Automation Test Call Senior.
     PROVIDERS_DETAILS:  Automation Test Notes Verify that Providers answer Senior call and completes session.
   Precases:
+    - AdminOnCallRefreshESParticipant
     - LoginESIDDNeverAloneHelper
     - ESCarePartnerCleanCallQueueAndHangedCalls
     - ESProviderCleaner
