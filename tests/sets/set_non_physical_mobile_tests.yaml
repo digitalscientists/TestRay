@@ -29,6 +29,9 @@ SetNonPhysicalMobileTest:
     - Case: TestProvidersSelectCallInQueueAndGetCallAnsweredAlreadyNotification
     - Case: TestProviderReviewParticipantsCallHistoryAndAccessCallRecordings
     - Case: TestProviderReviewCallHistoryAndAccessCallRecordings
+  # ES Provider Care Platform
+    - Case: TestESProviderCarePlatformAnswerAndCompleteSession
+    - Case: TestCHProviderCarePlatformAnswerAndCompleteSession
   # Never Alone Senior App
     - Case: TestSeniorAppSuspendedAccountStatus
     - Case: TestSeniorAppActiveAccountStatusAndBehavior
