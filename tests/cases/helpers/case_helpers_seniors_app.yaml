@@ -130,7 +130,6 @@ SeniorGreatPostSurveyCallHelper:
       Id: $PAGE.seniors_app_home.call_care_partner$
 
 CallCarePartner:
-  Environment: Settings
   Roles:
     - Role: localiOS
       App: NeverAlone
