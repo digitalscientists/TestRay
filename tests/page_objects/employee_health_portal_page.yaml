@@ -3,6 +3,7 @@ employee_health_login_page:
   log_in_button: //div[@class='login-screen']//form/button[text()='Log In']
   email_input: //*[@id='email']
   password_input: //input[@id='password']
+  failed_to_log_in: //form/div[text()='Failed to log in.']
   forgot_password_button: //button[text()='Forgot Password']
   dialog_email_input: //div[contains(@class,'dialog')]//input
   dialog_submit_button: //*[@id='dialogs']//button[text()='Submit']
@@ -86,6 +87,12 @@ employee_health_my_account_modal:
   my_info_email_input: //*[@id='email']
   my_info_date_of_birth_input: //*[@id='dateOfBirth']
   my_info_member_id_input: //*[@id='memberIdentifier']
+  update_email_tab: //nav/button[text()='Update Email']
+  update_email_current: //*[@tab-title='Update Email']//input[contains(@class,'input')]
+  update_email_new: //*[@id='email']
+  update_email_requirements_text: //*[@tab-title='Update Email']//div[contains(@class,'login-screen-password-help')]
+  update_email_send_confirmation: //button[text()='Send Confirmation']
+  update_email_cancel_button: //*[@tab-title='Update Email']//button[text()='Cancel']
   update_password_current: //*[@id='currentPassword']
   update_password_new: //*[@id='password']
   update_password_confirm: //*[@id='passwordConfirmation']
@@ -119,6 +126,7 @@ employee_health_on_demand_call_page:
   video_settings_modal_speakers_select: //div[text()='Speakers']/following-sibling::div//select
   video_settings_modal_camera_select: //div[text()='Camera']/following-sibling::div//select
   video_settings_modal_close_button: //*[@id='modals']//button[text()='Close']
+  video_waiting_room_label: //div[contains(text(),'Waiting room')]
 
 employee_health_telehealth_request_form:
   request_appointment_button: //button[text()='Request Appointment']

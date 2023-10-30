@@ -106,6 +106,9 @@ SeniorGreatPostSurveyCallHelper:
     - Role: localiOS
       App: NeverAlone
   Actions:
+    # Adding 2 sleep seconds to help with inconsistent UI State error.
+    - Type: sleep
+      Time: 2
     # Select the Great option.
     - Type: wait_for
       Strategy: class_chain

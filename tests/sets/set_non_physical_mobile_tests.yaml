@@ -29,6 +29,7 @@ SetNonPhysicalMobileTest:
     - Case: TestProvidersSelectCallInQueueAndGetCallAnsweredAlreadyNotification
     - Case: TestProviderReviewParticipantsCallHistoryAndAccessCallRecordings
     - Case: TestProviderReviewCallHistoryAndAccessCallRecordings
+    - Case: TestProviderCallHistoryShowsRecordingsForAllPlatformsAndDevices
   # ES Provider Care Platform
     - Case: TestESProviderCarePlatformAnswerAndCompleteSession
     - Case: TestCHProviderCarePlatformAnswerAndCompleteSession
@@ -83,6 +84,7 @@ SetNonPhysicalMobileTest:
     - Case: TestAdminOnCallShouldNotShowDuplicatesEntriesForNewCallsOnCallHistory
     - Case: TestAdminOnCallShouldNotAnswerProviderCallAfterMedicalTransfer
     - Case: TestAdminOnCallRefreshNurseFacilityDeviceForCalling
+    - Case: TestAdminOnCallCallHistoryShowsRecordingsForAllPlatformsAndDevices
   # Facility Leadership
     - Case: TestFacilityLeadershipSeeCallAppearOnQueueThenSelectCall
     - Case: TestFacilityLeadershipReviewCallHistoryAndAccessCallRecordings

@@ -209,3 +209,9 @@ providers_call_history_page:
   telehealth_form_close_button: //*[@id='modals']//button[contains(.,'Close')]
   play_pause_recording_button: (//div[contains(@class,'accordion-item')])[1]//div[contains(@class, 'call-recording')]/button
   play_pause_recording_button_status: (//div[contains(@class,'accordion-item')])[1]//div[contains(@class, 'call-recording')]/div[@aria-label='Audio player']
+  senior_play_pause_recording_button: //div[text()='$AND_CLI_SENIOR_CALL_SUBJECT$']/following-sibling::div/div[@class='call-recording']/button[@aria-label='Play']
+  senior_play_pause_recording_button_status: //div[text()='$AND_CLI_SENIOR_CALL_SUBJECT$']/following-sibling::div/div[@class='call-recording']/div[@aria-label='Audio player']
+  snf_play_pause_recording_button: //div[text()='$AND_CLI_SNF_CALL_SUBJECT$']/following-sibling::div/div[@class='call-recording']/button[@aria-label='Play']
+  snf_play_pause_recording_button_status: //div[text()='$AND_CLI_SNF_CALL_SUBJECT$']/following-sibling::div/div[@class='call-recording']/div[@aria-label='Audio player']
+  employee_play_pause_recording_button: //div[text()='$AND_CLI_EMPLOYEE_CALL_SUBJECT$']/following-sibling::div/div[@class='call-recording']/button[@aria-label='Play']
+  employee_play_pause_recording_button_status: //div[text()='$AND_CLI_EMPLOYEE_CALL_SUBJECT$']/following-sibling::div/div[@class='call-recording']/div[@aria-label='Audio player']
