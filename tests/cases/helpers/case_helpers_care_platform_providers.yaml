@@ -162,6 +162,8 @@ JoinMedicalTransfer:
     - Type: click
       Strategy: xpath
       Id: $PAGE.providers_call_handling_page.answer_call_button$
+    - Type: sleep
+      Time: 2
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.providers_call_handling_page.end_call_btn$
@@ -665,6 +667,10 @@ CreateAFollowUpForSNFCall:
       Strategy: xpath
       Role: desktopChrome
       Id: $PAGE.providers_call_handling_page.resolved_no_option$
+    - Type: click
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_call_handling_page.video_visit_true_option$
     - Type: wait_for
       Strategy: xpath
       Role: desktopChrome
