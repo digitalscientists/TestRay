@@ -1137,6 +1137,8 @@ TestSeniorVerifyEmergencyServicesButton:
     INTERFACE: en0
     VIDEO_IN: "1"
     TEST_FOLDER: $AND_CMD_pwd$/Reports/executions/$AND_CMD_date +%s$
+    EMS_OPTION: 'true'
+    PHONE_NUMBER: 61285038000
   Environment: Settings
   Precases:
     - LoginNeverAloneHelper
@@ -1160,11 +1162,22 @@ TestSeniorVerifyEmergencyServicesButton:
     # Login to the Care Platform app with Care Partners account.
     - Type: case
       Value: CarePartnerLogin
+    # Verify if "Emergency Services button" is shown
+    - Type: get_text
+      Strategy: xpath
+      Id: "**/XCUIElementTypeOther[`name == "Emergency Services"`]"
+      Greps:
+      - var: button_label
+        match: "(.*)"
+      Asserts: 
+      - Type: contain
+        Var: button_label
+        Value: "Emergency Services"
     # Click on the Call Personal Care Partner button.
     - Type: click
       Strategy: class_chain
       Id: $PAGE.seniors_app_home.call_care_partner$
-    # Verify that the screen updates to show screen asking what kind of heelp you need:
+    # Verify that the screen updates to show screen asking what kind of help you need:
     # Medical 
     # Non-Medical
     # Cancel Call
@@ -1177,6 +1190,10 @@ TestSeniorVerifyEmergencyServicesButton:
     - Type: wait_for
       Strategy: class_chain
       Id: $PAGE.seniors_app_call.cancel_call_button$
+    # Check if Emergency Service button is opened 
+    - Type: wait_not_visible
+      Strategy: class_chain
+      Id: "**/XCUIElementTypeOther[`name == "Emergency Services"`]"
     # Click on the Cancel Call button and verify that Home page is displayed.
     - Type: click
       Strategy: class_chain
@@ -1199,7 +1216,41 @@ TestSeniorVerifyEmergencyServicesButton:
     - Type: click
       Strategy: class_chain
       Id: $PAGE.seniors_app_call.video_button$
-    ## Care partner steps to take the call.
+    - Type: click
+      Role: desktopChrome
+      Strategy: xpath
+      Id: $PAGE.care_platform_home.first_call_of_queue$
+    # Go to Record and verify if participant have EMS enabled
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_details.records_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_records.participant_name$
+    # Click on the "Edit Info" button.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_records.edit_info_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_records.edit_info_button$
+    # Select the "Address/Emergency Phone" option on the navigation bar at the left.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_records.address_emergency_phone_navigation$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_records.address_emergency_phone_navigation$
+    - Type: set_env_var
+      Value: 'true'
+      Var: EMS_OPTION
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_edit_participant_address_emergency_phone.enable_ems_calls_option_based_on_user_input$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform.navigation_home$
+    # Care partner steps to take the call.
     - Type: click
       Role: desktopChrome
       Strategy: xpath
@@ -1240,6 +1291,11 @@ TestSeniorVerifyEmergencyServicesButton:
       Role: desktopChrome
       Strategy: xpath
       Id: $PAGE.care_platform_call_portal.full_screen_call_btn$
+    # checking Emergency Services button is opened on call
+    - Type: wait_for
+      Role: desktopChrome
+      Strategy: xpath
+      Id: //button[contains(@class,'button-emergency')]
     # Care partner leaves the call.
     - Type: wait_for
       Role: desktopChrome
@@ -1313,6 +1369,11 @@ TestSeniorVerifyEmergencyServicesButton:
       Strategy: class_chain
       Id: $PAGE.seniors_app_home.call_care_partner$
     # End the call on care partner side - Teardown.
+    # checking Emergency Services button is not opened
+    - Type: wait_not_visible
+      Role: desktopChrome
+      Strategy: xpath
+      Id: //button[contains(@class,'button-emergency')]
     # Fill the notes
     - Type: send_keys
       Role: desktopChrome
