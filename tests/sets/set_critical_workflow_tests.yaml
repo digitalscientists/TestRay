@@ -16,6 +16,8 @@ SetCriticalWorkflows:
     - Case: TestProvidersSelectCallInQueueAndGetCallAnsweredAlreadyNotification
     - Case: TestProvidersEHPSeeCallAppearInQueueAssignAndReviewDetails
     - Case: TestProviderReviewCallHistoryAndAccessCallRecordings
+    - Case: TestESProviderCarePlatformAnswerAndCompleteSession
+    - Case: TestCHProviderCarePlatformAnswerAndCompleteSession
   # Never Alone SNF tests
     - Case: TestSNFRequestSuccessfulCallConnect
     - Case: TestSNFCheckQueueandReviewDetails

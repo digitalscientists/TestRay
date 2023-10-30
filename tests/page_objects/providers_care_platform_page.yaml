@@ -1,6 +1,7 @@
 providers_home_page:
   home_button: //nav//a[contains(.,'Queue')]
   home_title: //h3[text()='PHP Providers']
+  es_home_title: //h3[text()='Providers']
   follow_up_calls: //*[@role='button'][contains(.,'Follow-up')][last()]
   scheduled_call: //*[@role='button'][contains(.,'Scheduled Call')][last()]
   scheduled_call_enabled: //*[@role='button'][contains(.,'Scheduled Call') and not(contains(@class,'disabled'))][last()]
@@ -19,6 +20,8 @@ providers_home_page:
   call_based_on_participant_name: (//div[contains(@class, 'ListRow_listRow') and not(contains(., 'Follow-up')) and not(contains(., 'Missed Call')) ]//strong[text() = '$AND_CLI_senior_user1_name$ $AND_CLI_senior_user1_lastname$']/ancestor::div[@role='button' and not(contains(@class,'disabled'))])[last()]
   on_demand_based_on_participant_name: (//*[@id='containerElement']/div[contains(@class,'ListRow_listRow') and contains(.,'On Demand Call')]/div[4]/strong[text()='$AND_CLI_senior_user1_name$ $AND_CLI_senior_user1_lastname$'])[last()]
   follow_up_ticket_based_on_participant_name: //div[contains(@class,'ListRow_listRow')][contains(.,'Follow-up')]//strong[text()='$AND_CLI_senior_user1_name$ $AND_CLI_senior_user1_lastname$'][last()]
+  es_follow_up_ticket_based_on_participant_name: //div[contains(@class,'ListRow_listRow')][contains(.,'Follow-up')]//strong[text()='$AND_CLI_idd_es_never_alone_user1_name$ $AND_CLI_idd_es_never_alone_user1_lastname$'][last()]
+  ch_follow_up_ticket_based_on_participant_name: //div[contains(@class,'ListRow_listRow')][contains(.,'Follow-up')]//strong[text()='$AND_CLI_idd_ch_never_alone_user2_name$ $AND_CLI_idd_ch_never_alone_user2_lastname$'][last()]
   close_ticket_button: //button[text()='Close Ticket']
   reason_for_closing_ticket_input: //input[@name='reasonForClosing']
   save_and_close_ticket_button: //button[text()='Save and Close Ticket']
@@ -84,7 +87,7 @@ providers_facilities_records_page:
   device_status: //div[@class='account-status-label']
 
 providers_call_handling_page:
-  end_call_btn: //button[span[text()='End Call']]
+  end_call_btn: //button[contains(.,'End Call')]
   call_device_btn: //button[text()='Call Device' or text()='Answer Call']
   subject_input: //div[label[text()='Subject']]//input
   details_textarea: //div[label[text()='Details']]//textarea
@@ -123,6 +126,7 @@ providers_call_handling_page:
   video_status: //div[contains(@class,'video')]//div[@class='video-status']
   no_message_button: //button[contains(.,'No Message')]
   call_update_dropdown_button: //button[text()='Update' and @class='status-filter-dropdown-toggle']
+  video_grid: //div[@class='video']//div[contains(@data-testid,'video-grid')]
 
 providers_follow_up_call_details_page:
   call_device_button: //button[contains(.,'Call Device')]

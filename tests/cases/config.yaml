@@ -79,7 +79,12 @@ Environments:
       provider_user2: add_your_info
       provider_user2_pwd: add_your_info
       provider_user2_name: add_your_info
-      provider_user2_lastname: add_your_info      
+      provider_user2_lastname: add_your_info
+#EasterSeals Provider users
+      es_provider_user1: add_your_info
+      es_provider_user1_pwd: add_your_info
+      es_provider_user1_name: add_your_info
+      es_provider_user1_lastname: add_your_info  
 #Admin users      
       admin_user1: add_your_info
       admin_user1_pwd: add_your_info

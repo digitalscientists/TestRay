@@ -254,6 +254,8 @@ TestSNFNewRequestFormBehavior:
     - Type: click
       Strategy: class_chain
       Id: $PAGE.snf_new_request_form.patient_information_title$
+    - Type: hide_keyboard
+      Role: localiOS
     - Type: click
       Strategy: class_chain
       Id: $PAGE.snf_new_request_form.submit_button$
@@ -280,6 +282,8 @@ TestSNFNewRequestFormBehavior:
     - Type: click
       Strategy: class_chain
       Id: $PAGE.snf_new_request_form.patient_information_title$
+    - Type: hide_keyboard
+      Role: localiOS
     - Type: click
       Strategy: class_chain
       Id: $PAGE.snf_new_request_form.submit_button$  

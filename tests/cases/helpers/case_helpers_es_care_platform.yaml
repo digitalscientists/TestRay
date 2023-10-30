@@ -1,5 +1,4 @@
 ESCarePartnerLogin:
-  Environment: Settings
   Roles:
     - Role: desktopChrome
       App: desktop
@@ -48,7 +47,6 @@ AnswerCallAsESCarePartner:
 ESCarePartnerCleanCallQueueAndHangedCalls:
   Vars:
     LOGOUT_OPTION: "Go Off Shift"
-  Environment: Settings
   Aftercases:
     - CarePlatformLogout
   Roles:
@@ -58,6 +56,8 @@ ESCarePartnerCleanCallQueueAndHangedCalls:
     # Log in.
     - Type: case
       Value: ESCarePartnerLogin
+    - Type: sleep
+      Time: 1
     # Clean Care Partner Call Queue and Hanged Calls.
     - Type: care_partner_clean_call_queue_and_hanged_calls
 
