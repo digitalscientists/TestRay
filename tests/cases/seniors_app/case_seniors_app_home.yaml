@@ -1138,7 +1138,6 @@ TestSeniorVerifyEmergencyServicesButton:
     VIDEO_IN: "1"
     TEST_FOLDER: $AND_CMD_pwd$/Reports/executions/$AND_CMD_date +%s$
     EMS_OPTION: 'true'
-    PHONE_NUMBER: 61285038000
   Environment: Settings
   Precases:
     - LoginNeverAloneHelper
@@ -1432,3 +1431,56 @@ TestSeniorVerifyEmergencyServicesButton:
       Role: desktopChrome
       Strategy: xpath
       Id: $PAGE.care_platform_notifications.call_completed_notification$
+    # Steps to reproduce soft call and verify if Emergency Service button is shown
+    # Navigate to the call portal.
+    - Type: case
+      Value: CarePartnerParticipantCallPortalNavigation
+    # Click "Place Call" in "Place Call" section to right of inactive video window.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.place_call_tab_navigation$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.place_call_tab_navigation$
+    # Section refreshes to show field, where you can type in desired phone number.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.enter_a_number_input$
+    # Verify that the "Call" button is disabled when the phone number input is empty.
+    - Type: wait_for_property
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.call_button$
+      Property: disabled
+      Value: "true"
+    - Type: set_env_var
+      Value: "61285038000"
+      Var: soft_call_phone_number
+    # Enter phone number where indicated.
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.enter_a_number_input$
+      Value: $AND_CLI_soft_call_phone_number$
+    # Call button (phone visual) becomes active when number is present.
+    - Type: wait_for_property
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.call_button$
+      Property: disabled
+      Value: "false"
+    # Click Call button below entry field.
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.call_button$
+    # Video window updates to show that a call has initiated.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.end_call_button$
+    # Complete conversation and click the "End Call" button.
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.end_call_button$
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.end_call_button$
+
+
+
