@@ -81,9 +81,27 @@ TestSeniorAppCallPersonalCarePartnerOnHomePage:
       Role: desktopChrome
       Strategy: xpath
       Id: $PAGE.care_platform_call_portal.video_btn$
+    - Type: wait_for
+      Role: desktopChrome
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.video_mirror_care_partner$
+    - Type: click
+      Role: desktopChrome
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.full_screen_call_btn$
+    - Type: wait_for
+      Role: desktopChrome
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.verify_video_is_full_screen$
     - Type: click
       Strategy: xpath
       Id: $PAGE.seniors_app_call.mute_call_button$
+    # Record the call.
+    - Type: case
+      Value: GetCallRecordings
+    # Analyze the call.
+    - Type: case
+      Value: AnalyzeRecordings
     # Make video quality assertions
     - Type: case
       Value: VideoQualityAssertions
