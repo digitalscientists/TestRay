@@ -1269,8 +1269,10 @@ TestSeniorVerifyEmergencyServicesButton:
       Role: desktopChrome
       Strategy: xpath
       Id: $PAGE.care_platform_call_portal.video_btn$
-    - Type: sleep
-      Time: 8
+    - Type: wait_for
+      Role: desktopChrome
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.video_call$
     # checking Emergency Services button is opened on call
     - Type: wait_for
       Role: desktopChrome
@@ -1341,9 +1343,6 @@ TestSeniorVerifyEmergencyServicesButton:
     - Type: wait_for
       Strategy: class_chain
       Id: $PAGE.seniors_app_post_call_survey.thank_you_label$
-    # Do not click the "To Home" button on Thank you for your feedback screen.
-    - Type: sleep
-      Time: 8
     # Verify device is automatically returned to home page after a few seconds.
     - Type: wait_for
       Strategy: class_chain
@@ -1463,8 +1462,10 @@ TestSeniorVerifyEmergencyServicesButton:
       Role: desktopChrome
       Strategy: xpath
       Id: $PAGE.care_platform_call_portal.end_call_button$
-    - Type: sleep
-      Time: 5
+    - Type: wait_for
+      Role: desktopChrome
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.video_call$
     # Complete conversation and click the "End Call" button.
     - Type: click
       Role: desktopChrome
@@ -1474,3 +1475,8 @@ TestSeniorVerifyEmergencyServicesButton:
       Role: desktopChrome
       Strategy: xpath
       Id: $PAGE.care_platform_call_portal.end_call_button$
+    # checking Emergency Services button is not opened on call
+    - Type: wait_not_visible
+      Role: desktopChrome
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.emergency_button$

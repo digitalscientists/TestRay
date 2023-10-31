@@ -619,6 +619,7 @@ care_platform_call_portal:
   cancel_refresh_dialog_button: //*[@id='dialogs']//button[contains(text(),'Cancel')]
   alert_call_ended: //div[@role='alert']//div[contains(text(),'Call has ended')]
   emergency_button: //button[contains(@class,'button-emergency')]
+  video_call: //div[@class='video-feed']
 
 care_platform_call_settings_modal:
   video_settings_modal_title: //*[@id='modals']//h4[text()='Call Settings']
