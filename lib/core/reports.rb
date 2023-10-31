@@ -88,9 +88,11 @@ module Reports
           elsif step["error_message"]
             # ERROR STEPS DO NOT HAVE GHERKIN PREFIX
             step_description = step["step"] if step["step"]
+            # step_description.scrub
           #Checks if the step is a case step. 
           elsif step["step"].match(/\w+ /)
             step_description = step["step"]
+            # step_description.scrub
             keyword = step["step"].match(/\w+ /)[0].strip! #Keyword is the case name so that it shows in bold on the report
                                   #GETS MAIN CASE INFO: FILE AND LINE WHERE IT START, LINE WHERE THE STEP IS CALLED
             case_info = get_case_info(main_case, case_file, step_description)
