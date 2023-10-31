@@ -1133,7 +1133,6 @@ TestSeniorIpadShouldNotResetIfCarePartnerUpdatesParticipantProfile:
 # CXTB-466: Verify "Emergency Services" button in portal
 TestSeniorVerifyEmergencyServicesButton:
   Vars:
-    TIME: 5
     INTERFACE: en0
     TEST_FOLDER: $AND_CMD_pwd$/Reports/executions/$AND_CMD_date +%s$
     EMS_OPTION: 'true'
