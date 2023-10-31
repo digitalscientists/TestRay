@@ -1135,7 +1135,6 @@ TestSeniorVerifyEmergencyServicesButton:
   Vars:
     TIME: 5
     INTERFACE: en0
-    VIDEO_IN: "1"
     TEST_FOLDER: $AND_CMD_pwd$/Reports/executions/$AND_CMD_date +%s$
     EMS_OPTION: 'true'
   Environment: Settings
