@@ -17,8 +17,8 @@ LoginESIDDNeverAloneHelper:
       Strategy: class_chain
       Id: $PAGE.seniors_app_login.password_input$
       Value: $AND_CLI_idd_es_never_alone_user1_pwd$
-    - Type: hide_keyboard
-      Role: localiOS
+    # - Type: hide_keyboard
+    #   Role: localiOS
     # Click on the Log In button.
     - Type: click
       Strategy: class_chain
@@ -47,8 +47,8 @@ LoginCHIDDNeverAloneHelper:
       Strategy: class_chain
       Id: $PAGE.seniors_app_login.password_input$
       Value: $AND_CLI_idd_ch_never_alone_user2_pwd$
-    - Type: hide_keyboard
-      Role: localiOS
+    # - Type: hide_keyboard
+    #   Role: localiOS
     # Click on the Log In button.
     - Type: click
       Strategy: class_chain

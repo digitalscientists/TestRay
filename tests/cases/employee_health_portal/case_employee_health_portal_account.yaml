@@ -1,10 +1,10 @@
 # CXTB-242: Set “Notifications” in “My account” Modal
 TestEmployeeSettingNotification:
-    Environment: Settings 
-    Roles:
-    - Role: desktopChrome
-      App: "desktop"
-      Actions:
+  Environment: Settings 
+  Roles:
+  - Role: desktopChrome
+    App: "desktop"
+  Actions:
   # Calling Login case
     - Type: case
       Value: EmployeeHealthPortalLogIn

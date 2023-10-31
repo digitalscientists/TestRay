@@ -11,7 +11,7 @@ module PLogger
   end
 
   def log_error(message, no_date=false, _print=false)
-    _log(message, "ERROR", :red, no_date, _print)
+    _log(message, "ERROR", :red, no_date, _print) # ASCII-8BIT to UTF-8 can happen here
     report_error(message)
   end
 

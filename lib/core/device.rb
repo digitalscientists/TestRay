@@ -259,7 +259,12 @@ class Device
 
   # hides keyboard (Only Mobile)
   def hide_keyboard(action = nil, main_case, main_case_id)
-    @driver.hide_keyboard
+    begin
+      log_info("Hiding keyboard...")
+      @driver.hide_keyboard
+    rescue => e
+      log_info("#{@role}: There was an error while hiding keyboard: #{e.message}", "error")
+    end
   end
 
   # Toggles wifi using the iOS Control Center (available only for iOS with Physical Devices, not simulators)

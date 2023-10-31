@@ -35,8 +35,8 @@ LoginNeverAloneHelper:
       Strategy: class_chain
       Id: $PAGE.seniors_app_login.password_input$
       Value: $AND_CLI_senior_user1_pwd$
-    - Type: hide_keyboard
-      Role: localiOS
+    # - Type: hide_keyboard
+      # Role: localiOS #will delete
     # Click on the Log In button.
     - Type: click
       Strategy: class_chain
