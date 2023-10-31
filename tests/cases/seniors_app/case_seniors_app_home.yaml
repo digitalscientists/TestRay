@@ -1205,11 +1205,11 @@ TestSeniorVerifyEmergencyServicesButton:
     - Type: wait_for
       Role: desktopChrome
       Strategy: xpath
-      Id: //div/a[contains(text(), "Records")]
+      Id: $PAGE.care_platform_home.record_button$
     - Type: click
       Role: desktopChrome
       Strategy: xpath
-      Id: //div/a[contains(text(), "Records")]
+      Id: $PAGE.care_platform_home.record_button$
     # Click on the "Edit Info" button.
     - Type: wait_for
       Role: desktopChrome
@@ -1258,7 +1258,7 @@ TestSeniorVerifyEmergencyServicesButton:
     - Type: wait_for
       Role: desktopChrome
       Strategy: xpath
-      Id: //button[contains(@class,'button-emergency')]
+      Id: $PAGE.care_platform_call_portal.emergency_button$
     # Care partner leaves the call.
     - Type: wait_for
       Role: desktopChrome
@@ -1336,7 +1336,7 @@ TestSeniorVerifyEmergencyServicesButton:
     - Type: wait_not_visible
       Role: desktopChrome
       Strategy: xpath
-      Id: //button[contains(@class,'button-emergency')]
+      Id: $PAGE.care_platform_call_portal.emergency_button$
     # Fill the notes
     - Type: send_keys
       Role: desktopChrome
@@ -1457,6 +1457,3 @@ TestSeniorVerifyEmergencyServicesButton:
       Role: desktopChrome
       Strategy: xpath
       Id: $PAGE.care_platform_call_portal.end_call_button$
-
-
-
