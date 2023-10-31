@@ -1436,9 +1436,6 @@ TestSeniorVerifyEmergencyServicesButton:
       Id: $PAGE.care_platform_call_portal.call_button$
       Property: disabled
       Value: "true"
-    - Type: set_env_var
-      Value: 61285038000
-      Var: soft_call_phone_number
     # Enter phone number where indicated.
     - Type: send_keys
       Role: desktopChrome
