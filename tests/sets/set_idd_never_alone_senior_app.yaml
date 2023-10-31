@@ -1,0 +1,5 @@
+SetIDDSeniorNeverAloneAppTest:
+  Cases:   
+  # Never Alone IDD Senior App Mobile Non Physical
+    - Case: TestIDDESAnswerCallForCarePartnerCallingDeviceIgnoreCall
+    - Case: TestIDDESActiveAppointmentTimeWindowWhenNotJoinedPrior

@@ -478,7 +478,7 @@ EmployeeHealthPortalCallNow:
     # Workaround ends here.
     - Type: wait_for
       Strategy: xpath
-      Id: $PAGE.employee_health_on_demand_call_page.connecting_label$
+      Id: $PAGE.employee_health_on_demand_call_page.video_waiting_room_label$
 
 # Custom action to log out of EHP if it is needed.
 EmployeeHealthPortalLogOutAction:
@@ -1043,7 +1043,7 @@ EHPMobileCallNow:
       Id: $PAGE.employee_health_mobile_call_now_page.call_now_button$
     - Type: wait_for
       Strategy: xpath
-      Id: $PAGE.employee_health_on_demand_call_page.connecting_label$
+      Id: $PAGE.employee_health_on_demand_call_page.video_waiting_room_label$
 
 EHPMobileLogOut: 
     Roles:

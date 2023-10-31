@@ -1,5 +1,5 @@
-SetSNFNotPhysical:
-  Cases:
+SetNurseFacilityNeverAloneAppTest:
+  Cases:   
   # Never Alone SNF tests
     - Case: TestSNFVerifyNotificationsPage
     - Case: TestSNFMessagePromptFromProvider

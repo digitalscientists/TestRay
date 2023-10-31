@@ -79,7 +79,12 @@ Environments:
       provider_user2: add_your_info
       provider_user2_pwd: add_your_info
       provider_user2_name: add_your_info
-      provider_user2_lastname: add_your_info      
+      provider_user2_lastname: add_your_info
+#EasterSeals Provider users
+      es_provider_user1: add_your_info
+      es_provider_user1_pwd: add_your_info
+      es_provider_user1_name: add_your_info
+      es_provider_user1_lastname: add_your_info  
 #Admin users      
       admin_user1: add_your_info
       admin_user1_pwd: add_your_info
@@ -154,6 +159,7 @@ Environments:
       employee_user2_dob: "YYYY-MM-DD" #you need to keep the date between quotation marks
       employee_user2_phone_number: add_your_info #phone number is a combination of 10 digits, without parenthesis or dashes
 #Alternative credentials
+      alternative_user: add_your_info
       alternative_correct_password: add_your_info #this password is used to update momentarily the current password
       alternative_incorrect_password: add_your_info #this password shouldn't comply with all requirements
 #Facility Leadership users

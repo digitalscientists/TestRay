@@ -1,0 +1,397 @@
+# CXTB-659 - IDD - Answer Call and Complete Session
+TestESProviderCarePlatformAnswerAndCompleteSession:
+  Environment: Settings
+  Vars:
+    PROVIDERS_SUBJECT:  Automation Test Call Senior.
+    PROVIDERS_DETAILS:  Automation Test Notes Verify that Providers answer Senior call and completes session.
+  Precases:
+    - AdminOnCallRefreshESParticipant
+    - LoginESIDDNeverAloneHelper
+    - ESCarePartnerCleanCallQueueAndHangedCalls
+    - ESProviderCleaner
+    - IDDESParticipantCleanPrompts
+  Aftercases:
+    - TerminateApp
+  Roles:
+    - Role: desktopChrome
+      App: desktop
+    - Role: localiOS
+      App: NeverAlone
+    - Role: desktopChrome1
+      App: desktop
+  Actions:
+  # Generate a medical call as a senior.
+    - Type: case
+      Value: IDDCallCarePartnerHelper
+  # Login and answer call as a care partner,
+    - Type: sleep
+      Time: 1
+    - Type: case
+      Value: AnswerCallAsESCarePartner
+  # Click "Medical" button in video call window so the participant speaks to a doctor while on the call.
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.medical_transfer_btn$
+  # "Telehealth request form" appears to the left of video call window.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.telehealth_request_form_header$
+  # Click on "Submit" and verify that the form can't be submitted.
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.submit_btn$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.urgent_patient_matter_error_label$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.reason_for_request_error_label$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.symptoms_start_input_error_label$
+  # Fill in the required fields:
+  # Priority level, Reason for request and When did symptoms start?
+  # Urgent patient matter
+    - Type: click
+      Strategy: id
+      Id: $PAGE.care_platform_call_portal.urgent_patient_matter_select$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.urgent_patient_matter_yes_option$  
+  # Reason for request
+    - Type: click
+      Strategy: id
+      Id: $PAGE.care_platform_call_portal.reason_for_request_select$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.first_reason_for_request_available_option$
+  # When did symptoms start      
+    - Type: click
+      Strategy: class
+      Id: $PAGE.care_platform_call_portal.symptoms_start_input_container$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.today_date_date_picker$
+  # Click on "Submit".
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.submit_btn$
+  # Telehealth request form window disappears.
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.telehealth_request_form_header$
+  # Verify "End Call" button has been replaced with "Leave Call" button.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.leave_call_btn$
+  # Log in as a provider and join the call
+    - Type: case
+      Value: ESProvidersCarePlatformLogin
+      Role: desktopChrome1
+  # Answer call on Provider's queue
+    - Type: case
+      Value: JoinMedicalTransfer
+      Role: desktopChrome1
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.video_btn$
+      Role: desktopChrome1
+    - Type: sleep
+      Time: 2
+  # Red indicator for 'In session'
+    - Type: get_attribute
+      Strategy: xpath
+      Role: desktopChrome1
+      Id: $PAGE.care_platform_header.status_indicator$
+      Greps:
+        - var: INDICATOR
+          attr: class
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Role: desktopChrome1
+      Asserts:
+        - Type: contain
+          Var: INDICATOR
+          Value: 'is-red'
+  # We have two video participants
+    - Type: wait_for
+      Strategy: xpath
+      Role: desktopChrome1
+      Id: $PAGE.providers_call_handling_page.video_grid$
+    - Type: get_attribute
+      Strategy: xpath
+      Role: desktopChrome1
+      Id: $PAGE.providers_call_handling_page.video_grid$
+      Greps:
+        - var: VIDEO_QUANTITY
+          attr: size 
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Role: desktopChrome1
+      Asserts:
+        - Type: contain
+          Var: VIDEO_QUANTITY
+          Value: '2'
+  # Provider ends call.
+    - Type: click
+      Role: desktopChrome1
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.end_call_btn$
+  # Provider fills up Post call Survey.
+  # Fill the Provider's call notes
+    - Type: wait_for
+      Role: desktopChrome1
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.call_notes_subject_input$
+    - Type: send_keys
+      Role: desktopChrome1
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.call_notes_subject_input$
+      Value: $AND_CLI_PROVIDERS_SUBJECT$
+    - Type: send_keys
+      Role: desktopChrome1
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.call_notes_provider_input$
+      Value: $AND_CLI_PROVIDERS_DETAILS$
+  # Red indicator for 'In session' should still show, until the session is completed
+    - Type: get_attribute
+      Strategy: xpath
+      Role: desktopChrome1
+      Id: $PAGE.care_platform_header.status_indicator$
+      Greps:
+        - var: RED_INDICATOR
+          attr: class
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Role: desktopChrome1
+      Asserts:
+        - Type: contain
+          Var: RED_INDICATOR
+          Value: 'is-red'
+  # Click the "Complete session" button.
+    - Type: wait_for_property
+      Role: desktopChrome1
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.complete_session_button$ 
+      Property: disabled
+      Value: "false"
+    - Type: click
+      Role: desktopChrome1
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.complete_session_button$ 
+    - Type: wait_for_property
+      Role: desktopChrome1
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.complete_session_button$ 
+      Property: disabled
+      Value: "true"
+  # Post-call survey screen appears with your current notes pre-populated.
+    - Type: wait_for
+      Role: desktopChrome1
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.post_call_survey_title$
+    - Type: return_element_attribute
+      Role: desktopChrome1
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.call_notes_subject_input$
+      Attribute: value
+      ResultVar: SUBJECT_SUBJECT_CURRENT_TEXT
+    - Type: assert
+      Asserts:
+        - Type: eq
+          Var: SUBJECT_SUBJECT_CURRENT_TEXT
+          Value: $AND_CLI_PROVIDERS_SUBJECT$
+    - Type: return_element_attribute
+      Role: desktopChrome1
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.call_notes_provider_input$
+      Attribute: value
+      ResultVar: SUBJECT_NOTES_CURRENT_TEXT
+    - Type: assert
+      Asserts:
+        - Type: eq
+          Var: SUBJECT_NOTES_CURRENT_TEXT
+          Value: $AND_CLI_PROVIDERS_DETAILS$
+  # Select Cancel on the Survey
+    - Type: click
+      Role: desktopChrome1
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.cancel_exit_session_button$
+  # You'll be sent back to Call Portal
+    - Type: wait_for_property
+      Role: desktopChrome1
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.complete_session_button$ 
+      Property: disabled
+      Value: "false"
+    - Type: click
+      Role: desktopChrome1
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.complete_session_button$
+    - Type: wait_for_property
+      Role: desktopChrome1
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.complete_session_button$ 
+      Property: disabled
+      Value: "true"
+    - Type: wait_for
+      Role: desktopChrome1
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.post_call_survey_title$
+  # Change to "No" on the "Was issue resolved" question.
+    - Type: wait_for
+      Role: desktopChrome1
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.resolved_no_option$
+    - Type: click
+      Role: desktopChrome1
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.resolved_no_option$
+  # Was this Video Visit with a patient?
+    - Type: wait_for
+      Strategy: xpath
+      Role: desktopChrome1
+      Id: $PAGE.providers_call_handling_page.video_visit_true_option$          
+    - Type: click
+      Strategy: xpath
+      Role: desktopChrome1
+      Id: $PAGE.providers_call_handling_page.video_visit_true_option$  
+  # Survey updates based on this response:
+  # New "Reason" field appears.
+    - Type: wait_for
+      Role: desktopChrome1
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.reason_input$
+  # "Follow-up recommended" is automatically selected.
+    - Type: wait_for_attribute
+      Role: desktopChrome1
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.follow_up_recommended_checkbox$
+      Attribute: value
+      Value: true
+  # New time options appear below Follow-up recommended checkbox, with "1 hour" selected.
+    - Type: wait_for_attribute
+      Role: desktopChrome1
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.selected_follow_up_time_option$
+      Attribute: value
+      Value: "1"
+  # "Assign to myself" box appears and is automatically selected.
+    - Type: wait_for_attribute
+      Role: desktopChrome1
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.assign_to_myself_checkbox$
+      Attribute: value
+      Value: true
+  # Select a reason and click on the "Submit and Exit Session" button.
+    - Type: click
+      Role: desktopChrome1
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.reason_input$
+    - Type: click
+      Role: desktopChrome1
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.first_reason_option$
+    - Type: click
+      Role: desktopChrome1
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.recommend_discharge_no_option$
+    - Type: scroll_to
+      Role: desktopChrome1
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.submit_exit_session_button$
+    - Type: click
+      Role: desktopChrome1
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.submit_exit_session_button$
+  # Wait for Notification
+    - Type: wait_for
+      Role: desktopChrome1
+      Strategy: xpath
+      Id: $PAGE.providers_notifications.call_completed_notification$
+  # User is redirected to the Home Listing page with the new Follow-up ticket included in the listing.
+    - Type: wait_for
+      Role: desktopChrome1
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.es_home_title$
+  # Set Time to all so the follow-up appears.
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.time_dropdown$
+      Role: desktopChrome1
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.time_all_option$
+      Role: desktopChrome1
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.time_all_option$
+      Role: desktopChrome1
+      Condition:
+        - Value: 5
+          Operation: visible
+          Result: true
+  # Red indicator for 'In session' should not show
+    - Type: get_attribute
+      Strategy: xpath
+      Role: desktopChrome1
+      Id: $PAGE.care_platform_header.status_indicator$
+      Greps:
+        - var: NOT_RED_INDICATOR
+          attr: class
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Role: desktopChrome1
+      Asserts:
+        - Type: n_contain
+          Var: NOT_RED_INDICATOR
+          Value: 'is-red'
+  # Close ticket so it cleans the Home queue.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.es_follow_up_ticket_based_on_participant_name$
+      Role: desktopChrome1
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.es_follow_up_ticket_based_on_participant_name$
+      Role: desktopChrome1
+    - Type: sleep
+      Time: 1
+      Role: desktopChrome1
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_follow_up_call_details_page.update_status_dropdown$
+      Role: desktopChrome1
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_follow_up_call_details_page.update_status_dropdown$
+      Role: desktopChrome1
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_follow_up_call_details_page.status_option_close_ticket$
+      Role: desktopChrome1
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_follow_up_call_details_page.status_option_close_ticket$
+      Role: desktopChrome1
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.reason_for_closing_ticket_input$
+      Role: desktopChrome1
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.reason_for_closing_ticket_input$
+      Role: desktopChrome1
+      Value: 'Automation Test Close Ticket'
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.save_and_close_ticket_button$
+      Role: desktopChrome1
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_notifications.follow_up_ticket_closed_notification$
+      Role: desktopChrome1

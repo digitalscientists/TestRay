@@ -294,7 +294,7 @@ TestSeniorAppSuspendedAccountStatus:
       Id: $PAGE.onboarders_notifications.participant_changes_saved_notification$
   # Logout Onboarder
     - Type: case
-      Value: AlternativeCarePlatformLogout
+      Value: AlternativeCarePartnerLogout
       Role: desktopChrome
     - Type: sleep
       Role: localiOS

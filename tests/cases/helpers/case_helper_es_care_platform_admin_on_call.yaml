@@ -1,0 +1,103 @@
+ESAdminOnCallLogin:
+  Roles:
+    - Role: desktopChrome
+      App: desktop
+  Actions:
+    - Type: navigate
+      Role: desktopChrome
+      Value: $AND_CLI_easterseals_care_platform_url$
+    - Type: maximize
+    - Type: send_keys
+      Strategy: id
+      Id: $PAGE.care_platform_login.email_input$
+      Value: $AND_CLI_es_admincall_user$
+    - Type: send_keys
+      Strategy: id
+      Id: $PAGE.care_platform_login.password_input$
+      Value: $AND_CLI_es_admincall_user_pwd$
+    - Type: click
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.care_platform_login.login_button$
+    - Type: sleep
+      Time: 2
+
+AdminOnCallRefreshESParticipant:
+  Vars:
+    LOGOUT_OPTION: "Go Off Shift"
+  Aftercases:
+    - CarePlatformLogout
+  Roles:
+    - Role: desktopChrome
+      App: desktop
+  Actions:
+    # Login into Care Platform
+    - Type: case
+      Value: ESAdminOnCallLogin
+    # Set ES Variables
+    - Type: set_env_var
+      Var: senior_user1_name
+      Value: $AND_CLI_idd_es_never_alone_user1_name$
+    - Type: set_env_var
+      Var: senior_user1_lastname
+      Value: $AND_CLI_idd_es_never_alone_user1_lastname$
+    # Go to Participant Records
+    - Type: case
+      Value: CarePartnerParticipantRecordsNavigation
+    # Check for "Refresh" button
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.refresh_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.refresh_button$
+    # Refresh confirmation
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.yes_refresh_dialog_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.yes_refresh_dialog_button$
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.yes_refresh_dialog_button$
+
+AdminOnCallRefreshCHParticipant:
+  Vars:
+    LOGOUT_OPTION: "Go Off Shift"
+  Aftercases:
+    - CarePlatformLogout
+  Roles:
+    - Role: desktopChrome
+      App: desktop
+  Actions:
+    # Login into Care Platform
+    - Type: case
+      Value: ESAdminOnCallLogin
+    # Set CH Variables
+    - Type: set_env_var
+      Var: senior_user1_name
+      Value: $AND_CLI_idd_ch_never_alone_user2_name$
+    - Type: set_env_var
+      Var: senior_user1_lastname
+      Value: $AND_CLI_idd_ch_never_alone_user2_lastname$
+    # Go to Participant Records
+    - Type: case
+      Value: CarePartnerParticipantRecordsNavigation
+    # Check for "Refresh" button
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.refresh_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.refresh_button$
+    # Refresh confirmation
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.yes_refresh_dialog_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.yes_refresh_dialog_button$
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.yes_refresh_dialog_button$
