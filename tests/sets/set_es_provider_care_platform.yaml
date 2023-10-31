@@ -1,0 +1,4 @@
+SetESProviderCarePlatformTests:
+  Cases:
+    - Case: TestCHProviderCarePlatformAnswerAndCompleteSession
+    - Case: TestESProviderCarePlatformAnswerAndCompleteSession

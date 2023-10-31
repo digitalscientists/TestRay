@@ -1,0 +1,31 @@
+SetOnboardersCarePlatformTests:
+  Cases:  
+  # On Boarders WEB
+    - Case: TestOnboarderManuallyLogOutOfThePortal
+    - Case: TestOnboardersAccessFacilitiesDirectoryFilter
+    - Case: TestOnboardersForgotPasswordLoginLink
+    - Case: TestOnboardersAccessMyAcountWindowAndReviewMyInfo
+    - Case: TestOnboarderAccessParticipantDirectoryandFilter
+    - Case: TestOnboarderClickandViewParticipantRecordfromListing
+    - Case: TestOnboarderClickAndViewFacilitiesDevice
+    - Case: TestOnboarderNoNegativeToastIfParticipantIsSavedWithDuplicatedEmail
+    - Case: TestOnboarderParticipantProfileReviewEditOrAddBehavioralInfo
+    - Case: TestOnboarderParticipantProfileEditInsuranceOrProviderInformation
+    - Case: TestOnboarderParticipantPaneReviewEditOrAddBehavioralInfo
+    - Case: TestOnboarderCreateNewStaffMemberWithFacilityLeadershipRole
+    - Case: TestOnboarderParticipantInfoEditOrAddContactsInfo
+    - Case: TestOnboarderParticipantInfoEditOrAddEmergencyRoomAdmissionsInfo
+    - Case: TestOnboarderAccessStaffDirectoryAndFilter
+    - Case: TestOnboarderStaffMemberPaneReactivateStaffMemberAccountForCarePlatform
+    - Case: TestOnboarderStaffMemberPaneDeactivateStaffMemberAccountForCarePlatform
+    - Case: TestOnboarderEditStaffMemberAccountForCarePlatform
+    - Case: TestOnboarderCarePartnerUpdatePassword
+    - Case: TestOnboarderDeactivateStaffMemberAccountForCarePlatformStaffMemberProfile
+    - Case: TestOnboarderReactivateStaffMemberAccountForCarePlatformStaffMemberProfile
+    - Case: TestOnboarderCarePartnerParticipantProfileReviewEditOrAddVendorInfo
+  # Onboarder Mobile Non Physical
+    - Case: TestOnboarderChangeStatusToActiveForExistingParticipant
+    - Case: TestOnboarderChangeStatusToSuspendedForExistingParticipant
+    - Case: TestOnboarderFacilityProfileChangeStatusForExistingFacilityDevice
+    - Case: TestOnboarderChangeStatusToDeactivatedForExistingParticipant
+    - Case: TestOnboarderCreateNewParticipant

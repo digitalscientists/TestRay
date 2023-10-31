@@ -1,0 +1,20 @@
+SetESCarePartnerCarePlatformTests:
+  Cases:  
+  # ES Care Partner WEB
+    - Case: TestCHCarePartnerStatusDropdownNotInCall
+    - Case: TestCHCarePartnerAccessAndReviewTeamMembersAvailability
+    - Case: TestCHCarePartnerManuallyLogoutGoOffShift
+    - Case: TestCHCarePartnerManuallyLogoutStayOnShift
+    - Case: TestCHCarePartnerParticipantPaneCreateFollowUpTicket
+    - Case: TestCHCarePartnerParticipantDirectoryFilter
+    - Case: TestESCarePartnerStatusDropdownNotInCall
+    - Case: TestESCarePartnerAccessAndReviewTeamMembersAvailability
+    - Case: TestESCarePartnerManuallyLogoutGoOffShift
+    - Case: TestESCarePartnerManuallyLogoutStayOnShift
+    - Case: TestESCarePartnerParticipantPaneCreateFollowUpTicket
+    - Case: TestESCarePartnerParticipantDirectoryFilter
+  # Care Partner ES Mobile Non Physical
+    - Case: TestCHCarePartnerBrowsingWhileOnCall
+    - Case: TestCHCarePartnerCallParticipantsDeviceAndCompleteCall
+    - Case: TestESCarePartnerBrowsingWhileOnCall
+    - Case: TestESCarePartnerCallParticipantsDeviceAndCompleteCall

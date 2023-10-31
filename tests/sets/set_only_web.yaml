@@ -55,6 +55,7 @@ SetOnlyWebTests:
   - Case: TestEmployeeHealthPortalReviewUpcomingAppointment
   - Case: TestEmployeeHealthPortalManuallyLogoutOfPortal
   - Case: TestEmployeeHealthPortalCallsFromCurrentSessionDuplicatedInCallHistoryUntilAccessPage
+  - Case: TestEmployeeHealthPortalRequestAnAppointmentForDependentMinor
   # ES Care Partner
   - Case: TestCHCarePartnerStatusDropdownNotInCall
   - Case: TestCHCarePartnerAccessAndReviewTeamMembersAvailability
@@ -90,6 +91,7 @@ SetOnlyWebTests:
   - Case: TestOnboarderCarePartnerUpdatePassword
   - Case: TestOnboarderDeactivateStaffMemberAccountForCarePlatformStaffMemberProfile
   - Case: TestOnboarderReactivateStaffMemberAccountForCarePlatformStaffMemberProfile
+  - Case: TestOnboarderCarePartnerParticipantProfileReviewEditOrAddVendorInfo
   # Providers Care Platform
   - Case: TestProvidersUpdatePassword
   - Case: TestProviderLogOutStayOnShift
