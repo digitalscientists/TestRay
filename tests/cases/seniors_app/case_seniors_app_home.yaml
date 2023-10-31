@@ -1133,8 +1133,6 @@ TestSeniorIpadShouldNotResetIfCarePartnerUpdatesParticipantProfile:
 # CXTB-466: Verify "Emergency Services" button in portal
 TestSeniorVerifyEmergencyServicesButton:
   Vars:
-    INTERFACE: en0
-    TEST_FOLDER: $AND_CMD_pwd$/Reports/executions/$AND_CMD_date +%s$
     EMS_OPTION: 'true'
   Environment: Settings
   Precases:
@@ -1148,13 +1146,7 @@ TestSeniorVerifyEmergencyServicesButton:
       App: NeverAlone
     - Role: desktopChrome
       Capabilities:
-        chromeOptions:
-          args:
-            - use-file-for-fake-audio-capture=$AND_CMD_pwd$/video_audio_samples/sample3.wav
-            - use-file-for-fake-video-capture=$AND_CMD_pwd$/video_audio_samples/sample_640x360.mjpeg
       App: desktop
-    - Role: command1
-      App: command
   Actions:
     # Login to the Care Platform app with Care Partners account.
     - Type: case
