@@ -212,3 +212,47 @@ TestProviderReviewFacilityDeviceCallHistoryAndAccessCallRecordings:
     - Type: click
       Strategy: xpath
       Id: $PAGE.providers_call_history_page.play_pause_recording_button$
+
+#CXTB-663 Review Info for Existing Facility Device - Facility Pane
+TestProviderReviewInfoForExistingFacilityDeviceFacilityPane:
+  Environment: Settings
+  Roles: 
+    - Role: desktopChrome
+      App: "desktop"
+  Actions:
+  # Call to login case as a Provider.
+    - Type: case
+      Value: ProvidersCarePlatformLogin
+  # Navigate to Facilities.
+    - Type: case
+      Value: ProviderNavigateToFacilities
+  # Select a facility with an address and at least one device in listing.
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_facilities_page.facility_based_on_name$
+  # Right side of screen updates to show the selected facility’s summary pane including:
+  # Facility’s local time, Overview, Local Hospitals, Devices
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_facilities_page.facility_name$
+  # Using Facility leadership page objects to avoid duplication.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.facility_leadership_facility_details.facility_local_time$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_facility_Record.overview_tab$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_facility.local_hospitals_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_facility_Record.devices_button$
+  # Click "Devices" on right side.
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_facility_Record.devices_button$
+  # Right side of screen updates to show listing of facility’s device(s) and their current status.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_facility_Record.facility_status_label_elements$
