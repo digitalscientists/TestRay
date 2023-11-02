@@ -104,6 +104,15 @@ TestProviderAccessParticipantDirectoryandViewDeviceRecordfromListing:
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.providers_participants_page.participant_details_tabs_nav_bar$
+    - Type: count_elements
+      Strategy: xpath
+      Id: $PAGE.providers_participants_page.participant_details_tabs_nav_bar_items$
+      ResultVar: TABS_COUNT
+    - Type: assert
+      Asserts:
+        - Type: eq
+          Var: TABS_COUNT
+          Value: "3"
     - Type: get_attribute
       Strategy: xpath
       Id: $PAGE.providers_participants_page.participant_details_tabs_nav_bar$
@@ -123,15 +132,6 @@ TestProviderAccessParticipantDirectoryandViewDeviceRecordfromListing:
       - Type: contain
         Var: TABS
         Value: 'Providers'
-    - Type: count_elements
-      Strategy: xpath
-      Id: $PAGE.providers_participants_page.participant_details_tabs_nav_bar_items$
-      ResultVar: TABS_COUNT
-    - Type: assert
-      Asserts:
-        - Type: eq
-          Var: TABS_COUNT
-          Value: "3"
   # Click on Records Button
     - Type: click
       Strategy: xpath
