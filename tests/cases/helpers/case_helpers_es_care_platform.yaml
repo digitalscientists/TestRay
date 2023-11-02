@@ -497,3 +497,40 @@ ESPostCallSurveyCarePartner:
       Strategy: xpath
       Id: $PAGE.care_platform.es_call_queue_title$
       CheckTime: 25
+
+ESCarePartnerParticipantCallPortalNavigation:
+  Roles:
+    - Role: desktopChrome
+      App: desktop
+  Actions:
+  # Navigate to Participants.
+    - Type: click
+      Strategy: xpath
+      Id : $PAGE.care_platform.navigation_participant$
+  # Limit listing by searching name.
+    - Type: search_by_text
+      Role: desktopChrome
+      Text: $AND_CLI_idd_es_never_alone_user1_name$
+  # Select corresponding participant by name in the list.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant.esidd_senior_complete_name$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant.esidd_senior_complete_name$
+  # Verify that the Participant Pane is opened.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_details.records_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_details.participant_local_time$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_details.esidd_participant_details_title_by_name$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant.call_portal_btn$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant.call_portal_btn$

@@ -153,6 +153,8 @@ care_platform_add_participant_form:
 care_platform_participant_details:
   participant_details_title: //div[@id='participant-component']//h3
   participant_details_title_by_name: //h3[contains(.,'$AND_CLI_senior_user1_name$') and contains(.,'$AND_CLI_senior_user1_lastname$')]
+  esidd_participant_details_title_by_name: //h3[contains(.,'$AND_CLI_idd_es_never_alone_user1_name$') and contains(.,'$AND_CLI_idd_es_never_alone_user1_lastname$')]
+  chidd_participant_details_title_by_name: //h3[contains(.,'$AND_CLI_idd_ch_never_alone_user2_name$') and contains(.,'$AND_CLI_idd_ch_never_alone_user2_lastname$')]
   participant_dob: //strong[contains(text(),'DOB')]/following-sibling::time
   dnr_badge: //div[@id='participant-component']//div[contains(@class,'participant-photo-dnr')]
   participant_local_time: //div[@class='user-local-time']/span[contains(.,'Times shown are local to') and contains(.,'$AND_CLI_senior_user1_name$')]
