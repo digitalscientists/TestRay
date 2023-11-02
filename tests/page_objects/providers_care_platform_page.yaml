@@ -167,6 +167,7 @@ providers_participants_page:
   status_dropdown_suspended: //button[text()='Suspended']
   records_button: //button[text()='Records']
   participant_details_tabs_nav_bar: (//nav[@class='tabs-nav'])[1]
+  participant_details_tabs_nav_bar_items: (//nav[@class='tabs-nav'])[1]//button
 
 providers_participants_records_page:
   demographics_tab: //nav[contains(@class,'box-tabs-nav')]/button[text()='Demographics']
