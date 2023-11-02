@@ -68,23 +68,6 @@ TestCHCarePartnerStatusDropdownNotInCall:
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_header.user_toggle_input$
-#   Note: Follow Up Main navigation doesn't exist
-#
-#    - Type: click
-#      Strategy: xpath
-#      Id: $PAGE.care_platform.navigation_followup$
-#    - Type: sleep
-#      Time: 1
-#    - Type: get_text
-#      Strategy: xpath
-#      Id: $PAGE.care_platform.page_title$
-#      Greps:
-#        - var: HOME_TITLE
-#          match: "Follow-up(.*)"
-#      Asserts:
-#        - Type: eq
-#          Var: HOME_TITLE
-#          Value: "Follow-up Tickets"
   #Checking the status indicator correspond to Available
     - Type: sleep
       Time: 2

@@ -1237,3 +1237,84 @@ TestProvidersEHPSeeCallAppearInQueueAssignAndReviewDetails:
     - Type: case
       Value: EmployeeHealthPortalLogOut 
       Role: desktopChrome1
+
+# CXTB-153 Call SNF Device for Follow-up Task from Home (Answered)
+TestProvidersCallSNFDeviceForFollowUpTaskFromHome:
+  Environment: Settings
+  Precases:
+    - ProviderNewCleaner
+  Aftercases:
+    - TerminateApp
+    - CleanUsedFollowUp
+    - ProviderEndCurrentCall
+  Roles:
+    - Role: localiOS
+      Capabilities:
+        newCommandTimeout: 100
+      App: NeverAlone
+    - Role: desktopChrome
+      App: desktop 
+  Actions:
+    # Call login for nurses
+    - Type: case
+      Role: localiOS
+      Value: LoginSNFHelper
+    # Clean any prompt notification from the start
+    - Type: case
+      Role: localiOS
+      Value: SeniorCleanPrompts
+    - Type: case
+      Value: CreateAFollowUpForSNFCall
+    # Skip the survey.
+    - Type: wait_for
+      Strategy: class_chain
+      Role: localiOS
+      Id: $PAGE.seniors_app_post_call_survey.skip_survey_button$
+    - Type: click
+      Strategy: class_chain
+      Role: localiOS
+      Id: $PAGE.seniors_app_post_call_survey.skip_survey_button$
+    # Navigate again to home
+    - Type: click
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_home_page.home_button$
+    - Type: wait_for
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_home_page.home_title$
+    # Select a Follow-Up Call
+    - Type: click
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_home_page.follow_up_calls$
+    - Type: sleep
+      Role: desktopChrome
+      Time: 1
+    - Type: click
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_follow_up_call_details_page.call_device_button$
+    - Type: sleep
+      Time: 2
+      Role: desktopChrome
+    # Nurse answers the call from Provider.
+    - Type: case
+      Value: SNFAnswerIncomingCall
+      Role: localiOS
+    # End call in Provider
+    - Type: wait_for
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_call_handling_page.end_call_btn$
+    - Type: click
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_call_handling_page.end_call_btn$
+    # Provider fills up the Post Call Survey.
+    - Type: case
+      Value: PostCallSurveyProvider
+    # After call ends, select the Great option answer and then verify that the Nurse is redirected to the Home Page.
+    - Type: case
+      Value: SNFGreatPostCallSurvey
+      Role: localiOS

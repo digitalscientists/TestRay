@@ -626,33 +626,26 @@ CreateAFollowUpForSNFCall:
     #End call in Provider
     - Type: wait_for
       Strategy: xpath
-      Role: desktopChrome
       Id: $PAGE.providers_call_handling_page.end_call_btn$
     - Type: click
       Strategy: xpath
-      Role: desktopChrome
       Id: $PAGE.providers_call_handling_page.end_call_btn$
     #Fill the Provider's call notes
     - Type: wait_for
       Strategy: xpath
-      Role: desktopChrome
       Id: $PAGE.providers_call_handling_page.call_notes_subject_input$
     - Type: clear_field
       Strategy: xpath
-      Role: desktopChrome
       Id: $PAGE.providers_call_handling_page.call_notes_subject_input$
     - Type: send_keys
       Strategy: xpath
-      Role: desktopChrome
       Id: $PAGE.providers_call_handling_page.call_notes_subject_input$
       Value: 'Automation Test subject'
     - Type: clear_field
       Strategy: xpath
-      Role: desktopChrome
       Id: $PAGE.providers_call_handling_page.call_notes_provider_input$
     - Type: send_keys
       Strategy: xpath
-      Role: desktopChrome
       Id: $PAGE.providers_call_handling_page.call_notes_provider_input$
       Value: 'Automation Test Notes: Test TestSNFMissedCallFromProvider'
     - Type: if
@@ -661,43 +654,30 @@ CreateAFollowUpForSNFCall:
     #Fill survey for follow-up
     - Type: wait_for
       Strategy: xpath
-      Role: desktopChrome
-      Id: $PAGE.providers_call_handling_page.post_call_survey_title$
-    - Type: click
-      Strategy: xpath
-      Role: desktopChrome
       Id: $PAGE.providers_call_handling_page.resolved_no_option$
     - Type: click
       Strategy: xpath
-      Role: desktopChrome
+      Id: $PAGE.providers_call_handling_page.resolved_no_option$
+    - Type: click
+      Strategy: xpath
       Id: $PAGE.providers_call_handling_page.video_visit_true_option$
     - Type: wait_for
       Strategy: xpath
-      Role: desktopChrome
       Id: $PAGE.providers_call_handling_page.reason_input$
     - Type: click
       Strategy: xpath
-      Role: desktopChrome
       Id: $PAGE.providers_call_handling_page.reason_input$
     - Type: click
       Strategy: xpath
-      Role: desktopChrome
       Id: $PAGE.providers_call_handling_page.follow_up_reason_option$
     - Type: click
       Strategy: xpath
-      Role: desktopChrome
       Id: $PAGE.providers_call_handling_page.follow_up_now_option$
     - Type: click
       Strategy: xpath
-      Role: desktopChrome
       Id: $PAGE.providers_call_handling_page.recommend_discharge_no_option$
-    - Type: scroll_to
-      Strategy: xpath
-      Role: desktopChrome
-      Id: $PAGE.providers_call_handling_page.submit_exit_session_button$
     - Type: click
       Strategy: xpath
-      Role: desktopChrome
       Id: $PAGE.providers_call_handling_page.submit_exit_session_button$
 
 CleanUsedFollowUp:

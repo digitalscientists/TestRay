@@ -18,6 +18,7 @@ SetCriticalWorkflows:
     - Case: TestProviderReviewCallHistoryAndAccessCallRecordings
     - Case: TestESProviderCarePlatformAnswerAndCompleteSession
     - Case: TestCHProviderCarePlatformAnswerAndCompleteSession
+    - Case: TestProvidersCallSNFDeviceForFollowUpTaskFromHome
   # Never Alone SNF tests
     - Case: TestSNFRequestSuccessfulCallConnect
     - Case: TestSNFCheckQueueandReviewDetails
