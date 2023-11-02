@@ -16,8 +16,10 @@ SetNonPhysicalMobileTest:
   # Care Partner ES
     - Case: TestCHCarePartnerBrowsingWhileOnCall
     - Case: TestCHCarePartnerCallParticipantsDeviceAndCompleteCall
+    - Case: TestCHCarePartnerCreateTelehealthEventForParticipant
     - Case: TestESCarePartnerBrowsingWhileOnCall
     - Case: TestESCarePartnerCallParticipantsDeviceAndCompleteCall
+    - Case: TestESCarePartnerCreateTelehealthEventForParticipant
   # Never Alone IDD Senior App
     - Case: TestIDDESAnswerCallForCarePartnerCallingDeviceIgnoreCall
     - Case: TestIDDESActiveAppointmentTimeWindowWhenNotJoinedPrior
