@@ -99,6 +99,30 @@ TestProviderAccessParticipantDirectoryandViewDeviceRecordfromListing:
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.providers_participants_page.senior_1_row$
+  # CHS-2609 bug validation
+  # Verify only "Health Overview", "Medication" and "Providers" tabs appear.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_participants_page.participant_details_tabs_nav_bar$
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.providers_participants_page.participant_details_tabs_nav_bar$
+      Greps:
+      - var: TABS
+        attr: textContent
+        condition: nempty
+        match: "(.*)"
+    - Type: assert
+      Asserts:
+      - Type: contain
+        Var: TABS
+        Value: 'Health Overview'
+      - Type: contain
+        Var: TABS
+        Value: 'Medication'
+      - Type: contain
+        Var: TABS
+        Value: 'Providers'
   # Click on Records Button
     - Type: click
       Strategy: xpath
