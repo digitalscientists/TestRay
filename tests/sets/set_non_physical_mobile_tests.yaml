@@ -34,7 +34,9 @@ SetNonPhysicalMobileTest:
     - Case: TestProviderCallHistoryShowsRecordingsForAllPlatformsAndDevices
   # ES Provider Care Platform
     - Case: TestESProviderCarePlatformAnswerAndCompleteSession
+    - Case: TestESProviderIDDSeeCallAppearInQueueAssignAndReviewDetails
     - Case: TestCHProviderCarePlatformAnswerAndCompleteSession
+    - Case: TestCHProviderIDDSeeCallAppearInQueueAssignAndReviewDetails
   # Never Alone Senior App
     - Case: TestSeniorAppSuspendedAccountStatus
     - Case: TestSeniorAppActiveAccountStatusAndBehavior

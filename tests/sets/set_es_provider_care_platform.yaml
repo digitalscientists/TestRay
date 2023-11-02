@@ -1,4 +1,6 @@
 SetESProviderCarePlatformTests:
   Cases:
     - Case: TestCHProviderCarePlatformAnswerAndCompleteSession
+    - Case: TestCHProviderIDDSeeCallAppearInQueueAssignAndReviewDetails
     - Case: TestESProviderCarePlatformAnswerAndCompleteSession
+    - Case: TestESProviderIDDSeeCallAppearInQueueAssignAndReviewDetails
