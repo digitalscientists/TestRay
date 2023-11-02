@@ -43,10 +43,12 @@ SetCriticalWorkflows:
     - Case: TestCHCarePartnerManuallyLogoutStayOnShift
     - Case: TestCHCarePartnerParticipantPaneCreateFollowUpTicket
     - Case: TestCHCarePartnerCallParticipantsDeviceAndCompleteCall
+    - Case: TestCHCarePartnerCreateTelehealthEventForParticipant
     - Case: TestESCarePartnerManuallyLogoutGoOffShift
     - Case: TestESCarePartnerManuallyLogoutStayOnShift
     - Case: TestESCarePartnerParticipantPaneCreateFollowUpTicket
     - Case: TestESCarePartnerCallParticipantsDeviceAndCompleteCall
+    - Case: TestESCarePartnerCreateTelehealthEventForParticipant
   # Onboarders
     - Case: TestOnboarderChangeStatusToActiveForExistingParticipant
     - Case: TestOnboarderChangeStatusToSuspendedForExistingParticipant
