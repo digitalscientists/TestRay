@@ -16,6 +16,7 @@ SetProvidersCarePlatformTests:
     - Case: TestProviderAccessParticipantDirectoryandViewDeviceRecordfromListing
     - Case: TestProvidersEHPSeeCallAppearInQueueAssignAndReviewDetails
     - Case: TestProviderReviewFacilityDeviceCallHistoryAndAccessCallRecordings
+    - Case: TestProviderReviewInfoForExistingFacilityDeviceFacilityPane
   # Provider Care Platform Mobile Non Physical
     - Case: TestProviderHomePageListingView
     - Case: TestProviderBrowsingWhileOnCall
