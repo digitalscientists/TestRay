@@ -14,6 +14,7 @@ providers_home_page:
   time_dropdown: //div[div[contains(text(),'Time')]]//button
   time_all_option: //div[div[contains(text(),'Time')]]//button[contains(text(),'All')]
   last_medical_transfer_row: (//div[contains(text(),'Medical Transfer')])[last()]
+  last_medical_transfer_row_button: (//div[contains(text(),'Medical Transfer')])[last()]//ancestor::div[@role='button']
   participants_navigation: //header//nav//a[contains(text(),'Participants')]
   facilities_navigation: //header//nav//a[contains(text(),'Facilities')]
   employees_navigation: //header//nav//a[contains(text(),'Employees')]
@@ -99,7 +100,7 @@ providers_call_handling_page:
   call_notes_provider_input: //*[@id='providerNotes']
   call_notes_save_button: //button[text()='Save Notes']
   complete_session_button: //button[text()='Complete Session']
-  post_call_survey_title: //h3[text()='Post-call Survey']
+  post_call_survey_title: //h3[text()='Post-Call Survey']
   video_visit_false_option: //input[@name='video' and @value='false']/following-sibling::span
   video_visit_true_option: //input[@name='video' and @value='true']/following-sibling::span
   resolved_true_option: //input[@name='resolved' and @value='true']/following-sibling::span
@@ -127,6 +128,16 @@ providers_call_handling_page:
   no_message_button: //button[contains(.,'No Message')]
   call_update_dropdown_button: //button[text()='Update' and @class='status-filter-dropdown-toggle']
   video_grid: //div[@class='video']//div[contains(@data-testid,'video-grid')]
+
+providers_call_details_page:
+  assessment_subtab: //nav[@class='tabs-nav']/button[contains(text(),'Assessment')]
+  assessment_subtab_situation_title: //div[@tab-title='Assessment']//h4[text()='Situation']
+  health_overview_subtab: //nav[@class='tabs-nav']/button[contains(text(),'Health Overview')]
+  medication_subtab: //nav[@class='tabs-nav']/button[contains(text(),'Medication')]
+  providers_subtab: //nav[@class='tabs-nav']/button[contains(text(),'Providers')]
+  follow_up_tickets_tab: //nav[@class='tabs-nav']//button[@id='follow-up-tickets-tab']
+  call_history_tab: //nav[@class='tabs-nav']//button[@id='call-history-tab']
+  expand_lower_portion: //*[@id='expandButton']
 
 providers_follow_up_call_details_page:
   call_device_button: //button[contains(.,'Call Device')]
