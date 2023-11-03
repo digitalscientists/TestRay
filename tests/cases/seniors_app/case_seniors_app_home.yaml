@@ -1145,7 +1145,6 @@ TestSeniorVerifyEmergencyServicesButton:
     - Role: localiOS
       App: NeverAlone
     - Role: desktopChrome
-      Capabilities:
       App: desktop
   Actions:
     # Login to the Care Platform app with Care Partners account.
