@@ -1318,3 +1318,387 @@ TestProvidersCallSNFDeviceForFollowUpTaskFromHome:
     - Type: case
       Value: SNFGreatPostCallSurvey
       Role: localiOS
+
+#CXTB-582 IDD - CH - See Call Appear in Queue, Assign and Review Details
+TestProviderIDDCHSeeCallAppearInQueueAssignAndReviewDetails:
+  Environment: Settings
+  Vars:
+    LOGOUT_OPTION: "Go Off Shift"
+  Precases:
+    - AdminOnCallRefreshCHParticipant
+    - LoginCHIDDNeverAloneHelper
+    - CHCarePartnerCleanCallQueueAndHangedCalls
+    - ESProviderCleaner
+    - IDDESParticipantCleanPrompts
+  Aftercases:
+    - TerminateApp
+  Roles:
+    - Role: desktopChrome
+      App: desktop
+    - Role: localiOS
+      App: NeverAlone
+    - Role: desktopChrome1
+      App: desktop
+  Actions:
+  # Make IDD-CarePartner-Provider Medical Transfer
+    - Type: case
+      Value: IDDCHCarePartnerMakeCallToProvider
+  # Log in as a provider and join the call
+    - Type: case
+      Value: ESProvidersCarePlatformLogin
+      Role: desktopChrome1
+  # Select the call
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.last_medical_transfer_row$
+      Role: desktopChrome1
+  # Check Row values
+    - Type: get_attribute  
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.last_medical_transfer_row_button$
+      Role: desktopChrome1
+      Greps:
+      - var: MEDICAL_TRANSFER_CALL
+        attr: innerHTML
+        condition: nempty
+        match: "(.*)"
+    # Checking call origin
+    - Type: assert
+      Asserts: 
+        - Type: contain_encode_utf8
+          Var: MEDICAL_TRANSFER_CALL
+          Value: 'Participant (CH)'
+    # Checking IDD Participant Name
+    - Type: assert
+      Asserts: 
+        - Type: contain_encode_utf8
+          Var: MEDICAL_TRANSFER_CALL
+          Value: '$AND_CLI_idd_ch_never_alone_user2_name$ $AND_CLI_idd_ch_never_alone_user2_lastname$'
+  # Wait 5 seconds for the call to disappear
+    - Type: sleep
+      Time: 5
+    - Type: wait_not_visible
+      Strategy: xpath
+      Role: desktopChrome1
+      Id: $PAGE.providers_home_page.last_medical_transfer_row$
+  # Log out from ES Provider
+    - Type: case
+      Value: CarePlatformLogout
+      Role: desktopChrome1
+  # Log in to CHS Provider
+    - Type: case
+      Value: ProvidersCarePlatformLogin
+      Role: desktopChrome1
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.last_medical_transfer_row$
+      Role: desktopChrome1
+  # Check values of row
+    - Type: get_attribute  
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.last_medical_transfer_row_button$
+      Role: desktopChrome1
+      Greps:
+      - var: MEDICAL_TRANSFER_CALL_CH
+        attr: innerHTML
+        condition: nempty
+        match: "(.*)"
+    # Checking call origin
+    - Type: assert
+      Asserts: 
+        - Type: contain_encode_utf8
+          Var: MEDICAL_TRANSFER_CALL_CH
+          Value: 'Participant (ESP)'
+    # Checking IDD Participant Name
+    - Type: assert
+      Asserts: 
+        - Type: contain_encode_utf8
+          Var: MEDICAL_TRANSFER_CALL_CH
+          Value: '$AND_CLI_idd_ch_never_alone_user2_name$ $AND_CLI_idd_ch_never_alone_user2_lastname$'
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.last_medical_transfer_row$
+      Role: desktopChrome1
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.answer_call_button$
+      Role: desktopChrome1
+  # Assign to "Me"
+    - Type: wait_for  
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.assign_to_me_button$
+      Role: desktopChrome1
+    - Type: click  
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.assign_to_me_button$
+      Role: desktopChrome1
+    - Type: sleep
+      Time: 0.8
+      Role: desktopChrome1
+    # Check Assigment
+    - Type: get_attribute  
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.last_medical_transfer_row_button$
+      Role: desktopChrome1
+      Greps:
+      - var: SELECTED_CALL
+        attr: innerHTML
+        condition: nempty
+        match: "(.*)"
+    - Type: assert
+      Asserts: 
+        - Type: contain_encode_utf8
+          Var: SELECTED_CALL
+          Value: 'Me'
+  # Verify you can expand Call history in lower portion.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_call_details_page.assessment_subtab$
+      Role: desktopChrome1
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_details_page.assessment_subtab$
+      Role: desktopChrome1
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_call_details_page.assessment_subtab_situation_title$
+      Role: desktopChrome1
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_details_page.health_overview_subtab$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_details_page.medication_subtab$
+      Role: desktopChrome1
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_details_page.providers_subtab$
+      Role: desktopChrome1
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_details_page.expand_lower_portion$
+      Role: desktopChrome1
+    - Type: wait_for_attribute
+      Strategy: xpath
+      Id: $PAGE.providers_call_details_page.expand_lower_portion$
+      Attribute: innerText
+      Value: Minimize
+      Role: desktopChrome1
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_details_page.call_history_tab$
+      Role: desktopChrome1
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_details_page.follow_up_tickets_tab$
+      Role: desktopChrome1
+    # Answer call
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.answer_call_button$
+      Role: desktopChrome1
+    - Type: sleep
+      Time: 2
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.end_call_btn$
+      Role: desktopChrome1
+    # End Call and Close Session
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.end_call_btn$
+      Role: desktopChrome1
+    - Type: case
+      Value: PostCallSurveyProvider
+      Role: desktopChrome1
+
+#CXTB-582 IDD - ES - See Call Appear in Queue, Assign and Review Details
+TestProviderIDDESSeeCallAppearInQueueAssignAndReviewDetails:
+  Environment: Settings
+  Precases:
+    - AdminOnCallRefreshESParticipant
+    - LoginESIDDNeverAloneHelper
+    - ESCarePartnerCleanCallQueueAndHangedCalls
+    - ESProviderCleaner
+    - IDDESParticipantCleanPrompts
+  Aftercases:
+    - TerminateApp
+  Roles:
+    - Role: desktopChrome
+      App: desktop
+    - Role: localiOS
+      App: NeverAlone
+    - Role: desktopChrome1
+      App: desktop
+  Actions:
+  # Make IDD-CarePartner-Provider Medical Transfer
+    - Type: case
+      Value: IDDESCarePartnerMakeCallToProvider
+  # Log in as a provider and join the call
+    - Type: case
+      Value: ESProvidersCarePlatformLogin
+      Role: desktopChrome1
+  # Select the call
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.last_medical_transfer_row$
+      Role: desktopChrome1
+  # Check Row values
+    - Type: get_attribute  
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.last_medical_transfer_row_button$
+      Role: desktopChrome1
+      Greps:
+      - var: MEDICAL_TRANSFER_CALL
+        attr: innerHTML
+        condition: nempty
+        match: "(.*)"
+    # Checking call origin
+    - Type: assert
+      Asserts: 
+        - Type: contain_encode_utf8
+          Var: MEDICAL_TRANSFER_CALL
+          Value: 'Participant (ES)'
+    # Checking IDD Participant Name
+    - Type: assert
+      Asserts: 
+        - Type: contain_encode_utf8
+          Var: MEDICAL_TRANSFER_CALL
+          Value: '$AND_CLI_idd_es_never_alone_user1_name$ $AND_CLI_idd_es_never_alone_user1_lastname$'
+  # Wait 5 seconds for the call to disappear
+    - Type: sleep
+      Time: 5
+    - Type: wait_not_visible
+      Strategy: xpath
+      Role: desktopChrome1
+      Id: $PAGE.providers_home_page.last_medical_transfer_row$
+  # Log out from ES Provider
+    - Type: case
+      Value: CarePlatformLogout
+      Role: desktopChrome1
+  # Log in to CHS Provider
+    - Type: case
+      Value: ProvidersCarePlatformLogin
+      Role: desktopChrome1
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.last_medical_transfer_row$
+      Role: desktopChrome1
+  # Check values of row
+    - Type: get_attribute  
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.last_medical_transfer_row_button$
+      Role: desktopChrome1
+      Greps:
+      - var: MEDICAL_TRANSFER_CALL_ES
+        attr: innerHTML
+        condition: nempty
+        match: "(.*)"
+    # Checking call origin
+    - Type: assert
+      Asserts: 
+        - Type: contain_encode_utf8
+          Var: MEDICAL_TRANSFER_CALL_ES
+          Value: 'Participant (ESP)'
+    # Checking IDD Participant Name
+    - Type: assert
+      Asserts: 
+        - Type: contain_encode_utf8
+          Var: MEDICAL_TRANSFER_CALL_ES
+          Value: '$AND_CLI_idd_es_never_alone_user1_name$ $AND_CLI_idd_es_never_alone_user1_lastname$'
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.last_medical_transfer_row$
+      Role: desktopChrome1
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.answer_call_button$
+      Role: desktopChrome1
+  # Assign to "Me"
+    - Type: wait_for  
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.assign_to_me_button$
+      Role: desktopChrome1
+    - Type: click  
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.assign_to_me_button$
+      Role: desktopChrome1
+    - Type: sleep
+      Time: 0.8
+      Role: desktopChrome1
+    # Check Assigment
+    - Type: get_attribute  
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.last_medical_transfer_row_button$
+      Role: desktopChrome1
+      Greps:
+      - var: SELECTED_CALL
+        attr: innerHTML
+        condition: nempty
+        match: "(.*)"
+    - Type: assert
+      Asserts: 
+        - Type: contain
+          Var: SELECTED_CALL
+          Value: 'Me'
+  # Verify you can expand Call history in lower portion.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_call_details_page.assessment_subtab$
+      Role: desktopChrome1
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_details_page.assessment_subtab$
+      Role: desktopChrome1
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_call_details_page.assessment_subtab_situation_title$
+      Role: desktopChrome1
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_details_page.health_overview_subtab$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_details_page.medication_subtab$
+      Role: desktopChrome1
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_details_page.providers_subtab$
+      Role: desktopChrome1
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_details_page.expand_lower_portion$
+      Role: desktopChrome1
+    - Type: wait_for_attribute
+      Strategy: xpath
+      Id: $PAGE.providers_call_details_page.expand_lower_portion$
+      Attribute: innerText
+      Value: Minimize
+      Role: desktopChrome1
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_details_page.call_history_tab$
+      Role: desktopChrome1
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_details_page.follow_up_tickets_tab$
+      Role: desktopChrome1
+    # Answer call
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.answer_call_button$
+      Role: desktopChrome1
+    - Type: sleep
+      Time: 2
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.end_call_btn$
+      Role: desktopChrome1
+    # End Call and Close Session
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.end_call_btn$
+      Role: desktopChrome1
+    - Type: case
+      Value: PostCallSurveyProvider
+      Role: desktopChrome1
