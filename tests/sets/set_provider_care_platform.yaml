@@ -27,3 +27,4 @@ SetProvidersCarePlatformTests:
     - Case: TestProviderReviewCallHistoryAndAccessCallRecordings
     - Case: TestProviderCallHistoryShowsRecordingsForAllPlatformsAndDevices
     - Case: TestProvidersCallSNFDeviceForFollowUpTaskFromHome
+    - Case: TestProviderSeniorSeeCallAppearInQueueAssignAndReviewDetails
