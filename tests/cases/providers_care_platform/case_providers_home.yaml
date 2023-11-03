@@ -1319,7 +1319,7 @@ TestProvidersCallSNFDeviceForFollowUpTaskFromHome:
       Value: SNFGreatPostCallSurvey
       Role: localiOS
 
-#CXTB-582 IDD - CH - See Call Appear in Queue, Assign and Review Details
+#CXTB-666 IDD - CH - See Call Appear in Queue, Assign and Review Details
 TestProviderIDDCHSeeCallAppearInQueueAssignAndReviewDetails:
   Environment: Settings
   Vars:
@@ -1512,7 +1512,7 @@ TestProviderIDDCHSeeCallAppearInQueueAssignAndReviewDetails:
       Value: PostCallSurveyProvider
       Role: desktopChrome1
 
-#CXTB-582 IDD - ES - See Call Appear in Queue, Assign and Review Details
+#CXTB-666 IDD - ES - See Call Appear in Queue, Assign and Review Details
 TestProviderIDDESSeeCallAppearInQueueAssignAndReviewDetails:
   Environment: Settings
   Precases:
