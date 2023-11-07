@@ -1130,7 +1130,7 @@ TestSeniorIpadShouldNotResetIfCarePartnerUpdatesParticipantProfile:
     - Type: case
       Value: SeniorGreatPostSurveyCallHelper
 
-# CXTB-466: Verify "Emergency Services" button in portal
+# CXTB-667: Verify "Emergency Services" button in portal
 TestSeniorVerifyEmergencyServicesButton:
   Vars:
     EMS_OPTION: 'true'
