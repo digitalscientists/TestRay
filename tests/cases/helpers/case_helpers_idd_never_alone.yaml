@@ -141,6 +141,8 @@ IDDCallCarePartnerHelper:
       Strategy: class_chain
       Id: $PAGE.idd_never_alone_app_call.yes_place_call_button$
   # Device screen updates showing you the waiting room.
+    - Type: sleep
+      Time: 1
     - Type: wait_for
       Strategy: class_chain
       Id: $PAGE.idd_never_alone_app_call.waiting_room_label$

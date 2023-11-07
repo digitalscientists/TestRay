@@ -1320,6 +1320,7 @@ TestProvidersCallSNFDeviceForFollowUpTaskFromHome:
       Role: localiOS
 
 #CXTB-666 IDD - CH - See Call Appear in Queue, Assign and Review Details
+#CXTB-668 IDD - Answer Call and Complete Session
 TestProviderIDDCHSeeCallAppearInQueueAssignAndReviewDetails:
   Environment: Settings
   Vars:
@@ -1492,27 +1493,281 @@ TestProviderIDDCHSeeCallAppearInQueueAssignAndReviewDetails:
       Strategy: xpath
       Id: $PAGE.providers_call_details_page.follow_up_tickets_tab$
       Role: desktopChrome1
-    # Answer call
+  # Answer call
     - Type: click
       Strategy: xpath
       Id: $PAGE.providers_call_handling_page.answer_call_button$
       Role: desktopChrome1
+  # Call portal should be displayed and the user status has been automatically updated to "In session" (red dot).
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.video_btn$
+      Role: desktopChrome1
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.care_platform_header.status_indicator$
+      Role: desktopChrome1
+      Greps:
+        - var: INDICATOR
+          attr: class
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: INDICATOR
+          Value: 'is-red'
+  # Verify video is disabled by default on the Providers.
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.call_camera_button$
+      Role: desktopChrome1
+      Greps:
+        - var: CLASS
+          attr: innerHTML
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: CLASS
+          Value: 'off'
     - Type: sleep
       Time: 2
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.providers_call_handling_page.end_call_btn$
       Role: desktopChrome1
-    # End Call and Close Session
+  # End Call and Close Session
     - Type: click
       Strategy: xpath
       Id: $PAGE.providers_call_handling_page.end_call_btn$
       Role: desktopChrome1
-    - Type: case
-      Value: PostCallSurveyProvider
+    - Type: wait_for_property
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.complete_session_button$
+      Role: desktopChrome1
+      Property: disabled
+      Value: "false"
+  # Click on the complete session button.
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.complete_session_button$
+      Role: desktopChrome1
+  # Fill the notes
+  # Verify that the "Complete Session" is disabled.
+    - Type: wait_for_property
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.complete_session_button$
+      Role: desktopChrome1
+      Property: disabled
+      Value: "true"
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.subject_input$
+      Role: desktopChrome1
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.subject_input$
+      Role: desktopChrome1
+      Value: 'Automation subject CXTB-668'
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.details_textarea$
+      Value: 'Automation notes CXTB-668'
+      Role: desktopChrome1
+  # Fill the Post-call Survey
+  # Select Resolved to YES
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.resolved_true_option$
+      Role: desktopChrome1
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.resolved_true_option$
+      Role: desktopChrome1
+  # Click on Cancel button
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.cancel_exit_session_button$
+      Role: desktopChrome1
+  # Go back to Call Portal
+    - Type: wait_for_property
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.complete_session_button$
+      Role: desktopChrome1
+      Property: disabled
+      Value: "false"
+  # Click on the complete session button.
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.complete_session_button$
+      Role: desktopChrome1
+  # Verify that the "Complete Session" is disabled.
+    - Type: wait_for_property
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.complete_session_button$
+      Role: desktopChrome1
+      Property: disabled
+      Value: "true"
+  # Select Resolved to NO
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.resolved_no_option$
+      Role: desktopChrome1
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.resolved_no_option$
+      Role: desktopChrome1
+  # Survey updates based on this response:
+  # New "Reason" field appears.
+    - Type: wait_for
+      Role: desktopChrome1
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.reason_input$
+    - Type: click
+      Role: desktopChrome1
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.first_reason_option$
+    - Type: click
+      Role: desktopChrome1
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.recommend_discharge_no_option$
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.subject_input$
+      Role: desktopChrome1
+      Value: 'Automation subject CXTB-668'
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.details_textarea$
+      Value: 'Automation notes CXTB-668'
+      Role: desktopChrome1
+  # "Follow-up recommended" is automatically selected.
+    - Type: wait_for_attribute
+      Role: desktopChrome1
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.follow_up_recommended_checkbox$
+      Attribute: value
+      Value: true
+  # Fill other options
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.video_visit_true_option$
+      Role: desktopChrome1
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.video_visit_true_option$
+      Role: desktopChrome1
+  # New time options appear below Follow-up recommended checkbox, with "1 hour" selected.
+    - Type: wait_for_attribute
+      Role: desktopChrome1
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.selected_follow_up_time_option$
+      Attribute: value
+      Value: "1"
+  # "Assign to myself" box appears and is automatically selected.
+    - Type: wait_for_attribute
+      Role: desktopChrome1
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.assign_to_myself_checkbox$
+      Attribute: value
+      Value: true
+    - Type: click
+      Role: desktopChrome1
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.submit_exit_session_button$
+  # Wait for Notification
+    - Type: wait_for
+      Role: desktopChrome1
+      Strategy: xpath
+      Id: $PAGE.providers_notifications.call_completed_notification$
+  # User is redirected to the Home Listing page with the new Follow-up ticket included in the listing.
+    - Type: wait_for
+      Role: desktopChrome1
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.home_title$
+  # Go back to Available
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_header.status_indicator$
+      Role: desktopChrome1
+    - Type: return_element_attribute
+      Strategy: xpath
+      Id: $PAGE.care_platform_header.status_indicator$
+      Role: desktopChrome1
+      Attribute: className
+      ResultVar: IS_GREEN
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: IS_GREEN
+          Value: is-green
+    # Set Time to all so the follow-up appears.
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.time_dropdown$
+      Role: desktopChrome1
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.time_all_option$
+      Role: desktopChrome1
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.time_all_option$
+      Role: desktopChrome1
+      Condition:
+        - Value: 5
+          Operation: visible
+          Result: true
+  # Close ticket so it cleans the Home queue.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.ch_follow_up_ticket_based_on_participant_name$
+      Role: desktopChrome1
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.ch_follow_up_ticket_based_on_participant_name$
+      Role: desktopChrome1
+    - Type: sleep
+      Time: 1
+      Role: desktopChrome1
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_follow_up_call_details_page.update_status_dropdown$
+      Role: desktopChrome1
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_follow_up_call_details_page.update_status_dropdown$
+      Role: desktopChrome1
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_follow_up_call_details_page.status_option_close_ticket$
+      Role: desktopChrome1
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_follow_up_call_details_page.status_option_close_ticket$
+      Role: desktopChrome1
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.reason_for_closing_ticket_input$
+      Role: desktopChrome1
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.reason_for_closing_ticket_input$
+      Role: desktopChrome1
+      Value: 'Automation Test Close Ticket'
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.save_and_close_ticket_button$
+      Role: desktopChrome1
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_notifications.follow_up_ticket_closed_notification$
       Role: desktopChrome1
 
 #CXTB-666 IDD - ES - See Call Appear in Queue, Assign and Review Details
+#CXTB-668 IDD - Answer Call and Complete Session
 TestProviderIDDESSeeCallAppearInQueueAssignAndReviewDetails:
   Environment: Settings
   Precases:
@@ -1683,22 +1938,275 @@ TestProviderIDDESSeeCallAppearInQueueAssignAndReviewDetails:
       Strategy: xpath
       Id: $PAGE.providers_call_details_page.follow_up_tickets_tab$
       Role: desktopChrome1
-    # Answer call
+  # Answer call
     - Type: click
       Strategy: xpath
       Id: $PAGE.providers_call_handling_page.answer_call_button$
       Role: desktopChrome1
+  # Call portal should be displayed and the user status has been automatically updated to "In session" (red dot).
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.video_btn$
+      Role: desktopChrome1
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.care_platform_header.status_indicator$
+      Role: desktopChrome1
+      Greps:
+        - var: INDICATOR
+          attr: class
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: INDICATOR
+          Value: 'is-red'
+  # Verify video is disabled by default on the Providers.
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.call_camera_button$
+      Role: desktopChrome1
+      Greps:
+        - var: CLASS
+          attr: innerHTML
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: CLASS
+          Value: 'off'
     - Type: sleep
       Time: 2
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.providers_call_handling_page.end_call_btn$
       Role: desktopChrome1
-    # End Call and Close Session
+  # End Call and Close Session
     - Type: click
       Strategy: xpath
       Id: $PAGE.providers_call_handling_page.end_call_btn$
       Role: desktopChrome1
-    - Type: case
-      Value: PostCallSurveyProvider
+    - Type: wait_for_property
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.complete_session_button$
+      Role: desktopChrome1
+      Property: disabled
+      Value: "false"
+  # Click on the complete session button.
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.complete_session_button$
+      Role: desktopChrome1
+  # Fill the notes
+  # Verify that the "Complete Session" is disabled.
+    - Type: wait_for_property
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.complete_session_button$
+      Role: desktopChrome1
+      Property: disabled
+      Value: "true"
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.subject_input$
+      Role: desktopChrome1
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.subject_input$
+      Role: desktopChrome1
+      Value: 'Automation subject CXTB-668'
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.details_textarea$
+      Value: 'Automation notes CXTB-668'
+      Role: desktopChrome1
+  # Fill the Post-call Survey
+  # Select Resolved to YES
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.resolved_true_option$
+      Role: desktopChrome1
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.resolved_true_option$
+      Role: desktopChrome1
+  # Click on Cancel button
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.cancel_exit_session_button$
+      Role: desktopChrome1
+  # Go back to Call Portal
+    - Type: wait_for_property
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.complete_session_button$
+      Role: desktopChrome1
+      Property: disabled
+      Value: "false"
+  # Click on the complete session button.
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.complete_session_button$
+      Role: desktopChrome1
+  # Verify that the "Complete Session" is disabled.
+    - Type: wait_for_property
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.complete_session_button$
+      Role: desktopChrome1
+      Property: disabled
+      Value: "true"
+  # Select Resolved to NO
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.resolved_no_option$
+      Role: desktopChrome1
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.resolved_no_option$
+      Role: desktopChrome1
+  # Survey updates based on this response:
+  # New "Reason" field appears.
+    - Type: wait_for
+      Role: desktopChrome1
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.reason_input$
+    - Type: click
+      Role: desktopChrome1
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.first_reason_option$
+    - Type: click
+      Role: desktopChrome1
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.recommend_discharge_no_option$
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.subject_input$
+      Role: desktopChrome1
+      Value: 'Automation subject CXTB-668'
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.details_textarea$
+      Value: 'Automation notes CXTB-668'
+      Role: desktopChrome1
+  # "Follow-up recommended" is automatically selected.
+    - Type: wait_for_attribute
+      Role: desktopChrome1
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.follow_up_recommended_checkbox$
+      Attribute: value
+      Value: true
+  # Fill other options
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.video_visit_true_option$
+      Role: desktopChrome1
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.video_visit_true_option$
+      Role: desktopChrome1
+  # New time options appear below Follow-up recommended checkbox, with "1 hour" selected.
+    - Type: wait_for_attribute
+      Role: desktopChrome1
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.selected_follow_up_time_option$
+      Attribute: value
+      Value: "1"
+  # "Assign to myself" box appears and is automatically selected.
+    - Type: wait_for_attribute
+      Role: desktopChrome1
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.assign_to_myself_checkbox$
+      Attribute: value
+      Value: true
+    - Type: click
+      Role: desktopChrome1
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.submit_exit_session_button$
+  # Wait for Notification
+    - Type: wait_for
+      Role: desktopChrome1
+      Strategy: xpath
+      Id: $PAGE.providers_notifications.call_completed_notification$
+  # User is redirected to the Home Listing page with the new Follow-up ticket included in the listing.
+    - Type: wait_for
+      Role: desktopChrome1
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.home_title$
+  # Go back to Available
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_header.status_indicator$
+      Role: desktopChrome1
+    - Type: return_element_attribute
+      Strategy: xpath
+      Id: $PAGE.care_platform_header.status_indicator$
+      Role: desktopChrome1
+      Attribute: className
+      ResultVar: IS_GREEN
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: IS_GREEN
+          Value: is-green
+  # Set Time to all so the follow-up appears.
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.time_dropdown$
+      Role: desktopChrome1
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.time_all_option$
+      Role: desktopChrome1
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.time_all_option$
+      Role: desktopChrome1
+      Condition:
+        - Value: 5
+          Operation: visible
+          Result: true
+  # Close ticket so it cleans the Home queue.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.ch_follow_up_ticket_based_on_participant_name$
+      Role: desktopChrome1
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.ch_follow_up_ticket_based_on_participant_name$
+      Role: desktopChrome1
+    - Type: sleep
+      Time: 1
+      Role: desktopChrome1
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_follow_up_call_details_page.update_status_dropdown$
+      Role: desktopChrome1
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_follow_up_call_details_page.update_status_dropdown$
+      Role: desktopChrome1
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_follow_up_call_details_page.status_option_close_ticket$
+      Role: desktopChrome1
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_follow_up_call_details_page.status_option_close_ticket$
+      Role: desktopChrome1
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.reason_for_closing_ticket_input$
+      Role: desktopChrome1
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.reason_for_closing_ticket_input$
+      Role: desktopChrome1
+      Value: 'Automation Test Close Ticket'
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.save_and_close_ticket_button$
+      Role: desktopChrome1
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_notifications.follow_up_ticket_closed_notification$
       Role: desktopChrome1
