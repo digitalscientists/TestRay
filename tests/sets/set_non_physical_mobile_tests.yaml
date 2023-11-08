@@ -13,7 +13,6 @@ SetNonPhysicalMobileTest:
     - Case: TestCarePartnerCallParticipantsDeviceCallMissed
     - Case: TestCarePartnerStatusUpdatedToInSessionNotLoggedForAnsweredOutboundCalls
     - Case: TestCarePartnerCreateManualEventForParticipant
-    - Case: TestSeniorVerifyEmergencyServicesButton
   # Care Partner ES
     - Case: TestCHCarePartnerBrowsingWhileOnCall
     - Case: TestCHCarePartnerCallParticipantsDeviceAndCompleteCall
@@ -35,6 +34,8 @@ SetNonPhysicalMobileTest:
     - Case: TestProviderCallHistoryShowsRecordingsForAllPlatformsAndDevices
     - Case: TestProvidersCallSNFDeviceForFollowUpTaskFromHome
     - Case: TestProviderSeniorSeeCallAppearInQueueAssignAndReviewDetails
+    - Case: TestProviderIDDCHSeeCallAppearInQueueAssignAndReviewDetails
+    - Case: TestProviderIDDESSeeCallAppearInQueueAssignAndReviewDetails
   # ES Provider Care Platform
     - Case: TestESProviderCarePlatformAnswerAndCompleteSession
     - Case: TestESProviderIDDSeeCallAppearInQueueAssignAndReviewDetails
@@ -71,6 +72,7 @@ SetNonPhysicalMobileTest:
     - Case: TestSeniorWifiSettingsPage
     - Case: TestSeniorAppDeactivatedAccountStatusVisuals
     - Case: TestSeniorIpadShouldNotResetIfCarePartnerUpdatesParticipantProfile
+    - Case: TestSeniorVerifyEmergencyServicesButton
   # Never Alone SNF tests
     - Case: TestSNFVerifyNotificationsPage
     - Case: TestSNFMessagePromptFromProvider
