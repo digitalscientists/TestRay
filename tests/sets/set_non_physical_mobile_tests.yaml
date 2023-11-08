@@ -33,6 +33,7 @@ SetNonPhysicalMobileTest:
     - Case: TestProviderReviewCallHistoryAndAccessCallRecordings
     - Case: TestProviderCallHistoryShowsRecordingsForAllPlatformsAndDevices
     - Case: TestProvidersCallSNFDeviceForFollowUpTaskFromHome
+    - Case: TestProviderSeniorSeeCallAppearInQueueAssignAndReviewDetails
     - Case: TestProviderIDDCHSeeCallAppearInQueueAssignAndReviewDetails
     - Case: TestProviderIDDESSeeCallAppearInQueueAssignAndReviewDetails
   # ES Provider Care Platform

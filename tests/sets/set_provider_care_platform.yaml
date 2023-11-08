@@ -29,3 +29,4 @@ SetProvidersCarePlatformTests:
     - Case: TestProvidersCallSNFDeviceForFollowUpTaskFromHome
     - Case: TestProviderIDDCHSeeCallAppearInQueueAssignAndReviewDetails
     - Case: TestProviderIDDESSeeCallAppearInQueueAssignAndReviewDetails
+    - Case: TestProviderSeniorSeeCallAppearInQueueAssignAndReviewDetails
