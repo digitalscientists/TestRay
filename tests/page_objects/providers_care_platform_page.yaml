@@ -146,6 +146,7 @@ providers_follow_up_call_details_page:
   close_ticket_modal_title: //*[@id='dialogs']//h4[text()='Close Ticket']
   close_ticket_reason_input: //*[@id='dialogs']//input[@name='reasonForClosing']
   close_ticket_save_button: //*[@id='dialogs']//button[text()='Save and Close Ticket']
+  nav_tab: //nav[@class='tabs-nav']
   
 providers_employees_page:
   employees_label: //h3[text()='Employees']

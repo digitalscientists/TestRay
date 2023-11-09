@@ -256,3 +256,112 @@ TestProviderReviewInfoForExistingFacilityDeviceFacilityPane:
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.care_platform_facility_Record.facility_status_label_elements$
+
+# BUG: CHS-2603 TC: CXTB-669 Forced Assessment View on Calls for Follow-ups without Telehealth Request
+TestProviderCheckForForcedAssessmentOnFollowUpsWithoutTelehealthRequest:
+  Environment: Settings
+  Roles: 
+    - Role: desktopChrome
+      App: desktop
+    - Role: localiOS
+      App: NeverAlone
+  Precases:
+    - ProviderNewCleaner
+  Aftercases:
+    - CleanUsedFollowUp
+    - TerminateApp  
+  Actions:
+    #Call login for nurses
+    - Type: case
+      Role: localiOS
+      Value: LoginSNFHelper
+    #Clean SNF prompts
+    - Type: case
+      Role: localiOS
+      Value: SeniorCleanPrompts
+    #Clean any prompt notification from the start
+    - Type: case
+      Value: CreateAFollowUpForSNFCall
+    # Skip the survey.
+    - Type: wait_for
+      Strategy: class_chain
+      Role: localiOS
+      Id: $PAGE.seniors_app_post_call_survey.skip_survey_button$
+    - Type: click
+      Strategy: class_chain
+      Role: localiOS
+      Id: $PAGE.seniors_app_post_call_survey.skip_survey_button$
+    # Navigate again to home
+    - Type: click
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_home_page.home_button$
+    - Type: wait_for
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_home_page.home_title$
+    # Select a Follow-Up Call
+    - Type: wait_for
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_home_page.follow_up_calls$
+    - Type: click
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_home_page.follow_up_calls$
+    - Type: sleep
+      Role: desktopChrome
+      Time: 1
+    # Looking for Assessment Tab, it shouldn't be
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.providers_follow_up_call_details_page.nav_tab$
+      Role: desktopChrome
+      Greps:
+        - var: FOLLOW_UP_TABS
+          attr: innerHTML
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: n_contain
+          Var: FOLLOW_UP_TABS
+          Value: 'Assessment'
+    # Call back to the device
+    - Type: wait_for
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_follow_up_call_details_page.call_device_button$
+    - Type: click
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_follow_up_call_details_page.call_device_button$
+    # Check you are in the call portal
+    - Type: wait_for
+      Role: desktopChrome
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.end_call_btn$
+    # Check there's no Assessment here neither
+    - Type: get_attribute
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_follow_up_call_details_page.nav_tab$
+      Greps:
+        - var: FOLLOW_UP_TAB_CALL_PORTAL
+          attr: innerHTML
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: n_contain
+          Var: FOLLOW_UP_TAB_CALL_PORTAL
+          Value: 'Assessment'
+    # End the call
+    - Type: click
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_call_handling_page.end_call_btn$
+    - Type: click
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_call_handling_page.no_message_button$
