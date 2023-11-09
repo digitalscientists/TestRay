@@ -38,6 +38,7 @@ SetNonPhysicalMobileTest:
     - Case: TestProviderIDDESSeeCallAppearInQueueAssignAndReviewDetails
     - Case: TestProviderIDDCHAnswerCallAndCompleteSession
     - Case: TestProviderIDDESAnswerCallAndCompleteSession
+    - Case: TestProviderCheckForForcedAssessmentOnFollowUpsWithoutTelehealthRequest
   # ES Provider Care Platform
     - Case: TestESProviderCarePlatformAnswerAndCompleteSession
     - Case: TestESProviderIDDSeeCallAppearInQueueAssignAndReviewDetails
