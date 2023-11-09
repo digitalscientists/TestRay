@@ -22,6 +22,8 @@ SetCriticalWorkflows:
     - Case: TestProviderSeniorSeeCallAppearInQueueAssignAndReviewDetails
     - Case: TestProviderIDDCHSeeCallAppearInQueueAssignAndReviewDetails
     - Case: TestProviderIDDESSeeCallAppearInQueueAssignAndReviewDetails
+    - Case: TestProviderIDDCHAnswerCallAndCompleteSession
+    - Case: TestProviderIDDESAnswerCallAndCompleteSession
   # Never Alone SNF tests
     - Case: TestSNFRequestSuccessfulCallConnect
     - Case: TestSNFCheckQueueandReviewDetails

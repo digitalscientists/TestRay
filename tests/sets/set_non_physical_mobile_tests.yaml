@@ -36,6 +36,8 @@ SetNonPhysicalMobileTest:
     - Case: TestProviderSeniorSeeCallAppearInQueueAssignAndReviewDetails
     - Case: TestProviderIDDCHSeeCallAppearInQueueAssignAndReviewDetails
     - Case: TestProviderIDDESSeeCallAppearInQueueAssignAndReviewDetails
+    - Case: TestProviderIDDCHAnswerCallAndCompleteSession
+    - Case: TestProviderIDDESAnswerCallAndCompleteSession
   # ES Provider Care Platform
     - Case: TestESProviderCarePlatformAnswerAndCompleteSession
     - Case: TestESProviderIDDSeeCallAppearInQueueAssignAndReviewDetails

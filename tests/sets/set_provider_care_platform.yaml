@@ -30,3 +30,5 @@ SetProvidersCarePlatformTests:
     - Case: TestProviderIDDCHSeeCallAppearInQueueAssignAndReviewDetails
     - Case: TestProviderIDDESSeeCallAppearInQueueAssignAndReviewDetails
     - Case: TestProviderSeniorSeeCallAppearInQueueAssignAndReviewDetails
+    - Case: TestProviderIDDCHAnswerCallAndCompleteSession
+    - Case: TestProviderIDDESAnswerCallAndCompleteSession
