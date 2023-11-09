@@ -112,7 +112,7 @@ TestOnboardersAccessFacilitiesDirectoryFilter:
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_facility.first_facility$
-    - Type : wait_for
+    - Type: wait_for
       Strategy: xpath
       Id: $PAGE.care_platform_facility.facility_name$
     - Type: click

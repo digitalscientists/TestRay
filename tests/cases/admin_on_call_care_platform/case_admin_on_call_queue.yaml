@@ -74,11 +74,11 @@ TestAdminOnCallShouldNotAnswerProviderCallAfterMedicalTransfer:
   # Telehealth request form window disappears.
     - Type: wait_not_visible
       Strategy: xpath
-      Id : $PAGE.care_platform_call_portal.telehealth_request_form_header$
+      Id: $PAGE.care_platform_call_portal.telehealth_request_form_header$
   # Verify "End Call" button has been replaced with "Leave Call" button.
     - Type: wait_for
       Strategy: xpath
-      Id : $PAGE.care_platform_call_portal.leave_call_btn$
+      Id: $PAGE.care_platform_call_portal.leave_call_btn$
   # Log in as a provider and join the call
     - Type: case
       Value: ProvidersCarePlatformLogin

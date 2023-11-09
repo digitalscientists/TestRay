@@ -9,7 +9,7 @@ ProvidersCarePlatformLogin:
       Value: $AND_CLI_care_platform_url$
     - Type: get_text
       Strategy: xpath
-      Id : $PAGE.care_platform_login.login_button$
+      Id: $PAGE.care_platform_login.login_button$
       Greps:
       - var: login_text
         match: "Log In"
@@ -366,17 +366,17 @@ ProviderSetStateCredential:
 #Going to My Account
     - Type: click
       Strategy: xpath
-      Id : $PAGE.care_platform_header.user_dropdown_button$
+      Id: $PAGE.care_platform_header.user_dropdown_button$
     - Type: click
       Strategy: xpath
-      Id : $PAGE.care_platform_header.myaccount_menu_button$
+      Id: $PAGE.care_platform_header.myaccount_menu_button$
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.care_platform_myaccount_info.modal_title$
   #Select credentials to answer call
     - Type: click
       Strategy: xpath
-      Id : $PAGE.providers_account_modal.credentials_navigation_tab$
+      Id: $PAGE.providers_account_modal.credentials_navigation_tab$
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.providers_account_modal.credentials_content$

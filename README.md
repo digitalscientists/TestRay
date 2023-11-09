@@ -305,7 +305,7 @@ Actions:
       Value: https://webcamtests.com/
     - Type: get_text
       Strategy: xpath
-      Id : $PAGE.webcamtest_page.check_webcam_link$
+      Id: $PAGE.webcamtest_page.check_webcam_link$
       Greps:
           - var: check_webcam_text
             match: "Check Webcam"

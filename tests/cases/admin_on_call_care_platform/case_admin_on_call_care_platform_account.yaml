@@ -64,7 +64,7 @@ TestAdminOnCallLogoutGoOffShift:
       Id: $PAGE.care_platform_header.offline_carepartner1_element$
     - Type: get_text
       Strategy: xpath
-      Id : $PAGE.care_platform_header.offline_carepartner1_element$
+      Id: $PAGE.care_platform_header.offline_carepartner1_element$
       Greps:
         - var: CARE_PARTNER_ELEMENT
           match: "(.*)"

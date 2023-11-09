@@ -373,7 +373,7 @@ VerifyCHUserIsOffline:
       Id: $PAGE.care_platform_header.offline_ch_carepartner_element$
     - Type: get_text
       Strategy: xpath
-      Id : $PAGE.care_platform_header.offline_ch_carepartner_element$
+      Id: $PAGE.care_platform_header.offline_ch_carepartner_element$
       Greps:
         - var: CARE_PARTNER_ELEMENT
           match: "(.*)"
@@ -403,7 +403,7 @@ VerifyCHUserIsOnline:
       Id: $PAGE.care_platform_header.online_ch_carepartner_element$
     - Type: get_text
       Strategy: xpath
-      Id : $PAGE.care_platform_header.online_ch_carepartner_element$
+      Id: $PAGE.care_platform_header.online_ch_carepartner_element$
       Greps:
         - var: CARE_PARTNER_ELEMENT
           match: "(.*)"
@@ -499,7 +499,7 @@ CHCarePartnerParticipantCallPortalNavigation:
   # Navigate to Participants.
     - Type: click
       Strategy: xpath
-      Id : $PAGE.care_platform.navigation_participant$
+      Id: $PAGE.care_platform.navigation_participant$
   # Limit listing by searching name.
     - Type: search_by_text
       Role: desktopChrome
