@@ -1419,6 +1419,14 @@ CarePlatformUpdateInfo:
       Id: $PAGE.care_platform_myaccount_info.contact_number$
       Attribute: disabled
       Value: true
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.care_platform_myaccount_info.contact_number$
+      Greps:
+        - var: CONTACT_NUMBER
+          attr: value
+          condition: nempty
+          match: "(.*)"
   #Go to Text Notification tab to change phone number
     - Type: click
       Strategy: xpath
@@ -1426,6 +1434,31 @@ CarePlatformUpdateInfo:
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.care_platform_myaccount_info.phone_input$
+  #Check that Contact Number in My Info is equal to Phone Number in Text Notification
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.care_platform_myaccount_info.phone_input$
+      Greps:
+        - var: PHONE_NUMBER
+          attr: value
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: eq
+          Var: PHONE_NUMBER
+          Value: $AND_CLI_CONTACT_NUMBER$
+  #Set a Phone Input
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.care_platform_myaccount_info.phone_input$
+      Value: 4373334444
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_myaccount_info.notification_text_save_button$  
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_notifications.saved_account_info_notification$
   #Check invalid phone number error message
     - Type: send_keys
       Strategy: xpath
@@ -1433,7 +1466,7 @@ CarePlatformUpdateInfo:
       Value: "backspace"
     - Type: click
       Strategy: xpath
-      Id: $PAGE.care_platform_myaccount_info.save_changes_button$  
+      Id: $PAGE.care_platform_myaccount_info.notification_text_save_button$  
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.care_platform_myaccount_info.phone_error_message$
@@ -1445,9 +1478,6 @@ CarePlatformUpdateInfo:
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_myaccount_info.text_notification_tab$
-  #Check checkboxes
-
-
   #Use button cancel of the modal
     - Type: click
       Strategy: xpath

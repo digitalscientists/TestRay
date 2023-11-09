@@ -66,15 +66,16 @@ care_platform_header:
 care_platform_myaccount_info:
   modal_title: //*[@id='modals']//h4[contains(text(),'My Account')]
   close_modal_button: //*[@id='modals']//button[contains(text(),'Close')]
+  my_info_tab: //nav//button[contains(text(),'My Info')]
   firstname_input: //input[@id='firstName']
   email_input: //input[@id='email']
-  phone_input: //*[@id='phone']
+  contact_number: //div[@id='modals']//div[contains(@class,'input-group')][contains(.,'Contact Number')]/input
   phone_error_message: //*[@id='modals']//div[contains(text(),'Please enter a valid contact number')]
   save_changes_button: //*[@id='modals']//button[text()='Save Changes']
   cancel_button: //*[@id='modals']//button[text()='Cancel']
   success_alert_msg: //div[@class='Toastify']//div[contains(text(),'Account info updated')]
   password_updated_successfully_alert_msg: //div[@class='Toastify']//div[contains(text(),'Password updated successfully')]  
-  update_password_button: //nav//button[contains(text(),'Update Password')]
+  update_password_tab: //nav//button[contains(text(),'Update Password')]
   current_password_label: //label[@for='currentPassword']
   current_password_input: //input[@id='currentPassword']
   new_password_label: //label[@for='password']
@@ -83,7 +84,12 @@ care_platform_myaccount_info:
   confirm_new_password_input: //input[@id='passwordConfirmation']
   change_my_password_button: //button[contains(text(),'Change My Password')]
   password_requirements_alert_text: //div[contains(@class,'red')][contains(text(),'Password does not meet the requirements')]
-  
+  text_notification_tab: //nav//button[contains(text(),'Text Notification')]
+  phone_input: //*[@id='phone']
+  incoming_call_checkbox: incomingCallNotification
+  long_wait_checkbox: fiveMinuteNotification
+  notification_text_save_button: //*[@id='button-save-changes']
+
 care_platform_logout_modal:
   stay_on_shift_button: //button[contains(text(),'Stay On Shift')]
   go_off_shift_button: //button[contains(text(),'Go Off Shift')]
@@ -671,6 +677,7 @@ care_platform_notifications:
   dismiss_notification_button: //div[@class='Toastify']//button[text()='Dismiss']
   device_changes_saved_notification: //div[@class='Toastify']//div[contains(text(),'Facility device changes saved')]
   refresh_staff_notification: //div[@class='Toastify']//div[contains(text(),'Account status refreshed')]
+  saved_account_info_notification: //div[@class='Toastify']//div[contains(text(),'Settings updated successfully')]
 
 care_platform_facility:
   search_button: searchButton
