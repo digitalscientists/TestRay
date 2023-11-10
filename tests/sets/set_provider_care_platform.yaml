@@ -32,3 +32,4 @@ SetProvidersCarePlatformTests:
     - Case: TestProviderSeniorSeeCallAppearInQueueAssignAndReviewDetails
     - Case: TestProviderIDDCHAnswerCallAndCompleteSession
     - Case: TestProviderIDDESAnswerCallAndCompleteSession
+    - Case: TestProviderCheckForForcedAssessmentOnFollowUpsWithoutTelehealthRequest
