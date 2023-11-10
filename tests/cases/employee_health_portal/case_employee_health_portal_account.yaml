@@ -210,6 +210,10 @@ TestEmployeeInformationUpdateNumber:
       Id: $PAGE.employee_health_my_account_modal.my_info_phone_input$
       Attribute: value
       Value: ''
+    - Type: set_checkbox_status
+      Strategy: xpath
+      Option: check
+      Id: $PAGE.employee_health_my_account_modal.notifications_sms_checkbox_checker$
   # Trying to save with empty phone number input
     - Type: click
       Strategy: xpath

@@ -78,6 +78,7 @@ employee_health_my_account_modal:
   cancel_button: //button[text()='Cancel']
   notifications_email_checkbox_input: //*[@id='minBeforeAppointmentToEmail']
   notifications_sms_checkbox_input: //*[@id='minBeforeAppointmentToText']
+  notifications_sms_checkbox_checker: //*[@id='minBeforeAppointmentToText']/ancestor::label
   notifications_email_checkbox: //*[@id='minBeforeAppointmentToEmail']/following-sibling::span
   notifications_sms_checkbox: //*[@id='minBeforeAppointmentToText']/following-sibling::span
   my_info_contact_number_input: //div[contains(@class,'input-group')][contains(.,'Contact Number')]/input

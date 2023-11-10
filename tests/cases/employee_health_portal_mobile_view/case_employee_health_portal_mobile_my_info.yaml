@@ -174,6 +174,9 @@ TestEHPMobileInformationUpdateNumber:
       Property: disabled
       Value: "true"
     #Go to Notification
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.employee_health_mobile_notifications_page.close_button$
     - Type: click
       Strategy: xpath
       Id: $PAGE.employee_health_mobile_notifications_page.close_button$
@@ -201,29 +204,29 @@ TestEHPMobileInformationUpdateNumber:
       Id: $PAGE.employee_health_my_account_modal.my_info_phone_input$
       Attribute: value
       Value: ''
-  
+    - Type: set_checkbox_status
+      Strategy: xpath
+      Option: check
+      Id: $PAGE.employee_health_my_account_modal.notifications_sms_checkbox_checker$
   # This is not working as the regular Web test. There's no alert when leaving the phone number empty
     #Trying to save with empty phone number input
-  #  - Type: click
-  #    Strategy: xpath
-  #    Id: $PAGE.employee_health_my_account_modal.save_changes_button$
-  #  - Type: click
-  #    Strategy: xpath
-  #    Id: $PAGE.employee_health_mobile_menu_modal.notifications_button$
-  #  - Type: wait_for
-  #    Strategy: xpath
-  #    Id: $PAGE.employee_health_my_account_modal.my_info_phone_alert_message$
-  #  - Type: get_text
-  #    Strategy: xpath
-  #    Id: $PAGE.employee_health_my_account_modal.my_info_phone_alert_message$
-  #    Greps:
-  #      - var: PHONE_ALERT
-  #        match: "(.*)"
-  #  - Type: assert
-  #    Asserts:
-  #      - Type: contain
-  #        Var: PHONE_ALERT
-  #        Value: Please enter a phone number
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.employee_health_my_account_modal.save_changes_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.employee_health_my_account_modal.my_info_phone_alert_message$
+    - Type: get_text
+      Strategy: xpath
+      Id: $PAGE.employee_health_my_account_modal.my_info_phone_alert_message$
+      Greps:
+        - var: PHONE_ALERT
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: PHONE_ALERT
+          Value: Please enter a contact number
     #Checking alert when using wrong format
     - Type: send_keys
       Strategy: xpath
