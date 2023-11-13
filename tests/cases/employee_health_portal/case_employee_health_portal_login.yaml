@@ -27,7 +27,7 @@ TestEmployeeHealthPortalSignUpNewDependent:
   #Check alert messages on required fields
     - Type: get_text
       Strategy: xpath
-      Id : $PAGE.employee_health_signup_page.first_name_alert$
+      Id: $PAGE.employee_health_signup_page.first_name_alert$
       Greps:
         - var: ALERT_MESSAGE
           match: "(.*)first name(.*)"
@@ -38,7 +38,7 @@ TestEmployeeHealthPortalSignUpNewDependent:
           Value: "Please enter your first name."
     - Type: get_text
       Strategy: xpath
-      Id : $PAGE.employee_health_signup_page.last_name_alert$
+      Id: $PAGE.employee_health_signup_page.last_name_alert$
       Greps:
         - var: ALERT_MESSAGE
           match: "(.*)last name(.*)"
@@ -111,18 +111,18 @@ TestEmployeeHealthPortalForgotPasswordOnLoginPage:
   #Opening the forgot password dialog
     - Type: click
       Strategy: xpath
-      Id : $PAGE.employee_health_login_page.forgot_password_button$
+      Id: $PAGE.employee_health_login_page.forgot_password_button$
   #Closing the dialog
     - Type: click
       Strategy: xpath
-      Id : $PAGE.employee_health_login_page.dialog_cancel_button$
+      Id: $PAGE.employee_health_login_page.dialog_cancel_button$
     - Type: wait_not_visible
       Strategy: xpath
       Id: $PAGE.employee_health_login_page.dialog_submit_button$
   #Opening the forgot password dialog again
     - Type: click
       Strategy: xpath
-      Id : $PAGE.employee_health_login_page.forgot_password_button$
+      Id: $PAGE.employee_health_login_page.forgot_password_button$
   #Submitting the email
     - Type: send_keys
       Strategy: xpath
@@ -130,7 +130,7 @@ TestEmployeeHealthPortalForgotPasswordOnLoginPage:
       Value: $AND_CLI_employee_user1$
     - Type: click
       Strategy: xpath
-      Id : $PAGE.employee_health_login_page.dialog_submit_button$
+      Id: $PAGE.employee_health_login_page.dialog_submit_button$
   #Verify the Thank You text showed up
     - Type: wait_for
       Strategy: xpath
@@ -138,7 +138,7 @@ TestEmployeeHealthPortalForgotPasswordOnLoginPage:
   #Closing the Thank You dialog   
     - Type: click
       Strategy: xpath
-      Id : $PAGE.employee_health_login_page.dialog_close_icon_button$
+      Id: $PAGE.employee_health_login_page.dialog_close_icon_button$
     - Type: wait_not_visible
       Strategy: xpath
-      Id : $PAGE.employee_health_login_page.dialog_submit_button$
+      Id: $PAGE.employee_health_login_page.dialog_submit_button$

@@ -1,10 +1,10 @@
 # CXTB-242: Set “Notifications” in “My account” Modal
 TestEmployeeSettingNotification:
-    Environment: Settings 
-    Roles:
+  Environment: Settings 
+  Roles:
     - Role: desktopChrome
       App: "desktop"
-      Actions:
+  Actions:
   # Calling Login case
     - Type: case
       Value: EmployeeHealthPortalLogIn
@@ -149,11 +149,6 @@ TestEmployeeInformationUpdateNumber:
       Id: $PAGE.employee_health_my_account_modal.modal_title$
     - Type: wait_for_property
       Strategy: xpath
-      Id: $PAGE.employee_health_my_account_modal.my_info_phone_input$ 
-      Property: disabled
-      Value: "false"
-    - Type: wait_for_property
-      Strategy: xpath
       Id: $PAGE.employee_health_my_account_modal.my_info_firstname_input$ 
       Property: disabled
       Value: "true"
@@ -177,7 +172,27 @@ TestEmployeeInformationUpdateNumber:
       Id: $PAGE.employee_health_my_account_modal.my_info_member_id_input$ 
       Property: disabled
       Value: "true"
+    - Type: wait_for_property
+      Strategy: xpath
+      Id: $PAGE.employee_health_my_account_modal.my_info_contact_number_input$
+      Property: disabled
+      Value: "true"
   # Save the current value for phone
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.employee_health_my_account_modal.my_info_contact_number_input$
+      Greps:
+      - var: MY_PHONE_CURRENT_PHONE
+        attr: value
+        match: "(.*)"
+  # Change to Notification for a change of number
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.employee_health_my_account_modal.notifications_tab$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.employee_health_my_account_modal.my_info_phone_input$
+  # Check My Info - Phone number against Notifications - Phone number
     - Type: get_attribute
       Strategy: xpath
       Id: $PAGE.employee_health_my_account_modal.my_info_phone_input$
@@ -195,6 +210,10 @@ TestEmployeeInformationUpdateNumber:
       Id: $PAGE.employee_health_my_account_modal.my_info_phone_input$
       Attribute: value
       Value: ''
+    - Type: set_checkbox_status
+      Strategy: xpath
+      Option: check
+      Id: $PAGE.employee_health_my_account_modal.notifications_sms_checkbox_checker$
   # Trying to save with empty phone number input
     - Type: click
       Strategy: xpath
@@ -212,7 +231,7 @@ TestEmployeeInformationUpdateNumber:
       Asserts:
         - Type: contain
           Var: PHONE_ALERT
-          Value: Please enter a phone number
+          Value: Please enter a contact number
   # Checking alert when using wrong format
     - Type: send_keys
       Strategy: xpath
@@ -228,7 +247,7 @@ TestEmployeeInformationUpdateNumber:
       Asserts:
         - Type: contain
           Var: PHONE_ALERT
-          Value: Please enter a valid phone number
+          Value: Please enter a valid contact number
     - Type: send_keys
       Strategy: xpath
       Id: $PAGE.employee_health_my_account_modal.my_info_phone_input$
@@ -239,10 +258,14 @@ TestEmployeeInformationUpdateNumber:
   # Waiting for notification of success
     - Type: wait_for
       Strategy: xpath
-      Id: $PAGE.employee_health_home_page.alert_updated_info$
+      Id: $PAGE.employee_health_home_page.alert_updated_notification$
   # Navigate into My Account
     - Type: case
       Value: NavigateToMyAccount
+  # Click into Notification
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.employee_health_my_account_modal.notifications_tab$
   # Erase again the phone number
     - Type: loop
       Times: 10
@@ -257,7 +280,7 @@ TestEmployeeInformationUpdateNumber:
       Id: $PAGE.employee_health_my_account_modal.save_changes_button$
     - Type: wait_for
       Strategy: xpath
-      Id: $PAGE.employee_health_home_page.alert_updated_info$
+      Id: $PAGE.employee_health_home_page.alert_updated_notification$
 
 # CXTB-657 Update Email from My Account Portal
 TestEmployeeUpdateAccountEmail:

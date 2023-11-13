@@ -531,7 +531,7 @@ TestOnboarderStaffMemberPaneDeactivateStaffMemberAccountForCarePlatform:
   # Verify if logged in and user is deactivated, it should kick out the user from the app.
     - Type: click
       Strategy: xpath
-      Id : $PAGE.care_platform.navigation_participant$
+      Id: $PAGE.care_platform.navigation_participant$
       Role: desktopChrome1
     - Type: wait_for
       Strategy: id

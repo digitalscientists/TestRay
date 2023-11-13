@@ -9,7 +9,7 @@ ESProvidersCarePlatformLogin:
       Value: $AND_CLI_easterseals_care_platform_url$
     - Type: get_text
       Strategy: xpath
-      Id : $PAGE.care_platform_login.login_button$
+      Id: $PAGE.care_platform_login.login_button$
       Greps:
       - var: login_text
         match: "Log In"

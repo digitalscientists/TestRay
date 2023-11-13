@@ -73,20 +73,22 @@ employee_health_my_account_modal:
   notifications_tab: //*[@id='modals']//nav/button[text()='Notifications']
   my_info_tab: //*[@id='modals']//nav/button[text()='My Info']
   update_password_tab: //nav/button[text()='Update Password']
-  notifications_text: //div[@tab-title='Notifications']/form
+  notifications_text: //div[@tab-title='Notifications']/form/p[contains(text(),'minutes')]
   save_changes_button: //button[text()='Save Changes']
   cancel_button: //button[text()='Cancel']
   notifications_email_checkbox_input: //*[@id='minBeforeAppointmentToEmail']
   notifications_sms_checkbox_input: //*[@id='minBeforeAppointmentToText']
+  notifications_sms_checkbox_checker: //*[@id='minBeforeAppointmentToText']/ancestor::label
   notifications_email_checkbox: //*[@id='minBeforeAppointmentToEmail']/following-sibling::span
   notifications_sms_checkbox: //*[@id='minBeforeAppointmentToText']/following-sibling::span
+  my_info_contact_number_input: //div[contains(@class,'input-group')][contains(.,'Contact Number')]/input
   my_info_phone_input: //input[@id='phone']
   my_info_phone_alert_message: //label[@for='phone']//following-sibling::div[@aria-hidden='false']//div[contains(@class,'color-red-400')]
-  my_info_firstname_input: //input[@id='firstName']
-  my_info_lastname_input: //*[@id='lastName']
-  my_info_email_input: //*[@id='email']
-  my_info_date_of_birth_input: //*[@id='dateOfBirth']
-  my_info_member_id_input: //*[@id='memberIdentifier']
+  my_info_firstname_input: //div[contains(@class,'input-group')][contains(.,'First Name')]/input
+  my_info_lastname_input: //div[contains(@class,'input-group')][contains(.,'Last Name')]/input
+  my_info_email_input: //div[contains(@class,'input-group')][contains(.,'Email')]/input
+  my_info_date_of_birth_input: //div[contains(@class,'input-group')][contains(.,'Date of Birth')]/input
+  my_info_member_id_input: //div[contains(@class,'input-group')][contains(.,'Member ID')]/input
   update_email_tab: //nav/button[text()='Update Email']
   update_email_current: //*[@tab-title='Update Email']//input[contains(@class,'input')]
   update_email_new: //*[@id='email']
@@ -170,7 +172,7 @@ employee_health_mobile_menu_modal:
 
 employee_health_mobile_notifications_page:
     save_changes_button: //button[text()= 'Save Changes']
-    notifications_text: //*[@id='menus']//form
+    notifications_text: //*[@id='menus']//form/p[contains(text(),'minutes')]
     close_button: //*[@id='menus']//header//button
 
 employee_health_mobile_password_page:

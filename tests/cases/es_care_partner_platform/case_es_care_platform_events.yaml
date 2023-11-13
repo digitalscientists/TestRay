@@ -289,7 +289,7 @@ TestESCarePartnerCreateTelehealthEventForParticipant:
   # Telehealth request form window disappears. 
     - Type: wait_not_visible
       Strategy: xpath
-      Id : $PAGE.care_platform_call_portal.telehealth_request_form_header$
+      Id: $PAGE.care_platform_call_portal.telehealth_request_form_header$
   # Schedule listing is updated to include the event you’ve just created.
     - Type: wait_for
       Strategy: xpath

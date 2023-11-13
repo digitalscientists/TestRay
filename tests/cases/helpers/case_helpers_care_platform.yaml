@@ -1003,7 +1003,7 @@ CarePlatformUpdatePassword:
   #Click in Update Password
     - Type: click
       Strategy: xpath
-      Id: $PAGE.care_platform_myaccount_info.update_password_button$
+      Id: $PAGE.care_platform_myaccount_info.update_password_tab$
   #Verify the elements
     - Type: wait_for
       Strategy: xpath
@@ -1068,7 +1068,7 @@ CarePlatformUpdatePassword:
   #Click in Update Password
     - Type: click
       Strategy: xpath
-      Id: $PAGE.care_platform_myaccount_info.update_password_button$
+      Id: $PAGE.care_platform_myaccount_info.update_password_tab$
   #Fill the fields
     - Type: send_keys
       Strategy: xpath
@@ -1115,7 +1115,7 @@ CarePlatformUpdatePassword:
   #Click in Update Password
     - Type: click
       Strategy: xpath
-      Id: $PAGE.care_platform_myaccount_info.update_password_button$
+      Id: $PAGE.care_platform_myaccount_info.update_password_tab$
   #Set the password var to the new value
     - Type: set_env_var
       Value: $AND_CLI_ENV_PASS_STORE$
@@ -1157,7 +1157,7 @@ AlternativeCarePlatformUpdatePassword:
   #Click in Update Password
     - Type: click
       Strategy: xpath
-      Id: $PAGE.care_platform_myaccount_info.update_password_button$
+      Id: $PAGE.care_platform_myaccount_info.update_password_tab$
   #Verify the elements
     - Type: wait_for
       Strategy: xpath
@@ -1222,7 +1222,7 @@ AlternativeCarePlatformUpdatePassword:
   #Click in Update Password
     - Type: click
       Strategy: xpath
-      Id: $PAGE.care_platform_myaccount_info.update_password_button$
+      Id: $PAGE.care_platform_myaccount_info.update_password_tab$
   #Fill the fields
     - Type: send_keys
       Strategy: xpath
@@ -1269,7 +1269,7 @@ AlternativeCarePlatformUpdatePassword:
   #Click in Update Password
     - Type: click
       Strategy: xpath
-      Id: $PAGE.care_platform_myaccount_info.update_password_button$
+      Id: $PAGE.care_platform_myaccount_info.update_password_tab$
   #Set the password var to the new value
     - Type: set_env_var
       Value: $AND_CLI_ENV_PASS_STORE$
@@ -1300,17 +1300,17 @@ CarePlatformUpdateInfo:
 #Going to My Account
     - Type: click
       Strategy: xpath
-      Id : $PAGE.care_platform_header.user_dropdown_button$
+      Id: $PAGE.care_platform_header.user_dropdown_button$
     - Type: click
       Strategy: xpath
-      Id : $PAGE.care_platform_header.myaccount_menu_button$  
+      Id: $PAGE.care_platform_header.myaccount_menu_button$  
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.care_platform_myaccount_info.modal_title$
   #Saving original firstname, and adding a 1 to form input
     - Type: get_attribute
       Strategy: xpath
-      Id : $PAGE.care_platform_myaccount_info.firstname_input$
+      Id: $PAGE.care_platform_myaccount_info.firstname_input$
       Greps:
         - var: FIRSTNAME_ORIG
           attr: value
@@ -1322,10 +1322,10 @@ CarePlatformUpdateInfo:
       Value: '1'
     - Type: click
       Strategy: xpath
-      Id : $PAGE.care_platform_myaccount_info.modal_title$
+      Id: $PAGE.care_platform_myaccount_info.modal_title$
     - Type: get_attribute
       Strategy: xpath
-      Id : $PAGE.care_platform_myaccount_info.firstname_input$
+      Id: $PAGE.care_platform_myaccount_info.firstname_input$
       Greps:
         - var: FIRSTNAME_NEW
           attr: value
@@ -1345,7 +1345,7 @@ CarePlatformUpdateInfo:
       Value: true
     - Type: click
       Strategy: xpath
-      Id : $PAGE.care_platform_myaccount_info.save_changes_button$  
+      Id: $PAGE.care_platform_myaccount_info.save_changes_button$  
   #Wait for the success alert message
     - Type: wait_for
       Strategy: xpath
@@ -1357,10 +1357,10 @@ CarePlatformUpdateInfo:
   # Open the user dropdown on header and verify that the name in the dropdown reflects the new change to the firstname
     - Type: click
       Strategy: xpath
-      Id : $PAGE.care_platform_header.user_dropdown_button$
+      Id: $PAGE.care_platform_header.user_dropdown_button$
     - Type: get_text
       Strategy: xpath
-      Id : $PAGE.care_platform_header.user_dropdown_user_name$ # Update TC
+      Id: $PAGE.care_platform_header.user_dropdown_user_name$ # Update TC
       Greps:
         - var: NEW_NAME
           condition: nempty
@@ -1373,7 +1373,7 @@ CarePlatformUpdateInfo:
   #Going again to the My Account Modal
     - Type: click
       Strategy: xpath
-      Id : $PAGE.care_platform_header.myaccount_menu_button$  
+      Id: $PAGE.care_platform_header.myaccount_menu_button$  
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.care_platform_myaccount_info.modal_title$
@@ -1384,20 +1384,20 @@ CarePlatformUpdateInfo:
       Value: "backspace"
     - Type: click
       Strategy: xpath
-      Id : $PAGE.care_platform_myaccount_info.save_changes_button$
+      Id: $PAGE.care_platform_myaccount_info.save_changes_button$
     - Type: wait_not_visible
       Strategy: xpath
       Id: $PAGE.care_platform_myaccount_info.success_alert_msg$
       Time: 10
     - Type: click
       Strategy: xpath
-      Id : $PAGE.care_platform_header.user_dropdown_button$
+      Id: $PAGE.care_platform_header.user_dropdown_button$
     - Type: click
       Strategy: xpath
-      Id : $PAGE.care_platform_header.myaccount_menu_button$
+      Id: $PAGE.care_platform_header.myaccount_menu_button$
     - Type: get_attribute
       Strategy: xpath
-      Id : $PAGE.care_platform_myaccount_info.firstname_input$
+      Id: $PAGE.care_platform_myaccount_info.firstname_input$
       Greps:
         - var: BACK_NAME
           attr: value
@@ -1408,21 +1408,80 @@ CarePlatformUpdateInfo:
         - Type: eq
           Var: BACK_NAME
           Value: $AND_CLI_FIRSTNAME_ORIG$
-  #Check error on phone number
+  #Check error on phone number #Phone number is no longer an input in this view
+    - Type: wait_for_attribute
+      Strategy: xpath
+      Id: $PAGE.care_platform_myaccount_info.email_input$
+      Attribute: disabled
+      Value: true
+    - Type: wait_for_attribute
+      Strategy: xpath
+      Id: $PAGE.care_platform_myaccount_info.contact_number$
+      Attribute: disabled
+      Value: true
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.care_platform_myaccount_info.contact_number$
+      Greps:
+        - var: CONTACT_NUMBER
+          attr: value
+          condition: nempty
+          match: "(.*)"
+  #Go to Text Notification tab to change phone number
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_myaccount_info.text_notification_tab$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_myaccount_info.phone_input$
+  #Check that Contact Number in My Info is equal to Phone Number in Text Notification
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.care_platform_myaccount_info.phone_input$
+      Greps:
+        - var: PHONE_NUMBER
+          attr: value
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: eq
+          Var: PHONE_NUMBER
+          Value: $AND_CLI_CONTACT_NUMBER$
+  #Set a Phone Input
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.care_platform_myaccount_info.phone_input$
+      Value: 4373334444
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_myaccount_info.notification_text_save_button$  
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_notifications.saved_account_info_notification$
+  #Check invalid phone number error message
     - Type: send_keys
       Strategy: xpath
       Id: $PAGE.care_platform_myaccount_info.phone_input$
       Value: "backspace"
     - Type: click
       Strategy: xpath
-      Id : $PAGE.care_platform_myaccount_info.save_changes_button$
+      Id: $PAGE.care_platform_myaccount_info.notification_text_save_button$  
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.care_platform_myaccount_info.phone_error_message$
+  #Change tab
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_myaccount_info.my_info_tab$
+  #Go back to text notification tab
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_myaccount_info.text_notification_tab$
   #Use button cancel of the modal
     - Type: click
       Strategy: xpath
-      Id : $PAGE.care_platform_myaccount_info.cancel_button$
+      Id: $PAGE.care_platform_myaccount_info.cancel_button$
     - Type: wait_not_visible
       Strategy: xpath
       Id: $PAGE.care_platform_myaccount_info.modal_title$
@@ -1670,18 +1729,18 @@ ForgotPasswordCarePlatformLoginLink:
   #Opening the forgot password dialog
     - Type: click
       Strategy: xpath
-      Id : $PAGE.care_platform_login.forgot_password_button$
+      Id: $PAGE.care_platform_login.forgot_password_button$
   #Closing the dialog
     - Type: click
       Strategy: xpath
-      Id : $PAGE.care_platform_login.dialog_cancel_button$
+      Id: $PAGE.care_platform_login.dialog_cancel_button$
     - Type: wait_not_visible
       Strategy: xpath
       Id: $PAGE.care_platform_login.dialog_submit_button$
   #Opening the forgot password dialog
     - Type: click
       Strategy: xpath
-      Id : $PAGE.care_platform_login.forgot_password_button$
+      Id: $PAGE.care_platform_login.forgot_password_button$
   #Submitting the email
     - Type: send_keys
       Strategy: xpath
@@ -1689,7 +1748,7 @@ ForgotPasswordCarePlatformLoginLink:
       Value: $AND_CLI_carepartner_user1$
     - Type: click
       Strategy: xpath
-      Id : $PAGE.care_platform_login.dialog_submit_button$
+      Id: $PAGE.care_platform_login.dialog_submit_button$
   #Verify the Thank You text showed up
     - Type: get_text  
       Strategy: xpath
@@ -1706,10 +1765,10 @@ ForgotPasswordCarePlatformLoginLink:
   #Closing the Thank You dialog   
     - Type: click
       Strategy: xpath
-      Id : $PAGE.care_platform_login.dialog_close_icon_button$
+      Id: $PAGE.care_platform_login.dialog_close_icon_button$
     - Type: wait_not_visible
       Strategy: xpath
-      Id : $PAGE.care_platform_login.dialog_submit_button$
+      Id: $PAGE.care_platform_login.dialog_submit_button$
   #Step 6 and 7 needs access to the email account provided in previous step
   #Access to the confirmation email message, and link within to set new password
   #These steps cannot be done 
@@ -1885,7 +1944,7 @@ CarePartnerEditParticipantNavigation:
 # Navigate to Participants
     - Type: click
       Strategy: xpath
-      Id : $PAGE.care_platform.navigation_participant$
+      Id: $PAGE.care_platform.navigation_participant$
   # Limit listing by searching name
     - Type: search_by_text
       Role: desktopChrome
@@ -1935,7 +1994,7 @@ CarePartnerParticipantPaneNavigation:
   # Navigate to Participants.
     - Type: click
       Strategy: xpath
-      Id : $PAGE.care_platform.navigation_participant$
+      Id: $PAGE.care_platform.navigation_participant$
   # Limit listing by searching name.
     - Type: search_by_text
       Role: desktopChrome
@@ -1980,7 +2039,7 @@ CarePartnerParticipantCallPortalNavigation:
   # Navigate to Participants.
     - Type: click
       Strategy: xpath
-      Id : $PAGE.care_platform.navigation_participant$
+      Id: $PAGE.care_platform.navigation_participant$
   # Limit listing by searching name.
     - Type: search_by_text
       Role: desktopChrome
@@ -2029,7 +2088,7 @@ CarePartnerToastValidation:
           Value: "1"
     - Type: get_text
       Strategy: xpath
-      Id : $PAGE.care_platform.carepartner_toast_notification$
+      Id: $PAGE.care_platform.carepartner_toast_notification$
       Greps:
         - var: TOAST_MESSAGE
           match: "(.*)"
@@ -2051,7 +2110,7 @@ CarePartnerParticipantRecordsNavigation:
   # Navigate to Participants
     - Type: click
       Strategy: xpath
-      Id : $PAGE.care_platform.navigation_participant$
+      Id: $PAGE.care_platform.navigation_participant$
   # Decrease listing by searching participant's name
     - Type: search_by_text
       Role: desktopChrome
@@ -2219,7 +2278,7 @@ AddEditOrDeleteParticipantVendorInfo:
       Var: MODAL_NAME
     - Type: get_text
       Strategy: xpath
-      Id : $PAGE.care_platform_edit_participants_vendor.modal_title_label$
+      Id: $PAGE.care_platform_edit_participants_vendor.modal_title_label$
       Greps:
         - var: MODAL_TITLE
           match: "(.*)"
@@ -2292,7 +2351,7 @@ AddEditOrDeleteParticipantVendorInfo:
   # Validate if the new change is applied
     - Type: get_text
       Strategy: xpath
-      Id : $PAGE.care_platform_edit_participants_vendor.name_vendor_record$
+      Id: $PAGE.care_platform_edit_participants_vendor.name_vendor_record$
       Greps:
         - var: CATEGORY_VENDOR_NAME
           match: "(.*)"
@@ -3410,11 +3469,11 @@ MakeMedicalTransferWhileOnCall:
   # Telehealth request form window disappears.
     - Type: wait_not_visible
       Strategy: xpath
-      Id : $PAGE.care_platform_call_portal.telehealth_request_form_header$
+      Id: $PAGE.care_platform_call_portal.telehealth_request_form_header$
   # Verify "End Call" button has been replaced with "Leave Call" button.
     - Type: wait_for
       Strategy: xpath
-      Id : $PAGE.care_platform_call_portal.leave_call_btn$
+      Id: $PAGE.care_platform_call_portal.leave_call_btn$
 
 AlternativeCarePartnerLogout:
   Roles:

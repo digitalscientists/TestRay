@@ -61,7 +61,7 @@ TestCHCarePartnerStatusDropdownNotInCall:
   #Changing status back to available
     - Type: click
       Strategy: xpath
-      Id : $PAGE.care_platform_header.user_dropdown_button$
+      Id: $PAGE.care_platform_header.user_dropdown_button$
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.care_platform_header.user_toggle_input$
