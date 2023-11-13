@@ -18,5 +18,7 @@ SetESCarePartnerCarePlatformTests:
   # Care Partner ES Mobile Non Physical
     - Case: TestCHCarePartnerBrowsingWhileOnCall
     - Case: TestCHCarePartnerCallParticipantsDeviceAndCompleteCall
+    - Case: TestCHCarePartnerSendMessageToParticipantDeviceParticipantProfile
     - Case: TestESCarePartnerBrowsingWhileOnCall
     - Case: TestESCarePartnerCallParticipantsDeviceAndCompleteCall
+    - Case: TestESCarePartnerSendMessageToParticipantDeviceParticipantProfile
