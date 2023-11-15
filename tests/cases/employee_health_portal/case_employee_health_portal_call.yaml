@@ -185,3 +185,20 @@ TestEmployeeHealthPortalCallsFromCurrentSessionDuplicatedInCallHistoryUntilAcces
         - Type: eq
           Var: SECOND_ROW_COUNT
           Value: "1"
+
+#CXTB-678 Employee Health Portal - Review Call History
+TestEmployeeHealthPortalReviewCallHistory:
+  Environment: Settings
+  Roles:
+    - Role: desktopChrome
+      App: "desktop"
+  Actions:
+  # Calling EHP Login case.
+    - Type: case
+      Value: EmployeeHealthPortalLogIn
+  # Go to Call History
+    - Type: case
+      Value: NavigateToCallHistory
+  # Log out
+    - Type: case
+      Value: EmployeeHealthPortalLogOut
