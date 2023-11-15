@@ -1067,3 +1067,30 @@ EHPMobileLogOut:
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.employee_health_login_page.log_in_button$
+
+EHPMobileNavigateToCallHistory:
+    Roles:
+    - Role: desktopChrome
+      App: desktop
+    Actions:
+  # Click on the tab button for Call History
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.employee_health_call_history_tab.call_history_navigation$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.employee_health_call_history_tab.call_history_navigation$
+  # Check that the tab is selected
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.employee_health_call_history_tab.call_history_navigation$
+      Greps:
+        - var: TAB_CLASS
+          attr: class
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: TAB_CLASS
+          Value: 'active'
