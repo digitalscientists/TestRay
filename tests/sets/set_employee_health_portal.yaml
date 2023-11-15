@@ -32,4 +32,5 @@ SetEmployeeHealthPortalTests:
     - Case: TestEHPMobileRequestAnAppointmentForUser
     - Case: TestEHPMobileReviewUpcomingAppointment
     - Case: TestEHPMobileRequestAnAppointmentForDependentMinor
+    - Case: TestEHPMobileReviewCallHistory
   
