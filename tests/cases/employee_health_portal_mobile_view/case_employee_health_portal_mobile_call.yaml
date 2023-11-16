@@ -163,7 +163,7 @@ TestEHPMobileReviewCallHistory:
       Value: EmployeeHealthPortalLogIn
   # Navigate to Call History
     - Type: case
-      Value: EHPMobileNavigateToCallHistory
+      Value: NavigateToCallHistory
   # Log out of EHP.
     - Type: case
       Value: EHPMobileLogOut

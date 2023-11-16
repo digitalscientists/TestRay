@@ -66,6 +66,12 @@ employee_health_home_page:
 employee_health_call_history_tab:
   call_history_navigation: //button[text()='Call History']
   call_row_entry: "//div[@class='accordion-item']//div[contains(text(), '$AND_CLI_UNIQUE_SUBJECT$')]"
+  column_header_date: //div[@class='accordion-header']//div[text()='Date']
+  column_header_time: //div[@class='accordion-header']//div[text()='Time']
+  column_header_duration: //div[@class='accordion-header']//div[text()='Duration']
+  column_header_patient: //div[@class='accordion-header']//div[text()='Patient']
+  column_header_provider: //div[@class='accordion-header']//div[text()='Provider']
+  column_header_subject: //div[@class='accordion-header']//div[text()='Subject']
 
 employee_health_my_account_modal:
   modal_title: //*[@id='modals']//h4[text()='My Account']
