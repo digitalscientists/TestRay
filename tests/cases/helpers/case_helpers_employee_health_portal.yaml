@@ -86,25 +86,6 @@ NavigateToCallHistory:
         - Type: contain
           Var: TAB_CLASS
           Value: 'active'
-  # Check for the column's headers
-    - Type: wait_for
-      Strategy: xpath
-      Id: $PAGE.employee_health_call_history_tab.column_header_date$
-    - Type: wait_for
-      Strategy: xpath
-      Id: $PAGE.employee_health_call_history_tab.column_header_time$
-    - Type: wait_for
-      Strategy: xpath
-      Id: $PAGE.employee_health_call_history_tab.column_header_duration$
-    - Type: wait_for
-      Strategy: xpath
-      Id: $PAGE.employee_health_call_history_tab.column_header_patient$
-    - Type: wait_for
-      Strategy: xpath
-      Id: $PAGE.employee_health_call_history_tab.column_header_provider$
-    - Type: wait_for
-      Strategy: xpath
-      Id: $PAGE.employee_health_call_history_tab.column_header_subject$
 
 CaseDeletePhoneNumber:
   Roles:

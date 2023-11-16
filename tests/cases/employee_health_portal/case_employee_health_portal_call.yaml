@@ -199,6 +199,25 @@ TestEmployeeHealthPortalReviewCallHistory:
   # Go to Call History
     - Type: case
       Value: NavigateToCallHistory
+  # Check for the column's headers
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.employee_health_call_history_tab.column_header_date$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.employee_health_call_history_tab.column_header_time$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.employee_health_call_history_tab.column_header_duration$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.employee_health_call_history_tab.column_header_patient$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.employee_health_call_history_tab.column_header_provider$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.employee_health_call_history_tab.column_header_subject$
   # Log out
     - Type: case
       Value: EmployeeHealthPortalLogOut
