@@ -33,3 +33,4 @@ SetProvidersCarePlatformTests:
     - Case: TestProviderIDDCHAnswerCallAndCompleteSession
     - Case: TestProviderIDDESAnswerCallAndCompleteSession
     - Case: TestProviderCheckForForcedAssessmentOnFollowUpsWithoutTelehealthRequest
+    - Case: TestProviderCallParticipantAndCompleteOnDemandCall
