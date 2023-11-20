@@ -49,6 +49,10 @@ SNFNewRequestHelper:
       Strategy: xpath
       Role: localiOS
       Id: $PAGE.snf_home.new_request_btn$
+    - Type: click
+      Strategy: class_chain
+      Role: localiOS
+      Id: $PAGE.snf_submit_options.call_now_button$
     - Type: wait_for
       Strategy: class_chain
       Role: localiOS

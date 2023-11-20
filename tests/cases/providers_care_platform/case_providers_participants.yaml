@@ -383,3 +383,96 @@ TestProviderBrowsingWhileOnCall:
     - Type: case
       Value: ProviderCompleteSession
       Role: desktopChrome1
+
+# CXTB-178: Call Participant’s Device & Complete an On-Demand Call.
+TestProviderCallParticipantAndCompleteOnDemandCall:
+  Environment: Settings
+  Vars:
+  # Log out option
+    LOGOUT_OPTION: "Go Off Shift"
+    USER_FULLNAME: $AND_CLI_provider_user1_name$ $AND_CLI_provider_user1_lastname$
+    STAFF_ROLE: "Provider"
+  Precases:
+    - LoginNeverAloneHelper
+    - ProviderNewCleaner
+    - SeniorCleanPrompts
+    - AdminOnCallRefreshStaff
+  Aftercases:
+    - TerminateApp
+  Roles:
+    - Role: localiOS
+      App: NeverAlone
+    - Role: desktopChrome
+      App: desktop
+  Actions:
+  # Call Participant logged in as a Provider.
+    - Type: case
+      Value: ProviderCallParticipant
+  # Device begins ringing and automatically displays "Incoming Call" modal.
+    - Type: wait_for
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_incoming_call.incoming_call_header$
+    - Type: return_element_attribute
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_incoming_call.incoming_call_header$
+      Attribute: label
+      ResultVar: HEADER_TITLE
+    - Type: assert
+      Asserts:
+        - Type: eq
+          Var: HEADER_TITLE
+          Value: Incoming Call...
+  # Verify that it shows who is calling and their details, giving you the option to answer or ignore the call.
+    - Type: wait_for
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_incoming_call.called_name$
+    - Type: return_element_attribute
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_incoming_call.called_name$
+      Attribute: label
+      ResultVar: CALLER_VALUE
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: CALLER_VALUE
+          Value: $AND_CLI_provider_user1_name$ $AND_CLI_provider_user1_lastname$
+    - Type: wait_for
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_incoming_call.answer_call_button$
+    - Type: wait_for
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_incoming_call.ignore_call_button$
+  # Click "Answer Call" button.
+    - Type: click
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_incoming_call.answer_call_button$
+  # Verify that senior was connected to the call.
+    - Type: wait_for
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_call.video_button$
+  # Then click "End Call".
+    - Type: click
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_call.end_call_button$
+  # Select the Great option on the Post Call Survey once the call ends.
+    - Type: case
+      Value: SeniorGreatPostSurveyCallHelper
+  # Fill up the Post Call Survey on the provider side.
+    - Type: case
+      Value: PostCallSurveyProvider
+  # Verify that the Provider is no longer showing as "In Session (red dot)".
+    - Type: wait_for
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.care_platform_header.status_indicator$
+    - Type: return_element_attribute
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.care_platform_header.status_indicator$
+      Attribute: className
+      ResultVar: IS_RED
+    - Type: assert
+      Asserts:
+        - Type: n_contain
+          Var: IS_RED
+          Value: is-red

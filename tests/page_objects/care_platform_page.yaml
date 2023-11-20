@@ -72,7 +72,7 @@ care_platform_myaccount_info:
   contact_number: //div[@id='modals']//div[contains(@class,'input-group')][contains(.,'Contact Number')]/input
   phone_error_message: //*[@id='modals']//div[contains(text(),'Please enter a valid contact number')]
   save_changes_button: //*[@id='modals']//button[text()='Save Changes']
-  cancel_button: //*[@id='modals']//button[text()='Cancel']
+  cancel_button: //*[@id='modals']//button[@data-test-id='button-cancel']
   success_alert_msg: //div[@class='Toastify']//div[contains(text(),'Account info updated')]
   password_updated_successfully_alert_msg: //div[@class='Toastify']//div[contains(text(),'Password updated successfully')]  
   update_password_tab: //nav//button[contains(text(),'Update Password')]
