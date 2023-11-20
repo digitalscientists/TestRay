@@ -15,6 +15,10 @@ TestSNFNewRequestFormBehavior:
     - Type: click
       Strategy: xpath
       Id: $PAGE.snf_home.new_request_btn$
+    - Type: click
+      Strategy: class_chain
+      Role: localiOS
+      Id: $PAGE.snf_submit_options.call_now_button$
     - Type: send_keys
       Strategy: class_chain
       Id: $PAGE.snf_new_request_form.requester_first_name$
@@ -119,6 +123,10 @@ TestSNFNewRequestFormBehavior:
     - Type: click
       Strategy: xpath
       Id: $PAGE.snf_home.new_request_btn$
+    - Type: click
+      Strategy: class_chain
+      Role: localiOS
+      Id: $PAGE.snf_submit_options.call_now_button$
     - Type: send_keys
       Strategy: class_chain
       Id: $PAGE.snf_new_request_form.requester_first_name$
@@ -731,6 +739,10 @@ TestSNFVerifyInAppOfflineBehavior:
     - Type: click
       Strategy: xpath
       Id: $PAGE.snf_home.new_request_btn$
+    - Type: click
+      Strategy: class_chain
+      Role: localiOS
+      Id: $PAGE.snf_submit_options.call_now_button$
     - Type: wait_for
       Strategy: class_chain
       Id: $PAGE.snf_new_request_form.patient_information_title$

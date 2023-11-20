@@ -1479,6 +1479,9 @@ CarePlatformUpdateInfo:
       Strategy: xpath
       Id: $PAGE.care_platform_myaccount_info.text_notification_tab$
   #Use button cancel of the modal
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_myaccount_info.cancel_button$
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_myaccount_info.cancel_button$
