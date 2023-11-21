@@ -437,6 +437,7 @@ TestSeniorAppIgnoreProviderCall:
   Environment: Settings
   Precases:
     - LoginNeverAloneHelper
+    - ProviderNewCleaner
   Aftercases:
     - TerminateApp
   Roles:

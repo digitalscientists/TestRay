@@ -98,7 +98,7 @@ TestSeniorNotificationsPageOnSeniorApp:
   # This sleep is to reduce flakyness, if we assert by seconds then there are higher chances that test will fail.
   # With this sleep we will assert once it has passed a minute and the label says that was added 1 minute ago.
     - Type: sleep
-      Time: 40
+      Time: 45
     - Type: click
       Strategy: class_chain
       Id: $PAGE.seniors_app_notifications.appointment_based_on_name_element$
