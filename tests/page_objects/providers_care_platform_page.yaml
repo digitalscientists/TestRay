@@ -3,6 +3,7 @@ providers_home_page:
   home_title: //h3[text()='PHP Providers']
   es_home_title: //h3[text()='Providers']
   follow_up_calls: //*[@role='button'][contains(.,'Follow-up')][last()]
+  follow_up_calls_time_text: //*[@role='button'][contains(.,'Follow-up')][last()]//div[3]
   scheduled_call: //*[@role='button'][contains(.,'Scheduled Call')][last()]
   scheduled_call_enabled: //*[@role='button'][contains(.,'Scheduled Call') and not(contains(@class,'disabled'))][last()]
   on_demand_calls: //*[@role='button'][contains(.,'On Demand Call')][last()]
@@ -143,6 +144,13 @@ providers_follow_up_call_details_page:
   call_device_button: //button[contains(.,'Call Device')]
   update_status_dropdown: //button[@class='status-filter-dropdown-toggle' and contains(.,'Update')]
   status_option_close_ticket: //button[@class='status-filter-dropdown-button' and contains(.,'Close Ticket')]
+  status_option_due_date: //button[@class='status-filter-dropdown-button' and contains(.,'Due Date')]
+  modal_title: //div[@id='modals']//h4
+  edit_ticket_one_hour_option: //input[@name='followUpTime' and @value='1']/following-sibling::div
+  edit_ticket_custom_option: //input[@name='followUpTime' and @value='custom']/following-sibling::div
+  edit_ticket_custom_input: //input[@id='followUpTimeCustom']
+  save_edits_button: //div[@id='modals']//button[@id='submit']
+  cancel_button: //div[@id='modals']//button[contains(text(), 'Cancel')]
   close_ticket_modal_title: //*[@id='dialogs']//h4[text()='Close Ticket']
   close_ticket_reason_input: //*[@id='dialogs']//input[@name='reasonForClosing']
   close_ticket_save_button: //*[@id='dialogs']//button[text()='Save and Close Ticket']

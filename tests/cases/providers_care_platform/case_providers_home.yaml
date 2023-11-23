@@ -2722,3 +2722,217 @@ TestProviderCallParticipantForFollowUpTaskFromHomeAndAnswered:
         - Type: n_contain
           Var: IS_RED
           Value: is-red
+
+# CXTB-683: Update Due Date for Follow-up Ticket from Home.
+TestProviderUpdateDueDateForFollowUpTicketFromHome:
+  Environment: Settings
+  Vars:
+  # Log out option
+    LOGOUT_OPTION: "Go Off Shift"
+  Precases:
+    - LoginNeverAloneHelper
+    - ProviderNewCleaner
+    - SeniorCleanPrompts
+  Aftercases:
+    - TerminateApp
+  Roles:
+    - Role: localiOS
+      App: NeverAlone
+    - Role: desktopChrome
+      App: desktop
+  Actions:
+  # Call Participant logged in as a Provider.
+    - Type: case
+      Value: CreateAFollowUpForParticipantCall
+  # Navigate again to home
+    - Type: click
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_home_page.home_button$
+    - Type: wait_for
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_home_page.home_title$
+    # Select a Follow-Up Call
+    - Type: wait_for
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_home_page.follow_up_calls$
+    - Type: click
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_home_page.follow_up_calls$
+    - Type: sleep
+      Role: desktopChrome
+      Time: 1
+    # Verify call information appears on the screen
+    - Type: wait_for
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_follow_up_call_details_page.update_status_dropdown$
+    # Click "Update" drop-down and select "Due Date"
+    - Type: click
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_follow_up_call_details_page.update_status_dropdown$
+    - Type: wait_for
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_follow_up_call_details_page.status_option_due_date$
+    - Type: click
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_follow_up_call_details_page.status_option_due_date$
+    # "Edit Ticket" window opens providing user time options for when they would like new follow-up ticket due date to be
+    - Type: wait_for
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_follow_up_call_details_page.modal_title$
+    - Type: wait_for_property
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_follow_up_call_details_page.modal_title$
+      Property: textContent
+      Value:  Edit Ticket
+    # Click Custom option
+    - Type: wait_for
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_follow_up_call_details_page.edit_ticket_custom_option$
+    - Type: click
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_follow_up_call_details_page.edit_ticket_custom_option$
+    # Additional "Hour(s) from now" field appears for user to type in the number of hours in which they would like to make the ticket ‘due’
+    - Type: wait_for
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_follow_up_call_details_page.edit_ticket_custom_input$
+    - Type: send_keys
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_follow_up_call_details_page.edit_ticket_custom_input$
+      Value: 1
+    # Click "Cancel" button or "Close" in upper right corner
+    - Type: wait_for
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_follow_up_call_details_page.cancel_button$
+    - Type: click
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_follow_up_call_details_page.cancel_button$
+    # Window closes and no changes are made to the follow-up ticket on the Home page
+    - Type: wait_not_visible
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_follow_up_call_details_page.modal_title$
+    # Select a follow-up ticket from the Home listing
+    - Type: wait_for
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_home_page.follow_up_calls$
+    - Type: click
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_home_page.follow_up_calls$
+    # Page updates to show call information on right side of screen
+    - Type: wait_for
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_follow_up_call_details_page.update_status_dropdown$
+    # Click "Update" drop-down and select "Due Date"
+    - Type: click
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_follow_up_call_details_page.update_status_dropdown$
+    - Type: wait_for
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_follow_up_call_details_page.status_option_due_date$
+    - Type: click
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_follow_up_call_details_page.status_option_due_date$
+    # "Edit Ticket" window opens providing user time options for when they would like new follow-up ticket due date to be
+    - Type: wait_for
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_follow_up_call_details_page.modal_title$
+    - Type: wait_for_property
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_follow_up_call_details_page.modal_title$
+      Property: textContent
+      Value:  Edit Ticket
+    # Select an option, then click "Save Edits" button
+    - Type: wait_for
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_follow_up_call_details_page.edit_ticket_one_hour_option$
+    - Type: click
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_follow_up_call_details_page.edit_ticket_one_hour_option$
+    - Type: wait_for
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_follow_up_call_details_page.save_edits_button$
+    - Type: click
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_follow_up_call_details_page.save_edits_button$
+    - Type: get_timestamp_plus_minutes
+      Minutes: 60
+      Format: "%-I:%M %p"
+      Var: FUTURE_DUE_TIME_60MINUTES_FOR_COMPARISON
+    # Edit ticket window disappears and confirmation toast notification appears at the top of the page
+    - Type: wait_not_visible
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_follow_up_call_details_page.modal_title$
+    # Update the Home Time window to include your updated due date
+    - Type: click
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_home_page.time_dropdown$
+    - Type: wait_for
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_home_page.time_all_option$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.time_all_option$
+      Role: desktopChrome
+      Condition:
+        - Value: 5
+          Operation: visible
+          Result: true
+    # Follow-up ticket is present with new Time column value showing as requested
+    - Type: wait_for
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_home_page.follow_up_calls$
+    - Type: wait_for
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_home_page.follow_up_calls_time_text$
+    - Type: get_text
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_home_page.follow_up_calls_time_text$
+      Greps:
+      - var: ACTUAL_TIME_VALUE
+        match: "(.*)"
+    - Type: assert
+      Asserts: 
+      - Type: eq
+        Var: FUTURE_DUE_TIME_60MINUTES_FOR_COMPARISON
+        Value: $AND_CLI_ACTUAL_TIME_VALUE$
+    # Clean Follow up
+    - Type: click
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_home_page.follow_up_calls$
+    - Type: case
+      Value: ProviderCloseCallHelper
