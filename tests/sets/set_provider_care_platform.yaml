@@ -36,3 +36,4 @@ SetProvidersCarePlatformTests:
     - Case: TestProviderCallParticipantAndCompleteOnDemandCall
     - Case: TestProviderCallParticipantForFollowUpTaskFromHomeAndIgnore
     - Case: TestProviderCallParticipantForFollowUpTaskFromHomeAndAnswered
+    - Case: TestProviderUpdateDueDateForFollowUpTicketFromHome
