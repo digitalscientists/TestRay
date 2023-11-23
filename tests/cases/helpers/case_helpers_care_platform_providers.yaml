@@ -680,6 +680,78 @@ CreateAFollowUpForSNFCall:
       Strategy: xpath
       Id: $PAGE.providers_call_handling_page.submit_exit_session_button$
 
+CreateAFollowUpForParticipantCall:
+  Roles:
+    - Role: desktopChrome
+      App: desktop  
+  Actions:
+  #Create follow-up call
+    #Generate a call from Provider to Facility Device.
+    - Type: case
+      Value: ProviderCallParticipant
+    - Type: sleep
+      Time: 3
+    - Type: case
+      Value: AnswerCallAsSenior
+    #End call in Provider
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.end_call_btn$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.end_call_btn$
+    #Fill the Provider's call notes
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.call_notes_subject_input$
+    - Type: clear_field
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.call_notes_subject_input$
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.call_notes_subject_input$
+      Value: 'Automation Test subject'
+    - Type: clear_field
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.call_notes_provider_input$
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.call_notes_provider_input$
+      Value: 'Automation Test Notes: Follow u for Participant'
+    - Type: if
+      If_Cases: 
+        - If_Case: ProviderCompleteSession
+    #Fill survey for follow-up
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.resolved_no_option$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.resolved_no_option$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.video_visit_true_option$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.reason_input$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.reason_input$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.follow_up_reason_option$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.follow_up_now_option$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.recommend_discharge_no_option$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.submit_exit_session_button$
+    - Type: case
+      Value: SeniorGreatPostSurveyCallHelper
+
 CleanUsedFollowUp:
   Roles:
     - Role: desktopChrome
