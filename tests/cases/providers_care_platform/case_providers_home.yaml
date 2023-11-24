@@ -2669,6 +2669,10 @@ TestProviderCallParticipantForFollowUpTaskFromHomeAndAnswered:
       Role: desktopChrome
       Id: $PAGE.providers_call_handling_page.end_call_btn$
     # Video feed ends, area updating to show a message that the call has ended, and "Emergency Services" button is no longer present
+    - Type: wait_not_visible
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_call_handling_page.emergency_services_button$
     - Type: wait_for
       Strategy: xpath
       Role: desktopChrome
