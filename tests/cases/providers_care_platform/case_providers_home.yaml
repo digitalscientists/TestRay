@@ -2614,7 +2614,7 @@ TestProviderCallParticipantForFollowUpTaskFromHomeAndIgnore:
     - Type: case
       Value: CleanUsedFollowUp
 
-#CXTB-680 IDD - CH - Return Missed IDD (Easterseals) Call from Home (Answered)
+#CXTB-670 IDD - CH - Return Missed IDD (Easterseals) Call from Home (Answered)
 TestProviderIDDCHReturnMissedCallFromHome:
   Environment: Settings
   Precases:
@@ -2797,7 +2797,7 @@ TestProviderIDDCHReturnMissedCallFromHome:
           Var: INDICATOR
           Value: 'is-green'
     
-#CXTB-680 IDD - ES - Return Missed IDD (Easterseals) Call from Home (Answered)
+#CXTB-670 IDD - ES - Return Missed IDD (Easterseals) Call from Home (Answered)
 TestProviderIDDESReturnMissedCallFromHome:
   Environment: Settings
   Precases:
