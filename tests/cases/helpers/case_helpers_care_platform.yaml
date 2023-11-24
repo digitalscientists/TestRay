@@ -2034,7 +2034,6 @@ CarePartnerParticipantPaneNavigation:
       Id: $PAGE.care_platform_participant_details.participant_details_title_by_name$
 
 CarePartnerParticipantCallPortalNavigation:
-  Environment: Settings
   Roles:
     - Role: desktopChrome
       App: desktop
@@ -2072,7 +2071,6 @@ CarePartnerParticipantCallPortalNavigation:
       Id: $PAGE.care_platform_participant.call_portal_btn$
 
 CarePartnerToastValidation:
-  Environment: Settings
   Roles:
     - Role: desktopChrome
       App: desktop
@@ -2115,8 +2113,10 @@ CarePartnerParticipantRecordsNavigation:
       Strategy: xpath
       Id: $PAGE.care_platform.navigation_participant$
   # Decrease listing by searching participant's name
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant.search_input$
     - Type: search_by_text
-      Role: desktopChrome
       Text: $AND_CLI_senior_user1_name$
   # Apply the Active filter
     - Type: click
@@ -3465,6 +3465,13 @@ MakeMedicalTransferWhileOnCall:
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_call_portal.today_date_date_picker$
+  # Patient location
+    - Type: click
+      Strategy: id
+      Id: $PAGE.care_platform_call_portal.location_selector$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.location_option_2$
   # Click on "Submit".
     - Type: click
       Strategy: xpath

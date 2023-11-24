@@ -232,7 +232,6 @@ PostCallSurveyProvider:
       Id: $PAGE.providers_notifications.call_completed_notification$
 
 ProviderNavigateToParticipants:
-  Environment: Settings
   Roles:
     - Role: desktopChrome
       App: desktop       
@@ -278,7 +277,6 @@ ProviderNavigateToFacilities:
       Id: $PAGE.providers_facilities_page.facilities_header_title$
 
 ProviderCallParticipant:
-  Environment: Settings
   Roles:
     - Role: desktopChrome
       App: desktop       
