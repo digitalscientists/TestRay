@@ -626,6 +626,13 @@ TestProvidersReturnToCallPortalAndAndCompletesSession:
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_call_portal.today_date_date_picker$
+  # Patient location
+    - Type: click
+      Strategy: id
+      Id: $PAGE.care_platform_call_portal.location_selector$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.location_option_2$
   # Click on "Submit".
     - Type: click
       Strategy: xpath
@@ -1035,10 +1042,10 @@ TestProviderReturnMissedSNFCall:
           Var: INDICATOR
           Value: 'is-green'
     # Clean used missed call
-    - Type: refresh
-      Role: desktopChrome
-    - Type: case
-      Value: CleanUsedMissedCall
+  #  - Type: refresh
+  #    Role: desktopChrome
+  #  - Type: case
+  #    Value: CleanUsedMissedCall
 
 # CXTB-610: Providers - SNF - Select Call in Queue and Get Call Answered Notification.
 TestProvidersSelectCallInQueueAndGetCallAnsweredAlreadyNotification:
@@ -1323,7 +1330,8 @@ TestProvidersCallSNFDeviceForFollowUpTaskFromHome:
 TestProviderSeniorSeeCallAppearInQueueAssignAndReviewDetails:
   Environment: Settings
   Precases:
-    - AdminOnCallRefreshParticipant
+  # Commented until they fix the refresh
+  #  - AdminOnCallRefreshParticipant
     - LoginNeverAloneHelper
     - CarePartnerCleanCallQueueAndHangedCalls
     - ProviderNewCleaner
@@ -1384,6 +1392,13 @@ TestProviderSeniorSeeCallAppearInQueueAssignAndReviewDetails:
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_call_portal.today_date_date_picker$
+  # Patient location
+    - Type: click
+      Strategy: id
+      Id: $PAGE.care_platform_call_portal.location_selector$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.location_option_2$
   # Click on "Submit".
     - Type: click
       Strategy: xpath
