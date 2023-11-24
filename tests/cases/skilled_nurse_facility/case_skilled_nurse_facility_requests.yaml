@@ -918,8 +918,6 @@ TestSNFUpdateVisualExperienceIfLoseConnectionOnCall:
       App: NeverAlone
     - Role: desktopChrome
       App: desktop 
-    - Role: command1
-      App: command
   Actions:
   # Create a request to Providers
     - Type: case
@@ -960,9 +958,8 @@ TestSNFUpdateVisualExperienceIfLoseConnectionOnCall:
       Strategy: class_chain
       Id: $PAGE.seniors_app_call.end_call_button$
   # Turn off wifi
-    - Type: command
-      Role: command1
-      Value: networksetup -setairportpower airport off
+    - Type: toggle_wifi
+      Role: localiOS
   # Wait for the Offline visuals
     - Type: wait_for
       Strategy: class_chain
@@ -999,20 +996,11 @@ TestSNFUpdateVisualExperienceIfLoseConnectionOnCall:
           Var: OFFLINE_TELEHEALTH_REQUEST_BUTTON_VALUE
           Value: Telehealth Request is Offline
   # Turn wifi back on
-    - Type: command
-      Role: command1
-      Value: networksetup -setairportpower airport on
+    - Type: toggle_wifi
+      Role: localiOS
     - Type: sleep
       Time: 20
   # Clean Post Call Survey
-    - Type: wait_for
-      Strategy: xpath
-      Id: $PAGE.providers_call_handling_page.end_call_btn$
-      Role: desktopChrome
-    - Type: click
-      Strategy: xpath
-      Id: $PAGE.providers_call_handling_page.end_call_btn$
-      Role: desktopChrome
     - Type: wait_for
       Strategy: xpath
       Role: desktopChrome

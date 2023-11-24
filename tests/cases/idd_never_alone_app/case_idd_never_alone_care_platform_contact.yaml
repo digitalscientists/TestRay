@@ -546,8 +546,6 @@ TestIDDESUpdateVisualExperienceIfLoseConnectionOnCall:
       App: NeverAlone
     - Role: desktopChrome
       App: desktop 
-    - Role: command1
-      App: command
   Actions:
   # Call senior
     - Type: case
@@ -572,9 +570,8 @@ TestIDDESUpdateVisualExperienceIfLoseConnectionOnCall:
       Strategy: class_chain
       Id: $PAGE.seniors_app_call.end_call_button$
   # Turn off wifi
-    - Type: command
-      Role: command1
-      Value: networksetup -setairportpower airport off
+    - Type: toggle_wifi
+      Role: localiOS
   # Wait for the Offline visuals
     - Type: wait_for
       Strategy: class_chain
@@ -609,9 +606,8 @@ TestIDDESUpdateVisualExperienceIfLoseConnectionOnCall:
           Var: OFFLINE_CALL_BUTTON_VALUE
           Value: "Calling Is Unavailable"
   # Turn wifi back on
-    - Type: command
-      Role: command1
-      Value: networksetup -setairportpower airport on
+    - Type: toggle_wifi
+      Role: localiOS
     - Type: sleep
       Time: 20
   # Clean Post Call Survey
