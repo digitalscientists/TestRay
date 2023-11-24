@@ -4,7 +4,6 @@ ESCarePartnerLogin:
       App: desktop
   Actions:
     - Type: navigate
-      Role: desktopChrome
       Value: $AND_CLI_easterseals_care_platform_url$
     - Type: maximize
     - Type: send_keys
@@ -17,7 +16,6 @@ ESCarePartnerLogin:
       Value: $AND_CLI_es_carepartner_user_pwd$
     - Type: click
       Strategy: xpath
-      Role: desktopChrome
       Id: $PAGE.care_platform_login.login_button$
     - Type: sleep
       Time: 2
