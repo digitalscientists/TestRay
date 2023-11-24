@@ -904,7 +904,7 @@ TestSNFVerifyInAppOfflineBehavior:
       Role: localiOS
 
 # Physical Device
-# CXTB-tbd Update Visual Experience if Lose Connection on Call on SNF
+# CXTB-686 Update Visual Experience if Lose Connection on Call on SNF
 TestSNFUpdateVisualExperienceIfLoseConnectionOnCall:
   Environment: Settings
   Precases:

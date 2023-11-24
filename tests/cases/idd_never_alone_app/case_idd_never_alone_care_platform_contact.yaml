@@ -532,7 +532,7 @@ TestIDDESPersonalCarePartnerMessagePromptAndCallBackButton:
       Value: ESPostCallSurveyCarePartner
 
 # Physical Device
-# CXTB-tbd Update Visual Experience if Lose Connection on Call on ES IDD Never Alone
+# CXTB-685 Update Visual Experience if Lose Connection on Call on ES IDD Never Alone
 TestIDDESUpdateVisualExperienceIfLoseConnectionOnCall:
   Environment: Settings
   Precases:

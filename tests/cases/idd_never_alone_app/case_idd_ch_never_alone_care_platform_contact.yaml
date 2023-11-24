@@ -1,5 +1,5 @@
 # Physical Device
-# CXTB-tbd Update Visual Experience if Lose Connection on Call on CH IDD Never Alone
+# CXTB-685 Update Visual Experience if Lose Connection on Call on CH IDD Never Alone
 TestIDDCHUpdateVisualExperienceIfLoseConnectionOnCall:
   Environment: Settings
   Precases:
