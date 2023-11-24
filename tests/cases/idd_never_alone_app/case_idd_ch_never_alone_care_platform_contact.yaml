@@ -1,3 +1,4 @@
+# Physical Device
 # CXTB-tbd Update Visual Experience if Lose Connection on Call on CH IDD Never Alone
 TestIDDCHUpdateVisualExperienceIfLoseConnectionOnCall:
   Environment: Settings
