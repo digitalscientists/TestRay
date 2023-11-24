@@ -116,6 +116,9 @@ seniors_app_connection_error_modal:
   device_offline_label: "**/XCUIElementTypeStaticText[`label == 'Device is offline.'`]"
   connection_header_header_label: "**/XCUIElementTypeStaticText[`label == 'Connection Error'`]"
   close_btn: "**/XCUIElementTypeButton[`label CONTAINS 'Close'`]"
+  call_disconnected_label: "**/XCUIElementTypeStaticText[`label == 'Call Disconnected'`]"
+  call_disconnected_icon: "**/XCUIElementTypeOther[`label CONTAINS 'Call Disconnected'`]/**/XCUIElementTypeImage"
+  return_to_home_button: "**/XCUIElementTypeOther[`label == 'To Home'`]"
 
 seniors_app_schedule:
   schedule_label: "**/XCUIElementTypeStaticText[`label == 'Schedule'`]"
