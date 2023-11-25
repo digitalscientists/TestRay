@@ -57,6 +57,9 @@ seniors_app_missed_call:
   from_label: "**/XCUIElementTypeStaticText[`label == 'From:'`]"
   from_value: //XCUIElementTypeStaticText[@name='From:']/following-sibling::XCUIElementTypeStaticText
   when_label: "**/XCUIElementTypeStaticText[`label == 'When:'`]"
+  call_disconnection_label: '**/XCUIElementTypeStaticText[`name == "Call Disconnected"`]'
+  top_yellow_message_label: '**/XCUIElementTypeOther[`name == "If this is a medical emergency, please call 911. We will continue trying to connect you to the internet."`]'
+  home_button: '**/XCUIElementTypeOther[`name == "To Home"`]'
 
 seniors_app_call:
   end_call_button: "**/XCUIElementTypeOther[`label ENDSWITH 'End Call'`][-1]"
