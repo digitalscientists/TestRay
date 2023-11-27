@@ -35,3 +35,6 @@ SetProvidersCarePlatformTests:
     - Case: TestProviderCheckForForcedAssessmentOnFollowUpsWithoutTelehealthRequest
     - Case: TestProviderCallParticipantAndCompleteOnDemandCall
     - Case: TestProviderCallParticipantForFollowUpTaskFromHomeAndIgnore
+    - Case: TestProviderCallParticipantForFollowUpTaskFromHomeAndAnswered
+    - Case: TestProviderIDDCHReturnMissedCallFromHome
+    - Case: TestProviderIDDESReturnMissedCallFromHome

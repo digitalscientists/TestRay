@@ -811,7 +811,7 @@ CreateAFollowUpForParticipantCall:
     - Type: send_keys
       Strategy: xpath
       Id: $PAGE.providers_call_handling_page.call_notes_provider_input$
-      Value: 'Automation Test Notes: Follow u for Participant'
+      Value: 'Automation Test Notes: Follow up for Participant'
     - Type: if
       If_Cases: 
         - If_Case: ProviderCompleteSession
