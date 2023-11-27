@@ -865,6 +865,24 @@ CleanUsedFollowUp:
     - Type: case
       Value: ProviderCloseCallHelper
 
+CleanUsedPausedIssue:
+  Roles:
+    - Role: desktopChrome
+      App: desktop  
+  Actions:
+    - Type: refresh
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.home_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.issue_paused_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.issue_paused_button$
+    - Type: case
+      Value: ProviderCloseCallHelper
+
 AnswerCallAsProvider:
   Roles:
     - Role: desktopChrome

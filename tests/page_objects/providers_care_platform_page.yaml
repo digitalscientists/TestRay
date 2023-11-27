@@ -9,6 +9,7 @@ providers_home_page:
   on_demand_call_assigned_value: //*[@role='button'][contains(.,'On Demand Call')][last()]/div[6]
   on_demand_call_state: //*[@role='button'][contains(.,'On Demand Call')][last()]/div[5]
   on_demand_by_state: (//*[@role='button'][contains(.,'On Demand Call')]/div[5][contains(text(),'$AND_CLI_STATE$')])[last()]
+  issue_paused_button: //*[@role='button'][contains(.,'Issue Paused')][last()]
   missed_call: //*[@role='button'][contains(.,'Missed Call')][last()]
   selected_missed_call: //*[@role='button'][contains(.,'Missed Call') and contains(@class,'is-selected')]
   time_dropdown: //div[div[contains(text(),'Time')]]//button
@@ -128,6 +129,8 @@ providers_call_handling_page:
   no_message_button: //button[contains(.,'No Message')]
   call_update_dropdown_button: //button[text()='Update' and @class='status-filter-dropdown-toggle']
   video_grid: //div[@class='video']//div[contains(@data-testid,'video-grid')]
+  emergency_services_button: //div[@class='video-additional-options']//button[contains(@class, 'button-emergency')]
+  pause_issue_button: //button[text()='Pause Issue']
 
 providers_call_details_page:
   assessment_subtab: //nav[@class='tabs-nav']/button[contains(text(),'Assessment')]
