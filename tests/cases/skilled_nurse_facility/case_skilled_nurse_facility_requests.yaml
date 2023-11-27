@@ -902,3 +902,124 @@ TestSNFVerifyInAppOfflineBehavior:
       Time: 45
     - Type: toggle_wifi
       Role: localiOS
+
+# Physical Device
+# CXTB-686 Update Visual Experience if Lose Connection on Call on SNF
+TestSNFUpdateVisualExperienceIfLoseConnectionOnCall:
+  Environment: Settings
+  Precases:
+    - LoginSNFHelper
+    - ProviderNewCleaner
+    - SeniorCleanPrompts
+  Aftercases:
+    - TerminateApp
+  Roles:
+    - Role: localiOS
+      App: NeverAlone
+    - Role: desktopChrome
+      App: desktop 
+  Actions:
+  # Create a request to Providers
+    - Type: case
+      Value: SNFNewRequestHelper
+  # Login and answer call as Provider
+    - Type: case
+      Value: ProvidersCarePlatformLogin
+      Role: desktopChrome
+  # Navigate to provider's queue
+    - Type: wait_for
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.admin_on_call_providers_call_queue_tab.call_queue_title$
+  # Answer Call
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.on_demand_calls$
+      Role: desktopChrome
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.on_demand_calls$
+      Role: desktopChrome
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.answer_call_button$
+      Role: desktopChrome
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.answer_call_button$
+      Role: desktopChrome
+  # Check the changes in the call portal
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.video_btn$
+      Role: desktopChrome
+  # Wait for the call to begin.
+    - Type: wait_for
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_call.end_call_button$
+  # Turn off wifi
+    - Type: toggle_wifi
+      Role: localiOS
+  # Wait for the Offline visuals
+    - Type: wait_for
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_home.offline_yellow_bar$
+      Time: 60
+    - Type: wait_for
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_connection_error_modal.call_disconnected_label$
+    - Type: wait_for
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_connection_error_modal.call_disconnected_icon$
+  # Verify that there is a Return to Home button on the Offline visuals
+    - Type: wait_for
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_connection_error_modal.return_to_home_button$
+  # Return back to home
+  # Re-using page objects from Never Alone Seniors to avoid duplication
+    - Type: click
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_connection_error_modal.return_to_home_button$
+    - Type: wait_for
+      Strategy: class_chain
+      Id: $PAGE.snf_home.telehealth_request_offline_button$
+      Time: 45
+    - Type: return_element_attribute
+      Strategy: class_chain
+      Id: $PAGE.snf_home.telehealth_request_offline_button$
+      Attribute: label
+      ResultVar: OFFLINE_TELEHEALTH_REQUEST_BUTTON_VALUE
+      NoNewLine: true
+    - Type: assert
+      Asserts:
+        - Type: eq
+          Var: OFFLINE_TELEHEALTH_REQUEST_BUTTON_VALUE
+          Value: Telehealth Request is Offline
+  # Turn wifi back on
+    - Type: toggle_wifi
+      Role: localiOS
+    - Type: sleep
+      Time: 20
+  # Clean Post Call Survey
+    - Type: wait_for
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.care_platform_call_portal.video_status$
+      Time: 20
+    - Type: get_attribute
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.care_platform_call_portal.video_status$
+      Greps:
+        - var: CALL_MESSAGE
+          attr: textContent
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Role: desktopChrome
+      Asserts:
+        - Type: contain
+          Var: CALL_MESSAGE
+          Value: 'The call has ended'
+    - Type: case
+      Value: PostCallSurveyProvider
