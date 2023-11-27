@@ -19,6 +19,7 @@ SetCriticalWorkflows:
     - Case: TestESProviderCarePlatformAnswerAndCompleteSession
     - Case: TestCHProviderCarePlatformAnswerAndCompleteSession
     - Case: TestProvidersCallSNFDeviceForFollowUpTaskFromHome
+    - Case: TestProviderCallParticipantForFollowUpTaskFromHomeAndAnswered
     - Case: TestProviderCallParticipantAndCompleteOnDemandCall
     - Case: TestProviderSeniorSeeCallAppearInQueueAssignAndReviewDetails
     - Case: TestProviderIDDCHSeeCallAppearInQueueAssignAndReviewDetails
