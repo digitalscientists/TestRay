@@ -277,6 +277,24 @@ TestEHPMobileInformationUpdateNumber:
       Strategy: xpath
       Id: $PAGE.employee_health_home_page.alert_updated_notification$
 
+#CXTB-688 “Update Email” Workflow in My account Modal
+TestEHPMobileUpdateAccountEmail:
+  Environment: Settings
+  Roles:
+    - Role: desktopChrome
+      Capabilities:
+        chromeOptions:
+          args:
+            - mobileEmulation
+      App: "desktop"
+  Actions:
+  #Calling Login case
+    - Type: case
+      Value: EmployeeHealthPortalLogIn
+  #Navigate into My Account
+    - Type: case
+      Value: EHPMoblieNavigateToMyInfo
+  
 #CXTB-241 “Update password” Workflow in My account Modal
 TestEHPMobileUpdateAccountPassword:
   Environment: Settings
