@@ -2756,6 +2756,8 @@ TestProviderIDDCHReturnMissedCallFromHome:
     - Role: desktopChrome
       App: desktop
     - Role: localiOS
+      Capabilities:
+        newCommandTimeout: 120
       App: NeverAlone
     - Role: desktopChrome1
       App: desktop
@@ -2939,6 +2941,8 @@ TestProviderIDDESReturnMissedCallFromHome:
     - Role: desktopChrome
       App: desktop
     - Role: localiOS
+      Capabilities:
+        newCommandTimeout: 120
       App: NeverAlone
     - Role: desktopChrome1
       App: desktop
