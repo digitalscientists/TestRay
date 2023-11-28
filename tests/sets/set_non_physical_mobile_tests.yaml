@@ -45,6 +45,7 @@ SetNonPhysicalMobileTest:
     - Case: TestProviderCallParticipantForFollowUpTaskFromHomeAndIgnore
     - Case: TestProviderCallParticipantForFollowUpTaskFromHomeAndAnswered
     - Case: TestProviderUpdateDueDateForFollowUpTicketFromHome
+    - Case: TestProviderCloseFollowUpTicketFromHome
   # ES Provider Care Platform
     - Case: TestESProviderCarePlatformAnswerAndCompleteSession
     - Case: TestESProviderIDDSeeCallAppearInQueueAssignAndReviewDetails
