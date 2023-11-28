@@ -3,6 +3,7 @@ providers_home_page:
   home_title: //h3[text()='PHP Providers']
   es_home_title: //h3[text()='Providers']
   follow_up_calls: //*[@role='button'][contains(.,'Follow-up')][last()]
+  follow_up_calls_element_list: //*[@role='button'][contains(.,'Follow-up')]
   follow_up_calls_time_text: //*[@role='button'][contains(.,'Follow-up')][last()]//div[3]
   scheduled_call: //*[@role='button'][contains(.,'Scheduled Call')][last()]
   scheduled_call_enabled: //*[@role='button'][contains(.,'Scheduled Call') and not(contains(@class,'disabled'))][last()]

@@ -3638,6 +3638,11 @@ TestProviderCloseFollowUpTicketFromHome:
       Strategy: xpath
       Role: desktopChrome
       Id: $PAGE.providers_home_page.follow_up_calls$
+    - Type: count_elements
+      Role: desktopChrome
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.follow_up_calls_element_list$
+      ResultVar: FOLLOW_UP_TICKETS_COUNT
     - Type: click
       Strategy: xpath
       Role: desktopChrome
@@ -3697,7 +3702,11 @@ TestProviderCloseFollowUpTicketFromHome:
       Role: desktopChrome
       Strategy: xpath
       Id: $PAGE.providers_home_page.toast_closed_ticket$
-    - Type: wait_not_visible
-      Strategy: xpath
+    - Type: count_elements
       Role: desktopChrome
-      Id: $PAGE.providers_home_page.follow_up_calls$
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.follow_up_calls_element_list$
+      ResultVar: FOLLOW_UP_TICKETS_NEW_COUNT
+    - Type: operation
+      Operation: "$AND_CLI_FOLLOW_UP_TICKETS_NEW_COUNT$ < $AND_CLI_FOLLOW_UP_TICKETS_COUNT$"
+      ExpectedResult: True
