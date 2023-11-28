@@ -147,6 +147,7 @@ providers_follow_up_call_details_page:
   status_option_close_ticket: //button[@class='status-filter-dropdown-button' and contains(.,'Close Ticket')]
   status_option_due_date: //button[@class='status-filter-dropdown-button' and contains(.,'Due Date')]
   modal_title: //div[@id='modals']//h4
+  dialog_title: //div[@id='dialogs']//h4
   edit_ticket_one_hour_option: //input[@name='followUpTime' and @value='1']/following-sibling::div
   edit_ticket_custom_option: //input[@name='followUpTime' and @value='custom']/following-sibling::div
   edit_ticket_custom_input: //input[@id='followUpTimeCustom']
@@ -155,6 +156,7 @@ providers_follow_up_call_details_page:
   close_ticket_modal_title: //*[@id='dialogs']//h4[text()='Close Ticket']
   close_ticket_reason_input: //*[@id='dialogs']//input[@name='reasonForClosing']
   close_ticket_save_button: //*[@id='dialogs']//button[text()='Save and Close Ticket']
+  cancel_ticket_save_button: //*[@id='dialogs']//button[text()='Cancel']
   nav_tab: //nav[@class='tabs-nav']
   
 providers_employees_page:

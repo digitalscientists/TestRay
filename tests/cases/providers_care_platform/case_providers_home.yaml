@@ -3325,3 +3325,157 @@ TestProviderUpdateDueDateForFollowUpTicketFromHome:
       Id: $PAGE.providers_home_page.follow_up_calls$
     - Type: case
       Value: ProviderCloseCallHelper
+
+# CXTB-690: Close Follow-up Ticket from Home.
+TestProviderCloseFollowUpTicketFromHome:
+  Environment: Settings
+  Vars:
+  # Log out option
+    LOGOUT_OPTION: "Go Off Shift"
+  Precases:
+    - LoginNeverAloneHelper
+    - ProviderNewCleaner
+    - SeniorCleanPrompts
+  Aftercases:
+    - TerminateApp
+  Roles:
+    - Role: localiOS
+      App: NeverAlone
+    - Role: desktopChrome
+      App: desktop
+  Actions:
+  # Call Participant logged in as a Provider.
+    - Type: case
+      Value: CreateAFollowUpForParticipantCall
+  # Navigate again to home
+    - Type: click
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_home_page.home_button$
+    - Type: wait_for
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_home_page.home_title$
+  # Select a Follow-Up Call
+    - Type: wait_for
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_home_page.follow_up_calls$
+    - Type: click
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_home_page.follow_up_calls$
+    - Type: sleep
+      Role: desktopChrome
+      Time: 1
+  # Verify call information appears on the screen
+    - Type: wait_for
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_follow_up_call_details_page.update_status_dropdown$
+  # Click "Update" drop-down and select "Close Ticket"
+    - Type: click
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_follow_up_call_details_page.update_status_dropdown$
+    - Type: wait_for
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_follow_up_call_details_page.status_option_close_ticket$
+    - Type: click
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_follow_up_call_details_page.status_option_close_ticket$
+  # "Close Ticket" window opens providing user field to enter reason for closing the ticket
+    - Type: wait_for
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_follow_up_call_details_page.dialog_title$
+    - Type: wait_for_property
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_follow_up_call_details_page.dialog_title$
+      Property: textContent
+      Value:  Close Ticket
+  # Click "Cancel" button
+    - Type: wait_for
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_follow_up_call_details_page.cancel_ticket_save_button$
+    - Type: click
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_follow_up_call_details_page.cancel_ticket_save_button$
+  # Window closes and no changes are made to the follow-up ticket on the Home page
+    - Type: wait_not_visible
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_follow_up_call_details_page.dialog_title$
+  # Select a follow-up ticket from the Home listing
+    - Type: wait_for
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_home_page.follow_up_calls$
+    - Type: click
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_home_page.follow_up_calls$
+    - Type: sleep
+      Role: desktopChrome
+      Time: 1
+  # Page updates to show call information on right side of screen
+    - Type: wait_for
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_follow_up_call_details_page.update_status_dropdown$
+  # Click "Update" drop-down and select "Close Ticket"
+    - Type: click
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_follow_up_call_details_page.update_status_dropdown$
+    - Type: wait_for
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_follow_up_call_details_page.status_option_close_ticket$
+    - Type: click
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_follow_up_call_details_page.status_option_close_ticket$
+  # "Close Ticket" window opens providing user field to enter reason for closing the ticket
+    - Type: wait_for
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_follow_up_call_details_page.dialog_title$
+    - Type: wait_for_property
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_follow_up_call_details_page.dialog_title$
+      Property: textContent
+      Value:  Close Ticket
+  # Enter reason ticket is being closed and click "Save and Close Ticket" button
+    - Type: wait_for
+      Role: desktopChrome
+      Strategy: xpath
+      Id: $PAGE.providers_follow_up_call_details_page.close_ticket_reason_input$
+    - Type: send_keys
+      Role: desktopChrome
+      Strategy: xpath
+      Id: $PAGE.providers_follow_up_call_details_page.close_ticket_reason_input$
+      Value: 'Automation Close Ticket'
+    - Type: wait_for
+      Role: desktopChrome
+      Strategy: xpath
+      Id: $PAGE.providers_follow_up_call_details_page.close_ticket_save_button$
+    - Type: click
+      Role: desktopChrome
+      Strategy: xpath
+      Id: $PAGE.providers_follow_up_call_details_page.close_ticket_save_button$
+  # Close ticket window disappears, confirmation toast appears at top of screen, and ticket is no longer listed on Home page
+    - Type: wait_for
+      Role: desktopChrome
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.toast_closed_ticket$
+    - Type: wait_not_visible
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_home_page.follow_up_calls$
