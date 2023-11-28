@@ -3114,7 +3114,7 @@ TestProviderIDDESReturnMissedCallFromHome:
           Value: 'is-green'
 
 # CXTB-687 Call SNF Device for “Issue Paused” Task from Home (Ignored)
-TestProvidersCallSNFDeviceForIssuePausedFromHome:
+TestProvidersCallSNFDeviceForIssuePausedFromHomeIgnored:
   Environment: Settings
   Precases:
     - ProviderNewCleaner
