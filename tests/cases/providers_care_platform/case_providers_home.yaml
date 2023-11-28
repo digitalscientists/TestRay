@@ -2926,7 +2926,6 @@ TestProviderIDDCHReturnMissedCallFromHome:
         - Type: contain
           Var: INDICATOR
           Value: 'is-green'
-
     
 #CXTB-680 IDD - ES - Return Missed IDD (Easterseals) Call from Home (Answered)
 TestProviderIDDESReturnMissedCallFromHome:
