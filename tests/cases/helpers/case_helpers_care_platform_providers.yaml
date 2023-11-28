@@ -232,7 +232,6 @@ PostCallSurveyProvider:
       Id: $PAGE.providers_notifications.call_completed_notification$
 
 ProviderNavigateToParticipants:
-  Environment: Settings
   Roles:
     - Role: desktopChrome
       App: desktop       
@@ -278,7 +277,6 @@ ProviderNavigateToFacilities:
       Id: $PAGE.providers_facilities_page.facilities_header_title$
 
 ProviderCallParticipant:
-  Environment: Settings
   Roles:
     - Role: desktopChrome
       App: desktop       
@@ -717,7 +715,7 @@ CreateAFollowUpForParticipantCall:
     - Type: send_keys
       Strategy: xpath
       Id: $PAGE.providers_call_handling_page.call_notes_provider_input$
-      Value: 'Automation Test Notes: Follow u for Participant'
+      Value: 'Automation Test Notes: Follow up for Participant'
     - Type: if
       If_Cases: 
         - If_Case: ProviderCompleteSession

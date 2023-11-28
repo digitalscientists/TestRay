@@ -396,7 +396,8 @@ TestProviderCallParticipantAndCompleteOnDemandCall:
     - LoginNeverAloneHelper
     - ProviderNewCleaner
     - SeniorCleanPrompts
-    - AdminOnCallRefreshStaff
+  # Commented until they fix the refresh
+  #  - AdminOnCallRefreshStaff
   Aftercases:
     - TerminateApp
   Roles:

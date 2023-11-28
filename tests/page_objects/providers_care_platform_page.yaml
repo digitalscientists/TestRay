@@ -129,6 +129,7 @@ providers_call_handling_page:
   no_message_button: //button[contains(.,'No Message')]
   call_update_dropdown_button: //button[text()='Update' and @class='status-filter-dropdown-toggle']
   video_grid: //div[@class='video']//div[contains(@data-testid,'video-grid')]
+  emergency_services_button: //div[@class='video-additional-options']//button[contains(@class, 'button-emergency')]
 
 providers_call_details_page:
   assessment_subtab: //nav[@class='tabs-nav']/button[contains(text(),'Assessment')]
