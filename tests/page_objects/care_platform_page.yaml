@@ -707,6 +707,7 @@ care_platform_facility_Record:
   facility_status_label_elements: //div[@tab-title='Devices']//tbody//div[@class='account-status-label']
   edit_device_by_number: //tr[contains(.,'Device $AND_CLI_facility_devices_user1_number$:')]//button[text()='Edit']
   call_device_by_number: //tr[contains(.,'Device $AND_CLI_facility_devices_user1_number$:')]//a[text()='Call']
+  refresh_device_by_number: //tr[contains(.,'Device $AND_CLI_facility_devices_user1_number$:')]//*[text()='Refresh']
   device_block: //tr[contains(.,'Device $AND_CLI_facility_devices_user1_number$:')]
 
 care_platform_facility_edit_device_modal:
@@ -716,6 +717,7 @@ care_platform_facility_edit_device_modal:
   status_toggle_dropdown_deactivated_option: //div[@class='status-filter-dropdown']//button[text()='Deactivated']
   status_toggle_dropdown_active_option: //div[@class='status-filter-dropdown']//button[text()='Active']
   status_toggle_dropdown_suspended_option: //div[@class='status-filter-dropdown']//button[text()='Suspended']
+  status_toggle_dropdown_variable_option: //div[@class='status-filter-dropdown']//button[text()='$AND_CLI_ACCOUNT_STATUS$']
   cancel_button: //*[@id='modals']//button[text()='Cancel']
   save_button: //*[@id='modals']//button[text()='Save']
   close_modal_button: //*[@id='modals']//button[contains(.,'Close')]
