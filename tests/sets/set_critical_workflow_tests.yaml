@@ -29,6 +29,7 @@ SetCriticalWorkflows:
     - Case: TestProviderIDDCHReturnMissedCallFromHome
     - Case: TestProviderIDDESReturnMissedCallFromHome
     - Case: TestProvidersCallSNFDeviceForIssuePausedFromHomeAnswered
+    - Case: TestProviderReturnMissedSeniorCallFromHomeAnswered
   # Never Alone SNF tests
     - Case: TestSNFRequestSuccessfulCallConnect
     - Case: TestSNFCheckQueueandReviewDetails
