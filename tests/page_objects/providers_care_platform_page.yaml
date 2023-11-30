@@ -11,6 +11,7 @@ providers_home_page:
   on_demand_call_assigned_value: //*[@role='button'][contains(.,'On Demand Call')][last()]/div[6]
   on_demand_call_state: //*[@role='button'][contains(.,'On Demand Call')][last()]/div[5]
   on_demand_by_state: (//*[@role='button'][contains(.,'On Demand Call')]/div[5][contains(text(),'$AND_CLI_STATE$')])[last()]
+  on_demand_call_participant: //*[@role='button'][contains(.,'On Demand Call')][last()]//div[4]
   issue_paused_button: //*[@role='button'][contains(.,'Issue Paused')][last()]
   missed_call: //*[@role='button'][contains(.,'Missed Call')][last()]
   selected_missed_call: //*[@role='button'][contains(.,'Missed Call') and contains(@class,'is-selected')]
