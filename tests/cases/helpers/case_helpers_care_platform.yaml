@@ -1624,6 +1624,36 @@ CarePartnerNavigateToParticipants:
       Property: textContent
       Value: "Participants"
 
+CarePartnerNavigateToFacilities:
+  Roles:
+    - Role: desktopChrome
+      App: desktop       
+  Actions:
+  Roles:
+    - Role: desktopChrome
+      App: desktop       
+  Actions:
+    # Navigate to Facilities.
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.facilities_navigation$
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.facilities_navigation$
+      Greps:
+        - var: ACTIVE_CLASS
+          attr: class
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: ACTIVE_CLASS
+          Value: "active"
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_facilities_page.facilities_header_title$
+
 CarePartnerNavigateToHome:
   Environment: Settings
   Roles:

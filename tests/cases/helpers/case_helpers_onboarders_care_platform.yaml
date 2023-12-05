@@ -166,9 +166,52 @@ OnboarderPrecaseforActiveState:
   - Type: case
     Value: OnboarderSetsAccountStatus
   - Type: case
-    Value: CarePlatformLogout
+    Value: AlternativeCarePartnerLogout
   - Type: sleep
     Time: 2
+
+#Onboarder changes status of a SNF Device (marked by number in the config file)
+#by using the variable: ACCOUNT_STATUS. Example: ACCOUNT_STATUS: Pre-delivery
+OnboarderCarePartnerSetSNFDeviceToVariableState:
+  Roles:
+    - Role: desktopChrome
+      App: desktop
+  Actions:
+    # Go to Facility Profile
+    - Type: case
+      Value: NavigationToFacilityProfile
+    # Select Devices
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_facility_Record.devices_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_facility_Record.edit_device_by_number$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_facility_Record.edit_device_by_number$
+    # Wait for Edit Modal
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_facility_edit_device_modal.modal_title$
+    # Change to variable state
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_facility_edit_device_modal.status_toggle$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_facility_edit_device_modal.status_toggle_dropdown_variable_option$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_facility_edit_device_modal.status_toggle_dropdown_variable_option$
+    # Wait for the notification
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_notifications.device_changes_saved_notification$
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id: $PAGE.care_platform_notifications.device_changes_saved_notification$
+      Time: 20
 
 #This helper is used to create a staff member
 OnboarderCreateStaffMember:
@@ -533,7 +576,7 @@ NavigationToFacilityProfile:
 
 OnboarderSetNurseToActive:
   Aftercases:
-    - CarePlatformLogout
+    - AlternativeCarePartnerLogout
   Roles:
     - Role: desktopChrome
       App: desktop
