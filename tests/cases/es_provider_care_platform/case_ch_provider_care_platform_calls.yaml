@@ -23,6 +23,7 @@ TestCHProviderCarePlatformAnswerAndCompleteSession:
   # Make IDD-CarePartner-Provider Medical Transfer
     - Type: case
       Value: IDDCHCarePartnerMakeCallToProvider
+      Role: desktopChrome
   # Log in as a provider and join the call
     - Type: case
       Value: ESProvidersCarePlatformLogin
@@ -78,6 +79,10 @@ TestCHProviderCarePlatformAnswerAndCompleteSession:
       Role: desktopChrome1
       Strategy: xpath
       Id: $PAGE.providers_call_handling_page.end_call_btn$
+  # Complete post call survey on the Care Partner side
+    - Type: case
+      Value: CHPostCallSurveyCarePartner
+      Role: desktopChrome
   # Provider fills up Post call Survey.
   # Fill the Provider's call notes
     - Type: wait_for
@@ -357,6 +362,7 @@ TestCHProviderIDDSeeCallAppearInQueueAssignAndReviewDetails:
   # Make IDD-CarePartner-Provider Medical Transfer
     - Type: case
       Value: IDDCHCarePartnerMakeCallToProvider
+      Role: desktopChrome
   # Log in as a provider and join the call
     - Type: case
       Value: ESProvidersCarePlatformLogin
@@ -462,3 +468,7 @@ TestCHProviderIDDSeeCallAppearInQueueAssignAndReviewDetails:
     - Type: case
       Value: PostCallSurveyProvider
       Role: desktopChrome1
+    # Fill up the post call survey to complete the session.
+    - Type: case
+      Value: CHPostCallSurveyCarePartner
+      Role: desktopChrome
