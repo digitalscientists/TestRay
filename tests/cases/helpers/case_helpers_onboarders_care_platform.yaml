@@ -156,7 +156,7 @@ OnboarderCarePartnerSetParticipantStateToActive:
 
 #This helper is used to pre-set the Senior state to other than active,
 #to have the expected behavior when making the final change to active
-OnboarderPrecaseforActiveState:
+OnboarderPrecaseforActiveStateSenior:
   Roles:
     - Role: desktopChrome
       App: desktop
@@ -165,6 +165,22 @@ OnboarderPrecaseforActiveState:
     Value: OnboarderCarePartnerLogin
   - Type: case
     Value: OnboarderSetsAccountStatus
+  - Type: case
+    Value: AlternativeCarePartnerLogout
+  - Type: sleep
+    Time: 2
+
+#This helper is used to pre-set the SNF state to other than active,
+#to have the expected behavior when making the final change to active
+OnboarderPrecaseforActiveStateSNF:
+  Roles:
+    - Role: desktopChrome
+      App: desktop
+  Actions:
+  - Type: case
+    Value: OnboarderCarePartnerLogin
+  - Type: case
+    Value: OnboarderCarePartnerSetSNFDeviceToVariableState
   - Type: case
     Value: AlternativeCarePartnerLogout
   - Type: sleep

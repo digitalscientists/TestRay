@@ -372,7 +372,7 @@ TestSeniorAppActiveAccountStatusAndBehavior:
     LOGOUT_OPTION: "Yes Logout"
     ACCOUNT_STATUS: 'predelivery' #this is for the precase
   Precases:
-    - OnboarderPrecaseforActiveState
+    - OnboarderPrecaseforActiveStateSenior
   Aftercases:
     - TerminateApp
     - CarePlatformLogout
@@ -469,7 +469,7 @@ TestSeniorAppDeactivatedAccountStatusVisuals:
     LOGOUT_OPTION: "Yes Logout"
     ACCOUNT_STATUS: 'active' #this is for the precase
   Precases:
-    - OnboarderPrecaseforActiveState
+    - OnboarderPrecaseforActiveStateSenior
   Aftercases:
     - CarePlatformLogout
     - OnboarderCarePartnerSetParticipantStateToActive

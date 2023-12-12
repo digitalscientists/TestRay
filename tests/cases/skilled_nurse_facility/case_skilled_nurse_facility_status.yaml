@@ -255,21 +255,41 @@ TestSNFVerifyPreDeliveryAccountStatusVisualsAndBehavior:
 TestSNFVerifyActiveAccountStatusVisualsAndBehavior:
   Environment: Settings
   Vars:
-    LOGOUT_OPTION: "Go Off Shift"
+    ACCOUNT_STATUS: Pre-delivery
   Precases:
     - AdminOnCallRefreshDevice
+    - OnboarderPrecaseforActiveStateSNF
   Aftercases:
+    - AlternativeCarePartnerLogout
     - TerminateApp
+    - OnboarderSetNurseToActive
   Roles:
     - Role: localiOS
       App: NeverAlone
     - Role: desktopChrome
       App: desktop
   Actions:
-    # Set the Account Status to "Active" to the Device with the Onboarder on Care Platform.
+    # Calling Onboarder Login case
     - Type: case
-      Value: OnboarderSetNurseToActive
+      Value: OnboarderCarePartnerLogin
+    # Calling Senior Login case
+    - Type: case
+      Value: LoginSNFHelper
+      Role: localiOS
+    # Change Onboarder to Active
+    - Type: set_env_var
+      Value: Active
+      Var: ACCOUNT_STATUS
+    - Type: case
+      Value: OnboarderCarePartnerSetSNFDeviceToVariableState
       Role: desktopChrome
+    - Type: case
+      Value: AlternativeCarePartnerLogout
+    # Device is automatically logged out when account status change is saved.
+    - Type: wait_for
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_login.provision_device_btn$
+      Time: 20
     # Call login for nurses
     - Type: case
       Value: LoginSNFHelper
