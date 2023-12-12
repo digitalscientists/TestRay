@@ -128,30 +128,6 @@ ProvidersCarePlatformPauseCall:
     - Role: desktopChrome
       App: desktop       
   Actions:      
-    - Type: wait_for
-      Strategy: xpath
-      Id: $PAGE.providers_home_page.home_title$
-  #Selects on demand call
-    - Type: wait_for
-      Strategy: xpath
-      Id: $PAGE.providers_home_page.on_demand_calls$
-    - Type: click
-      Strategy: xpath
-      Id: $PAGE.providers_home_page.on_demand_calls$
-  #Answer call
-    - Type: wait_for
-      Strategy: xpath
-      Id: $PAGE.providers_call_handling_page.answer_call_button$
-    - Type: wait_for_property
-      Strategy: xpath
-      Id: $PAGE.providers_call_handling_page.answer_call_button$
-      Property: disabled
-      Value: "false"
-    - Type: click
-      Strategy: xpath
-      Id: $PAGE.providers_call_handling_page.answer_call_button$
-    - Type: sleep
-      Time: 3
   #End call
     - Type: wait_for
       Strategy: xpath
@@ -904,6 +880,36 @@ AnswerCallAsProvider:
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.providers_call_handling_page.end_call_btn$
+
+AnswerOnDemandCallAsProvider:
+  Roles:
+    - Role: desktopChrome
+      App: desktop  
+  Actions:
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.home_title$
+  #Selects on demand call
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.on_demand_calls$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.on_demand_calls$
+  #Answer call
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.answer_call_button$
+    - Type: wait_for_property
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.answer_call_button$
+      Property: disabled
+      Value: "false"
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.answer_call_button$
+    - Type: sleep
+      Time: 3
 
 ProviderCloseCallHelper:
   Roles:
