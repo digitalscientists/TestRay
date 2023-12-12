@@ -10,3 +10,4 @@ SetNurseFacilityNeverAloneAppTest:
     - Case: TestSNFCheckQueueandReviewDetails
     - Case: TestSNFVerifyPreDeliveryAccountStatusVisualsAndBehavior
     - Case: TestSNFVerifyActiveAccountStatusVisualsAndBehavior
+    - Case: TestSNFVerifyDeactivatedAccountStatusVisualsAndBehavior
