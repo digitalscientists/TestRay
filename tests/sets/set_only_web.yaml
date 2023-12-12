@@ -110,6 +110,7 @@ SetOnlyWebTests:
   - Case: TestProvidersEHPSeeCallAppearInQueueAssignAndReviewDetails
   - Case: TestProviderReviewFacilityDeviceCallHistoryAndAccessCallRecordings
   - Case: TestProviderReviewInfoForExistingFacilityDeviceFacilityPane
+  - Case: TestProviderAccessAndReviewTeamMembersAvailability
   # Facility Leadership Care Platform
   - Case: TestFacilityLeadershipDirectoryAndFilter
   - Case: TestFacilityLeadershipLogoutGoOffShift
