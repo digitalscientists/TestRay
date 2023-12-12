@@ -17,7 +17,7 @@ TestSNFVerifyPreDeliveryAccountStatusVisualsAndBehavior:
     - Role: desktopChrome
       App: desktop
   Actions:
-    # Set the Account Status to "Pre-delivery" to the Participant with the Onboarder on Care Platform.
+    # Set the Account Status to "Pre-delivery" to the Device with the Onboarder on Care Platform.
     - Type: case
       Value: OnboarderCarePartnerLogin
       Role: desktopChrome
