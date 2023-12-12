@@ -250,3 +250,77 @@ TestSNFVerifyPreDeliveryAccountStatusVisualsAndBehavior:
     - Type: case
       Value: SNFGreatPostCallSurvey
       Role: localiOS
+
+# CXTB-332 “Deactivated” Account Status Visuals
+TestSNFVerifyDeactivatedAccountStatusVisualsAndBehavior:
+  Environment: Settings
+  Vars:
+    ACCOUNT_STATUS: Deactivated
+  Precases:
+    - AdminOnCallRefreshDevice
+    - OnboarderSetNurseToActive
+  Aftercases:
+    - AlternativeCarePartnerLogout
+    - OnboarderSetNurseToActive
+    - TerminateApp
+  Roles:
+    - Role: localiOS
+      App: NeverAlone
+    - Role: desktopChrome
+      App: desktop
+  Actions:
+    # Login to Onboarders
+    - Type: case
+      Value: OnboarderCarePartnerLogin
+      Role: desktopChrome
+    # Call login for nurses
+    - Type: case
+      Value: LoginSNFHelper
+      Role: localiOS
+    # Call change of status to Deactivated
+    - Type: case
+      Value: OnboarderCarePartnerSetSNFDeviceToVariableState
+      Role: desktopChrome
+    # Device is automatically logged out when account status change is saved.
+    - Type: wait_for
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_login.provision_device_btn$
+      Role: localiOS
+      Time: 20
+    # Call login for nurses
+    # Open the Never Alone app and click on Provision Device button.
+    - Type: click
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_login.provision_device_btn$
+      Role: localiOS
+    # Fill in the email and password fields with credentials.
+    - Type: send_keys
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_login.email_input$
+      Value: $AND_CLI_facility_devices_user1$
+      Role: localiOS
+    - Type: click
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_login.password_input$
+      Role: localiOS
+    - Type: send_keys
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_login.password_input$
+      Value: $AND_CLI_facility_devices_user1_pwd$
+      Role: localiOS
+    - Type: hide_keyboard
+      Role: localiOS
+    # Click on the Log In button.
+    - Type: click
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_login.login_btn$
+      Role: localiOS
+    # Verify if device didn't log in 
+    - Type: wait_for
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_login.login_btn$
+      Role: localiOS
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id: $PAGE.snf_home.new_request_btn$
+      Role: localiOS

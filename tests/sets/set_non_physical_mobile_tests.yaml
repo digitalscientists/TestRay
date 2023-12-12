@@ -97,6 +97,7 @@ SetNonPhysicalMobileTest:
     - Case: TestSNFRequestSuccessfulCallConnect
     - Case: TestSNFCheckQueueandReviewDetails
     - Case: TestSNFVerifyPreDeliveryAccountStatusVisualsAndBehavior
+    - Case: TestSNFVerifyDeactivatedAccountStatusVisualsAndBehavior
   # Onboarder
     - Case: TestOnboarderChangeStatusToActiveForExistingParticipant
     - Case: TestOnboarderChangeStatusToSuspendedForExistingParticipant
