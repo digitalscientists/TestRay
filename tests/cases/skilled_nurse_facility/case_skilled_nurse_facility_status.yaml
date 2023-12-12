@@ -17,7 +17,7 @@ TestSNFVerifyPreDeliveryAccountStatusVisualsAndBehavior:
     - Role: desktopChrome
       App: desktop
   Actions:
-    # Set the Account Status to "Pre-delivery" to the Participant with the Onboarder on Care Platform.
+    # Set the Account Status to "Pre-delivery" to the Device with the Onboarder on Care Platform.
     - Type: case
       Value: OnboarderCarePartnerLogin
       Role: desktopChrome
@@ -250,3 +250,107 @@ TestSNFVerifyPreDeliveryAccountStatusVisualsAndBehavior:
     - Type: case
       Value: SNFGreatPostCallSurvey
       Role: localiOS
+
+# CXTB-333 Verify “Active” Account Status Visuals
+TestSNFVerifyActiveAccountStatusVisualsAndBehavior:
+  Environment: Settings
+  Vars:
+    ACCOUNT_STATUS: Pre-delivery
+  Precases:
+    - AdminOnCallRefreshDevice
+    - OnboarderPrecaseforActiveStateSNF
+  Aftercases:
+    - AlternativeCarePartnerLogout
+    - TerminateApp
+    - OnboarderSetNurseToActive
+  Roles:
+    - Role: localiOS
+      App: NeverAlone
+    - Role: desktopChrome
+      App: desktop
+  Actions:
+    # Calling Onboarder Login case
+    - Type: case
+      Value: OnboarderCarePartnerLogin
+    # Calling Senior Login case
+    - Type: case
+      Value: LoginSNFHelper
+      Role: localiOS
+    # Change Onboarder to Active
+    - Type: set_env_var
+      Value: Active
+      Var: ACCOUNT_STATUS
+    - Type: case
+      Value: OnboarderCarePartnerSetSNFDeviceToVariableState
+      Role: desktopChrome
+    - Type: case
+      Value: AlternativeCarePartnerLogout
+    # Device is automatically logged out when account status change is saved.
+    - Type: wait_for
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_login.provision_device_btn$
+      Time: 20
+    # Call login for nurses
+    - Type: case
+      Value: LoginSNFHelper
+      Role: localiOS
+    # Check status and visuals on device
+    # All buttons enabled
+      # New Request
+    - Type: wait_for_attribute
+      Strategy: xpath
+      Id: $PAGE.snf_home.new_request_btn$
+      Attribute: enabled
+      Value: true
+      # Existing request
+    - Type: wait_for_attribute
+      Strategy: class_chain
+      Id: $PAGE.snf_home.existing_request_button$
+      Attribute: enabled
+      Value: true
+      # Settings active
+    - Type: wait_for_attribute
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_home.settings_icon$
+      Attribute: enabled
+      Value: true
+      # Notifications active
+    - Type: wait_for_attribute
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_home.notifications_icon$
+      Attribute: enabled
+      Value: true
+    # Rotate device
+    # Rotate device and verify that the device is locked into landscape view.
+    - Type: return_element_location
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_home.notifications_icon$
+      ResultVar: ORIGINAL_ELEMENT_LOCATION
+    - Type: set_orientation
+      Role: localiOS
+      Value: portrait
+      ErrorMessage: ERROR_MESSAGE_VAR
+    - Type: assert
+      Asserts:
+        - Type: eq
+          Var: ERROR_MESSAGE_VAR
+          Value: "An unknown server-side error occurred while processing the command. Original error: Unable To Rotate Device"
+    - Type: return_element_location
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_home.notifications_icon$
+      ResultVar: NEW_ELEMENT_LOCATION
+    - Type: assert
+      Asserts:
+        - Type: eq
+          Var: ORIGINAL_ELEMENT_LOCATION
+          Value: $AND_CLI_NEW_ELEMENT_LOCATION$
+    # Rotate device back to normal and verify that the device is locked into landscape view.
+    - Type: set_orientation
+      Role: localiOS
+      Value: landscape
+      ErrorMessage: SECOND_ERROR_MESSAGE_VAR
+    - Type: assert
+      Asserts:
+        - Type: ne
+          Var: SECOND_ERROR_MESSAGE_VAR
+          Value: "An unknown server-side error occurred while processing the command. Original error: Unable To Rotate Device"
