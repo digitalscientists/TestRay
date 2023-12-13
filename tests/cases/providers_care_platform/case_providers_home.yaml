@@ -4010,3 +4010,82 @@ TestProvidersCallSeniorsDeviceForIssuePausedTaskFromHomeAnswered:
         - Type: contain
           Var: STATUS_VAR
           Value: "is-green"
+
+# CXTB-142 ProviderCarePlatform - Return Missed SNF Call from Home (Ignored)
+TestProviderReturnMissedSNFCallFromHomeIgnored:
+  Environment: Settings
+  Vars:
+    LOGOUT_OPTION: "Go Off Shift"
+  Aftercases:
+    - TerminateApp
+    - CarePlatformLogout
+  Roles:
+    - Role: desktopChrome
+      App: desktop
+    - Role: localiOS
+      Capabilities:
+        newCommandTimeout: 120
+      App: NeverAlone
+  Actions:
+    # Setup for the test data
+      #Call login for nurses
+    - Type: case
+      Role: localiOS
+      Value: LoginSNFHelper
+      #Calling Prompt cleaner
+    - Type: case
+      Role: localiOS
+      Value: SeniorCleanPrompts
+      #Login as Provider
+    - Type: case
+      Value: ProvidersCarePlatformLogin
+      #Clean-up of current calls
+    - Type: case
+      Value: ProviderEndCurrentCall
+      #Missed call 
+    - Type: case
+      Value: SetMissedCallFromSNF
+    # Select Missed call from Home
+    - Type: refresh
+      Role: desktopChrome
+    - Type: wait_for  
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.missed_call$
+    - Type: click  
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.missed_call$
+    # Call Device
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.call_device_btn$
+    # Nurse sees that there is an incoming call.
+    - Type: wait_for
+      Strategy: class_chain
+      Id: $PAGE.snf_incoming_call.incoming_call_header$
+      CheckTime: 20
+      Role: localiOS
+    # Click ignore call
+    - Type: click
+      Strategy: class_chain
+      Id: $PAGE.snf_incoming_call.ignore_call_button$
+      Role: localiOS
+    # Click "No message" to end the process without sending the participant a message.
+    - Type: sleep
+      Time: 2
+    - Type: wait_for
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_call_handling_page.no_message_button$
+    # Click "No message" to end the process without sending the device a message
+    - Type: click
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_call_handling_page.no_message_button$
+    # Call portal returns to Home page and call continues to show as it did in listing
+    - Type: wait_for
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_home_page.home_title$
+    # Clean Missed Call
+    - Type: case
+      Value: CleanUsedMissedCall
