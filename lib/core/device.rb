@@ -2105,7 +2105,11 @@ end
 # Return the following month of the current date
 def get_next_month(action, main_case, main_case_id)
   current_date = Time.now
-  next_month = current_date.month + 1
+  if current_date.month < 12
+    next_month = current_date.month + 1
+  else
+    next_month = 1
+  end
   ENV[convert_value(action["ResultVar"])] = format('%02d',next_month)
 end
 
