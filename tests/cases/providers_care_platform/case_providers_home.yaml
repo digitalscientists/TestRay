@@ -4116,7 +4116,6 @@ TestProviderIDDESReturnMissedCallFromHomeIgnored:
   # Wait 5 seconds for the change of call center from ES to CHS
     - Type: sleep
       Time: 5
-      Role: desktopChrome1
   # Log in to CHS Provider
     - Type: case
       Value: ProvidersCarePlatformLogin
@@ -4249,7 +4248,6 @@ TestProviderIDDCHReturnMissedCallFromHomeIgnored:
   # Wait 5 seconds for the change of call center from CH to CHS
     - Type: sleep
       Time: 5
-      Role: desktopChrome1
   # Log in to CHS Provider
     - Type: case
       Value: ProvidersCarePlatformLogin
@@ -4265,7 +4263,7 @@ TestProviderIDDCHReturnMissedCallFromHomeIgnored:
       Strategy: class_chain
       Role: localiOS
       Id: $PAGE.seniors_app_call.end_call_button$
-    # Fill in the post call survey with the Great option.
+  # Fill in the post call survey with the Great option.
     - Type: case
       Value: ESIDDSeniorGreatPostSurveyCallHelper
       Role: localiOS
@@ -4355,3 +4353,12 @@ TestProviderIDDCHReturnMissedCallFromHomeIgnored:
       Strategy: xpath
       Role: desktopChrome1
       Id: $PAGE.providers_home_page.home_title$
+
+TestProviderTestingCleaner:
+  Environment: Settings
+  Roles:
+    - Role: desktopChrome
+      App: desktop
+  Actions:
+    - Type: case
+      Value: ESCarePartnerCleanCallQueueAndHangedCalls
