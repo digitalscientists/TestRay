@@ -4353,12 +4353,3 @@ TestProviderIDDCHReturnMissedCallFromHomeIgnored:
       Strategy: xpath
       Role: desktopChrome1
       Id: $PAGE.providers_home_page.home_title$
-
-TestProviderTestingCleaner:
-  Environment: Settings
-  Roles:
-    - Role: desktopChrome
-      App: desktop
-  Actions:
-    - Type: case
-      Value: ESCarePartnerCleanCallQueueAndHangedCalls
