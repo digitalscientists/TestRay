@@ -4221,6 +4221,23 @@ TestProviderIDDESReturnMissedCallFromHomeIgnored:
       Strategy: xpath
       Role: desktopChrome1
       Id: $PAGE.providers_home_page.home_title$
+  # Automation cleanup
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform.navigation_home$
+    - Type: care_partner_clean_call_queue_and_hanged_calls
+    - Type: click
+      Strategy: xpath
+      Role: desktopChrome1
+      Id: $PAGE.providers_home_page.home_button$
+    - Type: click
+      Role: desktopChrome1
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.missed_call$
+    - Type: case
+      Role: desktopChrome1
+      Value: ProviderCloseCallHelper
+    
 
 # CXTB-724: Return Missed CH IDD (Easterseals) Call from Home (Ignored)
 TestProviderIDDCHReturnMissedCallFromHomeIgnored:
@@ -4353,3 +4370,19 @@ TestProviderIDDCHReturnMissedCallFromHomeIgnored:
       Strategy: xpath
       Role: desktopChrome1
       Id: $PAGE.providers_home_page.home_title$
+  # Automation cleanup
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform.navigation_home$
+    - Type: care_partner_clean_call_queue_and_hanged_calls
+    - Type: click
+      Strategy: xpath
+      Role: desktopChrome1
+      Id: $PAGE.providers_home_page.home_button$
+    - Type: click
+      Role: desktopChrome1
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.missed_call$
+    - Type: case
+      Role: desktopChrome1
+      Value: ProviderCloseCallHelper
