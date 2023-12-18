@@ -19,6 +19,7 @@ SetProvidersCarePlatformTests:
     - Case: TestProvidersUpdatePassword
     - Case: TestProviderAccessAndReviewTeamMembersAvailability
     - Case: TestProviderReviewInfoForExistingFacilityDeviceFacilityProfile
+    - Case: TestProviderAccessFacilitiesDirectoryAndFilter
   # Provider Care Platform Mobile Non Physical
     - Case: TestProviderHomePageListingView
     - Case: TestProviderBrowsingWhileOnCall
