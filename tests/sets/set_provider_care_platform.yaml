@@ -46,3 +46,4 @@ SetProvidersCarePlatformTests:
     - Case: TestProviderReturnMissedSeniorCallFromHomeAnswered
     - Case: TestProvidersCallSeniorsDeviceForIssuePausedTaskFromHomeAnswered
     - Case: TestProviderReturnMissedSNFCallFromHomeIgnored
+    - Case: TestProvidersCallSNFDeviceForFollowUpTaskFromHomeIgnored

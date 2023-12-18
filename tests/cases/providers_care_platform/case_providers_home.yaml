@@ -4089,3 +4089,93 @@ TestProviderReturnMissedSNFCallFromHomeIgnored:
     # Clean Missed Call
     - Type: case
       Value: CleanUsedMissedCall
+
+# CXTB-150 Call SNF Device for Follow-up Task from Home (Ignored)
+TestProvidersCallSNFDeviceForFollowUpTaskFromHomeIgnored:
+  Environment: Settings
+  Precases:
+    - ProviderNewCleaner
+  Aftercases:
+    - TerminateApp
+   # - ProviderEndCurrentCall
+  Roles:
+    - Role: localiOS
+      Capabilities:
+        newCommandTimeout: 100
+      App: NeverAlone
+    - Role: desktopChrome
+      App: desktop 
+  Actions:
+    # Call login for nurses
+    - Type: case
+      Role: localiOS
+      Value: LoginSNFHelper
+    # Clean any prompt notification from the start
+    - Type: case
+      Role: localiOS
+      Value: SeniorCleanPrompts
+    - Type: case
+      Value: CreateAFollowUpForSNFCall
+    # Skip the survey.
+    - Type: wait_for
+      Strategy: class_chain
+      Role: localiOS
+      Id: $PAGE.seniors_app_post_call_survey.skip_survey_button$
+    - Type: click
+      Strategy: class_chain
+      Role: localiOS
+      Id: $PAGE.seniors_app_post_call_survey.skip_survey_button$
+    # Navigate again to home
+    - Type: click
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_home_page.home_button$
+    - Type: refresh
+      Role: desktopChrome
+    - Type: wait_for
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_home_page.home_title$
+    # Select a Follow-Up Call
+    - Type: click
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_home_page.follow_up_calls$
+    - Type: sleep
+      Role: desktopChrome
+      Time: 1
+    - Type: click
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_follow_up_call_details_page.call_device_button$
+    # Nurse sees that there is an incoming call.
+    - Type: wait_for
+      Strategy: class_chain
+      Id: $PAGE.snf_incoming_call.incoming_call_header$
+      CheckTime: 20
+      Role: localiOS
+    # Click ignore call
+    - Type: click
+      Strategy: class_chain
+      Id: $PAGE.snf_incoming_call.ignore_call_button$
+      Role: localiOS
+    # Click "No message" to end the process without sending the participant a message.
+    - Type: sleep
+      Time: 2
+    - Type: wait_for
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_call_handling_page.no_message_button$
+    # Click "No message" to end the process without sending the device a message
+    - Type: click
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_call_handling_page.no_message_button$
+    # Call portal returns to Home page and call continues to show as it did in listing
+    - Type: wait_for
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_home_page.home_title$
+    # Clean Follow-up
+    - Type: case
+      Value: CleanUsedFollowUp
