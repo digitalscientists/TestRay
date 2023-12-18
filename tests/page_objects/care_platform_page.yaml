@@ -213,7 +213,7 @@ care_platform_participant_details:
   new_ticket_subject_by_name: //div[@tab-title='Follow-up Tickets']//div[@class='accordion-item-toggle']//div[contains(text(),'$AND_CLI_FOLLOW_UP_TICKET$')]
   new_ticket_date: (//div[@class='accordion-item']//div[contains(text(),'Automated test')]/preceding-sibling::div[contains(text(),'$AND_CLI_TODAYS_DATE$')])[last()]
   new_ticket_date_by_name: (//div[@class='accordion-item']//div[contains(text(),'$AND_CLI_FOLLOW_UP_TICKET$')]/preceding-sibling::div[contains(text(),'$AND_CLI_TODAYS_DATE$')])[last()]
-  records_button: //a/button[text()='Records']
+  records_button: //button[text()='Records']
   records_link: //a[contains(text(),'Records')]
 
 care_platform_participant_records:
