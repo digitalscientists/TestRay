@@ -560,6 +560,7 @@ care_platform_call_portal:
   calendar_any_day_without_event: //button[contains(@class,'calendar-day')][not (contains(@class,'has-event'))][1]
   calendar_no_events_message: //div[contains(text(),'There are no events for the selected date')]
   category_select: category
+  events_subtitle: //h4[contains(text(),'Events')]
   create_event_btn: //button[text()='Create Event']
   teleheath_appointment_option: //option[@value='telehealthAppointment']
   manual_appointment_option: //option[@value='manualAppointment']
