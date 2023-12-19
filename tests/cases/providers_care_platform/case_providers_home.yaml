@@ -4334,7 +4334,7 @@ TestProviderIDDCHReturnMissedCallFromHomeIgnored:
   Environment: Settings
   Precases:
     - LoginCHIDDNeverAloneHelper
-    - ESCarePartnerCleanCallQueueAndHangedCalls
+    - CHCarePartnerCleanCallQueueAndHangedCalls
     - ProviderNewCleaner
     - IDDESParticipantCleanPrompts
   Aftercases:
@@ -4476,3 +4476,25 @@ TestProviderIDDCHReturnMissedCallFromHomeIgnored:
     - Type: case
       Role: desktopChrome1
       Value: ProviderCloseCallHelper
+
+# CXTB-726:  Call CH IDD (Easterseals) Device for Follow-up Task from Home (Answered)
+TestProviderIDDCHCallDeviceForFollowUpTaskFromHomeAnswered:
+  Environment: Settings
+  Precases:
+    - LoginCHIDDNeverAloneHelper
+    - CHCarePartnerCleanCallQueueAndHangedCalls
+    - ProviderNewCleaner
+    - IDDESParticipantCleanPrompts
+  Aftercases:
+    - TerminateApp
+  Roles:
+    - Role: desktopChrome
+      App: desktop
+    - Role: localiOS
+      App: NeverAlone
+    - Role: desktopChrome1
+      App: desktop
+  Actions:
+  # Make IDD-CarePartner-Provider Follow up ticket
+    - Type: case
+      Value: CreateFollowUpTicketForESCHParticipant
