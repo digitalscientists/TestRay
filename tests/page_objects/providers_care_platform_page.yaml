@@ -64,7 +64,7 @@ providers_facilities_page:
   facilities_header_title: //h3[text()='Facilities']
   alpha_center_td: //div[@role='button']//div[text()='Alpha Healthcare Center']
   call_portal_btn: //button[text()='Call Portal']
-  records_button: //a/button[text()='Records']
+  records_button: //a//button[text()='Records']
   facility_based_on_name: //*[@id='containerElement']//div[text()='$AND_CLI_facility_name1$']
   devices_button: //button[text()='Devices']
   tabs_content: //div[@class='tabs-content']
