@@ -912,6 +912,9 @@ AnswerOnDemandCallAsProvider:
       Time: 3
 
 ProviderCloseCallHelper:
+  Roles:
+    - Role: desktopChrome
+      App: desktop  
   Actions:
     - Type: wait_for
       Strategy: xpath
