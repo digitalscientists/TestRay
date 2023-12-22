@@ -56,3 +56,5 @@ SetProvidersCarePlatformTests:
     - Case: TestProvidersCallSeniorsDeviceForIssuePausedTaskFromHomeIgnored
     - Case: TestProviderIDDCHCallDeviceForIssuePausedTaskFromHomeAnswered
     - Case: TestProviderIDDESCallDeviceForIssuePausedTaskFromHomeAnswered
+    - Case: TestProviderIDDCHCallDeviceForFollowUpTaskFromHomeIgnored
+    - Case: TestProviderIDDESCallDeviceForFollowUpTaskFromHomeIgnored
