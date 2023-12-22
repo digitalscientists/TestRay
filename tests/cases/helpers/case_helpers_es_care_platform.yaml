@@ -21,7 +21,6 @@ ESCarePartnerLogin:
       Time: 2
 
 AnswerCallAsESCarePartner:
-  Environment: Settings
   Roles:
     - Role: desktopChrome
       App: desktop       

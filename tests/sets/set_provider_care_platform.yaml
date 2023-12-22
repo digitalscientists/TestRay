@@ -19,6 +19,7 @@ SetProvidersCarePlatformTests:
     - Case: TestProvidersUpdatePassword
     - Case: TestProviderAccessAndReviewTeamMembersAvailability
     - Case: TestProviderReviewInfoForExistingFacilityDeviceFacilityProfile
+    - Case: TestProviderAccessFacilitiesDirectoryAndFilter
   # Provider Care Platform Mobile Non Physical
     - Case: TestProviderHomePageListingView
     - Case: TestProviderBrowsingWhileOnCall
@@ -52,5 +53,10 @@ SetProvidersCarePlatformTests:
     - Case: TestProviderIDDESReturnMissedCallFromHomeIgnored
     - Case: TestProviderIDDESCallDeviceForFollowUpTaskFromHomeAnswered
     - Case: TestProviderIDDCHCallDeviceForFollowUpTaskFromHomeAnswered
+    - Case: TestProvidersCallSeniorsDeviceForIssuePausedTaskFromHomeIgnored
+    - Case: TestProviderIDDCHCallDeviceForIssuePausedTaskFromHomeAnswered
+    - Case: TestProviderIDDESCallDeviceForIssuePausedTaskFromHomeAnswered
     - Case: TestProviderIDDCHCallDeviceForFollowUpTaskFromHomeIgnored
     - Case: TestProviderIDDESCallDeviceForFollowUpTaskFromHomeIgnored
+    - Case: TestProviderIDDCHCallDeviceForIssuePausedTaskFromHomeIgnored
+    - Case: TestProviderIDDESCallDeviceForIssuePausedTaskFromHomeIgnored
