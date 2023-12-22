@@ -56,6 +56,9 @@ SetNonPhysicalMobileTest:
     - Case: TestProvidersCallSNFDeviceForFollowUpTaskFromHomeIgnored
     - Case: TestProviderIDDCHReturnMissedCallFromHomeIgnored
     - Case: TestProviderIDDESReturnMissedCallFromHomeIgnored
+    - Case: TestProvidersCallSeniorsDeviceForIssuePausedTaskFromHomeIgnored
+    - Case: TestProviderIDDCHCallDeviceForIssuePausedTaskFromHomeAnswered
+    - Case: TestProviderIDDESCallDeviceForIssuePausedTaskFromHomeAnswered
     - Case: TestProviderIDDESCallDeviceForFollowUpTaskFromHomeAnswered
     - Case: TestProviderIDDCHCallDeviceForFollowUpTaskFromHomeAnswered
     - Case: TestProviderIDDCHCallDeviceForFollowUpTaskFromHomeIgnored

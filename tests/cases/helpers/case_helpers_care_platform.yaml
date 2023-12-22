@@ -2109,8 +2109,9 @@ CarePartnerParticipantCallPortalNavigation:
       Id: $PAGE.care_platform.navigation_participant$
   # Limit listing by searching name.
     - Type: search_by_text
-      Role: desktopChrome
       Text: $AND_CLI_senior_user1_name$
+    - Type: sleep
+      Time: 0.4
   # Select corresponding participant by name in the list.
     - Type: wait_for
       Strategy: xpath
