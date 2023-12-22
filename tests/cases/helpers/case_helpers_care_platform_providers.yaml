@@ -365,10 +365,10 @@ ProviderCallParticipant:
     # Call the participant.
     - Type: wait_for
       Strategy: xpath
-      Id: $PAGE.providers_call_handling_page.call_participant_button$
-    - Type: click
+      Id: $PAGE.care_platform_call_portal.events_subtitle$
+    - Type: click_js
       Strategy: xpath
-      Id: $PAGE.providers_call_handling_page.call_participant_button$
+      Id: $PAGE.care_platform_call_portal.call_participant_btn$
 
 ProviderCallFacility:
   Environment: Settings
@@ -912,6 +912,9 @@ AnswerOnDemandCallAsProvider:
       Time: 3
 
 ProviderCloseCallHelper:
+  Roles:
+    - Role: desktopChrome
+      App: desktop
   Actions:
     - Type: wait_for
       Strategy: xpath
