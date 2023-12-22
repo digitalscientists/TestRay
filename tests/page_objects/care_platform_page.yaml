@@ -32,8 +32,8 @@ care_platform_home:
   answer_call: //button[text()='Answer Call']
   record_button: //div/a[contains(text(), 'Records')]
   call_based_on_participant_name: (//div[contains(@class, 'ListRow_listRow') and not(contains(., 'Follow-up'))]//strong[text() = '$AND_CLI_senior_user1_name$ $AND_CLI_senior_user1_lastname$'])[last()]
-  call_based_on_es_idd_participant_name: //div[contains(@class, 'ListRow_listRow')]//strong[text() = '$AND_CLI_idd_es_never_alone_user1_name$ $AND_CLI_idd_es_never_alone_user1_lastname$']
-  call_based_on_ch_idd_participant_name: //div[contains(@class, 'ListRow_listRow')]//strong[text() = '$AND_CLI_idd_ch_never_alone_user2_name$ $AND_CLI_idd_ch_never_alone_user2_lastname$']
+  call_based_on_es_idd_participant_name: (//div[contains(@class, 'ListRow_listRow') and not(contains(., 'Follow-up'))]//strong[text() = '$AND_CLI_idd_es_never_alone_user1_name$ $AND_CLI_idd_es_never_alone_user1_lastname$'])[last()]
+  call_based_on_ch_idd_participant_name: (//div[contains(@class, 'ListRow_listRow') and not(contains(., 'Follow-up'))]//strong[text() = '$AND_CLI_idd_ch_never_alone_user2_name$ $AND_CLI_idd_ch_never_alone_user2_lastname$'])[last()]
   active_call_section: //div[contains(@class,'app-video app-video-fixed')] # doesn't matter if its expanded/collapsed
   call_queue_calls: //div[@id='containerElement']/div[starts-with(@class, 'ListRow_listRow') and not(contains(., 'Follow-up')) and not(contains(., 'Missed Call')) and not(contains(., 'Scheduled Call'))]
   queue_header_columns: //div[contains(text(),'Type')]/following-sibling::div[contains(text(),'Participant')]/following-sibling::div[contains(text(),'Assigned')]
@@ -213,7 +213,7 @@ care_platform_participant_details:
   new_ticket_subject_by_name: //div[@tab-title='Follow-up Tickets']//div[@class='accordion-item-toggle']//div[contains(text(),'$AND_CLI_FOLLOW_UP_TICKET$')]
   new_ticket_date: (//div[@class='accordion-item']//div[contains(text(),'Automated test')]/preceding-sibling::div[contains(text(),'$AND_CLI_TODAYS_DATE$')])[last()]
   new_ticket_date_by_name: (//div[@class='accordion-item']//div[contains(text(),'$AND_CLI_FOLLOW_UP_TICKET$')]/preceding-sibling::div[contains(text(),'$AND_CLI_TODAYS_DATE$')])[last()]
-  records_button: //a/button[text()='Records']
+  records_button: //button[text()='Records']
   records_link: //a[contains(text(),'Records')]
 
 care_platform_participant_records:
@@ -560,6 +560,7 @@ care_platform_call_portal:
   calendar_any_day_without_event: //button[contains(@class,'calendar-day')][not (contains(@class,'has-event'))][1]
   calendar_no_events_message: //div[contains(text(),'There are no events for the selected date')]
   category_select: category
+  events_subtitle: //h4[contains(text(),'Events')]
   create_event_btn: //button[text()='Create Event']
   teleheath_appointment_option: //option[@value='telehealthAppointment']
   manual_appointment_option: //option[@value='manualAppointment']

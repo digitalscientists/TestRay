@@ -439,3 +439,276 @@ TestProviderReviewInfoForExistingFacilityDeviceFacilityProfile:
         - Type: contain
           Var: DEVICE_STATUS
           Value: $AND_CLI_STATUS_TEXT$
+
+#CXTB-184 Access Facilities Directory & Filter
+TestProviderAccessFacilitiesDirectoryAndFilter:
+  Environment: Settings
+  Vars:
+    LOGOUT_OPTION: "Go Off Shift"
+  Aftercases:
+    - CarePlatformLogout
+  Roles: 
+    - Role: desktopChrome
+      App: desktop
+  Actions:
+  # Call to login
+    - Type: case
+      Value: ProvidersCarePlatformLogin
+  # Click on "Facilities" in header of the Care Platform
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.facility_leadership_care_platform_home.facilities_header_tab$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.facility_leadership_care_platform_home.facilities_header_tab$
+  # Click on a letter along right side of listing
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_facility.facility_first_active_letter$
+  # Get the value to compare later
+    - Type: get_text
+      Strategy: xpath
+      Id: $PAGE.care_platform_facility.facility_first_active_letter$
+      Greps:
+        - var: FILTER_LETTER
+          match: "(.*)"
+  #Verify is selected
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.care_platform_facility.facility_first_active_letter$
+      Greps:
+        - var: SELECTED_CLASS
+          attr: class
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: SELECTED_CLASS
+          Value: 'is-selected'
+  #Verify it was filtered by the selected letter
+    - Type: get_text
+      Strategy: xpath
+      Id: $PAGE.care_platform_facility.first_facility$
+      Greps:
+        - var: FIRST_LETTER
+          match: ^[a-zA-Z]   #The match selects: The first char from the starter word (^) that is a letter ([a-zA-Z])
+    - Type: assert
+      Asserts: 
+        - Type: eq
+          Var: FIRST_LETTER
+          Value: $AND_CLI_FILTER_LETTER$
+  #Remove the filter by letter
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_facility.facility_first_active_letter$
+  #Check is not selected anymore
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.care_platform_facility.facility_first_active_letter$
+      Greps:
+        - var: NOT_SELECTED_CLASS
+          attr: class
+          condition: nempty
+          match: "(.*)"
+  #Get the first facility in the list
+    - Type: get_text
+      Strategy: xpath
+      Id: $PAGE.care_platform_facility.first_facility$
+      Greps:
+        - var: FIRST_FACILITY_NO_FILTER
+          match: (.*)
+  #Add the search filter
+    - Type: click
+      Strategy: id
+      Id: $PAGE.facility_leadership_facilities_listing.search_button$
+    - Type: send_keys
+      Strategy: id
+      Id: $PAGE.facility_leadership_facilities_listing.search_text$
+      Value: $AND_CLI_FIRST_FACILITY_NO_FILTER$
+  #Verify there is at least 1 facility with that name
+    - Type: set_env_var
+      Value: $AND_CLI_FIRST_FACILITY_NO_FILTER$
+      Var: facility_name1
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.facility_leadership_facilities_listing.facility_based_on_name$
+    - Type: get_text
+      Strategy: xpath
+      Id: $PAGE.care_platform_facility.first_facility$
+      Greps:
+        - var: FIRST_FACILITY
+          match: (.*)
+  #Verify the first facility contains the text filtered
+    - Type: assert
+      Asserts: 
+        - Type: contain
+          Var: FIRST_FACILITY
+          Value: $AND_CLI_FIRST_FACILITY_NO_FILTER$
+  #Clear the search by clicking small "x" at right of field
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_facility.clear_search_button$
+  #Verify there is at least 1 facility
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_facility.first_facility$
+  #Get name of facility
+    - Type: get_text
+      Strategy: xpath
+      Id: $PAGE.care_platform_facility.first_facility$
+      Greps:
+        - var: FIRST_FACILITY_NAME
+          condition: nempty
+          match: "(.*)"
+  #Click on a facility
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_facility.first_facility$
+  #Check facility details
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_facilities_page.facility_name$
+    - Type: get_text
+      Strategy: xpath
+      Id: $PAGE.providers_facilities_page.facility_name$
+      Greps:
+        - var: FACILITY_NAME_TITLE
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: FIRST_FACILITY_NAME
+          Value: $AND_CLI_FACILITY_NAME_TITLE$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.facility_leadership_facility_details.facility_local_time$
+    # Check Overview is selected
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.facility_leadership_facility_details.overview_tab$
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.facility_leadership_facility_details.overview_tab$
+      Greps:
+        - var: OVERVIEW_SELECTED_CLASS
+          attr: class
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: OVERVIEW_SELECTED_CLASS
+          Value: 'active'
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.facility_leadership_facility_details.local_hospitals_tab$
+      Greps:
+        - var: LOCAL_HOSPITALS_SELECTED_CLASS
+          attr: class
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: n_contain
+          Var: LOCAL_HOSPITALS_SELECTED_CLASS
+          Value: 'active'
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.facility_leadership_facility_details.devices_tab$
+      Greps:
+        - var: DEVICES_SELECTED_CLASS
+          attr: class
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: n_contain
+          Var: DEVICES_SELECTED_CLASS
+          Value: 'active'
+    # Check Local Hospitals tab is selected
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.facility_leadership_facility_details.local_hospitals_tab$
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.facility_leadership_facility_details.overview_tab$
+      Greps:
+        - var: OVERVIEW_SELECTED_CLASS
+          attr: class
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: n_contain
+          Var: OVERVIEW_SELECTED_CLASS
+          Value: 'active'
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.facility_leadership_facility_details.local_hospitals_tab$
+      Greps:
+        - var: LOCAL_HOSPITALS_SELECTED_CLASS
+          attr: class
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: LOCAL_HOSPITALS_SELECTED_CLASS
+          Value: 'active'
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.facility_leadership_facility_details.devices_tab$
+      Greps:
+        - var: DEVICES_SELECTED_CLASS
+          attr: class
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: n_contain
+          Var: DEVICES_SELECTED_CLASS
+          Value: 'active'
+    # Check Devices tabs is selected
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.facility_leadership_facility_details.devices_tab$
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.facility_leadership_facility_details.overview_tab$
+      Greps:
+        - var: OVERVIEW_SELECTED_CLASS
+          attr: class
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: n_contain
+          Var: OVERVIEW_SELECTED_CLASS
+          Value: 'active'
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.facility_leadership_facility_details.local_hospitals_tab$
+      Greps:
+        - var: LOCAL_HOSPITALS_SELECTED_CLASS
+          attr: class
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: n_contain
+          Var: LOCAL_HOSPITALS_SELECTED_CLASS
+          Value: 'active'
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.facility_leadership_facility_details.devices_tab$
+      Greps:
+        - var: DEVICES_SELECTED_CLASS
+          attr: class
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: DEVICES_SELECTED_CLASS
+          Value: 'active'

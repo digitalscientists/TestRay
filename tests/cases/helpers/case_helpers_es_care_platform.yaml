@@ -35,7 +35,7 @@ AnswerCallAsESCarePartner:
       Strategy: xpath
       Id: $PAGE.care_platform_home.call_based_on_es_idd_participant_name$
     - Type: sleep
-      Time: 1
+      Time: 2
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.care_platform_home.answer_call$
