@@ -112,6 +112,7 @@ SetOnlyWebTests:
   - Case: TestProviderReviewInfoForExistingFacilityDeviceFacilityPane
   - Case: TestProviderAccessAndReviewTeamMembersAvailability
   - Case: TestProviderReviewInfoForExistingFacilityDeviceFacilityProfile
+  - Case: TestProviderAccessFacilitiesDirectoryAndFilter
   # Facility Leadership Care Platform
   - Case: TestFacilityLeadershipDirectoryAndFilter
   - Case: TestFacilityLeadershipLogoutGoOffShift
