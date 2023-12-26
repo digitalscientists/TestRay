@@ -479,7 +479,7 @@ TestProviderCallParticipantAndCompleteOnDemandCall:
           Value: is-red
 
 # This test calls a real phone number, please make sure to write the correct number on the variable.
-#CXTB-731 Call External 10-Digit Number (Without Participant)
+# CXTB-731: Call External 10-Digit Number (Without Participant).
 TestProviderCallExternal10DigitNumberWithoutParticipant:
   Environment: Settings
   Precases:

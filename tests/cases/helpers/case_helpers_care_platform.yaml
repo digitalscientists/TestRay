@@ -1657,10 +1657,6 @@ CarePartnerNavigateToFacilities:
     - Role: desktopChrome
       App: desktop       
   Actions:
-  Roles:
-    - Role: desktopChrome
-      App: desktop       
-  Actions:
     # Navigate to Facilities.
     - Type: click
       Strategy: xpath
@@ -2112,6 +2108,19 @@ CarePartnerParticipantCallPortalNavigation:
       Text: $AND_CLI_senior_user1_name$
     - Type: sleep
       Time: 0.4
+  # Apply the Active filter
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant.status_dropdown_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant.status_dropdown_options$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant.active_dropdown_option$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant.active_dropdown_option$
   # Select corresponding participant by name in the list.
     - Type: wait_for
       Strategy: xpath
