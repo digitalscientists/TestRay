@@ -4734,6 +4734,424 @@ TestProviderIDDESCallDeviceForFollowUpTaskFromHomeAnswered:
           Var: IS_RED
           Value: is-red
 
+# CXTB-728 Call Seniors Device for “Issue Paused” Task from Home (Ignored)
+TestProvidersCallSeniorsDeviceForIssuePausedTaskFromHomeIgnored:
+  Environment: Settings
+  Precases:
+    - ProviderNewCleaner
+    - LoginNeverAloneHelper
+    - SeniorCleanPrompts
+  Aftercases:
+    - TerminateApp
+  Roles:
+    - Role: desktopChrome
+      App: desktop
+    - Role: localiOS
+      App: NeverAlone
+  Actions:
+    # Login to the Care Platform app with Providers account.
+    - Type: case
+      Value: ProvidersCarePlatformLogin
+      Role: desktopChrome
+    # Make Call between Providers and Seniors
+    - Type: case
+      Value: ProviderCallParticipant
+    - Type: case
+      Value: AnswerCallAsSenior
+    # Make a Paused Issue
+    - Type: case
+      Value: ProvidersCarePlatformPauseCall
+      Role: desktopChrome
+    # Select Paused Issue
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.issue_paused_button$
+      Role: desktopChrome
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.issue_paused_button$
+      Role: desktopChrome
+    # Check it contains the correct data
+    # Check Assigment
+    - Type: get_attribute  
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.issue_paused_button$
+      Role: desktopChrome
+      Greps:
+      - var: SELECTED_ISSUE_PAUSED
+        attr: innerHTML
+        condition: nempty
+        match: "(.*)"
+    - Type: assert
+      Asserts: 
+        - Type: contain
+          Var: SELECTED_ISSUE_PAUSED
+          Value: 'Me'
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: SELECTED_ISSUE_PAUSED
+          Value: 'Participant (CHS)'
+    # Skip Survey in Never Alone
+    - Type: click
+      Role: localiOS
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_post_call_survey.skip_survey_button$
+    # Call Device
+    - Type: click_js
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.call_device_btn$
+      Role: desktopChrome
+    # Ignore incoming call on seniors side
+    - Type: wait_for
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_incoming_call.incoming_call_header$  
+      Role: localiOS
+    - Type: wait_for
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_incoming_call.ignore_call_button$
+      Role: localiOS
+    - Type: click
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_incoming_call.ignore_call_button$
+      Role: localiOS
+    # Click "No message" to end the process without sending the participant a message.
+    - Type: sleep
+      Time: 2
+    - Type: wait_for
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_call_handling_page.no_message_button$
+    - Type: click
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_call_handling_page.no_message_button$
+    # Call portal returns to Home page and call continues to show as it did in listing
+    - Type: wait_for
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_home_page.home_title$
+    # Clean Paused Issue in the queue
+    - Type: case
+      Role: desktopChrome
+      Value: CleanUsedPausedIssue
+
+# CXTB-730 Call IDD (Easterseals) Device for “Issue Paused” Task from Home (Answered)
+TestProviderIDDESCallDeviceForIssuePausedTaskFromHomeAnswered:
+  Environment: Settings
+  Precases:
+    - LoginESIDDNeverAloneHelper
+    - ESCarePartnerCleanCallQueueAndHangedCalls
+    - ProviderNewCleaner
+    - IDDESParticipantCleanPrompts
+  Aftercases:
+    - TerminateApp
+  Roles:
+    - Role: desktopChrome
+      App: desktop
+    - Role: localiOS
+      Capabilities:
+        newCommandTimeout: 120
+      App: NeverAlone
+    - Role: desktopChrome1
+      App: desktop
+  Actions:
+  # Make IDD-CarePartner-Provider Medical Transfer
+    - Type: case
+      Value: IDDESCarePartnerMakeCallToProvider
+  # Wait 5 seconds for the change of call center from ES to CHS
+    - Type: sleep
+      Time: 5
+  # Log in to CHS Provider
+    - Type: case
+      Value: ProvidersCarePlatformLogin
+      Role: desktopChrome1
+  # Make a Paused Issue
+    - Type: sleep
+      Time: 2
+      Role: desktopChrome1
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.last_medical_transfer_row$
+      Role: desktopChrome1
+      Time: 20
+    - Type: wait_for
+      Strategy: class_chain
+      Role: localiOS
+      Id: $PAGE.seniors_app_call.end_call_button$
+  # Answer call as Provider
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.last_medical_transfer_row$
+      Role: desktopChrome1
+    - Type: sleep
+      Time: 2
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.answer_call_button$
+      Role: desktopChrome1
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.answer_call_button$
+      Role: desktopChrome1
+    - Type: case
+      Value: ProvidersCarePlatformPauseCall
+      Role: desktopChrome1
+    - Type: sleep
+      Time: 1
+  # Select Paused Issue
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.issue_paused_button$
+      Role: desktopChrome1
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.issue_paused_button$
+      Role: desktopChrome1
+  # Check it contains the correct data
+  # Check Assigment
+    - Type: get_attribute  
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.issue_paused_button$
+      Role: desktopChrome1
+      Greps:
+      - var: SELECTED_ISSUE_PAUSED
+        attr: innerHTML
+        condition: nempty
+        match: "(.*)"
+    - Type: assert
+      Asserts: 
+        - Type: contain
+          Var: SELECTED_ISSUE_PAUSED
+          Value: 'Me'
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: SELECTED_ISSUE_PAUSED
+          Value: 'Participant (ES)'
+  # Call Device
+    - Type: sleep
+      Time: 2
+      Role: desktopChrome1
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.call_device_btn$
+      Role: desktopChrome1
+  # Skip Survey in Never Alone
+    - Type: click
+      Role: localiOS
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_post_call_survey.skip_survey_button$
+  # Answer incoming call on seniors side
+    - Type: case
+      Value: AnswerCallAsSenior
+  # Check Provider's In Session dot
+    - Type: get_attribute
+      Strategy: xpath
+      Role: desktopChrome1
+      Id: $PAGE.care_platform_header.status_indicator$
+      Greps:
+        - var: INDICATOR
+          attr: class
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Role: desktopChrome1
+      Asserts:
+        - Type: contain
+          Var: INDICATOR
+          Value: 'is-red'
+  # Complete Call, Session and Survey
+  # Provider ends call.
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.end_call_btn$
+      Role: desktopChrome1
+  # Provider fills up Post call Survey.
+    - Type: case
+      Value: PostCallSurveyProvider
+      Role: desktopChrome1
+  # After call ends, select the Great option answer and then verify that the Senior is redirected to the Home Page.
+    - Type: case
+      Value: ESIDDSeniorGreatPostSurveyCallHelper
+  # Checking the status indicator correspond to Available in the Providers side.
+    - Type: wait_for
+      Role: desktopChrome1
+      Strategy: xpath
+      Id: $PAGE.care_platform_header.status_indicator$
+    - Type: get_attribute
+      Role: desktopChrome1
+      Strategy: xpath
+      Id: $PAGE.care_platform_header.status_indicator$
+      Greps:
+        - var: STATUS_VAR
+          attr: class
+          condition: nempty
+          match: "(.*)has-status(.*)"
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: STATUS_VAR
+          Value: "is-green"
+
+# CXTB-730 Call IDD (Easterseals) Device for “Issue Paused” Task from Home (Answered)
+TestProviderIDDCHCallDeviceForIssuePausedTaskFromHomeAnswered:
+  Environment: Settings
+  Precases:
+    - LoginCHIDDNeverAloneHelper
+    - CHCarePartnerCleanCallQueueAndHangedCalls
+    - ProviderNewCleaner
+    - IDDESParticipantCleanPrompts
+  Aftercases:
+    - TerminateApp
+  Roles:
+    - Role: desktopChrome
+      App: desktop
+    - Role: localiOS
+      Capabilities:
+        newCommandTimeout: 120
+      App: NeverAlone
+    - Role: desktopChrome1
+      App: desktop
+  Actions:
+  # Make IDD-CarePartner-Provider Medical Transfer
+    - Type: case
+      Value: IDDCHCarePartnerMakeCallToProvider
+  # Wait 5 seconds for the change of call center from ES to CHS
+    - Type: sleep
+      Time: 5
+  # Log in to CHS Provider
+    - Type: case
+      Value: ProvidersCarePlatformLogin
+      Role: desktopChrome1
+  # Make a Paused Issue
+    - Type: sleep
+      Time: 2
+      Role: desktopChrome1
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.last_medical_transfer_row$
+      Role: desktopChrome1
+      Time: 20
+    - Type: wait_for
+      Strategy: class_chain
+      Role: localiOS
+      Id: $PAGE.seniors_app_call.end_call_button$
+  # Answer call as Provider
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.last_medical_transfer_row$
+      Role: desktopChrome1
+    - Type: sleep
+      Time: 2
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.answer_call_button$
+      Role: desktopChrome1
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.answer_call_button$
+      Role: desktopChrome1
+    - Type: case
+      Value: ProvidersCarePlatformPauseCall
+      Role: desktopChrome1
+    - Type: sleep
+      Time: 1
+  # Select Paused Issue
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.issue_paused_button$
+      Role: desktopChrome1
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.issue_paused_button$
+      Role: desktopChrome1
+  # Check it contains the correct data
+  # Check Assigment
+    - Type: get_attribute  
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.issue_paused_button$
+      Role: desktopChrome1
+      Greps:
+      - var: SELECTED_ISSUE_PAUSED
+        attr: innerHTML
+        condition: nempty
+        match: "(.*)"
+    - Type: assert
+      Asserts: 
+        - Type: contain
+          Var: SELECTED_ISSUE_PAUSED
+          Value: 'Me'
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: SELECTED_ISSUE_PAUSED
+          Value: 'Participant (CH)'
+  # Call Device
+    - Type: sleep
+      Time: 2
+      Role: desktopChrome1
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.call_device_btn$
+      Role: desktopChrome1
+  # Skip Survey in Never Alone
+    - Type: click
+      Role: localiOS
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_post_call_survey.skip_survey_button$
+  # Answer incoming call on seniors side
+    - Type: case
+      Value: AnswerCallAsSenior
+  # Check Provider's In Session dot
+    - Type: get_attribute
+      Strategy: xpath
+      Role: desktopChrome1
+      Id: $PAGE.care_platform_header.status_indicator$
+      Greps:
+        - var: INDICATOR
+          attr: class
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Role: desktopChrome1
+      Asserts:
+        - Type: contain
+          Var: INDICATOR
+          Value: 'is-red'
+  # Complete Call, Session and Survey
+  # Provider ends call.
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.end_call_btn$
+      Role: desktopChrome1
+  # Provider fills up Post call Survey.
+    - Type: case
+      Value: PostCallSurveyProvider
+      Role: desktopChrome1
+  # After call ends, select the Great option answer and then verify that the Senior is redirected to the Home Page.
+    - Type: case
+      Value: ESIDDSeniorGreatPostSurveyCallHelper
+  # Checking the status indicator correspond to Available in the Providers side.
+    - Type: wait_for
+      Role: desktopChrome1
+      Strategy: xpath
+      Id: $PAGE.care_platform_header.status_indicator$
+    - Type: get_attribute
+      Role: desktopChrome1
+      Strategy: xpath
+      Id: $PAGE.care_platform_header.status_indicator$
+      Greps:
+        - var: STATUS_VAR
+          attr: class
+          condition: nempty
+          match: "(.*)has-status(.*)"
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: STATUS_VAR
+          Value: "is-green"
+
 # CXTB-729: Call ES IDD (Easterseals) Device for Follow-up Task from Home (Ignored)
 TestProviderIDDESCallDeviceForFollowUpTaskFromHomeIgnored:
   Environment: Settings
@@ -4929,3 +5347,285 @@ TestProviderIDDCHCallDeviceForFollowUpTaskFromHomeIgnored:
     - Type: case
       Role: desktopChrome1
       Value: ProviderCloseCallHelper
+
+# CXTB-732 Call IDD (Easterseals) Device for “Issue Paused” Task from Home (Ignored)
+TestProviderIDDESCallDeviceForIssuePausedTaskFromHomeIgnored:
+  Environment: Settings
+  Precases:
+    - LoginESIDDNeverAloneHelper
+    - ESCarePartnerCleanCallQueueAndHangedCalls
+    - ProviderNewCleaner
+    - IDDESParticipantCleanPrompts
+  Aftercases:
+    - TerminateApp
+  Roles:
+    - Role: desktopChrome
+      App: desktop
+    - Role: localiOS
+      Capabilities:
+        newCommandTimeout: 120
+      App: NeverAlone
+    - Role: desktopChrome1
+      App: desktop
+  Actions:
+  # Make IDD-CarePartner-Provider Medical Transfer
+    - Type: case
+      Value: IDDESCarePartnerMakeCallToProvider
+  # Wait 5 seconds for the change of call center from ES to CHS
+    - Type: sleep
+      Time: 5
+  # Log in to CHS Provider
+    - Type: case
+      Value: ProvidersCarePlatformLogin
+      Role: desktopChrome1
+  # Make a Paused Issue
+    - Type: sleep
+      Time: 2
+      Role: desktopChrome1
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.last_medical_transfer_row$
+      Role: desktopChrome1
+      Time: 20
+    - Type: wait_for
+      Strategy: class_chain
+      Role: localiOS
+      Id: $PAGE.seniors_app_call.end_call_button$
+  # Answer call as Provider
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.last_medical_transfer_row$
+      Role: desktopChrome1
+    - Type: sleep
+      Time: 2
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.answer_call_button$
+      Role: desktopChrome1
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.answer_call_button$
+      Role: desktopChrome1
+    - Type: case
+      Value: ProvidersCarePlatformPauseCall
+      Role: desktopChrome1
+    - Type: sleep
+      Time: 1
+  # Select Paused Issue
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.issue_paused_button$
+      Role: desktopChrome1
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.issue_paused_button$
+      Role: desktopChrome1
+  # Check it contains the correct data
+  # Check Assigment
+    - Type: get_attribute  
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.issue_paused_button$
+      Role: desktopChrome1
+      Greps:
+      - var: SELECTED_ISSUE_PAUSED
+        attr: innerHTML
+        condition: nempty
+        match: "(.*)"
+    - Type: assert
+      Asserts: 
+        - Type: contain
+          Var: SELECTED_ISSUE_PAUSED
+          Value: 'Me'
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: SELECTED_ISSUE_PAUSED
+          Value: 'Participant (ES)'
+  # Call Device
+    - Type: sleep
+      Time: 2
+      Role: desktopChrome1
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.call_device_btn$
+      Role: desktopChrome1
+  # Skip Survey in Never Alone
+    - Type: click
+      Role: localiOS
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_post_call_survey.skip_survey_button$
+  # IDD Gets an Incoming Call  
+    - Type: wait_for
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_incoming_call.incoming_call_header$  
+      Role: localiOS
+    - Type: wait_for
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_incoming_call.ignore_call_button$
+      Role: localiOS
+    - Type: click
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_incoming_call.ignore_call_button$
+      Role: localiOS
+  # Click "No message" to end the process without sending the participant a message.
+    - Type: sleep
+      Time: 2
+      Role: desktopChrome1
+    - Type: wait_for
+      Strategy: xpath
+      Role: desktopChrome1
+      Id: $PAGE.providers_call_handling_page.no_message_button$
+    - Type: click
+      Strategy: xpath
+      Role: desktopChrome1
+      Id: $PAGE.providers_call_handling_page.no_message_button$
+  # Call portal returns to Home page and call continues to show as it did in listing
+    - Type: wait_for
+      Strategy: xpath
+      Role: desktopChrome1
+      Id: $PAGE.providers_home_page.home_title$
+  # Automation cleanup
+    - Type: case
+      Value: CleanUsedPausedIssue
+      Role: desktopChrome1
+
+# CXTB-732 Call IDD (Easterseals) Device for “Issue Paused” Task from Home (Ignored)
+TestProviderIDDCHCallDeviceForIssuePausedTaskFromHomeIgnored:
+  Environment: Settings
+  Precases:
+    - LoginCHIDDNeverAloneHelper
+    - CHCarePartnerCleanCallQueueAndHangedCalls
+    - ProviderNewCleaner
+    - IDDESParticipantCleanPrompts
+  Aftercases:
+    - TerminateApp
+  Roles:
+    - Role: desktopChrome
+      App: desktop
+    - Role: localiOS
+      Capabilities:
+        newCommandTimeout: 120
+      App: NeverAlone
+    - Role: desktopChrome1
+      App: desktop
+  Actions:
+  # Make IDD-CarePartner-Provider Medical Transfer
+    - Type: case
+      Value: IDDCHCarePartnerMakeCallToProvider
+  # Wait 5 seconds for the change of call center from ES to CHS
+    - Type: sleep
+      Time: 5
+  # Log in to CHS Provider
+    - Type: case
+      Value: ProvidersCarePlatformLogin
+      Role: desktopChrome1
+  # Make a Paused Issue
+    - Type: sleep
+      Time: 2
+      Role: desktopChrome1
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.last_medical_transfer_row$
+      Role: desktopChrome1
+      Time: 20
+    - Type: wait_for
+      Strategy: class_chain
+      Role: localiOS
+      Id: $PAGE.seniors_app_call.end_call_button$
+  # Answer call as Provider
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.last_medical_transfer_row$
+      Role: desktopChrome1
+    - Type: sleep
+      Time: 2
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.answer_call_button$
+      Role: desktopChrome1
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.answer_call_button$
+      Role: desktopChrome1
+    - Type: case
+      Value: ProvidersCarePlatformPauseCall
+      Role: desktopChrome1
+    - Type: sleep
+      Time: 1
+  # Select Paused Issue
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.issue_paused_button$
+      Role: desktopChrome1
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.issue_paused_button$
+      Role: desktopChrome1
+  # Check it contains the correct data
+  # Check Assigment
+    - Type: get_attribute  
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.issue_paused_button$
+      Role: desktopChrome1
+      Greps:
+      - var: SELECTED_ISSUE_PAUSED
+        attr: innerHTML
+        condition: nempty
+        match: "(.*)"
+    - Type: assert
+      Asserts: 
+        - Type: contain
+          Var: SELECTED_ISSUE_PAUSED
+          Value: 'Me'
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: SELECTED_ISSUE_PAUSED
+          Value: 'Participant (CH)'
+  # Call Device
+    - Type: sleep
+      Time: 2
+      Role: desktopChrome1
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.call_device_btn$
+      Role: desktopChrome1
+  # Skip Survey in Never Alone
+    - Type: click
+      Role: localiOS
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_post_call_survey.skip_survey_button$
+  # IDD Gets an Incoming Call  
+    - Type: wait_for
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_incoming_call.incoming_call_header$  
+      Role: localiOS
+    - Type: wait_for
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_incoming_call.ignore_call_button$
+      Role: localiOS
+    - Type: click
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_incoming_call.ignore_call_button$
+      Role: localiOS
+  # Click "No message" to end the process without sending the participant a message.
+    - Type: sleep
+      Time: 2
+      Role: desktopChrome1
+    - Type: wait_for
+      Strategy: xpath
+      Role: desktopChrome1
+      Id: $PAGE.providers_call_handling_page.no_message_button$
+    - Type: click
+      Strategy: xpath
+      Role: desktopChrome1
+      Id: $PAGE.providers_call_handling_page.no_message_button$
+  # Call portal returns to Home page and call continues to show as it did in listing
+    - Type: wait_for
+      Strategy: xpath
+      Role: desktopChrome1
+      Id: $PAGE.providers_home_page.home_title$
+  # Automation cleanup
+    - Type: case
+      Value: CleanUsedPausedIssue
+      Role: desktopChrome1
