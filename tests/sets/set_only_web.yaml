@@ -57,6 +57,8 @@ SetOnlyWebTests:
   - Case: TestEmployeeHealthPortalCallsFromCurrentSessionDuplicatedInCallHistoryUntilAccessPage
   - Case: TestEmployeeHealthPortalRequestAnAppointmentForDependentMinor
   - Case: TestEmployeeHealthPortalReviewCallHistory
+  - Case: TestEmployeeHealthPortalRescheduleAnUpcomingAppointmentForEHPEmployee
+  - Case: TestEmployeeHealthPortalRescheduleAnUpcomingAppointmentForEHPDependentMinor
   # ES Care Partner
   - Case: TestCHCarePartnerStatusDropdownNotInCall
   - Case: TestCHCarePartnerAccessAndReviewTeamMembersAvailability
