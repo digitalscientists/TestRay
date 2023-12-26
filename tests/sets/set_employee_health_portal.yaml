@@ -18,6 +18,8 @@ SetEmployeeHealthPortalTests:
     - Case: TestEmployeeHealthPortalManuallyLogoutOfPortal
     - Case: TestEmployeeHealthPortalCallsFromCurrentSessionDuplicatedInCallHistoryUntilAccessPage
     - Case: TestEmployeeHealthPortalReviewCallHistory
+    - Case: TestEmployeeHealthPortalRescheduleAnUpcomingAppointmentForEHPEmployee
+    - Case: TestEmployeeHealthPortalRescheduleAnUpcomingAppointmentForEHPDependentMinor
   # Employee Health Portal WEB Mobile
     - Case: TestEHPMobileUserCall
     - Case: TestEHPMobileDependentUserCall

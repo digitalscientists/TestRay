@@ -568,7 +568,7 @@ EmployeeHealthPortalAppointmentsRequestForDependentMinor:
       Id: $PAGE.employee_health_telehealth_request_form.calendar_right_button$
     - Type: wait_for
       Strategy: xpath
-      Id: $PAGE.employee_health_telehealth_request_form.calendar_month_view$
+      Id: $PAGE.employee_health_telehealth_request_form.calendar_month_days$
     - Type: generate_random_day
       InsertedDay: $AND_CLI_DAY$
       ResultVar: DAY
@@ -590,6 +590,38 @@ EmployeeHealthPortalAppointmentsRequestForDependentMinor:
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.employee_health_home_page.appointment_scheduled_notification$
+
+# This helper will cancel the appointment based on the appointment description
+# This description will be read from the <$AND_CLI_PAIN_DESCRIPTION$> variable.
+EmployeeHealthPortalCancelAppointmentRequest: 
+  Roles:
+    - Role: desktopChrome
+      App: desktop       
+  Actions: 
+  # Select the corresponding.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.employee_health_telehealth_request_form.appointment_dropdown_based_on_description$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.employee_health_telehealth_request_form.appointment_dropdown_based_on_description$
+  # Click "Cancel appointment" option.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.employee_health_telehealth_request_form.cancel_appointment_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.employee_health_telehealth_request_form.cancel_appointment_button$
+  # Delete Appointment
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.employee_health_telehealth_request_form.yes_delete_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.employee_health_telehealth_request_form.yes_delete_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.employee_health_mobile_home_page.alert_appointment_cancelled$
 
 EHPMoblieNavigateToMyInfo:
   Roles:
