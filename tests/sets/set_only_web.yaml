@@ -113,6 +113,7 @@ SetOnlyWebTests:
   - Case: TestProviderAccessAndReviewTeamMembersAvailability
   - Case: TestProviderReviewInfoForExistingFacilityDeviceFacilityProfile
   - Case: TestProviderAccessFacilitiesDirectoryAndFilter
+  - Case: TestProviderCallExternal10DigitNumberWithoutParticipant
   # Facility Leadership Care Platform
   - Case: TestFacilityLeadershipDirectoryAndFilter
   - Case: TestFacilityLeadershipLogoutGoOffShift
