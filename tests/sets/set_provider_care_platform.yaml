@@ -61,3 +61,4 @@ SetProvidersCarePlatformTests:
     - Case: TestProviderIDDCHCallDeviceForIssuePausedTaskFromHomeIgnored
     - Case: TestProviderIDDESCallDeviceForIssuePausedTaskFromHomeIgnored
     - Case: TestProviderCallExternal10DigitNumberWithoutParticipant
+    - Case: TestProviderSeniorReturnMissedCallFromHomeIgnored
