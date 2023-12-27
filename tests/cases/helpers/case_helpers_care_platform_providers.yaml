@@ -371,7 +371,6 @@ ProviderCallParticipant:
       Id: $PAGE.care_platform_call_portal.call_participant_btn$
 
 ProviderCallFacility:
-  Environment: Settings
   Roles:
     - Role: desktopChrome
       App: desktop       
@@ -401,6 +400,8 @@ ProviderCallFacility:
       Strategy: xpath
       Id: $PAGE.providers_facilities_page.call_based_on_device_button$
     # Page updates to show call portal screen with "No active call" showing in video window.
+    - Type: sleep
+      Time: 1
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.providers_call_handling_page.video_status$
@@ -557,7 +558,7 @@ SetMissedCallFromSNF:
     - Type: wait_for
       Role: localiOS
       Strategy: id
-      Id: $PAGE.snf_notifications.missed_call_modal_title$
+      Id: $PAGE.snf_notifications.missed_outgoing_call_modal_title$
     - Type: click
       Role: localiOS
       Strategy: class_chain
