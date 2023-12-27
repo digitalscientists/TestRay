@@ -5630,7 +5630,7 @@ TestProviderIDDCHCallDeviceForIssuePausedTaskFromHomeIgnored:
       Value: CleanUsedPausedIssue
       Role: desktopChrome1
 
-# CXTB-747: Return Missed Seniors Call from Home (Ignored)
+# CXTB-160: Return Missed Seniors Call from Home (Ignored)
 TestProviderSeniorReturnMissedCallFromHomeIgnored:
   Environment: Settings
   Precases:
