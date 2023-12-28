@@ -162,6 +162,7 @@ providers_follow_up_call_details_page:
   close_ticket_save_button: //*[@id='dialogs']//button[text()='Save and Close Ticket']
   cancel_ticket_save_button: //*[@id='dialogs']//button[text()='Cancel']
   nav_tab: //nav[@class='tabs-nav']
+  first_follow_up_row: (//div[@class='accordion']//div[contains(@class,'accordion-item')])[1]
   
 providers_employees_page:
   employees_label: //h3[text()='Employees']
