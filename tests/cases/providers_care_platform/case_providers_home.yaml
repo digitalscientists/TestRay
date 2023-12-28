@@ -5629,3 +5629,185 @@ TestProviderIDDCHCallDeviceForIssuePausedTaskFromHomeIgnored:
     - Type: case
       Value: CleanUsedPausedIssue
       Role: desktopChrome1
+
+# CXTB-160: Return Missed Seniors Call from Home (Ignored)
+TestProviderSeniorReturnMissedCallFromHomeIgnored:
+  Environment: Settings
+  Precases:
+    - LoginNeverAloneHelper
+    - CarePartnerCleanCallQueueAndHangedCalls
+    - ProviderNewCleaner
+    - SeniorCleanPrompts
+  Aftercases:
+    - TerminateApp
+  Roles:
+    - Role: desktopChrome
+      App: desktop
+    - Role: localiOS
+      Capabilities:
+        newCommandTimeout: 120
+      App: NeverAlone
+    - Role: desktopChrome1
+      App: desktop
+  Actions:
+  # Generate a medical call as a senior.
+    - Type: case
+      Value: CallCarePartner
+      Role: localiOS
+  # Login and answer call as a care partner.
+    - Type: case
+      Value: AnswerCallAsCarePartner
+      Role: desktopChrome
+  # Care Partner makes the medical transfer for the provider.
+    - Type: case
+      Value: MakeMedicalTransferWhileOnCall
+      Role: desktopChrome
+  # Care partner leaves the call.
+    - Type: click
+      Role: desktopChrome
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.leave_call_btn$
+  # Verify that the video updates to show the "The call has ended" text.
+    - Type: get_attribute
+      Role: desktopChrome
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.video_status$
+      Greps:
+        - var: CALL_MESSAGE
+          attr: textContent
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: CALL_MESSAGE
+          Value: 'The call has ended.'
+  # Fill up the post call survey to complete the session.
+    - Type: case
+      Value: PostCallSurveyCarePartner
+      Role: desktopChrome
+  # Verify that care partner was returned to the "Call queue" page.
+    - Type: wait_for
+      Role: desktopChrome
+      Strategy: xpath
+      Id: $PAGE.care_platform.call_queue_title$
+  # Wait 1 minute so it can be a missed call.
+    - Type: sleep
+      Time: 61
+  # End call on Never Alone.
+    - Type: wait_for
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_call.end_call_button$
+      Role: localiOS
+    - Type: click
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_call.end_call_button$
+      Role: localiOS
+    - Type: case
+      Value: SeniorGreatPostSurveyCallHelper
+  # Log in to the Providers Care Platform.
+    - Type: case
+      Value: ProvidersCarePlatformLogin
+      Role: desktopChrome1
+  # Select a missed Seniors call from the Home listing.
+    - Type: wait_for  
+      Role: desktopChrome1
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.missed_call$
+    - Type: click  
+      Role: desktopChrome1
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.missed_call$
+  # Assign to "Me"
+    - Type: wait_for  
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.call_update_dropdown_button$
+      Role: desktopChrome1
+    - Type: click  
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.call_update_dropdown_button$
+      Role: desktopChrome1
+    - Type: click  
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.assign_to_me_button$
+      Role: desktopChrome1
+    - Type: sleep
+      Time: 0.8
+      Role: desktopChrome1
+  # Check call row attributes
+    - Type: get_attribute  
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.missed_call$
+      Role: desktopChrome1
+      Greps:
+      - var: MISSED_CALL
+        attr: innerHTML
+        condition: nempty
+        match: "(.*)"
+    # Checking call origin
+    - Type: assert
+      Asserts: 
+        - Type: contain_encode_utf8
+          Var: MISSED_CALL
+          Value: 'Participant (CHS)'
+    # Checking IDD Participant Name
+    - Type: assert
+      Asserts: 
+        - Type: contain_encode_utf8
+          Var: MISSED_CALL
+          Value: '$AND_CLI_senior_user1_name$ $AND_CLI_senior_user1_lastname$'
+  # Call Device
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.call_device_btn$
+      Role: desktopChrome1
+  # Check you are in the call portal
+    - Type: wait_for
+      Role: desktopChrome1
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.end_call_btn$
+  # Participant Gets an Incoming Call  
+    - Type: wait_for
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_incoming_call.incoming_call_header$  
+      Role: localiOS
+    - Type: wait_for
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_incoming_call.ignore_call_button$
+      Role: localiOS
+    - Type: click
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_incoming_call.ignore_call_button$
+      Role: localiOS
+  # Click "No message" to end the process without sending the participant a message.
+    - Type: sleep
+      Time: 2
+    - Type: wait_for
+      Strategy: xpath
+      Role: desktopChrome1
+      Id: $PAGE.providers_call_handling_page.no_message_button$
+    - Type: click
+      Strategy: xpath
+      Role: desktopChrome1
+      Id: $PAGE.providers_call_handling_page.no_message_button$
+  # Call portal returns to Home page and call continues to show as it did in listing
+    - Type: wait_for
+      Strategy: xpath
+      Role: desktopChrome1
+      Id: $PAGE.providers_home_page.home_title$
+  # Automation cleanup
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform.navigation_home$
+    - Type: care_partner_clean_call_queue_and_hanged_calls
+    - Type: click
+      Strategy: xpath
+      Role: desktopChrome1
+      Id: $PAGE.providers_home_page.home_button$
+    - Type: click
+      Role: desktopChrome1
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.missed_call$
+    - Type: case
+      Role: desktopChrome1
+      Value: ProviderCloseCallHelper
