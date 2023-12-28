@@ -453,7 +453,7 @@ TestSNFCheckQueueandReviewDetails:
     - Type: wait_for
       Role: localiOS
       Strategy: id
-      Id: $PAGE.snf_notifications.missed_call_modal_title$
+      Id: $PAGE.snf_notifications.missed_outgoing_call_modal_title$
     - Type: click
       Role: localiOS
       Strategy: class_chain

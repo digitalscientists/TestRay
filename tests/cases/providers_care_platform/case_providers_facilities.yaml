@@ -713,6 +713,72 @@ TestProviderAccessFacilitiesDirectoryAndFilter:
           Var: DEVICES_SELECTED_CLASS
           Value: 'active'
 
+# CXTB-748 Attempt an On-Demand Call to Facility’s Device (that is Missed) - Facility Pane
+TestProviderAttemptAnOnDemandCallToFacilitysDeviceThatIsMissedFacilityPane:
+  Environment: Settings
+  Roles: 
+    - Role: localiOS
+      Capabilities:
+        newCommandTimeout: 120
+      App: NeverAlone
+    - Role: desktopChrome
+      App: desktop
+  Precases:
+    - ProviderNewCleaner
+  Aftercases:
+    - TerminateApp
+  Actions:
+  # Setup for the test data
+  #Call login for nurses
+    - Type: case
+      Role: localiOS
+      Value: LoginSNFHelper
+  #Calling Prompt cleaner
+    - Type: case
+      Role: localiOS
+      Value: SeniorCleanPrompts
+  # Call as a Provider
+    - Type: case
+      Value: ProviderCallFacility
+  # On SNF wait for the incoming call
+  # Nurse sees that there is an incoming call.
+    - Type: sleep
+      Time: 2
+    - Type: wait_for
+      Strategy: class_chain
+      Id: $PAGE.snf_incoming_call.incoming_call_header$
+      CheckTime: 20
+  # Sleep for a minute
+    - Type: sleep
+      Time: 61
+  # Click the "End Call" button.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.end_call_btn$
+      Role: desktopChrome
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.end_call_btn$
+      Role: desktopChrome
+  # Provider select No Message
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.no_message_button$
+      Role: desktopChrome
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.no_message_button$
+      Role: desktopChrome
+  # In SNF there's a missed call
+    - Type: wait_for
+      Strategy: class_chain
+      Id: $PAGE.snf_notifications.missed_incoming_call_modal_title$
+      Role: localiOS
+    - Type: click
+      Strategy: class_chain
+      Id: $PAGE.snf_notifications.modal_close_button$
+      Role: localiOS
+
 # CXTB-749 Can Click and View Facility Follow-up Tickets Information
 TestProviderCanClickAndViewFacilityFollowUpTicketsInformation:
   Environment: Settings
