@@ -67,6 +67,7 @@ SetNonPhysicalMobileTest:
     - Case: TestProviderIDDESCallDeviceForIssuePausedTaskFromHomeIgnored
     - Case: TestProviderSeniorReturnMissedCallFromHomeIgnored
     - Case: TestProviderAttemptAnOnDemandCallToFacilitysDeviceThatIsMissedFacilityPane
+    - Case: TestProviderCanClickAndViewFacilityFollowUpTicketsInformation
   # ES Provider Care Platform
     - Case: TestESProviderCarePlatformAnswerAndCompleteSession
     - Case: TestESProviderIDDSeeCallAppearInQueueAssignAndReviewDetails

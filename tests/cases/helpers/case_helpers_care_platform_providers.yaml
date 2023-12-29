@@ -419,9 +419,8 @@ ProviderCallFacility:
           Var: CALL_MESSAGE
           Value: 'No active call.'
     # Click on the Call Device button.
-    - Type: wait_for
-      Strategy: xpath
-      Id: $PAGE.providers_call_handling_page.call_device_btn$ 
+    - Type: sleep
+      Time: 1
     - Type: click
       Strategy: xpath
       Id: $PAGE.providers_call_handling_page.call_device_btn$ 
@@ -679,7 +678,38 @@ ProviderCompleteSession:
       Value: "false"
     - Type: click
       Strategy: xpath
-      Id: $PAGE.providers_call_handling_page.complete_session_button$ 
+      Id: $PAGE.providers_call_handling_page.complete_session_button$
+
+FollowUpHistoryPrecaseForSNF:
+  Vars:
+    LOGOUT_OPTION: "Go Off Shift"
+  Precases:
+    - ProviderNewCleaner
+  Aftercases:
+    - CleanUsedFollowUp
+    - CarePlatformLogout
+    - TerminateApp
+  Roles:
+    - Role: desktopChrome
+      App: desktop
+    - Role: localiOS
+      App: NeverAlone
+  Actions:
+    #Call login for nurses
+    - Type: case
+      Value: LoginSNFHelper
+      Role: localiOS
+    #Clean SNF prompts
+    - Type: case
+      Value: SeniorCleanPrompts
+      Role: localiOS
+    #Clean any prompt notification from the start
+    - Type: case
+      Value: CreateAFollowUpForSNFCall
+    - Type: refresh
+      Role: desktopChrome
+    - Type: sleep
+      Time: 1
 
 CreateAFollowUpForSNFCall:
   Roles:
@@ -718,7 +748,7 @@ CreateAFollowUpForSNFCall:
     - Type: send_keys
       Strategy: xpath
       Id: $PAGE.providers_call_handling_page.call_notes_provider_input$
-      Value: 'Automation Test Notes: Test TestSNFMissedCallFromProvider'
+      Value: 'Automation Test Notes: Test Follow-Up from Provider'
     - Type: if
       If_Cases: 
         - If_Case: ProviderCompleteSession
@@ -838,6 +868,8 @@ CleanUsedFollowUp:
     - Type: click
       Strategy: xpath
       Id: $PAGE.providers_home_page.follow_up_calls$
+    - Type: sleep
+      Time: 0.8
     - Type: case
       Value: ProviderCloseCallHelper
 
