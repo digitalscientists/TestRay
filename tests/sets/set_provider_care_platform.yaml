@@ -20,6 +20,7 @@ SetProvidersCarePlatformTests:
     - Case: TestProviderAccessAndReviewTeamMembersAvailability
     - Case: TestProviderReviewInfoForExistingFacilityDeviceFacilityProfile
     - Case: TestProviderAccessFacilitiesDirectoryAndFilter
+    - Case: TestProviderCanClickAndViewParticipantsEmergencyCalls
   # Provider Care Platform Mobile Non Physical
     - Case: TestProviderHomePageListingView
     - Case: TestProviderBrowsingWhileOnCall
