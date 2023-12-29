@@ -778,3 +778,111 @@ TestProviderAttemptAnOnDemandCallToFacilitysDeviceThatIsMissedFacilityPane:
       Strategy: class_chain
       Id: $PAGE.snf_notifications.modal_close_button$
       Role: localiOS
+
+# CXTB-749 Can Click and View Facility Follow-up Tickets Information
+TestProviderCanClickAndViewFacilityFollowUpTicketsInformation:
+  Environment: Settings
+  Vars:
+    LOGOUT_OPTION: "Go Off Shift"
+  Precases:
+    - FollowUpHistoryPrecaseForSNF
+  Aftercases:
+    - CarePlatformLogout
+  Roles: 
+    - Role: desktopChrome
+      App: desktop
+    - Role: localiOS
+      App: NeverAlone
+  Actions:
+  # Call to login
+    - Type: case
+      Value: ProvidersCarePlatformLogin
+  # Navigate to Facilities
+    - Type: case
+      Value: ProviderNavigateToFacilities
+  # Select a facility with an address and at least one device in listing.
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_facilities_page.facility_based_on_name$
+  # Right side of screen updates to show the selected facility’s summary
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_facilities_page.facility_name$
+  # Go to Facility Profile
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_details.records_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_facilities_records_page.info_title$
+  # Select Follow Up tab
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_participants_records_page.follow_up_tickets_tab$
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.providers_participants_records_page.follow_up_tickets_tab$
+      Greps:
+        - var: ACTIVE_CLASS
+          attr: class
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: ACTIVE_CLASS
+          Value: 'active' 
+  # Left "Ticket history"
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_records_follow_up_tickets.ticket_history_title$
+  # Right "Active tickets"
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_records_follow_up_tickets.active_tickets_title$
+  # Review the "Ticket history" section listing.
+    # Click to expand a row.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_follow_up_call_details_page.first_follow_up_row$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_follow_up_call_details_page.first_follow_up_row$
+    # Expands and shows creation information, and additional details about the task that was completed.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_records_follow_up_tickets.expanded_ticket_content$
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_records_follow_up_tickets.expanded_ticket_content$
+      Greps:
+        - var: COMPLETED_LABEL
+          attr: textContent
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: COMPLETED_LABEL
+          Value: Completed
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: COMPLETED_LABEL
+          Value: Reason for Closing
+    # Verify that listing includes all completed Care Partner follow-up tickets. The main table displays the key summary information.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_records_follow_up_tickets.ticket_history_completed_header_label$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_records_follow_up_tickets.ticket_history_loe_header_label$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_records_follow_up_tickets.ticket_history_type_header_label$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_records_follow_up_tickets.ticket_history_partner_header_label$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_records_follow_up_tickets.ticket_history_subject_header_label$

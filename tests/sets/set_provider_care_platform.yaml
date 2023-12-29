@@ -64,3 +64,4 @@ SetProvidersCarePlatformTests:
     - Case: TestProviderCallExternal10DigitNumberWithoutParticipant
     - Case: TestProviderSeniorReturnMissedCallFromHomeIgnored
     - Case: TestProviderAttemptAnOnDemandCallToFacilitysDeviceThatIsMissedFacilityPane
+    - Case: TestProviderCanClickAndViewFacilityFollowUpTicketsInformation
