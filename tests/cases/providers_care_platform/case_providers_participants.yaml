@@ -575,3 +575,41 @@ TestProviderCallExternal10DigitNumberWithoutParticipant:
   # Fill post call survey.
     - Type: case
       Value: PostCallSurveyProvider
+
+# CXTB-176 Can Click and View Participant’s Emergency calls
+TestProviderCanClickAndViewParticipantsEmergencyCalls:
+  Environment: Settings
+  Roles:
+    - Role: desktopChrome
+      App: desktop
+  Actions:
+  # Login to the Care Platform app with Providers account.
+    - Type: case
+      Value: ProvidersCarePlatformLogin
+  # Navigate to Participant's records
+    - Type: case
+      Value: CarePartnerParticipantRecordsNavigation
+  # Go to Emergency tab
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_records.emergency_calls_tab$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_records.emergency_calls_tab$
+  # Page refreshes to show a full page view of all the Emergency calls participant has made from their device.
+  # Validation will be limited to check the header labels since automation is not supposed to make emergency calls.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_records_emergency_calls.date_header_label$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_records_emergency_calls.time_header_label$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_records_emergency_calls.duration_header_label$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_records_emergency_calls.type_header_label$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_records_emergency_calls.subject_header_label$
