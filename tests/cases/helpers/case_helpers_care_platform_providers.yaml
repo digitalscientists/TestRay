@@ -951,6 +951,8 @@ AnswerOnDemandCallAsProvider:
     - Type: click
       Strategy: xpath
       Id: $PAGE.providers_home_page.on_demand_calls$
+    - Type: sleep
+      Time: 1
   #Answer call
     - Type: wait_for
       Strategy: xpath
