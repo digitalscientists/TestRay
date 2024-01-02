@@ -613,3 +613,58 @@ TestProviderCanClickAndViewParticipantsEmergencyCalls:
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.care_platform_participant_records_emergency_calls.subject_header_label$
+
+# CXTB-180 Attempt an On-Demand Call to Participant’s Device (that is Missed)
+TestProviderAttemptAnOnDemandCallToParticipantsDeviceThatIsMissed:
+  Environment: Settings
+  Roles:
+    - Role: localiOS
+      Capabilities:
+        newCommandTimeout: 120
+      App: NeverAlone
+    - Role: desktopChrome
+      App: desktop
+  Precases:
+    - LoginNeverAloneHelper
+    - ProviderNewCleaner
+    - SeniorCleanPrompts
+  Aftercases:
+    - TerminateApp
+  Actions:
+  # Login to the Care Platform app with Providers account.
+    - Type: case
+      Value: ProviderCallParticipant
+    - Type: sleep
+      Time: 2
+  # Device begins ringing and automatically displays "Incoming Call" modal.
+    - Type: wait_for
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_incoming_call.incoming_call_header$
+      Role: localiOS
+      CheckTime: 20
+  # Sleep for a minute
+    - Type: sleep
+      Time: 61
+  # Click the "End Call" button.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.end_call_btn$
+      Role: desktopChrome
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.end_call_btn$
+      Role: desktopChrome
+  # In Senior you'll find a missed call prompt
+    - Type: wait_for
+      Role: localiOS
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_missed_call.missed_call_header$
+  # Provider select No Message
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.no_message_button$
+      Role: desktopChrome
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.no_message_button$
+      Role: desktopChrome
