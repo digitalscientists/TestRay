@@ -65,3 +65,4 @@ SetProvidersCarePlatformTests:
     - Case: TestProviderSeniorReturnMissedCallFromHomeIgnored
     - Case: TestProviderAttemptAnOnDemandCallToFacilitysDeviceThatIsMissedFacilityPane
     - Case: TestProviderCanClickAndViewFacilityFollowUpTicketsInformation
+    - Case: TestProvidersAnswerCallAndCompleteSessionWithPauseIssue
