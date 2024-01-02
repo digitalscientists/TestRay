@@ -1121,3 +1121,108 @@ TestProvidersAnswerCallAndCompleteSessionWithPauseIssue:
     - Type: wait_not_visible
       Strategy: xpath
       Id: $PAGE.providers_notifications.call_completed_notification$
+
+# CXTB-751 Call Facility Device & Complete an On-Demand Call - Facility Profile
+TestProviderCallFacilityDeviceAndCompleteAnOnDemandCallFacilityProfile:
+  Environment: Settings
+  Precases:
+    - ProviderNewCleaner
+    - LoginSNFHelper
+  Aftercases:
+    - TerminateApp
+  Roles:
+    - Role: desktopChrome
+      App: desktop
+    - Role: localiOS
+      App: NeverAlone
+  Actions:
+    # Login to the Care Platform app with Providers account.
+    - Type: case
+      Value: ProvidersCarePlatformLogin
+      Role: desktopChrome
+    # Calling Prompt cleaner
+    - Type: case
+      Role: localiOS
+      Value: SeniorCleanPrompts
+    # Navigate to Facilities
+    - Type: case
+      Value: NavigationToFacilityProfile
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_details.records_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_facilities_records_page.info_title$
+    # Click to check Devices Tab
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_facilities_records_page.devices_tab$
+    - Type: sleep
+      Time: 2
+    # Call by device number
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_facility_Record.call_device_by_number$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_facility_Record.call_device_by_number$
+    # Wait for Call Portal
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.call_device_btn$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.call_device_btn$
+    - Type: sleep
+      Time: 2
+    - Type: case
+      Value: SNFAnswerIncomingCall
+    # Complete Call, Session and Survey
+      #Provider ends call.
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.end_call_btn$
+    # Check Provider's In Session dot
+    - Type: get_attribute
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.care_platform_header.status_indicator$
+      Greps:
+        - var: INDICATOR
+          attr: class
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Role: desktopChrome
+      Asserts:
+        - Type: contain
+          Var: INDICATOR
+          Value: 'is-red'
+    # Provider fills up Post call Survey.
+    - Type: case
+      Value: PostCallSurveyProvider
+      Role: desktopChrome
+    # After call ends, select the Great option answer and then verify that the Nurse is redirected to the Home Page.
+    - Type: case
+      Value: SNFGreatPostCallSurvey
+      Role: localiOS
+    # Checking the status indicator correspond to Available in the Porivders side.
+    - Type: wait_for
+      Role: desktopChrome
+      Strategy: xpath
+      Id: $PAGE.care_platform_header.status_indicator$
+    - Type: get_attribute
+      Role: desktopChrome
+      Strategy: xpath
+      Id: $PAGE.care_platform_header.status_indicator$
+      Greps:
+        - var: STATUS_VAR
+          attr: class
+          condition: nempty
+          match: "(.*)has-status(.*)"
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: STATUS_VAR
+          Value: "is-green"
+    
