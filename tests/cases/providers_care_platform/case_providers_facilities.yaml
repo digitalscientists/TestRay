@@ -886,3 +886,238 @@ TestProviderCanClickAndViewFacilityFollowUpTicketsInformation:
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.care_platform_participant_records_follow_up_tickets.ticket_history_subject_header_label$
+
+#CXTB-750 Answer Call and Complete Session with Pause Issue
+TestProvidersAnswerCallAndCompleteSessionWithPauseIssue:
+  Environment: Settings
+  Precases:
+    - ProviderNewCleaner
+    - LoginSNFHelper
+  Aftercases:
+    - TerminateApp
+  Roles:
+    - Role: desktopChrome
+      App: desktop
+    - Role: localiOS
+      App: NeverAlone
+  Actions:
+    # Login to the Care Platform app with Providers account.
+    - Type: case
+      Value: ProvidersCarePlatformLogin
+      Role: desktopChrome
+    # Calling Prompt cleaner
+    - Type: case
+      Role: localiOS
+      Value: SeniorCleanPrompts
+    # Make Call
+    - Type: case
+      Role: localiOS
+      Value: SNFNewRequestHelper
+    # Make a Paused Issue
+    - Type: case
+      Value: AnswerOnDemandCallAsProvider
+      Role: desktopChrome
+    #End call
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.end_call_btn$
+      Role: desktopChrome
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.end_call_btn$
+      Role: desktopChrome
+  #Fill the Provider's call notes
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.call_notes_subject_input$
+      Role: desktopChrome
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.call_notes_subject_input$
+      Role: desktopChrome
+      Value: 'Automation Test subject'
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.call_notes_provider_input$
+      Role: desktopChrome
+      Value: 'Automation Test Notes: Test Issue Paused'
+    - Type: scroll_to
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.call_notes_save_button$
+  #Manual save of notes
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.call_notes_save_button$
+  #Complete Session
+    - Type: wait_for_property
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.complete_session_button$ 
+      Property: disabled
+      Value: "false"
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.complete_session_button$ 
+  #Fill survey and end session
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.post_call_survey_title$
+  # Pause issue
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.pause_issue_button$
+    - Type: sleep
+      Time: 0.5
+    - Type: refresh
+      Role: desktopChrome
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.resolved_no_radio_input$
+  # Check auto filled properties
+    # Auto answer Issue resolved - No
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.resolved_no_radio_input$
+      Greps:
+        - var: RESOLVED_NO_CHECK
+          attr: outerHTML
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: RESOLVED_NO_CHECK
+          Value: checked
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: RESOLVED_NO_CHECK
+          Value: disabled
+    # Auto Answer Reason - Follow-up recommended
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.reason_input$
+      Greps:
+        - var: REASON_INPUT
+          attr: value
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: REASON_INPUT
+          Value: 'Follow-up recommended'
+    - Type: wait_for_property
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.reason_input$
+      Property: disabled
+      Value: "true"
+    # Auto answer Discharge - No
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.recommend_discharge_no_input$
+      Greps:
+        - var: DISCHARGE_NO_CHECK
+          attr: outerHTML
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: DISCHARGE_NO_CHECK
+          Value: checked
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: DISCHARGE_NO_CHECK
+          Value: disabled
+    # Auto answer Subject Notes - [Issue Paused]
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.call_notes_subject_input$
+      Greps:
+        - var: PAUSED_SUBJECT
+          attr: value
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: PAUSED_SUBJECT
+          Value: '[Issue Paused]'
+    - Type: wait_for_property
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.call_notes_subject_input$
+      Property: disabled
+      Value: "true"
+    # Auto answer Details Notes - [Issue Paused]
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.call_notes_provider_input$
+      Greps:
+        - var: PAUSED_NOTES
+          attr: value
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: PAUSED_NOTES
+          Value: '[Issue Paused]'
+  # Unpause Issue
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.unpause_issue_button$
+    - Type: sleep
+      Time: 0.5
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.resolved_true_option$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.video_visit_true_option$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.recommend_discharge_yes_by_SNF$
+    # Auto answer Details Notes - not [Issue Paused]
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.call_notes_provider_input$
+      Greps:
+        - var: PAUSED_NOTES
+          attr: value
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: n_contain
+          Var: PAUSED_NOTES
+          Value: '[Issue Paused]'
+     # Auto answer Subject Notes - not [Issue Paused]
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.call_notes_subject_input$
+      Greps:
+        - var: PAUSED_SUBJECT
+          attr: value
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: n_contain
+          Var: PAUSED_SUBJECT
+          Value: '[Issue Paused]'
+    - Type: scroll_to
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.submit_exit_session_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.submit_exit_session_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_notifications.call_completed_notification$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.home_title$
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id: $PAGE.providers_notifications.call_completed_notification$

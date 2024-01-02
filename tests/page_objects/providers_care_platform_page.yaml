@@ -109,6 +109,7 @@ providers_call_handling_page:
   video_visit_true_option: //input[@name='video' and @value='true']/following-sibling::span
   resolved_true_option: //input[@name='resolved' and @value='true']/following-sibling::span
   resolved_no_option: //input[@name='resolved' and @value='false']/following-sibling::span
+  resolved_no_radio_input: //input[@name='resolved' and @value='false']
   reason_label: //div[contains(text(),'Reason') and contains(.,'REQUIRED')]
   reason_input: //select[@id='reason']
   first_reason_option: //select[@id='reason']/option[not(@value)][1]
@@ -117,6 +118,7 @@ providers_call_handling_page:
   recommend_discharge_yes_by_telehealth: //input[@name='recommendedDischarge' and @value='Yes, by telehealth']/following-sibling::span
   recommend_discharge_yes_by_SNF: //input[@name='recommendedDischarge' and @value='Yes, by facility']/following-sibling::span
   recommend_discharge_no_option: //input[@name='recommendedDischarge' and @value='No']/following-sibling::span
+  recommend_discharge_no_input: //input[@name='recommendedDischarge' and @value='No']
   follow_up_recommended_checkbox: //input[@id='followUpRecommended']
   assign_to_myself_checkbox: //input[@id='assignToMyself']
   selected_follow_up_time_option: //input[@name='followUpTime' and @checked]
@@ -134,6 +136,7 @@ providers_call_handling_page:
   video_grid: //div[@class='video']//div[contains(@data-testid,'video-grid')]
   emergency_services_button: //div[@class='video-additional-options']//button[contains(@class, 'button-emergency')]
   pause_issue_button: //button[text()='Pause Issue']
+  unpause_issue_button: //button[text()='Unpause Issue']
 
 providers_call_details_page:
   assessment_subtab: //nav[@class='tabs-nav']/button[contains(text(),'Assessment')]
