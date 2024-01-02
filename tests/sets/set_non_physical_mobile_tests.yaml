@@ -70,6 +70,7 @@ SetNonPhysicalMobileTest:
     - Case: TestProviderCanClickAndViewFacilityFollowUpTicketsInformation
     - Case: TestProviderAttemptAnOnDemandCallToParticipantsDeviceThatIsMissed
     - Case: TestProvidersAnswerCallAndCompleteSessionWithPauseIssue
+    - Case: TestProviderCanClickAndViewParticipantsFollowUpTicketsInformation
   # ES Provider Care Platform
     - Case: TestESProviderCarePlatformAnswerAndCompleteSession
     - Case: TestESProviderIDDSeeCallAppearInQueueAssignAndReviewDetails
