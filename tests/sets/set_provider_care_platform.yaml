@@ -68,3 +68,4 @@ SetProvidersCarePlatformTests:
     - Case: TestProviderAttemptAnOnDemandCallToParticipantsDeviceThatIsMissed
     - Case: TestProvidersAnswerCallAndCompleteSessionWithPauseIssue
     - Case: TestProviderCanClickAndViewParticipantsFollowUpTicketsInformation
+    - Case: TestProviderSendMessageToParticipantDeviceParticipantProfile
