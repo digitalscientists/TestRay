@@ -2216,6 +2216,8 @@ CarePartnerParticipantRecordsNavigation:
       Strategy: xpath
       Id: $PAGE.care_platform_participant.senior_complete_name$
   # Go to Records
+    - Type: sleep
+      Time: 0.5
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_participant_details.records_button$
