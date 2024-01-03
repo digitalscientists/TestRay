@@ -919,3 +919,141 @@ TestProviderSendMessageToParticipantDeviceParticipantProfile:
         - Type: eq
           Var: MESSAGE_VALUE
           Value: $AND_CLI_MESSAGE_TO_PARTICIPANT$
+
+# CXTB-179 Attempt an On-Demand Call to Participant’s Device (that is Ignored)
+TestProviderAttemptAnOnDemandCallToParticipantsDeviceThatIsIgnored:
+  Environment: Settings
+  Vars:
+    MESSAGE_TO_PARTICIPANT: Automation Message CXTB-179  # Message from Provider to Senior
+    LOGOUT_OPTION: "Go Off Shift"
+  Precases:
+    - LoginNeverAloneHelper
+    - ProviderNewCleaner
+    - SeniorCleanPrompts
+  Aftercases:
+    - CarePlatformLogout
+    - TerminateApp
+  Roles:
+    - Role: localiOS
+      App: NeverAlone
+    - Role: desktopChrome
+      App: desktop       
+  Actions:
+    # Login to the Care Platform app with Providers account.
+    - Type: case
+      Value: ProviderCallParticipant
+    - Type: sleep
+      Time: 2
+    # Participant must select the "Ignore Call" button.
+    - Type: case
+      Value: IgnoreCallAsSenior
+    - Type: sleep
+      Time: 2
+    # Yes, Send Message
+    # Verify that the window updates to indicate the participant is not available.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.participant_not_available_text$
+      Role: desktopChrome
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.participant_not_available_text$
+      Role: desktopChrome
+      Greps:
+        - var: PARTICIPANT_NOT_AVAILABLE_TEXT
+          attr: textContent
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: eq
+          Var: PARTICIPANT_NOT_AVAILABLE_TEXT
+          Value: $AND_CLI_senior_user1_name$ is not available.Would you like to leave a text message?
+  # Verify that there is an option for the care partner to leave a text message.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.leave_message_participant_input$
+      Role: desktopChrome
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.yes_message_button$
+      Role: desktopChrome
+  # Provider sends a message in the available box and click on the "Yes, send message" button.
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.leave_message_participant_input$
+      Value: $AND_CLI_MESSAGE_TO_PARTICIPANT$
+      Role: desktopChrome
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.yes_message_button$
+      Role: desktopChrome
+  # Call portal returns to no active call display.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.video_status$
+      Role: desktopChrome
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.video_status$
+      Role: desktopChrome
+      Greps:
+        - var: CALL_MESSAGE
+          attr: textContent
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: eq
+          Var: CALL_MESSAGE
+          Value: 'No active call.'
+  # Verify that the Participant receives a "Provider Care Partner Message" prompt showing the message, who sent it and when.
+    - Type: wait_for
+      Role: localiOS
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_message_modal.message_header$
+    - Type: return_element_attribute
+      Role: localiOS
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_message_modal.message_header$
+      Attribute: label
+      ResultVar: MESSAGE_HEADER_TITLE
+    - Type: assert
+      Asserts:
+        - Type: eq
+          Var: MESSAGE_HEADER_TITLE
+          Value: Provider Message
+    - Type: wait_for
+      Role: localiOS
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_message_modal.from_label$
+    - Type: return_element_attribute
+      Role: localiOS
+      Strategy: xpath
+      Id: $PAGE.seniors_app_message_modal.from_value$
+      Attribute: label
+      ResultVar: FROM_VALUE
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: FROM_VALUE
+          Value: $AND_CLI_provider_user1_name$ $AND_CLI_provider_user1_lastname$
+    - Type: wait_for
+      Role: localiOS
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_message_modal.sent_label$
+    - Type: wait_for
+      Role: localiOS
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_message_modal.message_label$
+    - Type: return_element_attribute
+      Role: localiOS
+      Strategy: xpath
+      Id: $PAGE.seniors_app_message_modal.message_value$
+      Attribute: label
+      ResultVar: MESSAGE_VALUE
+    - Type: assert
+      Asserts:
+        - Type: eq
+          Var: MESSAGE_VALUE
+          Value: $AND_CLI_MESSAGE_TO_PARTICIPANT$
