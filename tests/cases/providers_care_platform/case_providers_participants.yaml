@@ -1057,3 +1057,92 @@ TestProviderAttemptAnOnDemandCallToParticipantsDeviceThatIsIgnored:
         - Type: eq
           Var: MESSAGE_VALUE
           Value: $AND_CLI_MESSAGE_TO_PARTICIPANT$
+
+# CXTB-753 Verify “Emergency Services” Button
+TestProviderVerifyEmergencyServicesButton:
+  Environment: Settings
+  Vars:
+    LOGOUT_OPTION: "Go Off Shift"
+  Precases:
+    - LoginNeverAloneHelper
+    - ProviderNewCleaner
+    - SeniorCleanPrompts
+  Aftercases:
+    - CarePlatformLogout
+    - TerminateApp
+  Roles:
+    - Role: localiOS
+      App: NeverAlone
+    - Role: desktopChrome
+      App: desktop
+  Actions:
+  # Call Participant logged in as a Provider.
+    - Type: case
+      Value: ProviderCallParticipant
+  # Check for the Emergency Button
+    - Type: wait_not_visible
+      Role: desktopChrome
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.emergency_button$
+  # Device begins ringing and automatically displays "Incoming Call" modal.
+    - Type: wait_for
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_incoming_call.incoming_call_header$
+    - Type: return_element_attribute
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_incoming_call.incoming_call_header$
+      Attribute: label
+      ResultVar: HEADER_TITLE
+    - Type: assert
+      Asserts:
+        - Type: eq
+          Var: HEADER_TITLE
+          Value: Incoming Call...
+    - Type: wait_for
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_incoming_call.answer_call_button$
+    - Type: wait_for
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_incoming_call.ignore_call_button$
+  # Click "Answer Call" button.
+    - Type: click
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_incoming_call.answer_call_button$
+  # Verify that senior was connected to the call.
+    - Type: wait_for
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_call.video_button$
+  # Check For Emergency Button
+    - Type: wait_for
+      Role: desktopChrome
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.emergency_button$
+    - Type: get_attribute
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.care_platform_call_portal.emergency_button$
+      Greps:
+        - var: BUTTON_TEXT
+          attr: innerText
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: BUTTON_TEXT
+          Value: Emergency Services
+  # Then click "End Call".
+    - Type: click
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_call.end_call_button$
+  # Check For Emergency Button: Must disappear when call with device has ended
+    - Type: wait_not_visible
+      Role: desktopChrome
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.emergency_button$
+  # Select the Great option on the Post Call Survey once the call ends.
+    - Type: case
+      Value: SeniorGreatPostSurveyCallHelper
+  # Fill up the Post Call Survey on the provider side.
+    - Type: case
+      Value: PostCallSurveyProvider
