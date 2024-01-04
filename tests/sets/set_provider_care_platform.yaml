@@ -71,3 +71,4 @@ SetProvidersCarePlatformTests:
     - Case: TestProviderSendMessageToParticipantDeviceParticipantProfile
     - Case: TestProviderCallFacilityDeviceAndCompleteAnOnDemandCallFacilityProfile
     - Case: TestProviderAttemptAnOnDemandCallToParticipantsDeviceThatIsIgnored
+    - Case: TestProviderAttemptAnOnDemandCallToFacilityDeviceThatIsIgnoredFacilityPane
