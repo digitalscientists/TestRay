@@ -72,4 +72,5 @@ SetProvidersCarePlatformTests:
     - Case: TestProviderCallFacilityDeviceAndCompleteAnOnDemandCallFacilityProfile
     - Case: TestProviderAttemptAnOnDemandCallToParticipantsDeviceThatIsIgnored
     - Case: TestProviderAttemptAnOnDemandCallToFacilityDeviceThatIsIgnoredFacilityPane
+    - Case: TestProviderVerifyEmergencyServicesButton
     - Case: TestProviderSendMessageToFacilityDeviceFacilityPane
