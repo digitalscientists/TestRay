@@ -1381,7 +1381,7 @@ TestProviderAttemptAnOnDemandCallToFacilityDeviceThatIsIgnoredFacilityPane:
           Var: MESSAGE_VALUE
           Value: $AND_CLI_MESSAGE_TO_SNF$
 
-#CXTB-189 Send Message to Facility Device - Facility Pane
+# CXTB-189 Send Message to Facility Device - Facility Pane
 TestProviderSendMessageToFacilityDeviceFacilityPane:
   Environment: Settings
   Vars:
@@ -1398,7 +1398,7 @@ TestProviderSendMessageToFacilityDeviceFacilityPane:
     - Role: desktopChrome
       App: desktop 
   Actions:
-  # Call login for nurses
+  # Login to SNF
     - Type: case
       Role: localiOS
       Value: LoginSNFHelper
@@ -1439,7 +1439,7 @@ TestProviderSendMessageToFacilityDeviceFacilityPane:
         ACCOUNT_STATUS: Pre-delivery
     - Type: case
       Value: AlternativeCarePartnerLogout
-  # Call login for nurses
+  # Log in to SNF
     - Type: case
       Role: localiOS
       Value: LoginSNFHelper
@@ -1472,18 +1472,18 @@ TestProviderSendMessageToFacilityDeviceFacilityPane:
         ACCOUNT_STATUS: Deactivated
     - Type: case
       Value: AlternativeCarePartnerLogout
-  # Login to the Care Platform app with Providers account.
+  # Login to the Care Platform app with Providers account
     - Type: case
       Value: ProvidersCarePlatformLogin
-  # Navigate to Facilities.
+  # Navigate to Facilities
     - Type: case
       Value: ProviderNavigateToFacilities
-  # Select the desired facility.
+  # Select the desired facility
     - Type: click
       Strategy: xpath
       Id: $PAGE.providers_facilities_page.facility_based_on_name$ 
       Role: desktopChrome
-  # Navigate to the Devices tab.
+  # Navigate to the Devices tab
     - Type: wait_for
       Strategy: xpath
       Role: desktopChrome
@@ -1528,18 +1528,18 @@ TestProviderSendMessageToFacilityDeviceFacilityPane:
         ACCOUNT_STATUS: Suspended
     - Type: case
       Value: AlternativeCarePartnerLogout
-  # Login to the Care Platform app with Providers account.
+  # Login to the Care Platform app with Providers account
     - Type: case
       Value: ProvidersCarePlatformLogin
-  # Navigate to Facilities.
+  # Navigate to Facilities
     - Type: case
       Value: ProviderNavigateToFacilities
-  # Select the desired facility.
+  # Select the desired facility
     - Type: click
       Strategy: xpath
       Id: $PAGE.providers_facilities_page.facility_based_on_name$ 
       Role: desktopChrome
-  # Navigate to the Devices tab.
+  # Navigate to the Devices tab
     - Type: wait_for
       Strategy: xpath
       Role: desktopChrome
