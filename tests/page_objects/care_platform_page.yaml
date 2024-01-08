@@ -228,6 +228,8 @@ care_platform_participant_records:
   follow_up_tickets_tab: //nav/button[contains(text(),'Follow-up Tickets')]
   medical_medications_subtab: //nav/button[text()='Medications']
   medical_medical_needs_subtab: //nav/button[text()='Medical Needs']
+  medical_facility_title: //*[@id='medicalNeeds']//h4[contains(text(),'Facility')]
+  medical_facility_name: //*[@id='medicalNeeds']//div[contains(.,'Facility:')]//div[contains(text(),'$AND_CLI_facility_name1$')]
   medical_behavioral_subtab: //nav/button[text()='Behavioral']
   medical_medical_history_subtab: //nav/button[text()='Medical History']
   message_input: //input[@id='message']
@@ -275,6 +277,7 @@ care_platform_participant_records_follow_up_tickets:
   save_ticket_button: //button[@data-test-id='testFormFollowUpTicketSave']
   medical_appointment_opt: //option[@id='med_appointment']
   details_input: //textarea[@id='details']
+  first_view_facility_follow_up_link: //*[@id='followup-ticket']//a[contains(.,'View Facility')][1]
 
 care_platform_edit_participant_records:
   edit_title: //span[contains(text(),'Edit')]
