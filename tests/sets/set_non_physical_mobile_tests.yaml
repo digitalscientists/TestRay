@@ -77,6 +77,8 @@ SetNonPhysicalMobileTest:
     - Case: TestProviderAttemptAnOnDemandCallToParticipantsDeviceThatIsIgnored
     - Case: TestProviderAttemptAnOnDemandCallToFacilityDeviceThatIsIgnoredFacilityPane
     - Case: TestProviderVerifyEmergencyServicesButton
+    - Case: TestProviderSendMessageToFacilityDeviceFacilityPane
+    - Case: TestProviderSendMessageToFacilityDeviceFacilityProfile
   # ES Provider Care Platform
     - Case: TestESProviderCarePlatformAnswerAndCompleteSession
     - Case: TestESProviderIDDSeeCallAppearInQueueAssignAndReviewDetails
