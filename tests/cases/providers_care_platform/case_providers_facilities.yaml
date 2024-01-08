@@ -1512,6 +1512,10 @@ TestProviderSendMessageToFacilityDeviceFacilityPane:
       Id: $PAGE.providers_facilities_page.last_message_sent$
       Attribute: textContent
       ResultVar: LAST_MESSAGE_HISTORY
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id: $PAGE.providers_facilities_page.send_message_button$
+      Role: desktopChrome
     - Type: assert
       Asserts:
         - Type: contain
@@ -1548,7 +1552,7 @@ TestProviderSendMessageToFacilityDeviceFacilityPane:
       Strategy: xpath
       Role: desktopChrome
       Id: $PAGE.providers_facilities_page.devices_tab$
-  # Click "Message" next to an inactive device on right side of screen, status in: Deactivated
+  # Click "Message" next to an inactive device on right side of screen, status in: Suspended
     - Type: wait_for
       Role: desktopChrome
       Strategy: xpath
@@ -1573,5 +1577,9 @@ TestProviderSendMessageToFacilityDeviceFacilityPane:
         - Type: contain
           Var: LAST_MESSAGE_HISTORY
           Value: Automation Message CXTB-189
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id: $PAGE.providers_facilities_page.send_message_button$
+      Role: desktopChrome
     - Type: case
       Value: CarePlatformLogout
