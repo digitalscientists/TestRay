@@ -1380,3 +1380,206 @@ TestProviderAttemptAnOnDemandCallToFacilityDeviceThatIsIgnoredFacilityPane:
         - Type: eq
           Var: MESSAGE_VALUE
           Value: $AND_CLI_MESSAGE_TO_SNF$
+
+# CXTB-189 Send Message to Facility Device - Facility Pane
+TestProviderSendMessageToFacilityDeviceFacilityPane:
+  Environment: Settings
+  Vars:
+    LOGOUT_OPTION: "Go Off Shift"
+  Precases:
+    - ProviderNewCleaner
+    - OnboarderSetNurseToActive
+  Aftercases:
+    - TerminateApp
+    - OnboarderSetNurseToActive
+  Roles:
+    - Role: localiOS
+      App: NeverAlone
+    - Role: desktopChrome
+      App: desktop 
+  Actions:
+  # Login to SNF
+    - Type: case
+      Role: localiOS
+      Value: LoginSNFHelper
+    - Type: case
+      Value: SeniorCleanPrompts
+  # Create message from provider to the active facility device
+    - Type: case
+      Value: ProviderSendsMessageToFacility
+      Vars:
+        MESSAGE_TO_FACILITY: Automation Message CXTB-189 Active Status
+  # Check sender
+    - Type: return_element_attribute
+      Strategy: class_chain
+      Id: $PAGE.snf_notifications.notification_details_from$
+      Attribute: label
+      ResultVar: FROM_VALUE
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: FROM_VALUE
+          Value: Dr. $AND_CLI_provider_user1_name$ $AND_CLI_provider_user1_lastname$
+  # Check message sent
+    - Type: wait_for
+      Strategy: id
+      Id: "$AND_CLI_MESSAGE_TO_FACILITY$"
+  # Close Message Prompt
+    - Type: click
+      Strategy: class_chain
+      Id: $PAGE.snf_notifications.modal_close_button$
+  # Change Facility device status to "Pre-Delivery"
+    - Type: case
+      Value: CarePlatformLogout
+    - Type: case
+      Value: OnboarderCarePartnerLogin
+    - Type: case
+      Value: OnboarderCarePartnerSetSNFDeviceToVariableState
+      Vars:
+        ACCOUNT_STATUS: Pre-delivery
+    - Type: case
+      Value: AlternativeCarePartnerLogout
+  # Log in to SNF
+    - Type: case
+      Role: localiOS
+      Value: LoginSNFHelper
+    - Type: case
+      Value: SeniorCleanPrompts
+  # Create message from provider to the active facility device
+    - Type: case
+      Value: ProviderSendsMessageToFacility
+      Vars:
+        MESSAGE_TO_FACILITY: Automation Message CXTB-189 Pre-Delivery Status
+  # Check sender
+    - Type: return_element_attribute
+      Strategy: class_chain
+      Id: $PAGE.snf_notifications.notification_details_from$
+      Attribute: label
+      ResultVar: FROM_VALUE
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: FROM_VALUE
+          Value: Dr. $AND_CLI_provider_user1_name$ $AND_CLI_provider_user1_lastname$
+    - Type: case
+      Value: CarePlatformLogout
+  # Change Facility device status to "Deactivated"
+    - Type: case
+      Value: OnboarderCarePartnerLogin
+    - Type: case
+      Value: OnboarderCarePartnerSetSNFDeviceToVariableState
+      Vars:
+        ACCOUNT_STATUS: Deactivated
+    - Type: case
+      Value: AlternativeCarePartnerLogout
+  # Login to the Care Platform app with Providers account
+    - Type: case
+      Value: ProvidersCarePlatformLogin
+  # Navigate to Facilities
+    - Type: case
+      Value: ProviderNavigateToFacilities
+  # Select the desired facility
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_facilities_page.facility_based_on_name$ 
+      Role: desktopChrome
+  # Navigate to the Devices tab
+    - Type: wait_for
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_facilities_page.devices_tab$ 
+    - Type: click
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_facilities_page.devices_tab$
+  # Click "Message" next to an inactive device on right side of screen, status in: Deactivated
+    - Type: wait_for
+      Role: desktopChrome
+      Strategy: xpath
+      Id: $PAGE.providers_facilities_page.message_based_on_device_button$
+    - Type: click
+      Role: desktopChrome
+      Strategy: xpath
+      Id: $PAGE.providers_facilities_page.message_based_on_device_button$
+  # Message device modal appears at center of screen, showing message history for device
+    - Type: wait_for
+      Role: desktopChrome
+      Strategy: xpath
+      Id: $PAGE.providers_facilities_page.last_message_sent$
+    - Type: return_element_attribute
+      Role: desktopChrome
+      Strategy: xpath
+      Id: $PAGE.providers_facilities_page.last_message_sent$
+      Attribute: textContent
+      ResultVar: LAST_MESSAGE_HISTORY
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id: $PAGE.providers_facilities_page.send_message_button$
+      Role: desktopChrome
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: LAST_MESSAGE_HISTORY
+          Value: Automation Message CXTB-189
+    - Type: case
+      Value: CarePlatformLogout
+  # Change Facility device status to "Suspended"
+    - Type: case
+      Value: OnboarderCarePartnerLogin
+    - Type: case
+      Value: OnboarderCarePartnerSetSNFDeviceToVariableState
+      Vars:
+        ACCOUNT_STATUS: Suspended
+    - Type: case
+      Value: AlternativeCarePartnerLogout
+  # Login to the Care Platform app with Providers account
+    - Type: case
+      Value: ProvidersCarePlatformLogin
+  # Navigate to Facilities
+    - Type: case
+      Value: ProviderNavigateToFacilities
+  # Select the desired facility
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_facilities_page.facility_based_on_name$ 
+      Role: desktopChrome
+  # Navigate to the Devices tab
+    - Type: wait_for
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_facilities_page.devices_tab$ 
+    - Type: click
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_facilities_page.devices_tab$
+  # Click "Message" next to an inactive device on right side of screen, status in: Suspended
+    - Type: wait_for
+      Role: desktopChrome
+      Strategy: xpath
+      Id: $PAGE.providers_facilities_page.message_based_on_device_button$
+    - Type: click
+      Role: desktopChrome
+      Strategy: xpath
+      Id: $PAGE.providers_facilities_page.message_based_on_device_button$
+  # Message device modal appears at center of screen, showing message history for device
+    - Type: wait_for
+      Role: desktopChrome
+      Strategy: xpath
+      Id: $PAGE.providers_facilities_page.last_message_sent$
+    - Type: return_element_attribute
+      Role: desktopChrome
+      Strategy: xpath
+      Id: $PAGE.providers_facilities_page.last_message_sent$
+      Attribute: textContent
+      ResultVar: LAST_MESSAGE_HISTORY
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: LAST_MESSAGE_HISTORY
+          Value: Automation Message CXTB-189
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id: $PAGE.providers_facilities_page.send_message_button$
+      Role: desktopChrome
+    - Type: case
+      Value: CarePlatformLogout
