@@ -1,11 +1,9 @@
 ESCarePartnerLogin:
-  Environment: Settings
   Roles:
     - Role: desktopChrome
       App: desktop
   Actions:
     - Type: navigate
-      Role: desktopChrome
       Value: $AND_CLI_easterseals_care_platform_url$
     - Type: maximize
     - Type: send_keys
@@ -18,13 +16,11 @@ ESCarePartnerLogin:
       Value: $AND_CLI_es_carepartner_user_pwd$
     - Type: click
       Strategy: xpath
-      Role: desktopChrome
       Id: $PAGE.care_platform_login.login_button$
     - Type: sleep
       Time: 2
 
 AnswerCallAsESCarePartner:
-  Environment: Settings
   Roles:
     - Role: desktopChrome
       App: desktop       
@@ -38,6 +34,8 @@ AnswerCallAsESCarePartner:
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_home.call_based_on_es_idd_participant_name$
+    - Type: sleep
+      Time: 2
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.care_platform_home.answer_call$
@@ -48,7 +46,6 @@ AnswerCallAsESCarePartner:
 ESCarePartnerCleanCallQueueAndHangedCalls:
   Vars:
     LOGOUT_OPTION: "Go Off Shift"
-  Environment: Settings
   Aftercases:
     - CarePlatformLogout
   Roles:
@@ -58,6 +55,8 @@ ESCarePartnerCleanCallQueueAndHangedCalls:
     # Log in.
     - Type: case
       Value: ESCarePartnerLogin
+    - Type: sleep
+      Time: 1
     # Clean Care Partner Call Queue and Hanged Calls.
     - Type: care_partner_clean_call_queue_and_hanged_calls
 
@@ -233,6 +232,13 @@ ESCarePartnerSetScheduledCallForSeniors:
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_call_portal.today_date_date_picker$
+    # Patient location
+    - Type: click
+      Strategy: id
+      Id: $PAGE.care_platform_call_portal.location_selector$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.location_option_2$
     # Click in the submit button
     - Type: click
       Strategy: xpath
@@ -251,7 +257,6 @@ ESCarePartnerSetScheduledCallForSeniors:
 
 # Creates an schedule to start in X amount of minutes.
 ESSetScheduledCallForSeniorsToStartInXMinutes:
-  Environment: Settings
   Vars:
     LOGOUT_OPTION: "Go Off Shift"
   Roles:
@@ -349,6 +354,13 @@ ESSetScheduledCallForSeniorsToStartInXMinutes:
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_call_portal.today_date_date_picker$
+      # Patient location
+    - Type: click
+      Strategy: id
+      Id: $PAGE.care_platform_call_portal.location_selector$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.location_option_2$
       # Click in the submit button
     - Type: click
       Strategy: xpath
@@ -379,7 +391,7 @@ VerifyESUserIsOffline:
       Id: $PAGE.care_platform_header.offline_es_carepartner_element$
     - Type: get_text
       Strategy: xpath
-      Id : $PAGE.care_platform_header.offline_es_carepartner_element$
+      Id: $PAGE.care_platform_header.offline_es_carepartner_element$
       Greps:
         - var: CARE_PARTNER_ELEMENT
           match: "(.*)"
@@ -410,7 +422,7 @@ VerifyESUserIsOnline:
       Id: $PAGE.care_platform_header.online_es_carepartner_element$
     - Type: get_text
       Strategy: xpath
-      Id : $PAGE.care_platform_header.online_es_carepartner_element$
+      Id: $PAGE.care_platform_header.online_es_carepartner_element$
       Greps:
         - var: CARE_PARTNER_ELEMENT
           match: "(.*)"
@@ -497,3 +509,40 @@ ESPostCallSurveyCarePartner:
       Strategy: xpath
       Id: $PAGE.care_platform.es_call_queue_title$
       CheckTime: 25
+
+ESCarePartnerParticipantCallPortalNavigation:
+  Roles:
+    - Role: desktopChrome
+      App: desktop
+  Actions:
+  # Navigate to Participants.
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform.navigation_participant$
+  # Limit listing by searching name.
+    - Type: search_by_text
+      Role: desktopChrome
+      Text: $AND_CLI_idd_es_never_alone_user1_name$
+  # Select corresponding participant by name in the list.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant.esidd_senior_complete_name$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant.esidd_senior_complete_name$
+  # Verify that the Participant Pane is opened.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_details.records_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_details.participant_local_time$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_details.esidd_participant_details_title_by_name$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant.call_portal_btn$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant.call_portal_btn$

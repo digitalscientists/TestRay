@@ -13,7 +13,7 @@ TestCarePartnerCreateFollowUpTicket:
   #Go to participants
     - Type: click
       Strategy: xpath
-      Id : $PAGE.care_platform.navigation_participant$
+      Id: $PAGE.care_platform.navigation_participant$
   #Select first participant in the list
     - Type: wait_for
       Strategy: xpath
@@ -1030,6 +1030,13 @@ TestCarePartnerAnswerCallFromQueueAndCompleteMedicalTransfer:
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_call_portal.today_date_date_picker$
+  # Patient location
+    - Type: click
+      Strategy: id
+      Id: $PAGE.care_platform_call_portal.location_selector$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.location_option_2$
   # Click on "Submit".
     - Type: click
       Strategy: xpath
@@ -1037,11 +1044,11 @@ TestCarePartnerAnswerCallFromQueueAndCompleteMedicalTransfer:
   # Telehealth request form window disappears.
     - Type: wait_not_visible
       Strategy: xpath
-      Id : $PAGE.care_platform_call_portal.telehealth_request_form_header$
+      Id: $PAGE.care_platform_call_portal.telehealth_request_form_header$
   # Verify "End Call" button has been replaced with "Leave Call" button.
     - Type: wait_for
       Strategy: xpath
-      Id : $PAGE.care_platform_call_portal.leave_call_btn$
+      Id: $PAGE.care_platform_call_portal.leave_call_btn$
   # Log in as a provider
     - Type: case
       Value: ProvidersCarePlatformLogin
@@ -2103,7 +2110,7 @@ TestCarePartnerParticipantPaneEditEMSSettingAndAddress:
   # Navigate to Participants
     - Type: click
       Strategy: xpath
-      Id : $PAGE.care_platform.navigation_participant$
+      Id: $PAGE.care_platform.navigation_participant$
   # Decrease listing by searching participant's name
     - Type: search_by_text
       Text: $AND_CLI_senior_user1_name$
@@ -3752,7 +3759,7 @@ TestCarePartnerParticipantInfoEditDNRFlag:
   # Return to Participants directory by clicking "Participants" in header
     - Type: click
       Strategy: xpath
-      Id : $PAGE.care_platform.navigation_participant$
+      Id: $PAGE.care_platform.navigation_participant$
   # Search Participant by name
     - Type: search_by_text
       Role: desktopChrome

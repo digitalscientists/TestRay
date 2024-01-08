@@ -66,6 +66,12 @@ employee_health_home_page:
 employee_health_call_history_tab:
   call_history_navigation: //button[text()='Call History']
   call_row_entry: "//div[@class='accordion-item']//div[contains(text(), '$AND_CLI_UNIQUE_SUBJECT$')]"
+  column_header_date: //div[@class='accordion-header']//div[text()='Date']
+  column_header_time: //div[@class='accordion-header']//div[text()='Time']
+  column_header_duration: //div[@class='accordion-header']//div[text()='Duration']
+  column_header_patient: //div[@class='accordion-header']//div[text()='Patient']
+  column_header_provider: //div[@class='accordion-header']//div[text()='Provider']
+  column_header_subject: //div[@class='accordion-header']//div[text()='Subject']
 
 employee_health_my_account_modal:
   modal_title: //*[@id='modals']//h4[text()='My Account']
@@ -73,20 +79,22 @@ employee_health_my_account_modal:
   notifications_tab: //*[@id='modals']//nav/button[text()='Notifications']
   my_info_tab: //*[@id='modals']//nav/button[text()='My Info']
   update_password_tab: //nav/button[text()='Update Password']
-  notifications_text: //div[@tab-title='Notifications']/form
+  notifications_text: //div[@tab-title='Notifications']/form/p[contains(text(),'minutes')]
   save_changes_button: //button[text()='Save Changes']
   cancel_button: //button[text()='Cancel']
   notifications_email_checkbox_input: //*[@id='minBeforeAppointmentToEmail']
   notifications_sms_checkbox_input: //*[@id='minBeforeAppointmentToText']
+  notifications_sms_checkbox_checker: //*[@id='minBeforeAppointmentToText']/ancestor::label
   notifications_email_checkbox: //*[@id='minBeforeAppointmentToEmail']/following-sibling::span
   notifications_sms_checkbox: //*[@id='minBeforeAppointmentToText']/following-sibling::span
+  my_info_contact_number_input: //div[contains(@class,'input-group')][contains(.,'Contact Number')]/input
   my_info_phone_input: //input[@id='phone']
   my_info_phone_alert_message: //label[@for='phone']//following-sibling::div[@aria-hidden='false']//div[contains(@class,'color-red-400')]
-  my_info_firstname_input: //input[@id='firstName']
-  my_info_lastname_input: //*[@id='lastName']
-  my_info_email_input: //*[@id='email']
-  my_info_date_of_birth_input: //*[@id='dateOfBirth']
-  my_info_member_id_input: //*[@id='memberIdentifier']
+  my_info_firstname_input: //div[contains(@class,'input-group')][contains(.,'First Name')]/input
+  my_info_lastname_input: //div[contains(@class,'input-group')][contains(.,'Last Name')]/input
+  my_info_email_input: //div[contains(@class,'input-group')][contains(.,'Email')]/input
+  my_info_date_of_birth_input: //div[contains(@class,'input-group')][contains(.,'Date of Birth')]/input
+  my_info_member_id_input: //div[contains(@class,'input-group')][contains(.,'Member ID')]/input
   update_email_tab: //nav/button[text()='Update Email']
   update_email_current: //*[@tab-title='Update Email']//input[contains(@class,'input')]
   update_email_new: //*[@id='email']
@@ -145,12 +153,21 @@ employee_health_telehealth_request_form:
   first_hour_available_button: //div[@id='modals']//input[@name='startTime'][not(@disabled)][1]/following-sibling::div
   calendar_18hr_button: //div[@id='modals']//input[@name='startTime' and @value='18:00']/following-sibling::div
   calendar_day_button: //div[@class='calendar-days fade-quick-enter-done']//div[text()=$AND_CLI_DAY$]
+  calendar_day_that_is_not_selected: (//div[@id='modals']//button[contains(@class, 'calendar-day') and not(contains(@class, 'is-selected')) and not(@disabled)])[1]
   calendar_hour_button: //input[@name='startTime']/../div[text()= '11:30 am']
   appointment_list: //div[@class = 'accordion-item']
   appointment_list_description: //div/div[contains(text(), '$AND_CLI_PAIN_DESCRIPTION$')]
+  appointment_dropdown_based_on_description: //div/div[contains(text(), '$AND_CLI_PAIN_DESCRIPTION$')]/following-sibling::div/div[contains(@class, 'dropdown')]/button
+  appointment_date_based_on_description: //div/div[contains(text(), '$AND_CLI_PAIN_DESCRIPTION$')]/preceding-sibling::div/time[not(contains(text(),'AM'))and not(contains(text(),'PM'))]
+  reschedule_appointment_button: //nav[contains(@class, 'dropdown-menu')]//button[contains(text(), 'Reschedule Appointment')]
+  cancel_appointment_button: //nav[contains(@class, 'dropdown-menu')]//button[contains(text(), 'Cancel Appointment')]
+  edit_appointment_title: //div[@id='modals']//h4
+  edit_appointment_cancel_button: //div[@id='modals']//button[contains(text(), 'Cancel')]
+  edit_appointment_save_and_close_button: //button[contains(text(), 'Save and close')]
   calendar_month_days: //div[@class='calendar']//div[@class='calendar-days fade-quick-enter-done']
   tab_section: //div[contains(@class, 'box has-scrollable-content')]
   comments: comments
+  yes_delete_button: //div[@id='dialogs']//button[text()='Yes, Delete']
 
 employee_health_mobile_home_page:
   header_menu_button: //*[@id='root']//header//button
@@ -170,7 +187,7 @@ employee_health_mobile_menu_modal:
 
 employee_health_mobile_notifications_page:
     save_changes_button: //button[text()= 'Save Changes']
-    notifications_text: //*[@id='menus']//form
+    notifications_text: //*[@id='menus']//form/p[contains(text(),'minutes')]
     close_button: //*[@id='menus']//header//button
 
 employee_health_mobile_password_page:

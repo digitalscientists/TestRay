@@ -437,6 +437,7 @@ TestSeniorAppIgnoreProviderCall:
   Environment: Settings
   Precases:
     - LoginNeverAloneHelper
+    - ProviderNewCleaner
   Aftercases:
     - TerminateApp
   Roles:
@@ -956,6 +957,8 @@ TestSeniorVerifyCallWillNotRedirectToHomePageAfter10MinutesWithoutAction:
       Strategy: class_chain
       Id: $PAGE.seniors_app_notifications.all_tab$
     # Select the call in the notifications page and join the call.
+    - Type: sleep
+      Time: 2
     - Type: wait_for
       Strategy: class_chain
       Id: $PAGE.seniors_app_notifications.appointment_based_on_name_element$

@@ -36,6 +36,8 @@ AnswerCallAsCHCarePartner:
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_home.call_based_on_ch_idd_participant_name$
+    - Type: sleep
+      Time: 2
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.care_platform_home.answer_call$
@@ -55,6 +57,8 @@ CHCarePartnerCleanCallQueueAndHangedCalls:
     # Log in.
     - Type: case
       Value: CHCarePartnerLogin
+    - Type: sleep
+      Time: 1
     # Clean Care Partner Call Queue and Hanged Calls.
     - Type: care_partner_clean_call_queue_and_hanged_calls
 
@@ -227,6 +231,13 @@ CHCarePartnerSetScheduledCallForSeniors:
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_call_portal.today_date_date_picker$
+    # Patient location
+    - Type: click
+      Strategy: id
+      Id: $PAGE.care_platform_call_portal.location_selector$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.location_option_2$
     # Click in the submit button
     - Type: click
       Strategy: xpath
@@ -342,6 +353,13 @@ CHSetScheduledCallForSeniorsToStartInXMinutes:
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_call_portal.today_date_date_picker$
+      # Patient location
+    - Type: click
+      Strategy: id
+      Id: $PAGE.care_platform_call_portal.location_selector$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.location_option_2$
       # Click in the submit button
     - Type: click
       Strategy: xpath
@@ -355,30 +373,6 @@ CHSetScheduledCallForSeniorsToStartInXMinutes:
       Id: $PAGE.care_platform.navigation_home$
     - Type: case
       Value: CarePlatformLogout
-
-ESAdminOnCallLogin:
-  Roles:
-    - Role: desktopChrome
-      App: desktop
-  Actions:
-    - Type: navigate
-      Role: desktopChrome
-      Value: $AND_CLI_easterseals_care_platform_url$
-    - Type: maximize
-    - Type: send_keys
-      Strategy: id
-      Id: $PAGE.care_platform_login.email_input$
-      Value: $AND_CLI_es_admincall_user$
-    - Type: send_keys
-      Strategy: id
-      Id: $PAGE.care_platform_login.password_input$
-      Value: $AND_CLI_es_admincall_user_pwd$
-    - Type: click
-      Strategy: xpath
-      Role: desktopChrome
-      Id: $PAGE.care_platform_login.login_button$
-    - Type: sleep
-      Time: 2
 
 VerifyCHUserIsOffline:
   Roles:
@@ -395,7 +389,7 @@ VerifyCHUserIsOffline:
       Id: $PAGE.care_platform_header.offline_ch_carepartner_element$
     - Type: get_text
       Strategy: xpath
-      Id : $PAGE.care_platform_header.offline_ch_carepartner_element$
+      Id: $PAGE.care_platform_header.offline_ch_carepartner_element$
       Greps:
         - var: CARE_PARTNER_ELEMENT
           match: "(.*)"
@@ -425,7 +419,7 @@ VerifyCHUserIsOnline:
       Id: $PAGE.care_platform_header.online_ch_carepartner_element$
     - Type: get_text
       Strategy: xpath
-      Id : $PAGE.care_platform_header.online_ch_carepartner_element$
+      Id: $PAGE.care_platform_header.online_ch_carepartner_element$
       Greps:
         - var: CARE_PARTNER_ELEMENT
           match: "(.*)"
@@ -512,3 +506,40 @@ CHPostCallSurveyCarePartner:
       Strategy: xpath
       Id: $PAGE.care_platform.ch_call_queue_title$
       CheckTime: 25
+
+CHCarePartnerParticipantCallPortalNavigation:
+  Roles:
+    - Role: desktopChrome
+      App: desktop
+  Actions:
+  # Navigate to Participants.
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform.navigation_participant$
+  # Limit listing by searching name.
+    - Type: search_by_text
+      Role: desktopChrome
+      Text: $AND_CLI_idd_ch_never_alone_user2_name$
+  # Select corresponding participant by name in the list.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant.chidd_senior_complete_name$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant.chidd_senior_complete_name$
+  # Verify that the Participant Pane is opened.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_details.records_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_details.participant_local_time$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_details.chidd_participant_details_title_by_name$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant.call_portal_btn$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant.call_portal_btn$

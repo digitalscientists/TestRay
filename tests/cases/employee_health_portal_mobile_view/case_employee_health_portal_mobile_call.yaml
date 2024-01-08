@@ -146,3 +146,24 @@ TestEHPMobileCallAlreadyAnsweredNotificationWhenEmployeeLogsOut:
       Role: desktopChrome1
       Strategy: xpath
       Id: $PAGE.providers_home_page.home_title$
+
+# CXTB-679 Employee Health Portal Mobile - Review Call History
+TestEHPMobileReviewCallHistory:
+  Environment: Settings
+  Roles:
+    - Role: desktopChrome
+      Capabilities:
+        chromeOptions:
+          args:
+            - mobileEmulation
+      App: desktop
+  Actions:
+  # Calling EHP Login case.
+    - Type: case
+      Value: EmployeeHealthPortalLogIn
+  # Navigate to Call History
+    - Type: case
+      Value: NavigateToCallHistory
+  # Log out of EHP.
+    - Type: case
+      Value: EHPMobileLogOut

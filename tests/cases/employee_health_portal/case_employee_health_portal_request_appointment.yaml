@@ -410,3 +410,465 @@ TestEmployeeHealthPortalRequestAnAppointmentForDependentMinor:
         - Type: eq
           Var: SHOWED_DESCRIPTION
           Value: $AND_CLI_PAIN_DESCRIPTION$
+
+#CXTB-114 Reschedule an Upcoming Appointment for Employee EHP Employees
+TestEmployeeHealthPortalRescheduleAnUpcomingAppointmentForEHPEmployee:
+  Environment: Settings 
+  Roles:
+    - Role: desktopChrome
+      App: "desktop"
+  Actions:
+  #Calling Login case
+    - Type: case
+      Value: EmployeeHealthPortalLogIn
+  # Make an appointment
+    - Type: case
+      Value: EmployeeHealthPortalAppointmentsRequest
+  # Verify if the appointment is showing on the list
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.employee_health_telehealth_request_form.appointment_list$
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.employee_health_telehealth_request_form.appointment_list_description$
+      Greps:
+        - var: SHOWED_DESCRIPTION
+          attr: textContent
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: eq
+          Var: SHOWED_DESCRIPTION
+          Value: $AND_CLI_PAIN_DESCRIPTION$
+  # Get appointment date value for later
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.employee_health_telehealth_request_form.appointment_date_based_on_description$
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.employee_health_telehealth_request_form.appointment_date_based_on_description$
+      Greps:
+        - var: FIRST_APPOINTMENT_DATE
+          attr: textContent
+          condition: nempty
+          match: "(.*)"
+  # View upcoming appointments listing and click the 3 dot visual on right side of listing for one of them.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.employee_health_telehealth_request_form.appointment_dropdown_based_on_description$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.employee_health_telehealth_request_form.appointment_dropdown_based_on_description$
+  # Click "Reschedule appointment" option.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.employee_health_telehealth_request_form.reschedule_appointment_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.employee_health_telehealth_request_form.reschedule_appointment_button$
+  # User must validate that Edit appointment modal appears, pre-populated with existing appointment information.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.employee_health_telehealth_request_form.edit_appointment_title$
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.employee_health_telehealth_request_form.edit_appointment_title$
+      Greps:
+        - var: MODAL_TITLE
+          attr: textContent
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: eq
+          Var: MODAL_TITLE
+          Value: Edit appointment
+  # Change one or two things, then click "Cancel" button at bottom of modal.
+    - Type: wait_for
+      Strategy: id
+      Id: $PAGE.employee_health_telehealth_request_form.comments$
+    - Type: get_attribute
+      Strategy: id
+      Id: $PAGE.employee_health_telehealth_request_form.comments$
+      Greps:
+        - var: DESCRIPTION
+          attr: textContent
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: eq
+          Var: DESCRIPTION
+          Value: $AND_CLI_PAIN_DESCRIPTION$
+    - Type: send_keys
+      Strategy: id
+      Id: $PAGE.employee_health_telehealth_request_form.comments$
+      Value: $AND_CLI_PAIN_DESCRIPTION$ Edit
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.employee_health_telehealth_request_form.edit_appointment_cancel_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.employee_health_telehealth_request_form.edit_appointment_cancel_button$
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id: $PAGE.employee_health_telehealth_request_form.edit_appointment_title$
+  # User must validate that the Edit modal closes and no changes have been saved to the appointment.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.employee_health_telehealth_request_form.appointment_list$
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.employee_health_telehealth_request_form.appointment_list_description$
+      Greps:
+        - var: SHOWED_DESCRIPTION
+          attr: textContent
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: eq
+          Var: SHOWED_DESCRIPTION
+          Value: $AND_CLI_PAIN_DESCRIPTION$
+  # Click the 3 dot visual again for an appointment entry.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.employee_health_telehealth_request_form.appointment_dropdown_based_on_description$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.employee_health_telehealth_request_form.appointment_dropdown_based_on_description$
+  # Click "Reschedule appointment" option.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.employee_health_telehealth_request_form.reschedule_appointment_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.employee_health_telehealth_request_form.reschedule_appointment_button$
+  # User must validate that Edit appointment modal appears, pre-populated with existing appointment information.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.employee_health_telehealth_request_form.edit_appointment_title$
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.employee_health_telehealth_request_form.edit_appointment_title$
+      Greps:
+        - var: MODAL_TITLE
+          attr: textContent
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: eq
+          Var: MODAL_TITLE
+          Value: Edit appointment
+  # Change one or two things, then click "Save and close" button at bottom of modal.
+    - Type: wait_for
+      Strategy: id
+      Id: $PAGE.employee_health_telehealth_request_form.comments$
+    - Type: get_attribute
+      Strategy: id
+      Id: $PAGE.employee_health_telehealth_request_form.comments$
+      Greps:
+        - var: DESCRIPTION
+          attr: textContent
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: eq
+          Var: DESCRIPTION
+          Value: $AND_CLI_PAIN_DESCRIPTION$
+    - Type: send_keys
+      Strategy: id
+      Id: $PAGE.employee_health_telehealth_request_form.comments$
+      Value: Edit
+  # Change date
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.employee_health_telehealth_request_form.calendar_day_that_is_not_selected$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.employee_health_telehealth_request_form.calendar_day_that_is_not_selected$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.employee_health_telehealth_request_form.first_hour_available_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.employee_health_telehealth_request_form.edit_appointment_save_and_close_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.employee_health_telehealth_request_form.edit_appointment_save_and_close_button$
+  # User must validate that the Edit modal closes and your changes are now visible in the listing and calendar.
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id: $PAGE.employee_health_telehealth_request_form.edit_appointment_title$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.employee_health_telehealth_request_form.appointment_list$
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.employee_health_telehealth_request_form.appointment_list_description$
+      Greps:
+        - var: SHOWED_DESCRIPTION
+          attr: textContent
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: eq
+          Var: SHOWED_DESCRIPTION
+          Value: $AND_CLI_PAIN_DESCRIPTION$Edit
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.employee_health_telehealth_request_form.appointment_date_based_on_description$
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.employee_health_telehealth_request_form.appointment_date_based_on_description$
+      Greps:
+        - var: SECOND_APPOINTMENT_DATE
+          attr: textContent
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: ne
+          Var: SECOND_APPOINTMENT_DATE
+          Value: $AND_CLI_FIRST_APPOINTMENT_DATE$
+  # Clean used appointment
+    - Type: case
+      Value: EmployeeHealthPortalCancelAppointmentRequest
+
+#CXTB-114 Reschedule an Upcoming Appointment for Employee EHP Dependent Minor
+TestEmployeeHealthPortalRescheduleAnUpcomingAppointmentForEHPDependentMinor:
+  Environment: Settings 
+  Roles:
+    - Role: desktopChrome
+      App: "desktop"
+  Actions:
+  # Log in to EHP
+    - Type: set_env_var
+      Value: $AND_CLI_employee_minor_dependent_pwd$
+      Var: employee_user1_pwd
+    - Type: set_env_var
+      Value: $AND_CLI_employee_minor_dependent_user$
+      Var: employee_user1
+    - Type: case
+      Value: EmployeeHealthPortalLogIn
+  # Make an appointment
+    - Type: case
+      Value: EmployeeHealthPortalAppointmentsRequestForDependentMinor
+  # Verify if the appointment is showing on the list
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.employee_health_telehealth_request_form.appointment_list$
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.employee_health_telehealth_request_form.appointment_list_description$
+      Greps:
+        - var: SHOWED_DESCRIPTION
+          attr: textContent
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: eq
+          Var: SHOWED_DESCRIPTION
+          Value: $AND_CLI_PAIN_DESCRIPTION$
+  # Get appointment date value for later
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.employee_health_telehealth_request_form.appointment_date_based_on_description$
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.employee_health_telehealth_request_form.appointment_date_based_on_description$
+      Greps:
+        - var: FIRST_APPOINTMENT_DATE
+          attr: textContent
+          condition: nempty
+          match: "(.*)"
+  # View upcoming appointments listing and click the 3 dot visual on right side of listing for one of them.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.employee_health_telehealth_request_form.appointment_dropdown_based_on_description$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.employee_health_telehealth_request_form.appointment_dropdown_based_on_description$
+  # Click "Reschedule appointment" option.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.employee_health_telehealth_request_form.reschedule_appointment_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.employee_health_telehealth_request_form.reschedule_appointment_button$
+  # User must validate that Edit appointment modal appears, pre-populated with existing appointment information.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.employee_health_telehealth_request_form.edit_appointment_title$
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.employee_health_telehealth_request_form.edit_appointment_title$
+      Greps:
+        - var: MODAL_TITLE
+          attr: textContent
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: eq
+          Var: MODAL_TITLE
+          Value: Edit appointment
+  # Change one or two things, then click "Cancel" button at bottom of modal.
+    - Type: wait_for
+      Strategy: id
+      Id: $PAGE.employee_health_telehealth_request_form.comments$
+    - Type: get_attribute
+      Strategy: id
+      Id: $PAGE.employee_health_telehealth_request_form.comments$
+      Greps:
+        - var: DESCRIPTION
+          attr: textContent
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: eq
+          Var: DESCRIPTION
+          Value: $AND_CLI_PAIN_DESCRIPTION$
+    - Type: send_keys
+      Strategy: id
+      Id: $PAGE.employee_health_telehealth_request_form.comments$
+      Value: $AND_CLI_PAIN_DESCRIPTION$ Edit
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.employee_health_telehealth_request_form.edit_appointment_cancel_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.employee_health_telehealth_request_form.edit_appointment_cancel_button$
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id: $PAGE.employee_health_telehealth_request_form.edit_appointment_title$
+  # User must validate that the Edit modal closes and no changes have been saved to the appointment.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.employee_health_telehealth_request_form.appointment_list$
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.employee_health_telehealth_request_form.appointment_list_description$
+      Greps:
+        - var: SHOWED_DESCRIPTION
+          attr: textContent
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: eq
+          Var: SHOWED_DESCRIPTION
+          Value: $AND_CLI_PAIN_DESCRIPTION$
+  # Click the 3 dot visual again for an appointment entry.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.employee_health_telehealth_request_form.appointment_dropdown_based_on_description$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.employee_health_telehealth_request_form.appointment_dropdown_based_on_description$
+  # Click "Reschedule appointment" option.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.employee_health_telehealth_request_form.reschedule_appointment_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.employee_health_telehealth_request_form.reschedule_appointment_button$
+  # User must validate that Edit appointment modal appears, pre-populated with existing appointment information.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.employee_health_telehealth_request_form.edit_appointment_title$
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.employee_health_telehealth_request_form.edit_appointment_title$
+      Greps:
+        - var: MODAL_TITLE
+          attr: textContent
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: eq
+          Var: MODAL_TITLE
+          Value: Edit appointment
+  # Change one or two things, then click "Save and close" button at bottom of modal.
+    - Type: wait_for
+      Strategy: id
+      Id: $PAGE.employee_health_telehealth_request_form.comments$
+    - Type: get_attribute
+      Strategy: id
+      Id: $PAGE.employee_health_telehealth_request_form.comments$
+      Greps:
+        - var: DESCRIPTION
+          attr: textContent
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: eq
+          Var: DESCRIPTION
+          Value: $AND_CLI_PAIN_DESCRIPTION$
+    - Type: send_keys
+      Strategy: id
+      Id: $PAGE.employee_health_telehealth_request_form.comments$
+      Value: Edit
+  # Change date
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.employee_health_telehealth_request_form.calendar_day_that_is_not_selected$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.employee_health_telehealth_request_form.calendar_day_that_is_not_selected$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.employee_health_telehealth_request_form.first_hour_available_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.employee_health_telehealth_request_form.edit_appointment_save_and_close_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.employee_health_telehealth_request_form.edit_appointment_save_and_close_button$
+  # User must validate that the Edit modal closes and your changes are now visible in the listing and calendar.
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id: $PAGE.employee_health_telehealth_request_form.edit_appointment_title$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.employee_health_telehealth_request_form.appointment_list$
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.employee_health_telehealth_request_form.appointment_list_description$
+      Greps:
+        - var: SHOWED_DESCRIPTION
+          attr: textContent
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: eq
+          Var: SHOWED_DESCRIPTION
+          Value: $AND_CLI_PAIN_DESCRIPTION$Edit
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.employee_health_telehealth_request_form.appointment_date_based_on_description$
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.employee_health_telehealth_request_form.appointment_date_based_on_description$
+      Greps:
+        - var: SECOND_APPOINTMENT_DATE
+          attr: textContent
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: ne
+          Var: SECOND_APPOINTMENT_DATE
+          Value: $AND_CLI_FIRST_APPOINTMENT_DATE$
+  # Clean used appointment
+    - Type: case
+      Value: EmployeeHealthPortalCancelAppointmentRequest

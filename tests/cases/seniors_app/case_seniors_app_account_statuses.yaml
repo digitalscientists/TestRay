@@ -372,7 +372,7 @@ TestSeniorAppActiveAccountStatusAndBehavior:
     LOGOUT_OPTION: "Yes Logout"
     ACCOUNT_STATUS: 'predelivery' #this is for the precase
   Precases:
-    - OnboarderPrecaseforActiveState
+    - OnboarderPrecaseforActiveStateSenior
   Aftercases:
     - TerminateApp
     - CarePlatformLogout
@@ -462,14 +462,14 @@ TestSeniorAppActiveAccountStatusAndBehavior:
           Var: SECOND_ERROR_MESSAGE_VAR
           Value: "An unknown server-side error occurred while processing the command. Original error: Unable To Rotate Device"
 
-# CXTB-417 Senior app - Verify “Deactivated” Account Status Visuals
+# CXTB-571 Senior app - Verify “Deactivated” Account Status Visuals
 TestSeniorAppDeactivatedAccountStatusVisuals:
   Environment: Settings
   Vars:
     LOGOUT_OPTION: "Yes Logout"
     ACCOUNT_STATUS: 'active' #this is for the precase
   Precases:
-    - OnboarderPrecaseforActiveState
+    - OnboarderPrecaseforActiveStateSenior
   Aftercases:
     - CarePlatformLogout
     - OnboarderCarePartnerSetParticipantStateToActive

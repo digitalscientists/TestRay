@@ -122,8 +122,9 @@ TestProviderAnswerCompleteSessionFromEHP:
     STATE: IN
     USER_FULLNAME: $AND_CLI_provider_user1_name$ $AND_CLI_provider_user1_lastname$
     STAFF_ROLE: "Provider"
-  Precases:
-    - AdminOnCallRefreshStaff
+# Commented until they fix the refresh
+#  Precases:
+#    - AdminOnCallRefreshStaff
   Aftercases:
     - EmployeeHealthPortalLogOutAction
   Roles:

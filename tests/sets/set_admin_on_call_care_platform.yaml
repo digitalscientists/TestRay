@@ -1,0 +1,14 @@
+SetAdminOnCallCarePlatformTests:
+  Cases: 
+  # Admin on Call Only Web
+    - Case: TestAdminOnCallLogoutGoOffShift
+    - Case: TestAdminOnCallLogoutStayOnShift
+    - Case: TestAdminOnCallAccessStaffDirectoryFilterAndPane
+    - Case: TestAdminOnCallForgotPasswordLoginLink
+  # Admin on Call Mobile Non Physical
+    - Case: TestAdminOnCallRefreshUserAccountForCalling
+    - Case: TestAdminOnCallRefreshSessionForStaffMemberFromPane
+    - Case: TestAdminOnCallShouldNotShowDuplicatesEntriesForNewCallsOnCallHistory
+    - Case: TestAdminOnCallShouldNotAnswerProviderCallAfterMedicalTransfer
+    - Case: TestAdminOnCallRefreshNurseFacilityDeviceForCalling
+    - Case: TestAdminOnCallCallHistoryShowsRecordingsForAllPlatformsAndDevices

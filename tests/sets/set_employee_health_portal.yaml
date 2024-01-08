@@ -1,0 +1,39 @@
+SetEmployeeHealthPortalTests:
+  Cases:
+  # Employee Health Portal WEB
+    - Case: TestEmployeeSettingNotification
+    - Case: TestEmployeeInformationUpdateNumber
+    - Case: TestEmployeeUpdateAccountEmail
+    - Case: TestEmployeeUpdateAccountPassword
+    - Case: TestEmployeeHealthPortalAccountHelp
+    - Case: TestEmployeeHealthPortalUserCall
+    - Case: TestEmployeeHealthPortalDependentUserCall
+    - Case: TestEmployeeHealthPortalMinorUserCall
+    - Case: TestEmployeeHealthPortalCallAlreadyAnsweredNotificationWhenEmployeeLogsOut
+    - Case: TestEmployeeHealthPortalSignUpNewDependent
+    - Case: TestEmployeeHealthPortalRequestAnAppointmentForDependentMinor
+    - Case: TestEmployeeHealthPortalForgotPasswordOnLoginPage
+    - Case: TestEmployeeHealthPortalRequestAnAppointmentForUser
+    - Case: TestEmployeeHealthPortalReviewUpcomingAppointment
+    - Case: TestEmployeeHealthPortalManuallyLogoutOfPortal
+    - Case: TestEmployeeHealthPortalCallsFromCurrentSessionDuplicatedInCallHistoryUntilAccessPage
+    - Case: TestEmployeeHealthPortalReviewCallHistory
+    - Case: TestEmployeeHealthPortalRescheduleAnUpcomingAppointmentForEHPEmployee
+    - Case: TestEmployeeHealthPortalRescheduleAnUpcomingAppointmentForEHPDependentMinor
+  # Employee Health Portal WEB Mobile
+    - Case: TestEHPMobileUserCall
+    - Case: TestEHPMobileDependentUserCall
+    - Case: TestEHPMobileMinorUserCall
+    - Case: TestEHPMobileCallAlreadyAnsweredNotificationWhenEmployeeLogsOut
+    - Case: TestEHPMobileSignUpNewDependent
+    - Case: TestEHPMobileForgotPasswordOnLoginPage
+    - Case: TestEHPMobileSettingNotification
+    - Case: TestEHPMobileInformationUpdateNumber
+    - Case: TestEHPMobileUpdateAccountPassword
+    - Case: TestEHPMobileAccountHelp
+    - Case: TestEHPMobileManuallyLogoutOfPortal
+    - Case: TestEHPMobileRequestAnAppointmentForUser
+    - Case: TestEHPMobileReviewUpcomingAppointment
+    - Case: TestEHPMobileRequestAnAppointmentForDependentMinor
+    - Case: TestEHPMobileReviewCallHistory
+  

@@ -46,9 +46,10 @@ snf_existing_request:
   results_label: "**/XCUIElementTypeStaticText[`label CONTAINS ' result'`]"
 
 snf_submit_options:
-  yes_call_provider_button: "**/XCUIElementTypeButton[`label ENDSWITH 'Yes, Call Provider'`]"
-  no_adjust_form_button: "**/XCUIElementTypeButton[`label ENDSWITH 'No, Adjust Form'`]"
-  no_cancel_call_button: "**/XCUIElementTypeButton[`label ENDSWITH 'No, Cancel Call'`]"
+  yes_call_provider_button: "**/XCUIElementTypeButton[`label ENDSWITH 'Yes, Call Now'`]"
+  call_now_button: "**/XCUIElementTypeButton[`label ENDSWITH 'Call Now'`]"
+  no_adjust_form_button: "**/XCUIElementTypeButton[`label ENDSWITH 'No, Make Changes'`]"
+  no_cancel_call_button: "**/XCUIElementTypeButton[`label ENDSWITH 'Cancel Call'`]"
 
 snf_call_portal:
   end_call_button: "**/XCUIElementTypeOther[`label ENDSWITH 'End Call'`][-1]"
@@ -56,7 +57,8 @@ snf_call_portal:
   video_window: "**/XCUIElementTypeImage[-1]"
 
 snf_notifications:
-  missed_call_modal_title: Missed Outgoing Call
+  missed_outgoing_call_modal_title: Missed Outgoing Call
+  missed_incoming_call_modal_title: "**/XCUIElementTypeStaticText[`label == 'Missed Call'`]"
   modal_close_button: "**/XCUIElementTypeButton[`label ENDSWITH 'Close'`]"
   provider_message_modal_close_button: "**/XCUIElementTypeOther[`name CONTAINS 'Provider Message'`]/**/XCUIElementTypeButton[`label ENDSWITH 'Close'`]"
   notification_details_from: "**/XCUIElementTypeOther[`label BEGINSWITH 'From:'`][-1]"

@@ -1,24 +1,32 @@
 providers_home_page:
   home_button: //nav//a[contains(.,'Queue')]
   home_title: //h3[text()='PHP Providers']
+  es_home_title: //h3[text()='Providers']
   follow_up_calls: //*[@role='button'][contains(.,'Follow-up')][last()]
+  follow_up_calls_element_list: //*[@role='button'][contains(.,'Follow-up')]
+  follow_up_calls_time_text: //*[@role='button'][contains(.,'Follow-up')][last()]//div[3]
   scheduled_call: //*[@role='button'][contains(.,'Scheduled Call')][last()]
   scheduled_call_enabled: //*[@role='button'][contains(.,'Scheduled Call') and not(contains(@class,'disabled'))][last()]
   on_demand_calls: //*[@role='button'][contains(.,'On Demand Call')][last()]
   on_demand_call_assigned_value: //*[@role='button'][contains(.,'On Demand Call')][last()]/div[6]
   on_demand_call_state: //*[@role='button'][contains(.,'On Demand Call')][last()]/div[5]
   on_demand_by_state: (//*[@role='button'][contains(.,'On Demand Call')]/div[5][contains(text(),'$AND_CLI_STATE$')])[last()]
+  on_demand_call_participant: //*[@role='button'][contains(.,'On Demand Call')][last()]//div[4]
+  issue_paused_button: //*[@role='button'][contains(.,'Issue Paused')][last()]
   missed_call: //*[@role='button'][contains(.,'Missed Call')][last()]
   selected_missed_call: //*[@role='button'][contains(.,'Missed Call') and contains(@class,'is-selected')]
   time_dropdown: //div[div[contains(text(),'Time')]]//button
   time_all_option: //div[div[contains(text(),'Time')]]//button[contains(text(),'All')]
   last_medical_transfer_row: (//div[contains(text(),'Medical Transfer')])[last()]
+  last_medical_transfer_row_button: (//div[contains(text(),'Medical Transfer')])[last()]//ancestor::div[@role='button']
   participants_navigation: //header//nav//a[contains(text(),'Participants')]
   facilities_navigation: //header//nav//a[contains(text(),'Facilities')]
   employees_navigation: //header//nav//a[contains(text(),'Employees')]
   call_based_on_participant_name: (//div[contains(@class, 'ListRow_listRow') and not(contains(., 'Follow-up')) and not(contains(., 'Missed Call')) ]//strong[text() = '$AND_CLI_senior_user1_name$ $AND_CLI_senior_user1_lastname$']/ancestor::div[@role='button' and not(contains(@class,'disabled'))])[last()]
   on_demand_based_on_participant_name: (//*[@id='containerElement']/div[contains(@class,'ListRow_listRow') and contains(.,'On Demand Call')]/div[4]/strong[text()='$AND_CLI_senior_user1_name$ $AND_CLI_senior_user1_lastname$'])[last()]
   follow_up_ticket_based_on_participant_name: //div[contains(@class,'ListRow_listRow')][contains(.,'Follow-up')]//strong[text()='$AND_CLI_senior_user1_name$ $AND_CLI_senior_user1_lastname$'][last()]
+  es_follow_up_ticket_based_on_participant_name: //div[contains(@class,'ListRow_listRow')][contains(.,'Follow-up')]//strong[text()='$AND_CLI_idd_es_never_alone_user1_name$ $AND_CLI_idd_es_never_alone_user1_lastname$'][last()]
+  ch_follow_up_ticket_based_on_participant_name: //div[contains(@class,'ListRow_listRow')][contains(.,'Follow-up')]//strong[text()='$AND_CLI_idd_ch_never_alone_user2_name$ $AND_CLI_idd_ch_never_alone_user2_lastname$'][last()]
   close_ticket_button: //button[text()='Close Ticket']
   reason_for_closing_ticket_input: //input[@name='reasonForClosing']
   save_and_close_ticket_button: //button[text()='Save and Close Ticket']
@@ -56,7 +64,7 @@ providers_facilities_page:
   facilities_header_title: //h3[text()='Facilities']
   alpha_center_td: //div[@role='button']//div[text()='Alpha Healthcare Center']
   call_portal_btn: //button[text()='Call Portal']
-  records_button: //a/button[text()='Records']
+  records_button: //a//button[text()='Records']
   facility_based_on_name: //*[@id='containerElement']//div[text()='$AND_CLI_facility_name1$']
   devices_button: //button[text()='Devices']
   tabs_content: //div[@class='tabs-content']
@@ -84,7 +92,7 @@ providers_facilities_records_page:
   device_status: //div[@class='account-status-label']
 
 providers_call_handling_page:
-  end_call_btn: //button[span[text()='End Call']]
+  end_call_btn: //button[contains(.,'End Call')]
   call_device_btn: //button[text()='Call Device' or text()='Answer Call']
   subject_input: //div[label[text()='Subject']]//input
   details_textarea: //div[label[text()='Details']]//textarea
@@ -96,11 +104,12 @@ providers_call_handling_page:
   call_notes_provider_input: //*[@id='providerNotes']
   call_notes_save_button: //button[text()='Save Notes']
   complete_session_button: //button[text()='Complete Session']
-  post_call_survey_title: //h3[text()='Post-call Survey']
+  post_call_survey_title: //h3[text()='Post-Call Survey']
   video_visit_false_option: //input[@name='video' and @value='false']/following-sibling::span
   video_visit_true_option: //input[@name='video' and @value='true']/following-sibling::span
   resolved_true_option: //input[@name='resolved' and @value='true']/following-sibling::span
   resolved_no_option: //input[@name='resolved' and @value='false']/following-sibling::span
+  resolved_no_radio_input: //input[@name='resolved' and @value='false']
   reason_label: //div[contains(text(),'Reason') and contains(.,'REQUIRED')]
   reason_input: //select[@id='reason']
   first_reason_option: //select[@id='reason']/option[not(@value)][1]
@@ -109,6 +118,7 @@ providers_call_handling_page:
   recommend_discharge_yes_by_telehealth: //input[@name='recommendedDischarge' and @value='Yes, by telehealth']/following-sibling::span
   recommend_discharge_yes_by_SNF: //input[@name='recommendedDischarge' and @value='Yes, by facility']/following-sibling::span
   recommend_discharge_no_option: //input[@name='recommendedDischarge' and @value='No']/following-sibling::span
+  recommend_discharge_no_input: //input[@name='recommendedDischarge' and @value='No']
   follow_up_recommended_checkbox: //input[@id='followUpRecommended']
   assign_to_myself_checkbox: //input[@id='assignToMyself']
   selected_follow_up_time_option: //input[@name='followUpTime' and @checked]
@@ -123,14 +133,39 @@ providers_call_handling_page:
   video_status: //div[contains(@class,'video')]//div[@class='video-status']
   no_message_button: //button[contains(.,'No Message')]
   call_update_dropdown_button: //button[text()='Update' and @class='status-filter-dropdown-toggle']
+  video_grid: //div[@class='video']//div[contains(@data-testid,'video-grid')]
+  emergency_services_button: //div[@class='video-additional-options']//button[contains(@class, 'button-emergency')]
+  pause_issue_button: //button[text()='Pause Issue']
+  unpause_issue_button: //button[text()='Unpause Issue']
+
+providers_call_details_page:
+  assessment_subtab: //nav[@class='tabs-nav']/button[contains(text(),'Assessment')]
+  assessment_subtab_situation_title: //div[@tab-title='Assessment']//h4[text()='Situation']
+  health_overview_subtab: //nav[@class='tabs-nav']/button[contains(text(),'Health Overview')]
+  medication_subtab: //nav[@class='tabs-nav']/button[contains(text(),'Medication')]
+  providers_subtab: //nav[@class='tabs-nav']/button[contains(text(),'Providers')]
+  follow_up_tickets_tab: //nav[@class='tabs-nav']//button[@id='follow-up-tickets-tab']
+  call_history_tab: //nav[@class='tabs-nav']//button[@id='call-history-tab']
+  expand_lower_portion: //*[@id='expandButton']
 
 providers_follow_up_call_details_page:
   call_device_button: //button[contains(.,'Call Device')]
   update_status_dropdown: //button[@class='status-filter-dropdown-toggle' and contains(.,'Update')]
   status_option_close_ticket: //button[@class='status-filter-dropdown-button' and contains(.,'Close Ticket')]
+  status_option_due_date: //button[@class='status-filter-dropdown-button' and contains(.,'Due Date')]
+  modal_title: //div[@id='modals']//h4
+  dialog_title: //div[@id='dialogs']//h4
+  edit_ticket_one_hour_option: //input[@name='followUpTime' and @value='1']/following-sibling::div
+  edit_ticket_custom_option: //input[@name='followUpTime' and @value='custom']/following-sibling::div
+  edit_ticket_custom_input: //input[@id='followUpTimeCustom']
+  save_edits_button: //div[@id='modals']//button[@id='submit']
+  cancel_button: //div[@id='modals']//button[contains(text(), 'Cancel')]
   close_ticket_modal_title: //*[@id='dialogs']//h4[text()='Close Ticket']
   close_ticket_reason_input: //*[@id='dialogs']//input[@name='reasonForClosing']
   close_ticket_save_button: //*[@id='dialogs']//button[text()='Save and Close Ticket']
+  cancel_ticket_save_button: //*[@id='dialogs']//button[text()='Cancel']
+  nav_tab: //nav[@class='tabs-nav']
+  first_follow_up_row: (//div[@class='accordion']//div[contains(@class,'accordion-item')])[1]
   
 providers_employees_page:
   employees_label: //h3[text()='Employees']
@@ -162,6 +197,8 @@ providers_participants_page:
   status_dropdown_active: //button[text()='Active']
   status_dropdown_suspended: //button[text()='Suspended']
   records_button: //button[text()='Records']
+  participant_details_tabs_nav_bar: (//nav[@class='tabs-nav'])[1]
+  participant_details_tabs_nav_bar_items: (//nav[@class='tabs-nav'])[1]//button
 
 providers_participants_records_page:
   demographics_tab: //nav[contains(@class,'box-tabs-nav')]/button[text()='Demographics']
@@ -181,7 +218,7 @@ providers_participant_modal:
 providers_notifications:
   call_completed_notification:  //div[text()='Call completed']
   follow_up_ticket_closed_notification:  //div[text()='Follow-up ticket closed']
-  call_already_answered_notification:  //div[text()='Call already answered']
+  call_already_answered_notification:  //div[text()='Call already answered or ended by caller']
 
 providers_call_history_page:
   call_history_tab: //nav/button[text()='Call History']

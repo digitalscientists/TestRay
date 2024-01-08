@@ -294,6 +294,13 @@ TestCarePartnerCreateEventForParticipant:
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_call_portal.today_date_date_picker$
+  # Patient location
+    - Type: click
+      Strategy: id
+      Id: $PAGE.care_platform_call_portal.location_selector$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.location_option_2$
   # Click "Create event" button.
     - Type: click
       Strategy: xpath
@@ -301,7 +308,7 @@ TestCarePartnerCreateEventForParticipant:
   # Telehealth request form window disappears. 
     - Type: wait_not_visible
       Strategy: xpath
-      Id : $PAGE.care_platform_call_portal.telehealth_request_form_header$
+      Id: $PAGE.care_platform_call_portal.telehealth_request_form_header$
   # Schedule listing is updated to include the event you’ve just created.
     - Type: wait_for
       Strategy: xpath

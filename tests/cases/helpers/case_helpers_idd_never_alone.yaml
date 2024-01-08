@@ -119,3 +119,30 @@ ESIDDSeniorBadPostSurveyCallHelper:
     - Type: wait_for
       Strategy: class_chain
       Id: $PAGE.idd_never_alone_app_home.call_now_button$
+
+IDDCallCarePartnerHelper:
+  Roles:
+    - Role: localiOS
+      App: NeverAlone
+  Actions:
+  # Click on the Call Personal Care Partner
+    - Type: wait_for
+      Strategy: class_chain
+      Role: localiOS
+      Id: $PAGE.idd_never_alone_app_home.call_now_button$
+    - Type: click
+      Strategy: class_chain
+      Id: $PAGE.idd_never_alone_app_home.call_now_button$
+  # Click "Yes, Place call" button.
+    - Type: wait_for
+      Strategy: class_chain
+      Id: $PAGE.idd_never_alone_app_call.yes_place_call_button$
+    - Type: click
+      Strategy: class_chain
+      Id: $PAGE.idd_never_alone_app_call.yes_place_call_button$
+  # Device screen updates showing you the waiting room.
+    - Type: sleep
+      Time: 1
+    - Type: wait_for
+      Strategy: class_chain
+      Id: $PAGE.idd_never_alone_app_call.waiting_room_label$

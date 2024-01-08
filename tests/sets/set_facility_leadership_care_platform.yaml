@@ -1,0 +1,10 @@
+SetFacilityLeadershipCarePlatformTests:
+  Cases:  
+  # Facility Leadership Care Platform WEB
+    - Case: TestFacilityLeadershipDirectoryAndFilter
+    - Case: TestFacilityLeadershipLogoutGoOffShift
+    - Case: TestFacilityLeadershipClickAndViewFacilityProfile
+    - Case: TestFacilityLeadershipReviewInfoForExistingFacilityDeviceFacilityPane
+  # Facility Leadership
+    - Case: TestFacilityLeadershipSeeCallAppearOnQueueThenSelectCall
+    - Case: TestFacilityLeadershipReviewCallHistoryAndAccessCallRecordings

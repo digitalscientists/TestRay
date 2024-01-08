@@ -9,7 +9,7 @@ ProvidersCarePlatformLogin:
       Value: $AND_CLI_care_platform_url$
     - Type: get_text
       Strategy: xpath
-      Id : $PAGE.care_platform_login.login_button$
+      Id: $PAGE.care_platform_login.login_button$
       Greps:
       - var: login_text
         match: "Log In"
@@ -123,6 +123,78 @@ ProvidersCarePlatformEndCall:
       Strategy: xpath
       Id: $PAGE.providers_notifications.call_completed_notification$
 
+ProvidersCarePlatformPauseCall:
+  Roles:
+    - Role: desktopChrome
+      App: desktop       
+  Actions:      
+  #End call
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.end_call_btn$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.end_call_btn$
+  #Fill the Provider's call notes
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.call_notes_subject_input$
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.call_notes_subject_input$
+      Value: 'Automation Test subject'
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.call_notes_provider_input$
+      Value: 'Automation Test Notes: Test ProvidersCarePlatformEndCall'
+    - Type: scroll_to
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.call_notes_save_button$
+  #Manual save of notes
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.call_notes_save_button$
+  #Complete Session
+    - Type: wait_for_property
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.complete_session_button$ 
+      Property: disabled
+      Value: "false"
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.complete_session_button$ 
+  #Fill survey and end session
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.post_call_survey_title$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.resolved_true_option$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.video_visit_true_option$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.recommend_discharge_yes_by_SNF$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.pause_issue_button$
+    - Type: scroll_to
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.submit_exit_session_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.submit_exit_session_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_notifications.call_completed_notification$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.home_title$
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id: $PAGE.providers_notifications.call_completed_notification$
+
 ProviderLoginSecondaryUser:
   Roles:
     - Role: desktopChrome
@@ -162,6 +234,8 @@ JoinMedicalTransfer:
     - Type: click
       Strategy: xpath
       Id: $PAGE.providers_call_handling_page.answer_call_button$
+    - Type: sleep
+      Time: 2
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.providers_call_handling_page.end_call_btn$
@@ -230,7 +304,6 @@ PostCallSurveyProvider:
       Id: $PAGE.providers_notifications.call_completed_notification$
 
 ProviderNavigateToParticipants:
-  Environment: Settings
   Roles:
     - Role: desktopChrome
       App: desktop       
@@ -276,7 +349,6 @@ ProviderNavigateToFacilities:
       Id: $PAGE.providers_facilities_page.facilities_header_title$
 
 ProviderCallParticipant:
-  Environment: Settings
   Roles:
     - Role: desktopChrome
       App: desktop       
@@ -293,13 +365,14 @@ ProviderCallParticipant:
     # Call the participant.
     - Type: wait_for
       Strategy: xpath
-      Id: $PAGE.providers_call_handling_page.call_participant_button$
-    - Type: click
+      Id: $PAGE.care_platform_call_portal.events_subtitle$
+    - Type: sleep
+      Time: 1
+    - Type: click_js
       Strategy: xpath
-      Id: $PAGE.providers_call_handling_page.call_participant_button$
+      Id: $PAGE.care_platform_call_portal.call_participant_btn$
 
 ProviderCallFacility:
-  Environment: Settings
   Roles:
     - Role: desktopChrome
       App: desktop       
@@ -329,6 +402,8 @@ ProviderCallFacility:
       Strategy: xpath
       Id: $PAGE.providers_facilities_page.call_based_on_device_button$
     # Page updates to show call portal screen with "No active call" showing in video window.
+    - Type: sleep
+      Time: 1
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.providers_call_handling_page.video_status$
@@ -346,9 +421,8 @@ ProviderCallFacility:
           Var: CALL_MESSAGE
           Value: 'No active call.'
     # Click on the Call Device button.
-    - Type: wait_for
-      Strategy: xpath
-      Id: $PAGE.providers_call_handling_page.call_device_btn$ 
+    - Type: sleep
+      Time: 1
     - Type: click
       Strategy: xpath
       Id: $PAGE.providers_call_handling_page.call_device_btn$ 
@@ -364,17 +438,17 @@ ProviderSetStateCredential:
 #Going to My Account
     - Type: click
       Strategy: xpath
-      Id : $PAGE.care_platform_header.user_dropdown_button$
+      Id: $PAGE.care_platform_header.user_dropdown_button$
     - Type: click
       Strategy: xpath
-      Id : $PAGE.care_platform_header.myaccount_menu_button$
+      Id: $PAGE.care_platform_header.myaccount_menu_button$
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.care_platform_myaccount_info.modal_title$
   #Select credentials to answer call
     - Type: click
       Strategy: xpath
-      Id : $PAGE.providers_account_modal.credentials_navigation_tab$
+      Id: $PAGE.providers_account_modal.credentials_navigation_tab$
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.providers_account_modal.credentials_content$
@@ -485,7 +559,7 @@ SetMissedCallFromSNF:
     - Type: wait_for
       Role: localiOS
       Strategy: id
-      Id: $PAGE.snf_notifications.missed_call_modal_title$
+      Id: $PAGE.snf_notifications.missed_outgoing_call_modal_title$
     - Type: click
       Role: localiOS
       Strategy: class_chain
@@ -606,7 +680,38 @@ ProviderCompleteSession:
       Value: "false"
     - Type: click
       Strategy: xpath
-      Id: $PAGE.providers_call_handling_page.complete_session_button$ 
+      Id: $PAGE.providers_call_handling_page.complete_session_button$
+
+FollowUpHistoryPrecaseForSNF:
+  Vars:
+    LOGOUT_OPTION: "Go Off Shift"
+  Precases:
+    - ProviderNewCleaner
+  Aftercases:
+    - CleanUsedFollowUp
+    - CarePlatformLogout
+    - TerminateApp
+  Roles:
+    - Role: desktopChrome
+      App: desktop
+    - Role: localiOS
+      App: NeverAlone
+  Actions:
+    #Call login for nurses
+    - Type: case
+      Value: LoginSNFHelper
+      Role: localiOS
+    #Clean SNF prompts
+    - Type: case
+      Value: SeniorCleanPrompts
+      Role: localiOS
+    #Clean any prompt notification from the start
+    - Type: case
+      Value: CreateAFollowUpForSNFCall
+    - Type: refresh
+      Role: desktopChrome
+    - Type: sleep
+      Time: 1
 
 CreateAFollowUpForSNFCall:
   Roles:
@@ -624,75 +729,131 @@ CreateAFollowUpForSNFCall:
     #End call in Provider
     - Type: wait_for
       Strategy: xpath
-      Role: desktopChrome
       Id: $PAGE.providers_call_handling_page.end_call_btn$
     - Type: click
       Strategy: xpath
-      Role: desktopChrome
       Id: $PAGE.providers_call_handling_page.end_call_btn$
     #Fill the Provider's call notes
     - Type: wait_for
       Strategy: xpath
-      Role: desktopChrome
       Id: $PAGE.providers_call_handling_page.call_notes_subject_input$
     - Type: clear_field
       Strategy: xpath
-      Role: desktopChrome
       Id: $PAGE.providers_call_handling_page.call_notes_subject_input$
     - Type: send_keys
       Strategy: xpath
-      Role: desktopChrome
       Id: $PAGE.providers_call_handling_page.call_notes_subject_input$
       Value: 'Automation Test subject'
     - Type: clear_field
       Strategy: xpath
-      Role: desktopChrome
       Id: $PAGE.providers_call_handling_page.call_notes_provider_input$
     - Type: send_keys
       Strategy: xpath
-      Role: desktopChrome
       Id: $PAGE.providers_call_handling_page.call_notes_provider_input$
-      Value: 'Automation Test Notes: Test TestSNFMissedCallFromProvider'
+      Value: 'Automation Test Notes: Test Follow-Up from Provider'
     - Type: if
       If_Cases: 
         - If_Case: ProviderCompleteSession
     #Fill survey for follow-up
     - Type: wait_for
       Strategy: xpath
-      Role: desktopChrome
-      Id: $PAGE.providers_call_handling_page.post_call_survey_title$
+      Id: $PAGE.providers_call_handling_page.resolved_no_option$
     - Type: click
       Strategy: xpath
-      Role: desktopChrome
       Id: $PAGE.providers_call_handling_page.resolved_no_option$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.video_visit_true_option$
     - Type: wait_for
       Strategy: xpath
-      Role: desktopChrome
       Id: $PAGE.providers_call_handling_page.reason_input$
     - Type: click
       Strategy: xpath
-      Role: desktopChrome
       Id: $PAGE.providers_call_handling_page.reason_input$
     - Type: click
       Strategy: xpath
-      Role: desktopChrome
       Id: $PAGE.providers_call_handling_page.follow_up_reason_option$
     - Type: click
       Strategy: xpath
-      Role: desktopChrome
       Id: $PAGE.providers_call_handling_page.follow_up_now_option$
     - Type: click
       Strategy: xpath
-      Role: desktopChrome
       Id: $PAGE.providers_call_handling_page.recommend_discharge_no_option$
-    - Type: scroll_to
-      Strategy: xpath
-      Role: desktopChrome
-      Id: $PAGE.providers_call_handling_page.submit_exit_session_button$
     - Type: click
       Strategy: xpath
-      Role: desktopChrome
       Id: $PAGE.providers_call_handling_page.submit_exit_session_button$
+
+CreateAFollowUpForParticipantCall:
+  Roles:
+    - Role: desktopChrome
+      App: desktop  
+  Actions:
+  #Create follow-up call
+    #Generate a call from Provider to Facility Device.
+    - Type: case
+      Value: ProviderCallParticipant
+    - Type: sleep
+      Time: 3
+    - Type: case
+      Value: AnswerCallAsSenior
+    #End call in Provider
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.end_call_btn$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.end_call_btn$
+    #Fill the Provider's call notes
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.call_notes_subject_input$
+    - Type: clear_field
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.call_notes_subject_input$
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.call_notes_subject_input$
+      Value: 'Automation Test subject'
+    - Type: clear_field
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.call_notes_provider_input$
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.call_notes_provider_input$
+      Value: 'Automation Test Notes: Follow up for Participant'
+    - Type: if
+      If_Cases: 
+        - If_Case: ProviderCompleteSession
+    #Fill survey for follow-up
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.resolved_no_option$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.resolved_no_option$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.video_visit_true_option$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.reason_input$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.reason_input$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.follow_up_reason_option$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.follow_up_now_option$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.recommend_discharge_no_option$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.submit_exit_session_button$
+    - Type: case
+      Value: SeniorGreatPostSurveyCallHelper
 
 CleanUsedFollowUp:
   Roles:
@@ -700,7 +861,6 @@ CleanUsedFollowUp:
       App: desktop  
   Actions:
     - Type: refresh
-      Role: desktopChrome
     - Type: click
       Strategy: xpath
       Id: $PAGE.providers_home_page.home_button$
@@ -710,8 +870,51 @@ CleanUsedFollowUp:
     - Type: click
       Strategy: xpath
       Id: $PAGE.providers_home_page.follow_up_calls$
+    - Type: sleep
+      Time: 0.8
     - Type: case
       Value: ProviderCloseCallHelper
+
+CleanUsedPausedIssue:
+  Roles:
+    - Role: desktopChrome
+      App: desktop  
+  Actions:
+    - Type: refresh
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.home_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.issue_paused_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.issue_paused_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_follow_up_call_details_page.update_status_dropdown$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_follow_up_call_details_page.update_status_dropdown$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_follow_up_call_details_page.status_option_close_ticket$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_follow_up_call_details_page.status_option_close_ticket$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_follow_up_call_details_page.close_ticket_modal_title$
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.providers_follow_up_call_details_page.close_ticket_reason_input$
+      Value: 'Automation Test Cleaning Paused Issue'
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_follow_up_call_details_page.close_ticket_save_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.toast_closed_ticket$
 
 AnswerCallAsProvider:
   Roles:
@@ -734,6 +937,38 @@ AnswerCallAsProvider:
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.providers_call_handling_page.end_call_btn$
+
+AnswerOnDemandCallAsProvider:
+  Roles:
+    - Role: desktopChrome
+      App: desktop  
+  Actions:
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.home_title$
+  #Selects on demand call
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.on_demand_calls$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.on_demand_calls$
+    - Type: sleep
+      Time: 1
+  #Answer call
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.answer_call_button$
+    - Type: wait_for_property
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.answer_call_button$
+      Property: disabled
+      Value: "false"
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.answer_call_button$
+    - Type: sleep
+      Time: 3
 
 ProviderCloseCallHelper:
   Roles:
@@ -999,3 +1234,257 @@ MakeCallBetweenProviderAndEHP:
     - Type: case
       Value: PostCallSurveyProvider
       Role: desktopChrome
+
+CreateFollowUpTicketForCHParticipant:
+  Roles:
+    - Role: desktopChrome
+      App: desktop
+    - Role: localiOS
+      App: NeverAlone
+    - Role: desktopChrome1
+      App: desktop
+  Actions:
+  # Make IDD-CarePartner-Provider Medical Transfer
+    - Type: case
+      Value: IDDCHCarePartnerMakeCallToProvider
+  # Wait 5 seconds for the change of call center from CH to CHS
+    - Type: sleep
+      Time: 5
+  # Log in to CHS Provider
+    - Type: case
+      Value: ProvidersCarePlatformLogin
+      Role: desktopChrome1
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.last_medical_transfer_row$
+      Role: desktopChrome1
+      Time: 20
+    - Type: wait_for
+      Strategy: class_chain
+      Role: localiOS
+      Id: $PAGE.seniors_app_call.end_call_button$
+  # Answer call as Provider
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.last_medical_transfer_row$
+      Role: desktopChrome1
+    - Type: sleep
+      Time: 2
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.answer_call_button$
+      Role: desktopChrome1
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.answer_call_button$
+      Role: desktopChrome1
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.video_btn$
+      Role: desktopChrome1
+  # End call in Provider
+    - Type: wait_for
+      Strategy: xpath
+      Role: desktopChrome1
+      Id: $PAGE.providers_call_handling_page.end_call_btn$
+    - Type: click
+      Strategy: xpath
+      Role: desktopChrome1
+      Id: $PAGE.providers_call_handling_page.end_call_btn$
+  # Fill the Provider's call notes
+    - Type: wait_for
+      Strategy: xpath
+      Role: desktopChrome1
+      Id: $PAGE.providers_call_handling_page.call_notes_subject_input$
+    - Type: clear_field
+      Strategy: xpath
+      Role: desktopChrome1
+      Id: $PAGE.providers_call_handling_page.call_notes_subject_input$
+    - Type: send_keys
+      Strategy: xpath
+      Role: desktopChrome1
+      Id: $PAGE.providers_call_handling_page.call_notes_subject_input$
+      Value: 'Automation Test subject'
+    - Type: clear_field
+      Role: desktopChrome1
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.call_notes_provider_input$
+    - Type: send_keys
+      Role: desktopChrome1
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.call_notes_provider_input$
+      Value: 'Automation Test Notes: Follow up for Participant'
+    - Type: if
+      Role: desktopChrome1
+      If_Cases: 
+        - If_Case: ProviderCompleteSession
+  # Fill survey for follow-up
+    - Type: wait_for
+      Role: desktopChrome1
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.resolved_no_option$
+    - Type: click
+      Role: desktopChrome1
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.resolved_no_option$
+    - Type: click
+      Role: desktopChrome1
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.video_visit_true_option$
+    - Type: wait_for
+      Role: desktopChrome1
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.reason_input$
+    - Type: click
+      Role: desktopChrome1
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.reason_input$
+    - Type: click
+      Role: desktopChrome1
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.follow_up_reason_option$
+    - Type: click
+      Role: desktopChrome1
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.follow_up_now_option$
+    - Type: click
+      Role: desktopChrome1
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.recommend_discharge_no_option$
+    - Type: click
+      Role: desktopChrome1
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.submit_exit_session_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform.navigation_home$
+    - Type: care_partner_clean_call_queue_and_hanged_calls
+    - Type: case
+      Value: ESIDDSeniorGreatPostSurveyCallHelper
+
+CreateFollowUpTicketForESParticipant:
+  Roles:
+    - Role: desktopChrome
+      App: desktop
+    - Role: localiOS
+      App: NeverAlone
+    - Role: desktopChrome1
+      App: desktop
+  Actions:
+  # Make IDD-CarePartner-Provider Medical Transfer
+    - Type: case
+      Value: IDDESCarePartnerMakeCallToProvider
+  # Wait 5 seconds for the change of call center from CH to CHS
+    - Type: sleep
+      Time: 5
+  # Log in to CHS Provider
+    - Type: case
+      Value: ProvidersCarePlatformLogin
+      Role: desktopChrome1
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.last_medical_transfer_row$
+      Role: desktopChrome1
+      Time: 20
+    - Type: wait_for
+      Strategy: class_chain
+      Role: localiOS
+      Id: $PAGE.seniors_app_call.end_call_button$
+  # Answer call as Provider
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.last_medical_transfer_row$
+      Role: desktopChrome1
+    - Type: sleep
+      Time: 2
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.answer_call_button$
+      Role: desktopChrome1
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.answer_call_button$
+      Role: desktopChrome1
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.video_btn$
+      Role: desktopChrome1
+  # End call in Provider
+    - Type: wait_for
+      Strategy: xpath
+      Role: desktopChrome1
+      Id: $PAGE.providers_call_handling_page.end_call_btn$
+    - Type: click
+      Strategy: xpath
+      Role: desktopChrome1
+      Id: $PAGE.providers_call_handling_page.end_call_btn$
+  # Fill the Provider's call notes
+    - Type: wait_for
+      Strategy: xpath
+      Role: desktopChrome1
+      Id: $PAGE.providers_call_handling_page.call_notes_subject_input$
+    - Type: clear_field
+      Strategy: xpath
+      Role: desktopChrome1
+      Id: $PAGE.providers_call_handling_page.call_notes_subject_input$
+    - Type: send_keys
+      Strategy: xpath
+      Role: desktopChrome1
+      Id: $PAGE.providers_call_handling_page.call_notes_subject_input$
+      Value: 'Automation Test subject'
+    - Type: clear_field
+      Role: desktopChrome1
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.call_notes_provider_input$
+    - Type: send_keys
+      Role: desktopChrome1
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.call_notes_provider_input$
+      Value: 'Automation Test Notes: Follow up for Participant'
+    - Type: if
+      Role: desktopChrome1
+      If_Cases: 
+        - If_Case: ProviderCompleteSession
+  # Fill survey for follow-up
+    - Type: wait_for
+      Role: desktopChrome1
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.resolved_no_option$
+    - Type: click
+      Role: desktopChrome1
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.resolved_no_option$
+    - Type: click
+      Role: desktopChrome1
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.video_visit_true_option$
+    - Type: wait_for
+      Role: desktopChrome1
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.reason_input$
+    - Type: click
+      Role: desktopChrome1
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.reason_input$
+    - Type: click
+      Role: desktopChrome1
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.follow_up_reason_option$
+    - Type: click
+      Role: desktopChrome1
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.follow_up_now_option$
+    - Type: click
+      Role: desktopChrome1
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.recommend_discharge_no_option$
+    - Type: click
+      Role: desktopChrome1
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.submit_exit_session_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform.navigation_home$
+    - Type: care_partner_clean_call_queue_and_hanged_calls
+    - Type: case
+      Value: ESIDDSeniorGreatPostSurveyCallHelper

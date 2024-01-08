@@ -1,0 +1,14 @@
+SetNurseFacilityNeverAloneAppTest:
+  Cases:   
+  # Never Alone SNF tests
+    - Case: TestSNFVerifyNotificationsPage
+    - Case: TestSNFMessagePromptFromProvider
+    - Case: TestSNFIgnoreCallFromProvider
+    - Case: TestSNFMissedCallFromProvider
+    - Case: TestSNFNewRequestFormBehavior
+    - Case: TestSNFRequestSuccessfulCallConnect
+    - Case: TestSNFCheckQueueandReviewDetails
+    - Case: TestSNFVerifyPreDeliveryAccountStatusVisualsAndBehavior
+    - Case: TestSNFVerifyActiveAccountStatusVisualsAndBehavior
+    - Case: TestSNFVerifyDeactivatedAccountStatusVisualsAndBehavior
+    - Case: TestSNFAppSuspendedAccountStatus

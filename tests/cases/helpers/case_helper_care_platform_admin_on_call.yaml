@@ -41,17 +41,10 @@ AdminOnCallRefreshDevice:
       Id: $PAGE.care_platform_facility_Record.devices_button$
     - Type: wait_for
       Strategy: xpath
-      Id: $PAGE.care_platform_facility_Record.call_device_by_number$
+      Id: $PAGE.care_platform_facility_Record.refresh_device_by_number$
     - Type: click
       Strategy: xpath
-      Id: $PAGE.care_platform_facility_Record.call_device_by_number$
-    # Check for "Refresh" button
-    - Type: wait_for
-      Strategy: xpath
-      Id: $PAGE.care_platform_call_portal.refresh_button$
-    - Type: click
-      Strategy: xpath
-      Id: $PAGE.care_platform_call_portal.refresh_button$
+      Id: $PAGE.care_platform_facility_Record.refresh_device_by_number$
     # Refresh confirmation
     - Type: wait_for
       Strategy: xpath

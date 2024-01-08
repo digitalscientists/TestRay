@@ -16,6 +16,28 @@ SetCriticalWorkflows:
     - Case: TestProvidersSelectCallInQueueAndGetCallAnsweredAlreadyNotification
     - Case: TestProvidersEHPSeeCallAppearInQueueAssignAndReviewDetails
     - Case: TestProviderReviewCallHistoryAndAccessCallRecordings
+    - Case: TestESProviderCarePlatformAnswerAndCompleteSession
+    - Case: TestCHProviderCarePlatformAnswerAndCompleteSession
+    - Case: TestProvidersCallSNFDeviceForFollowUpTaskFromHome
+    - Case: TestProviderCallParticipantForFollowUpTaskFromHomeAndAnswered
+    - Case: TestProviderCallParticipantAndCompleteOnDemandCall
+    - Case: TestProviderSeniorSeeCallAppearInQueueAssignAndReviewDetails
+    - Case: TestProviderIDDCHSeeCallAppearInQueueAssignAndReviewDetails
+    - Case: TestProviderIDDESSeeCallAppearInQueueAssignAndReviewDetails
+    - Case: TestProviderIDDCHAnswerCallAndCompleteSession
+    - Case: TestProviderIDDESAnswerCallAndCompleteSession
+    - Case: TestProviderIDDCHReturnMissedCallFromHome
+    - Case: TestProviderIDDESReturnMissedCallFromHome
+    - Case: TestProvidersCallSNFDeviceForIssuePausedFromHomeAnswered
+    - Case: TestProviderReturnMissedSeniorCallFromHomeAnswered
+    - Case: TestProvidersCallSeniorsDeviceForIssuePausedTaskFromHomeAnswered
+    - Case: TestProviderIDDESCallDeviceForFollowUpTaskFromHomeAnswered
+    - Case: TestProviderIDDCHCallDeviceForFollowUpTaskFromHomeAnswered
+    - Case: TestProviderIDDESCallDeviceForIssuePausedTaskFromHomeAnswered
+    - Case: TestProviderIDDCHCallDeviceForIssuePausedTaskFromHomeAnswered
+    - Case: TestProvidersAnswerCallAndCompleteSessionWithPauseIssue
+    - Case: TestProviderSendMessageToParticipantDeviceParticipantProfile
+    - Case: TestProviderSendMessageToFacilityDeviceFacilityPane
   # Never Alone SNF tests
     - Case: TestSNFRequestSuccessfulCallConnect
     - Case: TestSNFCheckQueueandReviewDetails
@@ -40,10 +62,14 @@ SetCriticalWorkflows:
     - Case: TestCHCarePartnerManuallyLogoutStayOnShift
     - Case: TestCHCarePartnerParticipantPaneCreateFollowUpTicket
     - Case: TestCHCarePartnerCallParticipantsDeviceAndCompleteCall
+    - Case: TestCHCarePartnerCreateTelehealthEventForParticipant
+    - Case: TestCHCarePartnerSendMessageToParticipantDeviceParticipantProfile
     - Case: TestESCarePartnerManuallyLogoutGoOffShift
     - Case: TestESCarePartnerManuallyLogoutStayOnShift
     - Case: TestESCarePartnerParticipantPaneCreateFollowUpTicket
     - Case: TestESCarePartnerCallParticipantsDeviceAndCompleteCall
+    - Case: TestESCarePartnerCreateTelehealthEventForParticipant
+    - Case: TestESCarePartnerSendMessageToParticipantDeviceParticipantProfile
   # Onboarders
     - Case: TestOnboarderChangeStatusToActiveForExistingParticipant
     - Case: TestOnboarderChangeStatusToSuspendedForExistingParticipant

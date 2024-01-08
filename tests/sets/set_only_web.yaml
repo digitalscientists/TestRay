@@ -55,6 +55,10 @@ SetOnlyWebTests:
   - Case: TestEmployeeHealthPortalReviewUpcomingAppointment
   - Case: TestEmployeeHealthPortalManuallyLogoutOfPortal
   - Case: TestEmployeeHealthPortalCallsFromCurrentSessionDuplicatedInCallHistoryUntilAccessPage
+  - Case: TestEmployeeHealthPortalRequestAnAppointmentForDependentMinor
+  - Case: TestEmployeeHealthPortalReviewCallHistory
+  - Case: TestEmployeeHealthPortalRescheduleAnUpcomingAppointmentForEHPEmployee
+  - Case: TestEmployeeHealthPortalRescheduleAnUpcomingAppointmentForEHPDependentMinor
   # ES Care Partner
   - Case: TestCHCarePartnerStatusDropdownNotInCall
   - Case: TestCHCarePartnerAccessAndReviewTeamMembersAvailability
@@ -90,6 +94,7 @@ SetOnlyWebTests:
   - Case: TestOnboarderCarePartnerUpdatePassword
   - Case: TestOnboarderDeactivateStaffMemberAccountForCarePlatformStaffMemberProfile
   - Case: TestOnboarderReactivateStaffMemberAccountForCarePlatformStaffMemberProfile
+  - Case: TestOnboarderCarePartnerParticipantProfileReviewEditOrAddVendorInfo
   # Providers Care Platform
   - Case: TestProvidersUpdatePassword
   - Case: TestProviderLogOutStayOnShift
@@ -106,6 +111,12 @@ SetOnlyWebTests:
   - Case: TestProviderAccessParticipantDirectoryandViewDeviceRecordfromListing
   - Case: TestProvidersEHPSeeCallAppearInQueueAssignAndReviewDetails
   - Case: TestProviderReviewFacilityDeviceCallHistoryAndAccessCallRecordings
+  - Case: TestProviderReviewInfoForExistingFacilityDeviceFacilityPane
+  - Case: TestProviderAccessAndReviewTeamMembersAvailability
+  - Case: TestProviderReviewInfoForExistingFacilityDeviceFacilityProfile
+  - Case: TestProviderAccessFacilitiesDirectoryAndFilter
+  - Case: TestProviderCallExternal10DigitNumberWithoutParticipant
+  - Case: TestProviderCanClickAndViewParticipantsEmergencyCalls
   # Facility Leadership Care Platform
   - Case: TestFacilityLeadershipDirectoryAndFilter
   - Case: TestFacilityLeadershipLogoutGoOffShift
@@ -126,6 +137,7 @@ SetOnlyWebTests:
   - Case: TestEHPMobileRequestAnAppointmentForUser
   - Case: TestEHPMobileReviewUpcomingAppointment
   - Case: TestEHPMobileRequestAnAppointmentForDependentMinor
+  - Case: TestEHPMobileReviewCallHistory
   # Admin on Call
   - Case: TestAdminOnCallLogoutGoOffShift
   - Case: TestAdminOnCallLogoutStayOnShift
