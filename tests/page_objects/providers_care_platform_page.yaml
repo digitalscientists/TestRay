@@ -90,7 +90,9 @@ providers_facilities_records_page:
   info_title: //h4[text()='Facility Information']
   devices_tab: //button[text()='Devices']
   device_status: //div[@class='account-status-label']
-
+  linked_participants_tab: //button[text()='Linked Participants']
+  first_linked_participant_button: //table/tbody/tr[1]/td[1]/a
+  
 providers_call_handling_page:
   end_call_btn: //button[contains(.,'End Call')]
   call_device_btn: //button[text()='Call Device' or text()='Answer Call']
