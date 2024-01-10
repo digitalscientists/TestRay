@@ -22,6 +22,7 @@ SetProvidersCarePlatformTests:
     - Case: TestProviderAccessFacilitiesDirectoryAndFilter
     - Case: TestProviderCanClickAndViewParticipantsEmergencyCalls
     - Case: TestProviderLinkedParticipantsProfilePageAndNavigation
+    - Case: TestProviderCallExternal10DigitNumberWithoutFacility
   # Provider Care Platform Mobile Non Physical
     - Case: TestProviderHomePageListingView
     - Case: TestProviderBrowsingWhileOnCall
