@@ -79,6 +79,8 @@ module Reports
           #Checks if the step is an Action  
           if(step["step"].include? "Action: ")
             keyword, step_description = "Step ", step["step"] #Assigns Step as the keyword and the action as description for the report log
+            # step_description_not_frozen = step_description.dup.force_encoding("ASCII-8BIT")
+            # step_description_utf8_string = step_description_not_frozen.encode("UTF-8", "ASCII-8BIT", invalid: :replace, undef: :replace, replace: "")
             if end_time.nil?
               starting_time = main_case_id.match(/[0-9]*-[0-9]*-[0-9]* [0-2][0-9]:[0-5][0-9]:[0-5][0-9].\d*/)[0] #For the first action it takes the case starting time as the action starting time
             end
@@ -88,10 +90,17 @@ module Reports
           elsif step["error_message"]
             # ERROR STEPS DO NOT HAVE GHERKIN PREFIX
             step_description = step["step"] if step["step"]
+            # lol problem may not be hereee
+            # step_description_not_frozen = step_description.dup.force_encoding("ASCII-8BIT")
+            # step_description_utf8_string = step_description_not_frozen.encode("UTF-8", "ASCII-8BIT", invalid: :replace, undef: :replace, replace: "")
+            # step_description_utf8_string = "error lol1"
             # step_description.scrub
           #Checks if the step is a case step. 
           elsif step["step"].match(/\w+ /)
             step_description = step["step"]
+            # step_description_not_frozen = step_description.dup.force_encoding("ASCII-8BIT")
+            # step_description_utf8_string = step_description_not_frozen.encode("UTF-8", "ASCII-8BIT", invalid: :replace, undef: :replace, replace: "")
+            # step_description_utf8_string = "case step lol2"
             # step_description.scrub
             keyword = step["step"].match(/\w+ /)[0].strip! #Keyword is the case name so that it shows in bold on the report
                                   #GETS MAIN CASE INFO: FILE AND LINE WHERE IT START, LINE WHERE THE STEP IS CALLED
@@ -107,8 +116,10 @@ module Reports
             end
            #Removing keyword from the description so that the case name is not repeated
             begin
+                # step_description_utf8_string.slice! keyword 
                 step_description.slice! keyword 
             rescue => e
+                # step_description_utf8_string.dup.slice! keyword #Rescues the frozen string exception. 
                 step_description.dup.slice! keyword #Rescues the frozen string exception. 
             end
           end
@@ -117,9 +128,11 @@ module Reports
           steps_cucumber.append(
             {
               "arguments" => [],
+              # "keyword" => keyword ||= step_description_utf8_string,
               "keyword" => keyword ||= step_description,
               "embeddings" => data,
               "line" => step_line,
+              # "name" => step_description_utf8_string,
               "name" => step_description,
               "match" => {
               "location" => location
