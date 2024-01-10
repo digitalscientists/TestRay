@@ -2303,6 +2303,7 @@ def provider_clean_hanged_call_or_session(action, main_case, main_case_id)
   have_call = false
   if wait_for_element_to_exist("$PAGE.providers_home_page.session_return_button$")
     log_info("There's a return session")
+    wait_for_enabled_element("$PAGE.providers_home_page.session_return_button$")
     @driver.find_element(:xpath, convert_value_pageobjects("$PAGE.providers_home_page.session_return_button$")).click
     have_call = true
   end
