@@ -872,7 +872,7 @@ TestEmployeeHealthPortalRescheduleAnUpcomingAppointmentForEHPDependentMinor:
   # Clean used appointment
     - Type: case
       Value: EmployeeHealthPortalCancelAppointmentRequest
-      
+
 #CXTB-117 Cancel an Upcoming Appointment
 TestEmployeeHealthPortalCancelAnUpcomingAppointment:
   Environment: Settings 
@@ -882,16 +882,16 @@ TestEmployeeHealthPortalCancelAnUpcomingAppointment:
   Actions:
   # Log in to EHP
     - Type: set_env_var
-      Value: $AND_CLI_employee_minor_dependent_pwd$
+      Value: $AND_CLI_employee_user1_pwd$
       Var: employee_user1_pwd
     - Type: set_env_var
-      Value: $AND_CLI_employee_minor_dependent_user$
+      Value: $AND_CLI_employee_user1$
       Var: employee_user1
     - Type: case
       Value: EmployeeHealthPortalLogIn
   # Make an appointment
     - Type: case
-      Value: EmployeeHealthPortalAppointmentsRequestForDependentMinor
+      Value: EmployeeHealthPortalAppointmentsRequest
   # Verify if the appointment is showing on the list
     - Type: wait_for
       Strategy: xpath
@@ -909,3 +909,27 @@ TestEmployeeHealthPortalCancelAnUpcomingAppointment:
         - Type: eq
           Var: SHOWED_DESCRIPTION
           Value: $AND_CLI_PAIN_DESCRIPTION$
+  # Click the 3 dot visual on right side of listing for one of them.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.employee_health_telehealth_request_form.appointment_dropdown_based_on_description$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.employee_health_telehealth_request_form.appointment_dropdown_based_on_description$       
+  # Click "Cancel appointment" option.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.employee_health_telehealth_request_form.cancel_appointment_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.employee_health_telehealth_request_form.cancel_appointment_button$
+  # Delete Appointment
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.employee_health_telehealth_request_form.yes_delete_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.employee_health_telehealth_request_form.yes_delete_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.employee_health_mobile_home_page.alert_appointment_cancelled$
