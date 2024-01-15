@@ -119,6 +119,7 @@ SetOnlyWebTests:
   - Case: TestProviderCanClickAndViewParticipantsEmergencyCalls
   - Case: TestProviderLinkedParticipantsProfilePageAndNavigation
   - Case: TestProviderCallExternal10DigitNumberWithoutFacility
+  - Case: TestProviderCallExternal10DigitNumberWithoutEmployee
   # Facility Leadership Care Platform
   - Case: TestFacilityLeadershipDirectoryAndFilter
   - Case: TestFacilityLeadershipLogoutGoOffShift

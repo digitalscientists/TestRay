@@ -281,3 +281,98 @@ TestProviderAnswerCompleteSessionFromEHP:
     - Type: wait_not_visible
       Strategy: xpath
       Id: $PAGE.employee_health_home_page.alert_call_ended$
+
+# This test calls a real phone number, please make sure to write the correct number on the variable.
+# CXTB-778: Call External 10-Digit Number (Without Employee).
+TestProviderCallExternal10DigitNumberWithoutEmployee:
+  Environment: Settings
+  Precases:
+    - ProviderNewCleaner
+  Roles:
+    - Role: desktopChrome
+      App: desktop
+  Actions:
+  # Login to the Care Platform app with Providers account.
+    - Type: case
+      Value: ProvidersCarePlatformLogin
+  # Navigate to Employee Call Portal.
+    - Type: case
+      Value: ProviderNavigateEmployeeCallPortal
+  # Click "Place Call" in "Place Call" section to right of inactive video window.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.place_call_tab_navigation$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.place_call_tab_navigation$
+  # Section refreshes to show field, where you can type in desired phone number.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.enter_a_number_input$
+  # Verify that the "Call" button is disabled when the phone number input is empty.
+    - Type: wait_for_property
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.call_button$
+      Property: disabled
+      Value: "true"
+  # Enter phone number where indicated.
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.enter_a_number_input$
+      Value: $AND_CLI_soft_call_phone_number$
+  # Call button (phone visual) becomes active when number is present.
+    - Type: wait_for_property
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.call_button$
+      Property: disabled
+      Value: "false"
+  # Click Call button below entry field.
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.call_button$
+  # Video window updates to show that a call has initiated.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.end_call_button$
+  # Complete conversation and click the "End Call" button.
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.end_call_button$
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.end_call_button$
+  # Video window updates to show a message that the call has ended.
+    - Type: sleep
+      Time: 2
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.video_status$
+      Greps:
+        - var: CALL_MESSAGE
+          attr: textContent
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: CALL_MESSAGE
+          Value: 'The call has ended.'
+  # Verify that your status will remain "In session" until you have completed your notes and submitted the post call survey to fully complete the session.
+    - Type: get_attribute
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.care_platform_header.status_indicator$
+      Greps:
+        - var: INDICATOR
+          attr: class
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Role: desktopChrome
+      Asserts:
+        - Type: contain
+          Var: INDICATOR
+          Value: 'is-red'
+  # Fill post call survey.
+    - Type: case
+      Value: PostCallSurveyProvider
