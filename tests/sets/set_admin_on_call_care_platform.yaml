@@ -12,3 +12,4 @@ SetAdminOnCallCarePlatformTests:
     - Case: TestAdminOnCallShouldNotAnswerProviderCallAfterMedicalTransfer
     - Case: TestAdminOnCallRefreshNurseFacilityDeviceForCalling
     - Case: TestAdminOnCallCallHistoryShowsRecordingsForAllPlatformsAndDevices
+    - Case: TestAdminOnCallRefreshSessionForStaffMemberFromProfile
