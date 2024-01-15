@@ -872,3 +872,40 @@ TestEmployeeHealthPortalRescheduleAnUpcomingAppointmentForEHPDependentMinor:
   # Clean used appointment
     - Type: case
       Value: EmployeeHealthPortalCancelAppointmentRequest
+      
+#CXTB-117 Cancel an Upcoming Appointment
+TestEmployeeHealthPortalCancelAnUpcomingAppointment:
+  Environment: Settings 
+  Roles:
+    - Role: desktopChrome
+      App: "desktop"
+  Actions:
+  # Log in to EHP
+    - Type: set_env_var
+      Value: $AND_CLI_employee_minor_dependent_pwd$
+      Var: employee_user1_pwd
+    - Type: set_env_var
+      Value: $AND_CLI_employee_minor_dependent_user$
+      Var: employee_user1
+    - Type: case
+      Value: EmployeeHealthPortalLogIn
+  # Make an appointment
+    - Type: case
+      Value: EmployeeHealthPortalAppointmentsRequestForDependentMinor
+  # Verify if the appointment is showing on the list
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.employee_health_telehealth_request_form.appointment_list$
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.employee_health_telehealth_request_form.appointment_list_description$
+      Greps:
+        - var: SHOWED_DESCRIPTION
+          attr: textContent
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: eq
+          Var: SHOWED_DESCRIPTION
+          Value: $AND_CLI_PAIN_DESCRIPTION$
