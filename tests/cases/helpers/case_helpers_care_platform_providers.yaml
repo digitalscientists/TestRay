@@ -349,7 +349,6 @@ ProviderNavigateToFacilities:
       Id: $PAGE.providers_facilities_page.facilities_header_title$
 
 ProviderNavigateToEmployees:
-  Environment: Settings
   Roles:
     - Role: desktopChrome
       App: desktop       
