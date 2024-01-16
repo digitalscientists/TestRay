@@ -15,6 +15,7 @@ SetEmployeeHealthPortalTests:
     - Case: TestEmployeeHealthPortalForgotPasswordOnLoginPage
     - Case: TestEmployeeHealthPortalRequestAnAppointmentForUser
     - Case: TestEmployeeHealthPortalReviewUpcomingAppointment
+    - Case: TestEmployeeHealthPortalCancelAnUpcomingAppointment
     - Case: TestEmployeeHealthPortalManuallyLogoutOfPortal
     - Case: TestEmployeeHealthPortalCallsFromCurrentSessionDuplicatedInCallHistoryUntilAccessPage
     - Case: TestEmployeeHealthPortalReviewCallHistory
