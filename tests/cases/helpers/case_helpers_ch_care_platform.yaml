@@ -36,6 +36,8 @@ AnswerCallAsCHCarePartner:
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_home.call_based_on_ch_idd_participant_name$
+    - Type: sleep
+      Time: 2
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.care_platform_home.answer_call$
@@ -351,6 +353,13 @@ CHSetScheduledCallForSeniorsToStartInXMinutes:
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_call_portal.today_date_date_picker$
+      # Patient location
+    - Type: click
+      Strategy: id
+      Id: $PAGE.care_platform_call_portal.location_selector$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.location_option_2$
       # Click in the submit button
     - Type: click
       Strategy: xpath

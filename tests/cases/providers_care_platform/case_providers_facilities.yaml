@@ -365,3 +365,1660 @@ TestProviderCheckForForcedAssessmentOnFollowUpsWithoutTelehealthRequest:
       Strategy: xpath
       Role: desktopChrome
       Id: $PAGE.providers_call_handling_page.no_message_button$
+
+# CXTB-725 Review Info for Existing Facility Device - Facility Profile
+TestProviderReviewInfoForExistingFacilityDeviceFacilityProfile:
+  Environment: Settings
+  Vars:
+    DEVICE_STATUS: "(Active|Pre-delivery|Suspended|Deactivated)"
+    LOGOUT_OPTION: "Go Off Shift"
+  Aftercases:
+    - CarePlatformLogout
+  Roles: 
+    - Role: desktopChrome
+      App: desktop
+  Actions:
+  # Call to login case as a Provider.
+    - Type: case
+      Value: ProvidersCarePlatformLogin
+  # Navigate to Facilities.
+    - Type: case
+      Value: ProviderNavigateToFacilities
+  # Select a facility with an address and at least one device in listing.
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_facilities_page.facility_based_on_name$
+  # Right side of screen updates to show the selected facility’s summary pane including:
+  # Facility’s local time, Overview, Local Hospitals, Devices
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_facilities_page.facility_name$
+  # Using Facility leadership page objects to avoid duplication.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.facility_leadership_facility_details.facility_local_time$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_facility_Record.overview_tab$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_facility.local_hospitals_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_facility_Record.devices_button$
+  # Click "Devices" on right side.
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_facility_Record.devices_button$
+  # Right side of screen updates to show listing of facility’s device(s) and their current status.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_facility_Record.facility_status_label_elements$
+  # Click on Record
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_details.records_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_facilities_records_page.info_title$
+  # Click to check Devices Tab
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_facilities_records_page.devices_tab$
+    - Type: sleep
+      Time: 2
+    - Type: get_text
+      Strategy: xpath
+      Id: $PAGE.providers_facilities_records_page.device_status$
+      Greps:
+        - var: STATUS_TEXT
+          condition: nempty
+          match: "(Active|Pre-delivery|Suspended|Deactivated)"
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: DEVICE_STATUS
+          Value: $AND_CLI_STATUS_TEXT$
+
+#CXTB-184 Access Facilities Directory & Filter
+TestProviderAccessFacilitiesDirectoryAndFilter:
+  Environment: Settings
+  Vars:
+    LOGOUT_OPTION: "Go Off Shift"
+  Aftercases:
+    - CarePlatformLogout
+  Roles: 
+    - Role: desktopChrome
+      App: desktop
+  Actions:
+  # Call to login
+    - Type: case
+      Value: ProvidersCarePlatformLogin
+  # Click on "Facilities" in header of the Care Platform
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.facility_leadership_care_platform_home.facilities_header_tab$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.facility_leadership_care_platform_home.facilities_header_tab$
+  # Click on a letter along right side of listing
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_facility.facility_first_active_letter$
+  # Get the value to compare later
+    - Type: get_text
+      Strategy: xpath
+      Id: $PAGE.care_platform_facility.facility_first_active_letter$
+      Greps:
+        - var: FILTER_LETTER
+          match: "(.*)"
+  #Verify is selected
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.care_platform_facility.facility_first_active_letter$
+      Greps:
+        - var: SELECTED_CLASS
+          attr: class
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: SELECTED_CLASS
+          Value: 'is-selected'
+  #Verify it was filtered by the selected letter
+    - Type: get_text
+      Strategy: xpath
+      Id: $PAGE.care_platform_facility.first_facility$
+      Greps:
+        - var: FIRST_LETTER
+          match: ^[a-zA-Z]   #The match selects: The first char from the starter word (^) that is a letter ([a-zA-Z])
+    - Type: assert
+      Asserts: 
+        - Type: eq
+          Var: FIRST_LETTER
+          Value: $AND_CLI_FILTER_LETTER$
+  #Remove the filter by letter
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_facility.facility_first_active_letter$
+  #Check is not selected anymore
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.care_platform_facility.facility_first_active_letter$
+      Greps:
+        - var: NOT_SELECTED_CLASS
+          attr: class
+          condition: nempty
+          match: "(.*)"
+  #Get the first facility in the list
+    - Type: get_text
+      Strategy: xpath
+      Id: $PAGE.care_platform_facility.first_facility$
+      Greps:
+        - var: FIRST_FACILITY_NO_FILTER
+          match: (.*)
+  #Add the search filter
+    - Type: click
+      Strategy: id
+      Id: $PAGE.facility_leadership_facilities_listing.search_button$
+    - Type: send_keys
+      Strategy: id
+      Id: $PAGE.facility_leadership_facilities_listing.search_text$
+      Value: $AND_CLI_FIRST_FACILITY_NO_FILTER$
+  #Verify there is at least 1 facility with that name
+    - Type: set_env_var
+      Value: $AND_CLI_FIRST_FACILITY_NO_FILTER$
+      Var: facility_name1
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.facility_leadership_facilities_listing.facility_based_on_name$
+    - Type: get_text
+      Strategy: xpath
+      Id: $PAGE.care_platform_facility.first_facility$
+      Greps:
+        - var: FIRST_FACILITY
+          match: (.*)
+  #Verify the first facility contains the text filtered
+    - Type: assert
+      Asserts: 
+        - Type: contain
+          Var: FIRST_FACILITY
+          Value: $AND_CLI_FIRST_FACILITY_NO_FILTER$
+  #Clear the search by clicking small "x" at right of field
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_facility.clear_search_button$
+  #Verify there is at least 1 facility
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_facility.first_facility$
+  #Get name of facility
+    - Type: get_text
+      Strategy: xpath
+      Id: $PAGE.care_platform_facility.first_facility$
+      Greps:
+        - var: FIRST_FACILITY_NAME
+          condition: nempty
+          match: "(.*)"
+  #Click on a facility
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_facility.first_facility$
+  #Check facility details
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_facilities_page.facility_name$
+    - Type: get_text
+      Strategy: xpath
+      Id: $PAGE.providers_facilities_page.facility_name$
+      Greps:
+        - var: FACILITY_NAME_TITLE
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: FIRST_FACILITY_NAME
+          Value: $AND_CLI_FACILITY_NAME_TITLE$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.facility_leadership_facility_details.facility_local_time$
+    # Check Overview is selected
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.facility_leadership_facility_details.overview_tab$
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.facility_leadership_facility_details.overview_tab$
+      Greps:
+        - var: OVERVIEW_SELECTED_CLASS
+          attr: class
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: OVERVIEW_SELECTED_CLASS
+          Value: 'active'
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.facility_leadership_facility_details.local_hospitals_tab$
+      Greps:
+        - var: LOCAL_HOSPITALS_SELECTED_CLASS
+          attr: class
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: n_contain
+          Var: LOCAL_HOSPITALS_SELECTED_CLASS
+          Value: 'active'
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.facility_leadership_facility_details.devices_tab$
+      Greps:
+        - var: DEVICES_SELECTED_CLASS
+          attr: class
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: n_contain
+          Var: DEVICES_SELECTED_CLASS
+          Value: 'active'
+    # Check Local Hospitals tab is selected
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.facility_leadership_facility_details.local_hospitals_tab$
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.facility_leadership_facility_details.overview_tab$
+      Greps:
+        - var: OVERVIEW_SELECTED_CLASS
+          attr: class
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: n_contain
+          Var: OVERVIEW_SELECTED_CLASS
+          Value: 'active'
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.facility_leadership_facility_details.local_hospitals_tab$
+      Greps:
+        - var: LOCAL_HOSPITALS_SELECTED_CLASS
+          attr: class
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: LOCAL_HOSPITALS_SELECTED_CLASS
+          Value: 'active'
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.facility_leadership_facility_details.devices_tab$
+      Greps:
+        - var: DEVICES_SELECTED_CLASS
+          attr: class
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: n_contain
+          Var: DEVICES_SELECTED_CLASS
+          Value: 'active'
+    # Check Devices tabs is selected
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.facility_leadership_facility_details.devices_tab$
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.facility_leadership_facility_details.overview_tab$
+      Greps:
+        - var: OVERVIEW_SELECTED_CLASS
+          attr: class
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: n_contain
+          Var: OVERVIEW_SELECTED_CLASS
+          Value: 'active'
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.facility_leadership_facility_details.local_hospitals_tab$
+      Greps:
+        - var: LOCAL_HOSPITALS_SELECTED_CLASS
+          attr: class
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: n_contain
+          Var: LOCAL_HOSPITALS_SELECTED_CLASS
+          Value: 'active'
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.facility_leadership_facility_details.devices_tab$
+      Greps:
+        - var: DEVICES_SELECTED_CLASS
+          attr: class
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: DEVICES_SELECTED_CLASS
+          Value: 'active'
+
+# CXTB-748 Attempt an On-Demand Call to Facility’s Device (that is Missed) - Facility Pane
+TestProviderAttemptAnOnDemandCallToFacilitysDeviceThatIsMissedFacilityPane:
+  Environment: Settings
+  Roles: 
+    - Role: localiOS
+      Capabilities:
+        newCommandTimeout: 120
+      App: NeverAlone
+    - Role: desktopChrome
+      App: desktop
+  Precases:
+    - ProviderNewCleaner
+  Aftercases:
+    - TerminateApp
+  Actions:
+  # Setup for the test data
+  #Call login for nurses
+    - Type: case
+      Role: localiOS
+      Value: LoginSNFHelper
+  #Calling Prompt cleaner
+    - Type: case
+      Role: localiOS
+      Value: SeniorCleanPrompts
+  # Call as a Provider
+    - Type: case
+      Value: ProviderCallFacility
+  # On SNF wait for the incoming call
+  # Nurse sees that there is an incoming call.
+    - Type: sleep
+      Time: 2
+    - Type: wait_for
+      Strategy: class_chain
+      Id: $PAGE.snf_incoming_call.incoming_call_header$
+      CheckTime: 20
+  # Sleep for a minute
+    - Type: sleep
+      Time: 61
+  # Click the "End Call" button.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.end_call_btn$
+      Role: desktopChrome
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.end_call_btn$
+      Role: desktopChrome
+  # Provider select No Message
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.no_message_button$
+      Role: desktopChrome
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.no_message_button$
+      Role: desktopChrome
+  # In SNF there's a missed call
+    - Type: wait_for
+      Strategy: class_chain
+      Id: $PAGE.snf_notifications.missed_incoming_call_modal_title$
+      Role: localiOS
+    - Type: click
+      Strategy: class_chain
+      Id: $PAGE.snf_notifications.modal_close_button$
+      Role: localiOS
+
+# CXTB-749 Can Click and View Facility Follow-up Tickets Information
+TestProviderCanClickAndViewFacilityFollowUpTicketsInformation:
+  Environment: Settings
+  Vars:
+    LOGOUT_OPTION: "Go Off Shift"
+  Precases:
+    - FollowUpHistoryPrecaseForSNF
+  Aftercases:
+    - CarePlatformLogout
+  Roles: 
+    - Role: desktopChrome
+      App: desktop
+    - Role: localiOS
+      App: NeverAlone
+  Actions:
+  # Call to login
+    - Type: case
+      Value: ProvidersCarePlatformLogin
+  # Navigate to Facilities
+    - Type: case
+      Value: ProviderNavigateToFacilities
+  # Select a facility with an address and at least one device in listing.
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_facilities_page.facility_based_on_name$
+  # Right side of screen updates to show the selected facility’s summary
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_facilities_page.facility_name$
+  # Go to Facility Profile
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_details.records_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_facilities_records_page.info_title$
+  # Select Follow Up tab
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_participants_records_page.follow_up_tickets_tab$
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.providers_participants_records_page.follow_up_tickets_tab$
+      Greps:
+        - var: ACTIVE_CLASS
+          attr: class
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: ACTIVE_CLASS
+          Value: 'active' 
+  # Left "Ticket history"
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_records_follow_up_tickets.ticket_history_title$
+  # Right "Active tickets"
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_records_follow_up_tickets.active_tickets_title$
+  # Review the "Ticket history" section listing.
+    # Click to expand a row.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_follow_up_call_details_page.first_follow_up_row$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_follow_up_call_details_page.first_follow_up_row$
+    # Expands and shows creation information, and additional details about the task that was completed.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_records_follow_up_tickets.expanded_ticket_content$
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_records_follow_up_tickets.expanded_ticket_content$
+      Greps:
+        - var: COMPLETED_LABEL
+          attr: textContent
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: COMPLETED_LABEL
+          Value: Completed
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: COMPLETED_LABEL
+          Value: Reason for Closing
+    # Verify that listing includes all completed Care Partner follow-up tickets. The main table displays the key summary information.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_records_follow_up_tickets.ticket_history_completed_header_label$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_records_follow_up_tickets.ticket_history_loe_header_label$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_records_follow_up_tickets.ticket_history_type_header_label$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_records_follow_up_tickets.ticket_history_partner_header_label$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_records_follow_up_tickets.ticket_history_subject_header_label$
+
+#CXTB-750 Answer Call and Complete Session with Pause Issue
+TestProvidersAnswerCallAndCompleteSessionWithPauseIssue:
+  Environment: Settings
+  Precases:
+    - ProviderNewCleaner
+    - LoginSNFHelper
+  Aftercases:
+    - TerminateApp
+  Roles:
+    - Role: desktopChrome
+      App: desktop
+    - Role: localiOS
+      App: NeverAlone
+  Actions:
+    # Login to the Care Platform app with Providers account.
+    - Type: case
+      Value: ProvidersCarePlatformLogin
+      Role: desktopChrome
+    # Calling Prompt cleaner
+    - Type: case
+      Role: localiOS
+      Value: SeniorCleanPrompts
+    # Make Call
+    - Type: case
+      Role: localiOS
+      Value: SNFNewRequestHelper
+    # Make a Paused Issue
+    - Type: case
+      Value: AnswerOnDemandCallAsProvider
+      Role: desktopChrome
+    #End call
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.end_call_btn$
+      Role: desktopChrome
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.end_call_btn$
+      Role: desktopChrome
+  #Fill the Provider's call notes
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.call_notes_subject_input$
+      Role: desktopChrome
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.call_notes_subject_input$
+      Role: desktopChrome
+      Value: 'Automation Test subject'
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.call_notes_provider_input$
+      Role: desktopChrome
+      Value: 'Automation Test Notes: Test Issue Paused'
+    - Type: scroll_to
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.call_notes_save_button$
+  #Manual save of notes
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.call_notes_save_button$
+  #Complete Session
+    - Type: wait_for_property
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.complete_session_button$ 
+      Property: disabled
+      Value: "false"
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.complete_session_button$ 
+  #Fill survey and end session
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.post_call_survey_title$
+  # Pause issue
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.pause_issue_button$
+    - Type: sleep
+      Time: 0.5
+    - Type: refresh
+      Role: desktopChrome
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.resolved_no_radio_input$
+  # Check auto filled properties
+    # Auto answer Issue resolved - No
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.resolved_no_radio_input$
+      Greps:
+        - var: RESOLVED_NO_CHECK
+          attr: outerHTML
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: RESOLVED_NO_CHECK
+          Value: checked
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: RESOLVED_NO_CHECK
+          Value: disabled
+    # Auto Answer Reason - Follow-up recommended
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.reason_input$
+      Greps:
+        - var: REASON_INPUT
+          attr: value
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: REASON_INPUT
+          Value: 'Follow-up recommended'
+    - Type: wait_for_property
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.reason_input$
+      Property: disabled
+      Value: "true"
+    # Auto answer Discharge - No
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.recommend_discharge_no_input$
+      Greps:
+        - var: DISCHARGE_NO_CHECK
+          attr: outerHTML
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: DISCHARGE_NO_CHECK
+          Value: checked
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: DISCHARGE_NO_CHECK
+          Value: disabled
+    # Auto answer Subject Notes - [Issue Paused]
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.call_notes_subject_input$
+      Greps:
+        - var: PAUSED_SUBJECT
+          attr: value
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: PAUSED_SUBJECT
+          Value: '[Issue Paused]'
+    - Type: wait_for_property
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.call_notes_subject_input$
+      Property: disabled
+      Value: "true"
+    # Auto answer Details Notes - [Issue Paused]
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.call_notes_provider_input$
+      Greps:
+        - var: PAUSED_NOTES
+          attr: value
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: PAUSED_NOTES
+          Value: '[Issue Paused]'
+  # Unpause Issue
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.unpause_issue_button$
+    - Type: sleep
+      Time: 0.5
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.resolved_true_option$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.video_visit_true_option$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.recommend_discharge_yes_by_SNF$
+    # Auto answer Details Notes - not [Issue Paused]
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.call_notes_provider_input$
+      Greps:
+        - var: PAUSED_NOTES
+          attr: value
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: n_contain
+          Var: PAUSED_NOTES
+          Value: '[Issue Paused]'
+     # Auto answer Subject Notes - not [Issue Paused]
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.call_notes_subject_input$
+      Greps:
+        - var: PAUSED_SUBJECT
+          attr: value
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: n_contain
+          Var: PAUSED_SUBJECT
+          Value: '[Issue Paused]'
+    - Type: scroll_to
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.submit_exit_session_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.submit_exit_session_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_notifications.call_completed_notification$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.home_title$
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id: $PAGE.providers_notifications.call_completed_notification$
+
+# CXTB-751 Call Facility Device & Complete an On-Demand Call - Facility Profile
+TestProviderCallFacilityDeviceAndCompleteAnOnDemandCallFacilityProfile:
+  Environment: Settings
+  Precases:
+    - ProviderNewCleaner
+    - LoginSNFHelper
+  Aftercases:
+    - TerminateApp
+  Roles:
+    - Role: desktopChrome
+      App: desktop
+    - Role: localiOS
+      App: NeverAlone
+  Actions:
+    # Login to the Care Platform app with Providers account.
+    - Type: case
+      Value: ProvidersCarePlatformLogin
+      Role: desktopChrome
+    # Calling Prompt cleaner
+    - Type: case
+      Role: localiOS
+      Value: SeniorCleanPrompts
+    # Navigate to Facilities
+    - Type: case
+      Value: NavigationToFacilityProfile
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_details.records_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_facilities_records_page.info_title$
+    # Click to check Devices Tab
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_facilities_records_page.devices_tab$
+    - Type: sleep
+      Time: 2
+    # Call by device number
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_facility_Record.call_device_by_number$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_facility_Record.call_device_by_number$
+    # Wait for Call Portal
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.call_device_btn$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.call_device_btn$
+    - Type: sleep
+      Time: 2
+    - Type: case
+      Value: SNFAnswerIncomingCall
+    # Complete Call, Session and Survey
+      #Provider ends call.
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.end_call_btn$
+    # Check Provider's In Session dot
+    - Type: get_attribute
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.care_platform_header.status_indicator$
+      Greps:
+        - var: INDICATOR
+          attr: class
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Role: desktopChrome
+      Asserts:
+        - Type: contain
+          Var: INDICATOR
+          Value: 'is-red'
+    # Provider fills up Post call Survey.
+    - Type: case
+      Value: PostCallSurveyProvider
+      Role: desktopChrome
+    # After call ends, select the Great option answer and then verify that the Nurse is redirected to the Home Page.
+    - Type: case
+      Value: SNFGreatPostCallSurvey
+      Role: localiOS
+    # Checking the status indicator correspond to Available in the Porivders side.
+    - Type: wait_for
+      Role: desktopChrome
+      Strategy: xpath
+      Id: $PAGE.care_platform_header.status_indicator$
+    - Type: get_attribute
+      Role: desktopChrome
+      Strategy: xpath
+      Id: $PAGE.care_platform_header.status_indicator$
+      Greps:
+        - var: STATUS_VAR
+          attr: class
+          condition: nempty
+          match: "(.*)has-status(.*)"
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: STATUS_VAR
+          Value: "is-green"
+
+# CXTB-752 Attempt an On-Demand Call to Facility Device (that is Ignored) - Facility Pane
+TestProviderAttemptAnOnDemandCallToFacilityDeviceThatIsIgnoredFacilityPane:
+  Environment: Settings
+  Vars:
+    MESSAGE_TO_SNF: Automation Message CXTB-752  # Message from Provider to SNF
+    LOGOUT_OPTION: "Go Off Shift"
+  Precases:
+    - ProviderNewCleaner
+    - LoginSNFHelper
+  Aftercases:
+    - CarePlatformLogout
+    - TerminateApp
+  Roles:
+    - Role: desktopChrome
+      App: desktop
+    - Role: localiOS
+      App: NeverAlone
+  Actions:
+    # Login to the Care Platform app with Providers account.
+    - Type: case
+      Value: ProvidersCarePlatformLogin
+      Role: desktopChrome
+    # Calling Prompt cleaner
+    - Type: case
+      Role: localiOS
+      Value: SeniorCleanPrompts
+    # Navigate to Facilities
+    - Type: case
+      Value: NavigationToFacilityProfile
+    # Select Devices
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_facility_Record.devices_button$
+    - Type: sleep
+      Time: 1
+    # Call by device number
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_facility_Record.call_device_by_number$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_facility_Record.call_device_by_number$
+    # Wait for Call Portal
+    - Type: sleep
+      Time: 2
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.call_device_btn$
+    # SNF Ignore call
+    - Type: wait_for
+      Strategy: class_chain
+      Id: $PAGE.snf_incoming_call.incoming_call_header$
+      Role: localiOS
+      CheckTime: 20
+    - Type: wait_for
+      Strategy: class_chain
+      Id: $PAGE.snf_incoming_call.ignore_call_button$
+      Role: localiOS
+    - Type: click
+      Strategy: class_chain
+      Id: $PAGE.snf_incoming_call.ignore_call_button$
+      Role: localiOS
+    # Type a message in the box available and click "Yes, send message" button
+    - Type: sleep
+      Time: 2
+    # Yes, Send Message
+    # Verify that there is an option for the care partner to leave a text message.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.leave_message_participant_input$
+      Role: desktopChrome
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.yes_message_button$
+      Role: desktopChrome
+    # Provider sends a message in the available box and click on the "Yes, send message" button.
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.leave_message_participant_input$
+      Value: $AND_CLI_MESSAGE_TO_SNF$
+      Role: desktopChrome
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.yes_message_button$
+      Role: desktopChrome
+    # Call portal returns to no active call display.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.video_status$
+      Role: desktopChrome
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.video_status$
+      Role: desktopChrome
+      Greps:
+        - var: CALL_MESSAGE
+          attr: textContent
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: eq
+          Var: CALL_MESSAGE
+          Value: 'No active call.'
+    # Verify that the nurse receives a "Provider Message" prompt showing the message, who sent it and when.
+    - Type: wait_for
+      Role: localiOS
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_message_modal.message_header$
+    - Type: return_element_attribute
+      Role: localiOS
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_message_modal.message_header$
+      Attribute: label
+      ResultVar: MESSAGE_HEADER_TITLE
+    - Type: assert
+      Asserts:
+        - Type: eq
+          Var: MESSAGE_HEADER_TITLE
+          Value: Provider Message
+    - Type: wait_for
+      Role: localiOS
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_message_modal.from_label$
+    - Type: return_element_attribute
+      Role: localiOS
+      Strategy: xpath
+      Id: $PAGE.seniors_app_message_modal.from_value$
+      Attribute: label
+      ResultVar: FROM_VALUE
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: FROM_VALUE
+          Value: $AND_CLI_provider_user1_name$ $AND_CLI_provider_user1_lastname$
+    - Type: wait_for
+      Role: localiOS
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_message_modal.sent_label$
+    - Type: wait_for
+      Role: localiOS
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_message_modal.message_label$
+    - Type: return_element_attribute
+      Role: localiOS
+      Strategy: xpath
+      Id: $PAGE.seniors_app_message_modal.message_value$
+      Attribute: label
+      ResultVar: MESSAGE_VALUE
+    - Type: assert
+      Asserts:
+        - Type: eq
+          Var: MESSAGE_VALUE
+          Value: $AND_CLI_MESSAGE_TO_SNF$
+
+# CXTB-189 Send Message to Facility Device - Facility Pane
+TestProviderSendMessageToFacilityDeviceFacilityPane:
+  Environment: Settings
+  Vars:
+    LOGOUT_OPTION: "Go Off Shift"
+  Precases:
+    - ProviderNewCleaner
+    - OnboarderSetNurseToActive
+  Aftercases:
+    - TerminateApp
+    - OnboarderSetNurseToActive
+  Roles:
+    - Role: localiOS
+      App: NeverAlone
+    - Role: desktopChrome
+      App: desktop 
+  Actions:
+  # Login to SNF
+    - Type: case
+      Role: localiOS
+      Value: LoginSNFHelper
+    - Type: case
+      Value: SeniorCleanPrompts
+  # Create message from provider to the active facility device
+    - Type: case
+      Value: ProviderSendsMessageToFacility
+      Vars:
+        MESSAGE_TO_FACILITY: Automation Message CXTB-189 Active Status
+  # Check sender
+    - Type: return_element_attribute
+      Strategy: class_chain
+      Id: $PAGE.snf_notifications.notification_details_from$
+      Attribute: label
+      ResultVar: FROM_VALUE
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: FROM_VALUE
+          Value: Dr. $AND_CLI_provider_user1_name$ $AND_CLI_provider_user1_lastname$
+  # Check message sent
+    - Type: wait_for
+      Strategy: id
+      Id: "$AND_CLI_MESSAGE_TO_FACILITY$"
+  # Close Message Prompt
+    - Type: click
+      Strategy: class_chain
+      Id: $PAGE.snf_notifications.modal_close_button$
+  # Change Facility device status to "Pre-Delivery"
+    - Type: case
+      Value: CarePlatformLogout
+    - Type: case
+      Value: OnboarderCarePartnerLogin
+    - Type: case
+      Value: OnboarderCarePartnerSetSNFDeviceToVariableState
+      Vars:
+        ACCOUNT_STATUS: Pre-delivery
+    - Type: case
+      Value: AlternativeCarePartnerLogout
+  # Log in to SNF
+    - Type: case
+      Role: localiOS
+      Value: LoginSNFHelper
+    - Type: case
+      Value: SeniorCleanPrompts
+  # Create message from provider to the active facility device
+    - Type: case
+      Value: ProviderSendsMessageToFacility
+      Vars:
+        MESSAGE_TO_FACILITY: Automation Message CXTB-189 Pre-Delivery Status
+  # Check sender
+    - Type: return_element_attribute
+      Strategy: class_chain
+      Id: $PAGE.snf_notifications.notification_details_from$
+      Attribute: label
+      ResultVar: FROM_VALUE
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: FROM_VALUE
+          Value: Dr. $AND_CLI_provider_user1_name$ $AND_CLI_provider_user1_lastname$
+    - Type: case
+      Value: CarePlatformLogout
+  # Change Facility device status to "Deactivated"
+    - Type: case
+      Value: OnboarderCarePartnerLogin
+    - Type: case
+      Value: OnboarderCarePartnerSetSNFDeviceToVariableState
+      Vars:
+        ACCOUNT_STATUS: Deactivated
+    - Type: case
+      Value: AlternativeCarePartnerLogout
+  # Login to the Care Platform app with Providers account
+    - Type: case
+      Value: ProvidersCarePlatformLogin
+  # Navigate to Facilities
+    - Type: case
+      Value: ProviderNavigateToFacilities
+  # Select the desired facility
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_facilities_page.facility_based_on_name$ 
+      Role: desktopChrome
+  # Navigate to the Devices tab
+    - Type: wait_for
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_facilities_page.devices_tab$ 
+    - Type: click
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_facilities_page.devices_tab$
+  # Click "Message" next to an inactive device on right side of screen, status in: Deactivated
+    - Type: wait_for
+      Role: desktopChrome
+      Strategy: xpath
+      Id: $PAGE.providers_facilities_page.message_based_on_device_button$
+    - Type: click
+      Role: desktopChrome
+      Strategy: xpath
+      Id: $PAGE.providers_facilities_page.message_based_on_device_button$
+  # Message device modal appears at center of screen, showing message history for device
+    - Type: wait_for
+      Role: desktopChrome
+      Strategy: xpath
+      Id: $PAGE.providers_facilities_page.last_message_sent$
+    - Type: return_element_attribute
+      Role: desktopChrome
+      Strategy: xpath
+      Id: $PAGE.providers_facilities_page.last_message_sent$
+      Attribute: textContent
+      ResultVar: LAST_MESSAGE_HISTORY
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id: $PAGE.providers_facilities_page.send_message_button$
+      Role: desktopChrome
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: LAST_MESSAGE_HISTORY
+          Value: Automation Message CXTB-189
+    - Type: case
+      Value: CarePlatformLogout
+  # Change Facility device status to "Suspended"
+    - Type: case
+      Value: OnboarderCarePartnerLogin
+    - Type: case
+      Value: OnboarderCarePartnerSetSNFDeviceToVariableState
+      Vars:
+        ACCOUNT_STATUS: Suspended
+    - Type: case
+      Value: AlternativeCarePartnerLogout
+  # Login to the Care Platform app with Providers account
+    - Type: case
+      Value: ProvidersCarePlatformLogin
+  # Navigate to Facilities
+    - Type: case
+      Value: ProviderNavigateToFacilities
+  # Select the desired facility
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_facilities_page.facility_based_on_name$ 
+      Role: desktopChrome
+  # Navigate to the Devices tab
+    - Type: wait_for
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_facilities_page.devices_tab$ 
+    - Type: click
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_facilities_page.devices_tab$
+  # Click "Message" next to an inactive device on right side of screen, status in: Suspended
+    - Type: wait_for
+      Role: desktopChrome
+      Strategy: xpath
+      Id: $PAGE.providers_facilities_page.message_based_on_device_button$
+    - Type: click
+      Role: desktopChrome
+      Strategy: xpath
+      Id: $PAGE.providers_facilities_page.message_based_on_device_button$
+  # Message device modal appears at center of screen, showing message history for device
+    - Type: wait_for
+      Role: desktopChrome
+      Strategy: xpath
+      Id: $PAGE.providers_facilities_page.last_message_sent$
+    - Type: return_element_attribute
+      Role: desktopChrome
+      Strategy: xpath
+      Id: $PAGE.providers_facilities_page.last_message_sent$
+      Attribute: textContent
+      ResultVar: LAST_MESSAGE_HISTORY
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: LAST_MESSAGE_HISTORY
+          Value: Automation Message CXTB-189
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id: $PAGE.providers_facilities_page.send_message_button$
+      Role: desktopChrome
+    - Type: case
+      Value: CarePlatformLogout
+
+# CXTB-190 Send Message to Facility Device - Facility Profile
+TestProviderSendMessageToFacilityDeviceFacilityProfile:
+  Environment: Settings
+  Vars:
+    LOGOUT_OPTION: "Go Off Shift"
+  Precases:
+    - ProviderNewCleaner
+    - OnboarderSetNurseToActive
+  Aftercases:
+    - TerminateApp
+    - OnboarderSetNurseToActive
+  Roles:
+    - Role: localiOS
+      App: NeverAlone
+    - Role: desktopChrome
+      App: desktop 
+  Actions:
+  # Login to SNF
+    - Type: case
+      Role: localiOS
+      Value: LoginSNFHelper
+    - Type: case
+      Value: SeniorCleanPrompts
+  # Create message from provider to the active facility device
+    - Type: case
+      Value: ProviderSendsMessageToFacilityFromProfile
+      Vars:
+        MESSAGE_TO_FACILITY: Automation Message CXTB-190 Active Status
+  # Check sender
+    - Type: return_element_attribute
+      Strategy: class_chain
+      Id: $PAGE.snf_notifications.notification_details_from$
+      Attribute: label
+      ResultVar: FROM_VALUE
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: FROM_VALUE
+          Value: Dr. $AND_CLI_provider_user1_name$ $AND_CLI_provider_user1_lastname$
+  # Check message sent
+    - Type: wait_for
+      Strategy: id
+      Id: "$AND_CLI_MESSAGE_TO_FACILITY$"
+  # Close Message Prompt
+    - Type: click
+      Strategy: class_chain
+      Id: $PAGE.snf_notifications.modal_close_button$
+  # Change Facility device status to "Pre-Delivery"
+    - Type: case
+      Value: CarePlatformLogout
+    - Type: case
+      Value: OnboarderCarePartnerLogin
+    - Type: case
+      Value: OnboarderCarePartnerSetSNFDeviceToVariableState
+      Vars:
+        ACCOUNT_STATUS: Pre-delivery
+    - Type: case
+      Value: AlternativeCarePartnerLogout
+  # Log in to SNF
+    - Type: case
+      Role: localiOS
+      Value: LoginSNFHelper
+    - Type: case
+      Value: SeniorCleanPrompts
+  # Create message from provider to the active facility device
+    - Type: case
+      Value: ProviderSendsMessageToFacilityFromProfile
+      Vars:
+        MESSAGE_TO_FACILITY: Automation Message CXTB-190 Pre-Delivery Status
+  # Check sender
+    - Type: return_element_attribute
+      Strategy: class_chain
+      Id: $PAGE.snf_notifications.notification_details_from$
+      Attribute: label
+      ResultVar: FROM_VALUE
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: FROM_VALUE
+          Value: Dr. $AND_CLI_provider_user1_name$ $AND_CLI_provider_user1_lastname$
+    - Type: case
+      Value: CarePlatformLogout
+  # Change Facility device status to "Deactivated"
+    - Type: case
+      Value: OnboarderCarePartnerLogin
+    - Type: case
+      Value: OnboarderCarePartnerSetSNFDeviceToVariableState
+      Vars:
+        ACCOUNT_STATUS: Deactivated
+    - Type: case
+      Value: AlternativeCarePartnerLogout
+  # Login to the Care Platform app with Providers account
+    - Type: case
+      Value: ProvidersCarePlatformLogin
+  # Navigate to Facilities
+    - Type: case
+      Value: ProviderNavigateToFacilities
+  # Select the desired facility
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_facilities_page.facility_based_on_name$ 
+      Role: desktopChrome
+  # Click on Records
+    - Type: click
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_facilities_page.records_button$ 
+  # Navigate to the Devices tab
+    - Type: wait_for
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_facilities_page.devices_tab$ 
+    - Type: click
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_facilities_page.devices_tab$
+  # Click "Message" next to an inactive device on right side of screen, status in: Deactivated
+    - Type: wait_for
+      Role: desktopChrome
+      Strategy: xpath
+      Id: $PAGE.providers_facilities_page.message_based_on_device_button$
+    - Type: click
+      Role: desktopChrome
+      Strategy: xpath
+      Id: $PAGE.providers_facilities_page.message_based_on_device_button$
+  # Message device modal appears at center of screen, showing message history for device
+    - Type: wait_for
+      Role: desktopChrome
+      Strategy: xpath
+      Id: $PAGE.providers_facilities_page.last_message_sent$
+    - Type: return_element_attribute
+      Role: desktopChrome
+      Strategy: xpath
+      Id: $PAGE.providers_facilities_page.last_message_sent$
+      Attribute: textContent
+      ResultVar: LAST_MESSAGE_HISTORY
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: LAST_MESSAGE_HISTORY
+          Value: Automation Message CXTB-190
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id: $PAGE.providers_facilities_page.send_message_button$
+      Role: desktopChrome
+    - Type: case
+      Value: CarePlatformLogout
+  # Change Facility device status to "Suspended"
+    - Type: case
+      Value: OnboarderCarePartnerLogin
+    - Type: case
+      Value: OnboarderCarePartnerSetSNFDeviceToVariableState
+      Vars:
+        ACCOUNT_STATUS: Suspended
+    - Type: case
+      Value: AlternativeCarePartnerLogout
+  # Login to the Care Platform app with Providers account
+    - Type: case
+      Value: ProvidersCarePlatformLogin
+  # Navigate to Facilities
+    - Type: case
+      Value: ProviderNavigateToFacilities
+  # Select the desired facility
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_facilities_page.facility_based_on_name$ 
+      Role: desktopChrome
+  # Click on Records
+    - Type: click
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_facilities_page.records_button$ 
+  # Navigate to the Devices tab
+    - Type: wait_for
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_facilities_page.devices_tab$ 
+    - Type: click
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_facilities_page.devices_tab$
+  # Click "Message" next to an inactive device on right side of screen, status in: Suspended
+    - Type: wait_for
+      Role: desktopChrome
+      Strategy: xpath
+      Id: $PAGE.providers_facilities_page.message_based_on_device_button$
+    - Type: click
+      Role: desktopChrome
+      Strategy: xpath
+      Id: $PAGE.providers_facilities_page.message_based_on_device_button$
+  # Message device modal appears at center of screen, showing message history for device
+    - Type: wait_for
+      Role: desktopChrome
+      Strategy: xpath
+      Id: $PAGE.providers_facilities_page.last_message_sent$
+    - Type: return_element_attribute
+      Role: desktopChrome
+      Strategy: xpath
+      Id: $PAGE.providers_facilities_page.last_message_sent$
+      Attribute: textContent
+      ResultVar: LAST_MESSAGE_HISTORY
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: LAST_MESSAGE_HISTORY
+          Value: Automation Message CXTB-190
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id: $PAGE.providers_facilities_page.send_message_button$
+      Role: desktopChrome
+    - Type: case
+      Value: CarePlatformLogout
+
+# CXTB-775 Linked Participants Profile Page & Navigation
+TestProviderLinkedParticipantsProfilePageAndNavigation:
+  Environment: Settings
+  Precases:
+    - ProviderNewCleaner
+  Roles:
+    - Role: desktopChrome
+      App: desktop
+  Actions:
+    # Login to the Care Platform app with Providers account.
+    - Type: case
+      Value: ProvidersCarePlatformLogin
+    # Navigate to Facilities
+    - Type: case
+      Value: NavigationToFacilityProfile
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_details.records_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_facilities_records_page.info_title$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_facilities_records_page.linked_participants_tab$
+    # Go to Linked Participants
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_facilities_records_page.linked_participants_tab$
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.providers_facilities_records_page.linked_participants_tab$
+      Greps:
+        - var: TAB_CLASS
+          attr: class
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: TAB_CLASS
+          Value: 'active'
+    # Click name of a participant in listing
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_facilities_records_page.first_linked_participant_button$
+    # Page refreshes to show the Participant record
+    - Type: sleep
+      Time: 0.5
+    # Name and DOB at top of left panel
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_records.participant_name$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_records.participant_dob$
+    # Right side showing full screen of collected participant profile information.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_records.demographics_tab$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_records.medical_tab$
+    # Click Medical
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_records.medical_tab$
+    # Medical needs
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_records.medical_medical_needs_subtab$
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_records.medical_medical_needs_subtab$
+      Greps:
+        - var: SUBTAB_CLASS
+          attr: class
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: SUBTAB_CLASS
+          Value: 'active'
+    # Check there's a Facility section
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_records.medical_facility_title$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_records.medical_facility_name$
+    # Click to view participant’s “Call History”
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_records.call_history_tab$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_records.call_history_tab$
+    # Click the “Follow-up tickets” profile tab
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_details.follow_up_tab_button$
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_details.follow_up_tab_button$
+      Greps:
+        - var: TAB_CLASS
+          attr: class
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Role: desktopChrome
+      Asserts:
+        - Type: contain
+          Var: TAB_CLASS
+          Value: 'active'
+    # Check Active and History
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_records_follow_up_tickets.ticket_history_title$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_records_follow_up_tickets.active_tickets_title$
+    # View Facility (If exist)
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_records_follow_up_tickets.first_view_facility_follow_up_link$
+      Condition:
+        - Value: 3
+          Operation: visible
+          Result: true
+
+# This test calls a real phone number, please make sure to write the correct number on the variable.
+# CXTB-777: Call External 10-Digit Number (Without Facility Device).
+TestProviderCallExternal10DigitNumberWithoutFacility:
+  Environment: Settings
+  Precases:
+    - ProviderNewCleaner
+  Roles:
+    - Role: desktopChrome
+      App: desktop
+  Actions:
+  # Login to the Care Platform app with Providers account.
+    - Type: case
+      Value: ProvidersCarePlatformLogin
+  # Navigate to Facility Call Portal.
+    - Type: case
+      Value: ProviderNavigateFacilityCallPortal
+  # Click "Place Call" in "Place Call" section to right of inactive video window.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.place_call_tab_navigation$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.place_call_tab_navigation$
+  # Section refreshes to show field, where you can type in desired phone number.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.enter_a_number_input$
+  # Verify that the "Call" button is disabled when the phone number input is empty.
+    - Type: wait_for_property
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.call_button$
+      Property: disabled
+      Value: "true"
+  # Enter phone number where indicated.
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.enter_a_number_input$
+      Value: $AND_CLI_soft_call_phone_number$
+  # Call button (phone visual) becomes active when number is present.
+    - Type: wait_for_property
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.call_button$
+      Property: disabled
+      Value: "false"
+  # Click Call button below entry field.
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.call_button$
+  # Video window updates to show that a call has initiated.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.end_call_button$
+  # Complete conversation and click the "End Call" button.
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.end_call_button$
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.end_call_button$
+  # Video window updates to show a message that the call has ended.
+    - Type: sleep
+      Time: 2
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.video_status$
+      Greps:
+        - var: CALL_MESSAGE
+          attr: textContent
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: CALL_MESSAGE
+          Value: 'The call has ended.'
+  # Verify that your status will remain "In session" until you have completed your notes and submitted the post call survey to fully complete the session.
+    - Type: get_attribute
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.care_platform_header.status_indicator$
+      Greps:
+        - var: INDICATOR
+          attr: class
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Role: desktopChrome
+      Asserts:
+        - Type: contain
+          Var: INDICATOR
+          Value: 'is-red'
+  # Fill post call survey.
+    - Type: case
+      Value: PostCallSurveyProvider

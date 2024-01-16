@@ -32,8 +32,8 @@ care_platform_home:
   answer_call: //button[text()='Answer Call']
   record_button: //div/a[contains(text(), 'Records')]
   call_based_on_participant_name: (//div[contains(@class, 'ListRow_listRow') and not(contains(., 'Follow-up'))]//strong[text() = '$AND_CLI_senior_user1_name$ $AND_CLI_senior_user1_lastname$'])[last()]
-  call_based_on_es_idd_participant_name: //div[contains(@class, 'ListRow_listRow')]//strong[text() = '$AND_CLI_idd_es_never_alone_user1_name$ $AND_CLI_idd_es_never_alone_user1_lastname$']
-  call_based_on_ch_idd_participant_name: //div[contains(@class, 'ListRow_listRow')]//strong[text() = '$AND_CLI_idd_ch_never_alone_user2_name$ $AND_CLI_idd_ch_never_alone_user2_lastname$']
+  call_based_on_es_idd_participant_name: (//div[contains(@class, 'ListRow_listRow') and not(contains(., 'Follow-up'))]//strong[text() = '$AND_CLI_idd_es_never_alone_user1_name$ $AND_CLI_idd_es_never_alone_user1_lastname$'])[last()]
+  call_based_on_ch_idd_participant_name: (//div[contains(@class, 'ListRow_listRow') and not(contains(., 'Follow-up'))]//strong[text() = '$AND_CLI_idd_ch_never_alone_user2_name$ $AND_CLI_idd_ch_never_alone_user2_lastname$'])[last()]
   active_call_section: //div[contains(@class,'app-video app-video-fixed')] # doesn't matter if its expanded/collapsed
   call_queue_calls: //div[@id='containerElement']/div[starts-with(@class, 'ListRow_listRow') and not(contains(., 'Follow-up')) and not(contains(., 'Missed Call')) and not(contains(., 'Scheduled Call'))]
   queue_header_columns: //div[contains(text(),'Type')]/following-sibling::div[contains(text(),'Participant')]/following-sibling::div[contains(text(),'Assigned')]
@@ -213,7 +213,7 @@ care_platform_participant_details:
   new_ticket_subject_by_name: //div[@tab-title='Follow-up Tickets']//div[@class='accordion-item-toggle']//div[contains(text(),'$AND_CLI_FOLLOW_UP_TICKET$')]
   new_ticket_date: (//div[@class='accordion-item']//div[contains(text(),'Automated test')]/preceding-sibling::div[contains(text(),'$AND_CLI_TODAYS_DATE$')])[last()]
   new_ticket_date_by_name: (//div[@class='accordion-item']//div[contains(text(),'$AND_CLI_FOLLOW_UP_TICKET$')]/preceding-sibling::div[contains(text(),'$AND_CLI_TODAYS_DATE$')])[last()]
-  records_button: //a/button[text()='Records']
+  records_button: //button[text()='Records']
   records_link: //a[contains(text(),'Records')]
 
 care_platform_participant_records:
@@ -228,6 +228,8 @@ care_platform_participant_records:
   follow_up_tickets_tab: //nav/button[contains(text(),'Follow-up Tickets')]
   medical_medications_subtab: //nav/button[text()='Medications']
   medical_medical_needs_subtab: //nav/button[text()='Medical Needs']
+  medical_facility_title: //*[@id='medicalNeeds']//h4[contains(text(),'Facility')]
+  medical_facility_name: //*[@id='medicalNeeds']//div[contains(.,'Facility:')]//div[contains(text(),'$AND_CLI_facility_name1$')]
   medical_behavioral_subtab: //nav/button[text()='Behavioral']
   medical_medical_history_subtab: //nav/button[text()='Medical History']
   message_input: //input[@id='message']
@@ -275,6 +277,7 @@ care_platform_participant_records_follow_up_tickets:
   save_ticket_button: //button[@data-test-id='testFormFollowUpTicketSave']
   medical_appointment_opt: //option[@id='med_appointment']
   details_input: //textarea[@id='details']
+  first_view_facility_follow_up_link: //*[@id='followup-ticket']//a[contains(.,'View Facility')][1]
 
 care_platform_edit_participant_records:
   edit_title: //span[contains(text(),'Edit')]
@@ -560,6 +563,7 @@ care_platform_call_portal:
   calendar_any_day_without_event: //button[contains(@class,'calendar-day')][not (contains(@class,'has-event'))][1]
   calendar_no_events_message: //div[contains(text(),'There are no events for the selected date')]
   category_select: category
+  events_subtitle: //h4[contains(text(),'Events')]
   create_event_btn: //button[text()='Create Event']
   teleheath_appointment_option: //option[@value='telehealthAppointment']
   manual_appointment_option: //option[@value='manualAppointment']
@@ -581,7 +585,7 @@ care_platform_call_portal:
   first_reason_for_request_available_option: //select[@id='reasonForRequest']/option[not(@value)][1]
   reason_for_request_error_label: //select[@id='reasonForRequest']/following-sibling::div/div/div[@class='text-xs color-red-400']
   symptoms_start_input_container: react-datepicker__input-container
-  symptoms_start_input_error_label: //div[@class='react-datepicker-wrapper']/following-sibling::div/div/div[@class='text-xs color-red-400']
+  symptoms_start_input_error_label: //*[contains(@class,'input-group')]//div[@aria-hidden='false']//div[contains(@class,'red')][contains(text(),'Please select a date')]
   location_selector: state
   location_option_2: //*[@id='state']/option[2]
   submit_create_event_btn: //button[text()='Create Event'][@type='submit']
@@ -707,6 +711,7 @@ care_platform_facility_Record:
   facility_status_label_elements: //div[@tab-title='Devices']//tbody//div[@class='account-status-label']
   edit_device_by_number: //tr[contains(.,'Device $AND_CLI_facility_devices_user1_number$:')]//button[text()='Edit']
   call_device_by_number: //tr[contains(.,'Device $AND_CLI_facility_devices_user1_number$:')]//a[text()='Call']
+  refresh_device_by_number: //tr[contains(.,'Device $AND_CLI_facility_devices_user1_number$:')]//*[text()='Refresh']
   device_block: //tr[contains(.,'Device $AND_CLI_facility_devices_user1_number$:')]
 
 care_platform_facility_edit_device_modal:
@@ -716,6 +721,7 @@ care_platform_facility_edit_device_modal:
   status_toggle_dropdown_deactivated_option: //div[@class='status-filter-dropdown']//button[text()='Deactivated']
   status_toggle_dropdown_active_option: //div[@class='status-filter-dropdown']//button[text()='Active']
   status_toggle_dropdown_suspended_option: //div[@class='status-filter-dropdown']//button[text()='Suspended']
+  status_toggle_dropdown_variable_option: //div[@class='status-filter-dropdown']//button[text()='$AND_CLI_ACCOUNT_STATUS$']
   cancel_button: //*[@id='modals']//button[text()='Cancel']
   save_button: //*[@id='modals']//button[text()='Save']
   close_modal_button: //*[@id='modals']//button[contains(.,'Close')]

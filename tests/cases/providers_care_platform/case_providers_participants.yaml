@@ -477,3 +477,672 @@ TestProviderCallParticipantAndCompleteOnDemandCall:
         - Type: n_contain
           Var: IS_RED
           Value: is-red
+
+# This test calls a real phone number, please make sure to write the correct number on the variable.
+# CXTB-731: Call External 10-Digit Number (Without Participant).
+TestProviderCallExternal10DigitNumberWithoutParticipant:
+  Environment: Settings
+  Precases:
+    - ProviderNewCleaner
+  Roles:
+    - Role: desktopChrome
+      App: desktop
+  Actions:
+  # Login to the Care Platform app with Providers account.
+    - Type: case
+      Value: ProvidersCarePlatformLogin
+  # Navigate to Participants.
+    - Type: case
+      Value: ProviderNavigateToParticipants
+  # Navigate to the Call Portal.
+    - Type: case
+      Value: CarePartnerParticipantCallPortalNavigation
+  # Click "Place Call" in "Place Call" section to right of inactive video window.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.place_call_tab_navigation$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.place_call_tab_navigation$
+  # Section refreshes to show field, where you can type in desired phone number.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.enter_a_number_input$
+  # Verify that the "Call" button is disabled when the phone number input is empty.
+    - Type: wait_for_property
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.call_button$
+      Property: disabled
+      Value: "true"
+  # Enter phone number where indicated.
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.enter_a_number_input$
+      Value: $AND_CLI_soft_call_phone_number$
+  # Call button (phone visual) becomes active when number is present.
+    - Type: wait_for_property
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.call_button$
+      Property: disabled
+      Value: "false"
+  # Click Call button below entry field.
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.call_button$
+  # Video window updates to show that a call has initiated.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.end_call_button$
+  # Complete conversation and click the "End Call" button.
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.end_call_button$
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.end_call_button$
+  # Video window updates to show a message that the call has ended.
+    - Type: sleep
+      Time: 2
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.video_status$
+      Greps:
+        - var: CALL_MESSAGE
+          attr: textContent
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: CALL_MESSAGE
+          Value: 'The call has ended.'
+  # Verify that your status will remain "In session" until you have completed your notes and submitted the post call survey to fully complete the session.
+    - Type: get_attribute
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.care_platform_header.status_indicator$
+      Greps:
+        - var: INDICATOR
+          attr: class
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Role: desktopChrome
+      Asserts:
+        - Type: contain
+          Var: INDICATOR
+          Value: 'is-red'
+  # Fill post call survey.
+    - Type: case
+      Value: PostCallSurveyProvider
+
+# CXTB-176 Can Click and View Participant’s Emergency calls
+TestProviderCanClickAndViewParticipantsEmergencyCalls:
+  Environment: Settings
+  Roles:
+    - Role: desktopChrome
+      App: desktop
+  Actions:
+  # Login to the Care Platform app with Providers account.
+    - Type: case
+      Value: ProvidersCarePlatformLogin
+  # Navigate to Participant's records
+    - Type: case
+      Value: CarePartnerParticipantRecordsNavigation
+  # Go to Emergency tab
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_records.emergency_calls_tab$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_records.emergency_calls_tab$
+  # Page refreshes to show a full page view of all the Emergency calls participant has made from their device.
+  # Validation will be limited to check the header labels since automation is not supposed to make emergency calls.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_records_emergency_calls.date_header_label$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_records_emergency_calls.time_header_label$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_records_emergency_calls.duration_header_label$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_records_emergency_calls.type_header_label$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_records_emergency_calls.subject_header_label$
+
+# CXTB-180 Attempt an On-Demand Call to Participant’s Device (that is Missed)
+TestProviderAttemptAnOnDemandCallToParticipantsDeviceThatIsMissed:
+  Environment: Settings
+  Roles:
+    - Role: localiOS
+      Capabilities:
+        newCommandTimeout: 120
+      App: NeverAlone
+    - Role: desktopChrome
+      App: desktop
+  Precases:
+    - LoginNeverAloneHelper
+    - ProviderNewCleaner
+    - SeniorCleanPrompts
+  Aftercases:
+    - TerminateApp
+  Actions:
+  # Login to the Care Platform app with Providers account.
+    - Type: case
+      Value: ProviderCallParticipant
+    - Type: sleep
+      Time: 2
+  # Device begins ringing and automatically displays "Incoming Call" modal.
+    - Type: wait_for
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_incoming_call.incoming_call_header$
+      Role: localiOS
+      CheckTime: 20
+  # Sleep for a minute
+    - Type: sleep
+      Time: 61
+  # Click the "End Call" button.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.end_call_btn$
+      Role: desktopChrome
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.end_call_btn$
+      Role: desktopChrome
+  # In Senior you'll find a missed call prompt
+    - Type: wait_for
+      Role: localiOS
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_missed_call.missed_call_header$
+  # Provider select No Message
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.no_message_button$
+      Role: desktopChrome
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.no_message_button$
+      Role: desktopChrome
+
+# CXTB-177 Can Click and View Participant’s Follow-up Tickets Information
+TestProviderCanClickAndViewParticipantsFollowUpTicketsInformation:
+  Environment: Settings
+  Vars:
+  # Log out option
+    LOGOUT_OPTION: "Go Off Shift"
+  Precases:
+    - LoginNeverAloneHelper
+    - ProviderNewCleaner
+    - SeniorCleanPrompts
+  Aftercases:
+    - CarePlatformLogout
+    - TerminateApp
+  Roles:
+    - Role: localiOS
+      App: NeverAlone
+    - Role: desktopChrome
+      App: desktop
+  Actions:
+  # Call Participant logged in as a Provider.
+    - Type: case
+      Value: CreateAFollowUpForParticipantCall
+  # Navigate again to home
+    - Type: click
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_home_page.home_button$
+    - Type: wait_for
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_home_page.home_title$
+    # Select a Follow-Up Call
+    - Type: wait_for
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_home_page.follow_up_calls$
+    - Type: click
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.providers_home_page.follow_up_calls$
+    - Type: sleep
+      Role: desktopChrome
+      Time: 1
+    # Close Follow-Up
+    - Type: case
+      Value: CleanUsedFollowUp
+  # Navigate to Records.
+    - Type: case
+      Value: CarePartnerParticipantRecordsNavigation
+  # Click the "Follow-up tickets" profile tab.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_records.follow_up_tickets_tab$
+      Role: desktopChrome
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_records.follow_up_tickets_tab$
+      Role: desktopChrome
+    # Page refreshes to show a full page view of all the participant’s follow-up tickets:
+    # Left "Ticket history"
+    # Right "Active tickets"
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_records_follow_up_tickets.ticket_history_title$
+      Role: desktopChrome
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_records_follow_up_tickets.active_tickets_title$
+      Role: desktopChrome
+    # Review the "Active tickets" section listing.
+    # Shows active follow-up tickets for the participant.
+    # Click to expand a ticket.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_records_follow_up_tickets.active_follow_up_ticket_based_on_name$
+      Role: desktopChrome
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_records_follow_up_tickets.active_follow_up_ticket_based_on_name$
+      Role: desktopChrome
+    # Select Follow Up tab
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_participants_records_page.follow_up_tickets_tab$
+      Role: desktopChrome
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.providers_participants_records_page.follow_up_tickets_tab$
+      Role: desktopChrome
+      Greps:
+        - var: ACTIVE_CLASS
+          attr: class
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: ACTIVE_CLASS
+          Value: 'active' 
+  # Left "Ticket history"
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_records_follow_up_tickets.ticket_history_title$
+      Role: desktopChrome
+  # Right "Active tickets"
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_records_follow_up_tickets.active_tickets_title$
+      Role: desktopChrome
+  # Review the "Ticket history" section listing.
+    # Click to expand a row.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_follow_up_call_details_page.first_follow_up_row$
+      Role: desktopChrome
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_follow_up_call_details_page.first_follow_up_row$
+      Role: desktopChrome
+    # Expands and shows creation information, and additional details about the task that was completed.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_records_follow_up_tickets.expanded_ticket_content$
+      Role: desktopChrome
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_records_follow_up_tickets.expanded_ticket_content$
+      Role: desktopChrome
+      Greps:
+        - var: COMPLETED_LABEL
+          attr: textContent
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: COMPLETED_LABEL
+          Value: Completed
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: COMPLETED_LABEL
+          Value: Reason for Closing
+    # Verify that listing includes all completed Care Partner follow-up tickets. The main table displays the key summary information.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_records_follow_up_tickets.ticket_history_completed_header_label$
+      Role: desktopChrome
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_records_follow_up_tickets.ticket_history_loe_header_label$
+      Role: desktopChrome
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_records_follow_up_tickets.ticket_history_type_header_label$
+      Role: desktopChrome
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_records_follow_up_tickets.ticket_history_partner_header_label$
+      Role: desktopChrome
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_records_follow_up_tickets.ticket_history_subject_header_label$
+      Role: desktopChrome
+
+# CXTB-181 ProviderCarePlatform - Send Message to Participant’s Device - Participant Profile
+TestProviderSendMessageToParticipantDeviceParticipantProfile:
+  Environment: Settings
+  Vars:
+    MESSAGE_TO_PARTICIPANT: Automation Message CXTB-181  # Message from Provider to Senior
+  Precases:
+    - LoginNeverAloneHelper
+    - ProviderNewCleaner
+    - SeniorCleanPrompts
+  Aftercases:
+    - TerminateApp
+  Roles:
+    - Role: localiOS
+      App: NeverAlone
+    - Role: desktopChrome
+      App: desktop       
+  Actions:
+    # Log in.
+    - Type: case
+      Value: ProvidersCarePlatformLogin
+    # Navigate to Participants.
+    - Type: case
+      Value: CarePartnerParticipantRecordsNavigation
+    # Page refreshes to show the Participant record:
+    # Name and DOB at top of left panel.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_records.participant_name$
+      Role: desktopChrome
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_records.participant_dob$
+      Role: desktopChrome
+    # Verify that there is a message field.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_records.message_input$
+      Role: desktopChrome
+    # Send a Message to the Participant (Senior).
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_records.message_input$
+      Role: desktopChrome
+      Value: $AND_CLI_MESSAGE_TO_PARTICIPANT$
+    - Type: wait_for_property
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.care_platform_participant_records.message_submit_button$
+      Property: disabled
+      Value: "false"
+    - Type: click
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.care_platform_participant_records.message_submit_button$
+  # Device automatically displays "Personal Care Partner Message" window displaying
+  # the message sent and indicating the details of who/when sent.
+    - Type: wait_for
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_message_modal.message_header$
+    - Type: return_element_attribute
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_message_modal.message_header$
+      Attribute: label
+      ResultVar: MESSAGE_HEADER_TITLE
+    - Type: assert
+      Asserts:
+        - Type: eq
+          Var: MESSAGE_HEADER_TITLE
+          Value: Provider Message
+    - Type: wait_for
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_message_modal.sent_label$
+    - Type: wait_for
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_message_modal.message_label$
+    - Type: return_element_attribute
+      Strategy: xpath
+      Id: $PAGE.seniors_app_message_modal.message_value$
+      Attribute: label
+      ResultVar: MESSAGE_VALUE
+    - Type: assert
+      Asserts:
+        - Type: eq
+          Var: MESSAGE_VALUE
+          Value: $AND_CLI_MESSAGE_TO_PARTICIPANT$
+
+# CXTB-179 Attempt an On-Demand Call to Participant’s Device (that is Ignored)
+TestProviderAttemptAnOnDemandCallToParticipantsDeviceThatIsIgnored:
+  Environment: Settings
+  Vars:
+    MESSAGE_TO_PARTICIPANT: Automation Message CXTB-179  # Message from Provider to Senior
+    LOGOUT_OPTION: "Go Off Shift"
+  Precases:
+    - LoginNeverAloneHelper
+    - ProviderNewCleaner
+    - SeniorCleanPrompts
+  Aftercases:
+    - CarePlatformLogout
+    - TerminateApp
+  Roles:
+    - Role: localiOS
+      App: NeverAlone
+    - Role: desktopChrome
+      App: desktop       
+  Actions:
+    # Login to the Care Platform app with Providers account.
+    - Type: case
+      Value: ProviderCallParticipant
+    - Type: sleep
+      Time: 2
+    # Participant must select the "Ignore Call" button.
+    - Type: case
+      Value: IgnoreCallAsSenior
+    - Type: sleep
+      Time: 2
+    # Yes, Send Message
+    # Verify that the window updates to indicate the participant is not available.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.participant_not_available_text$
+      Role: desktopChrome
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.participant_not_available_text$
+      Role: desktopChrome
+      Greps:
+        - var: PARTICIPANT_NOT_AVAILABLE_TEXT
+          attr: textContent
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: eq
+          Var: PARTICIPANT_NOT_AVAILABLE_TEXT
+          Value: $AND_CLI_senior_user1_name$ is not available.Would you like to leave a text message?
+  # Verify that there is an option for the care partner to leave a text message.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.leave_message_participant_input$
+      Role: desktopChrome
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.yes_message_button$
+      Role: desktopChrome
+  # Provider sends a message in the available box and click on the "Yes, send message" button.
+    - Type: send_keys
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.leave_message_participant_input$
+      Value: $AND_CLI_MESSAGE_TO_PARTICIPANT$
+      Role: desktopChrome
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.yes_message_button$
+      Role: desktopChrome
+  # Call portal returns to no active call display.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.video_status$
+      Role: desktopChrome
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.video_status$
+      Role: desktopChrome
+      Greps:
+        - var: CALL_MESSAGE
+          attr: textContent
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: eq
+          Var: CALL_MESSAGE
+          Value: 'No active call.'
+  # Verify that the Participant receives a "Provider Care Partner Message" prompt showing the message, who sent it and when.
+    - Type: wait_for
+      Role: localiOS
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_message_modal.message_header$
+    - Type: return_element_attribute
+      Role: localiOS
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_message_modal.message_header$
+      Attribute: label
+      ResultVar: MESSAGE_HEADER_TITLE
+    - Type: assert
+      Asserts:
+        - Type: eq
+          Var: MESSAGE_HEADER_TITLE
+          Value: Provider Message
+    - Type: wait_for
+      Role: localiOS
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_message_modal.from_label$
+    - Type: return_element_attribute
+      Role: localiOS
+      Strategy: xpath
+      Id: $PAGE.seniors_app_message_modal.from_value$
+      Attribute: label
+      ResultVar: FROM_VALUE
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: FROM_VALUE
+          Value: $AND_CLI_provider_user1_name$ $AND_CLI_provider_user1_lastname$
+    - Type: wait_for
+      Role: localiOS
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_message_modal.sent_label$
+    - Type: wait_for
+      Role: localiOS
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_message_modal.message_label$
+    - Type: return_element_attribute
+      Role: localiOS
+      Strategy: xpath
+      Id: $PAGE.seniors_app_message_modal.message_value$
+      Attribute: label
+      ResultVar: MESSAGE_VALUE
+    - Type: assert
+      Asserts:
+        - Type: eq
+          Var: MESSAGE_VALUE
+          Value: $AND_CLI_MESSAGE_TO_PARTICIPANT$
+
+# CXTB-753 Verify “Emergency Services” Button
+TestProviderVerifyEmergencyServicesButton:
+  Environment: Settings
+  Vars:
+    LOGOUT_OPTION: "Go Off Shift"
+  Precases:
+    - LoginNeverAloneHelper
+    - ProviderNewCleaner
+    - SeniorCleanPrompts
+  Aftercases:
+    - CarePlatformLogout
+    - TerminateApp
+  Roles:
+    - Role: localiOS
+      App: NeverAlone
+    - Role: desktopChrome
+      App: desktop
+  Actions:
+  # Call Participant logged in as a Provider.
+    - Type: case
+      Value: ProviderCallParticipant
+  # Check for the Emergency Button
+    - Type: wait_not_visible
+      Role: desktopChrome
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.emergency_button$
+  # Device begins ringing and automatically displays "Incoming Call" modal.
+    - Type: wait_for
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_incoming_call.incoming_call_header$
+    - Type: return_element_attribute
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_incoming_call.incoming_call_header$
+      Attribute: label
+      ResultVar: HEADER_TITLE
+    - Type: assert
+      Asserts:
+        - Type: eq
+          Var: HEADER_TITLE
+          Value: Incoming Call...
+    - Type: wait_for
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_incoming_call.answer_call_button$
+    - Type: wait_for
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_incoming_call.ignore_call_button$
+  # Click "Answer Call" button.
+    - Type: click
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_incoming_call.answer_call_button$
+  # Verify that senior was connected to the call.
+    - Type: wait_for
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_call.video_button$
+  # Check For Emergency Button
+    - Type: wait_for
+      Role: desktopChrome
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.emergency_button$
+    - Type: get_attribute
+      Strategy: xpath
+      Role: desktopChrome
+      Id: $PAGE.care_platform_call_portal.emergency_button$
+      Greps:
+        - var: BUTTON_TEXT
+          attr: innerText
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: BUTTON_TEXT
+          Value: Emergency Services
+  # Then click "End Call".
+    - Type: click
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_call.end_call_button$
+  # Check For Emergency Button: Must disappear when call with device has ended
+    - Type: wait_not_visible
+      Role: desktopChrome
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.emergency_button$
+  # Select the Great option on the Post Call Survey once the call ends.
+    - Type: case
+      Value: SeniorGreatPostSurveyCallHelper
+  # Fill up the Post Call Survey on the provider side.
+    - Type: case
+      Value: PostCallSurveyProvider

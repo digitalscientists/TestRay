@@ -57,7 +57,8 @@ snf_call_portal:
   video_window: "**/XCUIElementTypeImage[-1]"
 
 snf_notifications:
-  missed_call_modal_title: Missed Outgoing Call
+  missed_outgoing_call_modal_title: Missed Outgoing Call
+  missed_incoming_call_modal_title: "**/XCUIElementTypeStaticText[`label == 'Missed Call'`]"
   modal_close_button: "**/XCUIElementTypeButton[`label ENDSWITH 'Close'`]"
   provider_message_modal_close_button: "**/XCUIElementTypeOther[`name CONTAINS 'Provider Message'`]/**/XCUIElementTypeButton[`label ENDSWITH 'Close'`]"
   notification_details_from: "**/XCUIElementTypeOther[`label BEGINSWITH 'From:'`][-1]"

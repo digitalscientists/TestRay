@@ -153,12 +153,21 @@ employee_health_telehealth_request_form:
   first_hour_available_button: //div[@id='modals']//input[@name='startTime'][not(@disabled)][1]/following-sibling::div
   calendar_18hr_button: //div[@id='modals']//input[@name='startTime' and @value='18:00']/following-sibling::div
   calendar_day_button: //div[@class='calendar-days fade-quick-enter-done']//div[text()=$AND_CLI_DAY$]
+  calendar_day_that_is_not_selected: (//div[@id='modals']//button[contains(@class, 'calendar-day') and not(contains(@class, 'is-selected')) and not(@disabled)])[1]
   calendar_hour_button: //input[@name='startTime']/../div[text()= '11:30 am']
   appointment_list: //div[@class = 'accordion-item']
   appointment_list_description: //div/div[contains(text(), '$AND_CLI_PAIN_DESCRIPTION$')]
+  appointment_dropdown_based_on_description: //div/div[contains(text(), '$AND_CLI_PAIN_DESCRIPTION$')]/following-sibling::div/div[contains(@class, 'dropdown')]/button
+  appointment_date_based_on_description: //div/div[contains(text(), '$AND_CLI_PAIN_DESCRIPTION$')]/preceding-sibling::div/time[not(contains(text(),'AM'))and not(contains(text(),'PM'))]
+  reschedule_appointment_button: //nav[contains(@class, 'dropdown-menu')]//button[contains(text(), 'Reschedule Appointment')]
+  cancel_appointment_button: //nav[contains(@class, 'dropdown-menu')]//button[contains(text(), 'Cancel Appointment')]
+  edit_appointment_title: //div[@id='modals']//h4
+  edit_appointment_cancel_button: //div[@id='modals']//button[contains(text(), 'Cancel')]
+  edit_appointment_save_and_close_button: //button[contains(text(), 'Save and close')]
   calendar_month_days: //div[@class='calendar']//div[@class='calendar-days fade-quick-enter-done']
   tab_section: //div[contains(@class, 'box has-scrollable-content')]
   comments: comments
+  yes_delete_button: //div[@id='dialogs']//button[text()='Yes, Delete']
 
 employee_health_mobile_home_page:
   header_menu_button: //*[@id='root']//header//button

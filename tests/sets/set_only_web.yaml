@@ -57,6 +57,8 @@ SetOnlyWebTests:
   - Case: TestEmployeeHealthPortalCallsFromCurrentSessionDuplicatedInCallHistoryUntilAccessPage
   - Case: TestEmployeeHealthPortalRequestAnAppointmentForDependentMinor
   - Case: TestEmployeeHealthPortalReviewCallHistory
+  - Case: TestEmployeeHealthPortalRescheduleAnUpcomingAppointmentForEHPEmployee
+  - Case: TestEmployeeHealthPortalRescheduleAnUpcomingAppointmentForEHPDependentMinor
   # ES Care Partner
   - Case: TestCHCarePartnerStatusDropdownNotInCall
   - Case: TestCHCarePartnerAccessAndReviewTeamMembersAvailability
@@ -110,6 +112,14 @@ SetOnlyWebTests:
   - Case: TestProvidersEHPSeeCallAppearInQueueAssignAndReviewDetails
   - Case: TestProviderReviewFacilityDeviceCallHistoryAndAccessCallRecordings
   - Case: TestProviderReviewInfoForExistingFacilityDeviceFacilityPane
+  - Case: TestProviderAccessAndReviewTeamMembersAvailability
+  - Case: TestProviderReviewInfoForExistingFacilityDeviceFacilityProfile
+  - Case: TestProviderAccessFacilitiesDirectoryAndFilter
+  - Case: TestProviderCallExternal10DigitNumberWithoutParticipant
+  - Case: TestProviderCanClickAndViewParticipantsEmergencyCalls
+  - Case: TestProviderLinkedParticipantsProfilePageAndNavigation
+  - Case: TestProviderCallExternal10DigitNumberWithoutFacility
+  - Case: TestProviderCallExternal10DigitNumberWithoutEmployee
   # Facility Leadership Care Platform
   - Case: TestFacilityLeadershipDirectoryAndFilter
   - Case: TestFacilityLeadershipLogoutGoOffShift

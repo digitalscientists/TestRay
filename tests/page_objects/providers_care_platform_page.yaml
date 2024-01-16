@@ -3,12 +3,16 @@ providers_home_page:
   home_title: //h3[text()='PHP Providers']
   es_home_title: //h3[text()='Providers']
   follow_up_calls: //*[@role='button'][contains(.,'Follow-up')][last()]
+  follow_up_calls_element_list: //*[@role='button'][contains(.,'Follow-up')]
+  follow_up_calls_time_text: //*[@role='button'][contains(.,'Follow-up')][last()]//div[3]
   scheduled_call: //*[@role='button'][contains(.,'Scheduled Call')][last()]
   scheduled_call_enabled: //*[@role='button'][contains(.,'Scheduled Call') and not(contains(@class,'disabled'))][last()]
   on_demand_calls: //*[@role='button'][contains(.,'On Demand Call')][last()]
   on_demand_call_assigned_value: //*[@role='button'][contains(.,'On Demand Call')][last()]/div[6]
   on_demand_call_state: //*[@role='button'][contains(.,'On Demand Call')][last()]/div[5]
   on_demand_by_state: (//*[@role='button'][contains(.,'On Demand Call')]/div[5][contains(text(),'$AND_CLI_STATE$')])[last()]
+  on_demand_call_participant: //*[@role='button'][contains(.,'On Demand Call')][last()]//div[4]
+  issue_paused_button: //*[@role='button'][contains(.,'Issue Paused')][last()]
   missed_call: //*[@role='button'][contains(.,'Missed Call')][last()]
   selected_missed_call: //*[@role='button'][contains(.,'Missed Call') and contains(@class,'is-selected')]
   time_dropdown: //div[div[contains(text(),'Time')]]//button
@@ -60,7 +64,7 @@ providers_facilities_page:
   facilities_header_title: //h3[text()='Facilities']
   alpha_center_td: //div[@role='button']//div[text()='Alpha Healthcare Center']
   call_portal_btn: //button[text()='Call Portal']
-  records_button: //a/button[text()='Records']
+  records_button: //a//button[text()='Records']
   facility_based_on_name: //*[@id='containerElement']//div[text()='$AND_CLI_facility_name1$']
   devices_button: //button[text()='Devices']
   tabs_content: //div[@class='tabs-content']
@@ -86,7 +90,9 @@ providers_facilities_records_page:
   info_title: //h4[text()='Facility Information']
   devices_tab: //button[text()='Devices']
   device_status: //div[@class='account-status-label']
-
+  linked_participants_tab: //button[text()='Linked Participants']
+  first_linked_participant_button: //table/tbody/tr[1]/td[1]/a
+  
 providers_call_handling_page:
   end_call_btn: //button[contains(.,'End Call')]
   call_device_btn: //button[text()='Call Device' or text()='Answer Call']
@@ -105,6 +111,7 @@ providers_call_handling_page:
   video_visit_true_option: //input[@name='video' and @value='true']/following-sibling::span
   resolved_true_option: //input[@name='resolved' and @value='true']/following-sibling::span
   resolved_no_option: //input[@name='resolved' and @value='false']/following-sibling::span
+  resolved_no_radio_input: //input[@name='resolved' and @value='false']
   reason_label: //div[contains(text(),'Reason') and contains(.,'REQUIRED')]
   reason_input: //select[@id='reason']
   first_reason_option: //select[@id='reason']/option[not(@value)][1]
@@ -113,6 +120,7 @@ providers_call_handling_page:
   recommend_discharge_yes_by_telehealth: //input[@name='recommendedDischarge' and @value='Yes, by telehealth']/following-sibling::span
   recommend_discharge_yes_by_SNF: //input[@name='recommendedDischarge' and @value='Yes, by facility']/following-sibling::span
   recommend_discharge_no_option: //input[@name='recommendedDischarge' and @value='No']/following-sibling::span
+  recommend_discharge_no_input: //input[@name='recommendedDischarge' and @value='No']
   follow_up_recommended_checkbox: //input[@id='followUpRecommended']
   assign_to_myself_checkbox: //input[@id='assignToMyself']
   selected_follow_up_time_option: //input[@name='followUpTime' and @checked]
@@ -128,6 +136,9 @@ providers_call_handling_page:
   no_message_button: //button[contains(.,'No Message')]
   call_update_dropdown_button: //button[text()='Update' and @class='status-filter-dropdown-toggle']
   video_grid: //div[@class='video']//div[contains(@data-testid,'video-grid')]
+  emergency_services_button: //div[@class='video-additional-options']//button[contains(@class, 'button-emergency')]
+  pause_issue_button: //button[text()='Pause Issue']
+  unpause_issue_button: //button[text()='Unpause Issue']
 
 providers_call_details_page:
   assessment_subtab: //nav[@class='tabs-nav']/button[contains(text(),'Assessment')]
@@ -143,10 +154,20 @@ providers_follow_up_call_details_page:
   call_device_button: //button[contains(.,'Call Device')]
   update_status_dropdown: //button[@class='status-filter-dropdown-toggle' and contains(.,'Update')]
   status_option_close_ticket: //button[@class='status-filter-dropdown-button' and contains(.,'Close Ticket')]
+  status_option_due_date: //button[@class='status-filter-dropdown-button' and contains(.,'Due Date')]
+  modal_title: //div[@id='modals']//h4
+  dialog_title: //div[@id='dialogs']//h4
+  edit_ticket_one_hour_option: //input[@name='followUpTime' and @value='1']/following-sibling::div
+  edit_ticket_custom_option: //input[@name='followUpTime' and @value='custom']/following-sibling::div
+  edit_ticket_custom_input: //input[@id='followUpTimeCustom']
+  save_edits_button: //div[@id='modals']//button[@id='submit']
+  cancel_button: //div[@id='modals']//button[contains(text(), 'Cancel')]
   close_ticket_modal_title: //*[@id='dialogs']//h4[text()='Close Ticket']
   close_ticket_reason_input: //*[@id='dialogs']//input[@name='reasonForClosing']
   close_ticket_save_button: //*[@id='dialogs']//button[text()='Save and Close Ticket']
+  cancel_ticket_save_button: //*[@id='dialogs']//button[text()='Cancel']
   nav_tab: //nav[@class='tabs-nav']
+  first_follow_up_row: (//div[@class='accordion']//div[contains(@class,'accordion-item')])[1]
   
 providers_employees_page:
   employees_label: //h3[text()='Employees']
@@ -157,6 +178,7 @@ providers_employees_page:
   selected_darkened_letter_button: //button[contains(@class,'is-selected')]
   first_employee_in_list_strong: //*[@id='containerElement']/div[@role='button'][1]//strong
   first_employee: //*[@id='containerElement']/div[@role='button'][1]
+  employee_one_complete_name: //*[@id='containerElement']//div[contains(text(),'$AND_CLI_employee_user1_name$')][strong[contains(text(),'$AND_CLI_employee_user1_lastname$')]]
   employee_dob_label: //strong[@class='color-green-300' and text()='DOB']
   employee_dob_content: //div[@class='flex-col flex-col-auto']/time
   employee_contact_label: //strong[@class='color-green-300' and text()='Contact']
@@ -199,7 +221,7 @@ providers_participant_modal:
 providers_notifications:
   call_completed_notification:  //div[text()='Call completed']
   follow_up_ticket_closed_notification:  //div[text()='Follow-up ticket closed']
-  call_already_answered_notification:  //div[text()='Call already answered']
+  call_already_answered_notification:  //div[text()='Call already answered or ended by caller']
 
 providers_call_history_page:
   call_history_tab: //nav/button[text()='Call History']

@@ -9,7 +9,8 @@ seniors_app_home:
   schedule_label: "**/XCUIElementTypeStaticText[`label == 'Schedule'`]"
   call_care_partner: "**/XCUIElementTypeOther[`label BEGINSWITH 'Call Personal' AND label ENDSWITH 'Care Partner'`][-1]"
   full_schedule_btn: "**/XCUIElementTypeButton[`label CONTAINS 'Full Schedule'`][-1]"
-  settings_icon: "**/XCUIElementTypeOther[`name == 'headerContainer'`]/XCUIElementTypeOther/XCUIElementTypeOther[-1]/XCUIElementTypeOther/XCUIElementTypeOther[1]"
+  announcements_icon: "**/XCUIElementTypeOther[`name == 'headerContainer'`]/XCUIElementTypeOther/XCUIElementTypeOther[-1]/XCUIElementTypeOther/XCUIElementTypeOther[1]"
+  settings_icon: "**/XCUIElementTypeOther[`name == 'headerContainer'`]/XCUIElementTypeOther/XCUIElementTypeOther[-1]/XCUIElementTypeOther/XCUIElementTypeOther[2]"
   notifications_icon: "**/XCUIElementTypeOther[`name == 'headerContainer'`]/XCUIElementTypeOther/XCUIElementTypeOther[-1]/XCUIElementTypeOther/XCUIElementTypeOther[-1]"
   emergency_services_button: "**/XCUIElementTypeOther[`label == 'Emergency Services'`]"
   first_event: "**/XCUIElementTypeScrollView/XCUIElementTypeOther[1]/**/XCUIElementTypeOther[`enabled == 1 AND accessible == 1`][1]"
@@ -119,6 +120,9 @@ seniors_app_connection_error_modal:
   device_offline_label: "**/XCUIElementTypeStaticText[`label == 'Device is offline.'`]"
   connection_header_header_label: "**/XCUIElementTypeStaticText[`label == 'Connection Error'`]"
   close_btn: "**/XCUIElementTypeButton[`label CONTAINS 'Close'`]"
+  call_disconnected_label: "**/XCUIElementTypeStaticText[`label == 'Call Disconnected'`]"
+  call_disconnected_icon: "**/XCUIElementTypeOther[`label CONTAINS 'Call Disconnected'`]/**/XCUIElementTypeImage"
+  return_to_home_button: "**/XCUIElementTypeOther[`label == 'To Home'`]"
 
 seniors_app_schedule:
   schedule_label: "**/XCUIElementTypeStaticText[`label == 'Schedule'`]"

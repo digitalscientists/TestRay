@@ -13,6 +13,7 @@ SetNonPhysicalMobileTest:
     - Case: TestCarePartnerCallParticipantsDeviceCallMissed
     - Case: TestCarePartnerStatusUpdatedToInSessionNotLoggedForAnsweredOutboundCalls
     - Case: TestCarePartnerCreateManualEventForParticipant
+    - Case: TestCarePartnerVerifyEmergencyServicesButton
   # Care Partner ES
     - Case: TestCHCarePartnerBrowsingWhileOnCall
     - Case: TestCHCarePartnerCallParticipantsDeviceAndCompleteCall
@@ -43,6 +44,41 @@ SetNonPhysicalMobileTest:
     - Case: TestProviderCheckForForcedAssessmentOnFollowUpsWithoutTelehealthRequest
     - Case: TestProviderCallParticipantAndCompleteOnDemandCall
     - Case: TestProviderCallParticipantForFollowUpTaskFromHomeAndIgnore
+    - Case: TestProviderCallParticipantForFollowUpTaskFromHomeAndAnswered
+    - Case: TestProviderUpdateDueDateForFollowUpTicketFromHome
+    - Case: TestProviderCloseFollowUpTicketFromHome
+    - Case: TestProviderIDDCHReturnMissedCallFromHome
+    - Case: TestProviderIDDESReturnMissedCallFromHome
+    - Case: TestProvidersCallSNFDeviceForIssuePausedFromHomeIgnored
+    - Case: TestProvidersCallSNFDeviceForIssuePausedFromHomeAnswered
+    - Case: TestProviderReturnMissedSeniorCallFromHomeAnswered
+    - Case: TestProvidersCallSeniorsDeviceForIssuePausedTaskFromHomeAnswered
+    - Case: TestProviderReturnMissedSNFCallFromHomeIgnored
+    - Case: TestProvidersCallSNFDeviceForFollowUpTaskFromHomeIgnored
+    - Case: TestProviderIDDCHReturnMissedCallFromHomeIgnored
+    - Case: TestProviderIDDESReturnMissedCallFromHomeIgnored
+    - Case: TestProvidersCallSeniorsDeviceForIssuePausedTaskFromHomeIgnored
+    - Case: TestProviderIDDCHCallDeviceForIssuePausedTaskFromHomeAnswered
+    - Case: TestProviderIDDESCallDeviceForIssuePausedTaskFromHomeAnswered
+    - Case: TestProviderIDDESCallDeviceForFollowUpTaskFromHomeAnswered
+    - Case: TestProviderIDDCHCallDeviceForFollowUpTaskFromHomeAnswered
+    - Case: TestProviderIDDCHCallDeviceForFollowUpTaskFromHomeIgnored
+    - Case: TestProviderIDDESCallDeviceForFollowUpTaskFromHomeIgnored
+    - Case: TestProviderIDDCHCallDeviceForIssuePausedTaskFromHomeIgnored
+    - Case: TestProviderIDDESCallDeviceForIssuePausedTaskFromHomeIgnored
+    - Case: TestProviderSeniorReturnMissedCallFromHomeIgnored
+    - Case: TestProviderAttemptAnOnDemandCallToFacilitysDeviceThatIsMissedFacilityPane
+    - Case: TestProviderCanClickAndViewFacilityFollowUpTicketsInformation
+    - Case: TestProviderAttemptAnOnDemandCallToParticipantsDeviceThatIsMissed
+    - Case: TestProvidersAnswerCallAndCompleteSessionWithPauseIssue
+    - Case: TestProviderCanClickAndViewParticipantsFollowUpTicketsInformation
+    - Case: TestProviderSendMessageToParticipantDeviceParticipantProfile
+    - Case: TestProviderCallFacilityDeviceAndCompleteAnOnDemandCallFacilityProfile
+    - Case: TestProviderAttemptAnOnDemandCallToParticipantsDeviceThatIsIgnored
+    - Case: TestProviderAttemptAnOnDemandCallToFacilityDeviceThatIsIgnoredFacilityPane
+    - Case: TestProviderVerifyEmergencyServicesButton
+    - Case: TestProviderSendMessageToFacilityDeviceFacilityPane
+    - Case: TestProviderSendMessageToFacilityDeviceFacilityProfile
   # ES Provider Care Platform
     - Case: TestESProviderCarePlatformAnswerAndCompleteSession
     - Case: TestESProviderIDDSeeCallAppearInQueueAssignAndReviewDetails
@@ -79,7 +115,6 @@ SetNonPhysicalMobileTest:
     - Case: TestSeniorWifiSettingsPage
     - Case: TestSeniorAppDeactivatedAccountStatusVisuals
     - Case: TestSeniorIpadShouldNotResetIfCarePartnerUpdatesParticipantProfile
-    - Case: TestSeniorVerifyEmergencyServicesButton
   # Never Alone SNF tests
     - Case: TestSNFVerifyNotificationsPage
     - Case: TestSNFMessagePromptFromProvider
@@ -88,6 +123,10 @@ SetNonPhysicalMobileTest:
     - Case: TestSNFNewRequestFormBehavior
     - Case: TestSNFRequestSuccessfulCallConnect
     - Case: TestSNFCheckQueueandReviewDetails
+    - Case: TestSNFVerifyPreDeliveryAccountStatusVisualsAndBehavior
+    - Case: TestSNFVerifyActiveAccountStatusVisualsAndBehavior
+    - Case: TestSNFVerifyDeactivatedAccountStatusVisualsAndBehavior
+    - Case: TestSNFAppSuspendedAccountStatus
   # Onboarder
     - Case: TestOnboarderChangeStatusToActiveForExistingParticipant
     - Case: TestOnboarderChangeStatusToSuspendedForExistingParticipant
