@@ -2192,6 +2192,18 @@ def count_elements(action, main_case, main_case_id)
   ENV[convert_value(action["ResultVar"])] = elements_count.to_s
 end
 
+# This action will verify that a file exists given a location.
+def verify_file_exists(action, main_case, main_case_id)
+  fileName, fileLocation = convert_value(action["FileName"]), convert_value(action["FileLocation"])
+  filePath = File.join(fileLocation, fileName)
+
+  if File.file?(filePath)
+    log_info("Found file containing this location: #{filePath}")
+  else
+    raise "Did not found file called #{fileName} containing this path: #{fileLocation}"
+  end
+end
+
 # Custom method to verify that an event on Never Alone went to the bottom after its time has passed.
 def verify_event_went_to_bottom(action, main_case, main_case_id)
   action = convert_value_pageobjects(action);

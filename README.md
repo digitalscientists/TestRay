@@ -419,6 +419,7 @@ This is not a type but can be used in different Types as a Validation for the ac
 8. [search_by_text](#search_by_text)
 9. [send_keys_if_exist](#send_keys_if_exist)
 10. [call_helper_case](#call_helper_case)
+11. [verify_file_exists](#verify_file_exists)
 
 ## Appium/Selenium
 
@@ -1299,3 +1300,11 @@ For example:
       case_name = "OnboarderSetStaffActive"
       call_helper_case(case_name)
     end
+
+
+### <a id="verify_file_exists"></a>verify_file_exists
+
+Custom action to verify if a file exists
+    - Type: verify_file_exists
+      FileName: AuditLog-$AND_CLI_TODAY_DATE$.csv
+      FileLocation: $AND_CMD_pwd$/downloads/

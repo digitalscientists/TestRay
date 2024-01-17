@@ -1,3 +1,5 @@
+require 'fileutils'
+
 # Class describing Appium driver initialisation-related methods,
 # including capability assembly and driver creation.
 class AppiumDriver
@@ -187,6 +189,15 @@ class SeleniumDriver
 
       if chrome_ops['args'].any?('mobileEmulation')      
           localChromeOptions.add_emulation(device_name: 'Nexus 5')     
+      end 
+      
+      if chrome_ops['args'].any?('downloadFile')     
+        repoPath = File.expand_path('../..', __dir__) #Returns the repo path (../.. because it's two levels up)
+        downloadDir =  File.join(repoPath, 'tests', 'downloads') # references tests/downloads folder, will be created on first download if needed.
+
+        localChromeOptions.add_preference('download.default_directory', downloadDir)
+        localChromeOptions.add_preference('download.prompt_for_download', false)
+        localChromeOptions.add_preference('download.directory_upgrade', true)
       end 
 
       driver = Selenium::WebDriver.for(

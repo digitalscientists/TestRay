@@ -423,3 +423,55 @@ TestAdminOnCallShouldNotShowDuplicatesEntriesForNewCallsOnCallHistory:
         - Type: eq
           Var: ROW_COUNT
           Value: "1"
+
+# CXTB-779 Access Staff Member Profile from Listing & Export Audit Log from Profile
+TestAdminOnCallAccessStaffMemberProfileFromListingAndExportAuditLogProfile:
+    Environment: Settings
+    Vars:
+      LOGOUT_OPTION: "Go Off Shift"
+      USER_FULLNAME: $AND_CLI_carepartner_user1_name$ #$AND_CLI_carepartner_user1_lastname$
+      STAFF_ROLE: "Care Partner"
+    Roles:
+      - Role: desktopChrome
+        Capabilities:
+          chromeOptions:
+            args:
+              - downloadFile
+        App: desktop
+    Actions:
+  # Log in Care Platform as an Admin on Call
+    - Type: case
+      Value: AdminOnCallLogin
+  # Go to selected staff
+    - Type: case
+      Value: SearchStaffByNameAndRole
+  # Click “Records” button at top of staff member pane on right side of screen
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_details.records_link$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant_details.records_link$
+  # Click "Admin" above information
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.staff_records.admin_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.staff_records.admin_button$
+  # Click on the Export Audit log button
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.staff_records.admin_export_audit_log_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.staff_records.admin_export_audit_log_button$
+  # CSV file downloads containing audit log information for staff member you are viewing profile for
+    - Type: sleep
+      Time: 10
+    - Type: get_timestamp
+      Format: "%Y-%m-%d" #YYYY-MM-DD
+      Var: TODAY_DATE
+    - Type: verify_file_exists
+      FileName: AuditLog-$AND_CLI_carepartner_user1_name$$AND_CLI_carepartner_user1_lastname$-$AND_CLI_TODAY_DATE$.csv
+      FileLocation: $AND_CMD_pwd$/downloads/

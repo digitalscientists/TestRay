@@ -9,6 +9,7 @@ examples/tests/appium_logs/
 node_modules
 pkg
 Reports
+tests/downloads
 
 Gemfile.lock
 .DS_Store
