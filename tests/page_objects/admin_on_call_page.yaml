@@ -7,7 +7,8 @@ admin_on_call_home:
 
 admin_on_call_notification:
   user_refreshed_notification: //div[@class='Toastify']//div[contains(text(),'User refreshed successfully')]
-
+  staff_refreshed_notification: //div[@class='Toastify']//div[contains(text(),'Account status refreshed')]
+  
 admin_on_call_providers_call_history_tab:
   call_history_tab: //nav/button[text()='Call History']
   call_history_provider_option: //header//nav//*[text()='PHP Providers']
