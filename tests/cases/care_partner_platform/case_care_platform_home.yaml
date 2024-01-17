@@ -453,7 +453,7 @@ TestCarePartnerVerifyEmergencyServicesButton:
     - Type: click
       Role: desktopChrome
       Strategy: xpath
-      Id: $PAGE.care_platform_home.first_call_of_queue$
+      Id: $PAGE.care_platform_home.last_call_of_queue$
     # Go to Record and verify if participant have EMS enabled
     - Type: wait_for
       Role: desktopChrome
@@ -496,7 +496,13 @@ TestCarePartnerVerifyEmergencyServicesButton:
     - Type: click
       Role: desktopChrome
       Strategy: xpath
-      Id: $PAGE.care_platform_home.first_call_of_queue$
+      Id: $PAGE.care_platform_home.last_call_of_queue$
+    - Type: wait_for_property
+      Role: desktopChrome
+      Strategy: xpath
+      Id: $PAGE.care_platform_home.answer_call$
+      Property: disabled
+      Value: "false"
     - Type: click
       Role: desktopChrome
       Strategy: xpath

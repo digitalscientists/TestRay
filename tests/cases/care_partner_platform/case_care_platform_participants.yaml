@@ -603,11 +603,13 @@ TestCarePartnerParticipantReview:
           Value: 'active'
   #These action beyond this point are not part of the test
   #but a way to avoid an unanswered call
-    - Type: scroll_to
+    - Type: wait_for_property
       Role: desktopChrome
       Strategy: xpath
       Id: $PAGE.care_platform_home.answer_call$
-    - Type: click
+      Property: disabled
+      Value: "false"
+    - Type: click_js
       Strategy: xpath
       Id: $PAGE.care_platform_home.answer_call$
       Role: desktopChrome
@@ -668,9 +670,9 @@ TestCarePartnerAnswerAndComplete:
     - Type: click
       Role: desktopChrome
       Strategy: xpath
-      Id: $PAGE.care_platform_participant.first_participant_row$
+      Id: $PAGE.care_platform_participant.last_participant_row$
   # Answer Call
-    - Type: click
+    - Type: click_js
       Strategy: xpath
       Id: $PAGE.care_platform_home.answer_call$
       Role: desktopChrome
@@ -1154,7 +1156,13 @@ TestCarePartnerBrowsingWhileOnCall:
       Strategy: xpath
       Id: $PAGE.care_platform_participant.first_participant_row$
   # Answer Call
-    - Type: click
+    - Type: wait_for_property
+      Role: desktopChrome
+      Strategy: xpath
+      Id: $PAGE.care_platform_home.answer_call$
+      Property: disabled
+      Value: "false"
+    - Type: click_js
       Strategy: xpath
       Id: $PAGE.care_platform_home.answer_call$
       Role: desktopChrome
@@ -1353,8 +1361,12 @@ TestCarePartnerCallParticipantsDeviceCallComplete:
     - Type: case
       Value: CarePartnerNavigateToParticipants
   # Decrease listing by searching participant's name
+    - Type: wait_for_property
+      Strategy: id
+      Id: $PAGE.care_platform_facility.search_text$
+      Property: disabled
+      Value: "false"
     - Type: search_by_text
-      Role: desktopChrome
       Text: $AND_CLI_senior_user1_name$
   # Click on the corresponding participant.
     - Type: click
@@ -1386,6 +1398,8 @@ TestCarePartnerCallParticipantsDeviceCallComplete:
       Strategy: xpath
       Id: $PAGE.care_platform_call_portal.on_active_call_message_input$
   # Click "Call Participant" button.
+    - Type: sleep
+      Time: 1
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_call_portal.call_participant_btn$
@@ -1513,8 +1527,9 @@ TestCarePartnerCallParticipantsDeviceCallIgnored:
     - Type: case
       Value: CarePartnerNavigateToParticipants
   # Decrease listing by searching participant's name
+    - Type: sleep
+      Time: 1
     - Type: search_by_text
-      Role: desktopChrome
       Text: $AND_CLI_senior_user1_name$
   # Click on the corresponding participant.
     - Type: click
@@ -1542,7 +1557,12 @@ TestCarePartnerCallParticipantsDeviceCallIgnored:
           Var: CALL_MESSAGE
           Value: 'No active call.'
   # Click "Call Participant" button.
-    - Type: click
+    - Type: wait_for_property
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.call_participant_btn$
+      Property: disabled
+      Value: "false"
+    - Type: click_js
       Strategy: xpath
       Id: $PAGE.care_platform_call_portal.call_participant_btn$
   # Video window updates visually as call attempt is made.

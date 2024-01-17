@@ -3585,3 +3585,4 @@ AlternativeCarePartnerLogout:
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.care_platform_login.login_button$
+      CheckTime: 5

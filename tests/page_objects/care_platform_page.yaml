@@ -29,6 +29,7 @@ care_platform:
 
 care_platform_home:
   first_call_of_queue: //div[@id='containerElement']/div[starts-with(@class, 'ListRow_listRow') and not(contains(., 'Follow-up'))][1]
+  last_call_of_queue: //div[@id='containerElement']/div[starts-with(@class, 'ListRow_listRow') and not(contains(., 'Follow-up'))][last()]
   answer_call: //button[text()='Answer Call']
   record_button: //div/a[contains(text(), 'Records')]
   call_based_on_participant_name: (//div[contains(@class, 'ListRow_listRow') and not(contains(., 'Follow-up'))]//strong[text() = '$AND_CLI_senior_user1_name$ $AND_CLI_senior_user1_lastname$'])[last()]
@@ -100,6 +101,7 @@ care_platform_logout_modal:
 care_platform_participant:
   participants_title: //h3[text()='Participants']
   first_participant_row: (//div[@id='containerElement']/div[starts-with(@class, 'ListRow_listRow')]//div/strong[text() = '$AND_CLI_senior_user1_name$ $AND_CLI_senior_user1_lastname$'])[1]
+  last_participant_row: (//div[@id='containerElement']//div[contains(text(),'Call')]/ancestor::div[starts-with(@class, 'ListRow_listRow')]//div/strong[contains(text(),'$AND_CLI_senior_user1_name$ $AND_CLI_senior_user1_lastname$')])[last()]
   first_darkened_letter_button: //button[@class='alphabet-letter'][not(@disabled)][1]
   selected_darkened_letter_button: //button[contains(@class,'is-selected')]
   senior_complete_name: //div[starts-with(@class, 'ListRow_listRow')]//div[contains(text(),'$AND_CLI_senior_user1_name$')][strong[contains(text(),'$AND_CLI_senior_user1_lastname$')]]

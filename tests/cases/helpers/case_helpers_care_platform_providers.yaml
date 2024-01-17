@@ -231,7 +231,7 @@ JoinMedicalTransfer:
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.providers_call_handling_page.answer_call_button$
-    - Type: click
+    - Type: click_js
       Strategy: xpath
       Id: $PAGE.providers_call_handling_page.answer_call_button$
     - Type: sleep
@@ -1456,13 +1456,13 @@ CreateFollowUpTicketForCHParticipant:
       Strategy: xpath
       Id: $PAGE.providers_home_page.last_medical_transfer_row$
       Role: desktopChrome1
-    - Type: sleep
-      Time: 2
-    - Type: wait_for
+    - Type: wait_for_property
       Strategy: xpath
       Id: $PAGE.providers_call_handling_page.answer_call_button$
       Role: desktopChrome1
-    - Type: click
+      Property: disabled
+      Value: "false"
+    - Type: click_js
       Strategy: xpath
       Id: $PAGE.providers_call_handling_page.answer_call_button$
       Role: desktopChrome1
