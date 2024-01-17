@@ -145,3 +145,4 @@ SetOnlyWebTests:
   - Case: TestAdminOnCallLogoutStayOnShift
   - Case: TestAdminOnCallAccessStaffDirectoryFilterAndPane
   - Case: TestAdminOnCallForgotPasswordLoginLink
+  - Case: TestAdminOnCallAccessStaffMemberProfileFromListingAndExportAuditLogProfile

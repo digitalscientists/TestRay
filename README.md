@@ -1304,7 +1304,8 @@ For example:
 
 ### <a id="verify_file_exists"></a>verify_file_exists
 
-Custom action to verify if a file exists
+Custom action to verify if a file exists:
+
     - Type: verify_file_exists
       FileName: AuditLog-$AND_CLI_TODAY_DATE$.csv
       FileLocation: $AND_CMD_pwd$/downloads/
