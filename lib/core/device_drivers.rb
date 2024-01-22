@@ -195,14 +195,16 @@ class SeleniumDriver
         repoPath = File.expand_path('../..', __dir__) #Returns the repo path (../.. because it's two levels up)
         downloadDir =  File.join(repoPath, 'tests', 'downloads') # references tests/downloads folder, will be created on first download if needed.
 
-        localChromeOptions.add_preference('download.default_directory', downloadDir)
+        localChromeOptions.add_preference("profile.default_content_settings.popups", 0);
+        localChromeOptions.add_preference("profile.default_content_setting_values.automatic_downloads",1);
         localChromeOptions.add_preference('download.prompt_for_download', false)
         localChromeOptions.add_preference('download.directory_upgrade', true)
+        localChromeOptions.add_preference('download.default_directory', downloadDir)
       end 
 
       driver = Selenium::WebDriver.for(
         :chrome, options: localChromeOptions
-      )
+      )                                                                                                                     
 
     else
       # remote selenium grid
