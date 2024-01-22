@@ -1388,7 +1388,6 @@ CarePlatformUpdateInfo:
     - Type: wait_not_visible
       Strategy: xpath
       Id: $PAGE.care_platform_myaccount_info.success_alert_msg$
-      Time: 10
   # Open the user dropdown on header and verify that the name in the dropdown reflects the new change to the firstname
     - Type: click
       Strategy: xpath
@@ -1423,7 +1422,6 @@ CarePlatformUpdateInfo:
     - Type: wait_not_visible
       Strategy: xpath
       Id: $PAGE.care_platform_myaccount_info.success_alert_msg$
-      Time: 10
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_header.user_dropdown_button$

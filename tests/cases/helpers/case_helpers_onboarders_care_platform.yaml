@@ -379,11 +379,11 @@ OnboarderCreateStaffMember:
 
 # Making an user to be "Test"
 OnboarderChangeUserToTest:
-  Aftercase:
-    - AlternativeCarePartnerLogout
   Roles:
     - Role: desktopChrome
       App: desktop
+  Aftercases:
+    - AlternativeCarePartnerLogout
   Actions:
     - Type: case
       Value: OnboarderCarePartnerLogin
@@ -422,7 +422,7 @@ OnboarderChangeUserToTest:
 
 # Making an user to be not "Test"
 OnboarderChangeUserToNotTest:
-  Aftercase:
+  Aftercases:
     - AlternativeCarePartnerLogout
   Roles:
     - Role: desktopChrome

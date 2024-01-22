@@ -2579,6 +2579,8 @@ def search_by_text(action, main_case, main_case_id)
     @driver.find_element(:id, 'searchText').send_keys(name)
   end
 
+  sleep 1
+
 end
 
 # Custom action to wait for a mobile element to exist
