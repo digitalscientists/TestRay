@@ -1131,6 +1131,7 @@ TestSeniorIpadShouldNotResetIfCarePartnerUpdatesParticipantProfile:
     - Type: case
       Value: SeniorGreatPostSurveyCallHelper
 
+#Physical only
 # CXTB-660: Update Visual Experience if Lose Connection on Call
 TestSeniorAppVisualExperienceIfLoseConnectionOnCall:
   Environment: Settings
