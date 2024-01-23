@@ -122,8 +122,6 @@ SearchStaffByNameAndRole:
     - Type: search_by_text
       Text: $AND_CLI_USER_FULLNAME$
     # Select first
-    - Type: sleep
-      Time: 1
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.care_platform_participant.senior_1_row$
