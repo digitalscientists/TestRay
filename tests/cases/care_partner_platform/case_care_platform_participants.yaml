@@ -1522,7 +1522,7 @@ TestCarePartnerCallParticipantsDeviceCallIgnored:
       Value: CarePartnerNavigateToParticipants
   # Decrease listing by searching participant's name
     - Type: sleep
-      Time: 1
+      Time: 0.5
     - Type: search_by_text
       Text: $AND_CLI_senior_user1_name$
   # Click on the corresponding participant.
@@ -1624,7 +1624,7 @@ TestCarePartnerCallParticipantsDeviceCallMissed:
       Value: CarePartnerNavigateToParticipants
   # Decrease listing by searching participant's name
     - Type: sleep
-      Time: 1
+      Time: 0.5
     - Type: search_by_text
       Role: desktopChrome
       Text: $AND_CLI_senior_user1_name$
@@ -4324,7 +4324,7 @@ TestCarePartnerClickAndViewTestParticipantVisuals:
       Value: CarePartnerNavigateToParticipants
   # Decrease listing by searching participant's name
     - Type: sleep
-      Time: 1
+      Time: 0.5
     - Type: search_by_text
       Text: $AND_CLI_senior_user2_lastname$
   # Check badge on the desired participant. In this case using senior 2
