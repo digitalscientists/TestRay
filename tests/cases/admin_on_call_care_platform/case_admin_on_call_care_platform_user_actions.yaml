@@ -35,7 +35,7 @@ TestAdminOnCallRefreshUserAccountForCalling:
   # Decrease listing by searching participant's name
     - Type: search_by_text
       Role: desktopChrome1
-      Text: $AND_CLI_senior_user1_name$
+      Text: $AND_CLI_senior_user1_lastname$
   # Click on the corresponding participant.
     - Type: click
       Strategy: xpath
