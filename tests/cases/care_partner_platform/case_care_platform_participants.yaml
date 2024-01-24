@@ -4453,7 +4453,7 @@ TestCarePartnerClickAndViewTestParticipantVisuals:
 # CHS-1789: "Status updated to in-session." Not Logged For Answered Outbound Calls
 TestCarePartnerStatusUpdatedToInSessionNotLoggedForAnsweredOutboundCalls:
   Vars:
-    USER_FULLNAME: $AND_CLI_carepartner_user2_name$ $AND_CLI_carepartner_user2_lastname$
+    USER_FULLNAME: $AND_CLI_carepartner_user2_lastname$
     STAFF_ROLE: "Care Partner"
   Environment: Settings
   Precases:
@@ -4476,8 +4476,7 @@ TestCarePartnerStatusUpdatedToInSessionNotLoggedForAnsweredOutboundCalls:
       Value: CarePartnerNavigateToParticipants
   # Decrease listing by searching participant's name
     - Type: search_by_text
-      Role: desktopChrome
-      Text: $AND_CLI_senior_user1_name$
+      Text: $AND_CLI_senior_user1_lastname$
   # Click on the corresponding participant.
     - Type: click
       Strategy: xpath
@@ -4508,7 +4507,9 @@ TestCarePartnerStatusUpdatedToInSessionNotLoggedForAnsweredOutboundCalls:
       Strategy: xpath
       Id: $PAGE.care_platform_call_portal.on_active_call_message_input$
   # Click "Call Participant" button.
-    - Type: click
+    - Type: sleep
+      Time: 0.5
+    - Type: click_js
       Strategy: xpath
       Id: $PAGE.care_platform_call_portal.call_participant_btn$
     - Type: get_local_timestamp

@@ -2573,7 +2573,9 @@ def search_by_text(action, main_case, main_case_id)
     raise "Name cannot be null."
   end
 
-  if wait_for_element_to_exist("//*[@id='searchButton']")
+  sleep 0.6
+
+  if wait_for_enabled_element("//*[@id='searchButton']")
     @driver.find_element(:id, 'searchButton').click
     wait_for_enabled_element("//*[@id='searchText']")
     @driver.find_element(:id, 'searchText').send_keys(name)
