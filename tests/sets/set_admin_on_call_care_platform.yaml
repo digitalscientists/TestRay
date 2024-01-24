@@ -5,6 +5,7 @@ SetAdminOnCallCarePlatformTests:
     - Case: TestAdminOnCallLogoutStayOnShift
     - Case: TestAdminOnCallAccessStaffDirectoryFilterAndPane
     - Case: TestAdminOnCallForgotPasswordLoginLink
+    - Case: TestAdminOnCallAccessStaffMemberProfileFromListingAndExportAuditLogProfile
   # Admin on Call Mobile Non Physical
     - Case: TestAdminOnCallRefreshUserAccountForCalling
     - Case: TestAdminOnCallRefreshSessionForStaffMemberFromPane
