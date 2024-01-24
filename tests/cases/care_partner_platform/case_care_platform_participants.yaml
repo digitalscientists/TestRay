@@ -630,9 +630,9 @@ TestCarePartnerParticipantReview:
 TestCarePartnerAnswerAndComplete:
   Environment: Settings
   Precases:
+    - CarePartnerCleanCallQueueAndHangedCalls
     - SetNonTelehealthAppointmentForSenior
     - LoginNeverAloneHelper
-    - CarePartnerCleanCallQueueAndHangedCalls
     - SeniorCleanPrompts
   Aftercases:
     - TerminateApp
