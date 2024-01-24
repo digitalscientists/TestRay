@@ -178,6 +178,7 @@ providers_employees_page:
   selected_darkened_letter_button: //button[contains(@class,'is-selected')]
   first_employee_in_list_strong: //*[@id='containerElement']/div[@role='button'][1]//strong
   first_employee: //*[@id='containerElement']/div[@role='button'][1]
+  employee_one_complete_name: //*[@id='containerElement']//div[contains(text(),'$AND_CLI_employee_user1_name$')][strong[contains(text(),'$AND_CLI_employee_user1_lastname$')]]
   employee_dob_label: //strong[@class='color-green-300' and text()='DOB']
   employee_dob_content: //div[@class='flex-col flex-col-auto']/time
   employee_contact_label: //strong[@class='color-green-300' and text()='Contact']

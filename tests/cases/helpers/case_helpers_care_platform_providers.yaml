@@ -231,7 +231,7 @@ JoinMedicalTransfer:
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.providers_call_handling_page.answer_call_button$
-    - Type: click
+    - Type: click_js
       Strategy: xpath
       Id: $PAGE.providers_call_handling_page.answer_call_button$
     - Type: sleep
@@ -348,6 +348,32 @@ ProviderNavigateToFacilities:
       Strategy: xpath
       Id: $PAGE.providers_facilities_page.facilities_header_title$
 
+ProviderNavigateToEmployees:
+  Roles:
+    - Role: desktopChrome
+      App: desktop       
+  Actions:
+    # Navigate to Employees.
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.employees_navigation$
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.employees_navigation$
+      Greps:
+        - var: ACTIVE_CLASS
+          attr: class
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: ACTIVE_CLASS
+          Value: "active"
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_employees_page.employees_label$
+
 ProviderCallParticipant:
   Roles:
     - Role: desktopChrome
@@ -456,6 +482,56 @@ ProviderNavigateFacilityCallPortal:
     - Type: click
       Strategy: xpath
       Id: $PAGE.providers_facilities_page.call_based_on_device_button$
+    # Page updates to show call portal screen with "No active call" showing in video window.
+    - Type: sleep
+      Time: 1
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.video_status$
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.video_status$
+      Greps:
+        - var: CALL_MESSAGE
+          attr: textContent
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: eq
+          Var: CALL_MESSAGE
+          Value: 'No active call.'
+
+ProviderNavigateEmployeeCallPortal:
+  Roles:
+    - Role: desktopChrome
+      App: desktop       
+  Actions:
+    # Login to the Care Platform app with Providers account.
+    - Type: case
+      Value: ProvidersCarePlatformLogin
+    # Navigate to Employees.
+    - Type: case
+      Value: ProviderNavigateToEmployees
+    # Limit listing by searching name.
+    - Type: search_by_text
+      Text: $AND_CLI_employee_user1_name$
+    - Type: sleep
+      Time: 0.4
+  # Select corresponding employee by name in the list.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_employees_page.employee_one_complete_name$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_employees_page.employee_one_complete_name$
+  # Verify that the Employee Pane is opened.
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant.call_portal_btn$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_participant.call_portal_btn$
     # Page updates to show call portal screen with "No active call" showing in video window.
     - Type: sleep
       Time: 1
@@ -1380,13 +1456,13 @@ CreateFollowUpTicketForCHParticipant:
       Strategy: xpath
       Id: $PAGE.providers_home_page.last_medical_transfer_row$
       Role: desktopChrome1
-    - Type: sleep
-      Time: 2
-    - Type: wait_for
+    - Type: wait_for_property
       Strategy: xpath
       Id: $PAGE.providers_call_handling_page.answer_call_button$
       Role: desktopChrome1
-    - Type: click
+      Property: disabled
+      Value: "false"
+    - Type: click_js
       Strategy: xpath
       Id: $PAGE.providers_call_handling_page.answer_call_button$
       Role: desktopChrome1

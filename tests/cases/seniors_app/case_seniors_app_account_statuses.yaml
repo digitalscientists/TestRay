@@ -232,7 +232,7 @@ TestSeniorAppSuspendedAccountStatus:
     LOGOUT_OPTION: "Yes Logout"
   Aftercases:
     - TerminateApp
-    - CarePlatformLogout
+    - AlternativeCarePartnerLogout
     - OnboarderCarePartnerSetParticipantStateToActive
   Roles:
     - Role: localiOS
@@ -369,13 +369,13 @@ TestSeniorAppSuspendedAccountStatus:
 TestSeniorAppActiveAccountStatusAndBehavior:
   Environment: Settings
   Vars:
-    LOGOUT_OPTION: "Yes Logout"
     ACCOUNT_STATUS: 'predelivery' #this is for the precase
   Precases:
+    - AdminOnCallRefreshParticipant
     - OnboarderPrecaseforActiveStateSenior
   Aftercases:
     - TerminateApp
-    - CarePlatformLogout
+    - AlternativeCarePartnerLogout
     - OnboarderCarePartnerSetParticipantStateToActive
   Roles:
     - Role: localiOS
@@ -396,7 +396,7 @@ TestSeniorAppActiveAccountStatusAndBehavior:
     - Type: case
       Value: OnboarderSetsAccountStatus
     - Type: case
-      Value: CarePlatformLogout
+      Value: AlternativeCarePartnerLogout
   # Device is automatically logged out when account status change is saved.
     - Type: wait_for
       Strategy: class_chain

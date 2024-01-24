@@ -140,6 +140,7 @@ SetNonPhysicalMobileTest:
     - Case: TestAdminOnCallShouldNotAnswerProviderCallAfterMedicalTransfer
     - Case: TestAdminOnCallRefreshNurseFacilityDeviceForCalling
     - Case: TestAdminOnCallCallHistoryShowsRecordingsForAllPlatformsAndDevices
+    - Case: TestAdminOnCallRefreshSessionForStaffMemberFromProfile
   # Facility Leadership
     - Case: TestFacilityLeadershipSeeCallAppearOnQueueThenSelectCall
     - Case: TestFacilityLeadershipReviewCallHistoryAndAccessCallRecordings

@@ -53,6 +53,7 @@ SetOnlyWebTests:
   - Case: TestEmployeeHealthPortalForgotPasswordOnLoginPage
   - Case: TestEmployeeHealthPortalRequestAnAppointmentForUser
   - Case: TestEmployeeHealthPortalReviewUpcomingAppointment
+  - Case: TestEmployeeHealthPortalCancelAnUpcomingAppointment
   - Case: TestEmployeeHealthPortalManuallyLogoutOfPortal
   - Case: TestEmployeeHealthPortalCallsFromCurrentSessionDuplicatedInCallHistoryUntilAccessPage
   - Case: TestEmployeeHealthPortalRequestAnAppointmentForDependentMinor
@@ -119,6 +120,7 @@ SetOnlyWebTests:
   - Case: TestProviderCanClickAndViewParticipantsEmergencyCalls
   - Case: TestProviderLinkedParticipantsProfilePageAndNavigation
   - Case: TestProviderCallExternal10DigitNumberWithoutFacility
+  - Case: TestProviderCallExternal10DigitNumberWithoutEmployee
   # Facility Leadership Care Platform
   - Case: TestFacilityLeadershipDirectoryAndFilter
   - Case: TestFacilityLeadershipLogoutGoOffShift

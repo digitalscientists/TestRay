@@ -382,6 +382,8 @@ OnboarderChangeUserToTest:
   Roles:
     - Role: desktopChrome
       App: desktop
+  Aftercases:
+    - AlternativeCarePartnerLogout
   Actions:
     - Type: case
       Value: OnboarderCarePartnerLogin
@@ -390,7 +392,7 @@ OnboarderChangeUserToTest:
       Value: CarePartnerNavigateToParticipants
     # Decrease listing by searching participant's name
     - Type: search_by_text
-      Text: $AND_CLI_senior_user2_name$
+      Text: $AND_CLI_senior_user2_lastname$
     # Click on the desired participant. In this case using senior 2
     - Type: click
       Strategy: xpath
@@ -417,12 +419,10 @@ OnboarderChangeUserToTest:
       Id: $PAGE.care_platform_edit_participant_records.medical_history_navigation$
     - Type: sleep
       Time: 0.5
-    - Type: case
-      Value: AlternativeCarePartnerLogout
 
 # Making an user to be not "Test"
 OnboarderChangeUserToNotTest:
-  Aftercase:
+  Aftercases:
     - AlternativeCarePartnerLogout
   Roles:
     - Role: desktopChrome
@@ -435,7 +435,7 @@ OnboarderChangeUserToNotTest:
       Value: CarePartnerNavigateToParticipants
     # Decrease listing by searching participant's name
     - Type: search_by_text
-      Text: $AND_CLI_senior_user2_name$
+      Text: $AND_CLI_senior_user2_lastname$
     # Click on the desired participant. In this case using senior 2
     - Type: click
       Strategy: xpath

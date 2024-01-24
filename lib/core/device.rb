@@ -2455,8 +2455,10 @@ def care_partner_clean_call_queue_and_hanged_calls(action, main_case, main_case_
     @driver.action.move_to(wait_for_element_to_exist("$PAGE.care_platform_floating_video_call.video_fixed_content$")).perform
 
     log_info("navigate to the call queue")
-    @driver.find_element(:xpath, convert_value_pageobjects("$PAGE.care_platform_floating_video_call.video_return_button$")).click
-    
+    if wait_for_enabled_element("$PAGE.care_platform_floating_video_call.video_return_button$")
+      @driver.find_element(:xpath, convert_value_pageobjects("$PAGE.care_platform_floating_video_call.video_return_button$")).click
+    end
+
     log_info("verify it was redirected to the call queue, if call is running, click on hang call")
     if wait_for_element_to_exist("$PAGE.care_platform_call_portal.end_call_button$")
       log_info("a call on course was found, click on the end call button")
@@ -2523,6 +2525,7 @@ def care_partner_clean_call_queue_and_hanged_calls(action, main_case, main_case_
       @driver.find_element(:xpath, convert_value_pageobjects("$PAGE.care_platform_home.first_call_of_queue$")).click
       log_info("answer call")
       wait_for_element_to_exist("$PAGE.care_platform_home.answer_call$")
+      wait_for_enabled_element("$PAGE.care_platform_home.answer_call$")
       @driver.find_element(:xpath, convert_value_pageobjects("$PAGE.care_platform_home.answer_call$")).click
       
       if wait_for_element_to_exist("$PAGE.care_platform_notifications.failed_to_join_call_notification$") || wait_for_element_to_exist("$PAGE.care_platform_notifications.call_already_answered_notification$")
@@ -2595,6 +2598,8 @@ def search_by_text(action, main_case, main_case_id)
     wait_for_enabled_element("//*[@id='searchText']")
     @driver.find_element(:id, 'searchText').send_keys(name)
   end
+
+  sleep 1
 
 end
 
