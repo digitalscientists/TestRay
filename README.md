@@ -419,7 +419,7 @@ This is not a type but can be used in different Types as a Validation for the ac
 8. [search_by_text](#search_by_text)
 9. [send_keys_if_exist](#send_keys_if_exist)
 10. [call_helper_case](#call_helper_case)
-11. [verify_file_exists](#verify_file_exists)
+11. [verify_file_was_downloaded](#verify_file_was_downloaded)
 
 ## Appium/Selenium
 
@@ -1302,10 +1302,9 @@ For example:
     end
 
 
-### <a id="verify_file_exists"></a>verify_file_exists
+### <a id="verify_file_was_downloaded"></a>verify_file_was_downloaded
 
-Custom action to verify if a file exists:
+Custom action to verify if a file was downloaded in the /tests/downloads folder:
 
-    - Type: verify_file_exists
+    - Type: verify_file_was_downloaded
       FileName: AuditLog-$AND_CLI_TODAY_DATE$.csv
-      FileLocation: $AND_CMD_pwd$/downloads/

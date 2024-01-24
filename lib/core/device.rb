@@ -2193,14 +2193,22 @@ def count_elements(action, main_case, main_case_id)
 end
 
 # This action will verify that a file exists given a location.
-def verify_file_exists(action, main_case, main_case_id)
-  fileName, fileLocation = convert_value(action["FileName"]), convert_value(action["FileLocation"])
-  filePath = File.join(fileLocation, fileName)
+def verify_file_was_downloaded(action, main_case, main_case_id)
+  fileName = convert_value(action["FileName"])
+  repoPath = File.expand_path('../..', __dir__)
+  downloadsLocation =  File.join(repoPath, 'tests', 'downloads')
+
+  if OS.windows?
+    path = File.join(downloadsLocation, fileName)
+    filePath =  path.gsub('/','\\')
+  else
+    filePath =  File.join(downloadsLocation, fileName)
+  end
 
   if File.file?(filePath)
     log_info("Found file containing this location: #{filePath}")
   else
-    raise "Did not found file called #{fileName} containing this path: #{fileLocation}"
+    raise "Did not found file called #{fileName} containing this path: #{downloadsLocation}"
   end
 end
 

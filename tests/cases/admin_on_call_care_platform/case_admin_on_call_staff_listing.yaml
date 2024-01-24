@@ -472,6 +472,5 @@ TestAdminOnCallAccessStaffMemberProfileFromListingAndExportAuditLogProfile:
     - Type: get_timestamp
       Format: "%Y-%m-%d" #YYYY-MM-DD
       Var: TODAY_DATE
-    - Type: verify_file_exists
+    - Type: verify_file_was_downloaded
       FileName: AuditLog-$AND_CLI_carepartner_user1_name$$AND_CLI_carepartner_user1_lastname$-$AND_CLI_TODAY_DATE$.csv
-      FileLocation: $AND_CMD_pwd$/downloads/
