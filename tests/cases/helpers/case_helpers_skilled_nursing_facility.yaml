@@ -234,6 +234,9 @@ SNFAnswerIncomingCall:
     - Type: click
       Strategy: class_chain
       Id: $PAGE.snf_incoming_call.answer_call_button$
+    - Type: wait_not_visible
+      Strategy: class_chain
+      Id: $PAGE.snf_incoming_call.answer_call_button$
   # Device screen updates shows the active call screen with a Provider.
     - Type: wait_for
       Strategy: class_chain

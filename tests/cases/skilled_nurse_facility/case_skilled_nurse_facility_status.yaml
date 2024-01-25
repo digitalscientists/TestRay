@@ -191,10 +191,8 @@ TestSNFVerifyPreDeliveryAccountStatusVisualsAndBehavior:
       - Type: contain
         Var: PARTICIPANT_NAME
         Value: 'Demo Patient'
-    - Type: wait_for
-      Strategy: xpath
-      Id: $PAGE.providers_call_handling_page.answer_call_button$
-      Role: desktopChrome
+    - Type: sleep
+      Time: 0.8
     - Type: click
       Strategy: xpath
       Id: $PAGE.providers_call_handling_page.answer_call_button$
