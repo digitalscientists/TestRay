@@ -162,7 +162,7 @@ TestAdminOnCallRefreshSessionForStaffMemberFromPane:
     Environment: Settings
     Vars:
       LOGOUT_OPTION: "Stay On Shift"
-      USER_FULLNAME: $AND_CLI_carepartner_user1_name$ $AND_CLI_carepartner_user1_lastname$
+      USER_FULLNAME: $AND_CLI_carepartner_user1_lastname$
       STAFF_ROLE: "Care Partner"
     Precases:
       - LoginNeverAloneHelper
