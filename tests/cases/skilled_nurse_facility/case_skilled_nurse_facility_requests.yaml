@@ -336,6 +336,8 @@ TestSNFRequestSuccessfulCallConnect:
       Role: desktopChrome
       Id: $PAGE.providers_home_page.on_demand_calls$
   #Answer call
+    - Type: sleep
+      Time: 0.8
     - Type: click
       Strategy: xpath
       Role: desktopChrome
@@ -544,6 +546,8 @@ TestSNFCheckQueueandReviewDetails:
           Var: FACILITY_NAME_SNF
           Value: $AND_CLI_CALL_FACILITY_NAME$
   #Assign call to me
+    - Type: sleep
+      Time: 0.8
     - Type: click
       Strategy: xpath
       Role: desktopChrome
@@ -589,6 +593,8 @@ TestSNFCheckQueueandReviewDetails:
           Var: REQUESTER_NAME
           Value: $AND_CLI_facility_devices_requester_lastname$
   #Answer call
+    - Type: sleep
+      Time: 0.8
     - Type: click
       Strategy: xpath
       Role: desktopChrome

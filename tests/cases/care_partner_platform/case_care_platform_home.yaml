@@ -497,13 +497,15 @@ TestCarePartnerVerifyEmergencyServicesButton:
       Role: desktopChrome
       Strategy: xpath
       Id: $PAGE.care_platform_home.last_call_of_queue$
+    - Type: sleep
+      Time: 0.5
     - Type: wait_for_property
       Role: desktopChrome
       Strategy: xpath
       Id: $PAGE.care_platform_home.answer_call$
       Property: disabled
       Value: "false"
-    - Type: click
+    - Type: click_js
       Role: desktopChrome
       Strategy: xpath
       Id: $PAGE.care_platform_home.answer_call$

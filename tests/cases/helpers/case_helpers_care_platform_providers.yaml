@@ -449,7 +449,12 @@ ProviderCallFacility:
     # Click on the Call Device button.
     - Type: sleep
       Time: 1
-    - Type: click
+    - Type: wait_for_property
+      Strategy: xpath
+      Id: $PAGE.providers_call_handling_page.call_device_btn$ 
+      Property: disabled
+      Value: "false"
+    - Type: click_js
       Strategy: xpath
       Id: $PAGE.providers_call_handling_page.call_device_btn$ 
 
