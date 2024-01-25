@@ -349,13 +349,9 @@ TestOnboarderCreateNewParticipant:
       Strategy: xpath
       Id: $PAGE.onboarders_platform_home.navigation_participant$      
   # Add the search filter.
-    - Type: click
-      Strategy: id
-      Id: $PAGE.onboarders_participant_page.search_button$
-    - Type: send_keys
-      Strategy: id
-      Id: $PAGE.onboarders_participant_page.search_input$
-      Value: "$AND_CLI_PARTICIPANT_LAST_NAME$"
+    - Type: search_by_text
+      Role: desktopChrome1
+      Text: $AND_CLI_PARTICIPANT_LAST_NAME$
   # Select the participant just created
     - Type: wait_for
       Strategy: xpath
