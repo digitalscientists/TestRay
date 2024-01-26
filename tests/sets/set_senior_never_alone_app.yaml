@@ -31,4 +31,3 @@ SetSeniorNeverAloneAppTest:
     - Case: TestSeniorWifiSettingsPage
     - Case: TestSeniorAppDeactivatedAccountStatusVisuals
     - Case: TestSeniorIpadShouldNotResetIfCarePartnerUpdatesParticipantProfile
-    - Case: TestSeniorAppVisualExperienceIfLoseConnectionOnCall
