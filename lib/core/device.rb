@@ -2451,10 +2451,11 @@ def care_partner_clean_call_queue_and_hanged_calls(action, main_case, main_case_
     end
     
     log_info("hover over the video fixed content to pull up the video return button")
-    wait_for_element_to_exist("$PAGE.care_platform_floating_video_call.video_fixed_content$")
-    @driver.action.move_to(wait_for_element_to_exist("$PAGE.care_platform_floating_video_call.video_fixed_content$")).perform
+    if wait_for_element_to_exist("$PAGE.care_platform_floating_video_call.video_fixed_content$")
+      @driver.action.move_to(wait_for_element_to_exist("$PAGE.care_platform_floating_video_call.video_fixed_content$")).perform
+    end
 
-    log_info("navigate to the call queue")
+    log_info("navigate to the call portal")
     if wait_for_enabled_element("$PAGE.care_platform_floating_video_call.video_return_button$")
       @driver.find_element(:xpath, convert_value_pageobjects("$PAGE.care_platform_floating_video_call.video_return_button$")).click
     end
