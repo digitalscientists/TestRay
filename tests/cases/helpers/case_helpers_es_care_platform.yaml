@@ -87,10 +87,9 @@ ESCarePartnerCallSenior:
       Strategy: xpath
       Id: $PAGE.care_platform_participant.call_portal_btn$
     # Click "Call Participant" button.
-    - Type: wait_for
-      Strategy: xpath
-      Id: $PAGE.care_platform_call_portal.call_participant_btn$
-    - Type: click
+    - Type: sleep
+      Time: 1
+    - Type: click_js
       Strategy: xpath
       Id: $PAGE.care_platform_call_portal.call_participant_btn$
     # Verify that the call has started.
