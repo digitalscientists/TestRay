@@ -217,7 +217,6 @@ TestIDDESActiveAppointmentTimeWindowWhenNotJoinedPrior:
     SCHED_TIME_START: 7
   Precases:
     - ESCarePartnerCleanCallQueueAndHangedCalls
-    - ESSetScheduledCallForSeniorsToStartInXMinutes
     - LoginESIDDNeverAloneHelper
     - IDDESParticipantCleanPrompts
   Aftercases:
@@ -231,6 +230,8 @@ TestIDDESActiveAppointmentTimeWindowWhenNotJoinedPrior:
       App: desktop
   Actions:
     # Wait for the Starting Soon modal and verify it appears on the screen indicating relative start time and the event details with a join button.
+    - Type: case
+      Value: ESSetScheduledCallForSeniorsToStartInXMinutes
     - Type: click
       Strategy: class_chain
       Id: $PAGE.seniors_app_appointment_modal.close_btn$
@@ -256,10 +257,16 @@ TestIDDESActiveAppointmentTimeWindowWhenNotJoinedPrior:
     - Type: click
       Strategy: class_chain
       Id: $PAGE.seniors_app_appointment_modal.close_btn$
+    - Type: click
+      Strategy: class_chain
+      Id: $PAGE.seniors_app_appointment_modal.close_btn$
+      Condition:
+      - Value: 5
+        Operation: visible
+        Result: true
     - Type: wait_not_visible
       Strategy: class_chain
       Id: $PAGE.seniors_app_appointment_modal.close_btn$
-      Time: 10
     # See the event in the events listing in the Home page.
     - Type: wait_for
       Strategy: class_chain
