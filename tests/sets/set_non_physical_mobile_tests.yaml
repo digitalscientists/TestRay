@@ -141,6 +141,7 @@ SetNonPhysicalMobileTest:
     - Case: TestAdminOnCallRefreshNurseFacilityDeviceForCalling
     - Case: TestAdminOnCallCallHistoryShowsRecordingsForAllPlatformsAndDevices
     - Case: TestAdminOnCallRefreshSessionForStaffMemberFromProfile
+    - Case: TestAdminOnCallClickAndViewStaffMembersFollowUpTicketsInformation
   # Facility Leadership
     - Case: TestFacilityLeadershipSeeCallAppearOnQueueThenSelectCall
     - Case: TestFacilityLeadershipReviewCallHistoryAndAccessCallRecordings
