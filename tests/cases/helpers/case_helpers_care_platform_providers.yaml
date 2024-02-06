@@ -562,7 +562,6 @@ ProviderNavigateEmployeeCallPortal:
 #This helper needs that you set the variable: STATE in your test
 #The STATE is refered as two letters. Ex: IN for Indiana
 ProviderSetStateCredential:
-  Environment: Settings
   Roles:
     - Role: desktopChrome
       App: desktop
@@ -1123,10 +1122,9 @@ AnswerCallAsProvider:
     - Type: click
       Strategy: xpath
       Id: $PAGE.providers_home_page.call_based_on_participant_name$
-    - Type: wait_for
-      Strategy: xpath
-      Id: $PAGE.providers_call_handling_page.answer_call_button$
-    - Type: click
+    - Type: sleep
+      Time: 0.8
+    - Type: click_js
       Strategy: xpath
       Id: $PAGE.providers_call_handling_page.answer_call_button$
     - Type: wait_for

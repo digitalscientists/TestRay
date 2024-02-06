@@ -1940,10 +1940,8 @@ TestProviderIDDCHAnswerCallAndCompleteSession:
       Strategy: xpath
       Id: $PAGE.providers_home_page.last_medical_transfer_row$
       Role: desktopChrome1
-    - Type: wait_for
-      Strategy: xpath
-      Id: $PAGE.providers_call_handling_page.answer_call_button$
-      Role: desktopChrome1
+    - Type: sleep
+      Time: 1
     - Type: click
       Strategy: xpath
       Id: $PAGE.providers_call_handling_page.answer_call_button$
@@ -5398,11 +5396,7 @@ TestProviderIDDESCallDeviceForIssuePausedTaskFromHomeIgnored:
       Role: desktopChrome1
     - Type: sleep
       Time: 2
-    - Type: wait_for
-      Strategy: xpath
-      Id: $PAGE.providers_call_handling_page.answer_call_button$
-      Role: desktopChrome1
-    - Type: click
+    - Type: click_js
       Strategy: xpath
       Id: $PAGE.providers_call_handling_page.answer_call_button$
       Role: desktopChrome1
