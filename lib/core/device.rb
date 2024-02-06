@@ -2376,6 +2376,7 @@ def provider_clean_hanged_call_or_session(action, main_case, main_case_id)
       wait_for_enabled_element("$PAGE.care_platform_home.first_call_of_queue$")
       @driver.find_element(:xpath, convert_value_pageobjects("$PAGE.care_platform_home.first_call_of_queue$")).click
       log_info("answer call")
+      sleep(2)
       wait_for_element_to_exist("$PAGE.care_platform_home.answer_call$")
       @driver.find_element(:xpath, convert_value_pageobjects("$PAGE.care_platform_home.answer_call$")).click
       
