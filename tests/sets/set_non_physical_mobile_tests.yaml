@@ -104,7 +104,7 @@ SetNonPhysicalMobileTest:
     - Case: TestSeniorVerifyCallWillNotRedirectToHomePageAfter10MinutesWithoutAction
     - Case: TestSeniorVerifyFullScheduleDisplay
     - Case: TestSeniorSchedulesPageNavigation
-    - Case: TestSeniorAutomaticReturnAfterInactivty
+    - Case: TestSeniorAutomaticReturnAfterInactivity
     - Case: TestSeniorNoPromptsForCancelledAppointments
     - Case: TestSeniorFutureNonTelehealthEventWindowAccess
     - Case: TestSeniorFutureAppointmentCancelOrRescheduleButton
@@ -141,6 +141,7 @@ SetNonPhysicalMobileTest:
     - Case: TestAdminOnCallRefreshNurseFacilityDeviceForCalling
     - Case: TestAdminOnCallCallHistoryShowsRecordingsForAllPlatformsAndDevices
     - Case: TestAdminOnCallRefreshSessionForStaffMemberFromProfile
+    - Case: TestAdminOnCallClickAndViewStaffMembersFollowUpTicketsInformation
   # Facility Leadership
     - Case: TestFacilityLeadershipSeeCallAppearOnQueueThenSelectCall
     - Case: TestFacilityLeadershipReviewCallHistoryAndAccessCallRecordings

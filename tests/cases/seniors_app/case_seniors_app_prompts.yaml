@@ -628,6 +628,7 @@ TestSeniorStartingSoonNotificationWaitUntilCallSurveyIsCompleted:
   Environment: Settings
   Precases:
     - LoginNeverAloneHelper
+    - AdminOnCallRefreshParticipant
     - CarePartnerCleanCallQueueAndHangedCalls
     - SeniorCleanPrompts
     - ProviderNewCleaner
@@ -925,6 +926,7 @@ TestSeniorVerifyCallWillNotRedirectToHomePageAfter10MinutesWithoutAction:
   Environment: Settings
   Precases:
     - LoginNeverAloneHelper
+    - AdminOnCallRefreshParticipant
     - CarePartnerCleanCallQueueAndHangedCalls
     - SeniorCleanPrompts
   Aftercases:

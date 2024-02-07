@@ -230,6 +230,8 @@ TestSeniorAppSuspendedAccountStatus:
   Environment: Settings
   Vars:
     LOGOUT_OPTION: "Yes Logout"
+  Precases:
+    - AdminOnCallRefreshParticipant
   Aftercases:
     - TerminateApp
     - AlternativeCarePartnerLogout

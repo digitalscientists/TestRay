@@ -111,7 +111,7 @@ TestSeniorSchedulesPageNavigation:
       Value: SchedulesPageNavigationHelper
 
 # CXTB-39: Automatically Return to Full Schedule Page After Period of Inactivity
-TestSeniorAutomaticReturnAfterInactivty:
+TestSeniorAutomaticReturnAfterInactivity:
   Environment: Settings
   Precases:
     - LoginNeverAloneHelper
