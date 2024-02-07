@@ -1123,15 +1123,20 @@ AnswerCallAsProvider:
     - Type: click
       Strategy: xpath
       Id: $PAGE.providers_home_page.call_based_on_participant_name$
+    - Type: sleep
+      Time: 2
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.providers_call_handling_page.answer_call_button$
     - Type: click
       Strategy: xpath
       Id: $PAGE.providers_call_handling_page.answer_call_button$
+    - Type: sleep
+      Time: 2
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.providers_call_handling_page.end_call_btn$
+      Time: 30
 
 AnswerOnDemandCallAsProvider:
   Roles:
