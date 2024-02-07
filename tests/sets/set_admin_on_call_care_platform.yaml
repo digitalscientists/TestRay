@@ -6,6 +6,7 @@ SetAdminOnCallCarePlatformTests:
     - Case: TestAdminOnCallAccessStaffDirectoryFilterAndPane
     - Case: TestAdminOnCallForgotPasswordLoginLink
     - Case: TestAdminOnCallAccessStaffMemberProfileFromListingAndExportAuditLogProfile
+    - Case: TestAdminOnCallClickAndViewStaffMembersFollowUpTicketsInformation
   # Admin on Call Mobile Non Physical
     - Case: TestAdminOnCallRefreshUserAccountForCalling
     - Case: TestAdminOnCallRefreshSessionForStaffMemberFromPane
