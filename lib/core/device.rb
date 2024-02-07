@@ -2320,123 +2320,127 @@ end
 
 # Custome action to clean hanged calls and sessions
 def provider_clean_hanged_call_or_session(action, main_case, main_case_id)
-  have_call = false
-  if wait_for_element_to_exist("$PAGE.providers_home_page.session_return_button$")
-    log_info("There's a return session")
-    wait_for_enabled_element("$PAGE.providers_home_page.session_return_button$")
-    @driver.find_element(:xpath, convert_value_pageobjects("$PAGE.providers_home_page.session_return_button$")).click
-    have_call = true
-  end
-  if wait_for_element_to_exist("$PAGE.providers_call_handling_page.end_call_btn$")
-    log_info("there's an end call button")
-    wait_for_enabled_element("$PAGE.providers_call_handling_page.end_call_btn$")
-    @driver.find_element(:xpath, convert_value_pageobjects("$PAGE.providers_call_handling_page.end_call_btn$")).click
-    have_call = true
-  end
-  if wait_for_enabled_element("$PAGE.providers_call_handling_page.complete_session_button$")
-    log_info("there's a complete session button")
-    wait_for_enabled_element("$PAGE.providers_call_handling_page.complete_session_button$")
-    @driver.find_element(:xpath, convert_value_pageobjects("$PAGE.providers_call_handling_page.complete_session_button$")).click
-    have_call = true
-  end
-  if wait_for_element_to_exist("$PAGE.providers_call_handling_page.post_call_survey_title$")
-    log_info("We are at the provider's survey")
-    have_call = true
-  end
-  if have_call
-    @driver.find_element(:xpath, convert_value_pageobjects("$PAGE.providers_call_handling_page.resolved_true_option$")).click
-    if wait_for_enabled_element("$PAGE.providers_call_handling_page.video_visit_true_option$")
-      @driver.find_element(:xpath, convert_value_pageobjects("$PAGE.providers_call_handling_page.video_visit_true_option$")).click
+  begin
+    have_call = false
+    if wait_for_element_to_exist("$PAGE.providers_home_page.session_return_button$")
+      log_info("There's a return session")
+      wait_for_enabled_element("$PAGE.providers_home_page.session_return_button$")
+      @driver.find_element(:xpath, convert_value_pageobjects("$PAGE.providers_home_page.session_return_button$")).click
+      have_call = true
     end
-    wait_for_enabled_element("$PAGE.providers_call_handling_page.recommend_discharge_yes_by_SNF$")
-    @driver.find_element(:xpath, convert_value_pageobjects("$PAGE.providers_call_handling_page.recommend_discharge_yes_by_SNF$")).click
-    wait_for_enabled_element("$PAGE.providers_call_handling_page.call_notes_subject_input$")
-    @driver.find_element(:xpath, convert_value_pageobjects("$PAGE.providers_call_handling_page.call_notes_subject_input$")).send_keys("Automation Test subject")
-    wait_for_enabled_element("$PAGE.providers_call_handling_page.call_notes_provider_input$")
-    @driver.find_element(:xpath, convert_value_pageobjects("$PAGE.providers_call_handling_page.call_notes_provider_input$")).send_keys("Automation Test Notes: Ended by provider's cleaner")
-    wait_for_enabled_element("$PAGE.providers_call_handling_page.submit_exit_session_button$")
-    @driver.find_element(:xpath, convert_value_pageobjects("$PAGE.providers_call_handling_page.submit_exit_session_button$")).click
-    
-    wait_for_element_not_visible("$PAGE.providers_call_handling_page.submit_exit_session_button$")
-    @driver.find_element(:xpath, convert_value_pageobjects("$PAGE.providers_home_page.home_button$")).click
-    wait_for_enabled_element("$PAGE.providers_home_page.home_title$")
-  end
+    if wait_for_element_to_exist("$PAGE.providers_call_handling_page.end_call_btn$")
+      log_info("there's an end call button")
+      wait_for_enabled_element("$PAGE.providers_call_handling_page.end_call_btn$")
+      @driver.find_element(:xpath, convert_value_pageobjects("$PAGE.providers_call_handling_page.end_call_btn$")).click
+      have_call = true
+    end
+    if wait_for_enabled_element("$PAGE.providers_call_handling_page.complete_session_button$")
+      log_info("there's a complete session button")
+      wait_for_enabled_element("$PAGE.providers_call_handling_page.complete_session_button$")
+      @driver.find_element(:xpath, convert_value_pageobjects("$PAGE.providers_call_handling_page.complete_session_button$")).click
+      have_call = true
+    end
+    if wait_for_element_to_exist("$PAGE.providers_call_handling_page.post_call_survey_title$")
+      log_info("We are at the provider's survey")
+      have_call = true
+    end
+    if have_call
+      @driver.find_element(:xpath, convert_value_pageobjects("$PAGE.providers_call_handling_page.resolved_true_option$")).click
+      if wait_for_enabled_element("$PAGE.providers_call_handling_page.video_visit_true_option$")
+        @driver.find_element(:xpath, convert_value_pageobjects("$PAGE.providers_call_handling_page.video_visit_true_option$")).click
+      end
+      wait_for_enabled_element("$PAGE.providers_call_handling_page.recommend_discharge_yes_by_SNF$")
+      @driver.find_element(:xpath, convert_value_pageobjects("$PAGE.providers_call_handling_page.recommend_discharge_yes_by_SNF$")).click
+      wait_for_enabled_element("$PAGE.providers_call_handling_page.call_notes_subject_input$")
+      @driver.find_element(:xpath, convert_value_pageobjects("$PAGE.providers_call_handling_page.call_notes_subject_input$")).send_keys("Automation Test subject")
+      wait_for_enabled_element("$PAGE.providers_call_handling_page.call_notes_provider_input$")
+      @driver.find_element(:xpath, convert_value_pageobjects("$PAGE.providers_call_handling_page.call_notes_provider_input$")).send_keys("Automation Test Notes: Ended by provider's cleaner")
+      wait_for_enabled_element("$PAGE.providers_call_handling_page.submit_exit_session_button$")
+      @driver.find_element(:xpath, convert_value_pageobjects("$PAGE.providers_call_handling_page.submit_exit_session_button$")).click
 
-  # is call queue clean?
-  log_info("checking if there is any pending call on the call queue page")
-  call_queue_call_elements = wait_for_element_collection_to_exist("$PAGE.care_platform_home.call_queue_calls$")
-  if call_queue_call_elements.nil? || call_queue_call_elements.empty?
-    puts "Call queue call elements collection is null/empty."
-  end
+      wait_for_element_not_visible("$PAGE.providers_call_handling_page.submit_exit_session_button$")
+      @driver.find_element(:xpath, convert_value_pageobjects("$PAGE.providers_home_page.home_button$")).click
+      wait_for_enabled_element("$PAGE.providers_home_page.home_title$")
+    end
 
-  if call_queue_call_elements.length() > 0
-    call_queue_call_elements.each do |call_element|
-      
-      log_info("wait for call queue element")
-      wait_for_enabled_element("$PAGE.care_platform_home.first_call_of_queue$")
-      @driver.find_element(:xpath, convert_value_pageobjects("$PAGE.care_platform_home.first_call_of_queue$")).click
-      log_info("answer call")
-      sleep(2)
-      wait_for_element_to_exist("$PAGE.care_platform_home.answer_call$")
-      @driver.find_element(:xpath, convert_value_pageobjects("$PAGE.care_platform_home.answer_call$")).click
-      
-      if wait_for_element_to_exist("$PAGE.care_platform_notifications.failed_to_join_call_notification$") || wait_for_element_to_exist("$PAGE.care_platform_notifications.call_already_answered_notification$")
-        log_info("Failed to join call/Call already answered notification appeared")
-        @driver.find_element(:xpath, convert_value_pageobjects("$PAGE.care_platform.navigation_home$")).click
-        @driver.navigate.refresh
-        wait_for_enabled_element("$PAGE.care_platform.call_queue_title$")
-      else
-        log_info("wait for the end call button")
-        wait_for_element_to_exist("$PAGE.care_platform_call_portal.end_call_button$")
-        
-        log_info("click on the end call")
-        @driver.find_element(:xpath, convert_value_pageobjects("$PAGE.care_platform_call_portal.end_call_button$")).click
+    # is call queue clean?
+    log_info("checking if there is any pending call on the call queue page")
+    call_queue_call_elements = wait_for_element_collection_to_exist("$PAGE.care_platform_home.call_queue_calls$")
+    if call_queue_call_elements.nil? || call_queue_call_elements.empty?
+      puts "Call queue call elements collection is null/empty."
+    end
 
-        log_info("Click on the No Message button if it appears")
-        if wait_for_element_to_exist("$PAGE.care_platform_call_portal.no_message_button$")
-          @driver.find_element(:xpath, convert_value_pageobjects("$PAGE.care_platform_call_portal.no_message_button$")).click
+    if call_queue_call_elements.length() > 0
+      call_queue_call_elements.each do |call_element|
+
+        log_info("wait for call queue element")
+        wait_for_enabled_element("$PAGE.care_platform_home.first_call_of_queue$")
+        @driver.find_element(:xpath, convert_value_pageobjects("$PAGE.care_platform_home.first_call_of_queue$")).click
+        log_info("answer call")
+        wait_for_element_to_exist("$PAGE.care_platform_home.answer_call$")
+        @driver.find_element(:xpath, convert_value_pageobjects("$PAGE.care_platform_home.answer_call$")).click
+
+        if wait_for_element_to_exist("$PAGE.care_platform_notifications.failed_to_join_call_notification$") || wait_for_element_to_exist("$PAGE.care_platform_notifications.call_already_answered_notification$")
+          log_info("Failed to join call/Call already answered notification appeared")
           @driver.find_element(:xpath, convert_value_pageobjects("$PAGE.care_platform.navigation_home$")).click
+          @driver.navigate.refresh
           wait_for_enabled_element("$PAGE.care_platform.call_queue_title$")
-          next
-        end
+        else
+          log_info("wait for the end call button")
+          wait_for_element_to_exist("$PAGE.care_platform_call_portal.end_call_button$")
 
-        log_info("fill in the details to complete the session, complete the session")
-        wait_for_element_to_exist("$PAGE.care_platform_call_portal.video_status$")
-        
-        log_info("fill in Subject and Details field")
-        wait_for_enabled_element("$PAGE.providers_call_handling_page.subject_input$")
-        @driver.find_element(:xpath, convert_value_pageobjects("$PAGE.providers_call_handling_page.subject_input$")).send_keys("Automation Tear Down")
-        @driver.find_element(:xpath, convert_value_pageobjects("$PAGE.providers_call_handling_page.details_textarea$")).send_keys("Automation Tear Down Details")
-        
-        log_info("wait for the Complete Sesion button to be enabled and click on it")
-        wait_for_enabled_element("$PAGE.care_platform_call_portal.complete_session_btn$")
-        @driver.find_element(:xpath, convert_value_pageobjects("$PAGE.care_platform_call_portal.complete_session_btn$")).click
-  
-        if wait_for_element_to_exist("$PAGE.providers_call_handling_page.post_call_survey_title$")
-          log_info("We are at the provider's survey")
-          have_call = true
-        end
+          log_info("click on the end call")
+          @driver.find_element(:xpath, convert_value_pageobjects("$PAGE.care_platform_call_portal.end_call_button$")).click
 
-        if have_call
-          @driver.find_element(:xpath, convert_value_pageobjects("$PAGE.providers_call_handling_page.resolved_true_option$")).click
-          if wait_for_enabled_element("$PAGE.providers_call_handling_page.video_visit_true_option$")
-            @driver.find_element(:xpath, convert_value_pageobjects("$PAGE.providers_call_handling_page.video_visit_true_option$")).click
+          log_info("Click on the No Message button if it appears")
+          if wait_for_element_to_exist("$PAGE.care_platform_call_portal.no_message_button$")
+            @driver.find_element(:xpath, convert_value_pageobjects("$PAGE.care_platform_call_portal.no_message_button$")).click
+            @driver.find_element(:xpath, convert_value_pageobjects("$PAGE.care_platform.navigation_home$")).click
+            wait_for_enabled_element("$PAGE.care_platform.call_queue_title$")
+            next
           end
-          wait_for_enabled_element("$PAGE.providers_call_handling_page.recommend_discharge_yes_by_SNF$")
-          @driver.find_element(:xpath, convert_value_pageobjects("$PAGE.providers_call_handling_page.recommend_discharge_yes_by_SNF$")).click
-          wait_for_enabled_element("$PAGE.providers_call_handling_page.call_notes_subject_input$")
-          @driver.find_element(:xpath, convert_value_pageobjects("$PAGE.providers_call_handling_page.call_notes_subject_input$")).send_keys("Automation Test subject")
-          wait_for_enabled_element("$PAGE.providers_call_handling_page.call_notes_provider_input$")
-          @driver.find_element(:xpath, convert_value_pageobjects("$PAGE.providers_call_handling_page.call_notes_provider_input$")).send_keys("Automation Test Notes: Ended by provider's cleaner")
-          wait_for_enabled_element("$PAGE.providers_call_handling_page.submit_exit_session_button$")
-          @driver.find_element(:xpath, convert_value_pageobjects("$PAGE.providers_call_handling_page.submit_exit_session_button$")).click
-          
-          wait_for_element_not_visible("$PAGE.providers_call_handling_page.submit_exit_session_button$")
-          @driver.find_element(:xpath, convert_value_pageobjects("$PAGE.providers_home_page.home_button$")).click
-          wait_for_enabled_element("$PAGE.providers_home_page.home_title$")
+
+          log_info("fill in the details to complete the session, complete the session")
+          wait_for_element_to_exist("$PAGE.care_platform_call_portal.video_status$")
+
+          log_info("fill in Subject and Details field")
+          wait_for_enabled_element("$PAGE.providers_call_handling_page.subject_input$")
+          @driver.find_element(:xpath, convert_value_pageobjects("$PAGE.providers_call_handling_page.subject_input$")).send_keys("Automation Tear Down")
+          @driver.find_element(:xpath, convert_value_pageobjects("$PAGE.providers_call_handling_page.details_textarea$")).send_keys("Automation Tear Down Details")
+
+          log_info("wait for the Complete Sesion button to be enabled and click on it")
+          wait_for_enabled_element("$PAGE.care_platform_call_portal.complete_session_btn$")
+          @driver.find_element(:xpath, convert_value_pageobjects("$PAGE.care_platform_call_portal.complete_session_btn$")).click
+
+          if wait_for_element_to_exist("$PAGE.providers_call_handling_page.post_call_survey_title$")
+            log_info("We are at the provider's survey")
+            have_call = true
+          end
+
+          if have_call
+            @driver.find_element(:xpath, convert_value_pageobjects("$PAGE.providers_call_handling_page.resolved_true_option$")).click
+            if wait_for_enabled_element("$PAGE.providers_call_handling_page.video_visit_true_option$")
+              @driver.find_element(:xpath, convert_value_pageobjects("$PAGE.providers_call_handling_page.video_visit_true_option$")).click
+            end
+            wait_for_enabled_element("$PAGE.providers_call_handling_page.recommend_discharge_yes_by_SNF$")
+            @driver.find_element(:xpath, convert_value_pageobjects("$PAGE.providers_call_handling_page.recommend_discharge_yes_by_SNF$")).click
+            wait_for_enabled_element("$PAGE.providers_call_handling_page.call_notes_subject_input$")
+            @driver.find_element(:xpath, convert_value_pageobjects("$PAGE.providers_call_handling_page.call_notes_subject_input$")).send_keys("Automation Test subject")
+            wait_for_enabled_element("$PAGE.providers_call_handling_page.call_notes_provider_input$")
+            @driver.find_element(:xpath, convert_value_pageobjects("$PAGE.providers_call_handling_page.call_notes_provider_input$")).send_keys("Automation Test Notes: Ended by provider's cleaner")
+            wait_for_enabled_element("$PAGE.providers_call_handling_page.submit_exit_session_button$")
+            @driver.find_element(:xpath, convert_value_pageobjects("$PAGE.providers_call_handling_page.submit_exit_session_button$")).click
+
+            wait_for_element_not_visible("$PAGE.providers_call_handling_page.submit_exit_session_button$")
+            @driver.find_element(:xpath, convert_value_pageobjects("$PAGE.providers_home_page.home_button$")).click
+            wait_for_enabled_element("$PAGE.providers_home_page.home_title$")
+          end
         end
       end
     end
+  rescue Exception => e
+    log_info("Exception: #{e}")
+    return false
   end
 end
 
