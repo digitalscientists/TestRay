@@ -162,6 +162,10 @@ TestProviderUpdateCredentialsAndCallAnsweringAbilitiesEHPRequest:
     - Type: click
       Strategy: xpath
       Id: $PAGE.providers_account_modal.save_changes_button$
+      NoRaise: true
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_account_modal.close_modal_button$
     - Type: wait_not_visible
       Strategy: xpath
       Id: $PAGE.providers_account_modal.credentials_content$
@@ -253,6 +257,10 @@ TestProviderUpdateCredentialsAndCallAnsweringAbilitiesEHPRequest:
     - Type: click
       Strategy: xpath
       Id: $PAGE.providers_account_modal.save_changes_button$
+      NoRaise: true
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_account_modal.close_modal_button$
     - Type: wait_not_visible
       Strategy: xpath
       Id: $PAGE.providers_account_modal.credentials_content$
