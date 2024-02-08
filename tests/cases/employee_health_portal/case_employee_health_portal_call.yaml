@@ -107,6 +107,8 @@ TestEmployeeHealthPortalCallAlreadyAnsweredNotificationWhenEmployeeLogsOut:
       Strategy: xpath
       Id: $PAGE.providers_home_page.on_demand_calls$
   # Verify that the call information appears on the right side.
+    - Type: sleep
+      Time: 1
     - Type: wait_for
       Role: desktopChrome1
       Strategy: xpath

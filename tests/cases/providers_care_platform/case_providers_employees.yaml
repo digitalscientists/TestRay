@@ -179,6 +179,8 @@ TestProviderAnswerCompleteSessionFromEHP:
       Role: desktopChrome
       Id: $PAGE.providers_home_page.on_demand_calls$
   #Answer call
+    - Type: sleep
+      Time: 1
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.providers_call_handling_page.answer_call_button$

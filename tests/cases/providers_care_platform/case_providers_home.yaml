@@ -258,6 +258,8 @@ TestProvidersAnswerSNFCallAndCompletesSession:
     - Type: click
       Strategy: xpath
       Id: $PAGE.providers_home_page.on_demand_based_on_participant_name$
+    - Type: sleep
+      Time: 1
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.providers_call_handling_page.answer_call_button$
@@ -1082,6 +1084,8 @@ TestProvidersSelectCallInQueueAndGetCallAnsweredAlreadyNotification:
       Strategy: xpath
       Id: $PAGE.providers_home_page.on_demand_based_on_participant_name$
     # Right side of screen refreshes to show the associated call pane with proper name and primary information as header.
+    - Type: sleep
+      Time: 1
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.providers_call_handling_page.answer_call_button$
@@ -1126,6 +1130,8 @@ TestProvidersSelectCallInQueueAndGetCallAnsweredAlreadyNotification:
       Strategy: xpath
       Id: $PAGE.providers_home_page.on_demand_based_on_participant_name$
     # Right side of screen refreshes to show the associated call pane with proper name and primary information as header.
+    - Type: sleep
+      Time: 1
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.providers_call_handling_page.answer_call_button$
@@ -1424,6 +1430,8 @@ TestProviderSeniorSeeCallAppearInQueueAssignAndReviewDetails:
       Strategy: xpath
       Id: $PAGE.providers_home_page.last_medical_transfer_row$
       Role: desktopChrome1
+    - Type: sleep
+      Time: 1
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.providers_call_handling_page.answer_call_button$
@@ -1498,6 +1506,8 @@ TestProviderSeniorSeeCallAppearInQueueAssignAndReviewDetails:
       Id: $PAGE.providers_call_details_page.follow_up_tickets_tab$
       Role: desktopChrome1
     # Answer call
+    - Type: sleep
+      Time: 1
     - Type: click
       Strategy: xpath
       Id: $PAGE.providers_call_handling_page.answer_call_button$
@@ -1617,6 +1627,8 @@ TestProviderIDDCHSeeCallAppearInQueueAssignAndReviewDetails:
       Strategy: xpath
       Id: $PAGE.providers_home_page.last_medical_transfer_row$
       Role: desktopChrome1
+    - Type: sleep
+      Time: 1
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.providers_call_handling_page.answer_call_button$
@@ -1691,6 +1703,8 @@ TestProviderIDDCHSeeCallAppearInQueueAssignAndReviewDetails:
       Id: $PAGE.providers_call_details_page.follow_up_tickets_tab$
       Role: desktopChrome1
     # Answer call
+    - Type: sleep
+      Time: 1
     - Type: click
       Strategy: xpath
       Id: $PAGE.providers_call_handling_page.answer_call_button$
@@ -1720,6 +1734,7 @@ TestProviderIDDESSeeCallAppearInQueueAssignAndReviewDetails:
     - ESProviderCleaner
     - IDDESParticipantCleanPrompts
   Aftercases:
+    - AdminOnCallRefreshESParticipant
     - TerminateApp
   Roles:
     - Role: desktopChrome
@@ -1808,6 +1823,8 @@ TestProviderIDDESSeeCallAppearInQueueAssignAndReviewDetails:
       Strategy: xpath
       Id: $PAGE.providers_home_page.last_medical_transfer_row$
       Role: desktopChrome1
+    - Type: sleep
+      Time: 1
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.providers_call_handling_page.answer_call_button$
@@ -1882,6 +1899,8 @@ TestProviderIDDESSeeCallAppearInQueueAssignAndReviewDetails:
       Id: $PAGE.providers_call_details_page.follow_up_tickets_tab$
       Role: desktopChrome1
     # Answer call
+    - Type: sleep
+      Time: 1
     - Type: click
       Strategy: xpath
       Id: $PAGE.providers_call_handling_page.answer_call_button$
@@ -1925,7 +1944,7 @@ TestProviderIDDCHAnswerCallAndCompleteSession:
       Value: IDDCHCarePartnerMakeCallToProvider
   # Wait 5 seconds for the call to disappear
     - Type: sleep
-      Time: 5
+      Time: 7
       Role: desktopChrome1
   # Log in to CHS Provider
     - Type: case
@@ -2253,6 +2272,8 @@ TestProviderIDDESAnswerCallAndCompleteSession:
       Strategy: xpath
       Id: $PAGE.providers_home_page.last_medical_transfer_row$
       Role: desktopChrome1
+    - Type: sleep
+      Time: 1
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.providers_call_handling_page.answer_call_button$
@@ -2749,6 +2770,7 @@ TestProviderIDDCHReturnMissedCallFromHome:
     - ProviderNewCleaner
     - IDDESParticipantCleanPrompts
   Aftercases:
+    - AdminOnCallRefreshCHParticipant
     - TerminateApp
   Roles:
     - Role: desktopChrome
@@ -2934,6 +2956,7 @@ TestProviderIDDESReturnMissedCallFromHome:
     - ProviderNewCleaner
     - IDDESParticipantCleanPrompts
   Aftercases:
+    - AdminOnCallRefreshESParticipant
     - TerminateApp
   Roles:
     - Role: desktopChrome
@@ -4187,6 +4210,7 @@ TestProviderIDDESReturnMissedCallFromHomeIgnored:
     - ProviderNewCleaner
     - IDDESParticipantCleanPrompts
   Aftercases:
+    - AdminOnCallRefreshESParticipant
     - TerminateApp
   Roles:
     - Role: desktopChrome
@@ -4335,6 +4359,7 @@ TestProviderIDDCHReturnMissedCallFromHomeIgnored:
     - ProviderNewCleaner
     - IDDESParticipantCleanPrompts
   Aftercases:
+    - AdminOnCallRefreshCHParticipant
     - TerminateApp
   Roles:
     - Role: desktopChrome
@@ -4483,6 +4508,7 @@ TestProviderIDDCHCallDeviceForFollowUpTaskFromHomeAnswered:
     - ProviderNewCleaner
     - IDDESParticipantCleanPrompts
   Aftercases:
+    - AdminOnCallRefreshCHParticipant
     - TerminateApp
   Roles:
     - Role: desktopChrome
@@ -4612,6 +4638,7 @@ TestProviderIDDESCallDeviceForFollowUpTaskFromHomeAnswered:
     - ProviderNewCleaner
     - IDDESParticipantCleanPrompts
   Aftercases:
+    - AdminOnCallRefreshESParticipant
     - TerminateApp
   Roles:
     - Role: desktopChrome
@@ -5159,6 +5186,7 @@ TestProviderIDDESCallDeviceForFollowUpTaskFromHomeIgnored:
     - ProviderNewCleaner
     - IDDESParticipantCleanPrompts
   Aftercases:
+    - AdminOnCallRefreshESParticipant
     - TerminateApp
   Roles:
     - Role: desktopChrome
@@ -5257,6 +5285,7 @@ TestProviderIDDCHCallDeviceForFollowUpTaskFromHomeIgnored:
     - ProviderNewCleaner
     - IDDESParticipantCleanPrompts
   Aftercases:
+    - AdminOnCallRefreshCHParticipant
     - TerminateApp
   Roles:
     - Role: desktopChrome

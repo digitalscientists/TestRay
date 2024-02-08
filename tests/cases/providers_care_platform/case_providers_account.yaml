@@ -223,6 +223,8 @@ TestProviderUpdateCredentialsAndCallAnsweringAbilitiesEHPRequest:
     - Type: click
       Strategy: xpath
       Id: $PAGE.providers_home_page.on_demand_calls$
+    - Type: sleep
+      Time: 1
     - Type: wait_for_property
       Strategy: xpath
       Id: $PAGE.providers_call_handling_page.answer_call_button$
@@ -288,6 +290,8 @@ TestProviderUpdateCredentialsAndCallAnsweringAbilitiesEHPRequest:
     - Type: click
       Strategy: xpath
       Id: $PAGE.providers_home_page.on_demand_by_state$
+    - Type: sleep
+      Time: 1
     - Type: wait_for_property
       Strategy: xpath
       Id: $PAGE.providers_call_handling_page.answer_call_button$
