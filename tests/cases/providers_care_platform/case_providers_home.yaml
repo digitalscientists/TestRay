@@ -1919,6 +1919,10 @@ TestProviderIDDESSeeCallAppearInQueueAssignAndReviewDetails:
     - Type: case
       Value: PostCallSurveyProvider
       Role: desktopChrome1
+    # Close on CarePartner Side
+    - Type: case
+      Value: ESCloseCarePartnerCall
+      Role: desktopChrome
 
 #CXTB-668 IDD - Answer Call and Complete Session
 TestProviderIDDCHAnswerCallAndCompleteSession:
@@ -2549,6 +2553,10 @@ TestProviderIDDESAnswerCallAndCompleteSession:
       Strategy: xpath
       Id: $PAGE.providers_notifications.follow_up_ticket_closed_notification$
       Role: desktopChrome1
+    # Close on CarePartner Side
+    - Type: case
+      Value: ESCloseCarePartnerCall
+      Role: desktopChrome
 
 # CXTB-681: Call Seniors Device for Follow-up Task from Home (Ignored).
 TestProviderCallParticipantForFollowUpTaskFromHomeAndIgnore:
@@ -3132,6 +3140,10 @@ TestProviderIDDESReturnMissedCallFromHome:
         - Type: contain
           Var: INDICATOR
           Value: 'is-green'
+  # Close on CarePartner Side
+    - Type: case
+      Value: ESCloseCarePartnerCall
+      Role: desktopChrome
 
 # CXTB-687 Call SNF Device for “Issue Paused” Task from Home (Ignored)
 TestProvidersCallSNFDeviceForIssuePausedFromHomeIgnored:
@@ -4349,6 +4361,10 @@ TestProviderIDDESReturnMissedCallFromHomeIgnored:
     - Type: case
       Role: desktopChrome1
       Value: ProviderCloseCallHelper
+  # Close on CarePartner Side
+    - Type: case
+      Value: ESCloseCarePartnerCall
+      Role: desktopChrome
     
 # CXTB-724: Return Missed CH IDD (Easterseals) Call from Home (Ignored)
 TestProviderIDDCHReturnMissedCallFromHomeIgnored:
@@ -5018,6 +5034,10 @@ TestProviderIDDESCallDeviceForIssuePausedTaskFromHomeAnswered:
         - Type: contain
           Var: STATUS_VAR
           Value: "is-green"
+  # Close on CarePartner Side
+    - Type: case
+      Value: ESCloseCarePartnerCall
+      Role: desktopChrome
 
 # CXTB-730 Call IDD (Easterseals) Device for “Issue Paused” Task from Home (Answered)
 TestProviderIDDCHCallDeviceForIssuePausedTaskFromHomeAnswered:
@@ -5511,6 +5531,10 @@ TestProviderIDDESCallDeviceForIssuePausedTaskFromHomeIgnored:
     - Type: case
       Value: CleanUsedPausedIssue
       Role: desktopChrome1
+  # Close on CarePartner Side
+    - Type: case
+      Value: ESCloseCarePartnerCall
+      Role: desktopChrome
 
 # CXTB-732 Call IDD (Easterseals) Device for “Issue Paused” Task from Home (Ignored)
 TestProviderIDDCHCallDeviceForIssuePausedTaskFromHomeIgnored:

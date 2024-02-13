@@ -410,6 +410,8 @@ TestProviderCallParticipantAndCompleteOnDemandCall:
     - Type: case
       Value: ProviderCallParticipant
   # Device begins ringing and automatically displays "Incoming Call" modal.
+    - Type: sleep
+      Time: 1
     - Type: wait_for
       Strategy: class_chain
       Id: $PAGE.seniors_app_incoming_call.incoming_call_header$

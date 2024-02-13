@@ -339,6 +339,10 @@ TestESProviderCarePlatformAnswerAndCompleteSession:
       Strategy: xpath
       Id: $PAGE.providers_notifications.follow_up_ticket_closed_notification$
       Role: desktopChrome1
+  # Close on CarePartner Side
+    - Type: case
+      Value: ESCloseCarePartnerCall
+      Role: desktopChrome
 
 #CXTB-665 IDD - See Call Appear in Queue, Assign and Review Details
 TestESProviderIDDSeeCallAppearInQueueAssignAndReviewDetails:
@@ -475,4 +479,8 @@ TestESProviderIDDSeeCallAppearInQueueAssignAndReviewDetails:
     # Fill up the post call survey to complete the session.
     - Type: case
       Value: ESPostCallSurveyCarePartner
+      Role: desktopChrome
+    # Close on CarePartner Side
+    - Type: case
+      Value: ESCloseCarePartnerCall
       Role: desktopChrome

@@ -232,9 +232,6 @@ JoinMedicalTransfer:
       Id: $PAGE.providers_home_page.last_medical_transfer_row$
     - Type: sleep
       Time: 1
-    - Type: wait_for
-      Strategy: xpath
-      Id: $PAGE.providers_call_handling_page.answer_call_button$
     - Type: click_js
       Strategy: xpath
       Id: $PAGE.providers_call_handling_page.answer_call_button$
@@ -604,6 +601,10 @@ ProviderSetStateCredential:
     - Type: click
       Strategy: xpath
       Id: $PAGE.providers_account_modal.save_changes_button$
+      NoRaise: true
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_account_modal.close_modal_button$
     - Type: wait_not_visible
       Strategy: xpath
       Id: $PAGE.providers_account_modal.credentials_content$
