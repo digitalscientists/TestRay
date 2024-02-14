@@ -157,6 +157,7 @@ employee_health_telehealth_request_form:
   calendar_hour_button: //input[@name='startTime']/../div[text()= '11:30 am']
   appointment_list: //div[@class = 'accordion-item']
   appointment_list_description: //div/div[contains(text(), '$AND_CLI_PAIN_DESCRIPTION$')]
+  first_appointment_dropdown: (//div/following-sibling::div/div[contains(@class, 'dropdown')]/button)[1]
   appointment_dropdown_based_on_description: //div/div[contains(text(), '$AND_CLI_PAIN_DESCRIPTION$')]/following-sibling::div/div[contains(@class, 'dropdown')]/button
   appointment_date_based_on_description: //div/div[contains(text(), '$AND_CLI_PAIN_DESCRIPTION$')]/preceding-sibling::div/time[not(contains(text(),'AM'))and not(contains(text(),'PM'))]
   reschedule_appointment_button: //nav[contains(@class, 'dropdown-menu')]//button[contains(text(), 'Reschedule Appointment')]
@@ -176,6 +177,7 @@ employee_health_mobile_home_page:
   no_upcoming_appointments_label: //div[text() = 'No upcoming appointments']
   appointment_list: //div[@class = 'mobile-schedule-item-container']
   appointment_list_element: //span[1]
+  first_appointment: (//div[@class = 'mobile-schedule-item-container'])[1]
   alert_appointment_cancelled: //div[@role='alert']//div[contains(text(),'Appointment canceled')]
 
 employee_health_mobile_menu_modal:

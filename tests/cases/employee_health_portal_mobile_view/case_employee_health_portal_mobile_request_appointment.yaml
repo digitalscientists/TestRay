@@ -12,6 +12,8 @@ TestEHPMobileRequestAnAppointmentForUser:
   #Calling Login case
     - Type: case
       Value: EmployeeHealthPortalLogIn
+    - Type: case
+      Value: EmployeeHealthPortalCleanUpcomingAppointments
   #Going to Request an Appointment
     - Type: wait_for
       Strategy: xpath
@@ -121,6 +123,8 @@ TestEHPMobileReviewUpcomingAppointment:
   #Calling Login case
     - Type: case
       Value: EmployeeHealthPortalLogIn
+    - Type: case
+      Value: EmployeeHealthPortalCleanUpcomingAppointments
   #Creating many appointment
     - Type: loop
       Times: 3
@@ -169,6 +173,8 @@ TestEHPMobileReviewUpcomingAppointment:
         - Type: ne
           Var: SECOND_SCHEDULED_DAY
           Value: $AND_CLI_THIRD_SCHEDULED_DAY$
+    - Type: case
+      Value: EmployeeHealthPortalCleanUpcomingAppointments
 
 #CXTB-110 Employee Health Portal - Request an Appointment for Dependent Minor.
 TestEHPMobileRequestAnAppointmentForDependentMinor:
