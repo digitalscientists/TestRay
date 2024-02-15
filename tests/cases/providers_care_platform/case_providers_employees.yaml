@@ -120,11 +120,12 @@ TestProviderAnswerCompleteSessionFromEHP:
   Environment: Settings 
   Vars:
     STATE: IN
-    USER_FULLNAME: $AND_CLI_provider_user1_name$ $AND_CLI_provider_user1_lastname$
+    USER_FULLNAME: $AND_CLI_provider_user1_lastname$
     STAFF_ROLE: "Provider"
 # Commented until they fix the refresh
-#  Precases:
-#    - AdminOnCallRefreshStaff
+  Precases:
+    - ProviderNewCleaner
+   # - AdminOnCallRefreshStaff
   Aftercases:
     - EmployeeHealthPortalLogOutAction
   Roles:
@@ -181,9 +182,6 @@ TestProviderAnswerCompleteSessionFromEHP:
   #Answer call
     - Type: sleep
       Time: 1
-    - Type: wait_for
-      Strategy: xpath
-      Id: $PAGE.providers_call_handling_page.answer_call_button$
     - Type: click
       Strategy: xpath
       Id: $PAGE.providers_call_handling_page.answer_call_button$

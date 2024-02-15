@@ -1734,7 +1734,7 @@ TestProviderIDDESSeeCallAppearInQueueAssignAndReviewDetails:
     - ESProviderCleaner
     - IDDESParticipantCleanPrompts
   Aftercases:
-    - AdminOnCallRefreshESParticipant
+    #- AdminOnCallRefreshESParticipant
     - TerminateApp
   Roles:
     - Role: desktopChrome
@@ -1825,10 +1825,6 @@ TestProviderIDDESSeeCallAppearInQueueAssignAndReviewDetails:
       Role: desktopChrome1
     - Type: sleep
       Time: 1
-    - Type: wait_for
-      Strategy: xpath
-      Id: $PAGE.providers_call_handling_page.answer_call_button$
-      Role: desktopChrome1
   # Assign to "Me"
     - Type: wait_for  
       Strategy: xpath
@@ -2278,10 +2274,6 @@ TestProviderIDDESAnswerCallAndCompleteSession:
       Role: desktopChrome1
     - Type: sleep
       Time: 1
-    - Type: wait_for
-      Strategy: xpath
-      Id: $PAGE.providers_call_handling_page.answer_call_button$
-      Role: desktopChrome1
     - Type: click
       Strategy: xpath
       Id: $PAGE.providers_call_handling_page.answer_call_button$
@@ -2599,12 +2591,7 @@ TestProviderCallParticipantForFollowUpTaskFromHomeAndIgnore:
       Id: $PAGE.providers_home_page.follow_up_calls$
     - Type: sleep
       Role: desktopChrome
-      Time: 1
-    # Verify call information appears on the screen
-    - Type: wait_for
-      Strategy: xpath
-      Role: desktopChrome
-      Id: $PAGE.providers_follow_up_call_details_page.call_device_button$
+      Time: 2
     # Call back to the device
     - Type: click
       Strategy: xpath

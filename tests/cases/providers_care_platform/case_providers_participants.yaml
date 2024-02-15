@@ -390,7 +390,7 @@ TestProviderCallParticipantAndCompleteOnDemandCall:
   Vars:
   # Log out option
     LOGOUT_OPTION: "Go Off Shift"
-    USER_FULLNAME: $AND_CLI_provider_user1_name$ $AND_CLI_provider_user1_lastname$
+    USER_FULLNAME: $AND_CLI_provider_user1_lastname$
     STAFF_ROLE: "Provider"
   Precases:
     - LoginNeverAloneHelper
