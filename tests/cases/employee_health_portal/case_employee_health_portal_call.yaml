@@ -196,6 +196,9 @@ TestEmployeeHealthPortalReviewCallHistory:
   # Calling EHP Login case.
     - Type: case
       Value: EmployeeHealthPortalLogIn
+  # Clean EHP hanged calls.
+    - Type: case
+      Value: EmployeeHealthPortalCleanHangedCalls
   # Go to Call History
     - Type: case
       Value: NavigateToCallHistory

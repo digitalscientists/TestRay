@@ -521,7 +521,6 @@ EmployeeHealthPortalLogOutAction:
 
 # Custom action to clean EHP hanged calls.
 EmployeeHealthPortalCleanHangedCalls:
-  Environment: Settings
   Roles:
     - Role: desktopChrome
       App: desktop
@@ -821,6 +820,18 @@ EHPMobileUpdateAccountPassword:
     - Type: wait_not_visible
       Strategy: xpath
       Id: $PAGE.employee_health_home_page.alert_failed_update_password$
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id: $PAGE.employee_health_home_page.alert_success_update_password$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.employee_health_mobile_menu_modal.close_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.employee_health_mobile_menu_modal.close_button$
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id: $PAGE.employee_health_my_account_modal.update_password_current$
   #Log Out
     - Type: click
       Strategy: xpath
@@ -872,6 +883,18 @@ EHPMobileUpdateAccountPassword:
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.employee_health_home_page.alert_success_update_password$  
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id: $PAGE.employee_health_home_page.alert_success_update_password$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.employee_health_mobile_menu_modal.close_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.employee_health_mobile_menu_modal.close_button$
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id: $PAGE.employee_health_my_account_modal.update_password_current$
       #Log Out
     - Type: click
       Strategy: xpath
@@ -980,6 +1003,9 @@ EHPMobileUserCall:
   #Calling Login case
     - Type: case
       Value: EmployeeHealthPortalLogIn
+  # Clean EHP hanged calls.
+    - Type: case
+      Value: EmployeeHealthPortalCleanHangedCalls
   #Home Page
     - Type: wait_for
       Strategy: xpath

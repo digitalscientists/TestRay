@@ -186,6 +186,7 @@ employee_health_mobile_menu_modal:
     password_button: //button[text()= 'Password']
     logout_button: //span[text()='Log Out']
     help_button: //a[text()='Help']
+    close_button: //div[@id='menus']//span[contains(@class, 'app-header-title')]/following-sibling::div/button
 
 employee_health_mobile_notifications_page:
     save_changes_button: //button[text()= 'Save Changes']

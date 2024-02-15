@@ -321,6 +321,9 @@ TestEmployeeHealthPortalRequestAnAppointmentForDependentMinor:
       Var: employee_user1
     - Type: case
       Value: EmployeeHealthPortalLogIn
+    # Clean EHP hanged calls.
+    - Type: case
+      Value: EmployeeHealthPortalCleanHangedCalls
   # Click "Request appointment" button above calendar on right side.
     - Type: wait_for
       Strategy: xpath
@@ -661,6 +664,9 @@ TestEmployeeHealthPortalRescheduleAnUpcomingAppointmentForEHPDependentMinor:
       Var: employee_user1
     - Type: case
       Value: EmployeeHealthPortalLogIn
+  # Clean EHP hanged calls.
+    - Type: case
+      Value: EmployeeHealthPortalCleanHangedCalls
     - Type: case
       Value: EmployeeHealthPortalCleanUpcomingAppointments
   # Make an appointment
