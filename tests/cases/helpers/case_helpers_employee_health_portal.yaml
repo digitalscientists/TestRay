@@ -40,6 +40,8 @@ EmployeeHealthPortalLogIn:
     - Type: click
       Strategy: xpath
       Id: $PAGE.employee_health_login_page.log_in_button$
+    - Type: sleep
+      Time: 1
 
 #CXTB-72 Navigate to My Account
 NavigateToMyAccount:
@@ -519,13 +521,22 @@ EmployeeHealthPortalLogOutAction:
 
 # Custom action to clean EHP hanged calls.
 EmployeeHealthPortalCleanHangedCalls:
-  Environment: Settings
   Roles:
     - Role: desktopChrome
       App: desktop
   Actions:
     # Clean hanged calls.
     - Type: ehp_clean_hanged_call
+
+# Custom action to clean EHP upcoming appointments.
+EmployeeHealthPortalCleanUpcomingAppointments:
+  Environment: Settings
+  Roles:
+    - Role: desktopChrome
+      App: desktop
+  Actions:
+    # Clean upcoming appointments.
+    - Type: ehp_clean_appointments
 
 EmployeeHealthPortalAppointmentsRequestForDependentMinor: 
   Roles:
@@ -747,6 +758,9 @@ EHPMobileUpdateAccountPassword:
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.employee_health_home_page.alert_failed_update_password$
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id: $PAGE.employee_health_home_page.alert_failed_update_password$
     - Type: click
       Strategy: xpath
       Id: $PAGE.employee_health_mobile_password_page.close_button$  
@@ -803,6 +817,21 @@ EHPMobileUpdateAccountPassword:
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.employee_health_home_page.alert_success_update_password$
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id: $PAGE.employee_health_home_page.alert_failed_update_password$
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id: $PAGE.employee_health_home_page.alert_success_update_password$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.employee_health_mobile_menu_modal.close_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.employee_health_mobile_menu_modal.close_button$
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id: $PAGE.employee_health_my_account_modal.update_password_current$
   #Log Out
     - Type: click
       Strategy: xpath
@@ -854,6 +883,18 @@ EHPMobileUpdateAccountPassword:
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.employee_health_home_page.alert_success_update_password$  
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id: $PAGE.employee_health_home_page.alert_success_update_password$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.employee_health_mobile_menu_modal.close_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.employee_health_mobile_menu_modal.close_button$
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id: $PAGE.employee_health_my_account_modal.update_password_current$
       #Log Out
     - Type: click
       Strategy: xpath
@@ -899,6 +940,8 @@ EHPMobileAppointmentsRequest:
     - Type: click
       Strategy: xpath
       Id: $PAGE.employee_health_mobile_request_appointment_page.select_date_input$
+    - Type: sleep
+      Time: 1
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.employee_health_mobile_request_appointment_page.calendar_right_button$
@@ -943,6 +986,9 @@ EHPMobileAppointmentsRequest:
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.employee_health_home_page.appointment_scheduled_notification$
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id: $PAGE.employee_health_home_page.appointment_scheduled_notification$
 
 #Employee Health Portal - User Call Now helper
 EHPMobileUserCall:
@@ -957,6 +1003,9 @@ EHPMobileUserCall:
   #Calling Login case
     - Type: case
       Value: EmployeeHealthPortalLogIn
+  # Clean EHP hanged calls.
+    - Type: case
+      Value: EmployeeHealthPortalCleanHangedCalls
   #Home Page
     - Type: wait_for
       Strategy: xpath
@@ -1116,9 +1165,15 @@ EHPMobileLogOut:
       Strategy: xpath
       Id: $PAGE.employee_health_mobile_home_page.header_menu_button$
       #Log Out
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.employee_health_mobile_menu_modal.logout_button$
     - Type: click
       Strategy: xpath
       Id: $PAGE.employee_health_mobile_menu_modal.logout_button$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.employee_health_mobile_logout_dialog.logout_button$
     - Type: click
       Strategy: xpath
       Id: $PAGE.employee_health_mobile_logout_dialog.logout_button$

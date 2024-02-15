@@ -2673,6 +2673,69 @@ def ehp_clean_hanged_call(action, main_case, main_case_id)
   end
 end
 
+# Custom action to clean EHP Appointments.
+def ehp_clean_appointments(action, main_case, main_case_id)
+  sleep 2
+  log_info("Verify that there are appointments - Web")
+  appointment_elements = wait_for_element_collection_to_exist("$PAGE.employee_health_telehealth_request_form.appointment_list$")
+  if appointment_elements.nil? || appointment_elements.empty?
+    puts "Appointment elements collection is null/empty."
+  end
+  
+  log_info("Verify that there are appointments - Mobile")
+  mobile_appointment_elements = wait_for_element_collection_to_exist("$PAGE.employee_health_mobile_home_page.appointment_list$")
+  if mobile_appointment_elements.nil? || mobile_appointment_elements.empty?
+    puts "Mobile Appointment elements collection is null/empty."
+  end
+
+  if appointment_elements.length() > 0
+    appointment_elements.each do |appointment_element|
+      log_info("Click on the appointment dropdown")
+      wait_for_enabled_element("$PAGE.employee_health_telehealth_request_form.first_appointment_dropdown$")
+      @driver.find_element(:xpath, convert_value_pageobjects("$PAGE.employee_health_telehealth_request_form.first_appointment_dropdown$")).click
+      
+      log_info("Click on the cancel button")
+      wait_for_enabled_element("$PAGE.employee_health_telehealth_request_form.cancel_appointment_button$")
+      @driver.find_element(:xpath, convert_value_pageobjects("$PAGE.employee_health_telehealth_request_form.cancel_appointment_button$")).click
+      
+      log_info("Click on <Yes, Delete> button")
+      wait_for_enabled_element("$PAGE.employee_health_telehealth_request_form.yes_delete_button$")
+      @driver.find_element(:xpath, convert_value_pageobjects("$PAGE.employee_health_telehealth_request_form.yes_delete_button$")).click
+      
+      log_info("Verify deleted toast appear")
+      wait_for_enabled_element("$PAGE.employee_health_mobile_home_page.alert_appointment_cancelled$")
+      sleep 1
+      wait_for_element_not_visible("$PAGE.employee_health_mobile_home_page.alert_appointment_cancelled$")
+    end
+  end
+  
+  if mobile_appointment_elements.length() > 0
+    mobile_appointment_elements.each do |mobile_appointment_elements|
+      log_info("Click on the appointment")
+      wait_for_enabled_element("$PAGE.employee_health_mobile_home_page.first_appointment$")
+      @driver.find_element(:xpath, convert_value_pageobjects("$PAGE.employee_health_mobile_home_page.first_appointment$")).click
+      
+      log_info("Click on the delete button")
+      sleep 0.5
+      wait_for_enabled_element("$PAGE.employee_health_mobile_call_details_page.options_button$")
+      @driver.find_element(:xpath, convert_value_pageobjects("$PAGE.employee_health_mobile_call_details_page.options_button$")).click
+      sleep 1
+      wait_for_enabled_element("$PAGE.employee_health_mobile_call_details_page.delete_button$")
+      @driver.find_element(:xpath, convert_value_pageobjects("$PAGE.employee_health_mobile_call_details_page.delete_button$")).click
+      
+      log_info("Click on <Yes, Delete> button")
+      sleep 1
+      wait_for_enabled_element("$PAGE.employee_health_mobile_call_details_page.yes_delete_button$")
+      @driver.find_element(:xpath, convert_value_pageobjects("$PAGE.employee_health_mobile_call_details_page.yes_delete_button$")).click
+      
+      log_info("Verify deleted toast appear")
+      wait_for_enabled_element("$PAGE.employee_health_mobile_home_page.alert_appointment_cancelled$")
+      sleep 1
+      wait_for_element_not_visible("$PAGE.employee_health_mobile_home_page.alert_appointment_cancelled$")
+    end
+  end
+end
+
 # Custom action to clean all the unwanted prompts on Never Alone app before starting test.
 def senior_clean_unwanted_prompts(action, main_case, main_case_id)
   count = 0

@@ -110,8 +110,8 @@ TestEHPMobileCallAlreadyAnsweredNotificationWhenEmployeeLogsOut:
     - Type: case
       Value: EmployeeHealthPortalLogIn
   # Clean EHP hanged calls.
-    # - Type: case
-    #   Value: EmployeeHealthPortalCleanHangedCalls
+    - Type: case
+      Value: EmployeeHealthPortalCleanHangedCalls
   # Generate a call from EHP.
     - Type: case
       Value: EHPMobileCallNow    
