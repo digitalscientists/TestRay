@@ -321,6 +321,9 @@ TestEmployeeHealthPortalRequestAnAppointmentForDependentMinor:
       Var: employee_user1
     - Type: case
       Value: EmployeeHealthPortalLogIn
+    # Clean EHP hanged calls.
+    - Type: case
+      Value: EmployeeHealthPortalCleanHangedCalls
   # Click "Request appointment" button above calendar on right side.
     - Type: wait_for
       Strategy: xpath
@@ -421,6 +424,8 @@ TestEmployeeHealthPortalRescheduleAnUpcomingAppointmentForEHPEmployee:
   #Calling Login case
     - Type: case
       Value: EmployeeHealthPortalLogIn
+    - Type: case
+      Value: EmployeeHealthPortalCleanUpcomingAppointments
   # Make an appointment
     - Type: case
       Value: EmployeeHealthPortalAppointmentsRequest
@@ -464,7 +469,7 @@ TestEmployeeHealthPortalRescheduleAnUpcomingAppointmentForEHPEmployee:
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.employee_health_telehealth_request_form.reschedule_appointment_button$
-    - Type: click
+    - Type: click_js
       Strategy: xpath
       Id: $PAGE.employee_health_telehealth_request_form.reschedule_appointment_button$
   # User must validate that Edit appointment modal appears, pre-populated with existing appointment information.
@@ -515,6 +520,8 @@ TestEmployeeHealthPortalRescheduleAnUpcomingAppointmentForEHPEmployee:
       Strategy: xpath
       Id: $PAGE.employee_health_telehealth_request_form.edit_appointment_title$
   # User must validate that the Edit modal closes and no changes have been saved to the appointment.
+    - Type: sleep
+      Time: 2
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.employee_health_telehealth_request_form.appointment_list$
@@ -542,7 +549,7 @@ TestEmployeeHealthPortalRescheduleAnUpcomingAppointmentForEHPEmployee:
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.employee_health_telehealth_request_form.reschedule_appointment_button$
-    - Type: click
+    - Type: click_js
       Strategy: xpath
       Id: $PAGE.employee_health_telehealth_request_form.reschedule_appointment_button$
   # User must validate that Edit appointment modal appears, pre-populated with existing appointment information.
@@ -603,6 +610,8 @@ TestEmployeeHealthPortalRescheduleAnUpcomingAppointmentForEHPEmployee:
     - Type: wait_not_visible
       Strategy: xpath
       Id: $PAGE.employee_health_telehealth_request_form.edit_appointment_title$
+    - Type: sleep
+      Time: 2
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.employee_health_telehealth_request_form.appointment_list$
@@ -655,6 +664,11 @@ TestEmployeeHealthPortalRescheduleAnUpcomingAppointmentForEHPDependentMinor:
       Var: employee_user1
     - Type: case
       Value: EmployeeHealthPortalLogIn
+  # Clean EHP hanged calls.
+    - Type: case
+      Value: EmployeeHealthPortalCleanHangedCalls
+    - Type: case
+      Value: EmployeeHealthPortalCleanUpcomingAppointments
   # Make an appointment
     - Type: case
       Value: EmployeeHealthPortalAppointmentsRequestForDependentMinor
@@ -748,6 +762,8 @@ TestEmployeeHealthPortalRescheduleAnUpcomingAppointmentForEHPDependentMinor:
     - Type: wait_not_visible
       Strategy: xpath
       Id: $PAGE.employee_health_telehealth_request_form.edit_appointment_title$
+    - Type: sleep
+      Time: 2
   # User must validate that the Edit modal closes and no changes have been saved to the appointment.
     - Type: wait_for
       Strategy: xpath
@@ -837,6 +853,8 @@ TestEmployeeHealthPortalRescheduleAnUpcomingAppointmentForEHPDependentMinor:
     - Type: wait_not_visible
       Strategy: xpath
       Id: $PAGE.employee_health_telehealth_request_form.edit_appointment_title$
+    - Type: sleep
+      Time: 2
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.employee_health_telehealth_request_form.appointment_list$
@@ -889,6 +907,8 @@ TestEmployeeHealthPortalCancelAnUpcomingAppointment:
       Var: employee_user1
     - Type: case
       Value: EmployeeHealthPortalLogIn
+    - Type: case
+      Value: EmployeeHealthPortalCleanUpcomingAppointments
   # Make an appointment
     - Type: case
       Value: EmployeeHealthPortalAppointmentsRequest
@@ -910,6 +930,8 @@ TestEmployeeHealthPortalCancelAnUpcomingAppointment:
           Var: SHOWED_DESCRIPTION
           Value: $AND_CLI_PAIN_DESCRIPTION$
   # Click the 3 dot visual on right side of listing for one of them.
+    - Type: sleep
+      Time: 2
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.employee_health_telehealth_request_form.appointment_dropdown_based_on_description$
@@ -920,7 +942,7 @@ TestEmployeeHealthPortalCancelAnUpcomingAppointment:
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.employee_health_telehealth_request_form.cancel_appointment_button$
-    - Type: click
+    - Type: click_js
       Strategy: xpath
       Id: $PAGE.employee_health_telehealth_request_form.cancel_appointment_button$
   # Delete Appointment
