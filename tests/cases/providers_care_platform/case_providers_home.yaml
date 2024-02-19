@@ -1303,7 +1303,7 @@ TestProvidersCallSNFDeviceForFollowUpTaskFromHome:
       Id: $PAGE.providers_home_page.follow_up_calls$
     - Type: sleep
       Role: desktopChrome
-      Time: 1
+      Time: 2
     - Type: click
       Strategy: xpath
       Role: desktopChrome
@@ -1336,8 +1336,7 @@ TestProvidersCallSNFDeviceForFollowUpTaskFromHome:
 TestProviderSeniorSeeCallAppearInQueueAssignAndReviewDetails:
   Environment: Settings
   Precases:
-  # Commented until they fix the refresh
-  #  - AdminOnCallRefreshParticipant
+    - AdminOnCallRefreshParticipant
     - LoginNeverAloneHelper
     - CarePartnerCleanCallQueueAndHangedCalls
     - ProviderNewCleaner

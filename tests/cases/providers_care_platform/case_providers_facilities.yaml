@@ -110,6 +110,7 @@ TestProviderReviewFacilityDeviceCallHistoryAndAccessCallRecordings:
   Precases:
     - MakeCallBetweenProviderAndSNF
   Aftercases:
+    - TerminateApp
     - CarePlatformLogout
   Roles:
     - Role: desktopChrome
@@ -328,10 +329,8 @@ TestProviderCheckForForcedAssessmentOnFollowUpsWithoutTelehealthRequest:
           Var: FOLLOW_UP_TABS
           Value: 'Assessment'
     # Call back to the device
-    - Type: wait_for
-      Strategy: xpath
-      Role: desktopChrome
-      Id: $PAGE.providers_follow_up_call_details_page.call_device_button$
+    - Type: sleep
+      Time: 1
     - Type: click
       Strategy: xpath
       Role: desktopChrome
@@ -787,6 +786,7 @@ TestProviderCanClickAndViewFacilityFollowUpTicketsInformation:
   Precases:
     - FollowUpHistoryPrecaseForSNF
   Aftercases:
+    - TerminateApp
     - CarePlatformLogout
   Roles: 
     - Role: desktopChrome
