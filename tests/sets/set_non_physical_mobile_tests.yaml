@@ -142,6 +142,7 @@ SetNonPhysicalMobileTest:
     - Case: TestAdminOnCallCallHistoryShowsRecordingsForAllPlatformsAndDevices
     - Case: TestAdminOnCallRefreshSessionForStaffMemberFromProfile
     - Case: TestAdminOnCallClickAndViewStaffMembersFollowUpTicketsInformation
+    - Case: TestAdminOnCallSeeCallAppearOnQueueAndReviewParticipantSummary
   # Facility Leadership
     - Case: TestFacilityLeadershipSeeCallAppearOnQueueThenSelectCall
     - Case: TestFacilityLeadershipReviewCallHistoryAndAccessCallRecordings
