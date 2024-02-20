@@ -1,0 +1,19 @@
+SetCHSProvidersESCallCenterTests:
+  Cases:
+# ES Related tests
+    - Case: TestProviderIDDESSeeCallAppearInQueueAssignAndReviewDetails
+    - Case: TestProviderIDDESAnswerCallAndCompleteSession
+    - Case: TestProviderIDDESReturnMissedCallFromHome
+    - Case: TestProviderIDDESReturnMissedCallFromHomeIgnored
+    - Case: TestProviderIDDESCallDeviceForFollowUpTaskFromHomeAnswered
+    - Case: TestProviderIDDESCallDeviceForIssuePausedTaskFromHomeAnswered
+    - Case: TestProviderIDDESCallDeviceForFollowUpTaskFromHomeIgnored
+    - Case: TestProviderIDDESCallDeviceForIssuePausedTaskFromHomeIgnored
+    - Case: TestProviderIDDCHSeeCallAppearInQueueAssignAndReviewDetails
+    - Case: TestProviderIDDCHAnswerCallAndCompleteSession
+    - Case: TestProviderIDDCHReturnMissedCallFromHome
+    - Case: TestProviderIDDCHReturnMissedCallFromHomeIgnored
+    - Case: TestProviderIDDCHCallDeviceForFollowUpTaskFromHomeAnswered
+    - Case: TestProviderIDDCHCallDeviceForIssuePausedTaskFromHomeAnswered
+    - Case: TestProviderIDDCHCallDeviceForFollowUpTaskFromHomeIgnored
+    - Case: TestProviderIDDCHCallDeviceForIssuePausedTaskFromHomeIgnored
