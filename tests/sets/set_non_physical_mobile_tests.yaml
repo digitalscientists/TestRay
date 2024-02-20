@@ -79,6 +79,7 @@ SetNonPhysicalMobileTest:
     - Case: TestProviderVerifyEmergencyServicesButton
     - Case: TestProviderSendMessageToFacilityDeviceFacilityPane
     - Case: TestProviderSendMessageToFacilityDeviceFacilityProfile
+    - Case: TestProviderReviewFacilityDeviceCallHistoryAndAccessCallRecordings
   # ES Provider Care Platform
     - Case: TestESProviderCarePlatformAnswerAndCompleteSession
     - Case: TestESProviderIDDSeeCallAppearInQueueAssignAndReviewDetails
