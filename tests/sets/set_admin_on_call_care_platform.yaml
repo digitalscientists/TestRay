@@ -17,3 +17,4 @@ SetAdminOnCallCarePlatformTests:
     - Case: TestAdminOnCallCallHistoryShowsRecordingsForAllPlatformsAndDevices
     - Case: TestAdminOnCallRefreshSessionForStaffMemberFromProfile
     - Case: TestAdminOnCallSeeCallAppearOnQueueAndReviewParticipantSummary
+    - Case: TestAdminOnCallAnswerCallFromQueueAndCompleteSessionWithoutMedicalTransfer
