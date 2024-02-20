@@ -393,11 +393,10 @@ TestProviderCallParticipantAndCompleteOnDemandCall:
     USER_FULLNAME: $AND_CLI_provider_user1_lastname$
     STAFF_ROLE: "Provider"
   Precases:
+    - AdminOnCallRefreshParticipant
     - LoginNeverAloneHelper
     - ProviderNewCleaner
     - SeniorCleanPrompts
-  # Commented until they fix the refresh
-  #  - AdminOnCallRefreshStaff
   Aftercases:
     - TerminateApp
   Roles:

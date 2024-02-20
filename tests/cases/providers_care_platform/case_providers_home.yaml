@@ -1733,7 +1733,6 @@ TestProviderIDDESSeeCallAppearInQueueAssignAndReviewDetails:
     - ESProviderCleaner
     - IDDESParticipantCleanPrompts
   Aftercases:
-    #- AdminOnCallRefreshESParticipant
     - TerminateApp
   Roles:
     - Role: desktopChrome
@@ -2759,12 +2758,12 @@ TestProviderCallParticipantForFollowUpTaskFromHomeAndAnswered:
 TestProviderIDDCHReturnMissedCallFromHome:
   Environment: Settings
   Precases:
+    - AdminOnCallRefreshCHParticipant
     - LoginCHIDDNeverAloneHelper
     - CHCarePartnerCleanCallQueueAndHangedCalls
     - ProviderNewCleaner
     - IDDESParticipantCleanPrompts
   Aftercases:
-    - AdminOnCallRefreshCHParticipant
     - TerminateApp
   Roles:
     - Role: desktopChrome
@@ -2950,7 +2949,6 @@ TestProviderIDDESReturnMissedCallFromHome:
     - ProviderNewCleaner
     - IDDESParticipantCleanPrompts
   Aftercases:
-    - AdminOnCallRefreshESParticipant
     - TerminateApp
   Roles:
     - Role: desktopChrome
@@ -4203,12 +4201,12 @@ TestProvidersCallSNFDeviceForFollowUpTaskFromHomeIgnored:
 TestProviderIDDESReturnMissedCallFromHomeIgnored:
   Environment: Settings
   Precases:
+    - AdminOnCallRefreshESParticipant
     - LoginESIDDNeverAloneHelper
     - ESCarePartnerCleanCallQueueAndHangedCalls
     - ProviderNewCleaner
     - IDDESParticipantCleanPrompts
   Aftercases:
-    - AdminOnCallRefreshESParticipant
     - TerminateApp
   Roles:
     - Role: desktopChrome
@@ -4505,12 +4503,12 @@ TestProviderIDDCHReturnMissedCallFromHomeIgnored:
 TestProviderIDDCHCallDeviceForFollowUpTaskFromHomeAnswered:
   Environment: Settings
   Precases:
+    - AdminOnCallRefreshCHParticipant
     - LoginCHIDDNeverAloneHelper
     - CHCarePartnerCleanCallQueueAndHangedCalls
     - ProviderNewCleaner
     - IDDESParticipantCleanPrompts
   Aftercases:
-    - AdminOnCallRefreshCHParticipant
     - TerminateApp
   Roles:
     - Role: desktopChrome
@@ -4635,12 +4633,12 @@ TestProviderIDDCHCallDeviceForFollowUpTaskFromHomeAnswered:
 TestProviderIDDESCallDeviceForFollowUpTaskFromHomeAnswered:
   Environment: Settings
   Precases:
+    - AdminOnCallRefreshESParticipant
     - LoginESIDDNeverAloneHelper
     - ESCarePartnerCleanCallQueueAndHangedCalls
     - ProviderNewCleaner
     - IDDESParticipantCleanPrompts
   Aftercases:
-    - AdminOnCallRefreshESParticipant
     - TerminateApp
   Roles:
     - Role: desktopChrome
