@@ -422,9 +422,8 @@ ProviderCallFacility:
       Strategy: xpath
       Id: $PAGE.providers_facilities_page.devices_tab$
     # Find the corresponding facility device and then call it.
-    - Type: wait_for
-      Strategy: xpath
-      Id: $PAGE.providers_facilities_page.call_based_on_device_button$ 
+    - Type: sleep
+      Time: 2
     - Type: click
       Strategy: xpath
       Id: $PAGE.providers_facilities_page.call_based_on_device_button$
@@ -482,9 +481,8 @@ ProviderNavigateFacilityCallPortal:
       Strategy: xpath
       Id: $PAGE.providers_facilities_page.devices_tab$
     # Find the corresponding facility device and then call it.
-    - Type: wait_for
-      Strategy: xpath
-      Id: $PAGE.providers_facilities_page.call_based_on_device_button$ 
+    - Type: sleep
+      Time: 2
     - Type: click
       Strategy: xpath
       Id: $PAGE.providers_facilities_page.call_based_on_device_button$

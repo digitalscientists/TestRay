@@ -894,6 +894,8 @@ TestProviderReturnMissedSNFCall:
   Environment: Settings
   Vars:
     LOGOUT_OPTION: "Go Off Shift"
+  Precases:
+    - ProviderNewCleaner
   Aftercases:
     - TerminateApp
     - CarePlatformLogout
@@ -4039,6 +4041,8 @@ TestProviderReturnMissedSNFCallFromHomeIgnored:
   Environment: Settings
   Vars:
     LOGOUT_OPTION: "Go Off Shift"
+  Precases:
+    - ProviderNewCleaner
   Aftercases:
     - TerminateApp
     - CarePlatformLogout

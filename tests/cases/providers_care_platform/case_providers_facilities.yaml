@@ -784,6 +784,7 @@ TestProviderCanClickAndViewFacilityFollowUpTicketsInformation:
   Vars:
     LOGOUT_OPTION: "Go Off Shift"
   Precases:
+    - ProviderNewCleaner
     - FollowUpHistoryPrecaseForSNF
   Aftercases:
     - TerminateApp
@@ -1160,16 +1161,12 @@ TestProviderCallFacilityDeviceAndCompleteAnOnDemandCallFacilityProfile:
     - Type: sleep
       Time: 2
     # Call by device number
-    - Type: wait_for
-      Strategy: xpath
-      Id: $PAGE.care_platform_facility_Record.call_device_by_number$
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_facility_Record.call_device_by_number$
     # Wait for Call Portal
-    - Type: wait_for
-      Strategy: xpath
-      Id: $PAGE.providers_call_handling_page.call_device_btn$
+    - Type: sleep
+      Time: 1
     - Type: click
       Strategy: xpath
       Id: $PAGE.providers_call_handling_page.call_device_btn$

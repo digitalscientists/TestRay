@@ -365,6 +365,7 @@ TestProviderReviewParticipantsCallHistoryAndAccessCallRecordings:
     - LoginNeverAloneHelper
     - CarePartnerCleanCallQueueAndHangedCalls
     - SeniorCleanPrompts
+    - ProviderNewCleaner
   Aftercases:
     - TerminateApp
   Roles:
