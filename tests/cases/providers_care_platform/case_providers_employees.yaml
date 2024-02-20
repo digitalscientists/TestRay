@@ -135,6 +135,11 @@ TestProviderAnswerCompleteSessionFromEHP:
   #Calling Login case
     - Type: case
       Value: EmployeeHealthPortalLogIn
+  #Clean comming appointment modal
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.employee_health_home_page.close_coming_appointment_dialog_button$
+      NoRaise: true
   #Make call
     - Type: wait_for
       Strategy: xpath

@@ -1173,6 +1173,12 @@ TestProvidersEHPSeeCallAppearInQueueAssignAndReviewDetails:
     - Type: case
       Value: EmployeeHealthPortalLogIn
       Role: desktopChrome1
+  #Clean comming appointment modal
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.employee_health_home_page.close_coming_appointment_dialog_button$
+      Role: desktopChrome1
+      NoRaise: true
   # Clean EHP hanged calls.
     - Type: case
       Value: EmployeeHealthPortalCleanHangedCalls

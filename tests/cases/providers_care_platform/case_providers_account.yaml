@@ -176,6 +176,11 @@ TestProviderUpdateCredentialsAndCallAnsweringAbilitiesEHPRequest:
   # Calling Employee Login case
     - Type: case
       Value: EmployeeHealthPortalLogIn
+  # Close Upcoming Appointment dialog
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.employee_health_home_page.close_coming_appointment_dialog_button$
+      NoRaise: true  
   # Employee Home Page
     - Type: wait_for
       Strategy: xpath
