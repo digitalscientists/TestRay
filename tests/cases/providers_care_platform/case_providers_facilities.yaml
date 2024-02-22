@@ -110,6 +110,7 @@ TestProviderReviewFacilityDeviceCallHistoryAndAccessCallRecordings:
   Precases:
     - MakeCallBetweenProviderAndSNF
   Aftercases:
+    - TerminateApp
     - CarePlatformLogout
   Roles:
     - Role: desktopChrome
@@ -328,10 +329,8 @@ TestProviderCheckForForcedAssessmentOnFollowUpsWithoutTelehealthRequest:
           Var: FOLLOW_UP_TABS
           Value: 'Assessment'
     # Call back to the device
-    - Type: wait_for
-      Strategy: xpath
-      Role: desktopChrome
-      Id: $PAGE.providers_follow_up_call_details_page.call_device_button$
+    - Type: sleep
+      Time: 1
     - Type: click
       Strategy: xpath
       Role: desktopChrome
@@ -785,8 +784,10 @@ TestProviderCanClickAndViewFacilityFollowUpTicketsInformation:
   Vars:
     LOGOUT_OPTION: "Go Off Shift"
   Precases:
+    - ProviderNewCleaner
     - FollowUpHistoryPrecaseForSNF
   Aftercases:
+    - TerminateApp
     - CarePlatformLogout
   Roles: 
     - Role: desktopChrome
@@ -842,16 +843,14 @@ TestProviderCanClickAndViewFacilityFollowUpTicketsInformation:
       Id: $PAGE.care_platform_participant_records_follow_up_tickets.active_tickets_title$
   # Review the "Ticket history" section listing.
     # Click to expand a row.
-    - Type: wait_for
-      Strategy: xpath
-      Id: $PAGE.providers_follow_up_call_details_page.first_follow_up_row$
+    - Type: sleep
+      Time: 2
     - Type: click
       Strategy: xpath
       Id: $PAGE.providers_follow_up_call_details_page.first_follow_up_row$
     # Expands and shows creation information, and additional details about the task that was completed.
-    - Type: wait_for
-      Strategy: xpath
-      Id: $PAGE.care_platform_participant_records_follow_up_tickets.expanded_ticket_content$
+    - Type: sleep
+      Time: 1
     - Type: get_attribute
       Strategy: xpath
       Id: $PAGE.care_platform_participant_records_follow_up_tickets.expanded_ticket_content$
@@ -1158,18 +1157,14 @@ TestProviderCallFacilityDeviceAndCompleteAnOnDemandCallFacilityProfile:
       Strategy: xpath
       Id: $PAGE.providers_facilities_records_page.devices_tab$
     - Type: sleep
-      Time: 2
+      Time: 1
     # Call by device number
-    - Type: wait_for
-      Strategy: xpath
-      Id: $PAGE.care_platform_facility_Record.call_device_by_number$
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_facility_Record.call_device_by_number$
     # Wait for Call Portal
-    - Type: wait_for
-      Strategy: xpath
-      Id: $PAGE.providers_call_handling_page.call_device_btn$
+    - Type: sleep
+      Time: 2
     - Type: click
       Strategy: xpath
       Id: $PAGE.providers_call_handling_page.call_device_btn$

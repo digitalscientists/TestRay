@@ -1551,9 +1551,6 @@ AnswerCallAsCarePartner:
       Id: $PAGE.care_platform_home.call_based_on_participant_name$
     - Type: sleep
       Time: 2
-    - Type: wait_for
-      Strategy: xpath
-      Id: $PAGE.care_platform_home.answer_call$
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_home.answer_call$

@@ -332,6 +332,8 @@ ProviderNavigateToFacilities:
       App: desktop       
   Actions:
     # Navigate to Facilities.
+    - Type: sleep
+      Time: 0.6
     - Type: click
       Strategy: xpath
       Id: $PAGE.providers_home_page.facilities_navigation$
@@ -979,7 +981,10 @@ CreateAFollowUpForSNFCall:
     - Type: click
       Strategy: xpath
       Id: $PAGE.providers_call_handling_page.submit_exit_session_button$
-
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_notifications.call_completed_notification$
+    
 CreateAFollowUpForParticipantCall:
   Roles:
     - Role: desktopChrome
@@ -1058,6 +1063,8 @@ CleanUsedFollowUp:
       App: desktop  
   Actions:
     - Type: refresh
+    - Type: sleep
+      Time: 0.6
     - Type: click
       Strategy: xpath
       Id: $PAGE.providers_home_page.home_button$
@@ -1078,6 +1085,8 @@ CleanUsedPausedIssue:
       App: desktop  
   Actions:
     - Type: refresh
+    - Type: sleep
+      Time: 0.6
     - Type: click
       Strategy: xpath
       Id: $PAGE.providers_home_page.home_button$
@@ -1158,9 +1167,6 @@ AnswerOnDemandCallAsProvider:
     - Type: sleep
       Time: 1
   #Answer call
-    - Type: wait_for
-      Strategy: xpath
-      Id: $PAGE.providers_call_handling_page.answer_call_button$
     - Type: wait_for_property
       Strategy: xpath
       Id: $PAGE.providers_call_handling_page.answer_call_button$

@@ -381,7 +381,7 @@ TestProviderBrowsingWhileOnCall:
       Role: desktopChrome
   # Complete Notes as Provider
     - Type: case
-      Value: ProviderCompleteSession
+      Value: PostCallSurveyProvider
       Role: desktopChrome1
 
 # CXTB-178: Call Participant’s Device & Complete an On-Demand Call.
