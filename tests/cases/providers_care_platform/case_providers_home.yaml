@@ -114,6 +114,11 @@ TestProviderHomePageListingView:
         Var: follow_up_text
         Value: "Follow-up"
         raise: true
+    # Cleaning remaining calls
+    - Type: case
+      Value: CleanUsedMissedCall
+    - Type: case
+      Value: CleanUsedFollowUp
 
 # CXTB-104 Provider's Status - Not on Active Call
 TestProviderStatusNotOnActiveCall:
@@ -898,7 +903,6 @@ TestProviderReturnMissedSNFCall:
     - ProviderNewCleaner
   Aftercases:
     - TerminateApp
-    - CarePlatformLogout
   Roles:
     - Role: desktopChrome
       App: desktop
@@ -974,6 +978,8 @@ TestProviderReturnMissedSNFCall:
       Strategy: xpath
       Id: $PAGE.providers_call_handling_page.unnasign_button$
     # Call Device
+    - Type: sleep
+      Time: 1
     - Type: click
       Strategy: xpath
       Id: $PAGE.providers_call_handling_page.call_device_btn$
@@ -1266,7 +1272,6 @@ TestProvidersCallSNFDeviceForFollowUpTaskFromHome:
     - ProviderNewCleaner
   Aftercases:
     - TerminateApp
-    - CleanUsedFollowUp
     - ProviderEndCurrentCall
   Roles:
     - Role: localiOS
@@ -2857,6 +2862,8 @@ TestProviderIDDCHReturnMissedCallFromHome:
           Var: MISSED_CALL
           Value: '$AND_CLI_idd_ch_never_alone_user2_name$ $AND_CLI_idd_ch_never_alone_user2_lastname$'
   # Call Device
+    - Type: sleep
+      Time: 1
     - Type: click
       Strategy: xpath
       Id: $PAGE.providers_call_handling_page.call_device_btn$
@@ -3042,6 +3049,8 @@ TestProviderIDDESReturnMissedCallFromHome:
           Var: MISSED_CALL
           Value: '$AND_CLI_idd_es_never_alone_user1_name$ $AND_CLI_idd_es_never_alone_user1_lastname$'
   # Call Device
+    - Type: sleep
+      Time: 1
     - Type: click
       Strategy: xpath
       Id: $PAGE.providers_call_handling_page.call_device_btn$
@@ -3206,6 +3215,8 @@ TestProvidersCallSNFDeviceForIssuePausedFromHomeIgnored:
       Strategy: class_chain
       Id: $PAGE.seniors_app_post_call_survey.skip_survey_button$
     # Call Device
+    - Type: sleep
+      Time: 1
     - Type: click
       Strategy: xpath
       Id: $PAGE.providers_call_handling_page.call_device_btn$
@@ -3307,6 +3318,8 @@ TestProvidersCallSNFDeviceForIssuePausedFromHomeAnswered:
       Strategy: class_chain
       Id: $PAGE.seniors_app_post_call_survey.skip_survey_button$
     # Call Device
+    - Type: sleep
+      Time: 1
     - Type: click
       Strategy: xpath
       Id: $PAGE.providers_call_handling_page.call_device_btn$
@@ -3827,10 +3840,8 @@ TestProviderReturnMissedSeniorCallFromHomeAnswered:
       Strategy: xpath
       Id: $PAGE.providers_home_page.missed_call$
   # Page updates to show call information on right side of screen.
-    - Type: wait_for
-      Role: desktopChrome1
-      Strategy: xpath
-      Id: $PAGE.providers_call_handling_page.call_device_btn$
+    - Type: sleep
+      Time: 1
   # Click "Call device" button on right side.
     - Type: click
       Role: desktopChrome1
@@ -3980,6 +3991,8 @@ TestProvidersCallSeniorsDeviceForIssuePausedTaskFromHomeAnswered:
       Strategy: class_chain
       Id: $PAGE.seniors_app_post_call_survey.skip_survey_button$
     # Call Device
+    - Type: sleep
+      Time: 0.8
     - Type: click
       Strategy: xpath
       Id: $PAGE.providers_call_handling_page.call_device_btn$
@@ -4082,6 +4095,8 @@ TestProviderReturnMissedSNFCallFromHomeIgnored:
       Strategy: xpath
       Id: $PAGE.providers_home_page.missed_call$
     # Call Device
+    - Type: sleep
+      Time: 1
     - Type: click
       Strategy: xpath
       Id: $PAGE.providers_call_handling_page.call_device_btn$
@@ -4301,6 +4316,8 @@ TestProviderIDDESReturnMissedCallFromHomeIgnored:
           Var: MISSED_CALL
           Value: '$AND_CLI_idd_es_never_alone_user1_name$ $AND_CLI_idd_es_never_alone_user1_lastname$'
   # Call Device
+    - Type: sleep
+      Time: 1
     - Type: click
       Strategy: xpath
       Id: $PAGE.providers_call_handling_page.call_device_btn$
@@ -4454,6 +4471,8 @@ TestProviderIDDCHReturnMissedCallFromHomeIgnored:
           Var: MISSED_CALL
           Value: '$AND_CLI_idd_es_never_alone_user1_name$ $AND_CLI_idd_es_never_alone_user1_lastname$'
   # Call Device
+    - Type: sleep
+      Time: 1
     - Type: click
       Strategy: xpath
       Id: $PAGE.providers_call_handling_page.call_device_btn$
@@ -5798,6 +5817,8 @@ TestProviderSeniorReturnMissedCallFromHomeIgnored:
           Var: MISSED_CALL
           Value: '$AND_CLI_senior_user1_name$ $AND_CLI_senior_user1_lastname$'
   # Call Device
+    - Type: sleep
+      Time: 1
     - Type: click
       Strategy: xpath
       Id: $PAGE.providers_call_handling_page.call_device_btn$
