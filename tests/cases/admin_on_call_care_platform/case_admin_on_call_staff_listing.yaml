@@ -698,7 +698,86 @@ TestAdminOnCallClickAndViewStaffMemberCallHistoryAndAccessCallRecording:
     - Type: click
       Strategy: xpath
       Id: $PAGE.admin_on_call_home.call_history_navigation_button$
-  # click on call partner option
+  # click on provider call history option
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.admin_on_call_home.providers_call_history_navigation_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.admin_on_call_home.providers_call_history_navigation_button$
+  # Expand row entry, check details
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_call_history_page.first_call_row$
+      Time: 10
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_history_page.first_call_row$
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.providers_call_history_page.first_call_row$
+      Greps:
+        - var: CALL_IS_OPEN
+          attr: class
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: CALL_IS_OPEN
+          Value: 'is-open'
+  # Check telehealth request form
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_call_history_page.telehealth_form_facility_call_button$
+    # Open Telehealth request Modal
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_history_page.telehealth_form_facility_call_button$
+      # Telehealth modal form
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_call_history_page.telehealth_form_modal_title$
+      # Patient subtitle
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_call_history_page.telehealth_form_patient_information_subtitle$
+      # Situation subtitle
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_call_history_page.telehealth_form_situation_subtitle$
+      # Assesment situation
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_call_history_page.telehealth_form_assessment_subtitle$  
+      # Close telehealth modal
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_history_page.telehealth_form_close_button$
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id: $PAGE.providers_call_history_page.telehealth_form_close_button$
+  # Click play button on call recording, check you can pause it
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_call_history_page.play_pause_recording_button$
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.providers_call_history_page.play_pause_recording_button_status$
+      Greps:
+        - var: PLAY_RECORDING_STATUS
+          attr: class
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: PLAY_RECORDING_STATUS
+          Value: '-paused'
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_history_page.play_pause_recording_button$
+  # click on care partners call history option
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.admin_on_call_home.providers_call_history_navigation_button$
