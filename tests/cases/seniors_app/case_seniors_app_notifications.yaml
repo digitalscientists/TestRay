@@ -186,10 +186,10 @@ TestSeniorNotificationsPageOnSeniorApp:
 TestSeniorAppointmentAddedNotifications:
   Environment: Settings
   Precases:
+    - AdminOnCallRefreshParticipant
     - LoginNeverAloneHelper
     - CarePartnerCleanCallQueueAndHangedCalls
     - SeniorCleanPrompts
-    - AdminOnCallRefreshParticipant
   Aftercases:
     - TerminateApp
   Roles:

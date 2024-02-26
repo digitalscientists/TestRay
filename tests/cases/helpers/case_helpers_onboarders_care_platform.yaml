@@ -614,6 +614,8 @@ OnboarderSetNurseToActive:
       Strategy: xpath
       Id: $PAGE.care_platform_facility_Record.edit_device_by_number$
   # Change Status to "Active"
+    - Type: sleep
+      Time: 0.6
     - Type: click
       Strategy: xpath
       Id: $PAGE.care_platform_facility_edit_device_modal.status_toggle$

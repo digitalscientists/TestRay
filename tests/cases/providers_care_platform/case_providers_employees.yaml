@@ -120,11 +120,12 @@ TestProviderAnswerCompleteSessionFromEHP:
   Environment: Settings 
   Vars:
     STATE: IN
-    USER_FULLNAME: $AND_CLI_provider_user1_name$ $AND_CLI_provider_user1_lastname$
+    USER_FULLNAME: $AND_CLI_provider_user1_lastname$
     STAFF_ROLE: "Provider"
 # Commented until they fix the refresh
-#  Precases:
-#    - AdminOnCallRefreshStaff
+  Precases:
+    - ProviderNewCleaner
+   # - AdminOnCallRefreshStaff
   Aftercases:
     - EmployeeHealthPortalLogOutAction
   Roles:
@@ -134,6 +135,11 @@ TestProviderAnswerCompleteSessionFromEHP:
   #Calling Login case
     - Type: case
       Value: EmployeeHealthPortalLogIn
+  #Clean comming appointment modal
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.employee_health_home_page.close_coming_appointment_dialog_button$
+      NoRaise: true
   #Make call
     - Type: wait_for
       Strategy: xpath
@@ -179,9 +185,8 @@ TestProviderAnswerCompleteSessionFromEHP:
       Role: desktopChrome
       Id: $PAGE.providers_home_page.on_demand_calls$
   #Answer call
-    - Type: wait_for
-      Strategy: xpath
-      Id: $PAGE.providers_call_handling_page.answer_call_button$
+    - Type: sleep
+      Time: 1
     - Type: click
       Strategy: xpath
       Id: $PAGE.providers_call_handling_page.answer_call_button$

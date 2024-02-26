@@ -627,8 +627,8 @@ TestSeniorAppAnswerCallCarePartnerCall:
 TestSeniorStartingSoonNotificationWaitUntilCallSurveyIsCompleted:
   Environment: Settings
   Precases:
-    - LoginNeverAloneHelper
     - AdminOnCallRefreshParticipant
+    - LoginNeverAloneHelper
     - CarePartnerCleanCallQueueAndHangedCalls
     - SeniorCleanPrompts
     - ProviderNewCleaner
@@ -925,8 +925,8 @@ TestSeniorVerifyMissedCallPromptAndCallBackButton:
 TestSeniorVerifyCallWillNotRedirectToHomePageAfter10MinutesWithoutAction:
   Environment: Settings
   Precases:
-    - LoginNeverAloneHelper
     - AdminOnCallRefreshParticipant
+    - LoginNeverAloneHelper
     - CarePartnerCleanCallQueueAndHangedCalls
     - SeniorCleanPrompts
   Aftercases:
