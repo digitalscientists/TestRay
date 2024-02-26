@@ -3,6 +3,7 @@ admin_on_call_home:
   queue_navigation_button: //button[@data-test-id='navQueue']
   providers_call_history_navigation_button: //ul[@class='header-nav-dropdown-menu']//a[text()='PHP Providers']
   php_providers_navigation_button: //nav[contains(@class,'header-nav')]//a[text()='PHP Providers']
+  care_partners_navigation_button: //nav[contains(@class,'header-nav')]//a[text()='Care Partners']
   call_history_tab: //nav//*[contains(text(),'Call History')]
 
 admin_on_call_notification:
