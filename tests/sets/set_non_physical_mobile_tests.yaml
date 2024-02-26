@@ -146,6 +146,7 @@ SetNonPhysicalMobileTest:
     - Case: TestAdminOnCallSeeCallAppearOnQueueAndReviewParticipantSummary
     - Case: TestAdminOnCallAnswerCallFromQueueAndCompleteSessionWithoutMedicalTransfer
     - Case: TestAdminOnCallMessageParticipantsDevice
+    - Case: TestAdminOnCallCreateEventForParticipant
   # Facility Leadership
     - Case: TestFacilityLeadershipSeeCallAppearOnQueueThenSelectCall
     - Case: TestFacilityLeadershipReviewCallHistoryAndAccessCallRecordings
