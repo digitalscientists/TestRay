@@ -47,7 +47,7 @@ ProvidersCarePlatformEndCall:
       Id: $PAGE.providers_home_page.on_demand_calls$
   #Answer call
     - Type: sleep
-      Time: 2
+      Time: 1
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.providers_call_handling_page.answer_call_button$
@@ -232,9 +232,6 @@ JoinMedicalTransfer:
       Id: $PAGE.providers_home_page.last_medical_transfer_row$
     - Type: sleep
       Time: 1
-    - Type: wait_for
-      Strategy: xpath
-      Id: $PAGE.providers_call_handling_page.answer_call_button$
     - Type: click_js
       Strategy: xpath
       Id: $PAGE.providers_call_handling_page.answer_call_button$
@@ -332,6 +329,8 @@ ProviderNavigateToFacilities:
       App: desktop       
   Actions:
     # Navigate to Facilities.
+    - Type: sleep
+      Time: 0.6
     - Type: click
       Strategy: xpath
       Id: $PAGE.providers_home_page.facilities_navigation$
@@ -425,9 +424,8 @@ ProviderCallFacility:
       Strategy: xpath
       Id: $PAGE.providers_facilities_page.devices_tab$
     # Find the corresponding facility device and then call it.
-    - Type: wait_for
-      Strategy: xpath
-      Id: $PAGE.providers_facilities_page.call_based_on_device_button$ 
+    - Type: sleep
+      Time: 2
     - Type: click
       Strategy: xpath
       Id: $PAGE.providers_facilities_page.call_based_on_device_button$
@@ -485,9 +483,8 @@ ProviderNavigateFacilityCallPortal:
       Strategy: xpath
       Id: $PAGE.providers_facilities_page.devices_tab$
     # Find the corresponding facility device and then call it.
-    - Type: wait_for
-      Strategy: xpath
-      Id: $PAGE.providers_facilities_page.call_based_on_device_button$ 
+    - Type: sleep
+      Time: 2
     - Type: click
       Strategy: xpath
       Id: $PAGE.providers_facilities_page.call_based_on_device_button$
@@ -564,7 +561,6 @@ ProviderNavigateEmployeeCallPortal:
 #This helper needs that you set the variable: STATE in your test
 #The STATE is refered as two letters. Ex: IN for Indiana
 ProviderSetStateCredential:
-  Environment: Settings
   Roles:
     - Role: desktopChrome
       App: desktop
@@ -605,6 +601,10 @@ ProviderSetStateCredential:
     - Type: click
       Strategy: xpath
       Id: $PAGE.providers_account_modal.save_changes_button$
+      NoRaise: true
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_account_modal.close_modal_button$
     - Type: wait_not_visible
       Strategy: xpath
       Id: $PAGE.providers_account_modal.credentials_content$
@@ -979,7 +979,10 @@ CreateAFollowUpForSNFCall:
     - Type: click
       Strategy: xpath
       Id: $PAGE.providers_call_handling_page.submit_exit_session_button$
-
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_notifications.call_completed_notification$
+    
 CreateAFollowUpForParticipantCall:
   Roles:
     - Role: desktopChrome
@@ -1058,6 +1061,8 @@ CleanUsedFollowUp:
       App: desktop  
   Actions:
     - Type: refresh
+    - Type: sleep
+      Time: 0.6
     - Type: click
       Strategy: xpath
       Id: $PAGE.providers_home_page.home_button$
@@ -1078,6 +1083,8 @@ CleanUsedPausedIssue:
       App: desktop  
   Actions:
     - Type: refresh
+    - Type: sleep
+      Time: 0.6
     - Type: click
       Strategy: xpath
       Id: $PAGE.providers_home_page.home_button$
@@ -1126,19 +1133,13 @@ AnswerCallAsProvider:
       Strategy: xpath
       Id: $PAGE.providers_home_page.call_based_on_participant_name$
     - Type: sleep
-      Time: 2
-    - Type: wait_for
+      Time: 0.8
+    - Type: click_js
       Strategy: xpath
       Id: $PAGE.providers_call_handling_page.answer_call_button$
-    - Type: click
-      Strategy: xpath
-      Id: $PAGE.providers_call_handling_page.answer_call_button$
-    - Type: sleep
-      Time: 2
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.providers_call_handling_page.end_call_btn$
-      Time: 30
 
 AnswerOnDemandCallAsProvider:
   Roles:
@@ -1158,9 +1159,6 @@ AnswerOnDemandCallAsProvider:
     - Type: sleep
       Time: 1
   #Answer call
-    - Type: wait_for
-      Strategy: xpath
-      Id: $PAGE.providers_call_handling_page.answer_call_button$
     - Type: wait_for_property
       Strategy: xpath
       Id: $PAGE.providers_call_handling_page.answer_call_button$
@@ -1254,6 +1252,8 @@ MakeCallBetweenProviderAndSNF:
       Strategy: xpath
       Id: $PAGE.providers_home_page.on_demand_calls$
       Role: desktopChrome
+    - Type: sleep
+      Time: 1
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.providers_call_handling_page.answer_call_button$
@@ -1472,6 +1472,8 @@ CreateFollowUpTicketForCHParticipant:
       Strategy: xpath
       Id: $PAGE.providers_home_page.last_medical_transfer_row$
       Role: desktopChrome1
+    - Type: sleep
+      Time: 1
     - Type: wait_for_property
       Strategy: xpath
       Id: $PAGE.providers_call_handling_page.answer_call_button$

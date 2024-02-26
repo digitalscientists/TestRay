@@ -376,6 +376,8 @@ TestCHProviderIDDSeeCallAppearInQueueAssignAndReviewDetails:
       Strategy: xpath
       Id: $PAGE.providers_home_page.last_medical_transfer_row$
       Role: desktopChrome1
+    - Type: sleep
+      Time: 1
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.providers_call_handling_page.answer_call_button$

@@ -114,6 +114,11 @@ TestProviderHomePageListingView:
         Var: follow_up_text
         Value: "Follow-up"
         raise: true
+    # Cleaning remaining calls
+    - Type: case
+      Value: CleanUsedMissedCall
+    - Type: case
+      Value: CleanUsedFollowUp
 
 # CXTB-104 Provider's Status - Not on Active Call
 TestProviderStatusNotOnActiveCall:
@@ -258,6 +263,8 @@ TestProvidersAnswerSNFCallAndCompletesSession:
     - Type: click
       Strategy: xpath
       Id: $PAGE.providers_home_page.on_demand_based_on_participant_name$
+    - Type: sleep
+      Time: 1
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.providers_call_handling_page.answer_call_button$
@@ -892,9 +899,10 @@ TestProviderReturnMissedSNFCall:
   Environment: Settings
   Vars:
     LOGOUT_OPTION: "Go Off Shift"
+  Precases:
+    - ProviderNewCleaner
   Aftercases:
     - TerminateApp
-    - CarePlatformLogout
   Roles:
     - Role: desktopChrome
       App: desktop
@@ -970,6 +978,8 @@ TestProviderReturnMissedSNFCall:
       Strategy: xpath
       Id: $PAGE.providers_call_handling_page.unnasign_button$
     # Call Device
+    - Type: sleep
+      Time: 1
     - Type: click
       Strategy: xpath
       Id: $PAGE.providers_call_handling_page.call_device_btn$
@@ -1082,6 +1092,8 @@ TestProvidersSelectCallInQueueAndGetCallAnsweredAlreadyNotification:
       Strategy: xpath
       Id: $PAGE.providers_home_page.on_demand_based_on_participant_name$
     # Right side of screen refreshes to show the associated call pane with proper name and primary information as header.
+    - Type: sleep
+      Time: 1
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.providers_call_handling_page.answer_call_button$
@@ -1126,6 +1138,8 @@ TestProvidersSelectCallInQueueAndGetCallAnsweredAlreadyNotification:
       Strategy: xpath
       Id: $PAGE.providers_home_page.on_demand_based_on_participant_name$
     # Right side of screen refreshes to show the associated call pane with proper name and primary information as header.
+    - Type: sleep
+      Time: 1
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.providers_call_handling_page.answer_call_button$
@@ -1167,6 +1181,12 @@ TestProvidersEHPSeeCallAppearInQueueAssignAndReviewDetails:
     - Type: case
       Value: EmployeeHealthPortalLogIn
       Role: desktopChrome1
+  #Clean comming appointment modal
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.employee_health_home_page.close_coming_appointment_dialog_button$
+      Role: desktopChrome1
+      NoRaise: true
   # Clean EHP hanged calls.
     - Type: case
       Value: EmployeeHealthPortalCleanHangedCalls
@@ -1252,7 +1272,6 @@ TestProvidersCallSNFDeviceForFollowUpTaskFromHome:
     - ProviderNewCleaner
   Aftercases:
     - TerminateApp
-    - CleanUsedFollowUp
     - ProviderEndCurrentCall
   Roles:
     - Role: localiOS
@@ -1297,7 +1316,7 @@ TestProvidersCallSNFDeviceForFollowUpTaskFromHome:
       Id: $PAGE.providers_home_page.follow_up_calls$
     - Type: sleep
       Role: desktopChrome
-      Time: 1
+      Time: 2
     - Type: click
       Strategy: xpath
       Role: desktopChrome
@@ -1330,8 +1349,7 @@ TestProvidersCallSNFDeviceForFollowUpTaskFromHome:
 TestProviderSeniorSeeCallAppearInQueueAssignAndReviewDetails:
   Environment: Settings
   Precases:
-  # Commented until they fix the refresh
-  #  - AdminOnCallRefreshParticipant
+    - AdminOnCallRefreshParticipant
     - LoginNeverAloneHelper
     - CarePartnerCleanCallQueueAndHangedCalls
     - ProviderNewCleaner
@@ -1424,6 +1442,8 @@ TestProviderSeniorSeeCallAppearInQueueAssignAndReviewDetails:
       Strategy: xpath
       Id: $PAGE.providers_home_page.last_medical_transfer_row$
       Role: desktopChrome1
+    - Type: sleep
+      Time: 1
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.providers_call_handling_page.answer_call_button$
@@ -1498,6 +1518,8 @@ TestProviderSeniorSeeCallAppearInQueueAssignAndReviewDetails:
       Id: $PAGE.providers_call_details_page.follow_up_tickets_tab$
       Role: desktopChrome1
     # Answer call
+    - Type: sleep
+      Time: 1
     - Type: click
       Strategy: xpath
       Id: $PAGE.providers_call_handling_page.answer_call_button$
@@ -1617,6 +1639,8 @@ TestProviderIDDCHSeeCallAppearInQueueAssignAndReviewDetails:
       Strategy: xpath
       Id: $PAGE.providers_home_page.last_medical_transfer_row$
       Role: desktopChrome1
+    - Type: sleep
+      Time: 1
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.providers_call_handling_page.answer_call_button$
@@ -1691,6 +1715,8 @@ TestProviderIDDCHSeeCallAppearInQueueAssignAndReviewDetails:
       Id: $PAGE.providers_call_details_page.follow_up_tickets_tab$
       Role: desktopChrome1
     # Answer call
+    - Type: sleep
+      Time: 1
     - Type: click
       Strategy: xpath
       Id: $PAGE.providers_call_handling_page.answer_call_button$
@@ -1808,10 +1834,8 @@ TestProviderIDDESSeeCallAppearInQueueAssignAndReviewDetails:
       Strategy: xpath
       Id: $PAGE.providers_home_page.last_medical_transfer_row$
       Role: desktopChrome1
-    - Type: wait_for
-      Strategy: xpath
-      Id: $PAGE.providers_call_handling_page.answer_call_button$
-      Role: desktopChrome1
+    - Type: sleep
+      Time: 1
   # Assign to "Me"
     - Type: wait_for  
       Strategy: xpath
@@ -1882,6 +1906,8 @@ TestProviderIDDESSeeCallAppearInQueueAssignAndReviewDetails:
       Id: $PAGE.providers_call_details_page.follow_up_tickets_tab$
       Role: desktopChrome1
     # Answer call
+    - Type: sleep
+      Time: 1
     - Type: click
       Strategy: xpath
       Id: $PAGE.providers_call_handling_page.answer_call_button$
@@ -1900,6 +1926,10 @@ TestProviderIDDESSeeCallAppearInQueueAssignAndReviewDetails:
     - Type: case
       Value: PostCallSurveyProvider
       Role: desktopChrome1
+    # Close on CarePartner Side
+    - Type: case
+      Value: ESCloseCarePartnerCall
+      Role: desktopChrome
 
 #CXTB-668 IDD - Answer Call and Complete Session
 TestProviderIDDCHAnswerCallAndCompleteSession:
@@ -1925,7 +1955,7 @@ TestProviderIDDCHAnswerCallAndCompleteSession:
       Value: IDDCHCarePartnerMakeCallToProvider
   # Wait 5 seconds for the call to disappear
     - Type: sleep
-      Time: 5
+      Time: 7
       Role: desktopChrome1
   # Log in to CHS Provider
     - Type: case
@@ -1940,10 +1970,8 @@ TestProviderIDDCHAnswerCallAndCompleteSession:
       Strategy: xpath
       Id: $PAGE.providers_home_page.last_medical_transfer_row$
       Role: desktopChrome1
-    - Type: wait_for
-      Strategy: xpath
-      Id: $PAGE.providers_call_handling_page.answer_call_button$
-      Role: desktopChrome1
+    - Type: sleep
+      Time: 1
     - Type: click
       Strategy: xpath
       Id: $PAGE.providers_call_handling_page.answer_call_button$
@@ -2255,10 +2283,8 @@ TestProviderIDDESAnswerCallAndCompleteSession:
       Strategy: xpath
       Id: $PAGE.providers_home_page.last_medical_transfer_row$
       Role: desktopChrome1
-    - Type: wait_for
-      Strategy: xpath
-      Id: $PAGE.providers_call_handling_page.answer_call_button$
-      Role: desktopChrome1
+    - Type: sleep
+      Time: 1
     - Type: click
       Strategy: xpath
       Id: $PAGE.providers_call_handling_page.answer_call_button$
@@ -2530,6 +2556,10 @@ TestProviderIDDESAnswerCallAndCompleteSession:
       Strategy: xpath
       Id: $PAGE.providers_notifications.follow_up_ticket_closed_notification$
       Role: desktopChrome1
+    # Close on CarePartner Side
+    - Type: case
+      Value: ESCloseCarePartnerCall
+      Role: desktopChrome
 
 # CXTB-681: Call Seniors Device for Follow-up Task from Home (Ignored).
 TestProviderCallParticipantForFollowUpTaskFromHomeAndIgnore:
@@ -2572,12 +2602,7 @@ TestProviderCallParticipantForFollowUpTaskFromHomeAndIgnore:
       Id: $PAGE.providers_home_page.follow_up_calls$
     - Type: sleep
       Role: desktopChrome
-      Time: 1
-    # Verify call information appears on the screen
-    - Type: wait_for
-      Strategy: xpath
-      Role: desktopChrome
-      Id: $PAGE.providers_follow_up_call_details_page.call_device_button$
+      Time: 2
     # Call back to the device
     - Type: click
       Strategy: xpath
@@ -2746,6 +2771,7 @@ TestProviderCallParticipantForFollowUpTaskFromHomeAndAnswered:
 TestProviderIDDCHReturnMissedCallFromHome:
   Environment: Settings
   Precases:
+    - AdminOnCallRefreshCHParticipant
     - LoginCHIDDNeverAloneHelper
     - CHCarePartnerCleanCallQueueAndHangedCalls
     - ProviderNewCleaner
@@ -2836,6 +2862,8 @@ TestProviderIDDCHReturnMissedCallFromHome:
           Var: MISSED_CALL
           Value: '$AND_CLI_idd_ch_never_alone_user2_name$ $AND_CLI_idd_ch_never_alone_user2_lastname$'
   # Call Device
+    - Type: sleep
+      Time: 1
     - Type: click
       Strategy: xpath
       Id: $PAGE.providers_call_handling_page.call_device_btn$
@@ -3021,6 +3049,8 @@ TestProviderIDDESReturnMissedCallFromHome:
           Var: MISSED_CALL
           Value: '$AND_CLI_idd_es_never_alone_user1_name$ $AND_CLI_idd_es_never_alone_user1_lastname$'
   # Call Device
+    - Type: sleep
+      Time: 1
     - Type: click
       Strategy: xpath
       Id: $PAGE.providers_call_handling_page.call_device_btn$
@@ -3111,6 +3141,10 @@ TestProviderIDDESReturnMissedCallFromHome:
         - Type: contain
           Var: INDICATOR
           Value: 'is-green'
+  # Close on CarePartner Side
+    - Type: case
+      Value: ESCloseCarePartnerCall
+      Role: desktopChrome
 
 # CXTB-687 Call SNF Device for “Issue Paused” Task from Home (Ignored)
 TestProvidersCallSNFDeviceForIssuePausedFromHomeIgnored:
@@ -3181,6 +3215,8 @@ TestProvidersCallSNFDeviceForIssuePausedFromHomeIgnored:
       Strategy: class_chain
       Id: $PAGE.seniors_app_post_call_survey.skip_survey_button$
     # Call Device
+    - Type: sleep
+      Time: 1
     - Type: click
       Strategy: xpath
       Id: $PAGE.providers_call_handling_page.call_device_btn$
@@ -3282,6 +3318,8 @@ TestProvidersCallSNFDeviceForIssuePausedFromHomeAnswered:
       Strategy: class_chain
       Id: $PAGE.seniors_app_post_call_survey.skip_survey_button$
     # Call Device
+    - Type: sleep
+      Time: 1
     - Type: click
       Strategy: xpath
       Id: $PAGE.providers_call_handling_page.call_device_btn$
@@ -3802,10 +3840,8 @@ TestProviderReturnMissedSeniorCallFromHomeAnswered:
       Strategy: xpath
       Id: $PAGE.providers_home_page.missed_call$
   # Page updates to show call information on right side of screen.
-    - Type: wait_for
-      Role: desktopChrome1
-      Strategy: xpath
-      Id: $PAGE.providers_call_handling_page.call_device_btn$
+    - Type: sleep
+      Time: 1
   # Click "Call device" button on right side.
     - Type: click
       Role: desktopChrome1
@@ -3955,6 +3991,8 @@ TestProvidersCallSeniorsDeviceForIssuePausedTaskFromHomeAnswered:
       Strategy: class_chain
       Id: $PAGE.seniors_app_post_call_survey.skip_survey_button$
     # Call Device
+    - Type: sleep
+      Time: 0.8
     - Type: click
       Strategy: xpath
       Id: $PAGE.providers_call_handling_page.call_device_btn$
@@ -4016,6 +4054,8 @@ TestProviderReturnMissedSNFCallFromHomeIgnored:
   Environment: Settings
   Vars:
     LOGOUT_OPTION: "Go Off Shift"
+  Precases:
+    - ProviderNewCleaner
   Aftercases:
     - TerminateApp
     - CarePlatformLogout
@@ -4055,6 +4095,8 @@ TestProviderReturnMissedSNFCallFromHomeIgnored:
       Strategy: xpath
       Id: $PAGE.providers_home_page.missed_call$
     # Call Device
+    - Type: sleep
+      Time: 1
     - Type: click
       Strategy: xpath
       Id: $PAGE.providers_call_handling_page.call_device_btn$
@@ -4184,6 +4226,7 @@ TestProvidersCallSNFDeviceForFollowUpTaskFromHomeIgnored:
 TestProviderIDDESReturnMissedCallFromHomeIgnored:
   Environment: Settings
   Precases:
+    - AdminOnCallRefreshESParticipant
     - LoginESIDDNeverAloneHelper
     - ESCarePartnerCleanCallQueueAndHangedCalls
     - ProviderNewCleaner
@@ -4273,6 +4316,8 @@ TestProviderIDDESReturnMissedCallFromHomeIgnored:
           Var: MISSED_CALL
           Value: '$AND_CLI_idd_es_never_alone_user1_name$ $AND_CLI_idd_es_never_alone_user1_lastname$'
   # Call Device
+    - Type: sleep
+      Time: 1
     - Type: click
       Strategy: xpath
       Id: $PAGE.providers_call_handling_page.call_device_btn$
@@ -4327,6 +4372,10 @@ TestProviderIDDESReturnMissedCallFromHomeIgnored:
     - Type: case
       Role: desktopChrome1
       Value: ProviderCloseCallHelper
+  # Close on CarePartner Side
+    - Type: case
+      Value: ESCloseCarePartnerCall
+      Role: desktopChrome
     
 # CXTB-724: Return Missed CH IDD (Easterseals) Call from Home (Ignored)
 TestProviderIDDCHReturnMissedCallFromHomeIgnored:
@@ -4337,6 +4386,7 @@ TestProviderIDDCHReturnMissedCallFromHomeIgnored:
     - ProviderNewCleaner
     - IDDESParticipantCleanPrompts
   Aftercases:
+    - AdminOnCallRefreshCHParticipant
     - TerminateApp
   Roles:
     - Role: desktopChrome
@@ -4421,6 +4471,8 @@ TestProviderIDDCHReturnMissedCallFromHomeIgnored:
           Var: MISSED_CALL
           Value: '$AND_CLI_idd_es_never_alone_user1_name$ $AND_CLI_idd_es_never_alone_user1_lastname$'
   # Call Device
+    - Type: sleep
+      Time: 1
     - Type: click
       Strategy: xpath
       Id: $PAGE.providers_call_handling_page.call_device_btn$
@@ -4480,6 +4532,7 @@ TestProviderIDDCHReturnMissedCallFromHomeIgnored:
 TestProviderIDDCHCallDeviceForFollowUpTaskFromHomeAnswered:
   Environment: Settings
   Precases:
+    - AdminOnCallRefreshCHParticipant
     - LoginCHIDDNeverAloneHelper
     - CHCarePartnerCleanCallQueueAndHangedCalls
     - ProviderNewCleaner
@@ -4609,6 +4662,7 @@ TestProviderIDDCHCallDeviceForFollowUpTaskFromHomeAnswered:
 TestProviderIDDESCallDeviceForFollowUpTaskFromHomeAnswered:
   Environment: Settings
   Precases:
+    - AdminOnCallRefreshESParticipant
     - LoginESIDDNeverAloneHelper
     - ESCarePartnerCleanCallQueueAndHangedCalls
     - ProviderNewCleaner
@@ -4993,6 +5047,10 @@ TestProviderIDDESCallDeviceForIssuePausedTaskFromHomeAnswered:
         - Type: contain
           Var: STATUS_VAR
           Value: "is-green"
+  # Close on CarePartner Side
+    - Type: case
+      Value: ESCloseCarePartnerCall
+      Role: desktopChrome
 
 # CXTB-730 Call IDD (Easterseals) Device for “Issue Paused” Task from Home (Answered)
 TestProviderIDDCHCallDeviceForIssuePausedTaskFromHomeAnswered:
@@ -5161,6 +5219,7 @@ TestProviderIDDESCallDeviceForFollowUpTaskFromHomeIgnored:
     - ProviderNewCleaner
     - IDDESParticipantCleanPrompts
   Aftercases:
+    - AdminOnCallRefreshESParticipant
     - TerminateApp
   Roles:
     - Role: desktopChrome
@@ -5259,6 +5318,7 @@ TestProviderIDDCHCallDeviceForFollowUpTaskFromHomeIgnored:
     - ProviderNewCleaner
     - IDDESParticipantCleanPrompts
   Aftercases:
+    - AdminOnCallRefreshCHParticipant
     - TerminateApp
   Roles:
     - Role: desktopChrome
@@ -5398,11 +5458,7 @@ TestProviderIDDESCallDeviceForIssuePausedTaskFromHomeIgnored:
       Role: desktopChrome1
     - Type: sleep
       Time: 2
-    - Type: wait_for
-      Strategy: xpath
-      Id: $PAGE.providers_call_handling_page.answer_call_button$
-      Role: desktopChrome1
-    - Type: click
+    - Type: click_js
       Strategy: xpath
       Id: $PAGE.providers_call_handling_page.answer_call_button$
       Role: desktopChrome1
@@ -5488,6 +5544,10 @@ TestProviderIDDESCallDeviceForIssuePausedTaskFromHomeIgnored:
     - Type: case
       Value: CleanUsedPausedIssue
       Role: desktopChrome1
+  # Close on CarePartner Side
+    - Type: case
+      Value: ESCloseCarePartnerCall
+      Role: desktopChrome
 
 # CXTB-732 Call IDD (Easterseals) Device for “Issue Paused” Task from Home (Ignored)
 TestProviderIDDCHCallDeviceForIssuePausedTaskFromHomeIgnored:
@@ -5757,6 +5817,8 @@ TestProviderSeniorReturnMissedCallFromHomeIgnored:
           Var: MISSED_CALL
           Value: '$AND_CLI_senior_user1_name$ $AND_CLI_senior_user1_lastname$'
   # Call Device
+    - Type: sleep
+      Time: 1
     - Type: click
       Strategy: xpath
       Id: $PAGE.providers_call_handling_page.call_device_btn$

@@ -381,7 +381,7 @@ TestProviderBrowsingWhileOnCall:
       Role: desktopChrome
   # Complete Notes as Provider
     - Type: case
-      Value: ProviderCompleteSession
+      Value: PostCallSurveyProvider
       Role: desktopChrome1
 
 # CXTB-178: Call Participant’s Device & Complete an On-Demand Call.
@@ -390,14 +390,13 @@ TestProviderCallParticipantAndCompleteOnDemandCall:
   Vars:
   # Log out option
     LOGOUT_OPTION: "Go Off Shift"
-    USER_FULLNAME: $AND_CLI_provider_user1_name$ $AND_CLI_provider_user1_lastname$
+    USER_FULLNAME: $AND_CLI_provider_user1_lastname$
     STAFF_ROLE: "Provider"
   Precases:
+    - AdminOnCallRefreshParticipant
     - LoginNeverAloneHelper
     - ProviderNewCleaner
     - SeniorCleanPrompts
-  # Commented until they fix the refresh
-  #  - AdminOnCallRefreshStaff
   Aftercases:
     - TerminateApp
   Roles:
@@ -410,6 +409,8 @@ TestProviderCallParticipantAndCompleteOnDemandCall:
     - Type: case
       Value: ProviderCallParticipant
   # Device begins ringing and automatically displays "Incoming Call" modal.
+    - Type: sleep
+      Time: 1
     - Type: wait_for
       Strategy: class_chain
       Id: $PAGE.seniors_app_incoming_call.incoming_call_header$

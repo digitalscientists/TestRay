@@ -4,6 +4,8 @@ TestFacilityLeadershipReviewCallHistoryAndAccessCallRecordings:
   Environment: Settings
   Precases:
     - MakeCallBetweenProviderAndSNF
+  Aftercases:
+    - TerminateApp
   Roles:
     - Role: desktopChrome
       App: desktop

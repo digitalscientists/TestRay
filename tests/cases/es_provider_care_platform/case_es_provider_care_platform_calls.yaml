@@ -339,6 +339,10 @@ TestESProviderCarePlatformAnswerAndCompleteSession:
       Strategy: xpath
       Id: $PAGE.providers_notifications.follow_up_ticket_closed_notification$
       Role: desktopChrome1
+  # Close on CarePartner Side
+    - Type: case
+      Value: ESCloseCarePartnerCall
+      Role: desktopChrome
 
 #CXTB-665 IDD - See Call Appear in Queue, Assign and Review Details
 TestESProviderIDDSeeCallAppearInQueueAssignAndReviewDetails:
@@ -376,6 +380,8 @@ TestESProviderIDDSeeCallAppearInQueueAssignAndReviewDetails:
       Strategy: xpath
       Id: $PAGE.providers_home_page.last_medical_transfer_row$
       Role: desktopChrome1
+    - Type: sleep
+      Time: 1
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.providers_call_handling_page.answer_call_button$
@@ -450,6 +456,8 @@ TestESProviderIDDSeeCallAppearInQueueAssignAndReviewDetails:
       Id: $PAGE.providers_call_details_page.follow_up_tickets_tab$
       Role: desktopChrome1
     # Answer call
+    - Type: sleep
+      Time: 1
     - Type: click
       Strategy: xpath
       Id: $PAGE.providers_call_handling_page.answer_call_button$
@@ -471,4 +479,8 @@ TestESProviderIDDSeeCallAppearInQueueAssignAndReviewDetails:
     # Fill up the post call survey to complete the session.
     - Type: case
       Value: ESPostCallSurveyCarePartner
+      Role: desktopChrome
+    # Close on CarePartner Side
+    - Type: case
+      Value: ESCloseCarePartnerCall
       Role: desktopChrome
