@@ -1,0 +1,274 @@
+TestCarePartnerReviewCallHistory:
+  Environment: Settings
+  Vars:
+    LOGOUT_OPTION: "Go Off Shift"
+  Precases:
+    - LoginNeverAloneHelper
+    - CarePartnerCleanCallQueueAndHangedCalls
+    - SeniorCleanPrompts
+    - MakeCallToParticipant
+  Aftercases:
+    - TerminateApp
+  Roles:
+    - Role: desktopChrome
+      App: desktop
+    - Role: localiOS
+      App: NeverAlone
+  Actions:
+  # Calling Login case
+    - Type: case
+      Value: CarePartnerLogin
+  # Go to Call History
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_home_page.call_history_navigation$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_call_history_page.call_history_tab$
+  # Check filter for source and status
+    #Both filter are in "all" option
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.providers_call_history_page.source_filter_all$
+      Greps:
+        - var: SOURCE_FILTER
+          attr: class
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: SOURCE_FILTER
+          Value: 'is-selected'
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.providers_call_history_page.status_filter_all$
+      Greps:
+        - var: STATUS_FILTER
+          attr: class
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: STATUS_FILTER
+          Value: 'is-selected'
+    # Check outbound option
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_history_page.source_filter_outbound$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_call_history_page.source_filter_outbound$
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.providers_call_history_page.source_filter_outbound$
+      Greps:
+        - var: SOURCE_OUTBOUND
+          attr: class
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: SOURCE_OUTBOUND
+          Value: 'is-selected'
+    - Type: get_url
+      Greps:
+        - var: SOURCE_OUTBOUND_URL
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: SOURCE_OUTBOUND_URL
+          Value: 'outbound'
+    #Check incoming filter
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_history_page.source_filter_inbound$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_call_history_page.source_filter_inbound$
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.providers_call_history_page.source_filter_inbound$
+      Greps:
+        - var: SOURCE_INBOUND
+          attr: class
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: SOURCE_INBOUND
+          Value: 'is-selected'
+    - Type: get_url
+      Greps:
+        - var: SOURCE_INBOUND_URL
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: SOURCE_INBOUND_URL
+          Value: 'inbound'
+    # Click Source Filter back to All
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_history_page.source_filter_all$
+    # Check Completed Status
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_history_page.status_filter_completed$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_call_history_page.status_filter_completed$
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.providers_call_history_page.status_filter_completed$
+      Greps:
+        - var: STATUS_COMPLETED
+          attr: class
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: STATUS_COMPLETED
+          Value: 'is-selected'
+    - Type: get_url
+      Greps:
+        - var: STATUS_COMPLETED_URL
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: STATUS_COMPLETED_URL
+          Value: 'completed'
+    # Check Missed Calls Filter
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_history_page.status_filter_missed$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_call_history_page.status_filter_missed$
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.providers_call_history_page.status_filter_missed$
+      Greps:
+        - var: STATUS_MISSED
+          attr: class
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: STATUS_MISSED
+          Value: 'is-selected'
+    - Type: get_url
+      Greps:
+        - var: STATUS_MISSED_URL
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: STATUS_MISSED_URL
+          Value: 'missed'
+    # Check Canceled Calls filter
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_history_page.status_filter_canceled$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_call_history_page.status_filter_canceled$
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.providers_call_history_page.status_filter_canceled$
+      Greps:
+        - var: STATUS_CANCELED
+          attr: class
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: STATUS_CANCELED
+          Value: 'is-selected'
+    - Type: get_url
+      Greps:
+        - var: STATUS_CANCELED_URL
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: STATUS_CANCELED_URL
+          Value: 'canceled'
+    # Check Ignored call status filter
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_history_page.status_filter_ignored$
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_call_history_page.status_filter_ignored$
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.providers_call_history_page.status_filter_ignored$
+      Greps:
+        - var: STATUS_IGNORED
+          attr: class
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: STATUS_IGNORED
+          Value: 'is-selected'
+    - Type: get_url
+      Greps:
+        - var: STATUS_IGNORED_URL
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: STATUS_IGNORED_URL
+          Value: 'ignored'
+  # Go to status completed
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_history_page.status_filter_completed$
+    - Type: refresh
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.providers_call_history_page.first_call_row$
+    # Requester Name
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_history_details_page.first_call_partner$
+    # Participant Name
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_history_details_page.first_call_participant$
+    # Subject
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_history_details_page.first_call_subject$
+    # Expand call
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_call_history_page.first_call_row$
+    - Type: get_attribute
+      Strategy: xpath
+      Id: $PAGE.providers_call_history_page.first_call_row$
+      Greps:
+        - var: CALL_IS_OPEN
+          attr: class
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: contain
+          Var: CALL_IS_OPEN
+          Value: 'is-open'
+    # Survey Area
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_history_details_page.first_call_post_call_survey$

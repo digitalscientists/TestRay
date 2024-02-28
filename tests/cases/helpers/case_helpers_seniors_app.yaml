@@ -155,7 +155,6 @@ CallCarePartner:
       Id: $PAGE.seniors_app_call.waiting_room_label$
 
 AnswerCallAsSenior:
-  Environment: Settings
   Roles:
     - Role: localiOS
       App: NeverAlone
