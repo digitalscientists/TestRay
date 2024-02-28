@@ -7,6 +7,7 @@ SetCriticalWorkflows:
     - Case: TestCarePartnerCallParticipantsDeviceCallComplete
     - Case: TestCarePartnerLogInButtonShouldBeLimitedToOneClick
     - Case: TestCarePartnerCreateManualEventForParticipant
+    - Case: TestCarePartnerReviewCallHistory
   # Provider tests
     - Case: TestProviderAnswerCompleteSessionFromEHP
     - Case: TestProvidersAnswerSNFCallAndCompletesSession #Physical

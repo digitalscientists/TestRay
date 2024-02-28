@@ -53,3 +53,4 @@ SetCarePartnerCarePlatformTests:
     - Case: TestCarePartnerStatusUpdatedToInSessionNotLoggedForAnsweredOutboundCalls
     - Case: TestCarePartnerCreateManualEventForParticipant
     - Case: TestCarePartnerVerifyEmergencyServicesButton
+    - Case: TestCarePartnerReviewCallHistory
