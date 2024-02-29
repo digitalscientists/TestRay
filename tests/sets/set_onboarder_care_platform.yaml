@@ -10,6 +10,7 @@ SetOnboardersCarePlatformTests:
     - Case: TestOnboarderClickAndViewFacilitiesDevice
     - Case: TestOnboarderNoNegativeToastIfParticipantIsSavedWithDuplicatedEmail
     - Case: TestOnboarderParticipantProfileReviewEditOrAddBehavioralInfo
+    - Case: TestOnboarderParticipantProfileReviewEditOrAddContacts
     - Case: TestOnboarderParticipantProfileEditInsuranceOrProviderInformation
     - Case: TestOnboarderParticipantPaneReviewEditOrAddBehavioralInfo
     - Case: TestOnboarderCreateNewStaffMemberWithFacilityLeadershipRole
