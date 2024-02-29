@@ -162,6 +162,10 @@ TestProviderUpdateCredentialsAndCallAnsweringAbilitiesEHPRequest:
     - Type: click
       Strategy: xpath
       Id: $PAGE.providers_account_modal.save_changes_button$
+      NoRaise: true
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_account_modal.close_modal_button$
     - Type: wait_not_visible
       Strategy: xpath
       Id: $PAGE.providers_account_modal.credentials_content$
@@ -172,6 +176,11 @@ TestProviderUpdateCredentialsAndCallAnsweringAbilitiesEHPRequest:
   # Calling Employee Login case
     - Type: case
       Value: EmployeeHealthPortalLogIn
+  # Close Upcoming Appointment dialog
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.employee_health_home_page.close_coming_appointment_dialog_button$
+      NoRaise: true  
   # Employee Home Page
     - Type: wait_for
       Strategy: xpath
@@ -219,6 +228,8 @@ TestProviderUpdateCredentialsAndCallAnsweringAbilitiesEHPRequest:
     - Type: click
       Strategy: xpath
       Id: $PAGE.providers_home_page.on_demand_calls$
+    - Type: sleep
+      Time: 1
     - Type: wait_for_property
       Strategy: xpath
       Id: $PAGE.providers_call_handling_page.answer_call_button$
@@ -253,6 +264,10 @@ TestProviderUpdateCredentialsAndCallAnsweringAbilitiesEHPRequest:
     - Type: click
       Strategy: xpath
       Id: $PAGE.providers_account_modal.save_changes_button$
+      NoRaise: true
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.providers_account_modal.close_modal_button$
     - Type: wait_not_visible
       Strategy: xpath
       Id: $PAGE.providers_account_modal.credentials_content$
@@ -280,6 +295,8 @@ TestProviderUpdateCredentialsAndCallAnsweringAbilitiesEHPRequest:
     - Type: click
       Strategy: xpath
       Id: $PAGE.providers_home_page.on_demand_by_state$
+    - Type: sleep
+      Time: 1
     - Type: wait_for_property
       Strategy: xpath
       Id: $PAGE.providers_call_handling_page.answer_call_button$

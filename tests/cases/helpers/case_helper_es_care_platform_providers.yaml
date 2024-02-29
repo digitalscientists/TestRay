@@ -202,3 +202,41 @@ IDDESCarePartnerMakeCallToProvider:
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.care_platform_call_portal.leave_call_btn$
+
+ESCloseCarePartnerCall:
+  Vars:
+    LOGOUT_OPTION: "Go Off Shift"
+  Aftercases:
+    - CarePlatformLogout
+  Roles:
+    - Role: desktopChrome
+      App: desktop
+  Actions:
+    # Verify "End Call" button has been replaced with "Leave Call" button.
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.leave_call_btn$
+      NoRaise: true
+    - Type: sleep
+      Time: 1
+    - Type: case
+      Value: ESPostCallSurveyCarePartner
+
+CHCloseCarePartnerCall:
+  Vars:
+    LOGOUT_OPTION: "Go Off Shift"
+  Aftercases:
+    - CarePlatformLogout
+  Roles:
+    - Role: desktopChrome
+      App: desktop
+  Actions:
+    # Verify "End Call" button has been replaced with "Leave Call" button.
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_call_portal.leave_call_btn$
+      NoRaise: true
+    - Type: sleep
+      Time: 1
+    - Type: case
+      Value: CHPostCallSurveyCarePartner

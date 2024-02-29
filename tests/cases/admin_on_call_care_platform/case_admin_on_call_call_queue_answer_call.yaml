@@ -285,6 +285,12 @@ TestAdminOnCallAnswerCallFromQueueAndCompleteSessionWithoutMedicalTransfer:
       Strategy: xpath
       Id: $PAGE.care_platform_participant.last_participant_row$
   # Answer Call
+    - Type: sleep
+      Time: 1
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_home.answer_call$
+      Role: desktopChrome
     - Type: click_js
       Strategy: xpath
       Id: $PAGE.care_platform_home.answer_call$

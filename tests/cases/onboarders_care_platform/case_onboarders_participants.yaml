@@ -676,6 +676,8 @@ TestOnboarderParticipantInfoEditOrAddEmergencyRoomAdmissionsInfo:
 
 # CXTB-512 OnboarderCarePartner - Change Status to “Active” for Existing Participant
 TestOnboarderChangeStatusToActiveForExistingParticipant:
+  Aftercases:
+    - TerminateApp
   Roles:
     - Role: localiOS
       App: NeverAlone
@@ -687,6 +689,8 @@ TestOnboarderChangeStatusToActiveForExistingParticipant:
 
 #CXTB-510 OnboardersCarePlatform - Change Status to “Suspended” for Existing Participant
 TestOnboarderChangeStatusToSuspendedForExistingParticipant:
+  Aftercases:
+    - TerminateApp
   Roles:
     - Role: localiOS
       App: NeverAlone
@@ -698,6 +702,8 @@ TestOnboarderChangeStatusToSuspendedForExistingParticipant:
 
 # CXTB-511 Onboarder - Change Status to “Deactivated” for Existing Participant
 TestOnboarderChangeStatusToDeactivatedForExistingParticipant:
+  Aftercases:
+    - TerminateApp
   Roles:
     - Role: localiOS
       App: NeverAlone

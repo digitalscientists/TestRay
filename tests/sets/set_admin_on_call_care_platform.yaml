@@ -18,3 +18,5 @@ SetAdminOnCallCarePlatformTests:
     - Case: TestAdminOnCallRefreshSessionForStaffMemberFromProfile
     - Case: TestAdminOnCallSeeCallAppearOnQueueAndReviewParticipantSummary
     - Case: TestAdminOnCallAnswerCallFromQueueAndCompleteSessionWithoutMedicalTransfer
+    - Case: TestAdminOnCallMessageParticipantsDevice
+    - Case: TestAdminOnCallCreateEventForParticipant
