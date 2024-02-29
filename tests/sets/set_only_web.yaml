@@ -39,6 +39,7 @@ SetOnlyWebTests:
   - Case: TestCarePartnerCreateFollowUpTicketParticipantProfile
   - Case: TestCarePartnerTrackTimeAndEditFollowUpTicketsForParticipant
   - Case: TestCarePartnerCompleteFollowUpTicketParticipantProfile
+  - Case: TestCarePartnerTextNotificationsWorkflowInMyAccountModal
   # Employee Health Portal
   - Case: TestEmployeeSettingNotification
   - Case: TestEmployeeInformationUpdateNumber

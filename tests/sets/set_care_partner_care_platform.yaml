@@ -39,6 +39,7 @@ SetCarePartnerCarePlatformTests:
     - Case: TestCarePartnerCreateFollowUpTicketParticipantProfile
     - Case: TestCarePartnerTrackTimeAndEditFollowUpTicketsForParticipant
     - Case: TestCarePartnerCompleteFollowUpTicketParticipantProfile
+    - Case: TestCarePartnerTextNotificationsWorkflowInMyAccountModal
   # Care Partner Platform Mobile Non Physical
     - Case: TestCarePartnerCreateEventForParticipant
     - Case: TestCarePartnerEditEventForParticipant
