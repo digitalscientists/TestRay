@@ -749,3 +749,9 @@ care_platform_edit_participants_vendor:
   dialog_title_label: //div[@id='dialogs']//h4[text()='$AND_CLI_MODAL_NAME$']
   modal: //div[@id='modals']//div[contains(@class,'modal')]
   button_edit_participant_info: //button[text()='Edit Info']
+
+care_platform_call_history_details_page:
+  first_call_participant: (//div[contains(@class,'accordion-item')])[1]//div[contains(text(),'$AND_CLI_senior_user1_name$ $AND_CLI_senior_user1_lastname$')]
+  first_call_partner: (//div[contains(@class,'accordion-item')])[1]//div[contains(text(),'$AND_CLI_carepartner_user1_name$ $AND_CLI_carepartner_user1_lastname$')]
+  first_call_post_call_survey: (//div[contains(@class,'accordion-item')])[1]//div[@class='post-call-survey']
+  first_call_subject: (//div[contains(@class,'accordion-item')])[1]//div[contains(text(),'$AND_CLI_UNIQUE_SUBJECT$')]
