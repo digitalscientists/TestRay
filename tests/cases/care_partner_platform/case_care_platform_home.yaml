@@ -169,7 +169,7 @@ TestCarePartnerUpdateInfoAccount:
     - Type: case
       Value: CarePlatformUpdateInfo
 
-# CXTB-803 CarePartnerPlatform - “Text Notifications” Workflow in My Account Modal
+# CXTB-803 Care Partner Platform - “Text Notifications” Workflow in My Account Modal
 TestCarePartnerTextNotificationsWorkflowInMyAccountModal:
   Environment: Settings 
   Roles:
@@ -208,53 +208,32 @@ TestCarePartnerTextNotificationsWorkflowInMyAccountModal:
       Strategy: id
       Id: $PAGE.care_platform_myaccount_info.long_wait_checkbox$
     # Populate or update contact number, or change checkbox selections
-    # - Type: get_attribute
-    #   Strategy: xpath
-    #   Id: $PAGE.care_platform_myaccount_info.incoming_call_checkbox_svg$
-    #   Greps:
-    #     - var: FIRST_INCOMING_CALL_CHECKBOX_VALUE
-    #       attr: class
-    #       condition: nempty
-    #       match: "(.*)"
-    # - Type: get_attribute
-    #   Strategy: id
-    #   Id: $PAGE.care_platform_myaccount_info.incoming_call_checkbox$
-    #   Greps:
-    #     - var: FIRST_INCOMING_CALL_CHECKBOX_VALUE
-    #       attr: checked
-    #       condition: nempty
-    #       match: "(.*)"
-    # - Type: click
-    #   Strategy: xpath
-    #   Id: $PAGE.care_platform_myaccount_info.incoming_call_checkbox_label$
-    # - Type: sleep
-    #   Time: 1
-    # Fields reflect changes as you make them
-    # - Type: get_attribute
-    #   Strategy: xpath
-    #   Id: $PAGE.care_platform_myaccount_info.incoming_call_checkbox_svg$
-    #   Greps:
-    #     - var: SECOND_INCOMING_CALL_CHECKBOX_VALUE
-    #       attr: class
-    #       condition: nempty
-    #       match: "(.*)"
-    # - Type: get_attribute
-    #   Strategy: id
-    #   Id: $PAGE.care_platform_myaccount_info.incoming_call_checkbox$
-    #   Greps:
-    #     - var: SECOND_INCOMING_CALL_CHECKBOX_VALUE
-    #       attr: checked
-    #       condition: nempty
-    #       match: "(.*)"
-    # - Type: assert
-    #   Asserts:
-    #     - Type: ne
-    #       Var: SECOND_INCOMING_CALL_CHECKBOX_VALUE
-    #       Value: $AND_CLI_FIRST_INCOMING_CALL_CHECKBOX_VALUE$
-    - Type: set_checkbox_status
+    - Type: get_attribute
+      Strategy: id
+      Id: $PAGE.care_platform_myaccount_info.incoming_call_checkbox$
+      Greps:
+        - var: FIRST_INCOMING_CALL_CHECKBOX_VALUE
+          attr: checked
+          condition: nempty
+          match: "(.*)"
+    - Type: click
       Strategy: xpath
-      Option: check
       Id: $PAGE.care_platform_myaccount_info.incoming_call_checkbox_label$
+    - Type: sleep
+      Time: 1
+    - Type: get_attribute
+      Strategy: id
+      Id: $PAGE.care_platform_myaccount_info.incoming_call_checkbox$
+      Greps:
+        - var: SECOND_INCOMING_CALL_CHECKBOX_VALUE
+          attr: checked
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: ne
+          Var: SECOND_INCOMING_CALL_CHECKBOX_VALUE
+          Value: $AND_CLI_FIRST_INCOMING_CALL_CHECKBOX_VALUE$
     # Click "Save changes" button at bottom of modal
     - Type: click
       Strategy: xpath
@@ -284,7 +263,7 @@ TestCarePartnerTextNotificationsWorkflowInMyAccountModal:
     - Type: wait_not_visible
       Strategy: xpath
       Id: $PAGE.care_platform_myaccount_info.incoming_call_checkbox_label$
-    # tear down
+    # Tear down
     # Going to My Account
     - Type: click
       Strategy: xpath
