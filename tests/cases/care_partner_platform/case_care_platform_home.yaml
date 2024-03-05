@@ -169,6 +169,133 @@ TestCarePartnerUpdateInfoAccount:
     - Type: case
       Value: CarePlatformUpdateInfo
 
+# CXTB-803 Care Partner Platform - “Text Notifications” Workflow in My Account Modal
+TestCarePartnerTextNotificationsWorkflowInMyAccountModal:
+  Environment: Settings 
+  Roles:
+    - Role: desktopChrome
+      App: "desktop"
+  Actions:
+    # Calling Login case
+    - Type: case
+      Value: CarePartnerLoginSecondaryUser
+    # Going to My Account
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_header.user_dropdown_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_header.myaccount_menu_button$  
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_myaccount_info.modal_title$
+    # Go to Text Notification tab to change phone number
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_myaccount_info.text_notification_tab$
+    # Display updates to show the following fields, with message indicating required disclaimers below:
+    # Contact Number
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_myaccount_info.phone_input$
+    # Opt-In Checkboxes:
+    # Incoming Calls
+    # Long Wait Time in Queue(s)
+    - Type: wait_for
+      Strategy: id
+      Id: $PAGE.care_platform_myaccount_info.incoming_call_checkbox$
+    - Type: wait_for
+      Strategy: id
+      Id: $PAGE.care_platform_myaccount_info.long_wait_checkbox$
+    # Populate or update contact number, or change checkbox selections
+    - Type: get_attribute
+      Strategy: id
+      Id: $PAGE.care_platform_myaccount_info.incoming_call_checkbox$
+      Greps:
+        - var: FIRST_INCOMING_CALL_CHECKBOX_VALUE
+          attr: checked
+          condition: nempty
+          match: "(.*)"
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_myaccount_info.incoming_call_checkbox_label$
+    - Type: sleep
+      Time: 1
+    - Type: get_attribute
+      Strategy: id
+      Id: $PAGE.care_platform_myaccount_info.incoming_call_checkbox$
+      Greps:
+        - var: SECOND_INCOMING_CALL_CHECKBOX_VALUE
+          attr: checked
+          condition: nempty
+          match: "(.*)"
+    - Type: assert
+      Asserts:
+        - Type: ne
+          Var: SECOND_INCOMING_CALL_CHECKBOX_VALUE
+          Value: $AND_CLI_FIRST_INCOMING_CALL_CHECKBOX_VALUE$
+    # Click "Save changes" button at bottom of modal
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_myaccount_info.notification_text_save_button$ 
+    # Notification appears at top of screen indicating your changes are being saved
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_notifications.saved_account_info_notification$
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id: $PAGE.care_platform_notifications.saved_account_info_notification$
+    # Populate or update contact number, or change checkbox selections
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_myaccount_info.incoming_call_checkbox_label$
+    # Fields reflect changes as you make them
+    - Type: wait_for_property
+      Strategy: xpath
+      Id: $PAGE.care_platform_myaccount_info.notification_text_save_button$
+      Property: disabled
+      Value:  false
+    # Click "Cancel" button at bottom of modal
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_myaccount_info.cancel_button$
+    # Modal disappears returning you to the full screen application without saving your changes
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id: $PAGE.care_platform_myaccount_info.incoming_call_checkbox_label$
+    # Tear down
+    # Going to My Account
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_header.user_dropdown_button$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_header.myaccount_menu_button$  
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_myaccount_info.modal_title$
+    # Go to Text Notification tab to change phone number
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_myaccount_info.text_notification_tab$
+    - Type: wait_for
+      Strategy: id
+      Id: $PAGE.care_platform_myaccount_info.incoming_call_checkbox$
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_myaccount_info.incoming_call_checkbox_label$
+    # Click "Save changes" button at bottom of modal
+    - Type: click
+      Strategy: xpath
+      Id: $PAGE.care_platform_myaccount_info.notification_text_save_button$ 
+    # Notification appears at top of screen indicating your changes are being saved
+    - Type: wait_for
+      Strategy: xpath
+      Id: $PAGE.care_platform_notifications.saved_account_info_notification$
+    - Type: wait_not_visible
+      Strategy: xpath
+      Id: $PAGE.care_platform_notifications.saved_account_info_notification$
+
 #CXTB-237 Account - Help
 TestCarePartnerAccountHelp:
   Environment: Settings 
