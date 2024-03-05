@@ -87,6 +87,7 @@ SetOnlyWebTests:
   - Case: TestOnboarderParticipantPaneReviewEditOrAddBehavioralInfo
   - Case: TestOnboarderCreateNewStaffMemberWithFacilityLeadershipRole
   - Case: TestOnboarderParticipantInfoEditOrAddContactsInfo
+  - Case: TestOnboarderParticipantProfileReviewEditOrAddContacts
   - Case: TestOnboarderParticipantInfoEditOrAddEmergencyRoomAdmissionsInfo
   - Case: TestOnboarderAccessStaffDirectoryAndFilter
   - Case: TestOnboarderStaffMemberPaneReactivateStaffMemberAccountForCarePlatform
