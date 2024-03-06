@@ -88,6 +88,8 @@ care_platform_myaccount_info:
   text_notification_tab: //nav//button[contains(text(),'Text Notification')]
   phone_input: //*[@id='phone']
   incoming_call_checkbox: incomingCallNotification
+  incoming_call_checkbox_label: //label[@for='incomingCallNotification' and @class]
+  incoming_call_checkbox_svg: //label[@for='incomingCallNotification']/*[@role='img']
   long_wait_checkbox: fiveMinuteNotification
   notification_text_save_button: //*[@id='button-save-changes']
 

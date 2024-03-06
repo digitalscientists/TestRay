@@ -1549,8 +1549,16 @@ class Device
     action = convert_value_pageobjects(action);
     option = convert_value(action["Option"])
     el = @driver.find_element(convert_value(action["Strategy"]), convert_value(action["Id"]))
-    input = el.find_element(:xpath => "./input")
-    span = el.find_element(:xpath => "./span")
+    locator = convert_value_pageobjects(action["Locator"])
+
+    input = el.find_element(:xpath => ".//input")
+
+    if locator.empty? || locator.nil?
+      span = el.find_element(:xpath => ".//span")
+    else
+      span = el.find_element(:xpath => "/.#{locator}")
+    end
+
     is_checked = false
     
     if input.attribute("checked")

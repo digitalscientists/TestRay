@@ -39,6 +39,7 @@ SetOnlyWebTests:
   - Case: TestCarePartnerCreateFollowUpTicketParticipantProfile
   - Case: TestCarePartnerTrackTimeAndEditFollowUpTicketsForParticipant
   - Case: TestCarePartnerCompleteFollowUpTicketParticipantProfile
+  - Case: TestCarePartnerTextNotificationsWorkflowInMyAccountModal
   # Employee Health Portal
   - Case: TestEmployeeSettingNotification
   - Case: TestEmployeeInformationUpdateNumber
@@ -87,6 +88,7 @@ SetOnlyWebTests:
   - Case: TestOnboarderParticipantPaneReviewEditOrAddBehavioralInfo
   - Case: TestOnboarderCreateNewStaffMemberWithFacilityLeadershipRole
   - Case: TestOnboarderParticipantInfoEditOrAddContactsInfo
+  - Case: TestOnboarderParticipantProfileReviewEditOrAddContacts
   - Case: TestOnboarderParticipantInfoEditOrAddEmergencyRoomAdmissionsInfo
   - Case: TestOnboarderAccessStaffDirectoryAndFilter
   - Case: TestOnboarderStaffMemberPaneReactivateStaffMemberAccountForCarePlatform
