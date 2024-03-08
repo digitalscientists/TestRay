@@ -1,4 +1,4 @@
-SetProvidersCarePlatformTests:
+SetProvidersCarePlatformMobileNonPhysicalTests:
   Cases:  
   # Provider Care Platform Mobile Non Physical
     - Case: TestProviderHomePageListingView
