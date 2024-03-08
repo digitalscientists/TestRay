@@ -5,4 +5,4 @@ idd_never_alone_app_home:
 idd_never_alone_app_call:
   yes_place_call_button: "**/XCUIElementTypeButton[`label ENDSWITH 'Yes, Place Call'`]"
   cancel_call_button: "**/XCUIElementTypeButton[`label ENDSWITH 'Cancel Call'`]"
-  waiting_room_label: "**/XCUIElementTypeOther[`label == 'Waiting Room'`]"
+  waiting_room_label: "**/XCUIElementTypeOther[`label == 'Waiting Room' OR label == 'Connecting'`]"

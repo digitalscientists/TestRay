@@ -1,0 +1,25 @@
+SetProvidersCarePlatformWebTests:
+  Cases:  
+  # Providers Care Platform WEB
+    - Case: TestProviderLogOutStayOnShift
+    - Case: TestProviderUpdateAccountInfo
+    - Case: TestProviderUpdateCredentialsAndCallAnsweringAbilities
+    - Case: TestProviderUpdateCredentialsAndCallAnsweringAbilitiesEHPRequest
+    - Case: TestProviderLogOutPortalGoOffShift
+    - Case: TestProviderAccessEmployeesDirectoryAndFilter
+    - Case: TestProviderAnswerCompleteSessionFromEHP
+    - Case: TestProviderCanClickAndViewFacilitiesDevice
+    - Case: TestProviderStatusNotOnActiveCall
+    - Case: TestProviderHelpMenuOption
+    - Case: TestProviderUseForgotPasswordLink
+    - Case: TestProviderAccessParticipantDirectoryandViewDeviceRecordfromListing
+    - Case: TestProvidersEHPSeeCallAppearInQueueAssignAndReviewDetails
+    - Case: TestProviderReviewInfoForExistingFacilityDeviceFacilityPane
+    - Case: TestProvidersUpdatePassword
+    - Case: TestProviderAccessAndReviewTeamMembersAvailability
+    - Case: TestProviderReviewInfoForExistingFacilityDeviceFacilityProfile
+    - Case: TestProviderAccessFacilitiesDirectoryAndFilter
+    - Case: TestProviderCanClickAndViewParticipantsEmergencyCalls
+    - Case: TestProviderLinkedParticipantsProfilePageAndNavigation
+    - Case: TestProviderCallExternal10DigitNumberWithoutFacility
+    - Case: TestProviderCallExternal10DigitNumberWithoutEmployee
