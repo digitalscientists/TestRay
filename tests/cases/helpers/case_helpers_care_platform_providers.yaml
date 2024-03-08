@@ -131,6 +131,8 @@ ProvidersCarePlatformPauseCall:
       App: desktop       
   Actions:      
   #End call
+    - Type: sleep
+      Time: 1
     - Type: wait_for
       Strategy: xpath
       Id: $PAGE.providers_call_handling_page.end_call_btn$

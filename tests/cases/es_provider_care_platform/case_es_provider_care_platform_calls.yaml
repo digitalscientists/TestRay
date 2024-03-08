@@ -79,10 +79,6 @@ TestESProviderCarePlatformAnswerAndCompleteSession:
       Role: desktopChrome1
       Strategy: xpath
       Id: $PAGE.providers_call_handling_page.end_call_btn$
-  # Complete post call survey on the Care Partner side
-    - Type: case
-      Value: ESPostCallSurveyCarePartner
-      Role: desktopChrome
   # Provider fills up Post call Survey.
   # Fill the Provider's call notes
     - Type: wait_for
@@ -476,10 +472,6 @@ TestESProviderIDDSeeCallAppearInQueueAssignAndReviewDetails:
     - Type: case
       Value: PostCallSurveyProvider
       Role: desktopChrome1
-    # Fill up the post call survey to complete the session.
-    - Type: case
-      Value: ESPostCallSurveyCarePartner
-      Role: desktopChrome
     # Close on CarePartner Side
     - Type: case
       Value: ESCloseCarePartnerCall

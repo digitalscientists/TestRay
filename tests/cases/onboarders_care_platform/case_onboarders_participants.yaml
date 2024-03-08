@@ -350,7 +350,7 @@ TestOnboarderCreateNewParticipant:
       Id: $PAGE.onboarders_platform_home.navigation_participant$      
   # Add the search filter.
     - Type: search_by_text
-      Role: desktopChrome1
+      Role: desktopChrome
       Text: $AND_CLI_PARTICIPANT_LAST_NAME$
   # Select the participant just created
     - Type: wait_for
